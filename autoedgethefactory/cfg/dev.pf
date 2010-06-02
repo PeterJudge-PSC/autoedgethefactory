@@ -1,0 +1,14 @@
+# PF for Dev
+
+# Default settings
+ -s 200 
+ -mmax 65534 
+ -T C:\Devarea\projects\OEBP\vendoredge\temp
+ -assemblies C:\Devarea\projects\OEBP\vendoredge\
+# -db C:\Devarea\views\pjudge_AUTOEDGE20\vobs_autoedge\uia\sampleapp\data\sports2000.db 
+ -debugalert 
+ -rereadnolock 
+ -inp 16000 
+ -tok 4000 
+ -noincrwarn
+ -errorstack
