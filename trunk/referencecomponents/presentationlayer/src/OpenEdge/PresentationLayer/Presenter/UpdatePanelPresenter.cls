@@ -1,0 +1,265 @@
+/*------------------------------------------------------------------------
+   File        : UpdatePanelPresenter
+   Purpose     : 
+   Syntax      : 
+   Description : 
+   Author(s)   : pjudge
+   Created     : Thu Feb 26 14:18:30 EST 2009
+   Notes       : 
+ ----------------------------------------------------------------------*/
+routine-level on error undo, throw.
+  
+using OpenEdge.PresentationLayer.Presenter.DataboundPresenter.
+using OpenEdge.PresentationLayer.Presenter.IDataboundPresenter.
+using OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter.
+using OpenEdge.PresentationLayer.Presenter.CommitActionEnum.
+using OpenEdge.PresentationLayer.Presenter.DeleteActionEnum.
+using OpenEdge.PresentationLayer.Presenter.UpdateActionEnum.
+using OpenEdge.PresentationLayer.Model.IModel.
+using OpenEdge.PresentationLayer.View.IUpdatePanelView.
+using OpenEdge.PresentationLayer.Common.ActionStateEnum.
+using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
+using OpenEdge.PresentationLayer.Common.ISelectAction.
+using OpenEdge.PresentationLayer.Common.ActionEventArgs.
+using OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs.
+
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+
+using OpenEdge.Core.System.IQuery.
+using OpenEdge.Lang.EnumMember.
+
+using Progress.Lang.Class.
+
+class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits DataboundPresenter
+    implements ISelectAction, IUpdatePanelPresenter:
+    
+    define private property moUndoActionModel as IModel no-undo
+        get():
+            return GetModel(Class:GetClass('OpenEdge.PresentationLayer.Model.UndoActionModel')).
+        end get.
+    
+    define private variable mcUndoActionQuery as character no-undo.
+    define private variable mcUndoActionTable as character no-undo init 'eAction'.
+    define protected property UndoActionOrder as integer no-undo
+        get():
+            UndoActionOrder = UndoActionOrder + 1.
+        end get.
+        private set.
+                                      
+    define public property ModelService as IComponentInfo no-undo get. set.
+    define public property QueryName as char no-undo get. set.
+    define public property TableName as char no-undo 
+        get.
+        set (pcTableName as char):
+            if pcTableName ne ? then
+            do:
+                TableName = pcTableName.
+                if valid-object(this-object:View) and type-of(this-object:View, IUpdatePanelView) then
+                    cast(this-object:View, IUpdatePanelView):TableNameChange(pcTableName).
+            end.
+        end set.
+    
+    define public property CommitAction as EnumMember no-undo /* OpenEdge.PresentationLayer.Presenter.CommitActionEnum */
+        get ():
+            if not valid-object(CommitAction) then
+                CommitAction = CommitActionEnum:Default.
+            
+            return CommitAction.
+        end get. 
+        set. 
+
+    define public property DeleteAction as EnumMember no-undo  /* OpenEdge.PresentationLayer.Presenter.DeleteActionEnum */
+        get ():
+            if not valid-object(DeleteAction) then
+                DeleteAction = DeleteActionEnum:Default.
+            
+            return DeleteAction.
+        end get. 
+        set.
+
+        
+    constructor public UpdatePanelPresenter (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
+        super(poServiceManager, poComponentInfo).
+    end constructor.
+    
+    constructor public UpdatePanelPresenter(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo, poModel as IModel extent):
+        super(poServiceManager, poComponentInfo, poModel).
+    end constructor.
+    
+    method override public void Initialize():
+        define variable oQueryDefinition as IQuery no-undo.
+        
+        super:Initialize().
+        
+        /****
+        oQueryDefinition = new QueryDefinition().
+        oQueryDefinition:AddBuffer(mcUndoActionTable).
+        
+        oQueryDefinition:AddSort(mcUndoActionTable,
+                              'QueryName',
+                              SortDirectionEnum:Default,
+                              1).
+        oQueryDefinition:AddSort(mcUndoActionTable,
+                              'BufferName',
+                              SortDirectionEnum:Default,
+                              2).
+        oQueryDefinition:AddSort(mcUndoActionTable,
+                              'Order',
+                              SortDirectionEnum:Default,
+                              3).
+        
+        this-object:GetQuery(mcUndoActionModel,
+                             oQueryDefinition,
+                             true,  /* create abl query */
+                             input-output mcUndoActionQuery).
+        this-object:OpenQuery(mcUndoActionModel, mcUndoActionQuery).
+        /* there should be no data in here at this point */
+        ***/
+        
+        if valid-object(ParentPresenter) and 
+            type-of(ParentPresenter, IDataboundPresenter) then
+        do:            
+            cast(ParentPresenter, IDataboundPresenter):UpdatePanelStateChanged:Subscribe(this-object:UpdatePanelStateChangedHandler).            
+        /*            cast(ParentPresenter, IDataboundPresenter):AddUndoAction:Attach:Subscribe(this-object:AddUndoActionHandler).*/
+        end.
+    end method.
+       
+    method public void SelectAction (poArgs as ActionEventArgs):
+        define variable iAction as integer no-undo.
+        
+        poArgs:GetArgValue('Action', output iAction).
+        
+        case UpdateActionEnum:EnumFromValue(iAction):
+            when UpdateActionEnum:Add then
+                cast(ParentPresenter, IDataboundPresenter):AddRecord(ModelService, QueryName, TableName).
+            when UpdateActionEnum:Delete then
+                do:
+                    /* Always (do the local) Delete */
+                    cast(ParentPresenter, IDataboundPresenter):DeleteRecord(ModelService, QueryName, TableName).
+                
+                    if DeleteAction eq DeleteActionEnum:Commit then
+                        cast(ParentPresenter, IDataboundPresenter):CommitData(ModelService).
+                end.
+            when UpdateActionEnum:Save then
+                cast(ParentPresenter, IDataboundPresenter):SaveRecord(ModelService, QueryName, TableName).
+            when UpdateActionEnum:Commit then
+                do:
+                    /* Commit does a Save first, do no need to do one here. */
+                    if CommitAction eq CommitActionEnum:Commit then 
+                        cast(ParentPresenter, IDataboundPresenter):CommitData(ModelService).
+                    else
+                        cast(ParentPresenter, IDataboundPresenter):SaveRecord(ModelService, QueryName, TableName).
+                end.
+            when UpdateActionEnum:Undo then
+                UndoAction().
+        end case.
+    end method.
+    
+    method public void UpdatePanelStateChangedHandler (poSender as IComponent, poEventArgs as UpdatePanelEventArgs):        
+        define variable oStates      as EnumMember extent 5 no-undo.
+        define variable oActions     as EnumMember extent 5 no-undo.
+        
+        define variable oAddState    as EnumMember no-undo.
+        define variable oDeleteState as EnumMember no-undo.
+        define variable oCancelState as EnumMember no-undo.
+        define variable oCommitState as EnumMember no-undo.
+        define variable oSaveState   as EnumMember no-undo.
+
+        if ModelService eq poEventArgs:ModelService and 
+            QueryName eq poEventArgs:QueryName and
+            TableName eq poEventArgs:TableName then
+        do:
+            /*
+                        case poEventArgs:ModelState:
+                            when ModelStateEnum:Add then
+                                assign 
+                                    iAddState    = UpdateActionEnum:Disable
+                                    iDeleteState = UpdateActionEnum:Disable
+                                    iCancelState = UpdateActionEnum:Enable
+                                    iCommitState = UpdateActionEnum:Enable
+                                    iSaveState   = UpdateActionEnum:Enable.
+                            when ModelStateEnum:ReadOnly then
+                                assign 
+                                    iAddState    = UpdateActionEnum:Disable
+                                    iDeleteState = UpdateActionEnum:Disable
+                                    iCancelState = UpdateActionEnum:Disable
+                                    iCommitState = UpdateActionEnum:Disable
+                                    iSaveState   = UpdateActionEnum:Disable.
+                            otherwise
+                            assign 
+                                iAddState    = UpdateActionEnum:Enable
+                                iDeleteState = UpdateActionEnum:Enable
+                                iCancelState = UpdateActionEnum:Enable
+                                iCommitState = UpdateActionEnum:Enable
+                                iSaveState   = UpdateActionEnum:Enable.
+                        end case.
+                        */
+            
+            assign 
+                oActions[1] = UpdateActionEnum:Add
+                oActions[2] = UpdateActionEnum:Delete
+                oActions[3] = UpdateActionEnum:Commit
+                oActions[4] = UpdateActionEnum:Save
+                oActions[5] = UpdateActionEnum:Undo.
+            
+            oStates = ActionStateEnum:Enable.
+            if type-of(this-object:View, IUpdatePanelView) then            
+                cast(this-object:View, IUpdatePanelView):UpdateStateChange(oActions, oStates).
+        end.
+    end method.
+        
+    method public void AddUndoActionHandler (poSender as IComponent, poEventArgs as UndoActionEventArgs):
+        define variable cNewRecordKey as character no-undo.
+        define variable cRowKey       as character extent 18 no-undo.
+        define variable iExtent       as integer   no-undo.
+        define variable oComponentInfo  as IComponentInfo no-undo.
+        
+        /* Add to the model */
+        oComponentInfo = cast(cast(moUndoActionModel, IComponent):ComponentInfo, IComponentInfo).
+        cNewRecordKey = AddRecord(oComponentInfo, mcUndoActionQuery, mcUndoActionTable).
+        
+        do iExtent = 1 to extent(poEventArgs:RecordKey):
+            cRowKey[iExtent] = poEventArgs:RecordKey[iExtent].
+        end.
+        
+        SetValue(oComponentInfo, cNewRecordKey, mcUndoActionTable, 'RecordKey', cRowKey).               
+        SetValue(oComponentInfo, cNewRecordKey, mcUndoActionTable, 'QueryName', poEventArgs:QueryName).
+        SetValue(oComponentInfo, cNewRecordKey, mcUndoActionTable, 'ModelService', poEventArgs:ModelService).
+        SetValue(oComponentInfo, cNewRecordKey, mcUndoActionTable, 'BufferName', poEventArgs:BufferName).
+        SetValue(oComponentInfo, cNewRecordKey, mcUndoActionTable, 'UndoActionType', poEventArgs:UndoActionType).
+        
+        poEventArgs:Order = UndoActionOrder.
+        SetValue(oComponentInfo, cNewRecordKey, mcUndoActionTable, 'Order', poEventArgs:Order).
+        
+        CommitData(oComponentInfo, mcUndoActionQuery, mcUndoActionTable).
+    end method.
+    
+    method protected void UndoAction ():
+        define variable iAction        as integer   no-undo.
+        define variable cCurrentRowKey as character extent no-undo.        
+        define variable cRecordKey     as character no-undo.
+        define variable oComponentInfo  as IComponentInfo no-undo.
+        
+        oComponentInfo = cast(cast(moUndoActionModel, IComponent):ComponentInfo, IComponentInfo).
+                        
+        cRecordKey = cast(GetModel(oComponentInfo):GetQuery(mcUndoActionQuery), IQuery):GetCurrentBufferKey(mcUndoActionTable).
+        
+        GetValue(oComponentInfo, cRecordKey, mcUndoActionTable,
+            'UndoActionType', output iAction). 
+
+        GetValue(oComponentInfo, cRecordKey, mcUndoActionTable,
+            'RecordKey', output cCurrentRowKey). 
+        
+        cast(ParentPresenter, IDataboundPresenter):UndoAction(
+            ModelService, QueryName, TableName,
+            UpdateActionEnum:EnumFromValue(iAction),
+            cCurrentRowKey ).
+        
+        /* Remove the undo action. */
+        DeleteRecord(oComponentInfo, mcUndoActionQuery, mcUndoActionTable).
+        CommitData(oComponentInfo, mcUndoActionQuery, mcUndoActionTable).
+    end method.
+    
+end class.
