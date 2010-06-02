@@ -1,0 +1,44 @@
+/*------------------------------------------------------------------------
+    File        : DoesNotExistError
+    Purpose     : 
+    Syntax      : 
+    Description : 
+    Author(s)   : pjudge
+    Created     : Tue Jul 07 16:56:09 EDT 2009
+    Notes       : 
+  ----------------------------------------------------------------------*/
+routine-level on error undo, throw.
+
+using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.System.DoesNotExistError.
+using Progress.Lang.Error.
+
+class OpenEdge.Core.System.DoesNotExistError inherits ApplicationError: 
+
+    define override protected property ErrorText as character no-undo get. set.
+    define override protected property ErrorTitle as character no-undo get. set.
+        
+    constructor public DoesNotExistError(poErr as Error, pcArgs1 as char):
+        this-object(poErr).    
+        AddMessage(pcArgs1, 1).
+    end constructor.
+    
+    constructor public DoesNotExistError(pcArgs1 as char):
+        define variable oUnknown as Error no-undo.
+        this-object(oUnknown,pcArgs1).
+    end constructor.
+    
+        
+    constructor public DoesNotExistError(poErr as Error):
+        super (poErr).
+        
+        this-object:ErrorTitle = 'Does Not Exist Error'.
+        this-object:ErrorText = 'The &1 specified does not exist'.
+    end constructor.
+    
+    constructor public DoesNotExistError():
+        define variable oUnknown as Error no-undo.
+        this-object(oUnknown).     
+    end constructor.
+
+end class.
