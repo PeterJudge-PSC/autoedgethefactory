@@ -10,24 +10,22 @@
     Created     : Mon Apr 12 14:53:12 EDT 2010
     Notes       :
   ----------------------------------------------------------------------*/
-using OpenEdge.Test.TestPresenterModule.
-
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager. 
 using OpenEdge.CommonInfrastructure.Common.IService.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
  
-using OpenEdge.CommonInfrastructure.PInject.CommonInfrastructureModule.
-using OpenEdge.CommonInfrastructure.PInject.ComponentKernel.
-using OpenEdge.Core.PInject.IKernel.
-using OpenEdge.Core.PInject.StandardKernel.
-using OpenEdge.Core.PInject.Binding.Modules.IInjectionModuleCollection.  
-using OpenEdge.Core.PInject.Binding.Parameters.IParameterCollection.
-using OpenEdge.Core.PInject.Binding.Parameters.MethodArgument. 
+using OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule.
+using OpenEdge.CommonInfrastructure.InjectABL.ComponentKernel.
+using OpenEdge.Core.InjectABL.IKernel.
+using OpenEdge.Core.InjectABL.StandardKernel.
+using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.  
+using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
+using OpenEdge.Core.InjectABL.Binding.Parameters.MethodArgument. 
 using OpenEdge.Core.System.ApplicationError.
 using Progress.Lang.Class.
   
-define variable oPInjectKernel as IKernel no-undo.
+define variable oInjectABLKernel as IKernel no-undo.
 define variable oModules as IInjectionModuleCollection no-undo.
 define variable oServiceManager as IServiceManager no-undo.
 define variable oParams as IParameterCollection no-undo.
@@ -37,10 +35,10 @@ session:suppress-warnings = true.
 
 oModules = new IInjectionModuleCollection().
 oModules:Add(new CommonInfrastructureModule()).
-oModules:Add(new TestPresenterModule()).
-oPInjectKernel = new ComponentKernel(oModules).
+/*oModules:Add(new TestPresenterModule()).*/
+oInjectABLKernel = new ComponentKernel(oModules).
 
-oServiceManager = cast(oPInjectKernel:Get('OpenEdge.CommonInfrastructure.Common.IServiceManager')
+oServiceManager = cast(oInjectABLKernel:Get('OpenEdge.CommonInfrastructure.Common.IServiceManager')
                     , IServiceManager).
 
 oLoginWindow = cast(oServiceManager:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IApplicationLogin'))
@@ -81,11 +79,11 @@ end catch.
 finally:
     /* Release() deactivates the service manager, which will run DestroyComponent 
        and clean up nicely. */
-    if valid-object(oPInjectKernel) then
-        oPInjectKernel:Release(oServiceManager).
+    if valid-object(oInjectABLKernel) then
+        oInjectABLKernel:Release(oServiceManager).
     
     oServiceManager = ?.
-    oPInjectKernel = ?.
+    oInjectABLKernel = ?.
 end finally.
 
 /* ~E~O~F~ */
