@@ -1,0 +1,7 @@
+#summary This is the general sidebar
+
+[http://communities.progress.com/pcom/community/psdn/openedge/architecture?view=overview AutoEdge:TheFactory Community]
+
+[http://communities.progress.com/pcom/community/feeds/documents?community=3709 Project Documents]
+
+[http://communities.progress.com/pcom/community/feeds/threads?community=3709 Project discussions]
