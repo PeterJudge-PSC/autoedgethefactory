@@ -46,7 +46,7 @@ class OpenEdge.Core.Util.ObjectInputStream:
         this-object:Clear().
     end destructor.
     
-    method public void Clear():
+    method protected void Clear():
         define buffer lbRef for StreamReference.
         
         empty temp-table lbRef.        
@@ -69,7 +69,7 @@ class OpenEdge.Core.Util.ObjectInputStream:
                                     this-object).
     end method.
     
-    method protected void Reset():
+    method public void Reset():
         this-object:Clear().
         Initialize().
     end method.
