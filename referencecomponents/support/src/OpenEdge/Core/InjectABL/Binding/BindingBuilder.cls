@@ -20,7 +20,7 @@ using OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder.
 using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition.
 using OpenEdge.Core.InjectABL.IKernel.
-using OpenEdge.Core.InjectABL.Lifecycle.StandardScope.
+using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
@@ -84,20 +84,27 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     /** Indicates that only a single instance of the binding should be created, and then
         should be re-used for all subsequent requests.  */
     method public IBindingSyntax InSingletonScope():
-        Binding:Scope = StandardScope:Singleton.        
+        Binding:Scope = StandardScopeEnum:Singleton.        
         return this-object.
     end method.
     
     /** Indicates that instances activated via the binding should not be re-used, nor have
         their lifecycle managed by InjectABL.  */
     method public IBindingSyntax InTransientScope():
-        Binding:Scope = StandardScope:Transient.
+        Binding:Scope = StandardScopeEnum:Transient.
         return this-object.
     end method.
     
-    /** Indicates that instances activated via the binding should be re-used within the same AppServer/WebSpeed request. */
-    method public IBindingSyntax InAgentScope():
-        Binding:Scope = StandardScope:Agent.
+    /** Indicates that an instance will be reused across an AppServer connection. 
+        Meaningless for statefree AppServers. */
+    method public IBindingSyntax InAgentConnectionScope():
+        Binding:Scope = StandardScopeEnum:AgentConnection.
+        return this-object.
+    end method.
+    
+    /** Indicates that an instance will be reused across an AppServer request. */
+    method public IBindingSyntax InAgentRequestScope():
+        Binding:Scope = StandardScopeEnum:AgentRequest.
         return this-object.
     end method.
     

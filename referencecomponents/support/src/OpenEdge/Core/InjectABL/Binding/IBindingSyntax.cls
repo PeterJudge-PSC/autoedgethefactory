@@ -36,8 +36,12 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     /** Indicates that instances activated via the binding should not be re-used, nor have
         their lifecycle managed by InjectABL.  */
     method public IBindingSyntax InTransientScope().
-
-    method public IBindingSyntax InAgentScope().
+    
+    /** Indicates that an instance will be reused across an AppServer connection. 
+        Meaningless for statefree AppServers. */
+    method public IBindingSyntax InAgentConnectionScope().
+    /** Indicates that an instance will be reused across an AppServer request. */
+    method public IBindingSyntax InAgentRequestScope().
     
     /* Custom scope */    
     method public IBindingSyntax InScope(poScopeCallback as class Class, poScope as EnumMember).

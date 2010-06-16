@@ -145,14 +145,24 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     end method.
     
     method public Object Get(poService as class Class):
+        return this-object:Get(poService, ?).
+    end method.
+    
+    method public Object Get(input poService as class Class,
+                             input poParameters as IParameterCollection):
         define variable oInstance as Object no-undo.
+        define variable oBinding as IBinding no-undo.
         
         Assert:ArgumentNotNull(poService, 'Service').
         
         if poService:IsA(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')) then
             return this-object.
         
-        oInstance = cast(CreateContext(SelectBinding(poService)), ILifecycleContext):Resolve().
+        oBinding = SelectBinding(poService).
+        /* Will fail gracefully if no params added */        
+        oBinding:Parameters:AddAll(poParameters).
+        
+        oInstance = cast(CreateContext(oBinding), ILifecycleContext):Resolve().
         
         return oInstance.
     end method.
@@ -198,6 +208,13 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         
         return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
                 , ICache):Release(poInstance).
+    end method.
+
+    method public void Clear(poScope as Object):
+        Assert:ArgumentNotNull(poScope, "instance").
+        
+        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
+                , ICache):Clear(poScope).
     end method.
     
     method public IBindingCollection GetBindings(poService as class Class):
