@@ -25,7 +25,7 @@ class OpenEdge.Core.System.InvalidValueSpecifiedError inherits ApplicationError:
         ErrorText = 'Invalid &1 specified &2'.
     end constructor.
     
-    constructor public InvalidValueSpecifiedError ():
+    constructor protected InvalidValueSpecifiedError ():
         define variable oNullError as Error no-undo.
         this-object(oNullError).
     end constructor.

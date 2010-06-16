@@ -14,6 +14,7 @@ using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.BindingTargetEnum.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScope.
+using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
@@ -87,7 +88,7 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
         /* Binding defaults to self-binding */
         assign Service = poService
                Parameters = new IParameterCollection()
-               Scope = StandardScope:Transient.
+               Scope = StandardScopeEnum:Transient.
     end constructor.
     
     /** Gets the provider for the binding.
