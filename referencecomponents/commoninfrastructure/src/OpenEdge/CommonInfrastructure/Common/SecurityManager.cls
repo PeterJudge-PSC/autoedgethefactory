@@ -20,5 +20,8 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager inherits Service
     constructor public SecurityManager(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).
     end constructor.
+    
+    	method public void ValidateSession(pcSessionId as character):
+    	end method.
 
 end class.

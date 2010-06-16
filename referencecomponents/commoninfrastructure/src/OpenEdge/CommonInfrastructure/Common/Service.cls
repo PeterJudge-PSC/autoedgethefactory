@@ -28,7 +28,7 @@ class OpenEdge.CommonInfrastructure.Common.Service inherits Component
         Assert:ArgumentNotNull(poServiceManager, 'Service Manager').
         ServiceManager = poServiceManager. 
     end constructor.
-
+    
     method override public logical Equals(p0 as Object):
         return (super:Equals(input p0) and
                this-object:ServiceManager:Equals(cast(p0, Service):ServiceManager)).

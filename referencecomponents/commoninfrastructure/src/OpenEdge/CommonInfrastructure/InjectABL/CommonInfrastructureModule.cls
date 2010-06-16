@@ -9,7 +9,7 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.InjectABL.ManagerScope.
+using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
@@ -52,7 +52,7 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
             :To('OpenEdge.CommonInfrastructure.Common.SecurityManager')
             :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
-                     ManagerScope:ServiceManager)
+                     ManagerScopeEnum:ServiceManager)
             .
         
         /* Scopes the tenant manager's lifecycle to the kernel's (aka Singleton-like behaviour) */
@@ -61,26 +61,38 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
             :To('OpenEdge.CommonInfrastructure.Client.TenantManager')
             :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
-                     ManagerScope:ServiceManager)
+                     ManagerScopeEnum:ServiceManager)
             :OnClientSession()
             .
-
-        /** ServiceMessageManager handles requests and responses to and from the business component
-            layers.               */
+        
+        /** ServiceMessageManager handles requests and responses for data. */
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager').
         oBindingSyntax
             :To('OpenEdge.CommonInfrastructure.Common.ServiceMessageManager')
             :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
-                     ManagerScope:ServiceManager)
+                     ManagerScopeEnum:ServiceManager)
             .
         
-        /**  */
+        /** The IServiceRequestBundle executes the requests; this execution may differ depending
+            on whether we're on the client (call to ServiceAdapter) or server (call to Business Component) */
+        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IServiceRequestBundle').
+        oBindingSyntax
+            :To('OpenEdge.CommonInfrastructure.Common.ServiceRequestBundle')
+            :InTransientScope()
+            .
+        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IServiceRequestBundle').
+        oBindingSyntax
+            :To('OpenEdge.CommonInfrastructure.Server.ServiceRequestBundle')
+            :OnServerSession()
+            :InTransientScope()
+            .
+        
+        @todo(task="question", action="does this belong here? a separate module?").
+        /** Default/simple service adapter binding */
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceAdapter').
         oBindingSyntax
-            :To('OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter')
-            :WithConstructorArgument(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'))
-            .
+            :To('OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter').
         
     end method.
     

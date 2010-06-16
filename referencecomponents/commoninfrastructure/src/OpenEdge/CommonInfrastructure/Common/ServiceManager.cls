@@ -21,13 +21,15 @@ using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.Component.
 using OpenEdge.CommonInfrastructure.Common.IManager.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceAdapter.
+using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
 
-using OpenEdge.CommonInfrastructure.InjectABL.ManagerScope.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Lifecycle.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext. 
 using OpenEdge.Core.InjectABL.IKernel.
+using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
+using OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument.
 
 using OpenEdge.Core.System.NotFoundError.
 using OpenEdge.Lang.Collections.IIterator.
@@ -53,7 +55,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
     /** Dependency injection/Inversion of Control container. */
     define public property Kernel as IKernel no-undo get. private set.
     
-    constructor public ServiceManager(poKernel as IKernel):
+    constructor public ServiceManager(input poKernel as IKernel):
         super (this-object,       /* OpenEdge.CommonInfrastructure.Common.IServiceManager */
                new ComponentInfo(
                   Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'),
@@ -82,7 +84,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
             at this point. */
         oBindings = Kernel:GetBindings(
                         Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
-                        ManagerScope:ServiceManager).
+                        ManagerScopeEnum:ServiceManager).
         oIterator = oBindings:Iterator().
         
         do while oIterator:HasNext():
@@ -93,7 +95,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         end.
     end method.
     
-    method protected logical RegisterService(poServiceType as EnumMember, pcServiceName as character):
+    method protected logical RegisterService(input poServiceType as EnumMember,
+                                             input pcServiceName as character):
         define variable lNew as logical no-undo.
         define variable oService as class Class no-undo.
         define buffer lbService for Service.
@@ -167,7 +170,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         @param pcComponentName 
         @return An IComponent instance of the requested service
       */
-    method public IService StartService(poServiceType as EnumMember, pcServiceName as character):
+    method public IService StartService(input poServiceType as EnumMember,
+                                        input pcServiceName as character):
         /* Register the component */
         RegisterService(poServiceType, pcServiceName).
         
@@ -178,22 +182,22 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         @param poComponent The class of the service to start 
         @return An IComponent instance of the requested service
       */
-    method public IService StartService(poService as class Class):
+    method public IService StartService(input poService as class Class):
         return cast(StartComponent(poService), IService).
     end method.
     
     /** Stops a running service.
         @param poComponent A running component instance
       */
-    method public void StopService(poServiceInstance as IService):
+    method public void StopService(input poServiceInstance as IService):
         StopComponent(cast(poServiceInstance, IComponent)).
     end method.
     
-    method protected  IComponent StartComponent(poComponent as class Class):
+    method protected  IComponent StartComponent(input poComponent as class Class):
         return cast(Kernel:Get(poComponent), IComponent).
     end method.
     
-    method protected void StopComponent(poComponentInstance as IComponent):
+    method protected void StopComponent(input poComponentInstance as IComponent):
         define variable lReleased as logical no-undo.
         
         /* Component only released if cached. If it's not cached, we need to
@@ -207,11 +211,15 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         end.
     end method.
     
-    method public IServiceAdapter GetServiceAdapter(pcService as character):
+    method public IServiceAdapter GetServiceAdapter(input pcService as character):
         define variable oServiceAdapter as IServiceAdapter no-undo.
+        define variable oParams as IParameterCollection no-undo.
         
-        oServiceAdapter = cast(ServiceManager:Kernel:Get(Class:GetClass(pcService)), IServiceAdapter).
-        oServiceAdapter:Service = pcService.
+        oParams = new IParameterCollection().
+        oParams:Add(new ConstructorArgument(pcService)).
+        oParams:Add(new ConstructorArgument(this-object)).
+        
+        oServiceAdapter = cast(Kernel:Get(Class:GetClass(pcService), oParams), IServiceAdapter).
         
         return oServiceAdapter.
     end method.

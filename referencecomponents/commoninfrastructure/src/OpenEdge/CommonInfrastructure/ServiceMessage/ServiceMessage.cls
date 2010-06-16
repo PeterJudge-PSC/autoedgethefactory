@@ -11,7 +11,7 @@ routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage.
-using OpenEdge.Core.System.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.

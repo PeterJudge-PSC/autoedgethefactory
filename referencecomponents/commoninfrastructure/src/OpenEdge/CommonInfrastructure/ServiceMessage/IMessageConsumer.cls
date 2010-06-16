@@ -1,26 +1,19 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IMessageConsumer
-    Purpose     : 
+    Purpose     : Interface defined for a message consumer: someone who acts on
+                  a response from a service request
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Apr 26 14:55:42 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IDefineResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer:
-    
-    method public void ActionCompleted(poResponse as IServiceMessage).
-    
-    /*
-    method public void Defined(poResponse as IDefineResponse).
-    method public void Fetched(poResponse as IFetchResponse).
-    method public void Saved(poResponse as ISaveResponse).
-    */
-    
+    /** Method called upon completion of the action for the ServiceMessage. 
+        The actual action type is contained within the response.
+        
+        @param poResponse The response to the request.      */
+    method public void ActionCompleted(poResponse as IServiceResponse).
 end interface.

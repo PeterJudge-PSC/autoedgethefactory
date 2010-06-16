@@ -1,54 +1,111 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : simple_savedata.p
     Purpose     : 
 
     Syntax      :
 
-    Description : Standard Service Interface procedure for the fetchdata method
+    Description : Standard Service Interface procedure for the save method
 
-    Author(s)   : john
+    @author(s)   : john
     Created     : Tue Jan 27 16:17:52 EST 2009
-    Notes       :
-  ----------------------------------------------------------------------*/
-using SampleApp.OERA.Interfaces.*.
-using SampleApp.OERA.Infrastructure.*.
-using SampleApp.OERA.Services.*.
-using OpenEdge.MVP.Interfaces.*.
-using OpenEdge.MVP.Model.*.
-using OpenEdge.Base.Interfaces.*.
-using OpenEdge.Base.System.*.
+    Notes       : * The vast bulk of this code is infrastructure - the only 'real'
+                    work that this procedure does is the call to ExecuteSyncRequest().
+                    The session validation should happen in the activation procedure (will as of 11.0.0);
+                    the serialisation is also simply infrastructure.
+                  * There are 3 separate loops that could be combined into 1 or 2 for performance reasons.
+                    They remain separate here for illustrative purposes.
 
-DEFINE INPUT        PARAMETER pcServiceName AS CHARACTER NO-UNDO.
-DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE phDataset.
-DEFINE INPUT-OUTPUT PARAMETER pcContext as longchar no-undo.
+  ---------------------------------------------------------------------- */
+routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IDatasetSaveResponse.
 
-DEFINE VARIABLE oService AS DataServiceManager NO-UNDO.
-DEFINE VARIABLE oBE      AS IBusinessEntity    NO-UNDO.
-DEFINE VARIABLE hDataset AS HANDLE NO-UNDO.
-DEFINE VARIABLE oContext AS IServerDataContext no-undo. 
+using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
-oService = DataServiceManager:GetInstance(). 
+using OpenEdge.Core.InjectABL.IKernel.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.ObjectInputStream.
 
-/* Register the entity so that we connect the datasources etc. */
-oBE = CAST(oService:GetService(pcServiceName, "BE"), IBusinessEntity).
-cast(oBE, IBusinessService):InitializeComponent().
+using OpenEdge.Lang.ABLSession.
+using Progress.Lang.Class.
 
-/* don't pass the dataset around, making deep copies all over the place. */
-oContext = new ServerDataContext(pcContext).
+/* ***************************  Main Block  *************************** */
+define input        parameter pmRequest as memptr extent no-undo.
+define input-output parameter phResponseDataset as handle extent no-undo.
+define output       parameter pmResponse as memptr extent no-undo.
+define input-output parameter pmUserContext as memptr no-undo.
 
-oBE:StoreData(phDataset:HANDLE, INPUT oContext). 
+define variable oInjectABLKernel as IKernel no-undo.
+define variable oServiceMessageManager as IServiceMessageManager no-undo.
+define variable iLoop as integer no-undo.
+define variable iMax as integer no-undo.
+define variable mTemp as memptr no-undo.
+define variable oOutput as ObjectOutputStream no-undo.
+define variable oInput as ObjectInputStream no-undo.
+define variable oRequest as ISaveRequest extent no-undo.
+define variable cRequestId as character extent no-undo.
+define variable oResponse as ISaveResponse extent no-undo.
+define variable oContext as IUserContext no-undo.
 
-/* we have no further use for this dataset. 
-   NB: I don't think this is true; leave the service running 
-       unless cleaned up by someone. 
-oService:ReleaseEntity(phDataset:Name).
-*/
+/* Deserialize requests, context */
+assign iMax = extent(pmRequest)
+       extent(oRequest) = iMax
+       extent(cRequestId) = iMax.
 
-pcContext = cast(oContext, ISerializable):Serialize().
+oInput = new ObjectInputStream().
+do iLoop = 1 to iMax:
+    oInput:Reset().
+    oInput:Read(pmRequest[iLoop]).
+    oRequest[iLoop] = cast(oInput:ReadObjectArray(), ISaveRequest).
+end.
 
-delete object phdataset.
+oInput:Reset().
+oInput:Read(pmUserContext).
+oContext = cast(oInput:ReadObjectArray(), IUserContext).
 
-ERROR-STATUS:ERROR = NO.
-RETURN.
-/* EOF */
+oInjectABLKernel = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')),
+                        IKernel).
+
+/* Are we who we say we are? Note that this should really happen on activate. */
+cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
+                        ,ISecurityManager):ValidateSession(oContext:ClientSessionId).
+
+/* Perform request. This is where the actual work happens. */
+oServiceMessageManager = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
+                        , IServiceMessageManager).
+
+/* Perform request. This is where the actual work happens. */
+oResponse = cast(oServiceMessageManager:ExecuteSyncRequest(cast(oRequest, IServiceRequest)), ISaveResponse).                         
+
+/* Serialize requests, context */
+assign iMax = extent(oResponse)
+       extent(pmResponse) = iMax
+       extent(phResponseDataset) = iMax.
+
+oOutput = new ObjectOutputStream().
+
+do iLoop = 1 to iMax:
+    if type-of(oResponse[iLoop], IDatasetSaveResponse) then
+        phResponseDataset[iLoop] = cast(oResponse[iLoop], IDatasetSaveResponse):Handle.
+    
+    oOutput:Reset().
+    oOutput:WriteObjectArray(oResponse[iLoop]).
+    oOutput:Write(output mTemp).
+    pmResponse[iLoop] = mTemp.
+    /* no leaks! */
+    set-size(mTemp) = 0.
+end.
+
+oOutput:Reset().
+oOutput:WriteObjectArray(oContext).
+oOutput:Write(output pmUserContext).
+
+error-status:error = no.
+return.
+
+/* oef */
