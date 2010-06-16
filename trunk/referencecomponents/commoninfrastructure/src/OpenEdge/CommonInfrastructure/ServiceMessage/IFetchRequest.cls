@@ -5,7 +5,7 @@
     Description : 
     Author(s)   : hdaniels
     Created     : Tue Feb 09 14:28:13 EST 2010
-    Notes       : * Corresponds with OpenEdge.Core.System.ServiceMessageActionEnum:Fetch
+    Notes       : * Corresponds with OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum:Fetch
   ----------------------------------------------------------------------*/
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection.

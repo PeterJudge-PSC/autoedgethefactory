@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IServiceMessageCollection
     Purpose     : 
     Syntax      : 
@@ -14,13 +14,13 @@ using OpenEdge.Lang.Collections.TypedList.
 using Progress.Lang.Class.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection inherits TypedList:
-        
+    
     constructor public IServiceMessageCollection():
         super(Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage')).
     end constructor.
     
-    constructor public IServiceMessageCollection(c as IServiceMessageCollection):
-        super(c).
+    constructor public IServiceMessageCollection(input poCollection as IServiceMessageCollection):
+        super(poCollection).
     end constructor.
-
+    
 end class.

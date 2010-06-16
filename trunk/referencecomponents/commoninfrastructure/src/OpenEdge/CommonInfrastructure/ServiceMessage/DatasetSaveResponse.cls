@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : DatasetSaveResponse
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 27 15:11:07 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  --------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.DatasetSaveResponse.
@@ -18,11 +18,12 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.DatasetSaveResponse inherits 
 
     define public property Handle as handle no-undo  get. set. 
 
-    constructor public DatasetSaveResponse(pcService as character ):
+    constructor public DatasetSaveResponse(input pcService as character ):
         super(pcService).
     end constructor.
     
-    constructor public DatasetSaveResponse(pcMessageId as character, pcService as character):
+    constructor public DatasetSaveResponse(input pcMessageId as character,
+                                           input pcService as character):
         super(pcMessageId, pcService).
     end constructor.
 

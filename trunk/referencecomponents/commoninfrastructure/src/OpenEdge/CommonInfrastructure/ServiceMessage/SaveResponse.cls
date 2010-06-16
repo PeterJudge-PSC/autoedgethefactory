@@ -9,19 +9,21 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage.
-using OpenEdge.Core.System.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse inherits ServiceMessage
-        implements ISaveResponse: 
+        implements ISaveResponse, IServiceResponse: 
 
-    constructor public SaveResponse(pcService as character):
+    constructor public SaveResponse(input pcService as character):
         super(pcService, ServiceMessageActionEnum:Save).
     end constructor.
     
-    constructor public SaveResponse(pcMessageId as character, pcService as character):
+    constructor public SaveResponse(input pcMessageId as character,
+                                    input pcService as character):
         super(pcMessageId, pcService, ServiceMessageActionEnum:Save).
     end constructor.
     

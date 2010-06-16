@@ -12,7 +12,7 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using Progress.Lang.Class.
 
 interface OpenEdge.CommonInfrastructure.Common.IService /* inherits IComponent */:  
-    /** Stores a reference to the session's Service Manager */
+    /** (mandatory) Stores a reference to the session's Service Manager */
     define public property ServiceManager as IServiceManager no-undo get.
     
 end interface.
