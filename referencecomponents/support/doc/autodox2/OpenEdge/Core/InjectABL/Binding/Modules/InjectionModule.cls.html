@@ -1,0 +1,377 @@
+<html>
+  <head>
+    <title>InjectionModule</title>
+    <link rel='stylesheet' type='text/css' href='../../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL\Binding\Modules</font>
+      <br />CLASS InjectionModule
+    </h2>
+    <p>CLASS OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule abstract INHERITS <a href="../../../../../OpenEdge/Core/InjectABL/Binding/BindingRoot.cls.html" title="OpenEdge.Core.InjectABL.Binding.BindingRoot" target="classFrame">BindingRoot</a> IMPLEMENTS <a href="../../../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModule.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule" target="classFrame">IInjectionModule</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Bindings'>Bindings</a>
+          </b> OVERRIDE GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Kernel'>Kernel</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the kernel that the module is loaded into.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Name'>Name</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the module's name. Only a single module with a given name can be loaded at one time.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addbinding(openedge.core.injectabl.binding.ibinding)'> AddBinding</a>
+          </b>(<a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registers the specified binding.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createbindingbuilder(openedge.core.injectabl.binding.ibinding)'> CreateBindingBuilder</a>
+          </b>(<a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#load()'> Load</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the module into the kernel.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#onload(openedge.core.injectabl.ikernel)'> OnLoad</a>
+          </b>(<a href="../../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> poKernel)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when the module is loaded into a kernel.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#onunload(openedge.core.injectabl.ikernel)'> OnUnload</a>
+          </b>(<a href="../../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> poKernel)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when the module is unloaded from a kernel.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#removebinding(openedge.core.injectabl.binding.ibinding)'> RemoveBinding</a>
+          </b>(<a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unregisters the specified binding.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#unload()'> Unload</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Bindings'><!-- --></a>
+    <h3>Bindings</h3>
+    <code><a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a> OVERRIDE GET PRIVATE SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Kernel'><!-- --></a>
+    <h3>Kernel</h3>
+    <code><a href="../../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>Gets the kernel that the module is loaded into. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Name'><!-- --></a>
+    <h3>Name</h3>
+    <code>CHARACTER PUBLIC GET </code>
+    <dl>
+      <dd>Gets the module's name. Only a single module with a given name can be loaded at one time. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PROTECTED  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addbinding(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>AddBinding</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>AddBinding</b>(<a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>Registers the specified binding. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>binding - The binding to add.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createbindingbuilder(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>CreateBindingBuilder</h3>
+    <code>OVERRIDE PROTECTED  <a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a>
+      <b>CreateBindingBuilder</b>(<a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='load()'><!-- --></a>
+    <h3>Load</h3>
+    <code>PUBLIC  VOID
+      <b>Load</b>()
+    </code>
+    <dl>
+      <dd>Loads the module into the kernel. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='onload(openedge.core.injectabl.ikernel)'><!-- --></a>
+    <h3>OnLoad</h3>
+    <code>PUBLIC  VOID
+      <b>OnLoad</b>(<a href="../../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> poKernel)
+    </code>
+    <dl>
+      <dd>Called when the module is loaded into a kernel. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>kernel - The kernel that is loading the module.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='onunload(openedge.core.injectabl.ikernel)'><!-- --></a>
+    <h3>OnUnload</h3>
+    <code>PUBLIC  VOID
+      <b>OnUnload</b>(<a href="../../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> poKernel)
+    </code>
+    <dl>
+      <dd>Called when the module is unloaded from a kernel. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>kernel - The kernel that is unloading the module.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='removebinding(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>RemoveBinding</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>RemoveBinding</b>(<a href="../../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>Unregisters the specified binding. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>binding - The binding to remove.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='unload()'><!-- --></a>
+    <h3>Unload</h3>
+    <code>PUBLIC  VOID
+      <b>Unload</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
