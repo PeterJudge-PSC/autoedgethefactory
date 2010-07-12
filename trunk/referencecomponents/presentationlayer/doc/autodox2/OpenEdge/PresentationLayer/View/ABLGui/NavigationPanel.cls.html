@@ -1,0 +1,302 @@
+<html>
+  <head>
+    <title>NavigationPanel</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\PresentationLayer\View\ABLGui</font>
+      <br />CLASS NavigationPanel
+    </h2>
+    <p>CLASS OpenEdge.PresentationLayer.View.ABLGui.NavigationPanel INHERITS <a href="../../../../OpenEdge/PresentationLayer/View/ABLGui/ContainedObject.cls.html" title="OpenEdge.PresentationLayer.View.ABLGui.ContainedObject" target="classFrame">ContainedObject</a> IMPLEMENTS <a href="../../../../OpenEdge/PresentationLayer/View/INavigationPanelView.cls.html" title="OpenEdge.PresentationLayer.View.INavigationPanelView" target="classFrame">INavigationPanelView</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ModelName'>ModelName</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.QueryName'>QueryName</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datafetched(character,logical)'> DataFetched</a>
+          </b>(CHARACTER pcModel, LOGICAL plNewData)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datarefreshed(character,character,openedge.lang.enummember)'> DataRefreshed</a>
+          </b>(CHARACTER pcModel, CHARACTER pcQuery, <a href="../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poModelAction)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#navigationstatechange(integer,integer)'> NavigationStateChange</a>
+          </b>(INTEGER piActions, INTEGER piStates)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#navigationstatechange(openedge.lang.enummember,openedge.lang.enummember)'> NavigationStateChange</a>
+          </b>(<a href="../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> piActions, <a href="../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> piStates)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#savedata(character,character)'> SaveData</a>
+          </b>(CHARACTER pcModel, CHARACTER pcTable)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setbindings()'> SetBindings</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.ModelName'><!-- --></a>
+    <h3>ModelName</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.QueryName'><!-- --></a>
+    <h3>QueryName</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datafetched(character,logical)'><!-- --></a>
+    <h3>DataFetched</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>DataFetched</b>(CHARACTER pcModel, LOGICAL plNewData)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datarefreshed(character,character,openedge.lang.enummember)'><!-- --></a>
+    <h3>DataRefreshed</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>DataRefreshed</b>(CHARACTER pcModel, CHARACTER pcQuery, <a href="../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poModelAction)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='navigationstatechange(integer,integer)'><!-- --></a>
+    <h3>NavigationStateChange</h3>
+    <code>PUBLIC  VOID
+      <b>NavigationStateChange</b>(INTEGER piActions, INTEGER piStates)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='navigationstatechange(openedge.lang.enummember,openedge.lang.enummember)'><!-- --></a>
+    <h3>NavigationStateChange</h3>
+    <code>PUBLIC  VOID
+      <b>NavigationStateChange</b>(<a href="../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> piActions, <a href="../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> piStates)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='savedata(character,character)'><!-- --></a>
+    <h3>SaveData</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>SaveData</b>(CHARACTER pcModel, CHARACTER pcTable)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setbindings()'><!-- --></a>
+    <h3>SetBindings</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>SetBindings</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

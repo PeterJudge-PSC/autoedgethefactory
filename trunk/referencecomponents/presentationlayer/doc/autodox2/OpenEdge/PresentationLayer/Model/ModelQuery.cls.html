@@ -1,0 +1,660 @@
+<html>
+  <head>
+    <title>ModelQuery</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\PresentationLayer\Model</font>
+      <br />CLASS ModelQuery
+    </h2>
+    <p>CLASS OpenEdge.PresentationLayer.Model.ModelQuery INHERITS <a href="../../../OpenEdge/Core/System/Query.cls.html" title="OpenEdge.Core.System.Query" target="classFrame">Query</a> IMPLEMENTS <a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="field_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Field Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.QueryClosed'>QueryClosed</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.QueryOpened'>QueryOpened</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.QueryRepositioned'>QueryRepositioned</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Model'>Model</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.NumSelectedRows'>NumSelectedRows</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.QueryName'>QueryName</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.presentationlayer.model.imodel,character,handle,openedge.core.system.iquerydefinition)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> poModel, CHARACTER pcName, HANDLE phQueryHandle, <a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.presentationlayer.model.imodel,character,openedge.core.system.iquerydefinition)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> poModel, CHARACTER pcName, <a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#clearselection()'> ClearSelection</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#closequery(handle)'> CloseQuery</a>
+          </b>(HANDLE phQuery)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#deselectcurrentrow()'> DeselectCurrentRow</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#deselectrow(character)'> DeselectRow</a>
+          </b>(CHARACTER pcRowKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getselectedrowkey(integer)'> GetSelectedRowKey</a>
+          </b>(INTEGER piRow)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#onqueryclose(handle)'> OnQueryClose</a>
+          </b>(HANDLE phQuery)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#onqueryopen(handle)'> OnQueryOpen</a>
+          </b>(HANDLE phQuery)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#onqueryrepos(handle)'> OnQueryRepos</a>
+          </b>(HANDLE phQuery)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#openquery(handle)'> OpenQuery</a>
+          </b>(HANDLE phQuery)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#repositionquery(handle,integer)'> RepositionQuery</a>
+          </b>(HANDLE phQuery, INTEGER piRow)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#repositionquery(handle,rowid)'> RepositionQuery</a>
+          </b>(HANDLE phQuery, ROWID prRecord)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resetqueryhandle()'> ResetQueryHandle</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#selectcurrentrow()'> SelectCurrentRow</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#selectrow(character)'> SelectRow</a>
+          </b>(CHARACTER pcRowKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setqueryhandle(handle)'> SetQueryHandle</a>
+          </b>(HANDLE phQuery)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="field_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Field Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='1194.QueryClosed'><!-- --></a>
+    <h3>QueryClosed</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.QueryOpened'><!-- --></a>
+    <h3>QueryOpened</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.QueryRepositioned'><!-- --></a>
+    <h3>QueryRepositioned</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Model'><!-- --></a>
+    <h3>Model</h3>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NumSelectedRows'><!-- --></a>
+    <h3>NumSelectedRows</h3>
+    <code>INTEGER PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.QueryName'><!-- --></a>
+    <h3>QueryName</h3>
+    <code>CHARACTER PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(openedge.presentationlayer.model.imodel,character,handle,openedge.core.system.iquerydefinition)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> poModel, CHARACTER pcName, HANDLE phQueryHandle, <a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(openedge.presentationlayer.model.imodel,character,openedge.core.system.iquerydefinition)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> poModel, CHARACTER pcName, <a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='clearselection()'><!-- --></a>
+    <h3>ClearSelection</h3>
+    <code>PUBLIC  VOID
+      <b>ClearSelection</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='closequery(handle)'><!-- --></a>
+    <h3>CloseQuery</h3>
+    <code>OVERRIDE PROTECTED  LOGICAL
+      <b>CloseQuery</b>(HANDLE phQuery)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='deselectcurrentrow()'><!-- --></a>
+    <h3>DeselectCurrentRow</h3>
+    <code>PUBLIC  VOID
+      <b>DeselectCurrentRow</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='deselectrow(character)'><!-- --></a>
+    <h3>DeselectRow</h3>
+    <code>PUBLIC  VOID
+      <b>DeselectRow</b>(CHARACTER pcRowKey)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getselectedrowkey(integer)'><!-- --></a>
+    <h3>GetSelectedRowKey</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetSelectedRowKey</b>(INTEGER piRow)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='onqueryclose(handle)'><!-- --></a>
+    <h3>OnQueryClose</h3>
+    <code>PROTECTED  VOID
+      <b>OnQueryClose</b>(HANDLE phQuery)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='onqueryopen(handle)'><!-- --></a>
+    <h3>OnQueryOpen</h3>
+    <code>PROTECTED  VOID
+      <b>OnQueryOpen</b>(HANDLE phQuery)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='onqueryrepos(handle)'><!-- --></a>
+    <h3>OnQueryRepos</h3>
+    <code>PROTECTED  VOID
+      <b>OnQueryRepos</b>(HANDLE phQuery)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='openquery(handle)'><!-- --></a>
+    <h3>OpenQuery</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>OpenQuery</b>(HANDLE phQuery)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='repositionquery(handle,integer)'><!-- --></a>
+    <h3>RepositionQuery</h3>
+    <code>OVERRIDE PROTECTED  LOGICAL
+      <b>RepositionQuery</b>(HANDLE phQuery, INTEGER piRow)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='repositionquery(handle,rowid)'><!-- --></a>
+    <h3>RepositionQuery</h3>
+    <code>OVERRIDE PROTECTED  LOGICAL
+      <b>RepositionQuery</b>(HANDLE phQuery, ROWID prRecord)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resetqueryhandle()'><!-- --></a>
+    <h3>ResetQueryHandle</h3>
+    <code>PUBLIC  VOID
+      <b>ResetQueryHandle</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='selectcurrentrow()'><!-- --></a>
+    <h3>SelectCurrentRow</h3>
+    <code>PUBLIC  VOID
+      <b>SelectCurrentRow</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='selectrow(character)'><!-- --></a>
+    <h3>SelectRow</h3>
+    <code>PUBLIC  VOID
+      <b>SelectRow</b>(CHARACTER pcRowKey)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setqueryhandle(handle)'><!-- --></a>
+    <h3>SetQueryHandle</h3>
+    <code>PUBLIC  VOID
+      <b>SetQueryHandle</b>(HANDLE phQuery)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
