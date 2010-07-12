@@ -1,0 +1,485 @@
+<html>
+  <head>
+    <title>ServiceMessageManager</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\Common</font>
+      <br />CLASS ServiceMessageManager
+    </h2>
+    <p>CLASS OpenEdge.CommonInfrastructure.Common.ServiceMessageManager abstract INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Common/Service.cls.html" title="OpenEdge.CommonInfrastructure.Common.Service" target="classFrame">Service</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> , <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageRequestor.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor" target="classFrame">IMessageRequestor</a> , <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.MessageConsumers'>MessageConsumers</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundleCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundleCollection" target="classFrame">IServiceRequestBundleCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ServiceRequestBundles'>ServiceRequestBundles</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A (lookup) map of messages and bundles, allowing us to get from a ServiceMessage to a Bundle if need be.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#actioncompleted(openedge.commoninfrastructure.servicemessage.iserviceresponse)'> ActionCompleted</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> poResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addrequest(openedge.commoninfrastructure.servicemessage.iservicerequestbundle,openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.servicemessage.imessageconsumer)'> AddRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poMessageBundle, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a request to the specified Request list
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createcomponent()'> CreateComponent</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createmessagebundle(openedge.commoninfrastructure.servicemessage.imessagerequestor,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'> CreateMessageBundle</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageRequestor.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor" target="classFrame">IMessageRequestor</a> poMessageRequestor, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poActionType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Factory method that creates a message bundle for a given component.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#destroycomponent()'> DestroyComponent</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executerequest(openedge.commoninfrastructure.servicemessage.imessagerequestor,openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.servicemessage.imessageconsumer)'> ExecuteRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageRequestor.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor" target="classFrame">IMessageRequestor</a> poMessageRequestor, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Execute the request for the component. This method creates a bundle
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executeresponse(openedge.commoninfrastructure.servicemessage.iserviceresponse)'> ExecuteResponse</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> poResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes responses for the message(s) requested earlier.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> ExecuteSyncRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A synchronous/linear/connected/combined request and response call.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#removerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> RemoveRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove a request from its message bundle
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#requestcompleted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'> RequestCompleted</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notification that all requests within a bundle are complete.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#requeststarted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'> RequestStarted</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notification that all requests within a bundle are about to be executed.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.MessageConsumers'><!-- --></a>
+    <h3>MessageConsumers</h3>
+    <code><a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ServiceRequestBundles'><!-- --></a>
+    <h3>ServiceRequestBundles</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundleCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundleCollection" target="classFrame">IServiceRequestBundleCollection</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>A (lookup) map of messages and bundles, allowing us to get from a ServiceMessage to a Bundle if need be. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='actioncompleted(openedge.commoninfrastructure.servicemessage.iserviceresponse)'><!-- --></a>
+    <h3>ActionCompleted</h3>
+    <code>PUBLIC  VOID
+      <b>ActionCompleted</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> poResponse)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addrequest(openedge.commoninfrastructure.servicemessage.iservicerequestbundle,openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.servicemessage.imessageconsumer)'><!-- --></a>
+    <h3>AddRequest</h3>
+    <code>PUBLIC  VOID
+      <b>AddRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poMessageBundle, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+    </code>
+    <dl>
+      <dd>Add a request to the specified Request list <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poMessageBundle - The message bundle in which to add the request<br/>poRequest - This is going to be a request specialised by therequest type: IFetchRequest, ISaveRequest, IDefineRequest <br/>poMessageConsumer - The component that will consumer the message response.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createcomponent()'><!-- --></a>
+    <h3>CreateComponent</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>CreateComponent</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createmessagebundle(openedge.commoninfrastructure.servicemessage.imessagerequestor,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>CreateMessageBundle</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a>
+      <b>CreateMessageBundle</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageRequestor.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor" target="classFrame">IMessageRequestor</a> poMessageRequestor, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poActionType)
+    </code>
+    <dl>
+      <dd>Factory method that creates a message bundle for a given component. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poRequestor - The object making the request.<br/> - poMessageType OpenEdge.Core.System.MessageTypeEnum (Fetch, Save or Define)<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Returns an IServiceRequestBundle instance, into which we can add ServiceRequests,and execute requests. </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='destroycomponent()'><!-- --></a>
+    <h3>DestroyComponent</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>DestroyComponent</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executerequest(openedge.commoninfrastructure.servicemessage.imessagerequestor,openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.servicemessage.imessageconsumer)'><!-- --></a>
+    <h3>ExecuteRequest</h3>
+    <code>PUBLIC  VOID
+      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageRequestor.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor" target="classFrame">IMessageRequestor</a> poMessageRequestor, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+    </code>
+    <dl>
+      <dd>Execute the request for the component. This method creates a bundle <p> </dd>
+      <dd>and executes the request in one call. It's a wrapper around CreateMessageBundle, AddRequest and ExecuteBundle. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poRequestor - The object making the request.<br/>poRequest - The Service request being made<br/>poMessageConsumer - The component that will consumer the message response.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executeresponse(openedge.commoninfrastructure.servicemessage.iserviceresponse)'><!-- --></a>
+    <h3>ExecuteResponse</h3>
+    <code>PUBLIC  VOID
+      <b>ExecuteResponse</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> poResponse)
+    </code>
+    <dl>
+      <dd>Executes responses for the message(s) requested earlier. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poResponse - An array of request responses.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
+    <h3>ExecuteSyncRequest</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a>
+      <b>ExecuteSyncRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+    </code>
+    <dl>
+      <dd>A synchronous/linear/connected/combined request and response call. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poRequest - An array of service requests.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Returns an array of responses for the provided requests</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='removerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
+    <h3>RemoveRequest</h3>
+    <code>PUBLIC  VOID
+      <b>RemoveRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+    </code>
+    <dl>
+      <dd>Remove a request from its message bundle <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poRequest - The request to remove from its bundle<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='requestcompleted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'><!-- --></a>
+    <h3>RequestCompleted</h3>
+    <code>PUBLIC  VOID
+      <b>RequestCompleted</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+    </code>
+    <dl>
+      <dd>Notification that all requests within a bundle are complete. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poBundle - The request bundle whose request are now complete<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='requeststarted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'><!-- --></a>
+    <h3>RequestStarted</h3>
+    <code>PUBLIC  VOID
+      <b>RequestStarted</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+    </code>
+    <dl>
+      <dd>Notification that all requests within a bundle are about to be executed. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poBundle - The request bundle whose requests are being acted upon.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

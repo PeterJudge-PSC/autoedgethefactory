@@ -1,0 +1,342 @@
+<html>
+  <head>
+    <title>TableRequest</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
+      <br />CLASS TableRequest
+    </h2>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest INHERITS <a href="../../../OpenEdge/Core/System/QueryDefinition.cls.html" title="OpenEdge.Core.System.QueryDefinition" target="classFrame">QueryDefinition</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.FullPage'>FullPage</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PageContext'>PageContext</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PageSize'>PageSize</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.RowKey'>RowKey</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.SearchType'>SearchType</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableName'>TableName</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableRequestType'>TableRequestType</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcTableName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addsearch(character,character,openedge.lang.enummember,character,openedge.lang.enummember,openedge.lang.enummember)'> AddSearch</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#buildsearchstring()'> BuildSearchString</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getsearch(character,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_openedge.lang.enummember)'> GetSearch</a>
+          </b>(CHARACTER pcBufferName, OUTPUT CHARACTER pcFieldName, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, OUTPUT CHARACTER pcFieldValue, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.FullPage'><!-- --></a>
+    <h3>FullPage</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PageContext'><!-- --></a>
+    <h3>PageContext</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PageSize'><!-- --></a>
+    <h3>PageSize</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.RowKey'><!-- --></a>
+    <h3>RowKey</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.SearchType'><!-- --></a>
+    <h3>SearchType</h3>
+    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableName'><!-- --></a>
+    <h3>TableName</h3>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableRequestType'><!-- --></a>
+    <h3>TableRequestType</h3>
+    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcTableName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addsearch(character,character,openedge.lang.enummember,character,openedge.lang.enummember,openedge.lang.enummember)'><!-- --></a>
+    <h3>AddSearch</h3>
+    <code>PUBLIC  VOID
+      <b>AddSearch</b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='buildsearchstring()'><!-- --></a>
+    <h3>BuildSearchString</h3>
+    <code>PUBLIC  CHARACTER
+      <b>BuildSearchString</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getsearch(character,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_openedge.lang.enummember)'><!-- --></a>
+    <h3>GetSearch</h3>
+    <code>PUBLIC  VOID
+      <b>GetSearch</b>(CHARACTER pcBufferName, OUTPUT CHARACTER pcFieldName, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, OUTPUT CHARACTER pcFieldValue, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

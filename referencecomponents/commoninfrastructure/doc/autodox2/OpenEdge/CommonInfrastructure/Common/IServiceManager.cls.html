@@ -1,0 +1,256 @@
+<html>
+  <head>
+    <title>IServiceManager</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\Common</font>
+      <br />INTERFACE IServiceManager
+    </h2>
+    <p>INTERFACE OpenEdge.CommonInfrastructure.Common.IServiceManager </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Kernel'>Kernel</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) Contains the InjectABL kernel that's responsible for mapping
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceProvider.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider" target="classFrame">IServiceProvider</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getserviceprovider(character)'> GetServiceProvider</a>
+          </b>(CHARACTER pcService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#startservice(openedge.lang.enummember,character)'> StartService</a>
+          </b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poServiceType, CHARACTER pcServiceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#startservice(progress.lang.class)'> StartService</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#startservices()'> StartServices</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#stopservice(openedge.commoninfrastructure.common.iservice)'> StopService</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a> poServiceInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#stopservices()'> StopServices</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Kernel'><!-- --></a>
+    <h3>Kernel</h3>
+    <code><a href="../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> PUBLIC GET </code>
+    <dl>
+      <dd>(mandatory) Contains the InjectABL kernel that's responsible for mapping <p> </dd>
+      <dd>services (in the sense of Interfaces) to concrete instances. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='getserviceprovider(character)'><!-- --></a>
+    <h3>GetServiceProvider</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceProvider.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider" target="classFrame">IServiceProvider</a>
+      <b>GetServiceProvider</b>(CHARACTER pcService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='startservice(openedge.lang.enummember,character)'><!-- --></a>
+    <h3>StartService</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a>
+      <b>StartService</b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poServiceType, CHARACTER pcServiceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='startservice(progress.lang.class)'><!-- --></a>
+    <h3>StartService</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a>
+      <b>StartService</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='startservices()'><!-- --></a>
+    <h3>StartServices</h3>
+    <code>PUBLIC  VOID
+      <b>StartServices</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='stopservice(openedge.commoninfrastructure.common.iservice)'><!-- --></a>
+    <h3>StopService</h3>
+    <code>PUBLIC  VOID
+      <b>StopService</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a> poServiceInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='stopservices()'><!-- --></a>
+    <h3>StopServices</h3>
+    <code>PUBLIC  VOID
+      <b>StopServices</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
