@@ -1,0 +1,781 @@
+<html>
+  <head>
+    <title>Presenter</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\PresentationLayer\Presenter</font>
+      <br />CLASS Presenter
+    </h2>
+    <p>CLASS OpenEdge.PresentationLayer.Presenter.Presenter abstract INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Common/Service.cls.html" title="OpenEdge.CommonInfrastructure.Common.Service" target="classFrame">Service</a> IMPLEMENTS <a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceCollection.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceCollection" target="classFrame">IServiceCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ChildPresenters'>ChildPresenters</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.HasView'>HasView</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.IsInvokingView'>IsInvokingView</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This only really works because the ABL is single-threaded and only 1 Presenter can be doing any 1 thing at a time
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ParentPresenter'>ParentPresenter</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/View/IView.cls.html" title="OpenEdge.PresentationLayer.View.IView" target="classFrame">IView</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.View'>View</a>
+          </b> PUBLIC PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addchildpresenter(openedge.presentationlayer.presenter.ipresenter)'> AddChildPresenter</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a> poPresenter)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#associatecontainedview(openedge.presentationlayer.view.icontainedview)'> AssociateContainedView</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/View/IContainedView.cls.html" title="OpenEdge.PresentationLayer.View.IContainedView" target="classFrame">IContainedView</a> poView)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#begineventloop(openedge.lang.enummember)'> BeginEventLoop</a>
+          </b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poShowMode)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#cancloseview(openedge.lang.enummember,openedge.lang.enummember)'> CanCloseView</a>
+          </b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poDialogResult, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poCloseReason)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#closeview()'> CloseView</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If a Presenter's View is closed, we consider the Presenter's work done,
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createchildpresenter(progress.lang.class)'> CreateChildPresenter</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poPresenter)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a child Presenter and associates it with this Presenter.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#destroychildpresenter(openedge.presentationlayer.presenter.ipresenter)'> DestroyChildPresenter</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a> poPresenter)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#destroychildpresenters()'> DestroyChildPresenters</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#destroycomponent()'> DestroyComponent</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#destroyview()'> DestroyView</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#endeventloop()'> EndEventLoop</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getchildpresenter(openedge.commoninfrastructure.common.icomponentinfo)'> GetChildPresenter</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poPresenterService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getchildpresenter(progress.lang.class)'> GetChildPresenter</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poPresenterService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#hideview()'> HideView</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#initialize()'> Initialize</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#personalize()'> Personalize</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#secure()'> Secure</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setview(openedge.presentationlayer.view.iview)'> SetView</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/View/IView.cls.html" title="OpenEdge.PresentationLayer.View.IView" target="classFrame">IView</a> poView)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use method since we can't (yet) set properties via reflection
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#showembedded(progress.lang.object)'> ShowEmbedded</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poParentView)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#showmodal()'> ShowModal</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#showview()'> ShowView</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#translate()'> Translate</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.ChildPresenters'><!-- --></a>
+    <h3>ChildPresenters</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceCollection.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceCollection" target="classFrame">IServiceCollection</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.HasView'><!-- --></a>
+    <h3>HasView</h3>
+    <code>LOGICAL PUBLIC GET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.IsInvokingView'><!-- --></a>
+    <h3>IsInvokingView</h3>
+    <code>LOGICAL PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>This only really works because the ABL is single-threaded and only 1 Presenter can be doing any 1 thing at a time <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ParentPresenter'><!-- --></a>
+    <h3>ParentPresenter</h3>
+    <code><a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.View'><!-- --></a>
+    <h3>View</h3>
+    <code><a href="../../../OpenEdge/PresentationLayer/View/IView.cls.html" title="OpenEdge.PresentationLayer.View.IView" target="classFrame">IView</a> PUBLIC PROTECTED GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addchildpresenter(openedge.presentationlayer.presenter.ipresenter)'><!-- --></a>
+    <h3>AddChildPresenter</h3>
+    <code>PUBLIC  VOID
+      <b>AddChildPresenter</b>(<a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a> poPresenter)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='associatecontainedview(openedge.presentationlayer.view.icontainedview)'><!-- --></a>
+    <h3>AssociateContainedView</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a>
+      <b>AssociateContainedView</b>(<a href="../../../OpenEdge/PresentationLayer/View/IContainedView.cls.html" title="OpenEdge.PresentationLayer.View.IContainedView" target="classFrame">IContainedView</a> poView)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='begineventloop(openedge.lang.enummember)'><!-- --></a>
+    <h3>BeginEventLoop</h3>
+    <code>PUBLIC  VOID
+      <b>BeginEventLoop</b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poShowMode)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='cancloseview(openedge.lang.enummember,openedge.lang.enummember)'><!-- --></a>
+    <h3>CanCloseView</h3>
+    <code>PUBLIC  LOGICAL
+      <b>CanCloseView</b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poDialogResult, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poCloseReason)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='closeview()'><!-- --></a>
+    <h3>CloseView</h3>
+    <code>PROTECTED  VOID
+      <b>CloseView</b>()
+    </code>
+    <dl>
+      <dd>If a Presenter's View is closed, we consider the Presenter's work done, <p> </dd>
+      <dd>and so the Presenter is destroyed. The Presenter and View can be considered co-dependent, and while a Presenter doesn't require a View, if it has one, it shares the lifecycle of that View. Note that this isn't the case for Models, where the lifespan of Model and Presenter aren't interdependent. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createchildpresenter(progress.lang.class)'><!-- --></a>
+    <h3>CreateChildPresenter</h3>
+    <code>PUBLIC  VOID
+      <b>CreateChildPresenter</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poPresenter)
+    </code>
+    <dl>
+      <dd>Starts a child Presenter and associates it with this Presenter. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poPresenter - The type (service) of the Presenter to invoke<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='destroychildpresenter(openedge.presentationlayer.presenter.ipresenter)'><!-- --></a>
+    <h3>DestroyChildPresenter</h3>
+    <code>PUBLIC  VOID
+      <b>DestroyChildPresenter</b>(<a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a> poPresenter)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='destroychildpresenters()'><!-- --></a>
+    <h3>DestroyChildPresenters</h3>
+    <code>PROTECTED  VOID
+      <b>DestroyChildPresenters</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='destroycomponent()'><!-- --></a>
+    <h3>DestroyComponent</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>DestroyComponent</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='destroyview()'><!-- --></a>
+    <h3>DestroyView</h3>
+    <code>PROTECTED  VOID
+      <b>DestroyView</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='endeventloop()'><!-- --></a>
+    <h3>EndEventLoop</h3>
+    <code>PUBLIC  VOID
+      <b>EndEventLoop</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getchildpresenter(openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <h3>GetChildPresenter</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a>
+      <b>GetChildPresenter</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poPresenterService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getchildpresenter(progress.lang.class)'><!-- --></a>
+    <h3>GetChildPresenter</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Presenter/IPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IPresenter" target="classFrame">IPresenter</a>
+      <b>GetChildPresenter</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poPresenterService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='hideview()'><!-- --></a>
+    <h3>HideView</h3>
+    <code>PUBLIC  VOID
+      <b>HideView</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='initialize()'><!-- --></a>
+    <h3>Initialize</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>Initialize</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='personalize()'><!-- --></a>
+    <h3>Personalize</h3>
+    <code>PROTECTED  VOID
+      <b>Personalize</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='secure()'><!-- --></a>
+    <h3>Secure</h3>
+    <code>PROTECTED  VOID
+      <b>Secure</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setview(openedge.presentationlayer.view.iview)'><!-- --></a>
+    <h3>SetView</h3>
+    <code>PUBLIC  VOID
+      <b>SetView</b>(<a href="../../../OpenEdge/PresentationLayer/View/IView.cls.html" title="OpenEdge.PresentationLayer.View.IView" target="classFrame">IView</a> poView)
+    </code>
+    <dl>
+      <dd>Use method since we can't (yet) set properties via reflection <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='showembedded(progress.lang.object)'><!-- --></a>
+    <h3>ShowEmbedded</h3>
+    <code>PUBLIC  VOID
+      <b>ShowEmbedded</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poParentView)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='showmodal()'><!-- --></a>
+    <h3>ShowModal</h3>
+    <code>PUBLIC  VOID
+      <b>ShowModal</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='showview()'><!-- --></a>
+    <h3>ShowView</h3>
+    <code>PUBLIC  VOID
+      <b>ShowView</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='translate()'><!-- --></a>
+    <h3>Translate</h3>
+    <code>PROTECTED  VOID
+      <b>Translate</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
