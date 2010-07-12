@@ -1,0 +1,1 @@
+0 0 0 fileindex 0 C:\Devarea\projects\OEBP\referencecomponents\businesscomponents\src\OpenEdge\BusinessComponent\Entity\IBusinessEntity.cls
