@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>simple_fetchdata</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
+      <br /> simple_fetchdata
+    </h2>
+    <p>(MEMPTR pmRequest, OUTPUT HANDLE phResponseDataset, OUTPUT MEMPTR pmResponse, INPUT-OUTPUT MEMPTR pmUserContext)</p>
+    <dl>
+      <dd>------------------------------------------------------------------------ <p> </dd>
+      <dd>File        : simple_fetchdata.p Purpose     : Syntax      : Description : Standard Service Interface procedure for the fetchdata method </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Author:</b>
+          </dt>
+          <dd>pjudgeCreated     : Tue Jan 27 16:17:52 EST 2009 Notes       : * The vast bulk of this code is infrastructure - the only 'real' work that this procedure does is the call to ExecuteSyncRequest(). The session validation should happen in the activation procedure (will as of 11.0.0); the serialisation is also simply infrastructure. There are 3 separate loops that could be combined into 1 or 2 for performance reasons. They remain separate here for illustrative purposes. ---------------------------------------------------------------------- </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

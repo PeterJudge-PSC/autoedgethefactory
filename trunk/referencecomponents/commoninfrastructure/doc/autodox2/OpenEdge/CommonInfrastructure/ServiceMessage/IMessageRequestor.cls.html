@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <title>IMessageRequestor</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
+      <br />INTERFACE IMessageRequestor
+    </h2>
+    <p>INTERFACE OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#requestcompleted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'> RequestCompleted</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notification that all requests within a bundle are complete.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#requeststarted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'> RequestStarted</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notification that all requests within a bundle are about to be executed.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='requestcompleted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'><!-- --></a>
+    <h3>RequestCompleted</h3>
+    <code>PUBLIC  VOID
+      <b>RequestCompleted</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+    </code>
+    <dl>
+      <dd>Notification that all requests within a bundle are complete. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poBundle - The request bundle whose request are now complete<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='requeststarted(openedge.commoninfrastructure.servicemessage.iservicerequestbundle)'><!-- --></a>
+    <h3>RequestStarted</h3>
+    <code>PUBLIC  VOID
+      <b>RequestStarted</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequestBundle.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle" target="classFrame">IServiceRequestBundle</a> poBundle)
+    </code>
+    <dl>
+      <dd>Notification that all requests within a bundle are about to be executed. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poBundle - The request bundle whose requests are being acted upon.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
