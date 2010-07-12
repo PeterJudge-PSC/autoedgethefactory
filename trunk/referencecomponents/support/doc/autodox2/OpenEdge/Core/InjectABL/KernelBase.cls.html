@@ -1,0 +1,778 @@
+<html>
+  <head>
+    <title>KernelBase</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL</font>
+      <br />CLASS KernelBase
+    </h2>
+    <p>CLASS OpenEdge.Core.InjectABL.KernelBase INHERITS <a href="../../../OpenEdge/Core/InjectABL/Binding/BindingRoot.cls.html" title="OpenEdge.Core.InjectABL.Binding.BindingRoot" target="classFrame">BindingRoot</a> IMPLEMENTS <a href="../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> , <a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingRoot.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingRoot" target="classFrame">IBindingRoot</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Bindings'>Bindings</a>
+          </b> OVERRIDE GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/ComponentContainer.cls.html" title="OpenEdge.Core.InjectABL.ComponentContainer" target="classFrame">ComponentContainer</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Components'>Components</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the component container, which holds components that contribute to InjectABL. *
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Modules'>Modules</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the modules that have been loaded into the kernel. *
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/KernelSettings.cls.html" title="OpenEdge.Core.InjectABL.KernelSettings" target="classFrame">KernelSettings</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Settings'>Settings</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.core.injectabl.binding.modules.iinjectionmodulecollection)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.core.injectabl.componentcontainer,openedge.core.injectabl.binding.modules.iinjectionmodulecollection,openedge.core.injectabl.kernelsettings)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/ComponentContainer.cls.html" title="OpenEdge.Core.InjectABL.ComponentContainer" target="classFrame">ComponentContainer</a> poComponents, <a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules, <a href="../../../OpenEdge/Core/InjectABL/KernelSettings.cls.html" title="OpenEdge.Core.InjectABL.KernelSettings" target="classFrame">KernelSettings</a> poSettings)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addbinding(openedge.core.injectabl.binding.ibinding)'> AddBinding</a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addcomponents()'> AddComponents</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#clear(progress.lang.object)'> Clear</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poScope)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createbindingbuilder(openedge.core.injectabl.binding.ibinding)'> CreateBindingBuilder</a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createcontext(openedge.core.injectabl.binding.ibinding)'> CreateContext</a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createdefaultbinding(progress.lang.class)'> CreateDefaultBinding</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#get(character)'> Get</a>
+          </b>(CHARACTER pcService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#get(progress.lang.class)'> Get</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#get(progress.lang.class,openedge.core.injectabl.binding.parameters.iparametercollection)'> Get</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, <a href="../../../OpenEdge/Core/InjectABL/Binding/Parameters/IParameterCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection" target="classFrame">IParameterCollection</a> poParameters)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getbindings(progress.lang.class)'> GetBindings</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getbindings(progress.lang.class,openedge.lang.enummember)'> GetBindings</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poScope)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#hasmodule(character)'> HasModule</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#inject(progress.lang.object,openedge.core.injectabl.binding.parameters.iparametercollection)'> Inject</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance, <a href="../../../OpenEdge/Core/InjectABL/Binding/Parameters/IParameterCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection" target="classFrame">IParameterCollection</a> poParameters)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Injects (from outside) *
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#load(character)'> Load</a>
+          </b>(CHARACTER pcFilePatterns)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#load(openedge.core.injectabl.binding.modules.iinjectionmodule)'> Load</a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModule.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule" target="classFrame">IInjectionModule</a> poModule)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#load(openedge.core.injectabl.binding.modules.iinjectionmodulecollection)'> Load</a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#release(progress.lang.object)'> Release</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#removebinding(openedge.core.injectabl.binding.ibinding)'> RemoveBinding</a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unregisters the specified binding.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#selectbinding(progress.lang.class)'> SelectBinding</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#typeisselfbindable(progress.lang.class)'> TypeIsSelfBindable</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#unload(character)'> Unload</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Bindings'><!-- --></a>
+    <h3>Bindings</h3>
+    <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a> OVERRIDE GET PRIVATE SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Components'><!-- --></a>
+    <h3>Components</h3>
+    <code><a href="../../../OpenEdge/Core/InjectABL/ComponentContainer.cls.html" title="OpenEdge.Core.InjectABL.ComponentContainer" target="classFrame">ComponentContainer</a> PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>Gets the component container, which holds components that contribute to InjectABL. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Modules'><!-- --></a>
+    <h3>Modules</h3>
+    <code><a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>Gets the modules that have been loaded into the kernel. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Settings'><!-- --></a>
+    <h3>Settings</h3>
+    <code><a href="../../../OpenEdge/Core/InjectABL/KernelSettings.cls.html" title="OpenEdge.Core.InjectABL.KernelSettings" target="classFrame">KernelSettings</a> PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(openedge.core.injectabl.binding.modules.iinjectionmodulecollection)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(openedge.core.injectabl.componentcontainer,openedge.core.injectabl.binding.modules.iinjectionmodulecollection,openedge.core.injectabl.kernelsettings)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PROTECTED  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/Core/InjectABL/ComponentContainer.cls.html" title="OpenEdge.Core.InjectABL.ComponentContainer" target="classFrame">ComponentContainer</a> poComponents, <a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules, <a href="../../../OpenEdge/Core/InjectABL/KernelSettings.cls.html" title="OpenEdge.Core.InjectABL.KernelSettings" target="classFrame">KernelSettings</a> poSettings)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addbinding(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>AddBinding</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>AddBinding</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addcomponents()'><!-- --></a>
+    <h3>AddComponents</h3>
+    <code>PROTECTED  VOID
+      <b>AddComponents</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='clear(progress.lang.object)'><!-- --></a>
+    <h3>Clear</h3>
+    <code>PUBLIC  VOID
+      <b>Clear</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poScope)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createbindingbuilder(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>CreateBindingBuilder</h3>
+    <code>OVERRIDE PROTECTED  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a>
+      <b>CreateBindingBuilder</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createcontext(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>CreateContext</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a>
+      <b>CreateContext</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createdefaultbinding(progress.lang.class)'><!-- --></a>
+    <h3>CreateDefaultBinding</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a>
+      <b>CreateDefaultBinding</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='get(character)'><!-- --></a>
+    <h3>Get</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Get</b>(CHARACTER pcService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='get(progress.lang.class)'><!-- --></a>
+    <h3>Get</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Get</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='get(progress.lang.class,openedge.core.injectabl.binding.parameters.iparametercollection)'><!-- --></a>
+    <h3>Get</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Get</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, <a href="../../../OpenEdge/Core/InjectABL/Binding/Parameters/IParameterCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection" target="classFrame">IParameterCollection</a> poParameters)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getbindings(progress.lang.class)'><!-- --></a>
+    <h3>GetBindings</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a>
+      <b>GetBindings</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getbindings(progress.lang.class,openedge.lang.enummember)'><!-- --></a>
+    <h3>GetBindings</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a>
+      <b>GetBindings</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poScope)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='hasmodule(character)'><!-- --></a>
+    <h3>HasModule</h3>
+    <code>PUBLIC  LOGICAL
+      <b>HasModule</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='inject(progress.lang.object,openedge.core.injectabl.binding.parameters.iparametercollection)'><!-- --></a>
+    <h3>Inject</h3>
+    <code>PUBLIC  VOID
+      <b>Inject</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance, <a href="../../../OpenEdge/Core/InjectABL/Binding/Parameters/IParameterCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection" target="classFrame">IParameterCollection</a> poParameters)
+    </code>
+    <dl>
+      <dd>Injects (from outside) * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='load(character)'><!-- --></a>
+    <h3>Load</h3>
+    <code>PUBLIC  VOID
+      <b>Load</b>(CHARACTER pcFilePatterns)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='load(openedge.core.injectabl.binding.modules.iinjectionmodule)'><!-- --></a>
+    <h3>Load</h3>
+    <code>PUBLIC  VOID
+      <b>Load</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModule.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule" target="classFrame">IInjectionModule</a> poModule)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='load(openedge.core.injectabl.binding.modules.iinjectionmodulecollection)'><!-- --></a>
+    <h3>Load</h3>
+    <code>PUBLIC  VOID
+      <b>Load</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='release(progress.lang.object)'><!-- --></a>
+    <h3>Release</h3>
+    <code>PUBLIC  LOGICAL
+      <b>Release</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='removebinding(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>RemoveBinding</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>RemoveBinding</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>Unregisters the specified binding. <p> </dd>
+      <dd><param name="binding">The binding to remove.</param> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='selectbinding(progress.lang.class)'><!-- --></a>
+    <h3>SelectBinding</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a>
+      <b>SelectBinding</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='typeisselfbindable(progress.lang.class)'><!-- --></a>
+    <h3>TypeIsSelfBindable</h3>
+    <code>PROTECTED  LOGICAL
+      <b>TypeIsSelfBindable</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='unload(character)'><!-- --></a>
+    <h3>Unload</h3>
+    <code>PUBLIC  VOID
+      <b>Unload</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

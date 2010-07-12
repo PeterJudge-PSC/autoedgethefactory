@@ -1,0 +1,614 @@
+<html>
+  <head>
+    <title>Stack</title>
+    <link rel='stylesheet' type='text/css' href='../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Lang</font>
+      <br />CLASS Stack
+    </h2>
+    <p>CLASS OpenEdge.Lang.Stack abstract </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="field_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Field Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#841.DEFAULT_STACK_DEPTH'>DEFAULT_STACK_DEPTH</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.AutoExpand'>AutoExpand</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE/ the expand/shrink behaviour could be handled with an enumeration,
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Depth'>Depth</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.DiscardOnShrink'>DiscardOnShrink</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Size'>Size</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcArray)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(integer)'>CONSTRUCTOR </a>
+          </b>(INTEGER piDepth)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(object)'>CONSTRUCTOR </a>
+          </b>(<a href="../../Object.cls.html" title="Object" target="classFrame">Object</a> poArray)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>Object</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#clone()'> Clone</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#invert()'> Invert</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>Object</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#objectpeek()'> ObjectPeek</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>Object</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#objectpop()'> ObjectPop</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#objectpush(object)'> ObjectPush</a>
+          </b>(<a href="../../Object.cls.html" title="Object" target="classFrame">Object</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>Object</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#objecttoarray()'> ObjectToArray</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#primitivepeek()'> PrimitivePeek</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#primitivepop()'> PrimitivePop</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#primitivepush(character)'> PrimitivePush</a>
+          </b>(CHARACTER pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#primitivetoarray()'> PrimitiveToArray</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#rotate(integer)'> Rotate</a>
+          </b>(INTEGER piItems)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#swap(integer,integer)'> Swap</a>
+          </b>(INTEGER piFromPos, INTEGER piToPos)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="field_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Field Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='841.DEFAULT_STACK_DEPTH'><!-- --></a>
+    <h3>DEFAULT_STACK_DEPTH</h3>
+    <code>INTEGER PUBLIC </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.AutoExpand'><!-- --></a>
+    <h3>AutoExpand</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>NOTE/ the expand/shrink behaviour could be handled with an enumeration, <p> </dd>
+      <dd>but as of 10.2B performance is better when using logical variables. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Depth'><!-- --></a>
+    <h3>Depth</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.DiscardOnShrink'><!-- --></a>
+    <h3>DiscardOnShrink</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Size'><!-- --></a>
+    <h3>Size</h3>
+    <code>INTEGER PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PROTECTED  
+      <b>CONSTRUCTOR</b>(CHARACTER pcArray)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(integer)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(INTEGER piDepth)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(object)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PROTECTED  
+      <b>CONSTRUCTOR</b>(<a href="../../Object.cls.html" title="Object" target="classFrame">Object</a> poArray)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='clone()'><!-- --></a>
+    <h3>Clone</h3>
+    <code>PUBLIC OVERRIDE  Object
+      <b>Clone</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='invert()'><!-- --></a>
+    <h3>Invert</h3>
+    <code>PUBLIC  VOID
+      <b>Invert</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='objectpeek()'><!-- --></a>
+    <h3>ObjectPeek</h3>
+    <code>PROTECTED  Object
+      <b>ObjectPeek</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='objectpop()'><!-- --></a>
+    <h3>ObjectPop</h3>
+    <code>PROTECTED  Object
+      <b>ObjectPop</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='objectpush(object)'><!-- --></a>
+    <h3>ObjectPush</h3>
+    <code>PROTECTED  VOID
+      <b>ObjectPush</b>(<a href="../../Object.cls.html" title="Object" target="classFrame">Object</a> poValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='objecttoarray()'><!-- --></a>
+    <h3>ObjectToArray</h3>
+    <code>PROTECTED  Object
+      <b>ObjectToArray</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='primitivepeek()'><!-- --></a>
+    <h3>PrimitivePeek</h3>
+    <code>PROTECTED  CHARACTER
+      <b>PrimitivePeek</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='primitivepop()'><!-- --></a>
+    <h3>PrimitivePop</h3>
+    <code>PROTECTED  CHARACTER
+      <b>PrimitivePop</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='primitivepush(character)'><!-- --></a>
+    <h3>PrimitivePush</h3>
+    <code>PROTECTED  VOID
+      <b>PrimitivePush</b>(CHARACTER pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='primitivetoarray()'><!-- --></a>
+    <h3>PrimitiveToArray</h3>
+    <code>PROTECTED  CHARACTER
+      <b>PrimitiveToArray</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='rotate(integer)'><!-- --></a>
+    <h3>Rotate</h3>
+    <code>PUBLIC  VOID
+      <b>Rotate</b>(INTEGER piItems)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='swap(integer,integer)'><!-- --></a>
+    <h3>Swap</h3>
+    <code>PUBLIC  VOID
+      <b>Swap</b>(INTEGER piFromPos, INTEGER piToPos)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

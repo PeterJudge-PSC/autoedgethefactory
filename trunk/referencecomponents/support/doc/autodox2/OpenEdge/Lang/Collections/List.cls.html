@@ -1,0 +1,565 @@
+<html>
+  <head>
+    <title>List</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Lang\Collections</font>
+      <br />CLASS List
+    </h2>
+    <p>CLASS OpenEdge.Lang.Collections.List INHERITS <a href="../../../OpenEdge/Lang/Collections/AbstractTTCollection.cls.html" title="OpenEdge.Lang.Collections.AbstractTTCollection" target="classFrame">AbstractTTCollection</a> IMPLEMENTS <a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.lang.collections.ilist)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a> list)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#add(integer,progress.lang.object)'> Add</a>
+          </b>(INTEGER seq, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#add(progress.lang.object)'> Add</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addall(integer,openedge.lang.collections.icollection)'> AddAll</a>
+          </b>(INTEGER seq, <a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> c)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addarray(integer,progress.lang.object)'> AddArray</a>
+          </b>(INTEGER seq, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#contains(progress.lang.object)'> Contains</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> checkObject)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#containsall(openedge.lang.collections.icollection)'> ContainsAll</a>
+          </b>(<a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> collection)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#equals(progress.lang.object)'> Equals</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> o)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#findbufferuseobject(progress.lang.object)'> FindBufferUseObject</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> findObject)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#get(integer)'> Get</a>
+          </b>(INTEGER i)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#indexof(progress.lang.object)'> IndexOf</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IIterator.cls.html" title="OpenEdge.Lang.Collections.IIterator" target="classFrame">IIterator</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#iterator()'> Iterator</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#lastindexof(progress.lang.object)'> LastIndexOf</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IListIterator.cls.html" title="OpenEdge.Lang.Collections.IListIterator" target="classFrame">IListIterator</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#listiterator()'> ListIterator</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IListIterator.cls.html" title="OpenEdge.Lang.Collections.IListIterator" target="classFrame">IListIterator</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#listiterator(integer)'> ListIterator</a>
+          </b>(INTEGER i)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#remove(integer)'> Remove</a>
+          </b>(INTEGER i)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#remove(progress.lang.object)'> Remove</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> oldObject)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#set(integer,progress.lang.object)'> Set</a>
+          </b>(INTEGER i, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> o)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#sublist(integer,integer)'> SubList</a>
+          </b>(INTEGER fromIndex, INTEGER toIndex)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(openedge.lang.collections.ilist)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a> list)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='add(integer,progress.lang.object)'><!-- --></a>
+    <h3>Add</h3>
+    <code>PUBLIC  LOGICAL
+      <b>Add</b>(INTEGER seq, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='add(progress.lang.object)'><!-- --></a>
+    <h3>Add</h3>
+    <code>PUBLIC OVERRIDE  LOGICAL
+      <b>Add</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addall(integer,openedge.lang.collections.icollection)'><!-- --></a>
+    <h3>AddAll</h3>
+    <code>PUBLIC  LOGICAL
+      <b>AddAll</b>(INTEGER seq, <a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> c)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addarray(integer,progress.lang.object)'><!-- --></a>
+    <h3>AddArray</h3>
+    <code>PUBLIC  LOGICAL
+      <b>AddArray</b>(INTEGER seq, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='contains(progress.lang.object)'><!-- --></a>
+    <h3>Contains</h3>
+    <code>PUBLIC OVERRIDE  LOGICAL
+      <b>Contains</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> checkObject)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='containsall(openedge.lang.collections.icollection)'><!-- --></a>
+    <h3>ContainsAll</h3>
+    <code>PUBLIC  LOGICAL
+      <b>ContainsAll</b>(<a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> collection)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='equals(progress.lang.object)'><!-- --></a>
+    <h3>Equals</h3>
+    <code>PUBLIC OVERRIDE  LOGICAL
+      <b>Equals</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> o)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='findbufferuseobject(progress.lang.object)'><!-- --></a>
+    <h3>FindBufferUseObject</h3>
+    <code>PROTECTED OVERRIDE  VOID
+      <b>FindBufferUseObject</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> findObject)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='get(integer)'><!-- --></a>
+    <h3>Get</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Get</b>(INTEGER i)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='indexof(progress.lang.object)'><!-- --></a>
+    <h3>IndexOf</h3>
+    <code>PUBLIC  INTEGER
+      <b>IndexOf</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='iterator()'><!-- --></a>
+    <h3>Iterator</h3>
+    <code>PUBLIC OVERRIDE  <a href="../../../OpenEdge/Lang/Collections/IIterator.cls.html" title="OpenEdge.Lang.Collections.IIterator" target="classFrame">IIterator</a>
+      <b>Iterator</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='lastindexof(progress.lang.object)'><!-- --></a>
+    <h3>LastIndexOf</h3>
+    <code>PUBLIC  INTEGER
+      <b>LastIndexOf</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='listiterator()'><!-- --></a>
+    <h3>ListIterator</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Lang/Collections/IListIterator.cls.html" title="OpenEdge.Lang.Collections.IListIterator" target="classFrame">IListIterator</a>
+      <b>ListIterator</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='listiterator(integer)'><!-- --></a>
+    <h3>ListIterator</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Lang/Collections/IListIterator.cls.html" title="OpenEdge.Lang.Collections.IListIterator" target="classFrame">IListIterator</a>
+      <b>ListIterator</b>(INTEGER i)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='remove(integer)'><!-- --></a>
+    <h3>Remove</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Remove</b>(INTEGER i)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='remove(progress.lang.object)'><!-- --></a>
+    <h3>Remove</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>Remove</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> oldObject)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='set(integer,progress.lang.object)'><!-- --></a>
+    <h3>Set</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Set</b>(INTEGER i, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> o)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='sublist(integer,integer)'><!-- --></a>
+    <h3>SubList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a>
+      <b>SubList</b>(INTEGER fromIndex, INTEGER toIndex)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

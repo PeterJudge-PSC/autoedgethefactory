@@ -1,0 +1,203 @@
+<html>
+  <head>
+    <title>IParameter</title>
+    <link rel='stylesheet' type='text/css' href='../../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL\Binding\Parameters</font>
+      <br />INTERFACE IParameter
+    </h2>
+    <p>INTERFACE OpenEdge.Core.InjectABL.Binding.Parameters.IParameter </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.DeclaredType'>DeclaredType</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify a declared type for cases where the parameter an object or array thereof. ABL doesn't currently (10.2B)
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Name'>Name</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the name of the parameter.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Type'>Type</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(openedge.core.injectabl.lifecycle.ilifecyclecontext,OUTPUT_character)'> GetValue</a>
+          </b>(<a href="../../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, OUTPUT CHARACTER pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(openedge.core.injectabl.lifecycle.ilifecyclecontext,OUTPUT_progress.lang.object)'> GetValue</a>
+          </b>(<a href="../../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, OUTPUT <a href="../../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.DeclaredType'><!-- --></a>
+    <h3>DeclaredType</h3>
+    <code><a href="../../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> PUBLIC GET </code>
+    <dl>
+      <dd>Specify a declared type for cases where the parameter an object or array thereof. ABL doesn't currently (10.2B) <p> </dd>
+      <dd>allow us to discover either the declared type of the array, or the signature of the callee (method, property, ctor), and so we need to specify the type for the InjectABL kernel. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Name'><!-- --></a>
+    <h3>Name</h3>
+    <code>CHARACTER PUBLIC GET </code>
+    <dl>
+      <dd>Gets the name of the parameter. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Type'><!-- --></a>
+    <h3>Type</h3>
+    <code><a href="../../../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='getvalue(openedge.core.injectabl.lifecycle.ilifecyclecontext,OUTPUT_character)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>PUBLIC  VOID
+      <b>GetValue</b>(<a href="../../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, OUTPUT CHARACTER pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(openedge.core.injectabl.lifecycle.ilifecyclecontext,OUTPUT_progress.lang.object)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>PUBLIC  VOID
+      <b>GetValue</b>(<a href="../../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, OUTPUT <a href="../../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
