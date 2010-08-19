@@ -1,17 +1,17 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : UndoActionEventArgs
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 31 11:44:27 EDT 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.Core.System.EventArgs.
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 
 class OpenEdge.PresentationLayer.Common.UndoActionEventArgs inherits EventArgs   : 
@@ -20,7 +20,7 @@ class OpenEdge.PresentationLayer.Common.UndoActionEventArgs inherits EventArgs  
     define public property ModelService as IComponentInfo no-undo get. set.
     define public property QueryName as character no-undo get. set.
     define public property BufferName as character no-undo get. set.
-    define public property UndoActionType as EnumMember no-undo get. set.  /* OpenEdge.PresentationLayer.Presenter.UpdateActionEnum */
+    define public property UndoActionType as UpdateActionEnum no-undo get. set. 
     define public property Order as integer no-undo get. set.
 
     constructor UndoActionEventArgs():
@@ -31,7 +31,7 @@ class OpenEdge.PresentationLayer.Common.UndoActionEventArgs inherits EventArgs  
                                     pcQueryName as char,
                                     pcBufferName as char,
                                     pcRecordKey as char extent,
-                                    poUndoActionType as EnumMember):
+                                    poUndoActionType as UpdateActionEnum):
         this-object().
         
         assign BufferName = pcBufferName

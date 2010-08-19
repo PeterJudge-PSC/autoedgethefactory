@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : SessionClientTypeEnum
-    Purpose     : 
+    Purpose     : Enumeration of ABL client types 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Feb 18 15:08:28 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Lang.SessionClientTypeEnum. 
@@ -31,14 +31,6 @@ class OpenEdge.Lang.SessionClientTypeEnum final inherits EnumMember:
         SessionClientTypeEnum:CurrentSession = SessionClientTypeEnum:EnumFromString(session:client-type).
     end constructor.
 
-	constructor public SessionClientTypeEnum(piValue as integer, pcName as character):
-		super(piValue, pcName).
-	end constructor.
-		
-	constructor public SessionClientTypeEnum(piValue as integer):
-		super(piValue).
-	end constructor.
-		
 	constructor public SessionClientTypeEnum(pcName as character):
 		super(pcName).
 	end constructor.

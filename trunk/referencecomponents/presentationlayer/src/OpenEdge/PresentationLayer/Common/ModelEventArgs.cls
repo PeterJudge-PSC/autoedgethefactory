@@ -1,23 +1,22 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ModelEventArgs
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 14 10:53:05 EDT 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageEventArgs. 
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 
 class OpenEdge.PresentationLayer.Common.ModelEventArgs inherits ServiceMessageEventArgs: 
     define public property ModelService as IComponentInfo no-undo get. set.
-    define public property ModelAction as EnumMember no-undo get. set. /* OpenEdge.PresentationLayer.Common.ModelActionEnum */
+    define public property ModelAction as ModelActionEnum no-undo get. set.
     define public property QueryName as character no-undo get. set.
     define public property TableName as character no-undo get. set.
     define public property CurrentRowKey as character extent no-undo get. set.
@@ -34,7 +33,7 @@ class OpenEdge.PresentationLayer.Common.ModelEventArgs inherits ServiceMessageEv
     end constructor.
             
     constructor public ModelEventArgs (poModelService as IComponentInfo,
-                                       poModelAction as EnumMember,
+                                       poModelAction as ModelActionEnum,
                                        pcQuery as char, 
                                        pcTable as char,
                                        pcKey as char extent  ):
@@ -67,7 +66,7 @@ class OpenEdge.PresentationLayer.Common.ModelEventArgs inherits ServiceMessageEv
         this-object(poModelService, ModelActionEnum:None, ?, ?, cDummy).
     end constructor.
             
-    constructor public ModelEventArgs (poModelService as IComponentInfo, poModelAction as EnumMember):
+    constructor public ModelEventArgs (poModelService as IComponentInfo, poModelAction as ModelActionEnum):
         define variable cDummy as char extent 1 no-undo init [?].
         
         this-object(poModelService, poModelAction, ?, ?, cDummy).

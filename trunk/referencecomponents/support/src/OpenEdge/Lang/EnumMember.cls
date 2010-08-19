@@ -1,20 +1,24 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : EnumMember
-    Purpose     : 
+    Purpose     : Abstract class for Enumerations' members.  
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Jan 21 10:07:10 EST 2010
-    Notes       : 
-  ----------------------------------------------------------------------*/
+    Notes       : * We could add a temp-table to manage the EnumMembers' values
+                    etc. That's not done right now because there's no pressing 
+                    need for it.
+  --------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.Lang.EnumMember.
+using Progress.Lang.Class.
+using Progress.Lang.AppError.
+using Progress.Lang.Object.
 
-class OpenEdge.Lang.EnumMember:
-    define public property Name as character no-undo get. protected set.
-    define public property Value as integer no-undo get. protected set.
+class OpenEdge.Lang.EnumMember abstract:
+    define public property Name as character no-undo get. private set.
+    define public property Value as integer no-undo get. private set.
     
     constructor public EnumMember(piValue as int, pcName as char):        
         assign this-object:Name = pcName
@@ -27,10 +31,6 @@ class OpenEdge.Lang.EnumMember:
 
     constructor public EnumMember(pcName as char):        
         this-object(?, pcName).
-    end constructor.
-    
-    constructor public EnumMember():
-        this-object(?, ?).
     end constructor.
     
     method public logical Equals(pcName as char):
@@ -53,7 +53,7 @@ class OpenEdge.Lang.EnumMember:
         
         return lEquals.
     end method.
-    
+
     method public override character ToString():
         define variable cName as character no-undo.
         
@@ -61,11 +61,11 @@ class OpenEdge.Lang.EnumMember:
             cName = substitute('&1', this-object:Name).
         else
         if this-object:Value eq ? then
-            cName = substitute('EnumMember_Value_&1', this-object:Value).
+            cName = substitute('&1_Value_&2', this-object:GetClass():TypeName, this-object:Value).
         else
-            cName = substitute('EnumMember_&1', this-object).
+            cName = substitute('&1_&2', this-object:GetClass():TypeName, this-object).
         
         return cName.
     end method.
     
-end class.
+end class. 

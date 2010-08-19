@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 19 15:16:47 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -16,7 +16,6 @@ using OpenEdge.Core.System.BufferFieldMismatchError.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.CompareStrengthEnum.
 using OpenEdge.Lang.DataTypeEnum.
-using OpenEdge.Lang.EnumMember.
 
 class OpenEdge.Core.Util.BufferHelper: 
     
@@ -61,7 +60,7 @@ class OpenEdge.Core.Util.BufferHelper:
             do iExtent = 1 to iNumItems:
                 if not CompareFieldValues(hSourceField,
                                           if lExtent then iExtent else 0,
-                                          OperatorEnum:Equals,
+                                          OperatorEnum:IsEqual,
                                           hTargetField,
                                           if lExtent then iExtent else 0,
                                           CompareStrengthEnum:Raw ) then 
@@ -81,10 +80,10 @@ class OpenEdge.Core.Util.BufferHelper:
         
     method protected static logical CompareFieldValues ( phColumn1  as handle,        
                                                          piExtent1  as integer,
-                                                         poOperator as EnumMember,
+                                                         poOperator as OperatorEnum,
                                                          phColumn2  as handle,
                                                          piExtent2  as integer,
-                                                         poStrength as EnumMember ):
+                                                         poStrength as CompareStrengthEnum):
         define variable lSame   as logical no-undo.
         define variable iExtent as integer no-undo.
              
@@ -102,7 +101,7 @@ class OpenEdge.Core.Util.BufferHelper:
         else
         do:
             case poOperator:
-                when OperatorEnum:Equals then
+                when OperatorEnum:IsEqual then
                     lSame = phColumn1:buffer-value(piExtent1) eq phColumn2:buffer-value(piExtent2).
                 when OperatorEnum:LessThan then
                     lSame = phColumn1:buffer-value(piExtent1) lt phColumn2:buffer-value(piExtent2).
@@ -121,9 +120,9 @@ class OpenEdge.Core.Util.BufferHelper:
     end method.
               
     method protected static logical CompareClobValues ( phColumn1  as handle,                
-                                                        poOperator as EnumMember,
+                                                        poOperator as OperatorEnum,
                                                         phcolumn2  as handle,
-                                                        poStrength as EnumMember) :
+                                                        poStrength as CompareStrengthEnum) :
         define variable cLong1    as longchar no-undo.
         define variable cLong2    as longchar no-undo.
         define variable lUnknown1 as logical  no-undo.
@@ -131,7 +130,7 @@ class OpenEdge.Core.Util.BufferHelper:
         define variable lEqual    as logical  no-undo.
         define variable lCompare  as logical  no-undo.
     
-        assign lEqual    = poOperator eq OperatorEnum:Equals
+        assign lEqual    = poOperator eq OperatorEnum:IsEqual
                lUnknown1 = (phColumn1:buffer-value eq ?)
                lUnknown2 = (phColumn2:buffer-value eq ?).
     

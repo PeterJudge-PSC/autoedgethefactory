@@ -1,35 +1,36 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : NavigationPanelPresenter
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Feb 05 15:43:38 EST 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.INavigationPanelPresenter. 
 using OpenEdge.PresentationLayer.Presenter.NavigationPanelPresenter.
 using OpenEdge.PresentationLayer.Presenter.Presenter.
 using OpenEdge.PresentationLayer.Presenter.IDataboundPresenter.
-using OpenEdge.PresentationLayer.Presenter.NavigationActionEnum.
+using OpenEdge.PresentationLayer.Common.NavigationActionEnum.
 using OpenEdge.PresentationLayer.View.INavigationPanelView.
-using OpenEdge.PresentationLayer.Common.ISelectAction.
-using OpenEdge.PresentationLayer.Common.ActionEventArgs.
+using OpenEdge.PresentationLayer.Common.ISelectToolbarAction.
+using OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs.
 using OpenEdge.PresentationLayer.Common.NavigationPanelEventArgs.
 using OpenEdge.PresentationLayer.Common.ActionStateEnum.
+using OpenEdge.PresentationLayer.Common.NavigationActionEnum.
 
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 
 using OpenEdge.Core.System.RowPositionEnum.
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 
 class OpenEdge.PresentationLayer.Presenter.NavigationPanelPresenter inherits Presenter
-        implements INavigationPanelPresenter, ISelectAction:
+        implements INavigationPanelPresenter, ISelectToolbarAction:
         
     define public property ModelService as IComponentInfo no-undo get. set.          
     define public property QueryName as char no-undo get. set.
@@ -46,8 +47,8 @@ class OpenEdge.PresentationLayer.Presenter.NavigationPanelPresenter inherits Pre
             cast(ParentPresenter, IDataboundPresenter):NavigationPanelStateChanged:Subscribe(this-object:NavigationPanelStateChangedHandler).
     end method.
     
-    /* ISelectAction events */
-    method public void SelectAction (poArgs as ActionEventArgs):
+    /* ISelectToolbarAction events */
+    method public void SelectToolbarAction (poArgs as ToolbarActionEventArgs):
         define variable iAction as integer no-undo.
         
         poArgs:GetArgValue('Action', output iAction).
@@ -65,8 +66,8 @@ class OpenEdge.PresentationLayer.Presenter.NavigationPanelPresenter inherits Pre
     end method.
                 
     method public void NavigationPanelStateChangedHandler (poSender as IComponent, poEventArgs as NavigationPanelEventArgs):
-        define variable oStates as EnumMember extent 4 no-undo.
-        define variable oActions as EnumMember extent 4 no-undo.
+        define variable oStates as ActionStateEnum extent 4 no-undo.
+        define variable oActions as NavigationActionEnum extent 4 no-undo.
         
         /* Only navigate for the current model */
         if ModelService eq poEventArgs:ModelService and

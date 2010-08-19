@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Mar 06 14:12:00 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.IDataboundPresenter.
 using OpenEdge.PresentationLayer.Presenter.Presenter.
-using OpenEdge.PresentationLayer.Presenter.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 using OpenEdge.PresentationLayer.Model.IModel.
 using OpenEdge.PresentationLayer.Model.IModelQuery.
 using OpenEdge.PresentationLayer.Model.OperationDoneForContextError.
@@ -22,6 +22,7 @@ using OpenEdge.PresentationLayer.Common.NavigationPanelEventArgs.
 using OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs.
 using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
 using OpenEdge.PresentationLayer.Common.DataFetchEventArgs.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
@@ -33,8 +34,8 @@ using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.EventArgs.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.IQuery.
+using OpenEdge.Lang.FindTypeEnum.
 using OpenEdge.Lang.Collections.IIterator.
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.Assert.
 
 using Progress.Lang.Class.
@@ -157,7 +158,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
 
-    method public logical GetRowWhere(poModelService as IComponentInfo,pcQuery as character,poQueryDefinition as OpenEdge.Core.System.IQueryDefinition,poFindType as OpenEdge.Lang.EnumMember ):
+    method public logical GetRowWhere(poModelService as IComponentInfo,pcQuery as character,poQueryDefinition as OpenEdge.Core.System.IQueryDefinition,poFindType as FindTypeEnum):
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
 
@@ -675,7 +676,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
 /*        oModel:OnDataDelete(poEventArgs).*/
     end method.
          
-    method public void UndoAction(poModelService as IComponentInfo, pcQuery as char, pcTable as char, poAction as EnumMember, pcCurrentRowKey as char extent):
+    method public void UndoAction(poModelService as IComponentInfo, pcQuery as char, pcTable as char, poAction as UpdateActionEnum, pcCurrentRowKey as char extent):
         /* find row */
         @todo(task="undo the action (delete, revert, etc)").
         

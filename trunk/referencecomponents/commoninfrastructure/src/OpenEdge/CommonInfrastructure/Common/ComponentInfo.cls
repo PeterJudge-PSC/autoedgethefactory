@@ -1,19 +1,18 @@
-/*------------------------------------------------------------------------
+/* ------------------------------------------------------------------------
     File        : ComponentInfo
-    Purpose     : 
+    Purpose     : Information about a specific component instance
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Feb 23 13:56:35 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum.
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.

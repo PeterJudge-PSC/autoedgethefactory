@@ -1,16 +1,15 @@
 /*------------------------------------------------------------------------
     File        : ServiceTypeEnum
-    Purpose     : 
+    Purpose     : Server-side service types
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Feb 22 11:31:42 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Client.ServiceTypeEnum.
-using OpenEdge.Lang.EnumMember.
 
 class OpenEdge.CommonInfrastructure.Client.ServiceTypeEnum inherits OpenEdge.CommonInfrastructure.Client.ComponentTypeEnum:
     

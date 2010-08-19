@@ -1,50 +1,54 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : CallbackNameEnum
-    Purpose     : 
+    Purpose     : Enumeration of ABL callback types, including ProDataSets,
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 07 13:48:05 EDT 2009
-    Notes       : 
+    Notes       : * Taken from ABL documentation
   ----------------------------------------------------------------------*/
 routine-level on error undo , throw.
 
-using OpenEdge.Lang.*.
+using OpenEdge.Lang.CallbackNameEnum.
+using OpenEdge.Lang.EnumMember.
 
-class OpenEdge.Lang.CallbackNameEnum final:
+class OpenEdge.Lang.CallbackNameEnum final inherits EnumMember:
     
     /* Web Services */
-    define public static property RequestHeader  as EnumMember no-undo get. private set.
-    define public static property ResponseHeader as EnumMember no-undo get. private set.
+    define public static property RequestHeader  as CallbackNameEnum no-undo get. private set.
+    define public static property ResponseHeader as CallbackNameEnum no-undo get. private set.
     
     /* ProDataSet */
-    define public static property BeforeFill     as EnumMember no-undo get. private set.
-    define public static property AfterFill      as EnumMember no-undo get. private set.
-    define public static property BeforeRowFill  as EnumMember no-undo get. private set.
-    define public static property AfterRowFill   as EnumMember no-undo get. private set.
-    define public static property RowCreate      as EnumMember no-undo get. private set.
-    define public static property RowDelete      as EnumMember no-undo get. private set.
-    define public static property RowUpdate      as EnumMember no-undo get. private set.
-    define public static property FindFailed     as EnumMember no-undo get. private set.
-    define public static property Syncronize     as EnumMember no-undo get. private set.
+    define public static property BeforeFill     as CallbackNameEnum no-undo get. private set.
+    define public static property AfterFill      as CallbackNameEnum no-undo get. private set.
+    define public static property BeforeRowFill  as CallbackNameEnum no-undo get. private set.
+    define public static property AfterRowFill   as CallbackNameEnum no-undo get. private set.
+    define public static property RowCreate      as CallbackNameEnum no-undo get. private set.
+    define public static property RowDelete      as CallbackNameEnum no-undo get. private set.
+    define public static property RowUpdate      as CallbackNameEnum no-undo get. private set.
+    define public static property FindFailed     as CallbackNameEnum no-undo get. private set.
+    define public static property Syncronize     as CallbackNameEnum no-undo get. private set.
     
     /* Query */
-    define public static property OffEnd         as EnumMember no-undo get. private set.
+    define public static property OffEnd         as CallbackNameEnum no-undo get. private set.
     
     constructor static CallbackNameEnum():
-        CallbackNameEnum:RequestHeader = new EnumMember(1, 'request-header').
-        CallbackNameEnum:ResponseHeader = new EnumMember(2, 'response-header').
-        CallbackNameEnum:BeforeFill = new EnumMember(3, 'before-fill').
-        CallbackNameEnum:AfterFill = new EnumMember(4, 'after-fill').
-        CallbackNameEnum:BeforeRowFill = new EnumMember(5, 'before-row-fill').
-        CallbackNameEnum:AfterRowFill = new EnumMember(6, 'after-row-fill').
-        CallbackNameEnum:RowCreate = new EnumMember(7, 'row-create').
-        CallbackNameEnum:RowDelete = new EnumMember(8, 'row-delete').
-        CallbackNameEnum:RowUpdate = new EnumMember(9, 'row-update').
-        CallbackNameEnum:FindFailed = new EnumMember(10, 'find-failed').
-        CallbackNameEnum:Syncronize = new EnumMember(11, 'syncronize').
-        CallbackNameEnum:OffEnd = new EnumMember(12, 'OFF-END').            
-        
+        CallbackNameEnum:RequestHeader = new CallbackNameEnum('request-header').
+        CallbackNameEnum:ResponseHeader = new CallbackNameEnum('response-header').
+        CallbackNameEnum:BeforeFill = new CallbackNameEnum('before-fill').
+        CallbackNameEnum:AfterFill = new CallbackNameEnum('after-fill').
+        CallbackNameEnum:BeforeRowFill = new CallbackNameEnum('before-row-fill').
+        CallbackNameEnum:AfterRowFill = new CallbackNameEnum('after-row-fill').
+        CallbackNameEnum:RowCreate = new CallbackNameEnum('row-create').
+        CallbackNameEnum:RowDelete = new CallbackNameEnum('row-delete').
+        CallbackNameEnum:RowUpdate = new CallbackNameEnum('row-update').
+        CallbackNameEnum:FindFailed = new CallbackNameEnum('find-failed').
+        CallbackNameEnum:Syncronize = new CallbackNameEnum('syncronize').
+        CallbackNameEnum:OffEnd = new CallbackNameEnum('OFF-END').            
     end constructor.
+
+	constructor public CallbackNameEnum( input pcName as character ):
+		super (input pcName).
+	end constructor.
     
 end class.

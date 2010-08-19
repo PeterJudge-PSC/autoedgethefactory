@@ -1,111 +1,116 @@
-/*------------------------------------------------------------------------
-    File        : DataType
-    Purpose     : 
+/** ------------------------------------------------------------------------
+    File        : DataTypeEnum
+    Purpose     : Enumeration of ABL datatypes
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Mar 16 13:44:09 EDT 2009
-    Notes       : 
-  ----------------------------------------------------------------------*/
+    Notes       : * EnumMember numeric values taken from ADE
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
   
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.EnumMember.
 
-class OpenEdge.Lang.DataTypeEnum final:
-    define public static property Default            as EnumMember no-undo get. private set.
-    define public static property None               as EnumMember no-undo get. private set.
+class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
+    
+    define public static property Default            as DataTypeEnum no-undo get. private set.
+    define public static property None               as DataTypeEnum no-undo get. private set.
     
     /* ABL Primitives */
-    define public static property Character          as EnumMember no-undo get. private set.
-    define public static property CharacterArray     as EnumMember no-undo get. private set.
-    define public static property LongChar           as EnumMember no-undo get. private set.
-    define public static property LongCharArray      as EnumMember no-undo get. private set.
-    define public static property Integer            as EnumMember no-undo get. private set.
-    define public static property IntegerArray       as EnumMember no-undo get. private set.
-    define public static property Int64              as EnumMember no-undo get. private set.
-    define public static property Int64Array         as EnumMember no-undo get. private set.
-    define public static property Decimal            as EnumMember no-undo get. private set.
-    define public static property DecimalArray       as EnumMember no-undo get. private set.
-    define public static property Logical            as EnumMember no-undo get. private set.
-    define public static property LogicalArray       as EnumMember no-undo get. private set.
-    define public static property Rowid              as EnumMember no-undo get. private set.
-    define public static property RowidArray         as EnumMember no-undo get. private set.
-    define public static property Recid              as EnumMember no-undo get. private set.
-    define public static property RecidArray         as EnumMember no-undo get. private set.
-    define public static property Date               as EnumMember no-undo get. private set.
-    define public static property DateArray          as EnumMember no-undo get. private set.
-    define public static property Datetime           as EnumMember no-undo get. private set.
-    define public static property DatetimeArray      as EnumMember no-undo get. private set.
-    define public static property DatetimeTZ         as EnumMember no-undo get. private set.
-    define public static property DatetimeTZArray    as EnumMember no-undo get. private set.
-    define public static property Raw                as EnumMember no-undo get. private set.
-    define public static property RawArray           as EnumMember no-undo get. private set.
-    define public static property Memptr             as EnumMember no-undo get. private set.
-    define public static property MemptrArray        as EnumMember no-undo get. private set.
-    define public static property Handle             as EnumMember no-undo get. private set.
-    define public static property HandleArray        as EnumMember no-undo get. private set.
-    define public static property BLOB               as EnumMember no-undo get. private set.
-    define public static property CLOB               as EnumMember no-undo get. private set.
-    define public static property ComHandle          as EnumMember no-undo get. private set.
-    define public static property ComHandleArray     as EnumMember no-undo get. private set.
+    define public static property Character          as DataTypeEnum no-undo get. private set.
+    define public static property CharacterArray     as DataTypeEnum no-undo get. private set.
+    define public static property LongChar           as DataTypeEnum no-undo get. private set.
+    define public static property LongCharArray      as DataTypeEnum no-undo get. private set.
+    define public static property Integer            as DataTypeEnum no-undo get. private set.
+    define public static property IntegerArray       as DataTypeEnum no-undo get. private set.
+    define public static property Int64              as DataTypeEnum no-undo get. private set.
+    define public static property Int64Array         as DataTypeEnum no-undo get. private set.
+    define public static property Decimal            as DataTypeEnum no-undo get. private set.
+    define public static property DecimalArray       as DataTypeEnum no-undo get. private set.
+    define public static property Logical            as DataTypeEnum no-undo get. private set.
+    define public static property LogicalArray       as DataTypeEnum no-undo get. private set.
+    define public static property Rowid              as DataTypeEnum no-undo get. private set.
+    define public static property RowidArray         as DataTypeEnum no-undo get. private set.
+    define public static property Recid              as DataTypeEnum no-undo get. private set.
+    define public static property RecidArray         as DataTypeEnum no-undo get. private set.
+    define public static property Date               as DataTypeEnum no-undo get. private set.
+    define public static property DateArray          as DataTypeEnum no-undo get. private set.
+    define public static property Datetime           as DataTypeEnum no-undo get. private set.
+    define public static property DatetimeArray      as DataTypeEnum no-undo get. private set.
+    define public static property DatetimeTZ         as DataTypeEnum no-undo get. private set.
+    define public static property DatetimeTZArray    as DataTypeEnum no-undo get. private set.
+    define public static property Raw                as DataTypeEnum no-undo get. private set.
+    define public static property RawArray           as DataTypeEnum no-undo get. private set.
+    define public static property Memptr             as DataTypeEnum no-undo get. private set.
+    define public static property MemptrArray        as DataTypeEnum no-undo get. private set.
+    define public static property Handle             as DataTypeEnum no-undo get. private set.
+    define public static property HandleArray        as DataTypeEnum no-undo get. private set.
+    define public static property BLOB               as DataTypeEnum no-undo get. private set.
+    define public static property CLOB               as DataTypeEnum no-undo get. private set.
+    define public static property ComHandle          as DataTypeEnum no-undo get. private set.
+    define public static property ComHandleArray     as DataTypeEnum no-undo get. private set.
     
     /* Data structures */
-    define public static property Dataset            as EnumMember no-undo get. private set.
-    define public static property Buffer             as EnumMember no-undo get. private set.
-    define public static property TempTable          as EnumMember no-undo get. private set.
+    define public static property Dataset            as DataTypeEnum no-undo get. private set.
+    define public static property Buffer             as DataTypeEnum no-undo get. private set.
+    define public static property TempTable          as DataTypeEnum no-undo get. private set.
 
     /* User-defined types */
-    define public static property ProgressLangObject as EnumMember no-undo get. private set.
-    define public static property Class              as EnumMember no-undo get. private set.
-    define public static property ClassArray         as EnumMember no-undo get. private set.
+    define public static property ProgressLangObject as DataTypeEnum no-undo get. private set.
+    define public static property Class              as DataTypeEnum no-undo get. private set.
+    define public static property ClassArray         as DataTypeEnum no-undo get. private set.
     
     constructor static DataTypeEnum():
-        DataTypeEnum:None = new EnumMember(01, '').
-        DataTypeEnum:Character = new EnumMember(02, 'Character').
-        DataTypeEnum:CharacterArray = new EnumMember(03, 'Character Extent').
-        DataTypeEnum:LongChar = new EnumMember(04, 'Longchar').
-        DataTypeEnum:LongCharArray = new EnumMember(05, 'Longchar Extent').
-        DataTypeEnum:Integer = new EnumMember(06, 'Integer').
-        DataTypeEnum:IntegerArray = new EnumMember(07, 'Integer Extent').
-        DataTypeEnum:Int64 = new EnumMember(08, 'Int64').
-        DataTypeEnum:Int64Array = new EnumMember(09, 'Int64 Extent').
-        DataTypeEnum:Decimal = new EnumMember(10, 'Decimal').
-        DataTypeEnum:DecimalArray = new EnumMember(11, 'Decimal Extent').
-        DataTypeEnum:Logical = new EnumMember(12, 'Logical').
-        DataTypeEnum:LogicalArray = new EnumMember(13, 'Logical Extent').
-        DataTypeEnum:Rowid = new EnumMember(14, 'Rowid').
-        DataTypeEnum:RowidArray = new EnumMember(15, 'Rowid Extent').
-        DataTypeEnum:Recid = new EnumMember(16, 'Recid').
-        DataTypeEnum:RecidArray = new EnumMember(17, 'Recid Extent').
-        DataTypeEnum:Date = new EnumMember(18, 'Date').
-        DataTypeEnum:DateArray = new EnumMember(19, 'Date Extent').
-        DataTypeEnum:Datetime = new EnumMember(20, 'Datetime').
-        DataTypeEnum:DatetimeArray = new EnumMember(21, 'Datetime Extent').
-        DataTypeEnum:DatetimeTZ = new EnumMember(22, 'Datetime-TZ').
-        DataTypeEnum:DatetimeTZArray = new EnumMember(23, 'Datetime-TZ Extent').
-        DataTypeEnum:Raw = new EnumMember(24, 'Raw').
-        DataTypeEnum:RawArray = new EnumMember(25, 'Raw Extent').
-        DataTypeEnum:Memptr = new EnumMember(26, 'Memptr').
-        DataTypeEnum:MemptrArray = new EnumMember(27, 'Memptr Extent').
-        DataTypeEnum:Handle = new EnumMember(28, 'Handle').
-        DataTypeEnum:HandleArray = new EnumMember(29, 'Handle Extent').
-        DataTypeEnum:Class = new EnumMember(30, 'Class &1').
-        DataTypeEnum:ClassArray = new EnumMember(31, 'Class &1 Extent').
-        DataTypeEnum:ProgressLangObject = new EnumMember(32, 'Progress.Lang.Object').
-        DataTypeEnum:BLOB = new EnumMember(33, 'BLOB').
-        DataTypeEnum:CLOB = new EnumMember(34, 'CLOB').
-        DataTypeEnum:ComHandle = new EnumMember(35, 'Com-Handle').
-        DataTypeEnum:ComHandleArray = new EnumMember(36, 'Com-Handle Extent').
-        DataTypeEnum:Dataset = new EnumMember(37, 'Dataset').
-        DataTypeEnum:Buffer = new EnumMember(38, 'Buffer').
-        DataTypeEnum:TempTable = new EnumMember(39, 'Temp-Table').
+        DataTypeEnum:None = new DataTypeEnum(01, '').
+        DataTypeEnum:Character = new DataTypeEnum(02, 'Character').
+        DataTypeEnum:CharacterArray = new DataTypeEnum(03, 'Character Extent').
+        DataTypeEnum:LongChar = new DataTypeEnum(04, 'Longchar').
+        DataTypeEnum:LongCharArray = new DataTypeEnum(05, 'Longchar Extent').
+        DataTypeEnum:Integer = new DataTypeEnum(06, 'Integer').
+        DataTypeEnum:IntegerArray = new DataTypeEnum(07, 'Integer Extent').
+        DataTypeEnum:Int64 = new DataTypeEnum(08, 'Int64').
+        DataTypeEnum:Int64Array = new DataTypeEnum(09, 'Int64 Extent').
+        DataTypeEnum:Decimal = new DataTypeEnum(10, 'Decimal').
+        DataTypeEnum:DecimalArray = new DataTypeEnum(11, 'Decimal Extent').
+        DataTypeEnum:Logical = new DataTypeEnum(12, 'Logical').
+        DataTypeEnum:LogicalArray = new DataTypeEnum(13, 'Logical Extent').
+        DataTypeEnum:Rowid = new DataTypeEnum(14, 'Rowid').
+        DataTypeEnum:RowidArray = new DataTypeEnum(15, 'Rowid Extent').
+        DataTypeEnum:Recid = new DataTypeEnum(16, 'Recid').
+        DataTypeEnum:RecidArray = new DataTypeEnum(17, 'Recid Extent').
+        DataTypeEnum:Date = new DataTypeEnum(18, 'Date').
+        DataTypeEnum:DateArray = new DataTypeEnum(19, 'Date Extent').
+        DataTypeEnum:Datetime = new DataTypeEnum(20, 'Datetime').
+        DataTypeEnum:DatetimeArray = new DataTypeEnum(21, 'Datetime Extent').
+        DataTypeEnum:DatetimeTZ = new DataTypeEnum(22, 'Datetime-TZ').
+        DataTypeEnum:DatetimeTZArray = new DataTypeEnum(23, 'Datetime-TZ Extent').
+        DataTypeEnum:Raw = new DataTypeEnum(24, 'Raw').
+        DataTypeEnum:RawArray = new DataTypeEnum(25, 'Raw Extent').
+        DataTypeEnum:Memptr = new DataTypeEnum(26, 'Memptr').
+        DataTypeEnum:MemptrArray = new DataTypeEnum(27, 'Memptr Extent').
+        DataTypeEnum:Handle = new DataTypeEnum(28, 'Handle').
+        DataTypeEnum:HandleArray = new DataTypeEnum(29, 'Handle Extent').
+        DataTypeEnum:Class = new DataTypeEnum(30, 'Class &1').
+        DataTypeEnum:ClassArray = new DataTypeEnum(31, 'Class &1 Extent').
+        DataTypeEnum:ProgressLangObject = new DataTypeEnum(32, 'Progress.Lang.Object').
+        DataTypeEnum:BLOB = new DataTypeEnum(33, 'BLOB').
+        DataTypeEnum:CLOB = new DataTypeEnum(34, 'CLOB').
+        DataTypeEnum:ComHandle = new DataTypeEnum(35, 'Com-Handle').
+        DataTypeEnum:ComHandleArray = new DataTypeEnum(36, 'Com-Handle Extent').
+        DataTypeEnum:Dataset = new DataTypeEnum(37, 'Dataset').
+        DataTypeEnum:Buffer = new DataTypeEnum(38, 'Buffer').
+        DataTypeEnum:TempTable = new DataTypeEnum(39, 'Temp-Table').
         
         DataTypeEnum:Default = DataTypeEnum:Character.
     end constructor.
+
+	constructor public DataTypeEnum ( input piValue as integer, input pcName as character ):
+		super (input piValue, input pcName).
+	end constructor.
     
-    method static public EnumMember EnumFromValue(piDataType as integer):
-        define variable oMember as EnumMember no-undo.
+    method static public DataTypeEnum EnumFromValue(piDataType as integer):
+        define variable oMember as DataTypeEnum no-undo.
         
         case piDataType:
             when DataTypeEnum:None:Value               then oMember = DataTypeEnum:None.
@@ -152,8 +157,8 @@ class OpenEdge.Lang.DataTypeEnum final:
         return oMember.        
     end method.
     
-    method static public EnumMember EnumFromString(pcDataType as character):
-        define variable oMember as EnumMember no-undo.
+    method static public DataTypeEnum EnumFromString(pcDataType as character):
+        define variable oMember as DataTypeEnum no-undo.
         
         case pcDataType:
             when DataTypeEnum:None:ToString()               then oMember = DataTypeEnum:None.
@@ -200,7 +205,7 @@ class OpenEdge.Lang.DataTypeEnum final:
         return oMember.   
     end method.
 
-    method static public logical IsPrimitive(poDataType as EnumMember):
+    method static public logical IsPrimitive(poDataType as DataTypeEnum):
         define variable lPrimitive as logical no-undo.
         
         case poDataType:
@@ -216,7 +221,7 @@ class OpenEdge.Lang.DataTypeEnum final:
         return lPrimitive.
     end method.
     
-    method static public logical IsArray(poDataType as EnumMember):
+    method static public logical IsArray(poDataType as DataTypeEnum):
         return (entry(num-entries(poDataType:Name, ' '), poDataType:Name, ' ') eq 'extent').
     end method.
     

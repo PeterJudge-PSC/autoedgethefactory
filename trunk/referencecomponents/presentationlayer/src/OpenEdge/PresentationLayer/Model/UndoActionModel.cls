@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 31 11:47:10 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -20,7 +20,7 @@ class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
         field QueryName as character
         field BufferName as character 
         field ModelService as Object    /* IComponentInfo */
-        field UndoActionType as Object /* OpenEdge.PresentationLayer.Presenter.UpdateActionEnum:EnumMember */
+        field UndoActionType as Object /* OpenEdge.CommonInfrastructure.Common.UpdateActionEnum:EnumMember */
         field Order as integer
         index idx1 as primary unique ModelService QueryName BufferName Order
         .

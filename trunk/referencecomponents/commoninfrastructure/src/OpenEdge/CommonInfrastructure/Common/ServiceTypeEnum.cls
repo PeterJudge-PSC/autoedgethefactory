@@ -1,17 +1,18 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ServiceTypeEnum
-    Purpose     : Lists known components in reference components
+    Purpose     : Lists known components in reference components. These are
+                  the common/shared service types.
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Feb 18 14:26:28 EST 2010
-    Notes       : * Not final because an application may extend this
-  ----------------------------------------------------------------------*/
+    Notes       : * Not final because we have client- and server-specific
+                    service types.
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum.
-using OpenEdge.Lang.EnumMember.
 
 class OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum inherits OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum:
     
@@ -29,5 +30,5 @@ class OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum inherits OpenEdge.Com
 	constructor public ServiceTypeEnum(pcName as character):
 		super(pcName).
 	end constructor.
-    
+	
 end class.

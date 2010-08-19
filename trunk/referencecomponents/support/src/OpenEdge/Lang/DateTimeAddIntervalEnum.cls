@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : DateTimeAddIntervalEnum
-    Purpose     : 
+    Purpose     : Enumeration of intervals for DATETIME and -TZ operations
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 11 11:35:55 EST 2010
-    Notes       : 
-  ----------------------------------------------------------------------*/
+    Notes       : * Taken fromA BL documentation
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Lang.DateTimeAddIntervalEnum.

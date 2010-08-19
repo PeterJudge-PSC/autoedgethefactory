@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 11 12:05:46 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -11,7 +11,6 @@ routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.KernelSettings.
 using OpenEdge.Lang.DateTimeAddIntervalEnum.
-using OpenEdge.Lang.EnumMember.
 
 class OpenEdge.Core.InjectABL.KernelSettings:
     define static public property NO_PRUNE_INTERVAL as integer init -1 no-undo get. private set.
