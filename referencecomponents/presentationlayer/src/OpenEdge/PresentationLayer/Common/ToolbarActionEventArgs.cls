@@ -1,22 +1,22 @@
-/*------------------------------------------------------------------------
-    File        : ActionEventArgs
-    Purpose     : 
+/** ------------------------------------------------------------------------
+    File        : ToolbarActionEventArgs
+    Purpose     : Event args passed on selection of a toolbar action/item
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu May 14 13:18:11 EDT 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.PresentationLayer.Common.*.
-using OpenEdge.Core.System.*.
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum.
+using OpenEdge.Core.System.EventArgs.
+using OpenEdge.Lang.DataTypeEnum.
+using Progress.Lang.Object.
 
-class OpenEdge.PresentationLayer.Common.ActionEventArgs inherits EventArgs  :
+class OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs inherits EventArgs  :
     define public property ActionKey as character no-undo get. protected set.
-    define public property ActionType as EnumMember no-undo get. protected set.    /* OpenEdge.PresentationLayer.Common.ActionTypeEnum */
+    define public property ActionType as ToolbarActionTypeEnum no-undo get. protected set.
     define public property ActionTarget as character no-undo
         get.
         set (pcTarget as char):
@@ -27,15 +27,15 @@ class OpenEdge.PresentationLayer.Common.ActionEventArgs inherits EventArgs  :
     define private temp-table eActionArgs no-undo        
         field ArgName   as char
         field ArgValue  as char
-        field ArgType   as Object /* OpenEdge.Core.System.DataTypeEnum:EnumMember */
+        field ArgType   as Object /* OpenEdge.Core.System.DataTypeEnum */
         index idx1 as primary unique ArgName
         .
     
-    constructor ActionEventArgs():
+    constructor ToolbarActionEventArgs():
         super().
     end constructor.        
     
-    constructor ActionEventArgs(pcKey as char, poType as EnumMember):
+    constructor ToolbarActionEventArgs(pcKey as char, poType as ToolbarActionTypeEnum):
         this-object().
                         
         ActionKey = pcKey.
@@ -44,7 +44,7 @@ class OpenEdge.PresentationLayer.Common.ActionEventArgs inherits EventArgs  :
                 
     method public void SetArgValue (pcArgName as char,
                                     pcArgValue as char,
-                                    poArgType as EnumMember):
+                                    poArgType as DataTypeEnum):
         define buffer lbArgs for eActionArgs.
         find lbArgs where lbArgs.ArgName = pcArgName no-error.
         if not available lbArgs then
@@ -57,13 +57,13 @@ class OpenEdge.PresentationLayer.Common.ActionEventArgs inherits EventArgs  :
                lbArgs.ArgType = poArgType.
     end method.
     
-    method public char GetArgumentValue (pcArgName as char, output poType as EnumMember):
+    method public char GetArgumentValue (pcArgName as char, output poType as DataTypeEnum):
         define buffer lbArgs for eActionArgs.
                 
         find lbArgs where lbArgs.ArgName = pcArgName no-error.
         if available lbArgs then
         do:
-            poType = cast(lbArgs.ArgType, EnumMember).
+            poType = cast(lbArgs.ArgType, DataTypeEnum).
             return lbArgs.ArgValue.
         end.
         else
@@ -71,13 +71,13 @@ class OpenEdge.PresentationLayer.Common.ActionEventArgs inherits EventArgs  :
     end method.
     
     method public void GetArgValue (pcArgName as char, output pcValue as char):
-        define variable oType as EnumMember no-undo.
+        define variable oType as DataTypeEnum no-undo.
         pcValue = GetArgumentValue(pcArgName, output oType).
     end method.
     
     method public void GetArgValue (pcArgName as char, output piValue as int):
         define variable cValue as character no-undo.
-        define variable oType as EnumMember no-undo.
+        define variable oType as DataTypeEnum no-undo.
         
         cValue = GetArgumentValue(pcArgName, output oType).
         if oType eq DataTypeEnum:Integer then
@@ -88,7 +88,7 @@ class OpenEdge.PresentationLayer.Common.ActionEventArgs inherits EventArgs  :
         
     method public void GetArgValue (pcArgName as char, output plValue as log):
         define variable cValue as character no-undo.
-        define variable oType as EnumMember no-undo.
+        define variable oType as DataTypeEnum no-undo.
         
         cValue = GetArgumentValue(pcArgName, output oType).
         if oType eq DataTypeEnum:Logical then
@@ -99,7 +99,7 @@ class OpenEdge.PresentationLayer.Common.ActionEventArgs inherits EventArgs  :
 
     method public void GetArgValue (pcArgName as char, output pdValue as dec):
         define variable cValue as character no-undo.
-        define variable oType as EnumMember no-undo.
+        define variable oType as DataTypeEnum no-undo.
         
         cValue = GetArgumentValue(pcArgName, output oType).
         if oType eq DataTypeEnum:Decimal then

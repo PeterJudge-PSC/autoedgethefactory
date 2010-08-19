@@ -3,18 +3,35 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Mar 27 16:02:48 EDT 2009
     Notes       : * needs to be IExternalizable because its derived class
                     ServerDataContext is.
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Core.System.*.
-using OpenEdge.Core.Interfaces.*.
-using OpenEdge.Core.Util.*.
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.Core.System.IQueryDefinition.
+using OpenEdge.Core.System.QueryDefinition.
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.System.QueryDefinitionEventArgs.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Lang.QueryBlockTypeEnum.
+using OpenEdge.Core.System.QueryDefinitionOperationEnum.
+using OpenEdge.Core.System.QueryElementEnum.
+
+using OpenEdge.Lang.ByteOrderEnum.
+using OpenEdge.Lang.CompareStrengthEnum.
+using OpenEdge.Lang.QueryTypeEnum.
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.LockModeEnum.
+using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.SortDirectionEnum.
+using OpenEdge.Lang.EnumMember.
+
+using Progress.Lang.Object.
+
 
 class OpenEdge.Core.System.QueryDefinition
         implements IQueryDefinition, IExternalizable :
@@ -22,7 +39,7 @@ class OpenEdge.Core.System.QueryDefinition
     define public event QueryDefinitionChanged signature void (poQueryDefinition as IQueryDefinition,
                                                                poEventArgs as QueryDefinitionEventArgs).
     
-    define public property QueryBlockType as EnumMember no-undo /*  OpenEdge.Core.System.QueryBlockTypeEnum  (For, Preselect) */
+    define public property QueryBlockType as QueryBlockTypeEnum no-undo
         get ():
             if not valid-object(QueryBlockType) then
                 QueryBlockType = QueryBlockTypeEnum:Default.
@@ -38,18 +55,18 @@ class OpenEdge.Core.System.QueryDefinition
         field BufferName as char
         field TableName as char
         field Order as int
-        field QueryType as Object   /* OpenEdge.Lang.QueryTypeEnum:EnumMember(each, first, last) */
-        field LockMode as Object       /* OpenEdge.Lang.LockModeEnum:EnumMember */
+        field QueryType as Object   /* OpenEdge.Lang.QueryTypeEnum */
+        field LockMode as Object       /* OpenEdge.Lang.LockModeEnum */
         index idx1 as unique BufferName
         index idx2 as primary unique Order.
     
     define private temp-table ttFilter no-undo
         field BufferName as character
         field FieldName as char
-        field Operator as Object           /* OpenEdge.Lang.OperatorEnum:EnumMember */
+        field Operator as Object           /* OpenEdge.Lang.OperatorEnum */
         field FieldValue as char
-        field FieldType as Object          /* OpenEdge.Lang.DataTypeEnum:EnumMember */
-        field JoinType as Object /* OpenEdge.Lang.JoinEnum:EnumMember */
+        field FieldType as Object          /* OpenEdge.Lang.DataTypeEnum */
+        field JoinType as Object /* OpenEdge.Lang.JoinEnum */
         index idx1 as primary unique BufferName FieldName Operator FieldValue         
         .        
     define private temp-table ttJoin no-undo
@@ -72,12 +89,13 @@ class OpenEdge.Core.System.QueryDefinition
         index idx1 as primary unique BufferName FieldName       
         .
 
+
     method public void AddFilter (pcBufferName as char,
                                   pcFieldName as char,
-                                  poOperator as EnumMember,            /* OpenEdge.Lang.OperatorEnum */
+                                  poOperator as OperatorEnum,
                                   pcFieldValue as char,
-                                  poFieldType as EnumMember,           /* OpenEdge.Core.System.DataTypeEnum */
-                                  poJoinType as EnumMember):           /* OpenEdge.Lang.JoinEnum */
+                                  poFieldType as DataTypeEnum,
+                                  poJoinType as JoinEnum):
         
         define buffer lbFilter for ttFilter.
         
@@ -89,12 +107,12 @@ class OpenEdge.Core.System.QueryDefinition
                lbFilter.FieldType = poFieldType
                lbFilter.JoinType = poJoinType.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Filter, OperationEnum:Create)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Filter, QueryDefinitionOperationEnum:Create)).
     end method.
     
     method public void AddSort (pcBufferName as char,
                                 pcFieldName as char,
-                                poSortDirection as EnumMember): /* OpenEdge.Lang.SortDirectionEnum */
+                                poSortDirection as SortDirectionEnum):
         define variable iOrder as integer no-undo.
 
         define buffer lbSort for ttSort.
@@ -110,7 +128,7 @@ class OpenEdge.Core.System.QueryDefinition
     
     method public void AddSort (pcBufferName as char,
                                 pcFieldName as char,
-                                poSortDirection as EnumMember, /* OpenEdge.Lang.SortDirectionEnum */
+                                poSortDirection as SortDirectionEnum,
                                 piOrder as integer ):
         define buffer lbSort for ttSort.
         
@@ -128,32 +146,32 @@ class OpenEdge.Core.System.QueryDefinition
         assign lbSort.Direction = poSortDirection
                lbSort.Order     = piOrder.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Sort, OperationEnum:Create)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Sort, QueryDefinitionOperationEnum:Create)).
     end method.
     
     method public void ClearFilters():
         empty temp-table ttFilter.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Sort, OperationEnum:Empty)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Sort, QueryDefinitionOperationEnum:Empty)).
     end method.
         
     method public void ClearSort():
         empty temp-table ttSort.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Filter, OperationEnum:Empty)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Filter, QueryDefinitionOperationEnum:Empty)).
     end method.
 
     method public void ClearJoins():
         empty temp-table ttJoin.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Join, OperationEnum:Empty)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Join, QueryDefinitionOperationEnum:Empty)).
     end method.
     
     method public void ClearBuffers():
         empty temp-table ttBuffer.
         NumBuffers = 0.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, OperationEnum:Empty)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Empty)).
     end method.
     
     method public void ClearAll():
@@ -173,8 +191,8 @@ class OpenEdge.Core.System.QueryDefinition
     end method.
     
     method public character extent GetBufferList(output pcTables as char extent,
-                                                 output poQueryTypes as EnumMember extent,
-                                                 output poLockModes as EnumMember extent):
+                                                 output poQueryTypes as QueryTypeEnum extent,
+                                                 output poLockModes as LockModeEnum extent):
         
         define variable cBuffer as character extent no-undo.
         define variable iExtentSize as integer no-undo.
@@ -197,8 +215,8 @@ class OpenEdge.Core.System.QueryDefinition
         do while not query qryBuffer:query-off-end:
             assign cBuffer[iExtent] = lbBuffer.BufferName
                    pcTables[iExtent] = lbBuffer.TableName
-                   poQueryTypes[iExtent] = cast(lbBuffer.QueryType, EnumMember)
-                   poLockModes[iExtent] = cast(lbBuffer.LockMode, EnumMember)
+                   poQueryTypes[iExtent] = cast(lbBuffer.QueryType, QueryTypeEnum)
+                   poLockModes[iExtent] = cast(lbBuffer.LockMode, LockModeEnum)
                    iExtent = iExtent + 1.
             
             query qryBuffer:get-next().
@@ -222,8 +240,8 @@ class OpenEdge.Core.System.QueryDefinition
             
     method public void AddBuffer(pcBuffer as char,
                                  pcTable as char,
-                                 poQueryType as EnumMember,
-                                 poLockMode as EnumMember):
+                                 poQueryType as QueryTypeEnum,
+                                 poLockMode as LockModeEnum):
         define buffer lbBuffer for ttBuffer.
         
         create lbBuffer.
@@ -234,7 +252,7 @@ class OpenEdge.Core.System.QueryDefinition
                lbBuffer.LockMode = poLockMode
                lbBuffer.QueryType = poQueryType.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, OperationEnum:Create)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Create)).
     end method.
 
     method public void SetBuffers(pcBuffer as char extent, pcTable as char extent):
@@ -259,10 +277,10 @@ class OpenEdge.Core.System.QueryDefinition
         else
             lbBuffer.TableName = pcTable.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, OperationEnum:Update)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Update)).
     end method.
     
-    method public void SetBufferLockMode(pcBuffer as char, poLockMode as EnumMember):
+    method public void SetBufferLockMode(pcBuffer as char, poLockMode as LockModeEnum):
         define buffer lbBuffer for ttBuffer.
         
         find lbBuffer where lbBuffer.BufferName = pcBuffer no-error.
@@ -271,10 +289,10 @@ class OpenEdge.Core.System.QueryDefinition
         else
             lbBuffer.LockMode = poLockMode.
             
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, OperationEnum:Update)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Update)).
     end method.
     
-    method public void SetBufferQueryType(pcBuffer as char, poQueryType as EnumMember):
+    method public void SetBufferQueryType(pcBuffer as char, poQueryType as QueryTypeEnum):
         define buffer lbBuffer for ttBuffer.
         
         find lbBuffer where lbBuffer.BufferName = pcBuffer no-error.
@@ -283,27 +301,27 @@ class OpenEdge.Core.System.QueryDefinition
         else
             lbBuffer.QueryType = poQueryType.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, OperationEnum:Update)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Update)).
     end method.
             
-    method public EnumMember GetBufferQueryType(pcBuffer as char):
-        define variable oType as EnumMember no-undo.
+    method public QueryTypeEnum GetBufferQueryType(pcBuffer as char):
+        define variable oType as QueryTypeEnum no-undo.
         define buffer lbBuffer for ttBuffer.
         
         find lbBuffer where lbBuffer.BufferName = pcBuffer no-error.        
         if available lbBuffer then 
-            oType = cast(lbBuffer.QueryType, EnumMember).
+            oType = cast(lbBuffer.QueryType, QueryTypeEnum).
         
         return oType.
     end method.
     
-    method public EnumMember GetBufferLockMode(pcBuffer as char):
-        define variable oMode as EnumMember no-undo.
+    method public LockModeEnum GetBufferLockMode(pcBuffer as char):
+        define variable oMode as LockModeEnum no-undo.
         define buffer lbBuffer for ttBuffer.
         
         find lbBuffer where lbBuffer.BufferName = pcBuffer no-error.        
         if available lbBuffer then 
-            oMode = cast(lbBuffer.LockMode, EnumMember).
+            oMode = cast(lbBuffer.LockMode, LockModeEnum).
         
         return oMode.
     end method.
@@ -325,10 +343,10 @@ class OpenEdge.Core.System.QueryDefinition
             
     method public void AddJoin (pcBufferName as char,
                                 pcFieldName as char,
-                                poOperator as EnumMember,          /* OpenEdge.Lang.OperatorEnum: =,<,> etc */
+                                poOperator as OperatorEnum,
                                 pcJoinBufferName as char,
                                 pcJoinFieldName as char,
-                                poJoinType as EnumMember):         /* OpenEdge.Lang.JoinEnum: AND, OR etc */
+                                poJoinType as JoinEnum):
         define buffer lbJoin for ttJoin.
         
         create lbJoin.
@@ -339,7 +357,7 @@ class OpenEdge.Core.System.QueryDefinition
                lbJoin.JoinFieldName = pcJoinFieldName
                lbJoin.JoinType = poJoinType.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Join, OperationEnum:Create)).
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Join, QueryDefinitionOperationEnum:Create)).
     end method.
     
     method public logical Equals(poQuery as QueryDefinition):
@@ -362,7 +380,7 @@ class OpenEdge.Core.System.QueryDefinition
            we certainly won't pass this test. */
         if lEquals then
             lEquals = compare(this-object:GetMD5(),
-                              OperatorEnum:Equals:ToString(),
+                              OperatorEnum:IsEqual:ToString(),
                               poQuery:GetMD5(),
                               CompareStrengthEnum:Raw:ToString()).
         
@@ -387,7 +405,7 @@ class OpenEdge.Core.System.QueryDefinition
     method protected void OnQueryDefinitionChanged (poEventArgs as QueryDefinitionEventArgs):
         this-object:QueryDefinitionChanged:Publish(
                 this-object,
-                new QueryDefinitionEventArgs(QueryElementEnum:Join, OperationEnum:Create)).
+                new QueryDefinitionEventArgs(QueryElementEnum:Join, QueryDefinitionOperationEnum:Create)).
     end method.
     
     method public void WriteObject(po as ObjectOutputStream):
@@ -400,7 +418,7 @@ class OpenEdge.Core.System.QueryDefinition
     end method.
     
     method public void ReadObject(po as ObjectInputStream):
-        QueryBlockType = cast(po:ReadObject(), EnumMember).
+        QueryBlockType = cast(po:ReadObject(), QueryBlockTypeEnum).
         
         po:ReadTable(table ttBuffer by-reference).
         po:ReadTable(table ttFilter by-reference).

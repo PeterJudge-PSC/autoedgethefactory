@@ -3,16 +3,19 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Dec 11 11:31:52 EST 2007
     Notes       : 
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
+using OpenEdge.PresentationLayer.View.EventLoopModeEnum.
 using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.View.IContainerView.
 using OpenEdge.PresentationLayer.View.IContainedView.
+using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
+using OpenEdge.PresentationLayer.Common.DialogResultEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
@@ -28,7 +31,6 @@ using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Core.System.NotFoundError.
 
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -150,7 +152,7 @@ class OpenEdge.PresentationLayer.Presenter.Presenter abstract inherits Service
         
         @return Whether the view can continue closing      */
     @method(virtual="True").
-    method public logical CanCloseView(poDialogResult as EnumMember, poCloseReason as EnumMember):
+    method public logical CanCloseView(poDialogResult as DialogResultEnum, poCloseReason as CloseReasonEnum):
         return true.
     end method.
     
@@ -229,7 +231,7 @@ class OpenEdge.PresentationLayer.Presenter.Presenter abstract inherits Service
         cast(this-object:View, IContainerView):ShowModal().
     end method.
     
-    method public void BeginEventLoop(poShowMode as EnumMember):
+    method public void BeginEventLoop(poShowMode as EventLoopModeEnum):
         Assert:ArgumentNotNull(this-object:View, 'View').
         
         cast(this-object:View, IContainerView):BeginEventLoop(poShowMode).

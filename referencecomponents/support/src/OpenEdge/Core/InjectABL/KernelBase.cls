@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 12:56:53 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -24,13 +24,12 @@ using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
+using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.IInjectionRequest.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.ComponentContainer.
 using OpenEdge.Core.InjectABL.KernelSettings.
-
 using OpenEdge.Lang.Collections.IIterator.
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.Assert.
 
 using Progress.Lang.Class.
@@ -227,7 +226,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     end method.
     
     method public IBindingCollection GetBindings(poScopeCallback as class Class,
-                                                 poScope as EnumMember):
+                                                 poScope as StandardScopeEnum):
         define variable oResolvedBindings as IBindingCollection no-undo.
         
         oResolvedBindings = cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))

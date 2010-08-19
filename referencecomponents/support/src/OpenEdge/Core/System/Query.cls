@@ -1,19 +1,31 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : Query
-    Purpose     : 
+    Purpose     : General query object/wrapper
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jul 31 16:34:19 EDT 2009
     Notes       : The buffers this query uses could also theoretically
                   be encapsulated. This is left as an exercise for the
                   reader :) 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Core.System.*.
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.Core.System.Query.
+using OpenEdge.Core.System.QueryDefinitionEventArgs.
+using OpenEdge.Core.System.IQuery.
+using OpenEdge.Core.System.ITableOwner.
+using OpenEdge.Core.System.IQueryDefinition.
+using OpenEdge.Core.System.RowPositionEnum.
+using OpenEdge.Core.System.QueryElementEnum.
+using OpenEdge.Core.System.InvalidValueSpecifiedError.
+using OpenEdge.Core.System.UnsupportedOperationError.
+
+using OpenEdge.Lang.FindTypeEnum.
+using OpenEdge.Lang.LockModeEnum.
+using OpenEdge.Lang.QueryTypeEnum.
+
+using Progress.Lang.Error.
 
 class OpenEdge.Core.System.Query 
     implements IQuery:
@@ -55,9 +67,9 @@ class OpenEdge.Core.System.Query
             return iCurrentRow.
         end get.
         
-    define public property RowPosition as EnumMember no-undo
+    define public property RowPosition as RowPositionEnum no-undo
         get():
-            define variable oRowPosition as EnumMember no-undo.
+            define variable oRowPosition as RowPositionEnum no-undo.
                 
             if not QueryHandle:is-open or
                QueryHandle:current-result-row eq 0 then
@@ -215,7 +227,7 @@ class OpenEdge.Core.System.Query
     end method.
     
     method public character extent GetCurrentRowKey():
-        GetCurrentRowKey(QueryHandle).
+        return GetCurrentRowKey(QueryHandle).
     end method.
     
     method protected character extent GetCurrentRowKey(phQuery as handle):
@@ -332,7 +344,7 @@ class OpenEdge.Core.System.Query
         end finally.
     end method.
     
-    method public character extent GetRowKeyWhere(poQueryDefinition as IQueryDefinition,poFindType as EnumMember).    
+    method public character extent GetRowKeyWhere(poQueryDefinition as IQueryDefinition, poFindType as FindTypeEnum):
         define variable hQuery as handle no-undo.
         
         hQuery = CloneQuery(QueryHandle).
@@ -373,7 +385,7 @@ class OpenEdge.Core.System.Query
         DeleteQuery().
     end destructor.
     
-    method public void QueryDefinitionChangedHandler (poSender as IQueryDefinition, poArgs as QueryDefinitionEventArgs):
+    method public void QueryDefinitionChangedHandler(input poSender as IQueryDefinition, input poArgs as QueryDefinitionEventArgs):
         /* Ignore prebult PDS queries wrt buffer changes. We only want
            to react to filter, sort, join changes.
            
@@ -406,8 +418,8 @@ class OpenEdge.Core.System.Query
     method protected void BuildQuery(phQuery as handle):
         define variable cBuffers as character extent no-undo.
         define variable cTables as character extent no-undo.
-        define variable oQueryTypes as EnumMember extent no-undo.
-        define variable oLockModes as EnumMember extent no-undo.
+        define variable oQueryTypes as QueryTypeEnum extent no-undo.
+        define variable oLockModes as LockModeEnum extent no-undo.
         define variable hBuffer as handle no-undo.
         define variable iExtent as integer no-undo.
         define variable hTable as handle no-undo.
@@ -528,7 +540,7 @@ class OpenEdge.Core.System.Query
         cTable = QueryHandle:get-buffer-handle(pcBufferName):table.
 
         @todo(task="improve message in unsupported Error  or create new Error").
-        catch e as Error :
+        catch e as Error:
               if valid-handle(QueryHandle) then 
                   undo, throw new InvalidValueSpecifiedError(e,"buffer name","~"" + pcBufferName + "~"").    
                 else

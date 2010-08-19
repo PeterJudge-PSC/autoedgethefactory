@@ -10,7 +10,6 @@
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Server.ServiceTypeEnum.
-using OpenEdge.Lang.EnumMember.
 
 class OpenEdge.CommonInfrastructure.Server.ServiceTypeEnum inherits OpenEdge.CommonInfrastructure.Server.ComponentTypeEnum: 
     define public static property BusinessEntity    as ServiceTypeEnum no-undo get. private set.

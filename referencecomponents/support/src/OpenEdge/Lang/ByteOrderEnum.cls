@@ -1,34 +1,39 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ByteOrderEnum
-    Purpose     : 
+    Purpose     : Enumeration of byte-order 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Dec 21 09:40:59 EST 2009
-    Notes       : 
+    Notes       : * Taken from ABL documentation
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Lang.*.
+using OpenEdge.Lang.ByteOrderEnum.
+using OpenEdge.Lang.EnumMember.
 
-class OpenEdge.Lang.ByteOrderEnum final:
+class OpenEdge.Lang.ByteOrderEnum final inherits EnumMember:
 
-    define public static property Default       as EnumMember no-undo get. private set.
-    define public static property HostByteOrder as EnumMember no-undo get. private set.
-    define public static property BigEndian     as EnumMember no-undo get. private set.
-    define public static property LittleEndian  as EnumMember no-undo get. private set.
+    define public static property Default       as ByteOrderEnum no-undo get. private set.
+    define public static property HostByteOrder as ByteOrderEnum no-undo get. private set.
+    define public static property BigEndian     as ByteOrderEnum no-undo get. private set.
+    define public static property LittleEndian  as ByteOrderEnum no-undo get. private set.
     
     constructor static ByteOrderEnum():
-        ByteOrderEnum:HostByteOrder = new EnumMember(host-byte-order, 'host-byte-order').
-        ByteOrderEnum:BigEndian = new EnumMember(big-endian, 'big-endian').
-        ByteOrderEnum:LittleEndian = new EnumMember(little-endian, 'little-endian').
+        ByteOrderEnum:HostByteOrder = new ByteOrderEnum(host-byte-order, 'host-byte-order').
+        ByteOrderEnum:BigEndian = new ByteOrderEnum(big-endian, 'big-endian').
+        ByteOrderEnum:LittleEndian = new ByteOrderEnum(little-endian, 'little-endian').
         
         ByteOrderEnum:Default = ByteOrderEnum:HostByteOrder.
     end constructor.
+		
+	constructor public ByteOrderEnum ( input piValue as integer, input pcName as character ):
+		super (input piValue, input pcName).
+	end constructor.
     
     @todo(task="this make sense?").
-    method static public EnumMember EnumFromString(pcByteOrder as char):
-        define variable oMember as EnumMember no-undo.
+    method static public ByteOrderEnum EnumFromString(pcByteOrder as char):
+        define variable oMember as ByteOrderEnum no-undo.
         
         case pcByteOrder:
             when ByteOrderEnum:HostByteOrder:ToString() then oMember = ByteOrderEnum:HostByteOrder.
@@ -39,8 +44,8 @@ class OpenEdge.Lang.ByteOrderEnum final:
         return oMember.        
     end method.
     
-    method static public EnumMember EnumFromValue(piByteOrder as integer):
-        define variable oMember as EnumMember no-undo.
+    method static public ByteOrderEnum EnumFromValue(piByteOrder as integer):
+        define variable oMember as ByteOrderEnum no-undo.
         
         case piByteOrder:
             when ByteOrderEnum:HostByteOrder:Value then oMember = ByteOrderEnum:HostByteOrder.

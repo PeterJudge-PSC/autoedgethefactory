@@ -1,23 +1,30 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IQueryDefinition
-    Purpose     : 
+    Purpose     : INterface for query definition: the decomposed parts of a query. 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Mar 27 16:06:04 EDT 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
-
-using OpenEdge.Core.System.*.
-using OpenEdge.Lang.*.
+  ---------------------------------------------------------------------- */
+using OpenEdge.Core.System.IQueryDefinition.
+using OpenEdge.Core.System.QueryDefinitionEventArgs.
+using OpenEdge.Lang.QueryBlockTypeEnum.
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.LockModeEnum.
+using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.QueryTypeEnum.
+using OpenEdge.Lang.SortDirectionEnum.
 
 interface OpenEdge.Core.System.IQueryDefinition:
     /* Allows us to optimize building of queries (ie we don't need to create a new buffer).
        The setting of the *Changed properties to FALSE is an exogenous event: whoever's
        using this object needs to do that. It will probably happen on open. */
-    define public event QueryDefinitionChanged signature void (poQueryDefinition as IQueryDefinition, poEventArgs as QueryDefinitionEventArgs).
+    define public event QueryDefinitionChanged signature void (input poQueryDefinition as IQueryDefinition,
+                                                               input poEventArgs as QueryDefinitionEventArgs).
                            
-    define public property QueryBlockType as EnumMember no-undo get. set.   /* OpenEdge.Core.System.QueryBlockTypeEnum */
+    define public property QueryBlockType as QueryBlockTypeEnum no-undo get. set.
     define public property NumBuffers as integer no-undo get.
     
     /* Old-school */    
@@ -27,53 +34,53 @@ interface OpenEdge.Core.System.IQueryDefinition:
     method public void ClearSort().
     method public void ClearJoins().
     
-    method public void SetBuffers(pcBuffer as char extent, pcTable as char extent).
-    method public void SetBuffers(pcBuffer as char extent).
+    method public void SetBuffers(input pcBuffer as character extent, input pcTable as character extent).
+    method public void SetBuffers(input pcBuffer as character extent).
     
-    method public void AddBuffer(pcBuffer as char).
-    method public void AddBuffer(pcBuffer as char, pcTable as char).    
-    method public void AddBuffer(pcBuffer as char,
-                                 pcTable as char,
-                                 poQueryType as EnumMember,
-                                 poLockMode as EnumMember).
+    method public void AddBuffer(input pcBuffer as character).
+    method public void AddBuffer(input pcBuffer as character, input pcTable as character).    
+    method public void AddBuffer(input pcBuffer as character,
+                                 input pcTable as character,
+                                 input poQueryType as QueryTypeEnum,
+                                 input poLockMode as LockModeEnum).
     
     /* IQuery will use these methods when constructing an ABL query */
     method public character extent GetBufferList().
     method public character extent GetBufferList(output pcTables as char extent,
-                                                 output poQueryTypes as EnumMember extent,
-                                                 output poLockModes as EnumMember extent).
+                                                 output poQueryTypes as QueryTypeEnum extent,
+                                                 output poLockModes as LockModeEnum extent).
 
-    method public void SetBufferTable(pcBuffer as char, pcTable as char).
-    method public void SetBufferLockMode(pcBuffer as char, piLockMode as EnumMember).   /* OpenEdge.System.Core.LockModeEnum  */
-    method public void SetBufferQueryType(pcBuffer as char, poQueryType as EnumMember). /* OpenEdge.System.Core.QueryTypeEnum */
+    method public void SetBufferTable(input pcBuffer as character, input pcTable as character).
+    method public void SetBufferLockMode(input pcBuffer as character, input poLockMode as LockModeEnum).   /* OpenEdge.System.Core.LockModeEnum  */
+    method public void SetBufferQueryType(input pcBuffer as character, input poQueryType as QueryTypeEnum). /* OpenEdge.System.Core.QueryTypeEnum */
     
-    method public character GetBufferTable(pcBuffer as char).
-    method public EnumMember GetBufferLockMode(pcBuffer as char).    /* OpenEdge.System.Core.LockModeEnum */
-    method public EnumMember GetBufferQueryType(pcBuffer as char).   /* OpenEdge.System.Core.QueryTypeEnum */
+    method public character GetBufferTable(input pcBuffer as character).
+    method public LockModeEnum GetBufferLockMode(input pcBuffer as character).    /* OpenEdge.System.Core.LockModeEnum */
+    method public QueryTypeEnum GetBufferQueryType(input pcBuffer as character).
     
     @todo(task="Refactor AddFilter to have type-specific signatures; remove need to pass DataTypeEnum. ").
-    method public void AddFilter (pcBufferName as char,
-                                  pcFieldName as char,
-                                  poOperator as EnumMember,        /* OpenEdge.Lang.OperatorEnum: =,<,> etc */
-                                  pcFieldValue as char,
-                                  poFieldType as EnumMember,       /* OpenEdge.Core.System.DataTypeEnum */
-                                  poJoinType as EnumMember   ).    /* OpenEdge.Lang.JoinEnum: AND, OR etc */
+    method public void AddFilter (input pcBufferName as character,
+                                  input pcFieldName as character,
+                                  input poOperator as OperatorEnum,
+                                  input pcFieldValue as character,
+                                  input poFieldType as DataTypeEnum,       /* OpenEdge.Core.System.DataTypeEnum */
+                                  input poJoinType as JoinEnum).
     
-    method public void AddJoin (pcBufferName as char,
-                                pcFieldName as char,
-                                poOperator as EnumMember,          /* OpenEdge.Lang.OperatorEnum: =,<,> etc */
-                                pcJoinBufferName as char,
-                                pcJoinFieldName as char,
-                                poJoinType as EnumMember).         /* OpenEdge.Lang.JoinEnum: AND, OR etc */
+    method public void AddJoin (input pcBufferName as character,
+                                input pcFieldName as character,
+                                input poOperator as OperatorEnum,
+                                input pcJoinBufferName as character,
+                                input pcJoinFieldName as character,
+                                input poJoinType as JoinEnum).
     
-    method public void AddSort (pcBufferName as char,
-                                pcFieldName as char,
-                                poSortDirection as EnumMember).     /* OpenEdge.Lang.SortDirectionEnum */
+    method public void AddSort (input pcBufferName as character,
+                                input pcFieldName as character,
+                                input poSortDirection as SortDirectionEnum).
 
-    method public void AddSort (pcBufferName as char,
-                                pcFieldName as char,
-                                poSortDirection as EnumMember,     /* OpenEdge.Lang.SortDirectionEnum */
-                                piOrder as integer).
+    method public void AddSort (input pcBufferName as character,
+                                input pcFieldName as character,
+                                input poSortDirection as SortDirectionEnum,
+                                input piOrder as integer).
                                 
     /* Methods returning query elements for all buffers in default (added-to-def) order */
     method public character GetQueryString().    
@@ -81,12 +88,12 @@ interface OpenEdge.Core.System.IQueryDefinition:
     
     /* WHERE clause elements per buffer. Filter and Join have
        no real meaning outside of the per-buffer context. */
-    method public character GetFilter(pcBufferName as character).
+    method public character GetFilter(input pcBufferName as character).
  
     
     /* Methods returning query elements for buffers in arg order */
-    method public character GetQueryString(pcBufferName as char extent).
-    method public character GetSort(pcBufferName as character extent).
+    method public character GetQueryString(input pcBufferName as char extent).
+    method public character GetSort(input pcBufferName as character extent).
     
     
 end interface.

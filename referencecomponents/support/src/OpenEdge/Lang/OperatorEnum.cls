@@ -1,43 +1,48 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : OperatorEnum
-    Purpose     : 
+    Purpose     : Enumeration of ABL operators 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 12 15:05:08 EDT 2009
-    Notes       : 
+    Notes       : * IsEqual property should be 'Equals' but compiler barfs. 
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Lang.*.
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.EnumMember.
 
-class OpenEdge.Lang.OperatorEnum final: 
-        
-    define public static property Equals        as EnumMember no-undo get. private set.
-    define public static property GreaterThan   as EnumMember no-undo get. private set.
-    define public static property GreaterEqual  as EnumMember no-undo get. private set.
-    define public static property LessThan      as EnumMember no-undo get. private set.
-    define public static property LessEqual     as EnumMember no-undo get. private set.
-    define public static property NotEqual      as EnumMember no-undo get. private set.
-    define public static property Matches       as EnumMember no-undo get. private set.
-    define public static property Begins        as EnumMember no-undo get. private set.
-    define public static property Contains      as EnumMember no-undo get. private set.
-    define public static property None          as EnumMember no-undo get. private set.
+class OpenEdge.Lang.OperatorEnum final inherits EnumMember :
+    
+    define public static property IsEqual       as OperatorEnum no-undo get. private set.
+    define public static property GreaterThan   as OperatorEnum no-undo get. private set.
+    define public static property GreaterEqual  as OperatorEnum no-undo get. private set.
+    define public static property LessThan      as OperatorEnum no-undo get. private set.
+    define public static property LessEqual     as OperatorEnum no-undo get. private set.
+    define public static property NotEqual      as OperatorEnum no-undo get. private set.
+    define public static property Matches       as OperatorEnum no-undo get. private set.
+    define public static property Begins        as OperatorEnum no-undo get. private set.
+    define public static property Contains      as OperatorEnum no-undo get. private set.
+    define public static property None          as OperatorEnum no-undo get. private set.
     
     constructor static OperatorEnum():
-        OperatorEnum:Equals = new EnumMember(1, 'eq').
-        OperatorEnum:GreaterThan = new EnumMember(2, 'gt').
-        OperatorEnum:GreaterEqual = new EnumMember(3, 'ge').
-        OperatorEnum:LessThan = new EnumMember(4, 'lt').
-        OperatorEnum:LessEqual = new EnumMember(5, 'le').
-        OperatorEnum:NotEqual = new EnumMember(6, 'ne').
-        OperatorEnum:Matches = new EnumMember(7, 'matches').
-        OperatorEnum:Begins = new EnumMember(8, 'begins').
-        OperatorEnum:Contains = new EnumMember(9, 'contains').
-        OperatorEnum:None = new EnumMember(10, '').
+        OperatorEnum:IsEqual = new OperatorEnum('eq').
+        OperatorEnum:GreaterThan = new OperatorEnum('gt').
+        OperatorEnum:GreaterEqual = new OperatorEnum('ge').
+        OperatorEnum:LessThan = new OperatorEnum('lt').
+        OperatorEnum:LessEqual = new OperatorEnum('le').
+        OperatorEnum:NotEqual = new OperatorEnum('ne').
+        OperatorEnum:Matches = new OperatorEnum('matches').
+        OperatorEnum:Begins = new OperatorEnum('begins').
+        OperatorEnum:Contains = new OperatorEnum('contains').
+        OperatorEnum:None = new OperatorEnum('').
     end constructor.
     
-    method static public logical Equals (pcOperator as char, poOperator as EnumMember):
+	constructor public OperatorEnum ( input pcName as character ):
+		super (input pcName).
+	end constructor.
+	
+    method static public logical Equals (pcOperator as char, poOperator as OperatorEnum):
         define variable lEqual as logical no-undo.
         
         lEqual = poOperator:ToString() eq pcOperator.
@@ -45,7 +50,7 @@ class OpenEdge.Lang.OperatorEnum final:
         /* Alternate */
         if not lEqual then
         case pcOperator:
-            when '=' then lEqual = poOperator eq OperatorEnum:Equals.
+            when '=' then lEqual = poOperator eq OperatorEnum:IsEqual.
             when '>' then lEqual = poOperator eq OperatorEnum:GreaterThan.
             when '>=' then lEqual = poOperator eq OperatorEnum:GreaterEqual.
             when '<' then lEqual = poOperator eq OperatorEnum:LessThan.
@@ -55,5 +60,5 @@ class OpenEdge.Lang.OperatorEnum final:
         
         return lEqual.
     end method.
-        
+    
 end class.

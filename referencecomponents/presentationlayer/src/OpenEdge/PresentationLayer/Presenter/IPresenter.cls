@@ -1,22 +1,24 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IPresenter
-    Purpose     : 
+    Purpose     : Common Presenter interface (data bound or not) 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Nov 06 16:19:51 EST 2008
     Notes       : 
   ----------------------------------------------------------------------*/
+using OpenEdge.PresentationLayer.View.EventLoopModeEnum.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.View.IContainedView.
+
+using OpenEdge.PresentationLayer.Common.DialogResultEnum.
+using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
 using OpenEdge.CommonInfrastructure.Common.Component.
 using OpenEdge.CommonInfrastructure.Common.IService.
-
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -51,7 +53,7 @@ interface OpenEdge.PresentationLayer.Presenter.IPresenter /* inherits IService *
     method public void ShowModal().    
     method public void ShowEmbedded(poParentView as Object).
     
-    method public void BeginEventLoop(poShowMode as EnumMember).
+    method public void BeginEventLoop(poShowMode as EventLoopModeEnum).
     method public void EndEventLoop().
     
     /** CanCloseView() call that's made from a View's event handlers/triggers. This method
@@ -62,6 +64,6 @@ interface OpenEdge.PresentationLayer.Presenter.IPresenter /* inherits IService *
         
         @return Whether the view can continue closing      */
     @method(virtual="true").
-    method public logical CanCloseView(poDialogResult as EnumMember, poCloseReason as EnumMember).
+    method public logical CanCloseView(poDialogResult as DialogResultEnum, poCloseReason as CloseReasonEnum).
     
 end interface.

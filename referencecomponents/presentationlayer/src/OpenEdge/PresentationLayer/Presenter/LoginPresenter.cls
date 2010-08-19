@@ -1,30 +1,25 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : LoginPresenter
-    Purpose     : 
+    Purpose     : Presenter to handle login functionality
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Dec 10 16:50:29 EST 2007
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
   
 using OpenEdge.PresentationLayer.Presenter.Presenter.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.Presenter.ILoginPresenter.
 using OpenEdge.PresentationLayer.Common.LoginError.
-using OpenEdge.PresentationLayer.Common.DialogResultEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IApplicationLogin.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager. 
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using OpenEdge.Core.System.ILoginData.
 using OpenEdge.Core.System.ApplicationError.
-using OpenEdge.Lang.EnumMember.
-using Progress.Lang.Class.
-using Progress.Lang.Error.
 
 class OpenEdge.PresentationLayer.Presenter.LoginPresenter
         inherits Presenter

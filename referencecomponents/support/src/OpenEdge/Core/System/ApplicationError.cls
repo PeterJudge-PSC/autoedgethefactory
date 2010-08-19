@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Mar 09 10:37:02 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -11,7 +11,6 @@ routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.ErrorSeverityEnum.
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.FlagsEnum.
 using Progress.Lang.AppError.
 using Progress.Lang.Object.

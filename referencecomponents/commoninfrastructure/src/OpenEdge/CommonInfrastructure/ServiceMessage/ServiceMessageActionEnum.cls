@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
-    File        : MessageTypeEnum
-    Purpose     : 
+/** ------------------------------------------------------------------------
+    File        : ServiceMessageActionEnum
+    Purpose     : Enumerates types of service messages (requests).
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Sat Feb 20 03:38:25 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
@@ -24,8 +24,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum inhe
         ServiceMessageActionEnum:Define = new ServiceMessageActionEnum('Define'). 
     end method.
 		
-	constructor public ServiceMessageActionEnum(pcName as character):
-		super(pcName).
-	end constructor.
+		    constructor public ServiceMessageActionEnum(pcName as character):
+        		super(pcName).
+    	end constructor.
 	
 end class.

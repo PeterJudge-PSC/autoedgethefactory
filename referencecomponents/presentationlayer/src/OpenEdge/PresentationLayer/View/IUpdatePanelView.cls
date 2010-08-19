@@ -1,19 +1,20 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IUpdatePanelView
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon May 18 15:07:59 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.PresentationLayer.Common.ActionStateEnum.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 
-interface OpenEdge.PresentationLayer.View.IUpdatePanelView:  
-    
-    method public void UpdateStateChange (piActions as EnumMember extent,
-                                          piStates as EnumMember extent).
-    method public void TableNameChange (pcTableName as char).
+interface OpenEdge.PresentationLayer.View.IUpdatePanelView:
       
+    method public void UpdateStateChange (input poActions as UpdateActionEnum extent,
+                                          input poStates as ActionStateEnum extent).
+    
+    method public void TableNameChange (input pcTableName as char).
+    
 end interface.
