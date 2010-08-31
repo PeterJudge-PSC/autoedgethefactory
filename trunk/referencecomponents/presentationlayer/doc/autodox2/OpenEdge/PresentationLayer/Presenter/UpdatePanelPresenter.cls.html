@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\PresentationLayer\Presenter</font>
       <br />CLASS UpdatePanelPresenter
     </h2>
-    <p>CLASS OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter INHERITS <a href="../../../OpenEdge/PresentationLayer/Presenter/DataboundPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.DataboundPresenter" target="classFrame">DataboundPresenter</a> IMPLEMENTS <a href="../../../OpenEdge/PresentationLayer/Common/ISelectAction.cls.html" title="OpenEdge.PresentationLayer.Common.ISelectAction" target="classFrame">ISelectAction</a> , <a href="../../../OpenEdge/PresentationLayer/Presenter/IUpdatePanelPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter" target="classFrame">IUpdatePanelPresenter</a> </p>
+    <p>CLASS OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter INHERITS <a href="../../../OpenEdge/PresentationLayer/Presenter/DataboundPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.DataboundPresenter" target="classFrame">DataboundPresenter</a> IMPLEMENTS <a href="../../../OpenEdge/PresentationLayer/Common/ISelectToolbarAction.cls.html" title="OpenEdge.PresentationLayer.Common.ISelectToolbarAction" target="classFrame">ISelectToolbarAction</a> , <a href="../../../OpenEdge/PresentationLayer/Presenter/IUpdatePanelPresenter.cls.html" title="OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter" target="classFrame">IUpdatePanelPresenter</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/UpdateActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.UpdateActionEnum" target="classFrame">UpdateActionEnum</a></code>
         </font>
       </td>
       <td>
@@ -69,7 +69,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/UpdateActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.UpdateActionEnum" target="classFrame">UpdateActionEnum</a></code>
         </font>
       </td>
       <td>
@@ -210,8 +210,8 @@
       <td>
         <code>
           <b>
-            <a href='#selectaction(openedge.presentationlayer.common.actioneventargs)'> SelectAction</a>
-          </b>(<a href="../../../OpenEdge/PresentationLayer/Common/ActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ActionEventArgs" target="classFrame">ActionEventArgs</a> poArgs)
+            <a href='#selecttoolbaraction(openedge.presentationlayer.common.toolbaractioneventargs)'> SelectToolbarAction</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Common/ToolbarActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs" target="classFrame">ToolbarActionEventArgs</a> poArgs)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -254,7 +254,7 @@
 				
     <a name='property.CommitAction'><!-- --></a>
     <h3>CommitAction</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET SET </code>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/UpdateActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.UpdateActionEnum" target="classFrame">UpdateActionEnum</a> PUBLIC GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -263,7 +263,7 @@
     <hr />
     <a name='property.DeleteAction'><!-- --></a>
     <h3>DeleteAction</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET SET </code>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/UpdateActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.UpdateActionEnum" target="classFrame">UpdateActionEnum</a> PUBLIC GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -357,10 +357,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='selectaction(openedge.presentationlayer.common.actioneventargs)'><!-- --></a>
-    <h3>SelectAction</h3>
+    <a name='selecttoolbaraction(openedge.presentationlayer.common.toolbaractioneventargs)'><!-- --></a>
+    <h3>SelectToolbarAction</h3>
     <code>PUBLIC  VOID
-      <b>SelectAction</b>(<a href="../../../OpenEdge/PresentationLayer/Common/ActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ActionEventArgs" target="classFrame">ActionEventArgs</a> poArgs)
+      <b>SelectToolbarAction</b>(<a href="../../../OpenEdge/PresentationLayer/Common/ToolbarActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs" target="classFrame">ToolbarActionEventArgs</a> poArgs)
     </code>
     <dl>
       <dd>

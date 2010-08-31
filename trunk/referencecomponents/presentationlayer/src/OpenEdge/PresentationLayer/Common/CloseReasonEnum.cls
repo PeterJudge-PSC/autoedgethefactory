@@ -43,9 +43,9 @@ class OpenEdge.PresentationLayer.Common.CloseReasonEnum final inherits EnumMembe
         CloseReasonEnum:ApplicationExitCall = new CloseReasonEnum('ApplicationExitCall').
     end constructor.
 
-	constructor public CloseReasonEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public CloseReasonEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
 
 
 end class.

@@ -27,8 +27,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum inherits OpenEdge.Com
         ServiceTypeEnum:AppService = new ServiceTypeEnum('AppService').
     end constructor.
     
-	constructor public ServiceTypeEnum(pcName as character):
-		super(pcName).
-	end constructor.
-	
+    constructor public ServiceTypeEnum(pcName as character):
+        super(pcName).
+    end constructor.
+    
 end class.

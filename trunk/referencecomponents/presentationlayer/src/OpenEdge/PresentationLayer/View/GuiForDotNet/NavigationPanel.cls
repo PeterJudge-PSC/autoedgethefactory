@@ -3,21 +3,22 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Feb 05 15:34:22 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw. 
 
-using OpenEdge.PresentationLayer.View.*.
-using OpenEdge.PresentationLayer.Presenter.*.
-using OpenEdge.PresentationLayer.View.GuiForDotNet.*.
-using OpenEdge.PresentationLayer.Common.*.
-using OpenEdge.Core.System.*.
-using OpenEdge.Lang.*.
-using Infragistics.Win.Misc.*.
-using Progress.Lang.*.
-using Progress.Windows.*.
+using OpenEdge.PresentationLayer.View.INavigationPanelView.
+using OpenEdge.PresentationLayer.View.GuiForDotNet.MVPUserControl.
+using OpenEdge.PresentationLayer.Common.ISelectToolbarAction.
+using OpenEdge.PresentationLayer.Common.NavigationActionEnum.
+using OpenEdge.PresentationLayer.Common.ActionStateEnum.
+using OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs.
+using OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum.
+using OpenEdge.Lang.DataTypeEnum.
+
+using Progress.Lang.Error.
 
 class OpenEdge.PresentationLayer.View.GuiForDotNet.NavigationPanel
         inherits MVPUserControl
@@ -157,19 +158,18 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.NavigationPanel
         end catch.
     end method.
     
-    method protected void SelectAction (poAction as EnumMember):
-        define variable oArgs as ActionEventArgs no-undo.
+    method protected void SelectAction (poAction as NavigationActionEnum):
+        define variable oArgs as ToolbarActionEventArgs no-undo.
         
-        oArgs = new ActionEventArgs(poAction:ToString(), ActionTypeEnum:Event).
+        oArgs = new ToolbarActionEventArgs(poAction:ToString(), ToolbarActionTypeEnum:Event).
         oArgs:SetArgValue('Action', poAction:ToString(), DataTypeEnum:Integer).
         
-        cast(Presenter, ISelectAction):SelectAction(oArgs).                        
+        cast(Presenter, ISelectToolbarAction):SelectToolbarAction(oArgs).                        
     end method.        
     
     method private void FirstButtonClick( input sender as System.Object, input e as System.EventArgs ):        
         SelectAction(NavigationActionEnum:First).
     end method.
-   
 
     method private void PrevButtonClick( input sender as System.Object, input e as System.EventArgs ):
         SelectAction(NavigationActionEnum:Prev).
@@ -183,7 +183,7 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.NavigationPanel
         SelectAction(NavigationActionEnum:Last).
     end method.
             
-    method public void NavigationStateChange (poActions as EnumMember extent, poStates as EnumMember extent):
+    method public void NavigationStateChange (poActions as NavigationActionEnum extent, poStates as ActionStateEnum extent):
         define variable iLoop as integer no-undo.
         
         do iLoop = 1 to extent(poActions):

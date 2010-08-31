@@ -55,6 +55,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.AutoStart'>AutoStart</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the component is auto-started when it is requested, or whether
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a></code>
         </font>
       </td>
@@ -77,7 +91,7 @@
           <b>
             <a href='#property.InstanceName'>InstanceName</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instance name for the running component. Optionally unique.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instance name for the running component. Optionally a unique value, although
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -103,6 +117,17 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='property.AutoStart'><!-- --></a>
+    <h3>AutoStart</h3>
+    <code>LOGICAL PUBLIC GET </code>
+    <dl>
+      <dd>Whether the component is auto-started when it is requested, or whether <p> </dd>
+      <dd>it should be explicitly started first. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='property.ComponentType'><!-- --></a>
     <h3>ComponentType</h3>
     <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a> PUBLIC GET SET </code>
@@ -117,7 +142,8 @@
     <h3>InstanceName</h3>
     <code>CHARACTER PUBLIC GET </code>
     <dl>
-      <dd>Instance name for the running component. Optionally unique. <p> </dd>
+      <dd>Instance name for the running component. Optionally a unique value, although <p> </dd>
+      <dd>often (usually?) just the typename of the component instance . </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

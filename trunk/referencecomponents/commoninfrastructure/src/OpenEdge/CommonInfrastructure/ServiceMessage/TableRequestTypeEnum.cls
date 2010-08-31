@@ -36,8 +36,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum final in
          TableRequestTypeEnum:All      = new TableRequestTypeEnum('all').        
     end constructor.
 
-	constructor public TableRequestTypeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public TableRequestTypeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
         
 end class.

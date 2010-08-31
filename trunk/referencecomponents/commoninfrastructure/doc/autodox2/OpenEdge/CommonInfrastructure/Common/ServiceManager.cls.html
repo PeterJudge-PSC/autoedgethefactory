@@ -120,6 +120,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getservice(progress.lang.class)'> GetService</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceProvider.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider" target="classFrame">IServiceProvider</a></code>
         </font>
       </td>
@@ -154,8 +168,8 @@
       <td>
         <code>
           <b>
-            <a href='#registerservice(openedge.lang.enummember,character)'> RegisterService</a>
-          </b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poServiceType, CHARACTER pcServiceName)
+            <a href='#registerservice(openedge.commoninfrastructure.common.servicetypeenum,character)'> RegisterService</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -196,8 +210,8 @@
       <td>
         <code>
           <b>
-            <a href='#startservice(openedge.lang.enummember,character)'> StartService</a>
-          </b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poServiceType, CHARACTER pcServiceName)
+            <a href='#startservice(openedge.commoninfrastructure.common.servicetypeenum,character)'> StartService</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a service
       </td>
     </tr>
@@ -330,6 +344,17 @@
       </dd>
     </dl>
     <hr />
+    <a name='getservice(progress.lang.class)'><!-- --></a>
+    <h3>GetService</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a>
+      <b>GetService</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='getserviceprovider(character)'><!-- --></a>
     <h3>GetServiceProvider</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceProvider.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider" target="classFrame">IServiceProvider</a>
@@ -352,10 +377,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='registerservice(openedge.lang.enummember,character)'><!-- --></a>
+    <a name='registerservice(openedge.commoninfrastructure.common.servicetypeenum,character)'><!-- --></a>
     <h3>RegisterService</h3>
     <code>PROTECTED  LOGICAL
-      <b>RegisterService</b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poServiceType, CHARACTER pcServiceName)
+      <b>RegisterService</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
     </code>
     <dl>
       <dd>
@@ -385,10 +410,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='startservice(openedge.lang.enummember,character)'><!-- --></a>
+    <a name='startservice(openedge.commoninfrastructure.common.servicetypeenum,character)'><!-- --></a>
     <h3>StartService</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a>
-      <b>StartService</b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poServiceType, CHARACTER pcServiceName)
+      <b>StartService</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
     </code>
     <dl>
       <dd>Starts a service <p> </dd>

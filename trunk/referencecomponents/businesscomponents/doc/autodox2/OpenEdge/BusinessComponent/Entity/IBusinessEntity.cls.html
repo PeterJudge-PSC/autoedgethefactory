@@ -55,15 +55,15 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>HANDLE</code>
+          <code><a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.DatasetHandle'>DatasetHandle</a>
-          </b> PROPERTY GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#property.DataAccess'>DataAccess</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The DataAccess object for this entity.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -86,7 +86,21 @@
           <b>
             <a href='#fetchdata(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> FetchData</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve data according to the request, and
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#fetchschema(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> FetchSchema</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defines the entity in terms of the schema that the underlying prodataset or
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -100,7 +114,7 @@
           <b>
             <a href='#getdata()'> GetData</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Response complement method for FetchData above.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -114,6 +128,20 @@
           <b>
             <a href='#savedata(openedge.commoninfrastructure.servicemessage.isaverequest)'> SaveData</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commit the data to the DataSource(s) through the DataAccess object.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setdataaccess(openedge.dataaccess.idataaccess)'> SetDataAccess</a>
+          </b>(<a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDataAccess)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -126,10 +154,12 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='property.DatasetHandle'><!-- --></a>
-    <h3>DatasetHandle</h3>
-    <code>HANDLE PROPERTY GET </code>
+    <a name='property.DataAccess'><!-- --></a>
+    <h3>DataAccess</h3>
+    <code><a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> PUBLIC GET </code>
     <dl>
+      <dd>(mandatory) The DataAccess object for this entity. <p> </dd>
+      <dd>The SetDataAccess method is a workaround for the lack of dynamic property invocation in the ABL. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -148,8 +178,36 @@
       <b>FetchData</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
     </code>
     <dl>
+      <dd>Retrieve data according to the request, and <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poRequest - parameter for the request (query, batch/page, etc)<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='fetchschema(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
+    <h3>FetchSchema</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
+      <b>FetchSchema</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
+    </code>
+    <dl>
+      <dd>Defines the entity in terms of the schema that the underlying prodataset or <p> </dd>
+      <dd>temp-tables will have. This is useful for example for binding UI before any data is requested. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IFetchRequest - The request object for the entity definition.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IFetchResponse</dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -159,8 +217,14 @@
       <b>GetData</b>()
     </code>
     <dl>
+      <dd>Response complement method for FetchData above. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IFetchResponse</dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -168,6 +232,27 @@
     <h3>SaveData</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a>
       <b>SaveData</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
+    </code>
+    <dl>
+      <dd>Commit the data to the DataSource(s) through the DataAccess object. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poChanges - The Save request parameter object for this request.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>ISaveReponse A save request parameter object.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setdataaccess(openedge.dataaccess.idataaccess)'><!-- --></a>
+    <h3>SetDataAccess</h3>
+    <code>PUBLIC  VOID
+      <b>SetDataAccess</b>(<a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDataAccess)
     </code>
     <dl>
       <dd>

@@ -31,8 +31,22 @@ class OpenEdge.Lang.FillModeEnum final inherits EnumMember:
         FillModeEnum:Default = FillModeEnum:Merge.
     end constructor.
 
-	constructor public FillModeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public FillModeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
+    
+    method static public FillModeEnum StringToEnum(input pcName as character):
+        define variable oEnum as FillModeEnum no-undo.
+        
+        case pcName:
+            when FillModeEnum:Append:Name then oEnum = FillModeEnum:Append.
+            when FillModeEnum:Empty:Name then oEnum = FillModeEnum:Empty.
+            when FillModeEnum:Merge:Name then oEnum = FillModeEnum:Merge.
+            when FillModeEnum:NoFill:Name then oEnum = FillModeEnum:NoFill.
+            when FillModeEnum:Replace:Name then oEnum = FillModeEnum:Replace.  
+        end case.
+        
+        return oEnum.
+    end method.
     
 end class.

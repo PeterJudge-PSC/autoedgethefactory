@@ -1,14 +1,15 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : MVPWindow
-    Purpose     : 
+    Purpose     : ABL Window general view portion of MVP triad. 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Feb 20 10:42:09 EST 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
-  
+
+using OpenEdge.PresentationLayer.View.EventLoopModeEnum.
 using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.View.IContainerView.
 using OpenEdge.PresentationLayer.View.IContainedView.
@@ -17,13 +18,13 @@ using OpenEdge.PresentationLayer.View.EventLoopModeEnum.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
 using OpenEdge.PresentationLayer.Common.DialogResultEnum.
+using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.Core.System.InvalidActionError.
  
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Object.
 
 class OpenEdge.PresentationLayer.View.ABLGui.MVPWindow abstract 
@@ -31,7 +32,7 @@ class OpenEdge.PresentationLayer.View.ABLGui.MVPWindow abstract
 
     /** Stores what the event loop mode is for this View. Values from
         OpenEdge.PresentationLayer.View.EventLoopModeEnum */
-    define protected property EventLoopMode as EnumMember no-undo get. set.
+    define protected property EventLoopMode as EventLoopModeEnum  no-undo get. set.
     define protected property WindowHandle as handle no-undo get. set.
     
     define public property Presenter as IPresenter no-undo 
@@ -92,7 +93,7 @@ class OpenEdge.PresentationLayer.View.ABLGui.MVPWindow abstract
         return error new InvalidActionError('ShowEmbedded() not not supported'). 
     end method.
 
-    method public void BeginEventLoop(poEventLoopMode as EnumMember):
+    method public void BeginEventLoop(poEventLoopMode as EventLoopModeEnum):
         run BeginEventLoop in WindowHandle (poEventLoopMode).
     end method.
     
@@ -128,7 +129,7 @@ class OpenEdge.PresentationLayer.View.ABLGui.MVPWindow abstract
         run DestroyObject in WindowHandle.
     end method.
 
-    method public void DataRefreshed(poModelService as IComponentInfo, pcQuery as character, poModelAction as EnumMember):
+    method public void DataRefreshed(poModelService as IComponentInfo, pcQuery as character, poModelAction as ModelActionEnum):
         run DataRefreshed in WindowHandle (poModelService, pcQuery, poModelAction).
     end method.
 

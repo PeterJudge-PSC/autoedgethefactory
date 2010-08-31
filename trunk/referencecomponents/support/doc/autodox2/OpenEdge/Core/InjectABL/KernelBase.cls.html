@@ -83,6 +83,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.InvocationStack'>InvocationStack</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a></code>
         </font>
       </td>
@@ -308,8 +322,8 @@
       <td>
         <code>
           <b>
-            <a href='#getbindings(progress.lang.class,openedge.lang.enummember)'> GetBindings</a>
-          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poScope)
+            <a href='#getbindings(progress.lang.class,openedge.core.injectabl.lifecycle.standardscopeenum)'> GetBindings</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -420,9 +434,23 @@
       <td>
         <code>
           <b>
+            <a href='#resolvetargettype(progress.lang.class)'> ResolveTargetType</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolve a binding target type into a type that can be invoked: so if the
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
             <a href='#selectbinding(progress.lang.class)'> SelectBinding</a>
           </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the binding to use for the
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -476,6 +504,15 @@
     <code><a href="../../../OpenEdge/Core/InjectABL/ComponentContainer.cls.html" title="OpenEdge.Core.InjectABL.ComponentContainer" target="classFrame">ComponentContainer</a> PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>Gets the component container, which holds components that contribute to InjectABL. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.InvocationStack'><!-- --></a>
+    <h3>InvocationStack</h3>
+    <code><a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -650,10 +687,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='getbindings(progress.lang.class,openedge.lang.enummember)'><!-- --></a>
+    <a name='getbindings(progress.lang.class,openedge.core.injectabl.lifecycle.standardscopeenum)'><!-- --></a>
     <h3>GetBindings</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a>
-      <b>GetBindings</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poScope)
+      <b>GetBindings</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope)
     </code>
     <dl>
       <dd>
@@ -741,12 +778,35 @@
       </dd>
     </dl>
     <hr />
+    <a name='resolvetargettype(progress.lang.class)'><!-- --></a>
+    <h3>ResolveTargetType</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a>
+      <b>ResolveTargetType</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>Resolve a binding target type into a type that can be invoked: so if the <p> </dd>
+      <dd>binding has a target which is an interface, then look for a binding for that type, recursively. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poService - The service being resolved<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>The correct binding</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='selectbinding(progress.lang.class)'><!-- --></a>
     <h3>SelectBinding</h3>
     <code>PROTECTED  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a>
       <b>SelectBinding</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
     </code>
     <dl>
+      <dd>Returns the binding to use for the <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

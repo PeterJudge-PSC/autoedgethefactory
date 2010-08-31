@@ -3,8 +3,7 @@
     Purpose     : Interface 
     Syntax      : 
     Description : 
-    @author pjudge
-    Created     : Wed Jun 09 12:03:58 EDT 2010
+    @author pjudge, Wed Jun 09 12:03:58 EDT 2010
     Notes       :  
   ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.

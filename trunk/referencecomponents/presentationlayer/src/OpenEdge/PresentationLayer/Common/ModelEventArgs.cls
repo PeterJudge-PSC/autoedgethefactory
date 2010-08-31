@@ -11,10 +11,10 @@ routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageEventArgs. 
+using OpenEdge.Core.System.EventArgs. 
 using Progress.Lang.Class.
 
-class OpenEdge.PresentationLayer.Common.ModelEventArgs inherits ServiceMessageEventArgs: 
+class OpenEdge.PresentationLayer.Common.ModelEventArgs inherits EventArgs: 
     define public property ModelService as IComponentInfo no-undo get. set.
     define public property ModelAction as ModelActionEnum no-undo get. set.
     define public property QueryName as character no-undo get. set.

@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContextCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContextCollection" target="classFrame">ITableContextCollection</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponseCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection" target="classFrame">ITableResponseCollection</a></code>
         </font>
       </td>
       <td>
@@ -63,7 +63,7 @@
           <b>
             <a href='#property.TableResponses'>TableResponses</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A collection of individual table responses for this larger request
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -78,15 +78,15 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContext.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext" target="classFrame">ITableContext</a></code>
+          <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#gettablecontext(character)'> GetTableContext</a>
-          </b>(CHARACTER pcTableName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> InitTableResponseFromRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre-populates the table response collection from the request's tablerequests
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -100,8 +100,9 @@
 				
     <a name='property.TableResponses'><!-- --></a>
     <h3>TableResponses</h3>
-    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContextCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContextCollection" target="classFrame">ITableContextCollection</a> PUBLIC GET </code>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponseCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection" target="classFrame">ITableResponseCollection</a> PUBLIC GET </code>
     <dl>
+      <dd>A collection of individual table responses for this larger request <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -114,12 +115,13 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='gettablecontext(character)'><!-- --></a>
-    <h3>GetTableContext</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContext.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext" target="classFrame">ITableContext</a>
-      <b>GetTableContext</b>(CHARACTER pcTableName)
+    <a name='inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
+    <h3>InitTableResponseFromRequest</h3>
+    <code>PUBLIC  VOID
+      <b>InitTableResponseFromRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
     </code>
     <dl>
+      <dd>Pre-populates the table response collection from the request's tablerequests <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

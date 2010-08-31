@@ -12,8 +12,8 @@ routine-level on error undo, throw.
 using OpenEdge.Core.InjectABL.Lifecycle.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
+using OpenEdge.Lang.DateTimeAddIntervalEnum.
 using OpenEdge.Lang.Assert.
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -51,11 +51,11 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache implements ICache:
         end get.
     
     define public property PruningInterval as integer no-undo get. set.    
-    define public property PruningUnit as EnumMember no-undo get. set.
+    define public property PruningUnit as DateTimeAddIntervalEnum no-undo get. set.
     
     constructor public Cache(poPipeline as IPipeline,
                              piLifespan as integer,
-                             poLifespanUnit as EnumMember):
+                             poLifespanUnit as DateTimeAddIntervalEnum):
         Assert:ArgumentNotNull(poLifespanUnit, 'Lifespan unit').
         Assert:ArgumentNotNull(poPipeline, 'Pipeline').
         

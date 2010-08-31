@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : Contains information about a service registration.
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Mar 03 14:28:18 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -18,7 +18,6 @@ using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.ObjectStack.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
@@ -38,10 +37,10 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
         end get.
     
     /** Gets or sets the type of target for the binding. */
-    define public property Target as EnumMember /* BindingTargetEnum */ no-undo get. set.
+    define public property Target as BindingTargetEnum no-undo get. set.
     
     /** Gets or sets the callback that returns the object that will act as the binding's scope. */
-    define public property Scope as /* StandardScope */ EnumMember no-undo get. set.
+    define public property Scope as StandardScopeEnum no-undo get. set.
     define public property ScopeCallbackType as class Class no-undo
         get():
             if not valid-object(ScopeCallbackType) then
@@ -62,7 +61,13 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
         end get.
         set.
     
-    define public property TargetType as class Class no-undo get. set.
+    /** The target type of the binding. Must be a concrete class. */
+    define public property TargetType as class Class no-undo get.
+        set(poTargetType as class Class):
+            Assert:ArgumentNotAbstract(poTargetType).
+            
+            TargetType = poTargetType.            
+        end set.
     
     /** Gets the parameters defined for the binding. */
     define public property Parameters as IParameterCollection no-undo get. private set.

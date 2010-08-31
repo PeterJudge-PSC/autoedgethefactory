@@ -1,17 +1,19 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : NavigationPanel
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Feb 20 14:38:47 EST 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.View.INavigationPanelView.
 using OpenEdge.PresentationLayer.View.ABLGui.ContainedObject.
-using OpenEdge.Lang.EnumMember.
+using OpenEdge.PresentationLayer.Common.ModelActionEnum.
+using OpenEdge.PresentationLayer.Common.NavigationActionEnum.
+using OpenEdge.PresentationLayer.Common.ActionStateEnum.
 
 class OpenEdge.PresentationLayer.View.ABLGui.NavigationPanel 
         inherits ContainedObject
@@ -32,8 +34,9 @@ class OpenEdge.PresentationLayer.View.ABLGui.NavigationPanel
         dynamic-function('SetView' in WindowHandle, this-object).
     end constructor.
         
-    method public void NavigationStateChange (piActions as integer extent, piStates as integer extent):
-        run SetActionState in WindowHandle (piActions, piStates).
+    method public void NavigationStateChange (poActions as NavigationActionEnum extent,
+                                              poStates as ActionStateEnum extent):
+        run SetActionState in WindowHandle (poActions, poStates).
     end method.
             
     
@@ -41,15 +44,12 @@ class OpenEdge.PresentationLayer.View.ABLGui.NavigationPanel
         run DataFetched in WindowHandle (pcModel, plNewData).
     end method.   
 
-    method public void NavigationStateChange(piActions as EnumMember extent, piStates as EnumMember extent):
-
-    end method.
-
     method override public void SetBindings(  ):
         
     end method.
 
-    method override public void DataRefreshed(pcModel as character, pcQuery as character, poModelAction as EnumMember):
+
+    method override public void DataRefreshed(pcModel as character, pcQuery as character, poModelAction as ModelActionEnum):
 
     end method.
 

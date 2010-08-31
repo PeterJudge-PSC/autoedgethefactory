@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Apr 23 09:27:56 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -32,13 +32,13 @@ class OpenEdge.PresentationLayer.InjectABL.PresentationLayerModule inherits Inje
             :InTransientScope()
             :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
             .
-                
+        
         oBindingSyntax = Bind('OpenEdge.PresentationLayer.View.INavigationPanel').
         oBindingSyntax:To('OpenEdge.PresentationLayer.View.GuiForDotNet.NavigationPanel')
-            :WithMethodValue('SetPresenterService', Class:GetClass('OpenEdge.PresentationLayer.Presenter.INavigationPanelPresenter'))
+            :WithPropertyValue('PresenterService', Class:GetClass('OpenEdge.PresentationLayer.Presenter.INavigationPanelPresenter'))
             .
         
-        @todo(task="implement", action="can potentially override WithMEthodValue(AddModel with a custom constraint/api").
+        @todo(task="implement", action="can potentially override WithMethodValue(AddModel with a custom constraint/api").
         
         oBindingSyntax = Bind('OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter').
         oBindingSyntax:To('OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter')
@@ -52,7 +52,7 @@ class OpenEdge.PresentationLayer.InjectABL.PresentationLayerModule inherits Inje
         @todo(task="implement", action="Add constraint for UI types"). 
         oBindingSyntax = Bind('OpenEdge.PresentationLayer.View.IUpdatePanelView').
         oBindingSyntax:To('OpenEdge.PresentationLayer.View.GuiForDotNet.UpdatePanel')
-            :WithMethodValue('SetPresenterService', Class:GetClass('OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter'))
+            :WithPropertyValue('PresenterService', Class:GetClass('OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter'))
             .
         
         /** We don't have to use an interface (although we really should).  */
@@ -60,9 +60,8 @@ class OpenEdge.PresentationLayer.InjectABL.PresentationLayerModule inherits Inje
         oBindingSyntax:ToSelf()
             :InTransientScope()
             :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
+/*            :WithPropertyValue('ServiceName','OpenEdge.BusinessComponent.Entity.IBusinessEntity')*/
             .
-            
-            
     end method.
-
+    
 end class.

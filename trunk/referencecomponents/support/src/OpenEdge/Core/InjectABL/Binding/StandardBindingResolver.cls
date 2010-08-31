@@ -1,14 +1,15 @@
-/*------------------------------------------------------------------------
+/**------------------------------------------------------------------------
     File        : StandardBindingResolver
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 09 09:02:30 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.IBindingResolver.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
@@ -16,7 +17,6 @@ using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.ObjectStack.
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -25,7 +25,7 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
     /** Returns valid binding(s) for a scope from a set of bindings */
     method public IBindingCollection Resolve(poBindings as IBindingCollection,
                                              poScopeCallback as class Class,
-                                             poScope as EnumMember):
+                                             poScope as StandardScopeEnum):
         
         define variable oResolvedBindings as IBindingCollection no-undo.
         define variable oIterator as IIterator no-undo.

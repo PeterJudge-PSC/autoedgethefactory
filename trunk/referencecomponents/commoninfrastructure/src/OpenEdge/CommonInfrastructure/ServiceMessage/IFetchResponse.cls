@@ -3,16 +3,19 @@
     Purpose     : Interface for response for fetch request  
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Tue Feb 09 14:28:13 EST 2010
-    Notes       : * Corresponds with OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum:Fetch
+    Notes       : 
   ---------------------------------------------------------------------- */
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext. 
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContextCollection.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
  
-interface OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse /* inherits IServiceMessage*/:
-    define public property TableResponses as ITableContextCollection no-undo get.
+interface OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse /* inherits IServiceResponse */:
     
-    method public ITableContext GetTableContext(input pcTableName as character).
+    /** A collection of individual table responses for this larger request */
+    define public property TableResponses as ITableResponseCollection no-undo get.
+    
+    /** Pre-populates the table response collection from the request's tablerequests */
+    method public void InitTableResponseFromRequest(input poRequest as IFetchRequest).
     
 end interface.

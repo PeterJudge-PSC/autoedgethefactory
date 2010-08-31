@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 14:51:10 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -21,7 +21,7 @@ using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
-using OpenEdge.Lang.EnumMember.
+using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.AppError.
@@ -50,7 +50,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     method public IBindingSyntax ToSelf():   
         Binding:TargetType = Binding:Service.
         Binding:Target = BindingTargetEnum:Self.
-        
+                
         return this-object.
     end method.
     
@@ -60,7 +60,11 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     method public IBindingSyntax To(pcImplementation as character):
         return this-object:To(Class:GetClass(pcImplementation)).
     end method.
-    
+
+    /** Indicates that the service should be bound to the specified implementation type.
+        
+        @param poImplementation The implementation type. This has to be a concrete type
+        (ie not abstract or an interface). */    
     method public IBindingSyntax To(poImplementation as class Class):
         Binding:TargetType = poImplementation.
         Binding:Target = BindingTargetEnum:Type.
@@ -108,7 +112,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
     
-    method public IBindingSyntax InScope(poScopeCallback as class Class, poScope as EnumMember):
+    method public IBindingSyntax InScope(poScopeCallback as class Class, poScope as StandardScopeEnum):
         Assert:ArgumentNotNull(poScopeCallback, 'Custom scope callback type').
         Assert:ArgumentNotNull(poScope, 'Custom scope').
         
@@ -127,7 +131,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
     
-    method public IBindingSyntax WithConstructorArgument(poValue as class Class, poDataType as EnumMember):
+    method public IBindingSyntax WithConstructorArgument(poValue as class Class, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new ConstructorArgument(poValue)).
         return this-object.
     end method.
@@ -137,7 +141,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithConstructorArgument(poService as class Class extent, poDataType as EnumMember):
+    method public IBindingSyntax WithConstructorArgument(poService as class Class extent, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new ConstructorArgument(poService, poDataType)).
         return this-object.
     end method.
@@ -167,7 +171,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithConstructorArgument(pcValue as character, poDataType as EnumMember):
+    method public IBindingSyntax WithConstructorArgument(pcValue as character, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new ConstructorArgument(pcValue, poDataType)).
         return this-object.
     end method.
@@ -177,7 +181,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
     
-    method public IBindingSyntax WithConstructorArgument(pcValue as character extent, poDataType as EnumMember):
+    method public IBindingSyntax WithConstructorArgument(pcValue as character extent, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new ConstructorArgument(pcValue, poDataType)).
         return this-object.
     end method.
@@ -188,7 +192,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class Class, poDataType as EnumMember):
+    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class Class, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new PropertyValue(pcPropertyName, poService, poDataType)).
         return this-object.
     end method.
@@ -198,7 +202,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class Class extent, poDataType as EnumMember):
+    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class Class extent, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new PropertyValue(pcPropertyName, poService, poDataType)).
         return this-object.
     end method.
@@ -228,7 +232,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character, poDataType as EnumMember):
+    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new PropertyValue(pcName, pcValue, poDataType)).
         return this-object.
     end method.
@@ -238,7 +242,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character extent, poDataType as EnumMember):
+    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character extent, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new PropertyValue(pcName, pcValue, poDataType)).
         return this-object.
     end method.
@@ -264,7 +268,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
         
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as class Class, poDataType as EnumMember):
+    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as class Class, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue, poDataType)).
         return this-object.
     end method.
@@ -279,7 +283,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as class Class extent, poDataType as EnumMember):
+    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as class Class extent, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue, poDataType)).
         return this-object.
     end method.
@@ -289,7 +293,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
     
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character, poDataType as EnumMember):
+    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new MethodArgument(pcMethodName, pcValue, poDataType)).
         return this-object.
     end method.
@@ -299,7 +303,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
 
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character extent, poDataType as EnumMember):
+    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character extent, poDataType as DataTypeEnum):
         Binding:Parameters:Add(new MethodArgument(pcMethodName, pcValue, poDataType)).
         return this-object.
     end method.

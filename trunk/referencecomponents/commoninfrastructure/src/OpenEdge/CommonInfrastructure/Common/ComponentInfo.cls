@@ -19,8 +19,7 @@ using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentInfo: 
     /** Instance name for the running component. Optionally a unique value, although
-        often (usually?) just the typename of the component instance  
-      */
+        often (usually?) just the typename of the component instance . */
     define public property InstanceName as character no-undo get. private set.
     
     /** The component type (per ComponentTypeEnum) */
@@ -35,26 +34,36 @@ class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentIn
       */
     define public property Service as class Class no-undo get. private set.
 
+    /** Whether the component is auto-started when it is requested, or whether
+        it should be explicitly started first. The default is TRUE. */
+    define public property AutoStart as logical no-undo get. private set.
+    
     constructor public ComponentInfo(poService as class Class):
         this-object(poService,
                     poService:TypeName,
-                    ComponentTypeEnum:ApplicationComponent).         
+                    ComponentTypeEnum:ApplicationComponent,
+                    true).         
     end constructor.
 
     constructor public ComponentInfo(poService as class Class, pcInstanceName as character):
         this-object(poService,
                     pcInstanceName,
-                    ComponentTypeEnum:ApplicationComponent).         
+                    ComponentTypeEnum:ApplicationComponent,
+                    true).         
     end constructor.
     
-    constructor public ComponentInfo(poService as class Class, pcInstanceName as character, poComponentType as ComponentTypeEnum):
+    constructor public ComponentInfo(input poService as class Class,
+                                     input pcInstanceName as character,
+                                     input poComponentType as ComponentTypeEnum,
+                                     input plAutoStart as logical):
         Assert:ArgumentNotNull(poService, 'Service').
         Assert:ArgumentNotNullOrEmpty(pcInstanceName, 'Instance name').
         Assert:ArgumentNotNull(poComponentType, 'Component type').
         
         assign InstanceName = pcInstanceName
                ComponentType = poComponentType
-               Service = poService. 
+               Service = poService
+               AutoStart = plAutoStart. 
     end constructor.
     
     method override public logical Equals(p0 as Object):

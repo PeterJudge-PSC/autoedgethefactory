@@ -4,7 +4,7 @@
                   caters for those. 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Apr 10 11:47:12 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -49,7 +49,7 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         .
 
     define public property ErrorBuffer as character extent no-undo get. set.
-    define public property ServiceName as character no-undo get. set.
+    define public property ServiceName as character no-undo get. private set.    
     define public property AllowDestroyComponent as logical no-undo get. set.
             
     /* Events */
@@ -62,9 +62,22 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
     
-    constructor public Model(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
+    constructor public Model(input pcServiceName as character,
+                             input poServiceManager as IServiceManager,
+                             input poComponentInfo as IComponentInfo):
+        this-object(poServiceManager, poComponentInfo).
+        
+        ServiceName = pcServiceName.
+    end constructor.
+
+    constructor public Model(input poServiceManager as IServiceManager,
+                             input poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).
     end constructor.
+    
+    method public void SetServiceName(input pcServiceName as character):
+        ServiceName = pcServiceName.
+    end method.
     
     method override public void DestroyComponent():
         DeleteQueries().

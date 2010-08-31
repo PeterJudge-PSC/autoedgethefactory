@@ -1,14 +1,17 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ServiceManager
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Feb 18 14:41:08 EST 2010
     Notes       :  
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
+using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IService.
@@ -20,8 +23,6 @@ using OpenEdge.CommonInfrastructure.Common.IComponentCollection.
 using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.Component.
 using OpenEdge.CommonInfrastructure.Common.IManager.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceAdapter.
-using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
 
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
@@ -33,18 +34,16 @@ using OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument.
 
 using OpenEdge.Core.System.NotFoundError.
 using OpenEdge.Lang.Collections.IIterator.
-using OpenEdge.Lang.EnumMember.
-
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
-    implements IServiceManager, IManager:
+        implements IServiceManager, IManager:
     
     define private variable moAppStart as IService no-undo.
     
     define private temp-table Service no-undo
-        field ServiceType  as Object        /* EnumMember */
+        field ServiceType  as Object        /* ServiceTypeEnum */
         field Service        as Object       /* Progress.Lang.Class */
         field Instance       as Object       /* IComponent or IService */
         /* Order added, per component type */
@@ -60,7 +59,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
                new ComponentInfo(
                   Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'),
                   this-object:GetClass():TypeName,
-                  ServiceTypeEnum:Manager) ).
+                  ServiceTypeEnum:Manager,
+                  true)).
         
         this-object:Kernel = poKernel.
     end constructor.
@@ -95,7 +95,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         end.
     end method.
     
-    method protected logical RegisterService(input poServiceType as EnumMember,
+    method protected logical RegisterService(input poServiceType as ServiceTypeEnum,
                                              input pcServiceName as character):
         define variable lNew as logical no-undo.
         define variable oService as class Class no-undo.
@@ -168,9 +168,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         @param poServiceType component type; ignored when InjectABL used, since we work off interfaces, which are
                unique within the application.
         @param pcComponentName 
-        @return An IComponent instance of the requested service
-      */
-    method public IService StartService(input poServiceType as EnumMember,
+        @return An IComponent instance of the requested service */
+    method public IService StartService(input poServiceType as ServiceTypeEnum,
                                         input pcServiceName as character):
         /* Register the component */
         RegisterService(poServiceType, pcServiceName).
@@ -180,15 +179,17 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
     
     /** Starts a service using the InjectABL dependency injection container.
         @param poComponent The class of the service to start 
-        @return An IComponent instance of the requested service
-      */
+        @return An IComponent instance of the requested service */
     method public IService StartService(input poService as class Class):
         return cast(StartComponent(poService), IService).
     end method.
     
+    method public IService GetService(input poService as class Class):
+        return StartService(poService).
+    end method.
+    
     /** Stops a running service.
-        @param poComponent A running component instance
-      */
+        @param poComponent A running component instance */
     method public void StopService(input poServiceInstance as IService):
         StopComponent(cast(poServiceInstance, IComponent)).
     end method.
@@ -211,17 +212,24 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         end.
     end method.
     
-    method public IServiceAdapter GetServiceAdapter(input pcService as character):
-        define variable oServiceAdapter as IServiceAdapter no-undo.
-        define variable oParams as IParameterCollection no-undo.
+    method public IServiceProvider GetServiceProvider(input pcService as character):
+        define variable oServiceProvider as IServiceProvider no-undo.
         
-        oParams = new IParameterCollection().
-        oParams:Add(new ConstructorArgument(pcService)).
-        oParams:Add(new ConstructorArgument(this-object)).
+        oServiceProvider = cast(Kernel:Get(Class:GetClass(pcService)), IServiceProvider).
         
-        oServiceAdapter = cast(Kernel:Get(Class:GetClass(pcService), oParams), IServiceAdapter).
+        /* If there's not specialised service provider, use the generic one. This might occur more often 
+           on the client, where a generalised service adapter would take care of passing requests through 
+           to the server. This default mapping is descibed in the 
+           OpenEdge.CommonInfrastructure.InjectABL.ServiceMessageModule. 
+           
+           The server-side provider is typically a business component such as a business entity, task or 
+           workflow.            
+          */
+        if not valid-object(oServiceProvider) then
+            oServiceProvider = cast(Kernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider'))
+                                , IServiceProvider).
         
-        return oServiceAdapter.
+        return oServiceProvider.
     end method.
     
 end class.

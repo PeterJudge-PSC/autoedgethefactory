@@ -1,16 +1,21 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ICache
     Purpose     : 
     Syntax      : Tracks instances for re-use in certain scopes. 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 04 17:03:02 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
-using OpenEdge.Core.InjectABL.Lifecycle.*.
-using Progress.Lang.*.
+  ---------------------------------------------------------------------- */
+using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
+using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
+using OpenEdge.Lang.DateTimeAddIntervalEnum.
+using Progress.Lang.Object.
 
 interface OpenEdge.Core.InjectABL.Lifecycle.ICache:
+    define public property PruningInterval as integer no-undo get. set.
+    define public property PruningUnit as DateTimeAddIntervalEnum no-undo get. set.
+
     /** Gets the activation pipeline in use for this kernel **/
     define public property Pipeline as IPipeline no-undo get.
     
@@ -18,14 +23,14 @@ interface OpenEdge.Core.InjectABL.Lifecycle.ICache:
     define public property Count as integer no-undo get.
 
     /** Stores the specified instance in the cache. 
-        <param name="context">The context to store.</param>
-        <param name="reference">The instance reference.</param>
+        @param context The context to store.
+        @param reference The instance reference.
      **/
     method public void Remember(poContext as ILifecycleContext, poReference as Object).
     
     /** Tries to retrieve an instance to re-use in the specified context. 
-        <param name="context">The context that is being activated.</param>
-        <returns>The instance for re-use, or unknown if none has been stored.</returns>
+        @param context The context that is being activated.
+        @returns The instance for re-use, or unknown if none has been stored.</returns>
      **/
     method public Object TryGet(poContext as ILifecycleContext).
     
@@ -33,8 +38,8 @@ interface OpenEdge.Core.InjectABL.Lifecycle.ICache:
     method public ILifecycleContext TryGetContext(poInstance as Object).
     
     /** Deactivates and releases the specified instance from the cache. 
-        <param name="instance">The instance to release.</param>
-        <returns>true if the instance was found and released. otherwise false.</returns>
+        @param instance The instance to release.
+        @return true if the instance was found and released. otherwise false.</returns>
      **/
     method public logical Release(poInstance as Object).
 
@@ -43,7 +48,7 @@ interface OpenEdge.Core.InjectABL.Lifecycle.ICache:
 
     /** Immediately deactivates and removes all instances in the cache that are owned by
         the specified scope.
-        <param name="scope">The scope whose instances should be deactivated.</param>
+        @param scope The scope whose instances should be deactivated.
      **/
     method public void Clear(poScope as Object).
     

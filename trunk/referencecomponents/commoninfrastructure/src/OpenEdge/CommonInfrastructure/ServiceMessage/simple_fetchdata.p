@@ -19,8 +19,8 @@ routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IDatasetFetchResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle. 
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum. 
@@ -53,6 +53,7 @@ define variable oRequest as IFetchRequest extent no-undo.
 define variable cRequestId as character extent no-undo.
 define variable oResponse as IFetchResponse extent no-undo.
 define variable oContext as IUserContext no-undo.
+define variable hDataSet as handle no-undo.
 
 /* Deserialize requests, context */
 assign iMax = extent(pmRequest)
@@ -79,8 +80,10 @@ cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.I
 
 oServiceMessageManager = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
                         , IServiceMessageManager).
-                        
-/* Perform request. This is where the actual work happens. */
+
+/* Perform request. This is where the actual work happens.
+   If this was a specialised service interface, we might construct the service request here, rather than
+   taking it as an input. */
 oResponse = cast(oServiceMessageManager:ExecuteSyncRequest(cast(oRequest, IServiceRequest)), IFetchResponse).                         
 
 /* Serialize requests, context */
@@ -91,8 +94,9 @@ assign iMax = extent(oResponse)
 oOutput = new ObjectOutputStream().
 
 do iLoop = 1 to iMax:
-    if type-of(oResponse[iLoop], IDatasetFetchResponse) then
-        phResponseDataset[iLoop] = cast(oResponse[iLoop], IDatasetFetchResponse):Handle.
+    cast(oResponse[iLoop], IServiceMessage):GetData(output hDataSet). 
+    
+    phResponseDataset[iLoop] = hDataSet. 
     
     oOutput:Reset().
     oOutput:WriteObjectArray(oResponse[iLoop]).

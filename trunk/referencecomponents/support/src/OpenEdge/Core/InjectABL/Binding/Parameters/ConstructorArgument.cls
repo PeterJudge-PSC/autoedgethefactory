@@ -3,14 +3,14 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 16:03:33 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
-using OpenEdge.Lang.EnumMember.
+using OpenEdge.Lang.DataTypeEnum.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -22,7 +22,7 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument inherits Pa
         super(mcConstructorName , pcValue).
     end constructor.
     
-    constructor public ConstructorArgument (pcValue as character, poType as EnumMember):
+    constructor public ConstructorArgument (pcValue as character, poType as DataTypeEnum):
         super(mcConstructorName, pcValue, poType).    
     end constructor.
     
@@ -30,7 +30,7 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument inherits Pa
         super(mcConstructorName, pcValue).
     end constructor.
     
-    constructor public ConstructorArgument (pcValue as character extent, poType as EnumMember):
+    constructor public ConstructorArgument (pcValue as character extent, poType as DataTypeEnum):
         super(mcConstructorName, pcValue, poType).        
     end constructor.
     
@@ -56,7 +56,7 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument inherits Pa
         super(mcConstructorName, poType).
     end constructor.
 
-    constructor public ConstructorArgument(poType as class Class, poDataType as EnumMember):
+    constructor public ConstructorArgument(poType as class Class, poDataType as DataTypeEnum):
         super(mcConstructorName, poType, poDataType).
     end constructor.
 
@@ -64,7 +64,7 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument inherits Pa
         super(mcConstructorName, poType).
     end constructor.
     
-    constructor public ConstructorArgument(poType as class Class extent, poDataType as EnumMember):
+    constructor public ConstructorArgument(poType as class Class extent, poDataType as DataTypeEnum):
         super(mcConstructorName, poType, poDataType).
     end constructor.
         

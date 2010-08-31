@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : StandardKernel
-    Purpose     : 
+    Purpose     : Standard/default InjectABL dependency injection kernel. 
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Tue Mar 02 12:56:53 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.BindingRoot.
@@ -30,6 +30,7 @@ using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.ComponentContainer.
 using OpenEdge.Core.InjectABL.KernelSettings.
 using OpenEdge.Lang.Collections.IIterator.
+using OpenEdge.Lang.Collections.IList.
 using OpenEdge.Lang.Assert.
 
 using Progress.Lang.Class.
@@ -48,10 +49,10 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     /** Gets the component container, which holds components that contribute to InjectABL. **/
     define public property Components as ComponentContainer no-undo get. private set.
     
-    /** Stack of unique services (as define by their Context) being invoked. Used to prevent
-        circular references. 
-    define protected property InvocationStack as List no-undo get. private set.
-        */
+    /** Stack of unique services (as define by their LiefcycleContext) being invoked. Used to prevent
+        circular references. */
+    @todo(task="implement", action="circ reference checks").        
+    define protected property InvocationStack as IList no-undo get. private set.
     
     destructor public KernelBase():
         /* Clean up all the singletons (ie those scoped to this Kernel) */
@@ -113,7 +114,8 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
             this-object:Load(cast(oIterator:Next(), IInjectionModule)).
         end.
     end method.
-
+    
+    @todo(task="implement", action="").
     method public logical HasModule(pcName as character):
     end method.
     
@@ -124,12 +126,15 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         poModule:OnLoad(this-object).
     end method.
     
+    @todo(task="implement", action="").
     method public void Load(pcFilePatterns as character extent):
-
+                
+        /* foo.bar.*module*/
+        
     end method.
     
+    @todo(task="implement", action="").
     method public void Unload(pcName as character):
-
     end method.
     
     method public Object Get(pcService as character):
@@ -157,7 +162,11 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         if poService:IsA(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')) then
             return this-object.
         
-        oBinding = SelectBinding(poService).
+        /* recurses if the target is itself an interface, until it
+           find a concrete  
+         */
+        oBinding = ResolveTargetType(poService).
+        
         /* Will fail gracefully if no params added */        
         oBinding:Parameters:AddAll(poParameters).
         
@@ -165,7 +174,29 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         
         return oInstance.
     end method.
+        
+    /** Resolve a binding target type into a type that can be invoked: so if the
+        binding has a target which is an interface, then look for a binding for that
+        type, recursively.
+                
+        @param poService The service being resolved 
+        @return The correct binding 
+     */
+    method protected IBinding ResolveTargetType(input poService as class Class):
+        define variable oBinding as IBinding no-undo.
+        
+        oBinding = SelectBinding(poService).
+        
+        if oBinding:TargetType:IsInterface() then
+            oBinding = ResolveTargetType(oBinding:TargetType).
+        
+        /* Need to be able to invoke this type. */
+        Assert:ArgumentNotAbstract(oBinding:TargetType).
+        
+        return oBinding. 
+    end method.
     
+    /** Returns the binding to use for the */
     method protected IBinding SelectBinding(poService as class Class):
         define variable oBindings as IBindingCollection no-undo.
         define variable oBinding as IBinding no-undo.
@@ -175,8 +206,10 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         if oBindings:IsEmpty() then
             oBinding = CreateDefaultBinding(poService).
         else
-            /* always use the first matching binding */
-            oBinding = cast(oBindings:Iterator():Next(), IBinding).
+            /* Always use the last matching binding. If this behaviour is 
+               undesirable, then a setting should be added to the KernelSettings
+               object to define it.  */
+            oBinding = cast(oBindings:Get(oBindings:Size), IBinding).
         
         return oBinding.
     end method.

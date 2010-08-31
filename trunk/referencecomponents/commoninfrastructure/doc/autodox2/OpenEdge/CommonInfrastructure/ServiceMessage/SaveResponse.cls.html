@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
       <br />CLASS SaveResponse
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage" target="classFrame">ServiceMessage</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a> , <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse" target="classFrame">ServiceResponse</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -61,22 +61,8 @@
       <td>
         <code>
           <b>
-            <a href='#(character)'>CONSTRUCTOR </a>
-          </b>(CHARACTER pcService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#(character,character)'>CONSTRUCTOR </a>
-          </b>(CHARACTER pcMessageId, CHARACTER pcService)
+            <a href='#(openedge.commoninfrastructure.servicemessage.isaverequest)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poServiceRequest)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -89,21 +75,10 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='(character)'><!-- --></a>
+    <a name='(openedge.commoninfrastructure.servicemessage.isaverequest)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(CHARACTER pcService)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='(character,character)'><!-- --></a>
-    <h3>CONSTRUCTOR</h3>
-    <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(CHARACTER pcMessageId, CHARACTER pcService)
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poServiceRequest)
     </code>
     <dl>
       <dd>

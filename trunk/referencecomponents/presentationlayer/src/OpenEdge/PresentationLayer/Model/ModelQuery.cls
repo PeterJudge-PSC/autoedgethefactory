@@ -1,19 +1,20 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ModelQuery
-    Purpose     : 
+    Purpose     : Specialisation of Query class for MVP Model
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Jan 26 15:05:18 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Model.*.
 using OpenEdge.Core.System.*.
 using Progress.Lang.*.
 
-class OpenEdge.PresentationLayer.Model.ModelQuery inherits Query implements IModelQuery:
+class OpenEdge.PresentationLayer.Model.ModelQuery inherits Query
+        implements IModelQuery:
     
     /* Events */
     define public event QueryOpened       signature void (poQuery as IModelQuery, poArgs as EventArgs).

@@ -26,8 +26,8 @@ class OpenEdge.PresentationLayer.Common.ActionStateEnum inherits FlagsEnum:
         ActionStateEnum:View = new ActionStateEnum(8).
     end constructor.
     
-	constructor public ActionStateEnum (input piValue as integer):
-		super(input piValue).
-	end constructor.
-		
+    constructor public ActionStateEnum (input piValue as integer):
+        super(input piValue).
+    end constructor.
+        
 end class.

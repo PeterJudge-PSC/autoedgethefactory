@@ -63,7 +63,7 @@
           <b>
             <a href='#gettablehandle(character)'> GetTableHandle</a>
           </b>(CHARACTER pcTableName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;know how to interpret the name. The name passed in is the name
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -81,8 +81,18 @@
       <b>GetTableHandle</b>(CHARACTER pcTableName)
     </code>
     <dl>
+      <dd>know how to interpret the name. The name passed in is the name <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - A table or buffer name. The implementer willthat the query will use together with its IQueryDefinition. <br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>A buffer handle corresponding to the requested name.</dd>
+        </dl>
       </dd>
     </dl>
     <hr />

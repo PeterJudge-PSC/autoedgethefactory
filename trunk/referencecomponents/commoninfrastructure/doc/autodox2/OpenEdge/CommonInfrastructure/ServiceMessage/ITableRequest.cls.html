@@ -111,7 +111,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/Lang/FindTypeEnum.cls.html" title="OpenEdge.Lang.FindTypeEnum" target="classFrame">FindTypeEnum</a></code>
         </font>
       </td>
       <td>
@@ -119,7 +119,7 @@
           <b>
             <a href='#property.SearchType'>SearchType</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FindTypeEnum (default to first)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -139,7 +139,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/TableRequestTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum" target="classFrame">TableRequestTypeEnum</a></code>
         </font>
       </td>
       <td>
@@ -147,7 +147,7 @@
           <b>
             <a href='#property.TableRequestType'>TableRequestType</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TableRequestTypeEnum
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -168,8 +168,8 @@
       <td>
         <code>
           <b>
-            <a href='#addsearch(character,character,openedge.lang.enummember,character,openedge.lang.enummember,openedge.lang.enummember)'> AddSearch</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
+            <a href='#addsearch(character,character,openedge.lang.operatorenum,character,openedge.lang.datatypeenum,openedge.lang.joinenum)'> AddSearch</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add search expression  (need to be kept separate from filter.).
       </td>
     </tr>
@@ -196,9 +196,9 @@
       <td>
         <code>
           <b>
-            <a href='#getsearch(character,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_openedge.lang.enummember)'> GetSearch</a>
-          </b>(CHARACTER pcBufferName, OUTPUT CHARACTER pcFieldName, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, OUTPUT CHARACTER pcFieldValue, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenEdge.Lang.JoinEnum: AND, OR etc
+            <a href='#getsearch(character,OUTPUT_character,OUTPUT_openedge.lang.operatorenum,OUTPUT_character,OUTPUT_openedge.lang.datatypeenum,OUTPUT_openedge.lang.joinenum)'> GetSearch</a>
+          </b>(CHARACTER pcBufferName, OUTPUT CHARACTER pcFieldName, OUTPUT <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, OUTPUT CHARACTER pcFieldValue, OUTPUT <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, OUTPUT <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -253,9 +253,8 @@
     <hr />
     <a name='property.SearchType'><!-- --></a>
     <h3>SearchType</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PROPERTY GET SET </code>
+    <code><a href="../../../OpenEdge/Lang/FindTypeEnum.cls.html" title="OpenEdge.Lang.FindTypeEnum" target="classFrame">FindTypeEnum</a> PROPERTY GET SET </code>
     <dl>
-      <dd>FindTypeEnum (default to first) <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -273,9 +272,8 @@
     <hr />
     <a name='property.TableRequestType'><!-- --></a>
     <h3>TableRequestType</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PROPERTY GET SET </code>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/TableRequestTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum" target="classFrame">TableRequestTypeEnum</a> PROPERTY GET SET </code>
     <dl>
-      <dd>TableRequestTypeEnum <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -288,10 +286,10 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='addsearch(character,character,openedge.lang.enummember,character,openedge.lang.enummember,openedge.lang.enummember)'><!-- --></a>
+    <a name='addsearch(character,character,openedge.lang.operatorenum,character,openedge.lang.datatypeenum,openedge.lang.joinenum)'><!-- --></a>
     <h3>AddSearch</h3>
     <code>PUBLIC  VOID
-      <b>AddSearch</b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
+      <b>AddSearch</b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
     </code>
     <dl>
       <dd>Add search expression  (need to be kept separate from filter.). <p> </dd>
@@ -313,13 +311,12 @@
       </dd>
     </dl>
     <hr />
-    <a name='getsearch(character,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_character,OUTPUT_openedge.lang.enummember,OUTPUT_openedge.lang.enummember)'><!-- --></a>
+    <a name='getsearch(character,OUTPUT_character,OUTPUT_openedge.lang.operatorenum,OUTPUT_character,OUTPUT_openedge.lang.datatypeenum,OUTPUT_openedge.lang.joinenum)'><!-- --></a>
     <h3>GetSearch</h3>
     <code>PUBLIC  VOID
-      <b>GetSearch</b>(CHARACTER pcBufferName, OUTPUT CHARACTER pcFieldName, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperator, OUTPUT CHARACTER pcFieldValue, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poFieldType, OUTPUT <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poJoinType)
+      <b>GetSearch</b>(CHARACTER pcBufferName, OUTPUT CHARACTER pcFieldName, OUTPUT <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, OUTPUT CHARACTER pcFieldValue, OUTPUT <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, OUTPUT <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
     </code>
     <dl>
-      <dd>OpenEdge.Lang.JoinEnum: AND, OR etc <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

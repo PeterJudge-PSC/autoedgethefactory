@@ -3,16 +3,16 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 11:30:06 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-
+using OpenEdge.Core.InjectABL.Binding.BindingTargetEnum.
+using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.ObjectStack.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -22,7 +22,7 @@ interface OpenEdge.Core.InjectABL.Binding.IBinding:
     define public property Service as class Class no-undo get.
     
     /** Gets or sets the type of target for the binding. */
-    define public property Target as EnumMember /* BindingTargetEnum */ no-undo get. set.
+    define public property Target as BindingTargetEnum no-undo get. set.
     define public property TargetType as class Class no-undo get. set.
     
     /** Gets a value indicating whether the binding has a condition associated with it. */
@@ -35,7 +35,7 @@ interface OpenEdge.Core.InjectABL.Binding.IBinding:
     define public property ProviderType as class Class no-undo get. set.
     
     /** Gets or sets the callback that returns the object that will act as the binding's scope. */
-    define public property Scope as /* StandardScope or derivative */ EnumMember no-undo get. set. 
+    define public property Scope as StandardScopeEnum no-undo get. set. 
     define public property ScopeCallbackType as class Class no-undo get. set.
     
     /** Gets the parameters defined for the binding. */

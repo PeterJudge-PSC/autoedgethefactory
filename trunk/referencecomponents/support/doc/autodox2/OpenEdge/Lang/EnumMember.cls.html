@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\Lang</font>
       <br />CLASS EnumMember
     </h2>
-    <p>CLASS OpenEdge.Lang.EnumMember </p>
+    <p>CLASS OpenEdge.Lang.EnumMember abstract </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -62,7 +62,7 @@
         <code>
           <b>
             <a href='#property.Name'>Name</a>
-          </b> PUBLIC GET PROTECTED SET 
+          </b> PUBLIC GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -76,7 +76,7 @@
         <code>
           <b>
             <a href='#property.Value'>Value</a>
-          </b> PUBLIC GET PROTECTED SET 
+          </b> PUBLIC GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -89,20 +89,6 @@
 				<B>Method Summary</B></FONT></TH>
 				</TR>
 				
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#()'>CONSTRUCTOR </a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
@@ -168,8 +154,8 @@
       <td>
         <code>
           <b>
-            <a href='#equals(object)'> Equals</a>
-          </b>(<a href="../../Object.cls.html" title="Object" target="classFrame">Object</a> poEnumMember)
+            <a href='#equals(progress.lang.object)'> Equals</a>
+          </b>(<a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poEnumMember)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -198,7 +184,7 @@
 				
     <a name='property.Name'><!-- --></a>
     <h3>Name</h3>
-    <code>CHARACTER PUBLIC GET PROTECTED SET </code>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -207,7 +193,7 @@
     <hr />
     <a name='property.Value'><!-- --></a>
     <h3>Value</h3>
-    <code>INTEGER PUBLIC GET PROTECTED SET </code>
+    <code>INTEGER PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -221,17 +207,6 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='()'><!-- --></a>
-    <h3>CONSTRUCTOR</h3>
-    <code>PUBLIC  
-      <b>CONSTRUCTOR</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='(character)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
@@ -276,10 +251,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='equals(object)'><!-- --></a>
+    <a name='equals(progress.lang.object)'><!-- --></a>
     <h3>Equals</h3>
     <code>PUBLIC OVERRIDE  LOGICAL
-      <b>Equals</b>(<a href="../../Object.cls.html" title="Object" target="classFrame">Object</a> poEnumMember)
+      <b>Equals</b>(<a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poEnumMember)
     </code>
     <dl>
       <dd>

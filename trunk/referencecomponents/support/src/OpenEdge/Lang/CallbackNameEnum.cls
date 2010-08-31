@@ -18,9 +18,11 @@ class OpenEdge.Lang.CallbackNameEnum final inherits EnumMember:
     define public static property RequestHeader  as CallbackNameEnum no-undo get. private set.
     define public static property ResponseHeader as CallbackNameEnum no-undo get. private set.
     
-    /* ProDataSet */
+    /* ProDataSet, Buffer */
     define public static property BeforeFill     as CallbackNameEnum no-undo get. private set.
     define public static property AfterFill      as CallbackNameEnum no-undo get. private set.
+    
+    /* Buffer */
     define public static property BeforeRowFill  as CallbackNameEnum no-undo get. private set.
     define public static property AfterRowFill   as CallbackNameEnum no-undo get. private set.
     define public static property RowCreate      as CallbackNameEnum no-undo get. private set.
@@ -28,7 +30,7 @@ class OpenEdge.Lang.CallbackNameEnum final inherits EnumMember:
     define public static property RowUpdate      as CallbackNameEnum no-undo get. private set.
     define public static property FindFailed     as CallbackNameEnum no-undo get. private set.
     define public static property Syncronize     as CallbackNameEnum no-undo get. private set.
-    
+
     /* Query */
     define public static property OffEnd         as CallbackNameEnum no-undo get. private set.
     
@@ -47,8 +49,8 @@ class OpenEdge.Lang.CallbackNameEnum final inherits EnumMember:
         CallbackNameEnum:OffEnd = new CallbackNameEnum('OFF-END').            
     end constructor.
 
-	constructor public CallbackNameEnum( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public CallbackNameEnum( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

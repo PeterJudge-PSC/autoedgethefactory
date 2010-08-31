@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : StandardScopeEnum
-    Purpose     : 
+    Purpose     : Enumeration of InjectABL scopes. This is the standard/default set. 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jun 04 13:50:10 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
@@ -15,7 +15,7 @@ using OpenEdge.Lang.EnumMember.
 class OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum inherits EnumMember: 
     define static public property Default as StandardScopeEnum no-undo get. private set.
     
-    /** One instance, running free   */
+    /** One instance, running free, like a wolf. */
     define static public property Transient as StandardScopeEnum no-undo get. private set.
     
     /** Only one instance at a time: effectively scoped to the life of the InjectABL kernel. */
@@ -35,21 +35,21 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum inherits EnumMember:
     
     constructor static StandardScopeEnum():
         /* these all use this type as IBinding:ScopeCallbackType */
-        StandardScopeEnum:Transient = new StandardScopeEnum('Transient Scope').
-        StandardScopeEnum:Singleton = new StandardScopeEnum('Singleton Scope').
+        StandardScopeEnum:Transient = new StandardScopeEnum('Transient').
+        StandardScopeEnum:Singleton = new StandardScopeEnum('Singleton').
         
-        StandardScopeEnum:ABLSession = new StandardScopeEnum('ABLSession Scope').
-        StandardScopeEnum:AgentRequest = new StandardScopeEnum('AgentRequest Scope').
-        StandardScopeEnum:AgentConnection = new StandardScopeEnum('AgentConnection Scope').
+        StandardScopeEnum:ABLSession = new StandardScopeEnum('ABLSession').
+        StandardScopeEnum:AgentRequest = new StandardScopeEnum('AgentRequest').
+        StandardScopeEnum:AgentConnection = new StandardScopeEnum('AgentConnection').
         
         /* IBinding:ScopeCallbackType set to input value */
-        StandardScopeEnum:Custom = new StandardScopeEnum('Custom Scope').
+        StandardScopeEnum:Custom = new StandardScopeEnum('Custom').
         
         StandardScopeEnum:Default = StandardScopeEnum:Transient.
     end constructor.
     
-	constructor public StandardScopeEnum (pcName as character):
-		super(pcName).
-	end constructor.
-	
+    constructor public StandardScopeEnum (pcName as character):
+        super(pcName).
+    end constructor.
+    
 end class.

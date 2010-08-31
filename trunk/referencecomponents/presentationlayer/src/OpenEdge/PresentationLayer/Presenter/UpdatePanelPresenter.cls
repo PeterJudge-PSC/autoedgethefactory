@@ -3,24 +3,22 @@
    Purpose     : 
    Syntax      : 
    Description : 
-   Author(s)   : pjudge
+   @author pjudge
    Created     : Thu Feb 26 14:18:30 EST 2009
    Notes       : 
  ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
-  
+
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.  
 using OpenEdge.PresentationLayer.Presenter.DataboundPresenter.
 using OpenEdge.PresentationLayer.Presenter.IDataboundPresenter.
 using OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter.
-using OpenEdge.PresentationLayer.Presenter.CommitActionEnum.
-using OpenEdge.PresentationLayer.Presenter.DeleteActionEnum.
-using OpenEdge.PresentationLayer.Presenter.UpdateActionEnum.
 using OpenEdge.PresentationLayer.Model.IModel.
 using OpenEdge.PresentationLayer.View.IUpdatePanelView.
 using OpenEdge.PresentationLayer.Common.ActionStateEnum.
 using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
-using OpenEdge.PresentationLayer.Common.ISelectAction.
-using OpenEdge.PresentationLayer.Common.ActionEventArgs.
+using OpenEdge.PresentationLayer.Common.ISelectToolbarAction.
+using OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs.
 using OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs.
 
 using OpenEdge.CommonInfrastructure.Common.IComponent.
@@ -33,7 +31,7 @@ using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 
 class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits DataboundPresenter
-    implements ISelectAction, IUpdatePanelPresenter:
+    implements ISelectToolbarAction, IUpdatePanelPresenter:
     
     define private property moUndoActionModel as IModel no-undo
         get():
@@ -60,25 +58,23 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
                     cast(this-object:View, IUpdatePanelView):TableNameChange(pcTableName).
             end.
         end set.
-    
-    define public property CommitAction as EnumMember no-undo /* OpenEdge.PresentationLayer.Presenter.CommitActionEnum */
+
+    define public property CommitAction as UpdateActionEnum no-undo
         get ():
             if not valid-object(CommitAction) then
-                CommitAction = CommitActionEnum:Default.
+                CommitAction = UpdateActionEnum:Commit.
             
             return CommitAction.
         end get. 
         set. 
 
-    define public property DeleteAction as EnumMember no-undo  /* OpenEdge.PresentationLayer.Presenter.DeleteActionEnum */
+    define public property DeleteAction as UpdateActionEnum no-undo
         get ():
             if not valid-object(DeleteAction) then
-                DeleteAction = DeleteActionEnum:Default.
-            
+                DeleteAction = UpdateActionEnum:Commit.
             return DeleteAction.
         end get. 
         set.
-
         
     constructor public UpdatePanelPresenter (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).
@@ -126,7 +122,7 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
         end.
     end method.
        
-    method public void SelectAction (poArgs as ActionEventArgs):
+    method public void SelectToolbarAction (poArgs as ToolbarActionEventArgs):
         define variable iAction as integer no-undo.
         
         poArgs:GetArgValue('Action', output iAction).
@@ -139,7 +135,7 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
                     /* Always (do the local) Delete */
                     cast(ParentPresenter, IDataboundPresenter):DeleteRecord(ModelService, QueryName, TableName).
                 
-                    if DeleteAction eq DeleteActionEnum:Commit then
+                    if DeleteAction eq UpdateActionEnum:Commit then
                         cast(ParentPresenter, IDataboundPresenter):CommitData(ModelService).
                 end.
             when UpdateActionEnum:Save then
@@ -147,7 +143,7 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
             when UpdateActionEnum:Commit then
                 do:
                     /* Commit does a Save first, do no need to do one here. */
-                    if CommitAction eq CommitActionEnum:Commit then 
+                    if CommitAction eq UpdateActionEnum:Commit then 
                         cast(ParentPresenter, IDataboundPresenter):CommitData(ModelService).
                     else
                         cast(ParentPresenter, IDataboundPresenter):SaveRecord(ModelService, QueryName, TableName).
@@ -158,14 +154,14 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
     end method.
     
     method public void UpdatePanelStateChangedHandler (poSender as IComponent, poEventArgs as UpdatePanelEventArgs):        
-        define variable oStates      as EnumMember extent 5 no-undo.
-        define variable oActions     as EnumMember extent 5 no-undo.
+        define variable oStates      as ActionStateEnum extent 5 no-undo.
+        define variable oActions     as UpdateActionEnum extent 5 no-undo.
         
-        define variable oAddState    as EnumMember no-undo.
-        define variable oDeleteState as EnumMember no-undo.
-        define variable oCancelState as EnumMember no-undo.
-        define variable oCommitState as EnumMember no-undo.
-        define variable oSaveState   as EnumMember no-undo.
+        define variable oAddState    as ActionStateEnum no-undo.
+        define variable oDeleteState as ActionStateEnum no-undo.
+        define variable oCancelState as ActionStateEnum no-undo.
+        define variable oCommitState as ActionStateEnum no-undo.
+        define variable oSaveState   as ActionStateEnum no-undo.
 
         if ModelService eq poEventArgs:ModelService and 
             QueryName eq poEventArgs:QueryName and

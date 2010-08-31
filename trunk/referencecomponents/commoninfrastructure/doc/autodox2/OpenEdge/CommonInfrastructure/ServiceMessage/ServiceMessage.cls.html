@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
       <br />CLASS ServiceMessage
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage abstract IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -63,7 +63,21 @@
           <b>
             <a href='#property.ActionType'>ActionType</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type of request (ServiceMessageActionEnum). The defaults are Fetch,Save,Define but
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.MessageDataFormat'>MessageDataFormat</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The data transport type for this message. These may differ for request and response.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -91,7 +105,7 @@
           <b>
             <a href='#property.Service'>Service</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Identifies the service message target.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -128,7 +142,7 @@
           <b>
             <a href='#(character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'>CONSTRUCTOR </a>
           </b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poMessageType)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This constructor will typically only be used for Requests, not responses,
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -145,6 +159,118 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdata(OUTPUT_handle)'> GetData</a>
+          </b>(OUTPUT HANDLE phData)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdata(OUTPUT_longchar)'> GetData</a>
+          </b>(OUTPUT LONGCHAR pcData)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The GetData() and SetData() methods allow access to the data being sent/
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdata(OUTPUT_memptr)'> GetData</a>
+          </b>(OUTPUT MEMPTR pmData)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdata(OUTPUT_progress.lang.object)'> GetData</a>
+          </b>(OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setdata(handle,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'> SetData</a>
+          </b>(HANDLE phData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setdata(longchar,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'> SetData</a>
+          </b>(LONGCHAR pcData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setdata(memptr,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'> SetData</a>
+          </b>(MEMPTR pmData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setdata(progress.lang.object,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'> SetData</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="property_detail"><!-- --></A>
@@ -158,6 +284,18 @@
     <h3>ActionType</h3>
     <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Type of request (ServiceMessageActionEnum). The defaults are Fetch,Save,Define but <p> </dd>
+      <dd>may be overridden (by FetchByRegion or something similar). All IServiceMessage instances that are issued together must be of the same type, and the same type as their bundle. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.MessageDataFormat'><!-- --></a>
+    <h3>MessageDataFormat</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>The data transport type for this message. These may differ for request and response. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -168,7 +306,7 @@
     <code>CHARACTER PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>Unique message identifier. Allows for completely decoupled request and response <p> </dd>
-      <dd>messages to be tied back together. </dd>
+      <dd>messages to be tied back together. This will probably be a GUID. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -178,6 +316,8 @@
     <h3>Service</h3>
     <code>CHARACTER PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Identifies the service message target. <p> </dd>
+      <dd>Used to find the ServiceAdapter and Business component </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -207,8 +347,15 @@
       <b>CONSTRUCTOR</b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poMessageType)
     </code>
     <dl>
+      <dd>This constructor will typically only be used for Requests, not responses, <p> </dd>
+      <dd>since the response needs a MessageId for ithe request that triggered it. </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>pcService - The service name for which this message is being incokved.<br/>poMessageType - Uses the ServiceMessageActionEnum to define the action of the message.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -216,6 +363,96 @@
     <h3>Equals</h3>
     <code>OVERRIDE PUBLIC  LOGICAL
       <b>Equals</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> p0)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdata(OUTPUT_handle)'><!-- --></a>
+    <h3>GetData</h3>
+    <code>PUBLIC  VOID
+      <b>GetData</b>(OUTPUT HANDLE phData)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdata(OUTPUT_longchar)'><!-- --></a>
+    <h3>GetData</h3>
+    <code>PUBLIC  VOID
+      <b>GetData</b>(OUTPUT LONGCHAR pcData)
+    </code>
+    <dl>
+      <dd>The GetData() and SetData() methods allow access to the data being sent/ <p> </dd>
+      <dd>received by this message. This data is formatted per the MessageDataFormat above; and is stored in the message as either LONGCHAR, MEMPTR, HANDLE or P.L.O. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdata(OUTPUT_memptr)'><!-- --></a>
+    <h3>GetData</h3>
+    <code>PUBLIC  VOID
+      <b>GetData</b>(OUTPUT MEMPTR pmData)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdata(OUTPUT_progress.lang.object)'><!-- --></a>
+    <h3>GetData</h3>
+    <code>PUBLIC  VOID
+      <b>GetData</b>(OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setdata(handle,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'><!-- --></a>
+    <h3>SetData</h3>
+    <code>PUBLIC  VOID
+      <b>SetData</b>(HANDLE phData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setdata(longchar,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'><!-- --></a>
+    <h3>SetData</h3>
+    <code>PUBLIC  VOID
+      <b>SetData</b>(LONGCHAR pcData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setdata(memptr,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'><!-- --></a>
+    <h3>SetData</h3>
+    <code>PUBLIC  VOID
+      <b>SetData</b>(MEMPTR pmData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setdata(progress.lang.object,openedge.commoninfrastructure.servicemessage.messagedataformatenum)'><!-- --></a>
+    <h3>SetData</h3>
+    <code>PUBLIC  VOID
+      <b>SetData</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/MessageDataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum" target="classFrame">MessageDataFormatEnum</a> poMessageDataFormat)
     </code>
     <dl>
       <dd>

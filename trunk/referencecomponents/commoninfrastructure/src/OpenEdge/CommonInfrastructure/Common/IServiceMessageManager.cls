@@ -1,12 +1,13 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IServiceMessageManager
-    Purpose     : 
+    Purpose     : Interface for the ServiceMessageManager: a broker for data requests/responses 
+                  (messages).
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Apr 26 11:37:08 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle.

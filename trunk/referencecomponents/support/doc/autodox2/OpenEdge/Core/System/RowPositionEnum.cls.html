@@ -105,7 +105,7 @@
           <b>
             <a href='#property.None'>None</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None means no records in the query.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -134,7 +134,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code></code>
+          <code>STATIC </code>
         </font>
       </td>
       <td>
@@ -142,6 +142,20 @@
           <b>
             <a href='#()'>CONSTRUCTOR </a>
           </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -185,6 +199,7 @@
     <h3>None</h3>
     <code><a href="../../../OpenEdge/Core/System/RowPositionEnum.cls.html" title="OpenEdge.Core.System.RowPositionEnum" target="classFrame">RowPositionEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>None means no records in the query. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -208,8 +223,19 @@
 				
     <a name='()'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
-    <code>PUBLIC  
+    <code>STATIC  
       <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcName)
     </code>
     <dl>
       <dd>

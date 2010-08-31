@@ -48,25 +48,23 @@ class OpenEdge.Lang.FlagsEnum abstract inherits EnumMember:
     /* Private ctor so that a derived class can't bypass the necessary checks for
        power-of-two-ness. */
     constructor private FlagsEnum():
-        super().
+        super(-1).
     end constructor.
     
     constructor public FlagsEnum(input piValue as integer):
-        super(piValue).
+        this-object(piValue, ?).
+    end constructor.
+    
+    constructor public FlagsEnum ( input piValue as integer, input pcName as character ):
+        super(input piValue, input pcName).
         
         ValidateEnumMemberValue(piValue).
     end constructor.
     
-	constructor public FlagsEnum ( input piValue as integer, input pcName as character ):
-		super(input piValue, input pcName).
-		
-        ValidateEnumMemberValue(piValue).
-	end constructor.
-	
     /** The value must be a power of 2 for it to be a flag enumeration value.
         The algorithm below adapted from the following comment on Stackoverflow:
         http://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2/2552559#2552559 */
-	method private void ValidateEnumMemberValue(input piValue as integer):
+    method private void ValidateEnumMemberValue(input piValue as integer):
         if not piValue eq exp(2, log(piValue, 2)) then
           undo, throw new AppError(string(piValue) + ' is not a power of 2, which is required for a flag enumeration value').
     end method.

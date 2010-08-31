@@ -1,6 +1,7 @@
-/* ------------------------------------------------------------------------
+@todo(task="question", action="why do we need this specialisation? for ISaveRequest only?").
+/** ------------------------------------------------------------------------
     File        : SaveRequest
-    Purpose     : 
+    Purpose     : A request for committing data.
     Syntax      : 
     Description : 
     @author pjudge
@@ -10,14 +11,13 @@
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
-class OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest inherits ServiceMessage
-        implements ISaveRequest, IServiceRequest: 
-
+class OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest inherits ServiceRequest
+        implements ISaveRequest:
+    
     constructor public SaveRequest(input pcService as character):
         super(pcService, ServiceMessageActionEnum:Save).
     end constructor.
@@ -26,5 +26,16 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest inherits ServiceM
                                    input pcService as character):
         super(pcMessageId, pcService, ServiceMessageActionEnum:Save).
     end constructor.
-    
+
+	constructor public SaveRequest(input pcService as character,
+                                   input poMessageType as ServiceMessageActionEnum ):
+		super (input pcService, input poMessageType).
+	end constructor.
+		
+	constructor public SaveRequest(input pcMessageId as character,
+	                               input pcService as character,
+	                               input poActionType as ServiceMessageActionEnum ):
+		super (input pcMessageId, input pcService, input poActionType).
+	end constructor.
+	
 end class.

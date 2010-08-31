@@ -1,18 +1,17 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IFetchRequest
     Purpose     : Interface for data fetch request  
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Tue Feb 09 14:28:13 EST 2010
-    Notes       : * Corresponds with OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum:Fetch
-  ----------------------------------------------------------------------*/
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
+    Notes       : 
+  --------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection.
  
-interface OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest /* inherits IServiceMessage */:
+interface OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest /* inherits IServiceRequest */:
+
+    /** (mandatory) A collection of one of more tables for this request. */
     define public property TableRequests as ITableRequestCollection no-undo get.
-    
-    method public ITableRequest GetTableRequest(pcTableName as character).
     
 end interface.

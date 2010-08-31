@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Jan 08 15:07:12 EST 2009
     Notes       : This class should be abstract, but the Visual Designer needs
                   a user control to inherit from a concrete class in order to 
@@ -15,11 +15,11 @@ using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.View.IComponentContainer.
 using OpenEdge.PresentationLayer.View.IContainedView.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
+using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.Lang.EnumMember.
  
 using System.Windows.Forms.Control.
 using Progress.Windows.UserControl.
@@ -33,7 +33,8 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.MVPUserControl  /* abstract *
         implements IContainedView, IView, IComponent :
     
     define public property Presenter as IPresenter no-undo get. set.
-    define public property PresenterService as class Class no-undo get. protected set. 
+    define public property PresenterService as class Class no-undo get. set.
+     
     define public property ComponentInfo as IComponentInfo no-undo get. private set.
 
     method public void Initialize():
@@ -131,9 +132,8 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.MVPUserControl  /* abstract *
     
     @method(abstract="true").
     method public /* abstract */ void DataRefreshed(poModelService as IComponentInfo,
-                                                    pcQuery as char, 
-                                                    /* OpenEdge.PresentationLayer.Common.ModelActionEnum */
-                                                    poModelAction as EnumMember):
+                                                    pcQuery as char,                                                     
+                                                    poModelAction as ModelActionEnum):
     end method.
 
     @method(abstract="true").

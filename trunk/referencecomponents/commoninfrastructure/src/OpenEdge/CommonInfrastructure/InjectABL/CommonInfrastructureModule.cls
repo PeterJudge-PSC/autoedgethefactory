@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : CommonInfrastructureModule
-    Purpose     : 
+    Purpose     : Binding for Common Infrastructure InjectABL services 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Mar 17 09:02:59 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
@@ -73,27 +73,6 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
                      ManagerScopeEnum:ServiceManager)
             .
-        
-        /** The IServiceRequestBundle executes the requests; this execution may differ depending
-            on whether we're on the client (call to ServiceAdapter) or server (call to Business Component) */
-        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IServiceRequestBundle').
-        oBindingSyntax
-            :To('OpenEdge.CommonInfrastructure.Common.ServiceRequestBundle')
-            :InTransientScope()
-            .
-        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IServiceRequestBundle').
-        oBindingSyntax
-            :To('OpenEdge.CommonInfrastructure.Server.ServiceRequestBundle')
-            :OnServerSession()
-            :InTransientScope()
-            .
-        
-        @todo(task="question", action="does this belong here? a separate module?").
-        /** Default/simple service adapter binding */
-        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceAdapter').
-        oBindingSyntax
-            :To('OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter').
-        
     end method.
     
 end class.

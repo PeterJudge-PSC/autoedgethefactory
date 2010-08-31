@@ -208,7 +208,7 @@ CHOOSE OF Btn-Next or
 CHOOSE OF Btn-Last 
 DO:
     define variable oButton as EnumMember no-undo.
-    define variable oArgs as ActionEventArgs no-undo.
+    define variable oArgs as ToolbarActionEventArgs no-undo.
                     
     case self:private-data:
         when 'First' then oButton = NavigationActionEnum:First.
@@ -218,10 +218,10 @@ DO:
     end case.
 
         
-    oArgs = new ActionEventArgs(oButton:ToString(), ActionTypeEnum:Event).
+    oArgs = new ToolbarActionEventArgs(oButton:ToString(), ToolbarActionTypeEnum:Event).
     oArgs:SetArgValue('Action', oButton:ToString(), DataTypeEnum:Integer).
     
-    cast(goPresenter, ISelectAction):SelectAction (oArgs).
+    cast(goPresenter, ISelectToolbarAction):SelectToolbarAction (oArgs).
 END.
 
 /* _UIB-CODE-BLOCK-END */
