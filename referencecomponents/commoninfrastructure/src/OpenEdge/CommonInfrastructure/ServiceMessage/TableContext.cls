@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : TableContext
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 27 15:01:35 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableContext.
@@ -23,5 +23,5 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableContext
     constructor public TableContext(pcTableName as character):
         TableName = pcTableName.
     end constructor. 
-    
+
 end class.

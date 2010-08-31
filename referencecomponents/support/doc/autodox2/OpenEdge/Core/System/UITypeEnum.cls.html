@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\Core\System</font>
       <br />CLASS UITypeEnum
     </h2>
-    <p>CLASS OpenEdge.Core.System.UITypeEnum </p>
+    <p>CLASS OpenEdge.Core.System.UITypeEnum INHERITS <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a></code>
         </font>
       </td>
       <td>
@@ -63,13 +63,13 @@
           <b>
             <a href='#property.AblGui'>AblGui</a>
           </b> STATIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Classic' ABL GUI
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a></code>
         </font>
       </td>
       <td>
@@ -77,27 +77,27 @@
           <b>
             <a href='#property.Chui'>Chui</a>
           </b> STATIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character-mode UI
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
             <a href='#property.Current'>Current</a>
-          </b> STATIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b> STATIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The current UI type. Settable since this may change at app startup
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a></code>
         </font>
       </td>
       <td>
@@ -111,7 +111,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a></code>
         </font>
       </td>
       <td>
@@ -119,7 +119,7 @@
           <b>
             <a href='#property.RiaGui'>RiaGui</a>
           </b> STATIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RIA/Web UI
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -145,6 +145,20 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="property_detail"><!-- --></A>
@@ -156,8 +170,9 @@
 				
     <a name='property.AblGui'><!-- --></a>
     <h3>AblGui</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> STATIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a> STATIC GET PRIVATE SET </code>
     <dl>
+      <dd>'Classic' ABL GUI <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -165,8 +180,9 @@
     <hr />
     <a name='property.Chui'><!-- --></a>
     <h3>Chui</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> STATIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a> STATIC GET PRIVATE SET </code>
     <dl>
+      <dd>Character-mode UI <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -174,8 +190,9 @@
     <hr />
     <a name='property.Current'><!-- --></a>
     <h3>Current</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> STATIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a> STATIC GET SET </code>
     <dl>
+      <dd>The current UI type. Settable since this may change at app startup <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -183,7 +200,7 @@
     <hr />
     <a name='property.DotNetGui'><!-- --></a>
     <h3>DotNetGui</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> STATIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a> STATIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -192,8 +209,9 @@
     <hr />
     <a name='property.RiaGui'><!-- --></a>
     <h3>RiaGui</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> STATIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/Core/System/UITypeEnum.cls.html" title="OpenEdge.Core.System.UITypeEnum" target="classFrame">UITypeEnum</a> STATIC GET PRIVATE SET </code>
     <dl>
+      <dd>RIA/Web UI <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -210,6 +228,17 @@
     <h3>CONSTRUCTOR</h3>
     <code>STATIC  
       <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcName)
     </code>
     <dl>
       <dd>

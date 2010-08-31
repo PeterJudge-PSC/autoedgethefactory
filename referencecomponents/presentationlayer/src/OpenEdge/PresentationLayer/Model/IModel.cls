@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Dec 18 15:51:15 EST 2008
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -17,12 +17,13 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
 using OpenEdge.Core.System.IQueryDefinition.
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Object.
 
 interface OpenEdge.PresentationLayer.Model.IModel /* inherits IComponent */:
     define public property ErrorBuffer as character extent no-undo get. set.
-    define public property ServiceName as character no-undo get. set.
+    
+    /* The name of the service from which this Model gets its data */
+    define public property ServiceName as character no-undo get.
     
     method public handle GetBindingHandle(pcQuery as char).
        

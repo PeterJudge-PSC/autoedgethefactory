@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Apr 07 14:41:39 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -36,7 +36,8 @@ class OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider inherits StandardP
                     new ComponentInfo(
                         poContext:Binding:Service,
                         poContext:Binding:Name,
-                        ComponentTypeEnum:Service), /* we don't know what kind of service this is, just that it is a service */
+                        ComponentTypeEnum:Service,      /* we don't know what kind of service this is, just that it is a service */
+                        true),      /* AutoStart */
                     Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo'))).
         
         return super:Create(poContext).

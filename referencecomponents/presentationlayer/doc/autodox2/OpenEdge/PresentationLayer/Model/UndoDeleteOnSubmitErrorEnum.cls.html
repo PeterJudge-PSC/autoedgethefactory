@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\PresentationLayer\Model</font>
       <br />CLASS UndoDeleteOnSubmitErrorEnum
     </h2>
-    <p>CLASS OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum FINAL </p>
+    <p>CLASS OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum FINAL INHERITS <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a></code>
         </font>
       </td>
       <td>
@@ -63,13 +63,13 @@
           <b>
             <a href='#property.All'>All</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Undo all deleted records.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a></code>
         </font>
       </td>
       <td>
@@ -83,7 +83,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a></code>
         </font>
       </td>
       <td>
@@ -91,13 +91,13 @@
           <b>
             <a href='#property.Error'>Error</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Only undo deletions that causes an error and keep deletions that was
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a></code>
         </font>
       </td>
       <td>
@@ -105,7 +105,7 @@
           <b>
             <a href='#property.None'>None</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Keep all deletions. Fix the problem and resave
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -131,6 +131,20 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="property_detail"><!-- --></A>
@@ -142,8 +156,9 @@
 				
     <a name='property.All'><!-- --></a>
     <h3>All</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Undo all deleted records. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -151,7 +166,7 @@
     <hr />
     <a name='property.Default'><!-- --></a>
     <h3>Default</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -160,8 +175,10 @@
     <hr />
     <a name='property.Error'><!-- --></a>
     <h3>Error</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Only undo deletions that causes an error and keep deletions that was <p> </dd>
+      <dd>rejected just because the transaction failed. Allows immediate resubmit. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -169,8 +186,9 @@
     <hr />
     <a name='property.None'><!-- --></a>
     <h3>None</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoDeleteOnSubmitErrorEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum" target="classFrame">UndoDeleteOnSubmitErrorEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Keep all deletions. Fix the problem and resave <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -187,6 +205,17 @@
     <h3>CONSTRUCTOR</h3>
     <code>STATIC  
       <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcName)
     </code>
     <dl>
       <dd>

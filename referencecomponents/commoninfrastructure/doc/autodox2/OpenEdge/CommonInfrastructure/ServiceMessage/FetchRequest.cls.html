@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
       <br />CLASS FetchRequest
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.FetchRequest INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage" target="classFrame">ServiceMessage</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> , <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.FetchRequest INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceRequest" target="classFrame">ServiceRequest</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -98,22 +98,22 @@
       <td>
         <code>
           <b>
-            <a href='#(character,character)'>CONSTRUCTOR </a>
-          </b>(CHARACTER pcMessageId, CHARACTER pcService)
+            <a href='#(character,character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcMessageId, CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poActionType)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a></code>
+          <code></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#gettablerequest(character)'> GetTableRequest</a>
-          </b>(CHARACTER pcTableName)
+            <a href='#(character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poMessageType)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -153,10 +153,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='(character,character)'><!-- --></a>
+    <a name='(character,character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(CHARACTER pcMessageId, CHARACTER pcService)
+      <b>CONSTRUCTOR</b>(CHARACTER pcMessageId, CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poActionType)
     </code>
     <dl>
       <dd>
@@ -164,10 +164,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='gettablerequest(character)'><!-- --></a>
-    <h3>GetTableRequest</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a>
-      <b>GetTableRequest</b>(CHARACTER pcTableName)
+    <a name='(character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poMessageType)
     </code>
     <dl>
       <dd>

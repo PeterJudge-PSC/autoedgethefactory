@@ -20,20 +20,20 @@ class OpenEdge.Lang.EnumMember abstract:
     define public property Name as character no-undo get. private set.
     define public property Value as integer no-undo get. private set.
     
-    constructor public EnumMember(piValue as int, pcName as char):        
+    constructor public EnumMember(input piValue as integer, input pcName as character):        
         assign this-object:Name = pcName
                this-object:Value = piValue.
     end constructor.
-    
-    constructor public EnumMember(piValue as int):
+
+    constructor public EnumMember(input piValue as integer):
         this-object(piValue, ?).
     end constructor.
 
-    constructor public EnumMember(pcName as char):        
+    constructor public EnumMember(input pcName as character):        
         this-object(?, pcName).
     end constructor.
-    
-    method public logical Equals(pcName as char):
+
+    method public logical Equals(input pcName as character):
         define variable lEquals as logical no-undo.
         
         lEquals = this-object:Name eq pcName. 

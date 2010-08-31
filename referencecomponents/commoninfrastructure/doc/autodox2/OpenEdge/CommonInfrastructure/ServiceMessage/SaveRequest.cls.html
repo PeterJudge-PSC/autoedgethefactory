@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
       <br />CLASS SaveRequest
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage" target="classFrame">ServiceMessage</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> , <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceRequest" target="classFrame">ServiceRequest</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -80,6 +80,34 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character,character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcMessageId, CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poActionType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poMessageType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="method_detail"><!-- --></A>
@@ -104,6 +132,28 @@
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
       <b>CONSTRUCTOR</b>(CHARACTER pcMessageId, CHARACTER pcService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character,character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcMessageId, CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poActionType)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poMessageType)
     </code>
     <dl>
       <dd>

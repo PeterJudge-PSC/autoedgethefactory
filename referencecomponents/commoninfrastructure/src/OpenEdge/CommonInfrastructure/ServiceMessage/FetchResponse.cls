@@ -9,42 +9,49 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContextCollection.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.FetchResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
+using OpenEdge.Lang.Collections.IIterator. 
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+class OpenEdge.CommonInfrastructure.ServiceMessage.FetchResponse inherits ServiceResponse
+        implements IFetchResponse:
+    
+    define public property TableResponses as ITableResponseCollection no-undo
+        get():
+            if not valid-object(TableResponses) then
+                TableResponses = new ITableResponseCollection().
 
-class OpenEdge.CommonInfrastructure.ServiceMessage.FetchResponse inherits ServiceMessage
-        implements IFetchResponse, IServiceResponse: 
-                        
-    define public property TableResponses as ITableContextCollection no-undo get. private set. 
-
-    constructor public FetchResponse(input pcService as character):
-        super(pcService, ServiceMessageActionEnum:Fetch).
+            return TableResponses.
+        end get.
+        private set.
+    
+    /**  Constructor to create a request from a response, so we can tie 'em together again. */
+    constructor public FetchResponse(input poRequest as IFetchRequest):
+        super(cast(poRequest, IServiceRequest)).
     end constructor.
     
-    constructor public FetchResponse(input pcMessageId as character,
-                                     input pcService as character):
-        super(pcMessageId, pcService, ServiceMessageActionEnum:Fetch).
+    destructor FetchResponse():
+        TableResponses:Clear().
+    end destructor.
+    
+    /* Pre-populates the table response collection from the request's tablerequests */
+    method public void InitTableResponseFromRequest(input poRequest as IFetchRequest):
+        define variable oTableResponse as ITableResponse no-undo.
+        define variable oIterator as IIterator no-undo.
+        define variable cTableName as character no-undo.
         
-        TableResponses = new ITableContextCollection().
-    end constructor.
-
-    method public ITableContext GetTableContext(input pcTableName as character):
-        define variable oTableContext as ITableContext no-undo.
-        define variable iIndex as integer no-undo.
-        
-        iIndex = TableResponses:IndexOf(new TableContext(pcTableName)).
-        
-        if iIndex gt 0 then
-            oTableContext = cast(TableResponses:Get(iIndex), ITableContext).
-        
-        return oTableContext.
+        oIterator = poRequest:TableRequests:KeySet:Iterator().
+        do while oIterator:HasNext():
+            cTableName = cast(oIterator:Next(), ITableRequest):TableName.
+            oTableResponse = new TableResponse(cTableName).
+            TableResponses:Put(cTableName, oTableResponse).
+        end.
     end method.
-
+    
 end class.

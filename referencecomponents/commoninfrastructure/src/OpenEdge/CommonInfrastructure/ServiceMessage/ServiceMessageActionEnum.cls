@@ -14,18 +14,23 @@ using OpenEdge.Lang.EnumMember.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum inherits EnumMember: 
     
-    define public static property Fetch    as ServiceMessageActionEnum no-undo get. private set.
-    define public static property Save     as ServiceMessageActionEnum no-undo get. private set.
-    define public static property Define   as ServiceMessageActionEnum no-undo get. private set.
+    /** Data fetch request */
+    define public static property Fetch       as ServiceMessageActionEnum no-undo get. private set.
+    
+    /** Data commit/save request */
+    define public static property Save        as ServiceMessageActionEnum no-undo get. private set.
+    
+    /** Schema fetch request. This is typically only made to a Business Entity. */
+    define public static property FetchSchema as ServiceMessageActionEnum no-undo get. private set.
     
     constructor static ServiceMessageActionEnum():
-        ServiceMessageActionEnum:Fetch  = new ServiceMessageActionEnum('Fetch').
-        ServiceMessageActionEnum:Save   = new ServiceMessageActionEnum('Save').
-        ServiceMessageActionEnum:Define = new ServiceMessageActionEnum('Define'). 
+        ServiceMessageActionEnum:Fetch       = new ServiceMessageActionEnum('Fetch').
+        ServiceMessageActionEnum:Save        = new ServiceMessageActionEnum('Save').
+        ServiceMessageActionEnum:FetchSchema = new ServiceMessageActionEnum('FetchSchema'). 
     end method.
-		
-		    constructor public ServiceMessageActionEnum(pcName as character):
-        		super(pcName).
-    	end constructor.
-	
+    
+    constructor public ServiceMessageActionEnum(pcName as character):
+        super(pcName).
+    end constructor.
+    
 end class.

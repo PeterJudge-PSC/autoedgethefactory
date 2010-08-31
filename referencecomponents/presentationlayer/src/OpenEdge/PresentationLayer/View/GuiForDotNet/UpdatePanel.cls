@@ -1,26 +1,29 @@
-/*------------------------------------------------------------------------
-    File        : UpdatePanel
+/** ------------------------------------------------------------------------
+    File        : UpdatePanel View component
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Feb 26 13:43:16 EST 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.View.GuiForDotNet.MVPUserControl.
 using OpenEdge.PresentationLayer.View.IUpdatePanelView.
+using OpenEdge.PresentationLayer.Common.ISelectToolbarAction.
+using OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs.
+using OpenEdge.PresentationLayer.Common.ActionStateEnum.
+using OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum.
+using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.Lang.DataTypeEnum.
 
-using OpenEdge.PresentationLayer.Presenter.*.
-using OpenEdge.PresentationLayer.Common.*.
-using OpenEdge.Core.System.*.
-using OpenEdge.Lang.*.
-using Infragistics.Win.Misc.*.
-using System.Windows.Forms.*.
-using Progress.Lang.*.
-using Infragistics.Win.UltraWinListView.*.
+using Infragistics.Win.UltraWinListView.UltraListViewItem.
+using Infragistics.Win.UltraWinListView.UltraListViewMainColumn.
+
+using Progress.Lang.Class.
 
 class OpenEdge.PresentationLayer.View.GuiForDotNet.UpdatePanel 
         inherits MVPUserControl 
@@ -233,31 +236,31 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.UpdatePanel
     end method.
     
     method private void CommitButtonClick( input sender as System.Object, input e as System.EventArgs ):
-        SelectAction(UpdateActionEnum:Commit).
+        SelectToolbarAction(UpdateActionEnum:Commit).
     end method.
     
     method private void DeleteButtonClick( input sender as System.Object, input e as System.EventArgs ):
-        SelectAction(UpdateActionEnum:Delete).
+        SelectToolbarAction(UpdateActionEnum:Delete).
     end method.
 
     method private void AddButtonClick( input sender as System.Object, input e as System.EventArgs ):
-        SelectAction(UpdateActionEnum:Add).
+        SelectToolbarAction(UpdateActionEnum:Add).
     end method.        
 
     method private void UndoButtonClick( input sender as System.Object, input e as System.EventArgs ):
-        SelectAction(UpdateActionEnum:Undo).
+        SelectToolbarAction(UpdateActionEnum:Undo).
     end method.
     
-    method protected void SelectAction (poAction as EnumMember):
-        define variable oArgs as ActionEventArgs no-undo.
+    method protected void SelectToolbarAction (poAction as UpdateActionEnum):
+        define variable oArgs as ToolbarActionEventArgs no-undo.
         
-        oArgs = new ActionEventArgs(poAction:ToString(), ActionTypeEnum:Event).
+        oArgs = new ToolbarActionEventArgs(poAction:ToString(), ToolbarActionTypeEnum:Event).
         oArgs:SetArgValue('Action', poAction:ToString(), DataTypeEnum:Integer).
         
-        cast(Presenter, ISelectAction):SelectAction(oArgs).                        
+        cast(Presenter, ISelectToolbarAction):SelectToolbarAction(oArgs).                        
     end method.
             
-    method public void UpdateStateChange (poActions as EnumMember extent, poStates as EnumMember extent):
+    method public void UpdateStateChange (poActions as UpdateActionEnum extent, poStates as ActionStateEnum extent):
         define variable iLoop as integer no-undo.
         
         do iLoop = 1 to extent(poActions):
@@ -286,7 +289,7 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.UpdatePanel
         
         /*
         oMainColumn = uxUndoActions:MainColumn.
-        oMainColumn:Text = poUndoActionEventArgs:RecordKey[1].
+        oMainColumn:Text = poUndoToolbarActionEventArgs:RecordKey[1].
         */
         
     end method.        

@@ -27,7 +27,7 @@ using OpenEdge.Lang.QueryTypeEnum.
 
 using Progress.Lang.Error.
 
-class OpenEdge.Core.System.Query 
+class OpenEdge.Core.System.Query use-widget-pool 
     implements IQuery:
 
     /* The model or other component that holds this query. We need it in case of callbacks. */ 
@@ -205,7 +205,7 @@ class OpenEdge.Core.System.Query
     end method.
     
     method protected logical ReopenQuery(phQuery as handle):
-        return ReopenQuery(GetCurrentRowKey(phQuery)).
+        return ReopenQuery(Query:GetCurrentRowKey(phQuery)).
     end method.
     
     method public logical  ReopenQuery(pcRowKey as char extent):
@@ -227,10 +227,10 @@ class OpenEdge.Core.System.Query
     end method.
     
     method public character extent GetCurrentRowKey():
-        return GetCurrentRowKey(QueryHandle).
+        return Query:GetCurrentRowKey(QueryHandle).
     end method.
     
-    method protected character extent GetCurrentRowKey(phQuery as handle):
+    method static public character extent GetCurrentRowKey(phQuery as handle):
         define variable cKeyWhere as character extent no-undo.
         define variable iLoop as integer no-undo.
         define variable iFields as integer no-undo.
@@ -276,7 +276,7 @@ class OpenEdge.Core.System.Query
         
         GetFirst(hQuery).
         
-        return GetCurrentRowKey(hQuery).
+        return Query:GetCurrentRowKey(hQuery).
         
         finally:
             CloseQuery(hQuery).
@@ -291,7 +291,7 @@ class OpenEdge.Core.System.Query
         
         GetNext(hQuery).
                 
-        return GetCurrentRowKey(hQuery).
+        return Query:GetCurrentRowKey(hQuery).
         
         finally:
             CloseQuery(hQuery).
@@ -306,7 +306,7 @@ class OpenEdge.Core.System.Query
         
         GetLast(hQuery).
                 
-        return GetCurrentRowKey(hQuery).
+        return Query:GetCurrentRowKey(hQuery).
         
         finally:
             CloseQuery(hQuery).
@@ -321,7 +321,7 @@ class OpenEdge.Core.System.Query
         
         GetPrev(hQuery).
                 
-        return GetCurrentRowKey(hQuery).
+        return Query:GetCurrentRowKey(hQuery).
         
         finally:
             CloseQuery(hQuery).
@@ -336,7 +336,7 @@ class OpenEdge.Core.System.Query
         
         RepositionQuery(hQuery, piPosition).
                 
-        return GetCurrentRowKey(hQuery).
+        return Query:GetCurrentRowKey(hQuery).
         
         finally:
             CloseQuery(hQuery).
@@ -469,7 +469,7 @@ class OpenEdge.Core.System.Query
     end method.
     
     method public logical GetFirst():
-        GetFirst(QueryHandle).
+        return GetFirst(QueryHandle).
     end method.
     
     method protected logical GetFirst(phQuery as handle):
@@ -479,7 +479,7 @@ class OpenEdge.Core.System.Query
     end method.
                 
     method public logical GetNext():
-        GetNext(QueryHandle).
+        return GetNext(QueryHandle).
     end method.
     
     method protected logical GetNext(phQuery as handle):
@@ -489,7 +489,7 @@ class OpenEdge.Core.System.Query
     end method.
     
     method public logical GetLast():
-        GetLast(QueryHandle).
+        return GetLast(QueryHandle).
     end method.
     
     method protected logical GetLast(phQuery as handle):
@@ -499,7 +499,7 @@ class OpenEdge.Core.System.Query
     end method.
         
     method public logical GetPrev():
-        GetPrev(QueryHandle).
+        return GetPrev(QueryHandle).
     end method.
     
     method protected logical GetPrev(phQuery as handle):

@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\Lang</font>
       <br />CLASS FlagsEnum
     </h2>
-    <p>CLASS OpenEdge.Lang.FlagsEnum </p>
+    <p>CLASS OpenEdge.Lang.FlagsEnum abstract INHERITS <a href="../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -55,6 +55,34 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(integer)'>CONSTRUCTOR </a>
+          </b>(INTEGER piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(integer,character)'>CONSTRUCTOR </a>
+          </b>(INTEGER piValue, CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>STATIC LOGICAL</code>
         </font>
       </td>
@@ -63,7 +91,7 @@
           <b>
             <a href='#isa(integer,openedge.lang.enummember)'> IsA</a>
           </b>(INTEGER piValueSum, <a href="../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poCheckEnum)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines whether a variable or member contains the particular specified
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -75,14 +103,47 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='(integer)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(INTEGER piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(integer,character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(INTEGER piValue, CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='isa(integer,openedge.lang.enummember)'><!-- --></a>
     <h3>IsA</h3>
     <code>STATIC PUBLIC  LOGICAL
       <b>IsA</b>(INTEGER piValueSum, <a href="../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poCheckEnum)
     </code>
     <dl>
+      <dd>Determines whether a variable or member contains the particular specified <p> </dd>
+      <dd>flag enumeration value. </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>piValueSum - Contains the value that is being checked to determine whetherit contains a particular flag. <br/>poCheckEnum - The flag being checked for inclusion.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Whether the value includes the specified member</dd>
+        </dl>
       </dd>
     </dl>
     <hr />

@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 11:24:26 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -11,12 +11,11 @@
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule.
+using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
+using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.IInjectionRequest.
 using OpenEdge.Core.InjectABL.ComponentContainer.
 using OpenEdge.Core.InjectABL.KernelSettings.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
-using OpenEdge.Lang.Collections.*.
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -108,6 +107,6 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
         @return A series of bindings that are registered for the service.
      */
     method public IBindingCollection GetBindings(input poScopeCallback as class Class,
-                                                 input poScope as EnumMember).
+                                                 input poScope as StandardScopeEnum).
     
 end interface.

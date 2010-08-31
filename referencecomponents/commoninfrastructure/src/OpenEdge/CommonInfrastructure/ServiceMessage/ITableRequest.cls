@@ -13,7 +13,7 @@ using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.JoinEnum.
 
-interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherits IServiceMessage, IQueryDefinition */:
+interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherits IQueryDefinition */:
     /** protected set - not changeable - provide with constructor  */  
     define property TableName as char no-undo get. 
     
@@ -22,8 +22,9 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherit
 
     /** retrieve full page when page position is at beginning or end of result-set */
     define property FullPage as logical no-undo get. set.
-    
     define property TableRequestType as TableRequestTypeEnum no-undo get. set.
+    
+    /** */
     define property SearchType as FindTypeEnum no-undo get. set.
        
     /** context info/key for where to start appending page begin or end */
@@ -54,5 +55,5 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherit
     
     /** returns the search expression applied to the BuildQueryString */
     method public character BuildSearchString().
-        
+    
 end interface.

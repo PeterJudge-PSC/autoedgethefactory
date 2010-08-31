@@ -1,17 +1,16 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : FormsEnumHelper
-    Purpose     : 
+    Purpose     : Helper class to translate from .NET GUI enumerations to ABL 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu May 21 14:49:18 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
- 
+
 using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
 using OpenEdge.PresentationLayer.Common.DialogResultEnum.
-using OpenEdge.Lang.EnumMember.
 
 using System.Windows.Forms.CloseReason.
 using System.Windows.Forms.DialogResult.
@@ -19,8 +18,8 @@ using Progress.Util.EnumHelper.
 
 class OpenEdge.PresentationLayer.View.GuiForDotNet.FormsEnumHelper   : 
 
-    method static public EnumMember CloseReasonToMVP(poCloseReason as CloseReason):
-        define variable oResult as EnumMember no-undo.
+    method static public CloseReasonEnum CloseReasonToABL(poCloseReason as CloseReason):
+        define variable oResult as CloseReasonEnum no-undo.
         
         if EnumHelper:AreEqual(poCloseReason, CloseReason:None) then oResult = CloseReasonEnum:None.
         else
@@ -39,8 +38,8 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.FormsEnumHelper   :
         return oResult.
     end method.
     
-    method static public EnumMember DialogResultToMVP(poDialogResult as DialogResult):
-        define variable oResult as EnumMember no-undo.
+    method static public DialogResultEnum DialogResultToABL(poDialogResult as DialogResult):
+        define variable oResult as DialogResultEnum no-undo.
         
         if EnumHelper:AreEqual(poDialogResult, DialogResult:Abort) then oResult = DialogResultEnum:Abort.
         else 

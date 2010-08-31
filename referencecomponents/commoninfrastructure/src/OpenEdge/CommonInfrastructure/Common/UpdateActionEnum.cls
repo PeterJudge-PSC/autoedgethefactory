@@ -35,10 +35,10 @@ class OpenEdge.CommonInfrastructure.Common.UpdateActionEnum final inherits EnumM
         UpdateActionEnum:Undo = new UpdateActionEnum(5, 'Undo').
     end constructor.
     
-	constructor public UpdateActionEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
-	
+    constructor public UpdateActionEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
+    
     method static public UpdateActionEnum EnumFromValue(piValue as integer):
         define variable oMember as UpdateActionEnum no-undo.
         
@@ -51,6 +51,6 @@ class OpenEdge.CommonInfrastructure.Common.UpdateActionEnum final inherits EnumM
         end case.
         
         return oMember.
-    end method.	
-	
+    end method.    
+    
 end class.

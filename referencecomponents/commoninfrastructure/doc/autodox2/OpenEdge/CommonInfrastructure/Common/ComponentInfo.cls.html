@@ -55,6 +55,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.AutoStart'>AutoStart</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the component is auto-started when it is requested, or whether
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a></code>
         </font>
       </td>
@@ -140,8 +154,8 @@
       <td>
         <code>
           <b>
-            <a href='#(progress.lang.class,character,openedge.commoninfrastructure.common.componenttypeenum)'>CONSTRUCTOR </a>
-          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName, <a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a> poComponentType)
+            <a href='#(progress.lang.class,character,openedge.commoninfrastructure.common.componenttypeenum,logical)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName, <a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a> poComponentType, LOGICAL plAutoStart)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -168,6 +182,17 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='property.AutoStart'><!-- --></a>
+    <h3>AutoStart</h3>
+    <code>LOGICAL PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>Whether the component is auto-started when it is requested, or whether <p> </dd>
+      <dd>it should be explicitly started first. The default is TRUE. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='property.ComponentType'><!-- --></a>
     <h3>ComponentType</h3>
     <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a> PUBLIC GET SET </code>
@@ -183,7 +208,7 @@
     <code>CHARACTER PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>Instance name for the running component. Optionally a unique value, although <p> </dd>
-      <dd>often (usually?) just the typename of the component instance </dd>
+      <dd>often (usually?) just the typename of the component instance . </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -229,10 +254,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='(progress.lang.class,character,openedge.commoninfrastructure.common.componenttypeenum)'><!-- --></a>
+    <a name='(progress.lang.class,character,openedge.commoninfrastructure.common.componenttypeenum,logical)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName, <a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a> poComponentType)
+      <b>CONSTRUCTOR</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName, <a href="../../../OpenEdge/CommonInfrastructure/Common/ComponentTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum" target="classFrame">ComponentTypeEnum</a> poComponentType, LOGICAL plAutoStart)
     </code>
     <dl>
       <dd>

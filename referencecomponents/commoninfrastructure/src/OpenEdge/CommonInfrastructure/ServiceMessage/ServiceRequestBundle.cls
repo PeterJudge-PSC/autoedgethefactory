@@ -5,15 +5,14 @@
     Description : 
     @author pjudge
     Created     : Mon Apr 26 15:03:13 EDT 2010
-    Notes       : * This is the common
+    Notes       : 
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IDefineRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceAdapter.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
@@ -44,12 +43,16 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceRequestBundle
     
     /** (mandatory) The ServiceMessageManager  managing the requests in this bundle. */
     define public property ServiceMessageManager as IServiceMessageManager no-undo get. private set.
+    
     /** (mandatory) The object making the requests contained in this bundle */
     define public property Requestor as IMessageRequestor no-undo get. private set.
+    
     /** (mandatory) The ServiceMessageActionEnum  type of action this bundle is performing */
     define public property ActionType as ServiceMessageActionEnum no-undo get. private set.
+    
     /* (derived) The number of IServiceRequests that have outstanding requests */
     define public property OutstandingRequests as integer no-undo get. protected set.
+    
     /* (derived) The total number of IServiceRequests this bundle is managing */
     define public property TotalRequests as integer no-undo 
         get():
@@ -114,41 +117,41 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceRequestBundle
         end catch.
     end method.
     
-    /** Execute all of a bundle's requests. */        
+    /** Execute all of a bundle's requests. */
     method public void ExecuteBundle():
-        define variable oRequestByAdapter as IMap no-undo.
+        define variable oRequestByProvider as IMap no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oRequest as IServiceRequest no-undo.
         define variable oString as String no-undo.
-        define variable oServiceAdapter as IServiceAdapter no-undo.
-        define variable cServiceAdapter as character no-undo.
+        define variable oServiceProvider as IServiceProvider no-undo.
+        define variable cService as character no-undo.
         
         /* Group all together requests by service, which allows us to make one 
            call per service (via the service adapter). */
-        oRequestByAdapter = new TypedMap(Class:GetClass('OpenEdge.Lang.String'),
-                                         Class:GetClass('OpenEdge.Lang.Collections.TypedCollection')).
+        oRequestByProvider = new TypedMap(Class:GetClass('OpenEdge.Lang.String'),
+                                          Class:GetClass('OpenEdge.Lang.Collections.TypedCollection')).
         
         oIterator = ServiceMessages:Iterator().
         do while oIterator:HasNext():
             oRequest = cast(oIterator:Next(), IServiceRequest).
             oString = new String(cast(oRequest, IServiceMessage):Service).
             
-            if not oRequestByAdapter:ContainsKey(oString) then
-                oRequestByAdapter:Put(oString, new IServiceMessageCollection()).
+            if not oRequestByProvider:ContainsKey(oString) then
+                oRequestByProvider:Put(oString, new IServiceMessageCollection()).
             
-            cast(oRequestByAdapter:Get(oString), ICollection):Add(oRequest).
+            cast(oRequestByProvider:Get(oString), ICollection):Add(oRequest).
         end.
         
-        oIterator = oRequestByAdapter:KeySet:Iterator().
+        oIterator = oRequestByProvider:KeySet:Iterator().
         do while oIterator:HasNext():
             assign oString = cast(oIterator:Next(), String)
-                   cServiceAdapter = oString:Value
-                   oServiceAdapter = cast(ServiceMessageManager, IService):ServiceManager:GetServiceAdapter(cServiceAdapter)
+                   cService = oString:Value
+                   oServiceProvider = cast(ServiceMessageManager, IService):ServiceManager:GetServiceProvider(cService)
                    /* increment before call since we're async, and so the Response call will be called
                       by the Fetch/Save/Define() call ... */
                    OutstandingRequests = OutstandingRequests + 1.
             
-            oServiceAdapter:ExecuteRequest(cast(cast(oRequestByAdapter:Get(oString), ICollection):ToArray(), IServiceRequest),
+            oServiceProvider:ExecuteRequest(cast(cast(oRequestByProvider:Get(oString), ICollection):ToArray(), IServiceRequest),
                                            ServiceMessageManager).                                                    
         end.
         

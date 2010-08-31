@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : TableRequest
     Purpose     : 
     Syntax      : 
@@ -6,7 +6,7 @@
     @author pjudge
     Created     : Tue Apr 27 14:42:27 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest.
@@ -23,7 +23,7 @@ using OpenEdge.Lang.JoinEnum.
 class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDefinition
         implements ITableRequest: 
     
-    define public property TableName as character no-undo get. private set. 
+    define public property TableName as character no-undo get. private set.
     define public property PageSize as integer no-undo get. set. 
     define public property FullPage as logical no-undo get. set.
     define public property TableRequestType as TableRequestTypeEnum no-undo get. set. 
@@ -32,6 +32,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
     define public property RowKey as character extent no-undo get. set. 
     
     constructor public TableRequest(pcTableName as character):
+        super().
         TableName = pcTableName.
     end constructor.
     
@@ -41,9 +42,14 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
                                  pcFieldValue as character,
                                  poFieldType as DataTypeEnum,
                                  poJoinType as JoinEnum):
-        @todo(task="implement", action="").
+        this-object:AddFilter(pcBufferName,
+                              pcFieldName,
+                              poOperator,
+                              pcFieldValue,
+                              poFieldType,
+                              poJoinType).
     end method.
-
+    
     method public void GetSearch(pcBufferName as character,
                                  output pcFieldName as character extent,
                                  output poOperator as OperatorEnum extent,
@@ -52,9 +58,9 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
                                  output poJoinType as JoinEnum extent):
         @todo(task="implement", action="").
     end method.
-
-    method public character BuildSearchString(  ):
-        @todo(task="implement", action="").
+    
+    method public character BuildSearchString():
+        return GetQueryString().
     end method.
     
 end class.

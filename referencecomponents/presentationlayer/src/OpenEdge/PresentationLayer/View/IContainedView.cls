@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jan 09 11:55:24 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -16,7 +16,7 @@ interface OpenEdge.PresentationLayer.View.IContainedView /*inherits IView */ :
         
         We use a Set method, since we cannot reflect on properties yet 
         (as of 10.2B) and we want to be able to set this value via InjectABL */
-    define public property PresenterService as class Class no-undo get.
+    define public property PresenterService as class Class no-undo get. set.
     method public void SetPresenterService(poService as class Class).
     
     /* Show as MDI child */

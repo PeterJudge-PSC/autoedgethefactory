@@ -1,12 +1,13 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : Parameter
-    Purpose     : 
+    Purpose     : Constructor, method or property parameter/argument class for
+                  dependency injection.
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 16:03:46 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
@@ -14,7 +15,6 @@ using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.System.InvalidValueSpecifiedError.
 using OpenEdge.Core.System.InvalidCallError.
 using OpenEdge.Core.System.ArgumentError.
-using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.Assert.
 
@@ -23,7 +23,7 @@ using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter:
     define public property Name as character no-undo get. private set. 
-    define public property Type as EnumMember /* DataTypeEnum:EnumMember */ no-undo get. private set.
+    define public property Type as DataTypeEnum no-undo get. private set.
 
     /** Specify a declared type for cases where the parameter an object or array thereof. ABL doesn't currently (10.2B)
         allow us to discover either the declared type of the array, or the signature of the callee (method, property, ctor),
@@ -87,14 +87,14 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter
     end method.
     
     /* Primitive value constructors */
-    constructor public Parameter(pcName as character, pcValue as char, poType as EnumMember):
+    constructor public Parameter(pcName as character, pcValue as char, poType as DataTypeEnum):
         assign Name = pcName
                Type = poType
                extent(mcValue) = 1
                mcValue[1] = pcValue.
     end constructor.
     
-    constructor public Parameter(pcName as character, pcValue as char extent, poType as EnumMember):
+    constructor public Parameter(pcName as character, pcValue as char extent, poType as DataTypeEnum):
         assign Name = pcName
                Type = poType
                mcValue = pcValue.
@@ -150,7 +150,7 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter
         this-object(pcName, poType, DataTypeEnum:Class).
     end constructor.
     
-    constructor public Parameter(pcName as character, poType as class Class, poDataType as EnumMember):
+    constructor public Parameter(pcName as character, poType as class Class, poDataType as DataTypeEnum):
         Assert:ArgumentNotNull(poType, 'Object value').
         Assert:ArgumentNotNull(poDataType, 'Data type').
         
@@ -175,7 +175,7 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter
         Type = DataTypeEnum:Class.                    
     end constructor.
     
-    constructor public Parameter(pcName as character, poType as class Class extent, poDataType as EnumMember):
+    constructor public Parameter(pcName as character, poType as class Class extent, poDataType as DataTypeEnum):
         /* These are always PLC */
         this-object(pcName,
                     poType,

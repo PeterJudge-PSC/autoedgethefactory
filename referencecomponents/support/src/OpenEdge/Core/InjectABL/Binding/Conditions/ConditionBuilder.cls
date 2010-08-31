@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Mar 08 11:50:07 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -31,7 +31,7 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder implements ICo
         get():
             BindingCondition:Push(Condition:And).
             return this-object.
-        end method.
+        end get.
 
     define public property Or as IConditionSyntax no-undo
         get():

@@ -32,8 +32,8 @@ class OpenEdge.PresentationLayer.View.EventLoopModeEnum final inherits EnumMembe
         EventLoopModeEnum:Embedded = new EventLoopModeEnum('Embedded').
     end constructor.
 
-	constructor public EventLoopModeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public EventLoopModeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

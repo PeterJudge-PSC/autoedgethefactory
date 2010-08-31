@@ -40,8 +40,15 @@
     </h2>
     <p>INTERFACE OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext </p>
     <dl>
+      <dd>------------------------------------------------------------------------ <p> </dd>
+      <dd>File        : ITableContext Purpose     : Interface for table context Syntax      : Description : </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Author:</b>
+          </dt>
+          <dd>hdanielsCreated     : Tue Feb 09 18:28:13 EST 2010 Notes       : ---------------------------------------------------------------------- </dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -63,7 +70,7 @@
           <b>
             <a href='#property.NextPosition'>NextPosition</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context info/key for where to start appending next page
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -77,7 +84,7 @@
           <b>
             <a href='#property.NumRows'>NumRows</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num rows in resultset (on server if paging)
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -91,7 +98,7 @@
           <b>
             <a href='#property.PrevPosition'>PrevPosition</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context info/key for where to start appending next page
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -105,7 +112,7 @@
           <b>
             <a href='#property.TableName'>TableName</a>
           </b> PROPERTY GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected set - not changeable - provide with constructor
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -121,6 +128,7 @@
     <h3>NextPosition</h3>
     <code>CHARACTER PROPERTY GET SET </code>
     <dl>
+      <dd>context info/key for where to start appending next page <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -130,6 +138,7 @@
     <h3>NumRows</h3>
     <code>INTEGER PROPERTY GET SET </code>
     <dl>
+      <dd>num rows in resultset (on server if paging) <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -139,6 +148,7 @@
     <h3>PrevPosition</h3>
     <code>CHARACTER PROPERTY GET SET </code>
     <dl>
+      <dd>context info/key for where to start appending next page <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -148,6 +158,7 @@
     <h3>TableName</h3>
     <code>CHARACTER PROPERTY GET </code>
     <dl>
+      <dd>protected set - not changeable - provide with constructor <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

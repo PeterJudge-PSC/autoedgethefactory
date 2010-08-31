@@ -1,18 +1,16 @@
 /** ------------------------------------------------------------------------
     File        : ServiceMessageManager
-    Purpose     : Manager aand broker of ServiceMessages and their Bundles (request/responses)
+    Purpose     : Manager and broker of ServiceMessages and their Bundles (request/responses)
     Syntax      : 
     Description : 
-    @author pjudge
+    @author pjudge 
     Created     : Mon Apr 26 12:26:37 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------  */
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageEventArgs.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundleCollection.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceAdapter.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
@@ -197,12 +195,12 @@ class OpenEdge.CommonInfrastructure.Common.ServiceMessageManager abstract inheri
     end method.
     
     /* IMessageConsumer */
-	method public void ActionCompleted(input poResponse as IServiceResponse):
-		assign miSyncResponseExtent = miSyncResponseExtent + 1. 
-		       moSyncResponse[miSyncResponseExtent] = poResponse
-		       .
-	end method.
-	
+    method public void ActionCompleted(input poResponse as IServiceResponse):
+        assign miSyncResponseExtent = miSyncResponseExtent + 1. 
+               moSyncResponse[miSyncResponseExtent] = poResponse
+               .
+    end method.
+    
     /** Notification that all requests within a bundle are about to be executed. 
         
         @param poBundle The request bundle whose requests are being acted upon. */    
@@ -219,6 +217,6 @@ class OpenEdge.CommonInfrastructure.Common.ServiceMessageManager abstract inheri
         @param poBundle The request bundle whose request are now complete   */    
     method public void RequestCompleted(input poBundle as IServiceRequestBundle):
         /* no-op */
-	end method.
-	
+    end method.
+    
 end class.

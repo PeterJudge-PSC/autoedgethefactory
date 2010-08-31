@@ -42,18 +42,18 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundleCollecti
         return cast(super:Get(poKey), IServiceRequestBundle).
     end method.
     
-    method public String Put(input poKey as String, input poValue as IServiceRequestBundle):		
-		return cast(super:Put(poKey, poValue), String).
-	end method.
+    method public String Put(input poKey as String, input poValue as IServiceRequestBundle):        
+        return cast(super:Put(poKey, poValue), String).
+    end method.
 
     method public String Put(input pcKey as character, input poValue as IServiceRequestBundle):     
         return this-object:Put(new String(pcKey), poValue). 
     end method.
     
-	method public String Remove(input poKey as String):
-		return cast(super:Remove(input poKey), String).
-	end method.
-	
+    method public String Remove(input poKey as String):
+        return cast(super:Remove(input poKey), String).
+    end method.
+    
     method public String Remove(input pcKey as character):
         return this-object:Remove(new String(pcKey)).
     end method.

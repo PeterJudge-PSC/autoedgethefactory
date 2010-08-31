@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\PresentationLayer\Model</font>
       <br />CLASS UndoOnConflictEnum
     </h2>
-    <p>CLASS OpenEdge.PresentationLayer.Model.UndoOnConflictEnum FINAL </p>
+    <p>CLASS OpenEdge.PresentationLayer.Model.UndoOnConflictEnum FINAL INHERITS <a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a></code>
         </font>
       </td>
       <td>
@@ -63,13 +63,13 @@
           <b>
             <a href='#property.All'>All</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discard all changes on confliciting record
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a></code>
         </font>
       </td>
       <td>
@@ -77,13 +77,13 @@
           <b>
             <a href='#property.Before'>Before</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overwrite before-image changes only. This mode keeps changes and
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a></code>
         </font>
       </td>
       <td>
@@ -91,13 +91,13 @@
           <b>
             <a href='#property.Conflict'>Conflict</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discard only conflicting field changes.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a></code>
         </font>
       </td>
       <td>
@@ -111,7 +111,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a></code>
         </font>
       </td>
       <td>
@@ -125,7 +125,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a></code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a></code>
         </font>
       </td>
       <td>
@@ -133,7 +133,7 @@
           <b>
             <a href='#property.None'>None</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Keeps all changes as well as the previous before-image record.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -159,6 +159,20 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="property_detail"><!-- --></A>
@@ -170,8 +184,9 @@
 				
     <a name='property.All'><!-- --></a>
     <h3>All</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Discard all changes on confliciting record <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -179,8 +194,10 @@
     <hr />
     <a name='property.Before'><!-- --></a>
     <h3>Before</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Overwrite before-image changes only. This mode keeps changes and <p> </dd>
+      <dd>allows resave. Requires Undo/Reset to show server changes. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -188,8 +205,9 @@
     <hr />
     <a name='property.Conflict'><!-- --></a>
     <h3>Conflict</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Discard only conflicting field changes. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -197,7 +215,7 @@
     <hr />
     <a name='property.Default'><!-- --></a>
     <h3>Default</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -206,7 +224,7 @@
     <hr />
     <a name='property.Merge'><!-- --></a>
     <h3>Merge</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -215,8 +233,10 @@
     <hr />
     <a name='property.None'><!-- --></a>
     <h3>None</h3>
-    <code><a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/UndoOnConflictEnum.cls.html" title="OpenEdge.PresentationLayer.Model.UndoOnConflictEnum" target="classFrame">UndoOnConflictEnum</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>Keeps all changes as well as the previous before-image record. <p> </dd>
+      <dd>A reread of data is required to save the record. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -233,6 +253,17 @@
     <h3>CONSTRUCTOR</h3>
     <code>STATIC  
       <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcName)
     </code>
     <dl>
       <dd>

@@ -1,14 +1,14 @@
-/*------------------------------------------------------------------------
-   File        : Form
-   Purpose     : 
+/** ------------------------------------------------------------------------
+   File        : MVPForm
+   Purpose     : ABL Form which is the base View
    Syntax      : 
    Description : 
-   Author(s)   : pjudge
+   @author pjudge
    Created     : Wed Dec 24 12:00:08 EST 2008
    Notes       : This class should be abstract, but the Visual Designer needs
                  a form to inherit from a concrete class in order to paint it
                  on the canvas. 
- ----------------------------------------------------------------------*/
+ ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.View.IView.
@@ -17,13 +17,14 @@ using OpenEdge.PresentationLayer.View.IContainedView.
 using OpenEdge.PresentationLayer.View.GuiForDotNet.MVPForm.
 using OpenEdge.PresentationLayer.View.IComponentContainer.
 using OpenEdge.PresentationLayer.View.EventLoopModeEnum.
-using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.View.GuiForDotNet.FormsEnumHelper.
-
+using OpenEdge.PresentationLayer.View.EventLoopModeEnum.
+using OpenEdge.PresentationLayer.Presenter.IPresenter.
+using OpenEdge.PresentationLayer.Common.ModelActionEnum.
+ 
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.Lang.EnumMember.
 
 using System.Windows.Forms.Control.
 using System.Windows.Forms.FormClosingEventArgs.
@@ -43,6 +44,7 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.MVPForm inherits Form
     implements IContainerView, IView, IComponent:
     
     define public property AllowDestroyComponent as logical initial true no-undo get. set.
+    
     define public property Presenter as IPresenter no-undo get. set.
 
     /** Stores information about the component, such as a developer-defined instance name 
@@ -56,9 +58,8 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.MVPForm inherits Form
        will have the static variable set (or not). */
     define private variable mlStartedByPresenter as logical no-undo.
     
-    /** Stores what the event loop mode is for this View. Values from
-        OpenEdge.PresentationLayer.View.EventLoopModeEnum */
-    define protected property EventLoopMode as EnumMember no-undo get. set.
+    /** Stores what the event loop mode is for this View. */
+    define protected property EventLoopMode as EventLoopModeEnum no-undo get. set.
     
     constructor public MVPForm(poComponentInfo as IComponentInfo):
         super().
@@ -269,8 +270,8 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.MVPForm inherits Form
             we sincerely hope. */
         if EnumHelper:AreNotEqual(e:CloseReason, CloseReason:None) then
             e:Cancel = not this-object:Presenter:CanCloseView(
-                            FormsEnumHelper:DialogResultToMVP(DialogResult),
-                            FormsEnumHelper:CloseReasonToMVP(e:CloseReason) ).
+                            FormsEnumHelper:DialogResultToABL(DialogResult),
+                            FormsEnumHelper:CloseReasonToABL(e:CloseReason) ).
     end method.
     
     method public void ShowEmbedded(poParentView as Object):
@@ -298,7 +299,7 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.MVPForm inherits Form
         EndEventLoop().        
     end method.
     
-    method public void BeginEventLoop(poEventLoopMode as EnumMember):
+    method public void BeginEventLoop(poEventLoopMode as EventLoopModeEnum):
         EventLoopMode = poEventLoopMode.
         
         case EventLoopMode:
@@ -332,7 +333,7 @@ class OpenEdge.PresentationLayer.View.GuiForDotNet.MVPForm inherits Form
         this-object:Dispose().
     end method.
     
-    method public void DataRefreshed (poModelService as IComponentInfo, pcQuery as char, poModelAction as EnumMember).   /* OpenEdge.PresentationLayer.Common.ModelActionEnum */
+    method public void DataRefreshed (poModelService as IComponentInfo, pcQuery as char, poModelAction as ModelActionEnum):
     end method.
     
     method public void DataFetched (poModelService as IComponentInfo, plNewData as log):

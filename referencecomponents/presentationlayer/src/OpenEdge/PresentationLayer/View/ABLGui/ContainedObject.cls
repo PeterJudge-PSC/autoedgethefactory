@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Feb 20 14:41:33 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -12,11 +12,11 @@ routine-level on error undo, throw.
 using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.View.IContainedView.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
+using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.   
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 
-using OpenEdge.Lang.EnumMember.  
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -36,7 +36,7 @@ class OpenEdge.PresentationLayer.View.ABLGui.ContainedObject abstract
                 dynamic-function('setPresenter' in WindowHandle, poPresenter).
         end set.
 
-    define public property PresenterService as class Class no-undo get. private set. 
+    define public property PresenterService as class Class no-undo get. set. 
     define public property ComponentInfo as IComponentInfo no-undo get. private set.
 
     method public void Create():
@@ -87,7 +87,7 @@ class OpenEdge.PresentationLayer.View.ABLGui.ContainedObject abstract
         return hObject.
     end method.
     
-    method public abstract void DataRefreshed(pcModel as char, pcQuery as char, poModelAction as EnumMember).   /* OpenEdge.PresentationLayer.Common.ModelActionEnum */
+    method public abstract void DataRefreshed(pcModel as char, pcQuery as char, poModelAction as ModelActionEnum).
     
     method public abstract void DataFetched(pcModel as char, plNewData as logical).
     
@@ -109,7 +109,7 @@ class OpenEdge.PresentationLayer.View.ABLGui.ContainedObject abstract
     method public void CloseView(  ):
     end method.
 
-    method public void DataRefreshed(poModelService as IComponentInfo, pcQuery as character, poModelAction as EnumMember):
+    method public void DataRefreshed(poModelService as IComponentInfo, pcQuery as character, poModelAction as ModelActionEnum):
 
     end method.
 

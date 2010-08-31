@@ -6,7 +6,7 @@
 
     Description : Standard Service Interface procedure for the save method
 
-    @author(s)   : john
+    @@author john
     Created     : Tue Jan 27 16:17:52 EST 2009
     Notes       : * The vast bulk of this code is infrastructure - the only 'real'
                     work that this procedure does is the call to ExecuteSyncRequest().
@@ -21,7 +21,7 @@ routine-level on error undo, throw.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IDatasetSaveResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
@@ -51,6 +51,7 @@ define variable oRequest as ISaveRequest extent no-undo.
 define variable cRequestId as character extent no-undo.
 define variable oResponse as ISaveResponse extent no-undo.
 define variable oContext as IUserContext no-undo.
+define variable hDataSet as handle no-undo.
 
 /* Deserialize requests, context */
 assign iMax = extent(pmRequest)
@@ -90,8 +91,8 @@ assign iMax = extent(oResponse)
 oOutput = new ObjectOutputStream().
 
 do iLoop = 1 to iMax:
-    if type-of(oResponse[iLoop], IDatasetSaveResponse) then
-        phResponseDataset[iLoop] = cast(oResponse[iLoop], IDatasetSaveResponse):Handle.
+    cast(oResponse[iLoop], IServiceMessage):GetData(output hDataSet). 
+    phResponseDataset[iLoop] = hDataSet. 
     
     oOutput:Reset().
     oOutput:WriteObjectArray(oResponse[iLoop]).

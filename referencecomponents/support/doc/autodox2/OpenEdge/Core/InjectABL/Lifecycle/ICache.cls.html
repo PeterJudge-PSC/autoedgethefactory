@@ -80,6 +80,34 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the activation pipeline in use for this kernel *
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PruningInterval'>PruningInterval</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Lang/DateTimeAddIntervalEnum.cls.html" title="OpenEdge.Lang.DateTimeAddIntervalEnum" target="classFrame">DateTimeAddIntervalEnum</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PruningUnit'>PruningUnit</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="method_summary"><!-- --></A>
@@ -112,8 +140,8 @@
       <td>
         <code>
           <b>
-            <a href='#clear(object)'> Clear</a>
-          </b>(<a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poScope)
+            <a href='#clear(progress.lang.object)'> Clear</a>
+          </b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poScope)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Immediately deactivates and removes all instances in the cache that are owned by
       </td>
     </tr>
@@ -140,8 +168,8 @@
       <td>
         <code>
           <b>
-            <a href='#release(object)'> Release</a>
-          </b>(<a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+            <a href='#release(progress.lang.object)'> Release</a>
+          </b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deactivates and releases the specified instance from the cache.
       </td>
     </tr>
@@ -154,15 +182,15 @@
       <td>
         <code>
           <b>
-            <a href='#remember(openedge.core.injectabl.lifecycle.ilifecyclecontext,object)'> Remember</a>
-          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poReference)
+            <a href='#remember(openedge.core.injectabl.lifecycle.ilifecyclecontext,progress.lang.object)'> Remember</a>
+          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poReference)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stores the specified instance in the cache.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>Object</code>
+          <code><a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
         </font>
       </td>
       <td>
@@ -182,8 +210,8 @@
       <td>
         <code>
           <b>
-            <a href='#trygetcontext(object)'> TryGetContext</a>
-          </b>(<a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+            <a href='#trygetcontext(progress.lang.object)'> TryGetContext</a>
+          </b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tries to get an instance's Context for use with additional decoration/injection. *
       </td>
     </tr>
@@ -216,6 +244,24 @@
       </dd>
     </dl>
     <hr />
+    <a name='property.PruningInterval'><!-- --></a>
+    <h3>PruningInterval</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PruningUnit'><!-- --></a>
+    <h3>PruningUnit</h3>
+    <code><a href="../../../../OpenEdge/Lang/DateTimeAddIntervalEnum.cls.html" title="OpenEdge.Lang.DateTimeAddIntervalEnum" target="classFrame">DateTimeAddIntervalEnum</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
 				<A NAME="method_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -235,16 +281,21 @@
       </dd>
     </dl>
     <hr />
-    <a name='clear(object)'><!-- --></a>
+    <a name='clear(progress.lang.object)'><!-- --></a>
     <h3>Clear</h3>
     <code>PUBLIC  VOID
-      <b>Clear</b>(<a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poScope)
+      <b>Clear</b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poScope)
     </code>
     <dl>
       <dd>Immediately deactivates and removes all instances in the cache that are owned by <p> </dd>
-      <dd>the specified scope. <param name="scope">The scope whose instances should be deactivated.</param> </dd>
+      <dd>the specified scope. </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>scope - The scope whose instances should be deactivated.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -260,49 +311,69 @@
       </dd>
     </dl>
     <hr />
-    <a name='release(object)'><!-- --></a>
+    <a name='release(progress.lang.object)'><!-- --></a>
     <h3>Release</h3>
     <code>PUBLIC  LOGICAL
-      <b>Release</b>(<a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+      <b>Release</b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance)
     </code>
     <dl>
       <dd>Deactivates and releases the specified instance from the cache. <p> </dd>
-      <dd><param name="instance">The instance to release.</param> <returns>true if the instance was found and released. otherwise false.</returns> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>instance - The instance to release.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>true if the instance was found and released. otherwise false.</returns></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
-    <a name='remember(openedge.core.injectabl.lifecycle.ilifecyclecontext,object)'><!-- --></a>
+    <a name='remember(openedge.core.injectabl.lifecycle.ilifecyclecontext,progress.lang.object)'><!-- --></a>
     <h3>Remember</h3>
     <code>PUBLIC  VOID
-      <b>Remember</b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poReference)
+      <b>Remember</b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poReference)
     </code>
     <dl>
       <dd>Stores the specified instance in the cache. <p> </dd>
-      <dd><param name="context">The context to store.</param> <param name="reference">The instance reference.</param> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>context - The context to store.<br/>reference - The instance reference.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='tryget(openedge.core.injectabl.lifecycle.ilifecyclecontext)'><!-- --></a>
     <h3>TryGet</h3>
-    <code>PUBLIC  Object
+    <code>PUBLIC  <a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
       <b>TryGet</b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext)
     </code>
     <dl>
       <dd>Tries to retrieve an instance to re-use in the specified context. <p> </dd>
-      <dd><param name="context">The context that is being activated.</param> <returns>The instance for re-use, or unknown if none has been stored.</returns> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>returns:</b>
+          </dt>
+          <dd>The instance for re-use, or unknown if none has been stored.</returns></dd>
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>context - The context that is being activated.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
-    <a name='trygetcontext(object)'><!-- --></a>
+    <a name='trygetcontext(progress.lang.object)'><!-- --></a>
     <h3>TryGetContext</h3>
     <code>PUBLIC  <a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a>
-      <b>TryGetContext</b>(<a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+      <b>TryGetContext</b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance)
     </code>
     <dl>
       <dd>Tries to get an instance's Context for use with additional decoration/injection. * <p> </dd>

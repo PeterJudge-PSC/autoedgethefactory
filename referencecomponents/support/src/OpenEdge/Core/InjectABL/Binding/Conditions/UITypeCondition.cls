@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Apr 23 15:11:37 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -25,7 +25,7 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition:
                UITypeCondition:ABLGui = new Condition(UITypeEnum:AblGui)
                UITypeCondition:RiaGui = new Condition(UITypeEnum:RiaGui)
                UITypeCondition:DotNetGui = new Condition(UITypeEnum:DotNetGui)
-               UITypeCondition:Current = new Condition(UITypeEnum:Current) 
+/*               UITypeCondition:Current = new Condition(UITypeEnum:Current)*/
                .
     end constructor.
     

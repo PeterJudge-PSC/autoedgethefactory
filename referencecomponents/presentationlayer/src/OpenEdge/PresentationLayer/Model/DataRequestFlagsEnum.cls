@@ -29,8 +29,8 @@ class OpenEdge.PresentationLayer.Model.DataRequestFlagsEnum inherits FlagsEnum f
         DataRequestFlagsEnum:Default = DataRequestFlagsEnum:IgnoreContextForFetch. 
     end constructor.
 
-	constructor public DataRequestFlagsEnum ( input piValue as integer ):
-		super (input piValue).
-	end constructor.
+    constructor public DataRequestFlagsEnum ( input piValue as integer ):
+        super (input piValue).
+    end constructor.
 
 end class.

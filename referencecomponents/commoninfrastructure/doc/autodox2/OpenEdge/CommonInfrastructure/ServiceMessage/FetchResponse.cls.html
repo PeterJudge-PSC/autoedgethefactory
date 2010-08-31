@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
       <br />CLASS FetchResponse
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.FetchResponse INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage" target="classFrame">ServiceMessage</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> , <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.FetchResponse INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse" target="classFrame">ServiceResponse</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContextCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContextCollection" target="classFrame">ITableContextCollection</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponseCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection" target="classFrame">ITableResponseCollection</a></code>
         </font>
       </td>
       <td>
@@ -84,36 +84,22 @@
       <td>
         <code>
           <b>
-            <a href='#(character)'>CONSTRUCTOR </a>
-          </b>(CHARACTER pcService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#(openedge.commoninfrastructure.servicemessage.ifetchrequest)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructor to create a request from a response, so we can tie 'em together again.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code></code>
+          <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#(character,character)'>CONSTRUCTOR </a>
-          </b>(CHARACTER pcMessageId, CHARACTER pcService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContext.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext" target="classFrame">ITableContext</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#gettablecontext(character)'> GetTableContext</a>
-          </b>(CHARACTER pcTableName)
+            <a href='#inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> InitTableResponseFromRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -128,7 +114,7 @@
 				
     <a name='property.TableResponses'><!-- --></a>
     <h3>TableResponses</h3>
-    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContextCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContextCollection" target="classFrame">ITableContextCollection</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponseCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection" target="classFrame">ITableResponseCollection</a> PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -142,32 +128,22 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='(character)'><!-- --></a>
+    <a name='(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(CHARACTER pcService)
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
     </code>
     <dl>
+      <dd>Constructor to create a request from a response, so we can tie 'em together again. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='(character,character)'><!-- --></a>
-    <h3>CONSTRUCTOR</h3>
-    <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(CHARACTER pcMessageId, CHARACTER pcService)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='gettablecontext(character)'><!-- --></a>
-    <h3>GetTableContext</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContext.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext" target="classFrame">ITableContext</a>
-      <b>GetTableContext</b>(CHARACTER pcTableName)
+    <a name='inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
+    <h3>InitTableResponseFromRequest</h3>
+    <code>PUBLIC  VOID
+      <b>InitTableResponseFromRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
     </code>
     <dl>
       <dd>

@@ -6,7 +6,7 @@
 
     Description : 
 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Feb 17 10:14:49 EST 2009
     Notes       :
   ----------------------------------------------------------------------*/
@@ -23,10 +23,15 @@ using Progress.Lang.Class.
 define variable oInjectABLKernel as IKernel no-undo.
 define variable oModules as IInjectionModuleCollection no-undo.
 define variable oServiceManager as IServiceManager no-undo.
+define variable cModulePaths as character extent no-undo.
 
 oModules = new IInjectionModuleCollection().
 oModules:Add(new CommonInfrastructureModule()).
 oInjectABLKernel = new StandardKernel(oModules).
+
+cModulePaths[1] = 'OpenEdge.CommonInfrastructure.InjectABL'.
+cModulePaths[1] = 'OpenEdge.PresentationLayer.InjectABL'.
+oInjectABLKernel:Load(cModulePaths).
 
 ABLSession:Instance:SessionProperties:Put(Class:GetClass('OpenEdge.Core.InjectABL.IKernel'), oInjectABLKernel).
 

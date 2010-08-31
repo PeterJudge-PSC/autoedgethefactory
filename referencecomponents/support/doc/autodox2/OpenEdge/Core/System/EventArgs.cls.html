@@ -63,7 +63,7 @@
           <b>
             <a href='#property.Empty'>Empty</a>
           </b> STATIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A single instance of this class so that we don't have
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -102,6 +102,8 @@
     <h3>Empty</h3>
     <code><a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> STATIC GET PRIVATE SET </code>
     <dl>
+      <dd>A single instance of this class so that we don't have <p> </dd>
+      <dd>to pass nulls around (ie we can depend on there always being a value if we so desire). </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

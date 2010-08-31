@@ -1,30 +1,25 @@
-/*------------------------------------------------------------------------
+@todo(task="question", action="why do we need this specialisation? for ISaveRequest only?").
+/** ------------------------------------------------------------------------
     File        : SaveResponse
-    Purpose     : 
+    Purpose     : General save response class 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 27 15:09:22 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 
-class OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse inherits ServiceMessage
-        implements ISaveResponse, IServiceResponse: 
-
-    constructor public SaveResponse(input pcService as character):
-        super(pcService, ServiceMessageActionEnum:Save).
-    end constructor.
+class OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse inherits ServiceResponse
+        implements ISaveResponse:
     
-    constructor public SaveResponse(input pcMessageId as character,
-                                    input pcService as character):
-        super(pcMessageId, pcService, ServiceMessageActionEnum:Save).
-    end constructor.
+	constructor public SaveResponse(input poServiceRequest as ISaveRequest):
+		super (input cast(poServiceRequest, IServiceRequest)).
+	end constructor.
     
 end class.
