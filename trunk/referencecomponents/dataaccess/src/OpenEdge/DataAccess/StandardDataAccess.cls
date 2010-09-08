@@ -24,7 +24,7 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
@@ -90,9 +90,11 @@ class OpenEdge.DataAccess.StandardDataAccess
         /* Don't pass in the request as an argument since we don't know how many of the dataset's
            tables are being operated on in this request. */
         moCurrentResponse = new SaveResponse(poRequest).
-        cast(moCurrentResponse, IServiceMessage):SetData(DatasetHandle, MessageDataFormatEnum:ProDataSet).
+        cast(moCurrentResponse, IServiceMessage):SetData(DatasetHandle, DataFormatEnum:ProDataSet).
         
-        AddDatasetCallbacks(DatasetHandle, ServiceMessageActionEnum:Save).
+        AddDatasetCallbacks(DatasetHandle,
+                            /* Should be Save or something similar. You'd expect. */
+                            cast(poRequest, IServiceMessage):ActionType).
         
         iMax = DatasetHandle:num-buffers.
         do iLoop = 1 to iMax:
@@ -124,7 +126,7 @@ class OpenEdge.DataAccess.StandardDataAccess
         /* Don't pass in the request as an argument since we don't know how many of the dataset's
            tables are being operated on in this request. */
         moCurrentResponse = new FetchResponse(poRequest).
-        cast(moCurrentResponse, IServiceMessage):SetData(DatasetHandle, MessageDataFormatEnum:ProDataSet).
+        cast(moCurrentResponse, IServiceMessage):SetData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         AddDatasetCallbacks(DatasetHandle, ServiceMessageActionEnum:Fetch).
         

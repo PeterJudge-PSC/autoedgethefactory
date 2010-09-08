@@ -63,7 +63,7 @@
           <b>
             <a href='#fetchdata(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> FetchData</a>
           </b>(<a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data retrieval method. This is simply a call to fetch. The response
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -77,6 +77,62 @@
           <b>
             <a href='#getdata()'> GetData</a>
           </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The response to a data retrieval request made in FetchData.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdatatarget(OUTPUT_handle,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
+          </b>(OUTPUT HANDLE phData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdatatarget(OUTPUT_longchar,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
+          </b>(OUTPUT LONGCHAR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The GetDataTarget() methods can be called by the DataSource object, to specify
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdatatarget(OUTPUT_memptr,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
+          </b>(OUTPUT MEMPTR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdatatarget(OUTPUT_progress.lang.object,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
+          </b>(OUTPUT <a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -91,7 +147,7 @@
           <b>
             <a href='#savedata(openedge.commoninfrastructure.servicemessage.isaverequest)'> SaveData</a>
           </b>(<a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A call to save data in the data source.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -109,8 +165,15 @@
       <b>FetchData</b>(<a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
     </code>
     <dl>
+      <dd>Data retrieval method. This is simply a call to fetch. The response <p> </dd>
+      <dd>is retreived via the GetData() method. </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IFetchRequest - The fetch service message.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -118,6 +181,58 @@
     <h3>GetData</h3>
     <code>PUBLIC  <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
       <b>GetData</b>()
+    </code>
+    <dl>
+      <dd>The response to a data retrieval request made in FetchData. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IFetchResponse</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdatatarget(OUTPUT_handle,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
+    <h3>GetDataTarget</h3>
+    <code>PUBLIC  VOID
+      <b>GetDataTarget</b>(OUTPUT HANDLE phData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdatatarget(OUTPUT_longchar,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
+    <h3>GetDataTarget</h3>
+    <code>PUBLIC  VOID
+      <b>GetDataTarget</b>(OUTPUT LONGCHAR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
+    </code>
+    <dl>
+      <dd>The GetDataTarget() methods can be called by the DataSource object, to specify <p> </dd>
+      <dd>the target for the DataSource's operations (usually the fill/fetch). This data is formatted per the MessageDataFormat above; and is stored in the message as either LONGCHAR, MEMPTR, HANDLE or P.L.O. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdatatarget(OUTPUT_memptr,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
+    <h3>GetDataTarget</h3>
+    <code>PUBLIC  VOID
+      <b>GetDataTarget</b>(OUTPUT MEMPTR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdatatarget(OUTPUT_progress.lang.object,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
+    <h3>GetDataTarget</h3>
+    <code>PUBLIC  VOID
+      <b>GetDataTarget</b>(OUTPUT <a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
     </code>
     <dl>
       <dd>
@@ -131,8 +246,18 @@
       <b>SaveData</b>(<a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poRequest)
     </code>
     <dl>
+      <dd>A call to save data in the data source. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ISaveRequest - The request message<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>ISaveResponse The response message</dd>
+        </dl>
       </dd>
     </dl>
     <hr />
