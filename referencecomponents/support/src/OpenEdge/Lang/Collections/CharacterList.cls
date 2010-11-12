@@ -3,7 +3,7 @@
     Purpose     : lightweight class for character entries 
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Tue Sep 29 21:48:14 EDT 2009
     Notes       : Does NOT implement IList (kind of IList<character>) and has no iterator 
   --------------------------------------------------------------------------------------*/
@@ -18,7 +18,7 @@ class OpenEdge.Lang.Collections.CharacterList /*implements IList*/:
     define variable mDlm  as character no-undo.
     
     define public property Size as integer no-undo 
-    get:
+    get():
        return num-entries(mList,mDlm).
     end.
     

@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 20 14:40:52 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -17,7 +17,7 @@ class OpenEdge.CommonInfrastructure.Common.IServiceCollection inherits TypedMap:
     constructor public IServiceCollection(poMap as IServiceCollection):
         super(poMap).
     end constructor.
-                        
+    
     constructor public IServiceCollection():
         super(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo'),
               Class:GetClass('OpenEdge.CommonInfrastructure.Common.IService')).

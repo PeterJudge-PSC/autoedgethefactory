@@ -140,6 +140,20 @@
       <td>
         <code>
           <b>
+            <a href='#get(openedge.core.injectabl.lifecycle.standardscopeenum,progress.lang.class)'> Get</a>
+          </b>(<a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instantiates all instances matching the specified scope. Typically
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
             <a href='#get(progress.lang.class)'> Get</a>
           </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instantiates an instance of an object that matches the passed service,
@@ -154,37 +168,23 @@
       <td>
         <code>
           <b>
+            <a href='#get(progress.lang.class,character)'> Get</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instantiates an instance of an object that matches the passed service and
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
             <a href='#get(progress.lang.class,openedge.core.injectabl.binding.parameters.iparametercollection)'> Get</a>
           </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, <a href="../../../OpenEdge/Core/InjectABL/Binding/Parameters/IParameterCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection" target="classFrame">IParameterCollection</a> poParameters)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instantiates an instance of an object that matches the passed service,
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getbindings(progress.lang.class)'> GetBindings</a>
-          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the bindings registered for the specified service.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getbindings(progress.lang.class,openedge.core.injectabl.lifecycle.standardscopeenum)'> GetBindings</a>
-          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the bindings registered for the specified scope.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -240,7 +240,7 @@
           <b>
             <a href='#load(openedge.core.injectabl.binding.modules.iinjectionmodule)'> Load</a>
           </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModule.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule" target="classFrame">IInjectionModule</a> poModules)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a single module into the kernel.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -254,7 +254,7 @@
           <b>
             <a href='#load(openedge.core.injectabl.binding.modules.iinjectionmodulecollection)'> Load</a>
           </b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the module(s) into the kernel.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads module(s) into the kernel.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -343,7 +343,7 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poScope - The scope for which to release instances.<br/></dd>
+          <dd>Object - The scope object for which to release instances.<br/></dd>
         </dl>
       </dd>
     </dl>
@@ -361,11 +361,33 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>pcService - A string version of a class/interface type name.<br/></dd>
+          <dd>character - A string version of a class/interface type name.<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
           <dd>An instance of the requested service/interface</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='get(openedge.core.injectabl.lifecycle.standardscopeenum,progress.lang.class)'><!-- --></a>
+    <h3>Get</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Get</b>(<a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback)
+    </code>
+    <dl>
+      <dd>Instantiates all instances matching the specified scope. Typically <p> </dd>
+      <dd>used to pre-start a set of objects when a Manager, for example, starts. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>StandardScopeEnum - The scope type (ie manager)<br/>Class - The parent scope (eg ServiceManager or SecurityManager).<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Object An array of objects matching the scope.</dd>
         </dl>
       </dd>
     </dl>
@@ -383,7 +405,29 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poService - A service represented by a Progress.Lang.Class type instance.<br/></dd>
+          <dd>Class - A service represented by a Progress.Lang.Class type instance.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>An instance of the requested service/interface</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='get(progress.lang.class,character)'><!-- --></a>
+    <h3>Get</h3>
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Get</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>Instantiates an instance of an object that matches the passed service and <p> </dd>
+      <dd>name, as determined by the bindings in a loaded module. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - A service represented by a Progress.Lang.Class type instance.<br/>character - A name for the service<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
@@ -405,53 +449,11 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poService - A service represented by a Progress.Lang.Class type instance.<br/>poParameters - A collection of parameters to add to the bindings for theobject being instantiated. <br/></dd>
+          <dd>Class - A service represented by a Progress.Lang.Class type instance.<br/>IParameterCollection - A collection of parameters to add to the bindings for theobject being instantiated. <br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>An instance of the requested service/interface</dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getbindings(progress.lang.class)'><!-- --></a>
-    <h3>GetBindings</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a>
-      <b>GetBindings</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
-    </code>
-    <dl>
-      <dd>Gets the bindings registered for the specified service. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>service - The service in question.<br/></dd>
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>A series of bindings that are registered for the service.</dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getbindings(progress.lang.class,openedge.core.injectabl.lifecycle.standardscopeenum)'><!-- --></a>
-    <h3>GetBindings</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/Core/InjectABL/Binding/IBindingCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingCollection" target="classFrame">IBindingCollection</a>
-      <b>GetBindings</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback, <a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope)
-    </code>
-    <dl>
-      <dd>Gets the bindings registered for the specified scope. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>service - The service in question.<br/></dd>
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>A series of bindings that are registered for the service.</dd>
+          <dd>Object An instance of the requested service/interface</dd>
         </dl>
       </dd>
     </dl>
@@ -468,7 +470,7 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>name - The name of the module.<br/></dd>
+          <dd>character - The name of the module.<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
@@ -489,7 +491,7 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>instance - The instance to inject.<br/>parameters - The parameters to pass to the request.<br/></dd>
+          <dd>Object - The instance to inject.<br/>IParameterCollection - The parameters to pass to the request.<br/></dd>
         </dl>
       </dd>
     </dl>
@@ -506,7 +508,7 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>filePatterns - The file patterns (i.e. "*.dll", "modules/ *.rb") to match.<br/></dd>
+          <dd>character - An array of file patterns (i.e. "*.dll", "modules/ *.rb")to match. <br/></dd>
         </dl>
       </dd>
     </dl>
@@ -517,8 +519,14 @@
       <b>Load</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModule.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule" target="classFrame">IInjectionModule</a> poModules)
     </code>
     <dl>
+      <dd>Loads a single module into the kernel. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IInjectionModule - The module to load.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -528,13 +536,13 @@
       <b>Load</b>(<a href="../../../OpenEdge/Core/InjectABL/Binding/Modules/IInjectionModuleCollection.cls.html" title="OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection" target="classFrame">IInjectionModuleCollection</a> poModules)
     </code>
     <dl>
-      <dd>Loads the module(s) into the kernel. <p> </dd>
+      <dd>Loads module(s) into the kernel. <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>modules - The modules to load.<br/></dd>
+          <dd>IInjectionModuleCollection - The modules to load.<br/></dd>
         </dl>
       </dd>
     </dl>
@@ -551,11 +559,11 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>instance - The instance to release.<br/></dd>
+          <dd>Object - The instance to release.<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>true if the instance was found and released. otherwise false.</dd>
+          <dd>logical True if the instance was found and released. otherwise false.</dd>
         </dl>
       </dd>
     </dl>
@@ -572,7 +580,7 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>name - The plugin's name.<br/></dd>
+          <dd>character - The plugin's name.<br/></dd>
         </dl>
       </dd>
     </dl>

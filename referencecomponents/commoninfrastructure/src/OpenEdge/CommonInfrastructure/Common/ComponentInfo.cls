@@ -17,14 +17,7 @@ using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentInfo: 
-    /** Instance name for the running component. Optionally a unique value, although
-        often (usually?) just the typename of the component instance . */
-    define public property InstanceName as character no-undo get. private set.
-    
-    /** The component type (per ComponentTypeEnum) */
-    define public property ComponentType as ComponentTypeEnum no-undo get. set.
-    
+class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentInfo:
     /** The Service type that this service implements. This could be 
         the concrete type, or one of the interfaces the component 
         implements.
@@ -33,7 +26,21 @@ class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentIn
         not started as a service (or interface by InjectABL). 
       */
     define public property Service as class Class no-undo get. private set.
-
+    
+    /** Instance name for the running component. Optionally a unique value, although
+        often (usually?) just the typename of the component instance . */
+    define public property InstanceName as character no-undo
+        get():
+            if InstanceName  eq ? or InstanceName eq '' then
+                InstanceName = Service:TypeName.
+            
+            return InstanceName. 
+        end get.
+        private set.
+    
+    /** The component type (per ComponentTypeEnum) */
+    define public property ComponentType as ComponentTypeEnum no-undo get. set.
+    
     /** Whether the component is auto-started when it is requested, or whether
         it should be explicitly started first. The default is TRUE. */
     define public property AutoStart as logical no-undo get. private set.

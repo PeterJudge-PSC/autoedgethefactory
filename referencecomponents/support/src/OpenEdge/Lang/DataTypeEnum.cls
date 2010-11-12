@@ -105,9 +105,9 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
         DataTypeEnum:Default = DataTypeEnum:Character.
     end constructor.
 
-	constructor public DataTypeEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+    constructor public DataTypeEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
     
     method static public DataTypeEnum EnumFromValue(piDataType as integer):
         define variable oMember as DataTypeEnum no-undo.

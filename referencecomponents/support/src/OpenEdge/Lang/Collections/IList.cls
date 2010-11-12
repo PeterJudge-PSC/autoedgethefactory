@@ -6,7 +6,7 @@
                   Allows elements to be accessed by their integer index in 
                   addition to by the element. 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Wed Jan 09 09:57:42 EST 2008
     Notes       : All methods (and comments) except ToTable are an exact match to Java  
                   List interface. Size is implemented as property                                 

@@ -83,62 +83,6 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getdatatarget(OUTPUT_handle,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
-          </b>(OUTPUT HANDLE phData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getdatatarget(OUTPUT_longchar,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
-          </b>(OUTPUT LONGCHAR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The GetDataTarget() methods can be called by the DataSource object, to specify
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getdatatarget(OUTPUT_memptr,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
-          </b>(OUTPUT MEMPTR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getdatatarget(OUTPUT_progress.lang.object,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'> GetDataTarget</a>
-          </b>(OUTPUT <a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
           <code><a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a></code>
         </font>
       </td>
@@ -172,7 +116,7 @@
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>IFetchRequest - The fetch service message.<br/></dd>
+          <dd>IFetchRequest - The fetch request service message which definesparameters for the request. <br/></dd>
         </dl>
       </dd>
     </dl>
@@ -191,52 +135,6 @@
           </dt>
           <dd>IFetchResponse</dd>
         </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getdatatarget(OUTPUT_handle,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
-    <h3>GetDataTarget</h3>
-    <code>PUBLIC  VOID
-      <b>GetDataTarget</b>(OUTPUT HANDLE phData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getdatatarget(OUTPUT_longchar,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
-    <h3>GetDataTarget</h3>
-    <code>PUBLIC  VOID
-      <b>GetDataTarget</b>(OUTPUT LONGCHAR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-    </code>
-    <dl>
-      <dd>The GetDataTarget() methods can be called by the DataSource object, to specify <p> </dd>
-      <dd>the target for the DataSource's operations (usually the fill/fetch). This data is formatted per the MessageDataFormat above; and is stored in the message as either LONGCHAR, MEMPTR, HANDLE or P.L.O. </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getdatatarget(OUTPUT_memptr,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
-    <h3>GetDataTarget</h3>
-    <code>PUBLIC  VOID
-      <b>GetDataTarget</b>(OUTPUT MEMPTR pmData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getdatatarget(OUTPUT_progress.lang.object,OUTPUT_openedge.commoninfrastructure.servicemessage.dataformatenum)'><!-- --></a>
-    <h3>GetDataTarget</h3>
-    <code>PUBLIC  VOID
-      <b>GetDataTarget</b>(OUTPUT <a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poData, OUTPUT <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poMessageDataFormat)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />

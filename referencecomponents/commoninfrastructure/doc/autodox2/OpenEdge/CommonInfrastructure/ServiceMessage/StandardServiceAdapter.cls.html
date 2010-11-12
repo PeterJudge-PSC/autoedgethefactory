@@ -66,6 +66,34 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The service for which this service adapter is servicing a request.
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ServiceManager'>ServiceManager</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The session's service manager. Used to determine the ServiceMessageManager and
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ServiceMessageManager'>ServiceMessageManager</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ServicemessageManager is used plentifully; we keep it as a property so that
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="method_summary"><!-- --></A>
@@ -84,8 +112,8 @@
       <td>
         <code>
           <b>
-            <a href='#(character)'>CONSTRUCTOR </a>
-          </b>(CHARACTER pcService)
+            <a href='#(character,openedge.commoninfrastructure.common.iservicemanager)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -98,15 +126,29 @@
       <td>
         <code>
           <b>
-            <a href='#executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.common.iservicemessagemanager)'> ExecuteRequest</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> poServiceMessageManager)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager
+            <a href='#executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> ExecuteRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services a request. The service provider will call ExecuteResponse() in
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> ExecuteSyncRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services a request in a synchronous manner. The responses are returned from the
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
         </font>
       </td>
       <td>
@@ -126,9 +168,51 @@
       <td>
         <code>
           <b>
-            <a href='#resolveremoteservice(character)'> ResolveRemoteService</a>
-          </b>(CHARACTER pcService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolve service into an executable handle.
+            <a href='#getcallbackprocedure()'> GetCallbackProcedure</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a procedure handle which will be used as the async event handler.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getservicelocation()'> GetServiceLocation</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the ABL service or session handle on which to run the service interface.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#save(openedge.commoninfrastructure.servicemessage.isaverequest,openedge.commoninfrastructure.common.iusercontext)'> Save</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#syncfetch(openedge.commoninfrastructure.servicemessage.ifetchrequest,openedge.commoninfrastructure.common.iusercontext)'> SyncFetch</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -140,7 +224,7 @@
       <td>
         <code>
           <b>
-            <a href='#save(openedge.commoninfrastructure.servicemessage.isaverequest,openedge.commoninfrastructure.common.iusercontext)'> Save</a>
+            <a href='#syncsave(openedge.commoninfrastructure.servicemessage.isaverequest,openedge.commoninfrastructure.common.iusercontext)'> SyncSave</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -164,6 +248,28 @@
       </dd>
     </dl>
     <hr />
+    <a name='property.ServiceManager'><!-- --></a>
+    <h3>ServiceManager</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>(mandatory) The session's service manager. Used to determine the ServiceMessageManager and <p> </dd>
+      <dd>other managers for callbacks, context and more. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ServiceMessageManager'><!-- --></a>
+    <h3>ServiceMessageManager</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>The ServicemessageManager is used plentifully; we keep it as a property so that <p> </dd>
+      <dd>we can get it whenever needed, without fuss. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
 				<A NAME="method_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -171,10 +277,10 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='(character)'><!-- --></a>
+    <a name='(character,openedge.commoninfrastructure.common.iservicemanager)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(CHARACTER pcService)
+      <b>CONSTRUCTOR</b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager)
     </code>
     <dl>
       <dd>
@@ -182,27 +288,49 @@
       </dd>
     </dl>
     <hr />
-    <a name='executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.common.iservicemessagemanager)'><!-- --></a>
+    <a name='executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
     <h3>ExecuteRequest</h3>
     <code>PUBLIC  VOID
-      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> poServiceMessageManager)
+      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
     </code>
     <dl>
-      <dd>Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager <p> </dd>
-      <dd>once it's done with the request. The object that implements this interface will call back to the ServiceMessageManager when it is done and it's ready with a response (IServiceResponse). </dd>
+      <dd>Services a request. The service provider will call ExecuteResponse() in <p> </dd>
+      <dd>the ServiceMessageManager once it's done with the request and ready with a response (IServiceResponse); typically this will happen in a callback of some sort. </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poRequest - The request to service.<br/>poServiceMessageManager - The message manager controlling this request.<br/></dd>
+          <dd>IServiceRequest - An array of requests to service.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
+    <h3>ExecuteSyncRequest</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a>
+      <b>ExecuteSyncRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+    </code>
+    <dl>
+      <dd>Services a request in a synchronous manner. The responses are returned from the <p> </dd>
+      <dd>ExecuteSyncRequest() call, rather than the service provider calling ExecuteResponse() in the ServiceMessageManager at a later time. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IServiceRequest - An array of requests to service.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IServiceResponse An array of responses to the request.</dd>
         </dl>
       </dd>
     </dl>
     <hr />
     <a name='fetch(openedge.commoninfrastructure.servicemessage.ifetchrequest,openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
     <h3>Fetch</h3>
-    <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
+    <code>PROTECTED  VOID
       <b>Fetch</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
     </code>
     <dl>
@@ -211,27 +339,66 @@
       </dd>
     </dl>
     <hr />
-    <a name='resolveremoteservice(character)'><!-- --></a>
-    <h3>ResolveRemoteService</h3>
-    <code>PUBLIC  HANDLE
-      <b>ResolveRemoteService</b>(CHARACTER pcService)
+    <a name='getcallbackprocedure()'><!-- --></a>
+    <h3>GetCallbackProcedure</h3>
+    <code>PROTECTED  HANDLE
+      <b>GetCallbackProcedure</b>()
     </code>
     <dl>
-      <dd>Resolve service into an executable handle. <p> </dd>
+      <dd>Returns a procedure handle which will be used as the async event handler. <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
-            <b>Parameters:</b>
+            <b>Returns:</b>
           </dt>
-          <dd>pcService - The name of the service being resolved.<br/></dd>
+          <dd>handle A procedure handle.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getservicelocation()'><!-- --></a>
+    <h3>GetServiceLocation</h3>
+    <code>PROTECTED  HANDLE
+      <b>GetServiceLocation</b>()
+    </code>
+    <dl>
+      <dd>Returns the ABL service or session handle on which to run the service interface. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>handle A server handle on which to run this service.</dd>
         </dl>
       </dd>
     </dl>
     <hr />
     <a name='save(openedge.commoninfrastructure.servicemessage.isaverequest,openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
     <h3>Save</h3>
-    <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a>
+    <code>PROTECTED  VOID
       <b>Save</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='syncfetch(openedge.commoninfrastructure.servicemessage.ifetchrequest,openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>SyncFetch</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
+      <b>SyncFetch</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='syncsave(openedge.commoninfrastructure.servicemessage.isaverequest,openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>SyncSave</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a>
+      <b>SyncSave</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
     </code>
     <dl>
       <dd>

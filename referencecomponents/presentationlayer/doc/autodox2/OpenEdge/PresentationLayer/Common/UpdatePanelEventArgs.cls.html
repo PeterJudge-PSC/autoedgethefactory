@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\PresentationLayer\Common</font>
       <br />CLASS UpdatePanelEventArgs
     </h2>
-    <p>CLASS OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs INHERITS <a href="../../../OpenEdge/PresentationLayer/Common/ModelEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelEventArgs" target="classFrame">ModelEventArgs</a> </p>
+    <p>CLASS OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs INHERITS <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -61,8 +61,8 @@
       <td>
         <code>
           <b>
-            <a href='#()'>CONSTRUCTOR </a>
-          </b>()
+            <a href='#(openedge.commoninfrastructure.common.icomponentinfo,openedge.presentationlayer.common.modelactionenum)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poModelAction)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -75,8 +75,8 @@
       <td>
         <code>
           <b>
-            <a href='#(openedge.commoninfrastructure.common.icomponentinfo,character,character)'>CONSTRUCTOR </a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, CHARACTER pcQuery, CHARACTER pcTable)
+            <a href='#(openedge.commoninfrastructure.common.icomponentinfo,openedge.presentationlayer.common.modelactionenum,character,character)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poModelAction, CHARACTER pcTables, CHARACTER pcMessageId)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -89,10 +89,10 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='()'><!-- --></a>
+    <a name='(openedge.commoninfrastructure.common.icomponentinfo,openedge.presentationlayer.common.modelactionenum)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>()
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poModelAction)
     </code>
     <dl>
       <dd>
@@ -100,10 +100,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='(openedge.commoninfrastructure.common.icomponentinfo,character,character)'><!-- --></a>
+    <a name='(openedge.commoninfrastructure.common.icomponentinfo,openedge.presentationlayer.common.modelactionenum,character,character)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, CHARACTER pcQuery, CHARACTER pcTable)
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poModelAction, CHARACTER pcTables, CHARACTER pcMessageId)
     </code>
     <dl>
       <dd>

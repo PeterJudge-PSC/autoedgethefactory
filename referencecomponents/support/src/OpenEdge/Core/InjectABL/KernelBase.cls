@@ -51,7 +51,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     
     /** Stack of unique services (as define by their LiefcycleContext) being invoked. Used to prevent
         circular references. */
-    @todo(task="implement", action="circ reference checks").        
+    @todo(task="implement", action="circ reference checks").
     define protected property InvocationStack as IList no-undo get. private set.
     
     destructor public KernelBase():
@@ -145,63 +145,79 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         
         Assert:ArgumentNotNull(oService, 'Service ' + pcService).
         
-        return this-object:Get(oService).
+        return this-object:Get(oService, '').
     end method.
     
     method public Object Get(poService as class Class):
-        return this-object:Get(poService, ?).
+        return this-object:Get(poService, '', ?).
     end method.
+
+	method public Object extent Get(input poScope as StandardScopeEnum,
+	                                input poScopeCallback as class Class ):
+        define variable oBinding as IBinding no-undo.
+        define variable oBindings as IBindingCollection no-undo.
+        define variable oIterator as IIterator no-undo.
+        define variable oInstance as Object extent no-undo.
+        define variable iExtent as integer no-undo.
+        
+        oBindings = GetBindings(poScope, poScopeCallback).
+        if oBindings:Size gt 0 then
+        do:
+            extent(oInstance) = oBindings:Size.
+            
+            oIterator = oBindings:Iterator().
+            do while oIterator:HasNext():
+                oBinding = cast(oIterator:Next(), IBinding).
+                iExtent = iExtent + 1.
+                oInstance[iExtent] = cast(CreateContext(oBinding), ILifecycleContext):Resolve().
+            end.
+        end.
+        
+        return oInstance.		
+	end method.
     
     method public Object Get(input poService as class Class,
                              input poParameters as IParameterCollection):
-        define variable oInstance as Object no-undo.
+        return this-object:Get(poService, '', poParameters).                                 
+    end method.
+    
+    /** Instantiates an instance of an object that matches the passed service,
+        as determined by the bindings in a loaded module. 
+    
+        @param Class A service represented by a Progress.Lang.Class type instance.
+        @param character A name for the service   
+        @return An instance of the requested service/interface    */
+    method public Object Get(input poService as class Class,
+                             input pcName as character):
+        return this-object:Get(poService, pcName, ?).
+    end method.
+    
+    method protected Object Get(input poService as class Class,
+                                input pcName as character,
+                                input poParameters as IParameterCollection):
         define variable oBinding as IBinding no-undo.
         
         Assert:ArgumentNotNull(poService, 'Service').
+        Assert:ArgumentNotNull(pcName, 'Name').
         
         if poService:IsA(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')) then
             return this-object.
         
-        /* recurses if the target is itself an interface, until it
-           find a concrete  
-         */
-        oBinding = ResolveTargetType(poService).
+        oBinding = SelectBinding(poService, pcName).
         
-        /* Will fail gracefully if no params added */        
-        oBinding:Parameters:AddAll(poParameters).
+        if valid-object(poParameters) then
+            oBinding:Parameters:AddAll(poParameters).
         
-        oInstance = cast(CreateContext(oBinding), ILifecycleContext):Resolve().
-        
-        return oInstance.
-    end method.
-        
-    /** Resolve a binding target type into a type that can be invoked: so if the
-        binding has a target which is an interface, then look for a binding for that
-        type, recursively.
-                
-        @param poService The service being resolved 
-        @return The correct binding 
-     */
-    method protected IBinding ResolveTargetType(input poService as class Class):
-        define variable oBinding as IBinding no-undo.
-        
-        oBinding = SelectBinding(poService).
-        
-        if oBinding:TargetType:IsInterface() then
-            oBinding = ResolveTargetType(oBinding:TargetType).
-        
-        /* Need to be able to invoke this type. */
-        Assert:ArgumentNotAbstract(oBinding:TargetType).
-        
-        return oBinding. 
+        return cast(CreateContext(oBinding), ILifecycleContext):Resolve().
     end method.
     
-    /** Returns the binding to use for the */
-    method protected IBinding SelectBinding(poService as class Class):
+    /** Retrieve the binding to use for the service. */
+    method protected IBinding SelectBinding(input poService as class Class,
+                                            input pcName as character):
         define variable oBindings as IBindingCollection no-undo.
         define variable oBinding as IBinding no-undo.
         
-        oBindings = GetBindings(poService).
+        oBindings = GetBindings(poService, pcName).
         
         if oBindings:IsEmpty() then
             oBinding = CreateDefaultBinding(poService).
@@ -210,6 +226,10 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                undesirable, then a setting should be added to the KernelSettings
                object to define it.  */
             oBinding = cast(oBindings:Get(oBindings:Size), IBinding).
+        
+        /* Need to be able to invoke this type. */
+        Assert:ArgumentNotAbstract(oBinding:TargetType).
+        Assert:ArgumentNotInterface(oBinding:TargetType).
         
         return oBinding.
     end method.
@@ -249,25 +269,18 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                 , ICache):Clear(poScope).
     end method.
     
-    method public IBindingCollection GetBindings(poService as class Class):
-        define variable oResolvedBindings as IBindingCollection no-undo.
-        
-        oResolvedBindings = cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
-                             , IBindingResolver):Resolve(Bindings, poService).
-        
-        return oResolvedBindings.
+    method protected IBindingCollection GetBindings(input poService as class Class,
+                                                    input pcName as character):
+        return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
+                             , IBindingResolver):Resolve(Bindings, poService, pcName).
     end method.
     
-    method public IBindingCollection GetBindings(poScopeCallback as class Class,
-                                                 poScope as StandardScopeEnum):
-        define variable oResolvedBindings as IBindingCollection no-undo.
+    method protected IBindingCollection GetBindings(input poScope as StandardScopeEnum,    
+                                                    input poScopeCallback as class Class):
         
-        oResolvedBindings = cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
+        return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
                              , IBindingResolver):Resolve(Bindings, poScopeCallback, poScope).
-        
-        return oResolvedBindings.
     end method.
-    
         
     method protected IBinding CreateDefaultBinding(poService as class Class):
         define variable oBinding as IBinding no-undo.
@@ -283,7 +296,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         oBuilder:ToSelf().
         
         return oBinding.
-    End method. 
+    end method. 
     
     method override protected IBindingSyntax CreateBindingBuilder(poBinding as IBinding):
         return new BindingBuilder(poBinding, this-object).

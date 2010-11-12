@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : UnsupportedOperationError
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Sep 02 13:46:49 EDT 2009
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
@@ -27,11 +27,6 @@ class OpenEdge.Core.System.UnsupportedOperationError inherits ApplicationError:
         this-object(poErr).
         AddMessage(pcArgs1, 1).
         AddMessage(pcArgs2, 2).
-    end constructor.
-    
-    constructor public UnsupportedOperationError():
-        define variable poUnknownError as Error no-undo. 
-        this-object(poUnknownError).
     end constructor.
     
     constructor public UnsupportedOperationError(poErr as Error):

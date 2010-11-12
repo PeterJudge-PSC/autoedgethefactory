@@ -11,9 +11,10 @@
     Notes       :
   ----------------------------------------------------------------------*/
 using OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule.
+using OpenEdge.CommonInfrastructure.InjectABL.ComponentKernel.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.  
 using OpenEdge.Core.InjectABL.IKernel.
-using OpenEdge.Core.InjectABL.StandardKernel.
+
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.  
 using OpenEdge.Core.System.ApplicationError.
 
@@ -27,10 +28,11 @@ define variable cModulePaths as character extent no-undo.
 
 oModules = new IInjectionModuleCollection().
 oModules:Add(new CommonInfrastructureModule()).
-oInjectABLKernel = new StandardKernel(oModules).
+oInjectABLKernel = new ComponentKernel(oModules).
 
-cModulePaths[1] = 'OpenEdge.CommonInfrastructure.InjectABL'.
-cModulePaths[1] = 'OpenEdge.PresentationLayer.InjectABL'.
+cModulePaths[1] = 'OpenEdge/CommonInfrastructure/InjectABL'.
+cModulePaths[1] = 'OpenEdge/PresentationLayer/InjectABL'.
+
 oInjectABLKernel:Load(cModulePaths).
 
 ABLSession:Instance:SessionProperties:Put(Class:GetClass('OpenEdge.Core.InjectABL.IKernel'), oInjectABLKernel).

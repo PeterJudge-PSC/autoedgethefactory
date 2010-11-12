@@ -1,15 +1,17 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : TypedMap
-    Purpose     : 
+    Purpose     : A Map collections that's typed: this means that only
+                  objects of a specific type can be added as a Key or Value.
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Apr 21 11:51:17 EDT 2010
-    Notes       : 
-  ----------------------------------------------------------------------*/
+    Notes       : * This class basically allows pseudo-generic collections
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Lang.Collections.Map.
+using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
@@ -26,6 +28,10 @@ class OpenEdge.Lang.Collections.TypedMap inherits Map:
                ValueType = poMap:ValueType.
     end constructor.
 
+    constructor public TypedMap(pcKeyType as character, pcValueType as character):
+        this-object(Class:GetClass(pcKeyType), Class:GetClass(pcValueType)).
+    end constructor.
+    
     constructor public TypedMap(poKeyType as class Class, poValueType as class Class):
         super().
         
@@ -67,4 +73,9 @@ class OpenEdge.Lang.Collections.TypedMap inherits Map:
         return super:Get(poKey).
     end method.
     
+	method override public void PutAll( input poMap as IMap):
+		Assert:ArgumentIsType(poMap, this-object:GetClass()).
+		super:PutAll(poMap).
+	end method.
+	
 end class.

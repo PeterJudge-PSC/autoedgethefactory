@@ -22,11 +22,15 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum inhe
     
     /** Schema fetch request. This is typically only made to a Business Entity. */
     define public static property FetchSchema as ServiceMessageActionEnum no-undo get. private set.
+
+    /** Acknowledge receipt of request */
+    define public static property ACK as ServiceMessageActionEnum no-undo get. private set.
     
     constructor static ServiceMessageActionEnum():
         ServiceMessageActionEnum:Fetch       = new ServiceMessageActionEnum('Fetch').
         ServiceMessageActionEnum:Save        = new ServiceMessageActionEnum('Save').
-        ServiceMessageActionEnum:FetchSchema = new ServiceMessageActionEnum('FetchSchema'). 
+        ServiceMessageActionEnum:FetchSchema = new ServiceMessageActionEnum('FetchSchema').
+        ServiceMessageActionEnum:ACK         = new ServiceMessageActionEnum('ACK'). 
     end method.
     
     constructor public ServiceMessageActionEnum(pcName as character):

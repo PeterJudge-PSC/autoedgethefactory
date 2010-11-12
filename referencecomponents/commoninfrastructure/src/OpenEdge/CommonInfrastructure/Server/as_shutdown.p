@@ -6,7 +6,7 @@
 
     Description : AppServer shutdown procedure
 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jun 04 13:57:59 EDT 2010
     Notes       :
   ----------------------------------------------------------------------*/

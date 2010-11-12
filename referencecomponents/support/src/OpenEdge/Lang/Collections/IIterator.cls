@@ -4,7 +4,7 @@
     Purpose     : traverses a collection forward 
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     :  
     Notes       : 
   ----------------------------------------------------------------------*/

@@ -14,24 +14,28 @@ using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.JoinEnum.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherits IQueryDefinition */:
+    
     /** protected set - not changeable - provide with constructor  */  
-    define property TableName as char no-undo get. 
+    define property TableName as char no-undo get.
     
-    /** aka batch size */
+    /** The number of records to return per page or batch */
     define property PageSize as integer no-undo get. set.
-
-    /** retrieve full page when page position is at beginning or end of result-set */
-    define property FullPage as logical no-undo get. set.
-    define property TableRequestType as TableRequestTypeEnum no-undo get. set.
     
-    /** */
-    define property SearchType as FindTypeEnum no-undo get. set.
+    /** Retrieve full page when page position is at beginning or end of result-set */
+    define property FullPage as logical no-undo get. set.
+
+    /** The number of remaining pages to retrieve. If this is zero, then
+        all data has been retrieved. This value is returned from the server/business
+        component layer. */
+    define public property NumRemainingPages as integer no-undo get. set.
+    
+    define property TableRequestType as TableRequestTypeEnum no-undo get. set.
        
     /** context info/key for where to start appending page begin or end */
     define property PageContext as char extent no-undo get. set.
     
-    /** return page positioned to this key (i.e. resort request/ reopen ) 
-       Typically used with TableRequestTypeEnum:Position */ 
+    /** Return page positioned to this key (i.e. resort request/ reopen ) 
+        Typically used with TableRequestTypeEnum:Position */ 
     define property RowKey as char extent no-undo get. set.
     
     /** Add search expression  (need to be kept separate from filter.). 

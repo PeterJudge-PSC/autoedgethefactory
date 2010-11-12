@@ -83,7 +83,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../OpenEdge/Lang/Collections/Map.cls.html" title="OpenEdge.Lang.Collections.Map" target="classFrame">Map</a></code>
+          <code><a href="../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a></code>
         </font>
       </td>
       <td>
@@ -92,6 +92,85 @@
             <a href='#property.SessionProperties'>SessionProperties</a>
           </b> PUBLIC GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getallinstances(character)'> GetAllInstances</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the object instances found that are of the type given.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getallrunningprocs(character)'> GetAllRunningProcs</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the running persistent procedure instances found
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getfirstclassinstance(character)'> GetFirstClassInstance</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the first object instance found that is of the type given.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getfirstrunningproc(character)'> GetFirstRunningProc</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the first running persistent procedure instance found
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resolveweakreference(integer)'> ResolveWeakReference</a>
+          </b>(INTEGER piReference)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolves a weak reference into an object instance. A weak reference is an integer
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -123,10 +202,125 @@
     <hr />
     <a name='property.SessionProperties'><!-- --></a>
     <h3>SessionProperties</h3>
-    <code><a href="../../OpenEdge/Lang/Collections/Map.cls.html" title="OpenEdge.Lang.Collections.Map" target="classFrame">Map</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='getallinstances(character)'><!-- --></a>
+    <h3>GetAllInstances</h3>
+    <code>PUBLIC  <a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>GetAllInstances</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>Returns all the object instances found that are of the type given. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The type name. This can be a class or an interface.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Object The reference to that type, if any. Unknown value ifthere's no running instance of that name. </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getallrunningprocs(character)'><!-- --></a>
+    <h3>GetAllRunningProcs</h3>
+    <code>PUBLIC  HANDLE
+      <b>GetAllRunningProcs</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>Returns all the running persistent procedure instances found <p> </dd>
+      <dd>for a given name. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The (relative) path name for a procedure.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>handle An array of handles to that procedure, if any.If there's no running instance of that name, then the array has an extent of 1 (one) which contains the unknown value. </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getfirstclassinstance(character)'><!-- --></a>
+    <h3>GetFirstClassInstance</h3>
+    <code>PUBLIC  <a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>GetFirstClassInstance</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>Returns the first object instance found that is of the type given. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The type name. This can be a class or an interface.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Object The reference to that type, if any. Unknown value ifthere's no running instance of that name. </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getfirstrunningproc(character)'><!-- --></a>
+    <h3>GetFirstRunningProc</h3>
+    <code>PUBLIC  HANDLE
+      <b>GetFirstRunningProc</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>Returns the first running persistent procedure instance found <p> </dd>
+      <dd>for a given name. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The (relative) path name for a procedure.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>handle The handle to that procedure, if any. Unknown value ifthere's no running instance of that name. </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resolveweakreference(integer)'><!-- --></a>
+    <h3>ResolveWeakReference</h3>
+    <code>PUBLIC  <a href="../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>ResolveWeakReference</b>(INTEGER piReference)
+    </code>
+    <dl>
+      <dd>Resolves a weak reference into an object instance. A weak reference is an integer <p> </dd>
+      <dd>representation of an object reference. This method is analogous to the WIDGET-HANDLE() function. Notes: * Based on http://msdn.microsoft.com/en-us/library/ms404247(v=VS.90).aspx Performance of ResolveWeakReference() will probably suck. An ABL statement "OBJECT-REFERENCE(int)" would entirely replace this method. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>integer - A weak reference to an object.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Object The object instance corresponding to that reference. The unknown value/nullis returned if the referecen cannot be resolved. </dd>
+        </dl>
       </dd>
     </dl>
     <hr />

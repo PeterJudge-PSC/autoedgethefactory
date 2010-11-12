@@ -26,7 +26,7 @@ class OpenEdge.DataAccess.InjectABL.DataAccessModule inherits InjectionModule:
         oBindingSyntax = Bind('OpenEdge.DataAccess.IDataAccess').
         oBindingSyntax
                 :To('OpenEdge.DataAccess.StandardDataAccess')
-                :WithMethodValue("AddDataSource", "Some-Named-DataSource")
+                :WithMethodValue("AddDataSource", "<tablename>")
                 :WithMethodValue("AddDataSource", Class:GetClass('OpenEdge.DataSource.IDataSource')).
     end method.
     

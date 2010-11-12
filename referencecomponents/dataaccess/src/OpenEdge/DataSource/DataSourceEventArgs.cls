@@ -12,21 +12,44 @@
 routine-level on error undo, throw.
 
 using OpenEdge.DataSource.DataSourceEventEnum.
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 using OpenEdge.Core.System.EventArgs.
 
-class OpenEdge.DataSource.DataSourceEventArgs inherits EventArgs: 
-    /** The event that caused this argument to be fired. */    
-    define public property DataSourceEvent as DataSourceEventEnum no-undo get. set.
+class OpenEdge.DataSource.DataSourceEventArgs inherits EventArgs:
+    
+    /** The data format type fpr the DataTarget data.  */
+    define public property DataTargetFormat as DataFormatEnum no-undo get. set.
+        
+    /** The data type of the data stored in the DataTarget */
+    define public property DataTargetType as DataTypeEnum no-undo get. set.
     
     /** Handle of the buffer/dataset being operated on, and to which the even applies. */
-    define public property Handle as handle no-undo get. set.
+    define public property DataTarget as longchar no-undo get. set.
+         
+    /** The event that caused this argument to be fired. */    
+    define public property DataSourceEvent as DataSourceEventEnum no-undo get. private set.
     
+    /** The row key used to identify the row being operated on in the data target. */
+    define public property RowKey as character extent no-undo get. set.
+    
+	constructor public DataSourceEventArgs(input poEvent as DataSourceEventEnum):
+        super().
+        
+        assign DataSourceEvent = poEvent.
+    end constructor.
+    	    
 	constructor public DataSourceEventArgs(input poEvent as DataSourceEventEnum,
-	                                       input phHandle as handle):
-		super().
-		
-		DataSourceEvent = poEvent.
-		this-object:Handle = phHandle.
+	                                       input poFormat as DataFormatEnum,
+	                                       input poDataType as DataTypeEnum,
+	                                       input pcData as longchar,
+	                                       input pcRowKey as character extent):
+        super().		
+		assign DataSourceEvent = poEvent
+		       DataTargetFormat = poFormat
+		       DataTargetType = poDataType
+		       DataTarget = pcData
+		       RowKey = pcRowKey.
 	end constructor.
 
 end class.

@@ -1,25 +1,29 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : Component
-    Purpose     : 
+    Purpose     : OERA Base component
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Apr 07 16:44:04 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.Component.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using Progress.Lang.Class. 
+
+using OpenEdge.Lang.Assert.
 using Progress.Lang.Object.
 
-class OpenEdge.CommonInfrastructure.Common.Component implements IComponent: 
+class OpenEdge.CommonInfrastructure.Common.Component implements IComponent:
+    /** (mandatory) Stores information about the component, such as a developer-defined instance name
+        so as to be able to uniquely identify the component.   */
     define public property ComponentInfo as IComponentInfo no-undo get. private set.
     
     constructor public Component(poComponentInfo as IComponentInfo):
+        Assert:ArgumentNotNull(poComponentInfo, 'Component info').
+        
         ComponentInfo = poComponentInfo.
     end constructor.
     
@@ -27,14 +31,20 @@ class OpenEdge.CommonInfrastructure.Common.Component implements IComponent:
         DestroyComponent().
     end destructor.
     
+    /** General creation code; constructors should only be used for property setting, not
+        for any more complex wiring.  */
     @method(virtual="True").
     method public void CreateComponent(  ):
     end method.
     
+    /** Not InitializeComponent, since the Gui for .NET uses that name already, 
+       as a PRIVATE member, and we want to have only 1 IComponent interface. */    
     @method(virtual="True").
     method public void Initialize(  ):
     end method.
     
+    /** General destruction code that can be called outside of the destructor
+        if needed (but will also be called from within the dtor). */
     @method(virtual="True").
     method public void DestroyComponent():
     end method.

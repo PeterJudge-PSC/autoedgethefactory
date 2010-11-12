@@ -61,78 +61,22 @@
       <td>
         <code>
           <b>
+            <a href='#(character,openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcServiceName, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
             <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#aftercommitdata()'> AfterCommitData</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#assigndefaultvalues(character,handle)'> AssignDefaultValues</a>
-          </b>(CHARACTER pcTable, HANDLE phBuffer)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#assignkeyvalues(character,widget-handle)'> AssignKeyValues</a>
-          </b>(CHARACTER pcTable, WIDGET-HANDLE phBuffer)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#destroycomponent()'> DestroyComponent</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#docommitdata()'> DoCommitData</a>
-          </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -146,7 +90,7 @@
         <code>
           <b>
             <a href='#getbufferhandle(character)'> GetBufferHandle</a>
-          </b>(CHARACTER pcTable)
+          </b>(CHARACTER pcTableName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -159,6 +103,17 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='(character,openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcServiceName, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
@@ -170,65 +125,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='aftercommitdata()'><!-- --></a>
-    <h3>AfterCommitData</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AfterCommitData</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='assigndefaultvalues(character,handle)'><!-- --></a>
-    <h3>AssignDefaultValues</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AssignDefaultValues</b>(CHARACTER pcTable, HANDLE phBuffer)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='assignkeyvalues(character,widget-handle)'><!-- --></a>
-    <h3>AssignKeyValues</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AssignKeyValues</b>(CHARACTER pcTable, WIDGET-HANDLE phBuffer)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='destroycomponent()'><!-- --></a>
-    <h3>DestroyComponent</h3>
-    <code>OVERRIDE PUBLIC  VOID
-      <b>DestroyComponent</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='docommitdata()'><!-- --></a>
-    <h3>DoCommitData</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>DoCommitData</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='getbufferhandle(character)'><!-- --></a>
     <h3>GetBufferHandle</h3>
     <code>OVERRIDE PROTECTED  HANDLE
-      <b>GetBufferHandle</b>(CHARACTER pcTable)
+      <b>GetBufferHandle</b>(CHARACTER pcTableName)
     </code>
     <dl>
       <dd>

@@ -17,6 +17,7 @@ using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.   
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 
+using OpenEdge.Lang.ABLSession.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -74,12 +75,7 @@ class OpenEdge.PresentationLayer.View.ABLGui.ContainedObject abstract
     method protected handle GetRunningObject (pcName as char):
         define variable hObject as handle no-undo.
         
-        hObject = session:first-procedure.
-        
-        do while valid-handle(hObject) and hObject:file-name ne pcName:
-            hObject = hObject:next-sibling. 
-        end.
-        
+        hObject = ABLSession:Instance:GetFirstRunningProc(pcName).
         /* Start if not found */
         if not valid-handle(hObject) then
             run value(pcName) persistent set hObject.

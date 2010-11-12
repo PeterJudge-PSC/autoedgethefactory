@@ -16,7 +16,7 @@ using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Lang.Collections.IIterator.
-using OpenEdge.Lang.ObjectStack.
+using OpenEdge.Lang.Collections.ObjectStack.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -26,7 +26,6 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
     method public IBindingCollection Resolve(poBindings as IBindingCollection,
                                              poScopeCallback as class Class,
                                              poScope as StandardScopeEnum):
-        
         define variable oResolvedBindings as IBindingCollection no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oBinding as IBinding no-undo.
@@ -54,9 +53,9 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
         return oResolvedBindings.
     end method.
     
-    method public IBindingCollection Resolve(poBindings as IBindingCollection,
-                                             poService as class Class):
-        
+    method public IBindingCollection Resolve(input poBindings as IBindingCollection,
+                                             input poService as class Class,
+                                             input pcName as character):
         define variable oResolvedBindings as IBindingCollection no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oBinding as IBinding no-undo.
@@ -69,6 +68,10 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
             
             /* Services need to match */
             if oBinding:Service ne poService then
+                next.
+            
+            /* Names need to match */
+            if oBinding:Name ne pcName then
                 next.
             
             /* All conditions need to be satisfied */

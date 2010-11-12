@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 11 09:02:02 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/

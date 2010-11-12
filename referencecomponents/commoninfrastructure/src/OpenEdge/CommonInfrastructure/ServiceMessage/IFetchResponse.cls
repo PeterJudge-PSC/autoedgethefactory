@@ -8,14 +8,14 @@
     Notes       : 
   ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
- 
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection.
+
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse /* inherits IServiceResponse */:
     
     /** A collection of individual table responses for this larger request */
     define public property TableResponses as ITableResponseCollection no-undo get.
     
     /** Pre-populates the table response collection from the request's tablerequests */
-    method public void InitTableResponseFromRequest(input poRequest as IFetchRequest).
+    method public void InitTableResponseFromRequest(input poRequestCollection as ITableRequestCollection).
     
 end interface.

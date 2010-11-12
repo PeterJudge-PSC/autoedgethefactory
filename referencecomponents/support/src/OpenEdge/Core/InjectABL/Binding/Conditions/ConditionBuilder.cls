@@ -17,7 +17,7 @@ using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Lang.Assert.
-using OpenEdge.Lang.ObjectStack.
+using OpenEdge.Lang.Collections.ObjectStack.
 
 using OpenEdge.Core.InjectABL.Binding.Modules.*.
 using Progress.Lang.*.

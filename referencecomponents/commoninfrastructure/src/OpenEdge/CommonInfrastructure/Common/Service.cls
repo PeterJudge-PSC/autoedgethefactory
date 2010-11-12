@@ -1,9 +1,9 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : Service
-    Purpose     : 
+    Purpose     : General OERA service  
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Apr 19 16:29:36 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -19,7 +19,8 @@ using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.Service inherits Component
         implements IService:
-        
+            
+    /** (mandatory) Stores a reference to the session's Service Manager */        
     define public property ServiceManager as IServiceManager no-undo get. private set. 
     
     constructor public Service (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):

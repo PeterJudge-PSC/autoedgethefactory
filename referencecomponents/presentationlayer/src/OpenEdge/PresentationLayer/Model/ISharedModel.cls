@@ -1,9 +1,10 @@
+@deprecated.
 /*------------------------------------------------------------------------
     File        : ISharedModel
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Mon Jun 22 11:17:18 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/

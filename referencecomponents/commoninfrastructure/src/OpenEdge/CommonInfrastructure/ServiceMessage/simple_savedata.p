@@ -21,6 +21,7 @@ routine-level on error undo, throw.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
@@ -42,6 +43,7 @@ define input-output parameter pmUserContext as memptr no-undo.
 
 define variable oInjectABLKernel as IKernel no-undo.
 define variable oServiceMessageManager as IServiceMessageManager no-undo.
+define variable oSecMgr as ISecurityManager no-undo.
 define variable iLoop as integer no-undo.
 define variable iMax as integer no-undo.
 define variable mTemp as memptr no-undo.
@@ -49,7 +51,7 @@ define variable oOutput as ObjectOutputStream no-undo.
 define variable oInput as ObjectInputStream no-undo.
 define variable oRequest as ISaveRequest extent no-undo.
 define variable cRequestId as character extent no-undo.
-define variable oResponse as ISaveResponse extent no-undo.
+define variable oResponse as IServiceResponse extent no-undo.
 define variable oContext as IUserContext no-undo.
 define variable hDataSet as handle no-undo.
 
@@ -73,15 +75,19 @@ oInjectABLKernel = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass
                         IKernel).
 
 /* Are we who we say we are? Note that this should really happen on activate. */
-cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
-                        ,ISecurityManager):ValidateSession(oContext:ClientSessionId).
+oSecMgr = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
+               ,ISecurityManager).
 
-/* Perform request. This is where the actual work happens. */
+oSecMgr:ValidateSession(oContext:ClientSessionId).
+oSecMgr:SetClientContext(oContext).
+
 oServiceMessageManager = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
                         , IServiceMessageManager).
 
-/* Perform request. This is where the actual work happens. */
-oResponse = cast(oServiceMessageManager:ExecuteSyncRequest(cast(oRequest, IServiceRequest)), ISaveResponse).                         
+/* Perform request. This is where the actual work happens.
+   If this was a specialised service interface, we might construct the service request here, rather than
+   taking it as an input. */
+oResponse = oServiceMessageManager:ExecuteRequest(cast(oRequest, IServiceRequest)).
 
 /* Serialize requests, context */
 assign iMax = extent(oResponse)
@@ -91,7 +97,7 @@ assign iMax = extent(oResponse)
 oOutput = new ObjectOutputStream().
 
 do iLoop = 1 to iMax:
-    cast(oResponse[iLoop], IServiceMessage):GetData(output hDataSet). 
+    cast(oResponse[iLoop], IServiceMessage):GetMessageData(output hDataSet). 
     phResponseDataset[iLoop] = hDataSet. 
     
     oOutput:Reset().

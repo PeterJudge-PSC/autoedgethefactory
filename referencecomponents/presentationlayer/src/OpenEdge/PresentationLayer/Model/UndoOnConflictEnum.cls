@@ -42,8 +42,8 @@ class OpenEdge.PresentationLayer.Model.UndoOnConflictEnum final inherits EnumMem
         UndoOnConflictEnum:Default = UndoOnConflictEnum:Before.
     end constructor.
 
-	constructor public UndoOnConflictEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public UndoOnConflictEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
 
 end class.

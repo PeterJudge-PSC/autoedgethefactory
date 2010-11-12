@@ -17,8 +17,8 @@ class OpenEdge.CommonInfrastructure.Client.ServiceManager inherits OpenEdge.Comm
     constructor public ServiceManager(poKernel as IKernel):
         super(poKernel).
     end constructor.
-
-	method override public IServiceProvider GetServiceProvider( input pcService as character ):	    
+    
+    method override public IServiceProvider GetServiceProvider( input pcService as character ):
 		return super:GetServiceProvider(input pcService).
 	end method.
 	

@@ -1,10 +1,9 @@
-@todo(task="implement", action="complete this shadow object").
 /*------------------------------------------------------------------------
     File        : String
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Aug 11 13:08:46 EDT 2009
     Notes       : * Named 'String' because of keyword/namespace conflicts with
                   ABL Primitive 'character'
@@ -12,10 +11,9 @@
 routine-level on error undo, throw.
 
 using OpenEdge.Lang.String.
-using OpenEdge.Lang.ABLPrimitive.
 
-class OpenEdge.Lang.String inherits ABLPrimitive:
-    define static variable moEmptyString as String no-undo.
+class OpenEdge.Lang.String:
+    define static private variable moEmptyString as String no-undo.
     define public property Value as longchar no-undo get. private set.
     
     constructor public String(pcString as longchar):

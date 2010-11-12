@@ -45,57 +45,6 @@
       </dd>
     </dl>
     <hr />
-				<A NAME="field_summary"><!-- --></A>
-				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-				<B>Field Summary</B></FONT></TH>
-				</TR>
-				
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.QueryClosed'>QueryClosed</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.QueryOpened'>QueryOpened</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.QueryRepositioned'>QueryRepositioned</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-				</TABLE>&nbsp;<P>
-				
 				<A NAME="property_summary"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -114,7 +63,7 @@
           <b>
             <a href='#property.Model'>Model</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The Model on which this query operates.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -128,7 +77,7 @@
           <b>
             <a href='#property.NumSelectedRows'>NumSelectedRows</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(derived) The nu
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -142,7 +91,21 @@
           <b>
             <a href='#property.QueryName'>QueryName</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) A user-friendly name of the query
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.RequiresReopen'>RequiresReopen</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does this query object require a Reopen() call? A query might be flagged as such
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -268,40 +231,6 @@
     </tr>
 				</TABLE>&nbsp;<P>
 				
-				<A NAME="field_detail"><!-- --></A>
-				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-				<B>Field Detail</B></FONT></TH>
-				</TR></TABLE>
-				
-    <a name='1194.QueryClosed'><!-- --></a>
-    <h3>QueryClosed</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='1194.QueryOpened'><!-- --></a>
-    <h3>QueryOpened</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='1194.QueryRepositioned'><!-- --></a>
-    <h3>QueryRepositioned</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
 				<A NAME="property_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -313,6 +242,7 @@
     <h3>Model</h3>
     <code><a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> PUBLIC GET </code>
     <dl>
+      <dd>(mandatory) The Model on which this query operates. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -322,6 +252,7 @@
     <h3>NumSelectedRows</h3>
     <code>INTEGER PUBLIC GET </code>
     <dl>
+      <dd>(derived) The nu <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -331,6 +262,18 @@
     <h3>QueryName</h3>
     <code>CHARACTER PUBLIC GET </code>
     <dl>
+      <dd>(mandatory) A user-friendly name of the query <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.RequiresReopen'><!-- --></a>
+    <h3>RequiresReopen</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>Does this query object require a Reopen() call? A query might be flagged as such <p> </dd>
+      <dd>by a Model when new data is added from a busines entity (or even locally) in batch/bundle mode. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

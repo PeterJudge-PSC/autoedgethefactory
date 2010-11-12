@@ -36,8 +36,8 @@ class OpenEdge.PresentationLayer.Common.DialogResultEnum final inherits EnumMemb
         DialogResultEnum:ResultYes = new DialogResultEnum('Yes').
     end constructor.
 
-	constructor public DialogResultEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public DialogResultEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

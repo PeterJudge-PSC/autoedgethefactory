@@ -3,7 +3,7 @@
     Purpose     : InjectABL scopes for Common Infrastructure Managers, per manager.
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 18 11:51:06 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/

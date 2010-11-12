@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Nov 13 14:29:30 EST 2009
     Notes       : * The Read<type>() methods have output parameters because they 
                     cater for both vectors and scalars. The alternative is to
@@ -13,11 +13,19 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Core.System.*.
-using OpenEdge.Core.Util.*.
-using OpenEdge.Core.Interfaces.*.
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.System.ObjectStreamConstants.
+using OpenEdge.Core.System.ObjectInputError.
+using OpenEdge.Lang.SortDirectionEnum.
+using OpenEdge.Lang.ByteOrderEnum.
+using OpenEdge.Lang.Collections.ObjectStack.
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.IOModeEnum.
+
+using Progress.Lang.ParameterList.
+using Progress.Lang.Error.
+using Progress.Lang.Class.
+using Progress.Lang.Object.
 
 class OpenEdge.Core.Util.ObjectInputStream:
     define private variable mmStreamMptr as memptr no-undo.

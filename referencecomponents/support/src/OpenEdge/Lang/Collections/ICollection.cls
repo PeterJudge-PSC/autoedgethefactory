@@ -4,7 +4,7 @@
                   elements.
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Sun Dec 16 20:04:13 EST 2007
     Notes       : All methods (and comments) except ToTable and AddArray 
                   are an exact match to Java Collection interface. 

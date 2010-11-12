@@ -26,10 +26,10 @@ class OpenEdge.Lang.ByteOrderEnum final inherits EnumMember:
         
         ByteOrderEnum:Default = ByteOrderEnum:HostByteOrder.
     end constructor.
-		
-	constructor public ByteOrderEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+        
+    constructor public ByteOrderEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
     
     @todo(task="this make sense?").
     method static public ByteOrderEnum EnumFromString(pcByteOrder as char):

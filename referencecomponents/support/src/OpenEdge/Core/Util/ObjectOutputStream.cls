@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Nov 13 14:22:25 EST 2009
     Notes       : * IExternalizable types don't write out metadata
                  * For the protocol definition, see
@@ -11,11 +11,20 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Core.System.*.
-using OpenEdge.Core.Util.*.
-using OpenEdge.Core.Interfaces.*.
-using OpenEdge.Lang.*.
-using Progress.Lang.*.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.System.ObjectStreamConstants.
+using OpenEdge.Core.System.ObjectOutputError.
+using OpenEdge.Lang.SortDirectionEnum.
+using OpenEdge.Lang.ByteOrderEnum.
+using OpenEdge.Lang.Collections.ObjectStack.
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.IOModeEnum.
+using OpenEdge.Lang.CompareStrengthEnum.
+
+using Progress.Lang.ParameterList.
+using Progress.Lang.Error.
+using Progress.Lang.Class.
+using Progress.Lang.Object.
 
 class OpenEdge.Core.Util.ObjectOutputStream:
     define private variable miCursor       as integer               no-undo.

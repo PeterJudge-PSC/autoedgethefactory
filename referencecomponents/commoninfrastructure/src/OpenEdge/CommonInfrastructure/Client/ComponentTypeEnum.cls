@@ -19,8 +19,8 @@ class OpenEdge.CommonInfrastructure.Client.ComponentTypeEnum inherits OpenEdge.C
         ComponentTypeEnum:View = new ComponentTypeEnum('View').
     end constructor.
 
-	constructor public ComponentTypeEnum(pcName as character):
-		super(pcName).
-	end constructor.
+    constructor public ComponentTypeEnum(pcName as character):
+        super(pcName).
+    end constructor.
     
 end class.

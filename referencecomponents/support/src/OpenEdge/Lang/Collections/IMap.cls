@@ -1,16 +1,15 @@
-
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IMap
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Sun Apr 11 01:17:48 EDT 2010
     Notes       : All methods (and comments) except ToTable matches 
                   Java Map interface.
                   Collection views are properties 
                   Size is property
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 
 using Progress.Lang.*.
 using OpenEdge.Lang.Collections.ICollection.

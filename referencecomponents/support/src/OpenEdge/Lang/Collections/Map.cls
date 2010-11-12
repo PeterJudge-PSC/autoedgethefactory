@@ -4,7 +4,7 @@
     Purpose     : 
     Syntax      :  
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Sun Apr 11 01:35:13 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -35,7 +35,7 @@ class OpenEdge.Lang.Collections.Map implements IMap:
     private set. 
     
     define public property Values as ICollection no-undo 
-    get:
+    get():
         if not valid-object(this-object:Values) then 
             this-object:Values = new ValueCollection(this-object,temp-table ttMap:handle,"ValueRef"). 
         return this-object:Values.   
@@ -43,14 +43,14 @@ class OpenEdge.Lang.Collections.Map implements IMap:
     private set. 
    
     define public property KeySet as ISet no-undo 
-    get:
+    get():
         if not valid-object(this-object:KeySet) then 
             this-object:KeySet = new KeySet(this-object,temp-table ttMap:handle,"KeyRef"). 
         return this-object:KeySet.   
     end.   
     private set. 
     define public property EntrySet as ISet no-undo 
-    get:
+    get():
         if not valid-object(this-object:EntrySet) then
             this-object:EntrySet = new EntrySet(this-object,temp-table ttMap:handle,"KeyRef").
         return this-object:EntrySet.
@@ -155,7 +155,7 @@ class OpenEdge.Lang.Collections.Map implements IMap:
         return not can-find(first ttMap).
     end method.
 
-    /* add antry to the map, return old value of any. Note that return of unknown could 
+    /* add entry to the map, return old value of any. Note that return of unknown could 
        also mean that the old mapped value was unknown... (check Size before and after) */   
     method public Object Put(poKey as Object, poValue as Object):
         define variable oOld as Object no-undo.

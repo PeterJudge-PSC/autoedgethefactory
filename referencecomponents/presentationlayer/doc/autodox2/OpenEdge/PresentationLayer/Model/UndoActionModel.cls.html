@@ -76,20 +76,20 @@
         <code>
           <b>
             <a href='#assigndefaultvalues(character,handle)'> AssignDefaultValues</a>
-          </b>(CHARACTER pcTable, HANDLE phBuffer)
+          </b>(CHARACTER pcTableName, HANDLE phBuffer)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>HANDLE</code>
+          <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#createmasterdataset()'> CreateMasterDataset</a>
+            <a href='#commitdata()'> CommitData</a>
           </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -103,8 +103,22 @@
       <td>
         <code>
           <b>
-            <a href='#docommitdata()'> DoCommitData</a>
+            <a href='#createmasterdataset()'> CreateMasterDataset</a>
           </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#findtablebykey(character,character)'> FindTableByKey</a>
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -145,7 +159,18 @@
     <a name='assigndefaultvalues(character,handle)'><!-- --></a>
     <h3>AssignDefaultValues</h3>
     <code>OVERRIDE PROTECTED  VOID
-      <b>AssignDefaultValues</b>(CHARACTER pcTable, HANDLE phBuffer)
+      <b>AssignDefaultValues</b>(CHARACTER pcTableName, HANDLE phBuffer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='commitdata()'><!-- --></a>
+    <h3>CommitData</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>CommitData</b>()
     </code>
     <dl>
       <dd>
@@ -155,7 +180,7 @@
     <hr />
     <a name='createmasterdataset()'><!-- --></a>
     <h3>CreateMasterDataset</h3>
-    <code>OVERRIDE PROTECTED  HANDLE
+    <code>OVERRIDE PROTECTED  VOID
       <b>CreateMasterDataset</b>()
     </code>
     <dl>
@@ -164,10 +189,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='docommitdata()'><!-- --></a>
-    <h3>DoCommitData</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>DoCommitData</b>()
+    <a name='findtablebykey(character,character)'><!-- --></a>
+    <h3>FindTableByKey</h3>
+    <code>OVERRIDE PROTECTED  LOGICAL
+      <b>FindTableByKey</b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
     </code>
     <dl>
       <dd>

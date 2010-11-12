@@ -1,6 +1,6 @@
 /* *------------------------------------------------------------------------
     File        : ITableOwner
-    Purpose     : Returns a buffer handle for an ABL table      
+    Purpose     :        
     Syntax      : 
     Description : 
     @author pjudge
@@ -8,6 +8,8 @@
     Notes       : * An implementation of this interface is required by an IQuery object
                     in order to create a buffer (or buffers) for the query to use. 
   ---------------------------------------------------------------------- */
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
+
 interface OpenEdge.Core.System.ITableOwner:
     
     /** @param character A table or buffer name. The implementer will
@@ -15,6 +17,6 @@ interface OpenEdge.Core.System.ITableOwner:
         that the query will use together with its IQueryDefinition.
         
         @return A buffer handle corresponding to the requested name. */
-    method public handle GetTableHandle (pcTableName as character).
+    method public handle GetTableHandle (input pcTableName as character).
     
 end interface.

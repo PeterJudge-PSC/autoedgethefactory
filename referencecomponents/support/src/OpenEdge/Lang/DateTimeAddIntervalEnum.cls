@@ -38,8 +38,8 @@ class OpenEdge.Lang.DateTimeAddIntervalEnum final inherits EnumMember:
                .
     end constructor.
     
-	constructor public DateTimeAddIntervalEnum(pcName as character):
-		super(pcName).
-	end constructor.
+    constructor public DateTimeAddIntervalEnum(pcName as character):
+        super(pcName).
+    end constructor.
     
 end class.

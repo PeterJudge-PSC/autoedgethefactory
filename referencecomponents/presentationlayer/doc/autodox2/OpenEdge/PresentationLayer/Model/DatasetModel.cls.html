@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\PresentationLayer\Model</font>
       <br />CLASS DatasetModel
     </h2>
-    <p>CLASS OpenEdge.PresentationLayer.Model.DatasetModel abstract INHERITS <a href="../../../OpenEdge/PresentationLayer/Model/Model.cls.html" title="OpenEdge.PresentationLayer.Model.Model" target="classFrame">Model</a> IMPLEMENTS <a href="../../../OpenEdge/PresentationLayer/Model/IDatasetModel.cls.html" title="OpenEdge.PresentationLayer.Model.IDatasetModel" target="classFrame">IDatasetModel</a> </p>
+    <p>CLASS OpenEdge.PresentationLayer.Model.DatasetModel abstract INHERITS <a href="../../../OpenEdge/PresentationLayer/Model/Model.cls.html" title="OpenEdge.PresentationLayer.Model.Model" target="classFrame">Model</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -62,22 +62,8 @@
         <code>
           <b>
             <a href='#property.MasterDataset'>MasterDataset</a>
-          </b> PROTECTED GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>HANDLE</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.TransportDataset'>TransportDataset</a>
-          </b> PROTECTED GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b> PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The dataset that contains this Model's data
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -112,51 +98,9 @@
       <td>
         <code>
           <b>
-            <a href='#afteraddrecord(character,character)'> AfterAddRecord</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcNewRecordKey)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#aftercommitdata()'> AfterCommitData</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#afterdeleterecord(character,character)'> AfterDeleteRecord</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#aftersaverecord(character,character)'> AfterSaveRecord</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#assigndefaultvalues(character,handle)'> AssignDefaultValues</a>
+          </b>(CHARACTER pcTableName, HANDLE phBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sset the default (initial) values on create of a record
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -171,6 +115,20 @@
             <a href='#assignkeyvalues(character,handle)'> AssignKeyValues</a>
           </b>(CHARACTER pcTable, HANDLE phBuffer)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assign parent values based on the relation a (child) buffer is part of.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#buildsaverequest(character)'> BuildSaveRequest</a>
+          </b>(CHARACTER pcTables)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds a save request for the specified tables in the Model.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -196,9 +154,9 @@
       <td>
         <code>
           <b>
-            <a href='#collectchanges()'> CollectChanges</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#createdefaultqueries(handle)'> CreateDefaultQueries</a>
+          </b>(HANDLE phDataset)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method public override void RemoveBindingHandle(phBindingHandle as handle):
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -210,37 +168,9 @@
       <td>
         <code>
           <b>
-            <a href='#createdefaultqueries(handle)'> CreateDefaultQueries</a>
-          </b>(HANDLE phDataset)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method public override void RemoveBindingHandle(phBindingHandle as handle):
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>HANDLE</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#createmasterdataset()'> CreateMasterDataset</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>HANDLE</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#createtransportdataset(handle)'> CreateTransportDataset</a>
-          </b>(HANDLE phMasterDataset)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the master ProDataSet for this Model. Default is to ask the Service for it.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -308,20 +238,6 @@
       <td>
         <code>
           <b>
-            <a href='#deletetransportdataset()'> DeleteTransportDataset</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#destroycomponent()'> DestroyComponent</a>
           </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -344,6 +260,34 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#doaddrecord(character)'> DoAddRecord</a>
+          </b>(CHARACTER pcTableName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#dodeleterecord(character,character)'> DoDeleteRecord</a>
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>VOID</code>
         </font>
       </td>
@@ -351,7 +295,7 @@
         <code>
           <b>
             <a href='#dosaverecord(character,character)'> DoSaveRecord</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -372,14 +316,28 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>CHARACTER</code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#gathererrorbuffers(handle)'> GatherErrorBuffers</a>
-          </b>(HANDLE phDataset)
+            <a href='#extracttableerrors(openedge.commoninfrastructure.servicemessage.itableresponse)'> ExtractTableErrors</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a> poResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extract error texts from a service response for a given table.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#findtablebykey(handle,character)'> FindTableByKey</a>
+          </b>(HANDLE phBuffer, CHARACTER pcRecordKey)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -394,7 +352,7 @@
           <b>
             <a href='#getbufferfield(character,character)'> GetBufferField</a>
           </b>(CHARACTER pcBufferName, CHARACTER pcFieldName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each model type will have it's own way of determining a buffer handle
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -414,14 +372,56 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getrecordkey(character)'> GetRecordKey</a>
+          </b>(CHARACTER pcTableName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getrecordkey(handle)'> GetRecordKey</a>
+          </b>(HANDLE phBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#gettablenames()'> GetTableNames</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists the names of tables in this Model. By default we list all tables.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#initialize()'> Initialize</a>
-          </b>()
+            <a href='#getvalue(character,character,character,OUTPUT_character)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT CHARACTER pcValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -434,37 +434,177 @@
       <td>
         <code>
           <b>
-            <a href='#loadnewbatch()'> LoadNewBatch</a>
-          </b>()
+            <a href='#getvalue(character,character,character,OUTPUT_date)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DATE ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LOGICAL</code>
+          <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#mergechanges(character)'> MergeChanges</a>
-          </b>(CHARACTER pcQuery)
+            <a href='#getvalue(character,character,character,OUTPUT_datetime)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DATETIME ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a></code>
+          <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#processmodelerrors(character)'> ProcessModelErrors</a>
-          </b>(CHARACTER pcBuffer)
+            <a href='#getvalue(character,character,character,OUTPUT_datetime-tz)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DATETIME-TZ ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(character,character,character,OUTPUT_decimal)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DECIMAL pdValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(character,character,character,OUTPUT_handle)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT HANDLE phValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(character,character,character,OUTPUT_int64)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT INT64 piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(character,character,character,OUTPUT_integer)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT INTEGER piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(character,character,character,OUTPUT_longchar)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT LONGCHAR pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(character,character,character,OUTPUT_progress.lang.object)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getvalue(character,character,character,OUTPUT_raw)'> GetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT RAW prValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#receivefetchresponse(openedge.commoninfrastructure.servicemessage.ifetchresponse)'> ReceiveFetchResponse</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> poResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#receivefetchschemaresponse(openedge.commoninfrastructure.servicemessage.ifetchresponse)'> ReceiveFetchSchemaResponse</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> poResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#receivesaveresponse(openedge.commoninfrastructure.servicemessage.isaveresponse)'> ReceiveSaveResponse</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a> poResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receive the Save response (may have data) from the service message.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -495,6 +635,160 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,character)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, CHARACTER pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,date)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DATE ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,datetime)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DATETIME ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,datetime-tz)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DATETIME-TZ ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,decimal)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DECIMAL pdValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,handle)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, HANDLE phValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,int64)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, INT64 piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,integer)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, INTEGER piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,longchar)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, LONGCHAR pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,progress.lang.object)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setvalue(character,character,character,raw)'> SetValue</a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, RAW prValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="property_detail"><!-- --></A>
@@ -506,17 +800,9 @@
 				
     <a name='property.MasterDataset'><!-- --></a>
     <h3>MasterDataset</h3>
-    <code>HANDLE PROTECTED GET PRIVATE SET </code>
+    <code>HANDLE PROTECTED GET SET </code>
     <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.TransportDataset'><!-- --></a>
-    <h3>TransportDataset</h3>
-    <code>HANDLE PROTECTED GET PRIVATE SET </code>
-    <dl>
+      <dd>The dataset that contains this Model's data <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -540,53 +826,27 @@
       </dd>
     </dl>
     <hr />
-    <a name='afteraddrecord(character,character)'><!-- --></a>
-    <h3>AfterAddRecord</h3>
-    <code>OVERRIDE PUBLIC  VOID
-      <b>AfterAddRecord</b>(CHARACTER pcBufferName, CHARACTER pcNewRecordKey)
+    <a name='assigndefaultvalues(character,handle)'><!-- --></a>
+    <h3>AssignDefaultValues</h3>
+    <code> VOID
+      <b>AssignDefaultValues</b>(CHARACTER pcTableName, HANDLE phBuffer)
     </code>
     <dl>
+      <dd>Sset the default (initial) values on create of a record <p> </dd>
+      <dd>in the model. The table name is passed in in case the model is operating on a non-default-ly named buffer. The buffer handle is positioned to the newly-created record. Note that key values are set in AssignKeyValues(). </dd>
       <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='aftercommitdata()'><!-- --></a>
-    <h3>AfterCommitData</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AfterCommitData</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='afterdeleterecord(character,character)'><!-- --></a>
-    <h3>AfterDeleteRecord</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AfterDeleteRecord</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='aftersaverecord(character,character)'><!-- --></a>
-    <h3>AfterSaveRecord</h3>
-    <code>PROTECTED OVERRIDE  VOID
-      <b>AfterSaveRecord</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - <br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='assignkeyvalues(character,handle)'><!-- --></a>
     <h3>AssignKeyValues</h3>
-    <code>OVERRIDE PROTECTED  VOID
+    <code>PROTECTED  VOID
       <b>AssignKeyValues</b>(CHARACTER pcTable, HANDLE phBuffer)
     </code>
     <dl>
@@ -596,21 +856,31 @@
       </dd>
     </dl>
     <hr />
+    <a name='buildsaverequest(character)'><!-- --></a>
+    <h3>BuildSaveRequest</h3>
+    <code>OVERRIDE PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a>
+      <b>BuildSaveRequest</b>(CHARACTER pcTables)
+    </code>
+    <dl>
+      <dd>Builds a save request for the specified tables in the Model. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - An array of table for which to create the save request.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>ISaveRequest The complete save request for the model/tables</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='clonedataset(handle)'><!-- --></a>
     <h3>CloneDataset</h3>
     <code>PROTECTED  HANDLE
       <b>CloneDataset</b>(HANDLE phDataset)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='collectchanges()'><!-- --></a>
-    <h3>CollectChanges</h3>
-    <code>OVERRIDE PUBLIC  VOID
-      <b>CollectChanges</b>()
     </code>
     <dl>
       <dd>
@@ -633,21 +903,12 @@
     <hr />
     <a name='createmasterdataset()'><!-- --></a>
     <h3>CreateMasterDataset</h3>
-    <code> HANDLE
+    <code>PROTECTED  VOID
       <b>CreateMasterDataset</b>()
     </code>
     <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='createtransportdataset(handle)'><!-- --></a>
-    <h3>CreateTransportDataset</h3>
-    <code>PROTECTED  HANDLE
-      <b>CreateTransportDataset</b>(HANDLE phMasterDataset)
-    </code>
-    <dl>
+      <dd>Creates the master ProDataSet for this Model. Default is to ask the Service for it. <p> </dd>
+      <dd>The ReceiveFetchSchemaResponse() method will receive the dataset response and perform the actual create. This method is usually not called, since a Presenter will typically make a service request for schema when the Presenter is initiating. However, we keep this method in a similar vein as the FetchData() call (which is also usually similarly overridden/ignored by the Presenter). </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -697,17 +958,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='deletetransportdataset()'><!-- --></a>
-    <h3>DeleteTransportDataset</h3>
-    <code>PROTECTED  VOID
-      <b>DeleteTransportDataset</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='destroycomponent()'><!-- --></a>
     <h3>DestroyComponent</h3>
     <code>OVERRIDE PUBLIC  VOID
@@ -730,10 +980,32 @@
       </dd>
     </dl>
     <hr />
+    <a name='doaddrecord(character)'><!-- --></a>
+    <h3>DoAddRecord</h3>
+    <code>OVERRIDE PROTECTED  CHARACTER
+      <b>DoAddRecord</b>(CHARACTER pcTableName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='dodeleterecord(character,character)'><!-- --></a>
+    <h3>DoDeleteRecord</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>DoDeleteRecord</b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='dosaverecord(character,character)'><!-- --></a>
     <h3>DoSaveRecord</h3>
-    <code>PROTECTED OVERRIDE  VOID
-      <b>DoSaveRecord</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
+    <code>OVERRIDE PROTECTED  VOID
+      <b>DoSaveRecord</b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
     </code>
     <dl>
       <dd>
@@ -752,10 +1024,31 @@
       </dd>
     </dl>
     <hr />
-    <a name='gathererrorbuffers(handle)'><!-- --></a>
-    <h3>GatherErrorBuffers</h3>
-    <code>PROTECTED  CHARACTER
-      <b>GatherErrorBuffers</b>(HANDLE phDataset)
+    <a name='extracttableerrors(openedge.commoninfrastructure.servicemessage.itableresponse)'><!-- --></a>
+    <h3>ExtractTableErrors</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a>
+      <b>ExtractTableErrors</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a> poResponse)
+    </code>
+    <dl>
+      <dd>Extract error texts from a service response for a given table. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ITableResponse - The tableresponse object containin error(s)<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>ModelErrorEventArgs Arguments containing the request errors</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='findtablebykey(handle,character)'><!-- --></a>
+    <h3>FindTableByKey</h3>
+    <code>OVERRIDE PROTECTED  LOGICAL
+      <b>FindTableByKey</b>(HANDLE phBuffer, CHARACTER pcRecordKey)
     </code>
     <dl>
       <dd>
@@ -765,10 +1058,12 @@
     <hr />
     <a name='getbufferfield(character,character)'><!-- --></a>
     <h3>GetBufferField</h3>
-    <code>OVERRIDE PROTECTED  HANDLE
+    <code>PROTECTED  HANDLE
       <b>GetBufferField</b>(CHARACTER pcBufferName, CHARACTER pcFieldName)
     </code>
     <dl>
+      <dd>Each model type will have it's own way of determining a buffer handle <p> </dd>
+      <dd>based on it's internal data storage structures, eg prodataset, temp-table. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -785,10 +1080,49 @@
       </dd>
     </dl>
     <hr />
-    <a name='initialize()'><!-- --></a>
-    <h3>Initialize</h3>
+    <a name='getrecordkey(character)'><!-- --></a>
+    <h3>GetRecordKey</h3>
+    <code>OVERRIDE PROTECTED  CHARACTER
+      <b>GetRecordKey</b>(CHARACTER pcTableName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getrecordkey(handle)'><!-- --></a>
+    <h3>GetRecordKey</h3>
+    <code>PROTECTED  CHARACTER
+      <b>GetRecordKey</b>(HANDLE phBuffer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='gettablenames()'><!-- --></a>
+    <h3>GetTableNames</h3>
+    <code>OVERRIDE PROTECTED  CHARACTER
+      <b>GetTableNames</b>()
+    </code>
+    <dl>
+      <dd>Lists the names of tables in this Model. By default we list all tables. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>character An array of table names in this Model</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_character)'><!-- --></a>
+    <h3>GetValue</h3>
     <code>OVERRIDE PUBLIC  VOID
-      <b>Initialize</b>()
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT CHARACTER pcValue)
     </code>
     <dl>
       <dd>
@@ -796,10 +1130,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='loadnewbatch()'><!-- --></a>
-    <h3>LoadNewBatch</h3>
-    <code>PROTECTED  VOID
-      <b>LoadNewBatch</b>()
+    <a name='getvalue(character,character,character,OUTPUT_date)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DATE ptValue)
     </code>
     <dl>
       <dd>
@@ -807,10 +1141,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='mergechanges(character)'><!-- --></a>
-    <h3>MergeChanges</h3>
-    <code>OVERRIDE PUBLIC  LOGICAL
-      <b>MergeChanges</b>(CHARACTER pcQuery)
+    <a name='getvalue(character,character,character,OUTPUT_datetime)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DATETIME ptValue)
     </code>
     <dl>
       <dd>
@@ -818,14 +1152,130 @@
       </dd>
     </dl>
     <hr />
-    <a name='processmodelerrors(character)'><!-- --></a>
-    <h3>ProcessModelErrors</h3>
-    <code>OVERRIDE PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a>
-      <b>ProcessModelErrors</b>(CHARACTER pcBuffer)
+    <a name='getvalue(character,character,character,OUTPUT_datetime-tz)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DATETIME-TZ ptValue)
     </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_decimal)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT DECIMAL pdValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_handle)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT HANDLE phValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_int64)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT INT64 piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_integer)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT INTEGER piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_longchar)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT LONGCHAR pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_progress.lang.object)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getvalue(character,character,character,OUTPUT_raw)'><!-- --></a>
+    <h3>GetValue</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, OUTPUT RAW prValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='receivefetchresponse(openedge.commoninfrastructure.servicemessage.ifetchresponse)'><!-- --></a>
+    <h3>ReceiveFetchResponse</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>ReceiveFetchResponse</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> poResponse)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='receivefetchschemaresponse(openedge.commoninfrastructure.servicemessage.ifetchresponse)'><!-- --></a>
+    <h3>ReceiveFetchSchemaResponse</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>ReceiveFetchSchemaResponse</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> poResponse)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='receivesaveresponse(openedge.commoninfrastructure.servicemessage.isaveresponse)'><!-- --></a>
+    <h3>ReceiveSaveResponse</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>ReceiveSaveResponse</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a> poResponse)
+    </code>
+    <dl>
+      <dd>Receive the Save response (may have data) from the service message. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ISaveResponse - The response message from the data save request.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -844,6 +1294,127 @@
     <h3>SetCallbacks</h3>
     <code>PROTECTED  VOID
       <b>SetCallbacks</b>(HANDLE phDataset)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,character)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, CHARACTER pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,date)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DATE ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,datetime)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DATETIME ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,datetime-tz)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DATETIME-TZ ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,decimal)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, DECIMAL pdValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,handle)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, HANDLE phValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,int64)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, INT64 piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,integer)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, INTEGER piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,longchar)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, LONGCHAR pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,progress.lang.object)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setvalue(character,character,character,raw)'><!-- --></a>
+    <h3>SetValue</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcField, RAW prValue)
     </code>
     <dl>
       <dd>

@@ -1,0 +1,490 @@
+<html>
+  <head>
+    <title>ServiceMessageConsumerCollection</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
+      <br />CLASS ServiceMessageConsumerCollection
+    </h2>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.OutstandingMessages'>OutstandingMessages</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(derived, readonly) The number of requests/messages that  are outstanding
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.RequestGroupKey'>RequestGroupKey</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) A key value used to aggregate requests. This request key needs to be globally unique
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TotalMessages'>TotalMessages</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(derived, readonly) The number of requests/messages herein.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcRequestGroupKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addmessage(character,openedge.commoninfrastructure.servicemessage.imessageconsumer)'> AddMessage</a>
+          </b>(CHARACTER pcMessageId, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a request to this collection.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getmessageconsumer(character)'> GetMessageConsumer</a>
+          </b>(CHARACTER pcMessageId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves MessageConsumer objects for all given message ids.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getmessageconsumers()'> GetMessageConsumers</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of the message consumers for the messages bundled herein.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getmessagerequestgroupkey(character)'> GetMessageRequestGroupKey</a>
+          </b>(CHARACTER pcMessageId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the request key for a message. Each message ID can only be part of
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getmessages()'> GetMessages</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of the message IDs for the messages bundled herein.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#releaseconsumer(openedge.commoninfrastructure.servicemessage.imessageconsumer)'> ReleaseConsumer</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes all the messages associated with a message consumer.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#releasemessages()'> ReleaseMessages</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Releases/removes all messages for this RequestGroupKey from the (shared/static)
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#removemessage(character)'> RemoveMessage</a>
+          </b>(CHARACTER pcMessageId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes a request from this collection.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#responsereceived(character)'> ResponseReceived</a>
+          </b>(CHARACTER pcMessageId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A response has been received for a given message (by ID).
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.OutstandingMessages'><!-- --></a>
+    <h3>OutstandingMessages</h3>
+    <code>INTEGER PUBLIC GET </code>
+    <dl>
+      <dd>(derived, readonly) The number of requests/messages that  are outstanding <p> </dd>
+      <dd>(ie have not received a response yet). </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.RequestGroupKey'><!-- --></a>
+    <h3>RequestGroupKey</h3>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>(mandatory) A key value used to aggregate requests. This request key needs to be globally unique <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TotalMessages'><!-- --></a>
+    <h3>TotalMessages</h3>
+    <code>INTEGER PUBLIC GET </code>
+    <dl>
+      <dd>(derived, readonly) The number of requests/messages herein. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcRequestGroupKey)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The parent key all these messages<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addmessage(character,openedge.commoninfrastructure.servicemessage.imessageconsumer)'><!-- --></a>
+    <h3>AddMessage</h3>
+    <code>PUBLIC  VOID
+      <b>AddMessage</b>(CHARACTER pcMessageId, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+    </code>
+    <dl>
+      <dd>Add a request to this collection. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The unique identifier of the message.<br/>IMessageConsumer - The object that responds to the message.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getmessageconsumer(character)'><!-- --></a>
+    <h3>GetMessageConsumer</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a>
+      <b>GetMessageConsumer</b>(CHARACTER pcMessageId)
+    </code>
+    <dl>
+      <dd>Retrieves MessageConsumer objects for all given message ids. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - An array of message ids<br/>IMessageConsumer - An array of message consumers for the message.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getmessageconsumers()'><!-- --></a>
+    <h3>GetMessageConsumers</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a>
+      <b>GetMessageConsumers</b>()
+    </code>
+    <dl>
+      <dd>Returns an array of the message consumers for the messages bundled herein. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IMessageConsumer An array of message consumers the messages.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getmessagerequestgroupkey(character)'><!-- --></a>
+    <h3>GetMessageRequestGroupKey</h3>
+    <code>STATIC PUBLIC  CHARACTER
+      <b>GetMessageRequestGroupKey</b>(CHARACTER pcMessageId)
+    </code>
+    <dl>
+      <dd>Returns the request key for a message. Each message ID can only be part of <p> </dd>
+      <dd>a single request. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The Message Id<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>character The request key for the input message ID.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getmessages()'><!-- --></a>
+    <h3>GetMessages</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetMessages</b>()
+    </code>
+    <dl>
+      <dd>Returns an array of the message IDs for the messages bundled herein. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>String An array of message ID for this bundle.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='releaseconsumer(openedge.commoninfrastructure.servicemessage.imessageconsumer)'><!-- --></a>
+    <h3>ReleaseConsumer</h3>
+    <code>PUBLIC  VOID
+      <b>ReleaseConsumer</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageConsumer)
+    </code>
+    <dl>
+      <dd>Removes all the messages associated with a message consumer. <p> </dd>
+      <dd>a request from the bundle. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The unique message ID for a message.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='releasemessages()'><!-- --></a>
+    <h3>ReleaseMessages</h3>
+    <code>PUBLIC  VOID
+      <b>ReleaseMessages</b>()
+    </code>
+    <dl>
+      <dd>Releases/removes all messages for this RequestGroupKey from the (shared/static) <p> </dd>
+      <dd>temp-table. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='removemessage(character)'><!-- --></a>
+    <h3>RemoveMessage</h3>
+    <code>PUBLIC  VOID
+      <b>RemoveMessage</b>(CHARACTER pcMessageId)
+    </code>
+    <dl>
+      <dd>Removes a request from this collection. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The unique message ID for a message.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='responsereceived(character)'><!-- --></a>
+    <h3>ResponseReceived</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a>
+      <b>ResponseReceived</b>(CHARACTER pcMessageId)
+    </code>
+    <dl>
+      <dd>A response has been received for a given message (by ID). <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - An array of unique identifiers of the message.<br/>IMessageConsumer - An attay of the consumers for the messages received.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

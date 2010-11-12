@@ -1,6 +1,3 @@
-@todo(task="question", action="should this be deprecated?").
-@deprecated(version="0.0").
-
 /** ------------------------------------------------------------------------
     File        : ModelActionEnum
     Purpose     : Enumeration of actions a model can perform.
@@ -16,25 +13,31 @@ using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 using OpenEdge.Lang.EnumMember.
 
 class OpenEdge.PresentationLayer.Common.ModelActionEnum final inherits EnumMember:
- 
-    define static public property None    as ModelActionEnum no-undo get. private set.
-    define static public property Fetch   as ModelActionEnum no-undo get. private set.
-    define static public property Add     as ModelActionEnum no-undo get. private set.
-    define static public property Delete  as ModelActionEnum no-undo get. private set.
-    define static public property Save    as ModelActionEnum no-undo get. private set.
-    define static public property Commit  as ModelActionEnum no-undo get. private set.
+    
+    /* Local Actions */ 
+    define static public property Add    as ModelActionEnum no-undo get. private set.
+    define static public property Save   as ModelActionEnum no-undo get. private set.
+    define static public property Delete as ModelActionEnum no-undo get. private set.
+    
+    define static public property Navigate as ModelActionEnum no-undo get. private set.
+    
+    /* Service actions */
+    define static public property Fetch  as ModelActionEnum no-undo get. private set.
+    define static public property Commit as ModelActionEnum no-undo get. private set.
     
     constructor static ModelActionEnum():
-        ModelActionEnum:None = new ModelActionEnum('none').
-        ModelActionEnum:Fetch = new ModelActionEnum('fetch').
-        ModelActionEnum:Add = new ModelActionEnum('add').
-        ModelActionEnum:Delete = new ModelActionEnum('delete').
-        ModelActionEnum:Save = new ModelActionEnum('save').
-        ModelActionEnum:Commit = new ModelActionEnum('commit').
+        ModelActionEnum:Add = new ModelActionEnum('Add').
+        ModelActionEnum:Save = new ModelActionEnum('Save').
+        ModelActionEnum:Delete = new ModelActionEnum('Delete').
+        
+        ModelActionEnum:Navigate = new ModelActionEnum('Navigate').
+        
+        ModelActionEnum:Fetch = new ModelActionEnum('Fetch').
+        ModelActionEnum:Commit = new ModelActionEnum('Commit').
     end constructor.
 
-	constructor public ModelActionEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public ModelActionEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

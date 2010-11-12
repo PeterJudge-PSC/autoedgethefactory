@@ -36,8 +36,8 @@ class OpenEdge.Core.System.UITypeEnum inherits EnumMember:
                UITypeEnum:Current = UITypeEnum:DotNetGui.
     end constructor.
     
-	constructor public UITypeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
-	
+    constructor public UITypeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
+    
 end class.

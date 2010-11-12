@@ -28,8 +28,8 @@ class OpenEdge.Lang.LockModeEnum final inherits EnumMember:
         LockModeEnum:Default = LockModeEnum:NoLock.
     end constructor.
 
-	constructor public LockModeEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+    constructor public LockModeEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
 
 end class.

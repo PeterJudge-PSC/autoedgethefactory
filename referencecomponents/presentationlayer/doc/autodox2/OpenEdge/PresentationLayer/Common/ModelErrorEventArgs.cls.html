@@ -55,13 +55,13 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>CHARACTER</code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.BufferName'>BufferName</a>
+            <a href='#property.ModelAction'>ModelAction</a>
           </b> PUBLIC GET SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -69,14 +69,28 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LOGICAL</code>
+          <code>CHARACTER</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.HasError'>HasError</a>
+            <a href='#property.ServiceMessageId'>ServiceMessageId</a>
           </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(optional) The unique identifier for the service request that results in this message
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableName'>TableName</a>
+          </b> PUBLIC GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -98,8 +112,8 @@
       <td>
         <code>
           <b>
-            <a href='#()'>CONSTRUCTOR </a>
-          </b>()
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcTable)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -112,8 +126,8 @@
       <td>
         <code>
           <b>
-            <a href='#(character)'>CONSTRUCTOR </a>
-          </b>(CHARACTER pcBuffer)
+            <a href='#(character,openedge.presentationlayer.common.modelactionenum)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcTable, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poAction)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -140,18 +154,28 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='property.BufferName'><!-- --></a>
-    <h3>BufferName</h3>
-    <code>CHARACTER PUBLIC GET SET </code>
+    <a name='property.ModelAction'><!-- --></a>
+    <h3>ModelAction</h3>
+    <code><a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> PUBLIC GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='property.HasError'><!-- --></a>
-    <h3>HasError</h3>
-    <code>LOGICAL PUBLIC GET SET </code>
+    <a name='property.ServiceMessageId'><!-- --></a>
+    <h3>ServiceMessageId</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>(optional) The unique identifier for the service request that results in this message <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableName'><!-- --></a>
+    <h3>TableName</h3>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -165,10 +189,10 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='()'><!-- --></a>
+    <a name='(character)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>()
+      <b>CONSTRUCTOR</b>(CHARACTER pcTable)
     </code>
     <dl>
       <dd>
@@ -176,10 +200,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='(character)'><!-- --></a>
+    <a name='(character,openedge.presentationlayer.common.modelactionenum)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(CHARACTER pcBuffer)
+      <b>CONSTRUCTOR</b>(CHARACTER pcTable, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poAction)
     </code>
     <dl>
       <dd>

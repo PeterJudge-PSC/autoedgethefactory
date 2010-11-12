@@ -63,7 +63,49 @@
           <b>
             <a href='#1194.DataAdd'>DataAdd</a>
           </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been added to the model.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.DataAddError'>DataAddError</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is added to the model.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.DataCommitError'>DataCommitError</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is saved to a service.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.DataCommitted'>DataCommitted</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a FetchData()
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -77,7 +119,49 @@
           <b>
             <a href='#1194.DataDelete'>DataDelete</a>
           </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been removed
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.DataDeleteError'>DataDeleteError</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is deleted from the model
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.DataFetched'>DataFetched</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a SaveData()
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.DataFetchError'>DataFetchError</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is fetched from a service.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -91,7 +175,49 @@
           <b>
             <a href='#1194.DataSave'>DataSave</a>
           </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been saved to the model (local save,
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.DataSaveError'>DataSaveError</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is saved locally
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.ServiceRequestCompleted'>ServiceRequestCompleted</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a service request.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.ServiceRequestError'>ServiceRequestError</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs on a service request.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -106,15 +232,15 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>CHARACTER</code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/IModelQueryCollection.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQueryCollection" target="classFrame">IModelQueryCollection</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.ErrorBuffer'>ErrorBuffer</a>
-          </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#property.ModelQueries'>ModelQueries</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) A collection for ModelQueries associated with this Model.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -128,7 +254,7 @@
           <b>
             <a href='#property.ServiceName'>ServiceName</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The name of the service from which this Model gets its data
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -150,78 +276,22 @@
         <code>
           <b>
             <a href='#addrecord(character)'> AddRecord</a>
-          </b>(CHARACTER pcBufferName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b>(CHARACTER pcTableName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a record locally to the Model
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#buildrequest()'> BuildRequest</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BuildRequest
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#buildrequest(character)'> BuildRequest</a>
-          </b>(CHARACTER pcTables)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#buildrequestfromqueries()'> BuildRequestFromQueries</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#buildrequestfromqueries(character)'> BuildRequestFromQueries</a>
-          </b>(CHARACTER pcTables)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#collectchanges()'> CollectChanges</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#buildrequest(openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'> BuildRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A general build request method for all tables in the model. This will
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -235,7 +305,7 @@
           <b>
             <a href='#commitdata()'> CommitData</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commits all modified data in the Model
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -247,15 +317,29 @@
       <td>
         <code>
           <b>
-            <a href='#createquery(character,character)'> CreateQuery</a>
-          </b>(CHARACTER pcQueryName, CHARACTER pcTable)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#commitdata(character)'> CommitData</a>
+          </b>(CHARACTER pcTables)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commits all modified data for the specified in the Model.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>VOID</code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createquery(character,character)'> CreateQuery</a>
+          </b>(CHARACTER pcQueryName, CHARACTER pcTableName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a default query for table
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a></code>
         </font>
       </td>
       <td>
@@ -263,35 +347,21 @@
           <b>
             <a href='#createquery(character,openedge.core.system.iquerydefinition)'> CreateQuery</a>
           </b>(CHARACTER pcQueryName, <a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a query with the specified definition.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>VOID</code>
+          <code><a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.core.system.eventargs)'> DataFetchedHandler</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#deletequery(character)'> DeleteQuery</a>
-          </b>(CHARACTER pcQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#createquery(openedge.core.system.iquerydefinition,handle,character)'> CreateQuery</a>
+          </b>(<a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition, HANDLE phQuery, CHARACTER pcQueryName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a query with the specified definition.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -304,8 +374,8 @@
         <code>
           <b>
             <a href='#deleterecord(character,character)'> DeleteRecord</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete a record locally from the Model.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -319,7 +389,7 @@
           <b>
             <a href='#fetchdata()'> FetchData</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch data
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch data for all tables. The Fetch() calls are for this model only,
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -331,9 +401,9 @@
       <td>
         <code>
           <b>
-            <a href='#fetchdata(openedge.commoninfrastructure.servicemessage.itablerequest)'> FetchData</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poTableRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#fetchdata(character)'> FetchData</a>
+          </b>(CHARACTER pcTables)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch data for all specified tables.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -347,7 +417,7 @@
           <b>
             <a href='#fetchdataforqueries()'> FetchDataForQueries</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetches data necessary to satisfy all queries in the Model.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -359,9 +429,9 @@
       <td>
         <code>
           <b>
-            <a href='#fetchdataforqueries(openedge.commoninfrastructure.servicemessage.itablerequest)'> FetchDataForQueries</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poTableRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#fetchdataforqueries(character)'> FetchDataForQueries</a>
+          </b>(CHARACTER pcQuery)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves data for the tables specifed by the named queries.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -374,22 +444,8 @@
         <code>
           <b>
             <a href='#getbindinghandle(character)'> GetBindingHandle</a>
-          </b>(CHARACTER pcQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getquery(character)'> GetQuery</a>
           </b>(CHARACTER pcQueryName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return a handle to which the UI will bind for a specific query.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -402,7 +458,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_character)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT CHARACTER pcValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT CHARACTER pcValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -416,7 +472,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_date)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATE ptValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATE ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -430,7 +486,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_datetime)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME ptValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -444,7 +500,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_datetime-tz)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME-TZ ptValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME-TZ ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -458,7 +514,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_decimal)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DECIMAL pdValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DECIMAL pdValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -472,7 +528,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_handle)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT HANDLE phValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT HANDLE phValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -486,7 +542,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_int64)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INT64 piValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INT64 piValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -500,7 +556,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_integer)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INTEGER piValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INTEGER piValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -514,7 +570,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_longchar)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT LONGCHAR pcValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT LONGCHAR pcValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -528,7 +584,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_progress.lang.object)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -542,49 +598,7 @@
         <code>
           <b>
             <a href='#getvalue(character,character,character,OUTPUT_raw)'> GetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT RAW prValue)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>LOGICAL</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#mergechanges(character)'> MergeChanges</a>
-          </b>(CHARACTER pcQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#processmodelerrors(character)'> ProcessModelErrors</a>
-          </b>(CHARACTER pcBufferName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#receivedata(openedge.commoninfrastructure.servicemessage.ifetchresponse)'> ReceiveData</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> poResponse)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT RAW prValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -598,8 +612,8 @@
         <code>
           <b>
             <a href='#saverecord(character,character)'> SaveRecord</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save a record locally to the Model.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -612,7 +626,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,character)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, CHARACTER pcValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, CHARACTER pcValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -626,7 +640,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,date)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATE ptValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATE ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -640,7 +654,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,datetime)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME ptValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -654,7 +668,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,datetime-tz)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME-TZ ptValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME-TZ ptValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -668,7 +682,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,decimal)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DECIMAL pdValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DECIMAL pdValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -682,7 +696,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,handle)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, HANDLE phValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, HANDLE phValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -696,7 +710,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,int64)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INT64 piValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INT64 piValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -710,7 +724,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,integer)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INTEGER piValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INTEGER piValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -724,7 +738,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,longchar)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, LONGCHAR pcValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, LONGCHAR pcValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -738,7 +752,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,progress.lang.object)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -752,7 +766,7 @@
         <code>
           <b>
             <a href='#setvalue(character,character,character,raw)'> SetValue</a>
-          </b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, RAW prValue)
+          </b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, RAW prValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -765,9 +779,9 @@
       <td>
         <code>
           <b>
-            <a href='#validatefield(integer,character,handle,handle)'> ValidateField</a>
-          </b>(INTEGER pcAction, CHARACTER pcFieldName, HANDLE phBeforeField, HANDLE phAfterField)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#validatefield(openedge.presentationlayer.common.modelactionenum,character,character,character)'> ValidateField</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poAction, CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Local/client-side field-level validation for a field in the model. If the validation
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -779,9 +793,9 @@
       <td>
         <code>
           <b>
-            <a href='#validaterow(integer,handle,handle)'> ValidateRow</a>
-          </b>(INTEGER pcAction, HANDLE phBeforeBuffer, HANDLE phAfterBuffer)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#validaterow(openedge.presentationlayer.common.modelactionenum,character,character)'> ValidateRow</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poAction, CHARACTER pcTableName, CHARACTER pcRecordKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Local/client-side record- or row-level validation for a field in
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -797,8 +811,60 @@
     <h3>DataAdd</h3>
     <code> PUBLIC </code>
     <dl>
+      <dd>Fired after a record has been added to the model. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.DataAddError'><!-- --></a>
+    <h3>DataAddError</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is added to the model. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.DataCommitError'><!-- --></a>
+    <h3>DataCommitError</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is saved to a service. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.DataCommitted'><!-- --></a>
+    <h3>DataCommitted</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a FetchData() <p> </dd>
+      <dd>service request. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -806,8 +872,60 @@
     <h3>DataDelete</h3>
     <code> PUBLIC </code>
     <dl>
+      <dd>Fired after a record has been removed <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.DataDeleteError'><!-- --></a>
+    <h3>DataDeleteError</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is deleted from the model <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.DataFetched'><!-- --></a>
+    <h3>DataFetched</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a SaveData() <p> </dd>
+      <dd>service request. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.DataFetchError'><!-- --></a>
+    <h3>DataFetchError</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is fetched from a service. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -815,8 +933,61 @@
     <h3>DataSave</h3>
     <code> PUBLIC </code>
     <dl>
+      <dd>Fired after a record has been saved to the model (local save, <p> </dd>
+      <dd>not a commit). </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.DataSaveError'><!-- --></a>
+    <h3>DataSaveError</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is saved locally <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.ServiceRequestCompleted'><!-- --></a>
+    <h3>ServiceRequestCompleted</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a service request. <p> </dd>
+      <dd>Individual events like DataFetched above will also fire. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.ServiceRequestError'><!-- --></a>
+    <h3>ServiceRequestError</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>This event fires when an error occurs on a service request. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -827,10 +998,12 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='property.ErrorBuffer'><!-- --></a>
-    <h3>ErrorBuffer</h3>
-    <code>CHARACTER PUBLIC GET SET </code>
+    <a name='property.ModelQueries'><!-- --></a>
+    <h3>ModelQueries</h3>
+    <code><a href="../../../OpenEdge/PresentationLayer/Model/IModelQueryCollection.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQueryCollection" target="classFrame">IModelQueryCollection</a> PUBLIC GET </code>
     <dl>
+      <dd>(mandatory) A collection for ModelQueries associated with this Model. <p> </dd>
+      <dd>Creation is done via the CreateQuery() API. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -840,6 +1013,7 @@
     <h3>ServiceName</h3>
     <code>CHARACTER PUBLIC GET </code>
     <dl>
+      <dd>(mandatory) The name of the service from which this Model gets its data <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -855,68 +1029,42 @@
     <a name='addrecord(character)'><!-- --></a>
     <h3>AddRecord</h3>
     <code>PUBLIC  CHARACTER
-      <b>AddRecord</b>(CHARACTER pcBufferName)
+      <b>AddRecord</b>(CHARACTER pcTableName)
     </code>
     <dl>
+      <dd>Add a record locally to the Model <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The name of the table in the Model to which to add a record.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>character The unique record key of the newly-added record.</dd>
+        </dl>
       </dd>
     </dl>
     <hr />
-    <a name='buildrequest()'><!-- --></a>
+    <a name='buildrequest(openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'><!-- --></a>
     <h3>BuildRequest</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a>
-      <b>BuildRequest</b>()
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a>
+      <b>BuildRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
     </code>
     <dl>
-      <dd>BuildRequest <p> </dd>
-      <dd>Allows you to bundle requests for multiple datasets. The Corresponding response need to be passed to ReceiveData. This is typically managed through the ClientServiceManager. </dd>
+      <dd>A general build request method for all tables in the model. This will <p> </dd>
       <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='buildrequest(character)'><!-- --></a>
-    <h3>BuildRequest</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a>
-      <b>BuildRequest</b>(CHARACTER pcTables)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='buildrequestfromqueries()'><!-- --></a>
-    <h3>BuildRequestFromQueries</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a>
-      <b>BuildRequestFromQueries</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='buildrequestfromqueries(character)'><!-- --></a>
-    <h3>BuildRequestFromQueries</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a>
-      <b>BuildRequestFromQueries</b>(CHARACTER pcTables)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='collectchanges()'><!-- --></a>
-    <h3>CollectChanges</h3>
-    <code>PUBLIC  VOID
-      <b>CollectChanges</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ServiceMessageActionEnum - The message type (Fetch, FetchSchema, Save etc)<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IServiceRequest The completed request for all tables in the Model</dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -926,63 +1074,106 @@
       <b>CommitData</b>()
     </code>
     <dl>
+      <dd>Commits all modified data in the Model <p> </dd>
       <dd>
         <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='commitdata(character)'><!-- --></a>
+    <h3>CommitData</h3>
+    <code>PUBLIC  VOID
+      <b>CommitData</b>(CHARACTER pcTables)
+    </code>
+    <dl>
+      <dd>Commits all modified data for the specified in the Model. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - An array of table names.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='createquery(character,character)'><!-- --></a>
     <h3>CreateQuery</h3>
-    <code>PUBLIC  VOID
-      <b>CreateQuery</b>(CHARACTER pcQueryName, CHARACTER pcTable)
+    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a>
+      <b>CreateQuery</b>(CHARACTER pcQueryName, CHARACTER pcTableName)
     </code>
     <dl>
+      <dd>Create a default query for table <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The table on which to create the query. More complex queries should useIQueryDefinition. <br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IModelQuery The created query. The name of this query the input name,since that is optional. </dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='createquery(character,openedge.core.system.iquerydefinition)'><!-- --></a>
     <h3>CreateQuery</h3>
-    <code>PUBLIC  VOID
+    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a>
       <b>CreateQuery</b>(CHARACTER pcQueryName, <a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition)
     </code>
     <dl>
+      <dd>Create a query with the specified definition. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - A name to use for the query (optional).<br/>IQueryDefinition - The definition (buffers, joins etc) for the query.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IModelQuery The created query. The name of this query the input name,since that is optional. </dd>
+        </dl>
       </dd>
     </dl>
     <hr />
-    <a name='datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.core.system.eventargs)'><!-- --></a>
-    <h3>DataFetchedHandler</h3>
-    <code>PUBLIC  VOID
-      <b>DataFetchedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
+    <a name='createquery(openedge.core.system.iquerydefinition,handle,character)'><!-- --></a>
+    <h3>CreateQuery</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a>
+      <b>CreateQuery</b>(<a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition, HANDLE phQuery, CHARACTER pcQueryName)
     </code>
     <dl>
+      <dd>Create a query with the specified definition. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='deletequery(character)'><!-- --></a>
-    <h3>DeleteQuery</h3>
-    <code>PUBLIC  VOID
-      <b>DeleteQuery</b>(CHARACTER pcQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IQueryDefinition - The definition (buffers, joins etc) for the query.<br/>handle - An existing ABL query (from a ProDataset/ProBindingSource for example)<br/>character - A name to use for the query (optional).<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IModelQuery The created query. The name of this query the input name,since that is optional. </dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='deleterecord(character,character)'><!-- --></a>
     <h3>DeleteRecord</h3>
     <code>PUBLIC  VOID
-      <b>DeleteRecord</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
+      <b>DeleteRecord</b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
     </code>
     <dl>
+      <dd>Delete a record locally from the Model. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The unique record key of the record.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -992,20 +1183,27 @@
       <b>FetchData</b>()
     </code>
     <dl>
-      <dd>fetch data <p> </dd>
+      <dd>Fetch data for all tables. The Fetch() calls are for this model only, <p> </dd>
+      <dd>the Build() calls are to enable bundling by the presenter (typically). </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='fetchdata(openedge.commoninfrastructure.servicemessage.itablerequest)'><!-- --></a>
+    <a name='fetchdata(character)'><!-- --></a>
     <h3>FetchData</h3>
     <code>PUBLIC  VOID
-      <b>FetchData</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poTableRequest)
+      <b>FetchData</b>(CHARACTER pcTables)
     </code>
     <dl>
+      <dd>Fetch data for all specified tables. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - An array of tables names in the Model for which to fetch data.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -1015,48 +1213,55 @@
       <b>FetchDataForQueries</b>()
     </code>
     <dl>
+      <dd>Fetches data necessary to satisfy all queries in the Model. <p> </dd>
+      <dd>If there are no queries defined, no data will be retrieved. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='fetchdataforqueries(openedge.commoninfrastructure.servicemessage.itablerequest)'><!-- --></a>
+    <a name='fetchdataforqueries(character)'><!-- --></a>
     <h3>FetchDataForQueries</h3>
     <code>PUBLIC  VOID
-      <b>FetchDataForQueries</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poTableRequest)
+      <b>FetchDataForQueries</b>(CHARACTER pcQuery)
     </code>
     <dl>
+      <dd>Retrieves data for the tables specifed by the named queries. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - An array of query names in the Model for whose table towhich to fetch data. <br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='getbindinghandle(character)'><!-- --></a>
     <h3>GetBindingHandle</h3>
     <code>PUBLIC  HANDLE
-      <b>GetBindingHandle</b>(CHARACTER pcQuery)
+      <b>GetBindingHandle</b>(CHARACTER pcQueryName)
     </code>
     <dl>
+      <dd>Return a handle to which the UI will bind for a specific query. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getquery(character)'><!-- --></a>
-    <h3>GetQuery</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a>
-      <b>GetQuery</b>(CHARACTER pcQueryName)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - A query name<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>handle The handle to which the view will bind the UI</dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='getvalue(character,character,character,OUTPUT_character)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT CHARACTER pcValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT CHARACTER pcValue)
     </code>
     <dl>
       <dd>
@@ -1067,7 +1272,7 @@
     <a name='getvalue(character,character,character,OUTPUT_date)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATE ptValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATE ptValue)
     </code>
     <dl>
       <dd>
@@ -1078,7 +1283,7 @@
     <a name='getvalue(character,character,character,OUTPUT_datetime)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME ptValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME ptValue)
     </code>
     <dl>
       <dd>
@@ -1089,7 +1294,7 @@
     <a name='getvalue(character,character,character,OUTPUT_datetime-tz)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME-TZ ptValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DATETIME-TZ ptValue)
     </code>
     <dl>
       <dd>
@@ -1100,7 +1305,7 @@
     <a name='getvalue(character,character,character,OUTPUT_decimal)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DECIMAL pdValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT DECIMAL pdValue)
     </code>
     <dl>
       <dd>
@@ -1111,7 +1316,7 @@
     <a name='getvalue(character,character,character,OUTPUT_handle)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT HANDLE phValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT HANDLE phValue)
     </code>
     <dl>
       <dd>
@@ -1122,7 +1327,7 @@
     <a name='getvalue(character,character,character,OUTPUT_int64)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INT64 piValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INT64 piValue)
     </code>
     <dl>
       <dd>
@@ -1133,7 +1338,7 @@
     <a name='getvalue(character,character,character,OUTPUT_integer)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INTEGER piValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT INTEGER piValue)
     </code>
     <dl>
       <dd>
@@ -1144,7 +1349,7 @@
     <a name='getvalue(character,character,character,OUTPUT_longchar)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT LONGCHAR pcValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT LONGCHAR pcValue)
     </code>
     <dl>
       <dd>
@@ -1155,7 +1360,7 @@
     <a name='getvalue(character,character,character,OUTPUT_progress.lang.object)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
     </code>
     <dl>
       <dd>
@@ -1166,40 +1371,7 @@
     <a name='getvalue(character,character,character,OUTPUT_raw)'><!-- --></a>
     <h3>GetValue</h3>
     <code>PUBLIC  VOID
-      <b>GetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT RAW prValue)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='mergechanges(character)'><!-- --></a>
-    <h3>MergeChanges</h3>
-    <code>PUBLIC  LOGICAL
-      <b>MergeChanges</b>(CHARACTER pcQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='processmodelerrors(character)'><!-- --></a>
-    <h3>ProcessModelErrors</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a>
-      <b>ProcessModelErrors</b>(CHARACTER pcBufferName)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='receivedata(openedge.commoninfrastructure.servicemessage.ifetchresponse)'><!-- --></a>
-    <h3>ReceiveData</h3>
-    <code>PUBLIC  VOID
-      <b>ReceiveData</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a> poResponse)
+      <b>GetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, OUTPUT RAW prValue)
     </code>
     <dl>
       <dd>
@@ -1210,18 +1382,24 @@
     <a name='saverecord(character,character)'><!-- --></a>
     <h3>SaveRecord</h3>
     <code>PUBLIC  VOID
-      <b>SaveRecord</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey)
+      <b>SaveRecord</b>(CHARACTER pcTableName, CHARACTER pcRecordKey)
     </code>
     <dl>
+      <dd>Save a record locally to the Model. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The unique record key of the record.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
     <a name='setvalue(character,character,character,character)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, CHARACTER pcValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, CHARACTER pcValue)
     </code>
     <dl>
       <dd>
@@ -1232,7 +1410,7 @@
     <a name='setvalue(character,character,character,date)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATE ptValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATE ptValue)
     </code>
     <dl>
       <dd>
@@ -1243,7 +1421,7 @@
     <a name='setvalue(character,character,character,datetime)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME ptValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME ptValue)
     </code>
     <dl>
       <dd>
@@ -1254,7 +1432,7 @@
     <a name='setvalue(character,character,character,datetime-tz)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME-TZ ptValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DATETIME-TZ ptValue)
     </code>
     <dl>
       <dd>
@@ -1265,7 +1443,7 @@
     <a name='setvalue(character,character,character,decimal)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DECIMAL pdValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, DECIMAL pdValue)
     </code>
     <dl>
       <dd>
@@ -1276,7 +1454,7 @@
     <a name='setvalue(character,character,character,handle)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, HANDLE phValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, HANDLE phValue)
     </code>
     <dl>
       <dd>
@@ -1287,7 +1465,7 @@
     <a name='setvalue(character,character,character,int64)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INT64 piValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INT64 piValue)
     </code>
     <dl>
       <dd>
@@ -1298,7 +1476,7 @@
     <a name='setvalue(character,character,character,integer)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INTEGER piValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, INTEGER piValue)
     </code>
     <dl>
       <dd>
@@ -1309,7 +1487,7 @@
     <a name='setvalue(character,character,character,longchar)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, LONGCHAR pcValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, LONGCHAR pcValue)
     </code>
     <dl>
       <dd>
@@ -1320,7 +1498,7 @@
     <a name='setvalue(character,character,character,progress.lang.object)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
     </code>
     <dl>
       <dd>
@@ -1331,7 +1509,7 @@
     <a name='setvalue(character,character,character,raw)'><!-- --></a>
     <h3>SetValue</h3>
     <code>PUBLIC  LOGICAL
-      <b>SetValue</b>(CHARACTER pcBufferName, CHARACTER pcRecordKey, CHARACTER pcFieldName, RAW prValue)
+      <b>SetValue</b>(CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName, RAW prValue)
     </code>
     <dl>
       <dd>
@@ -1339,25 +1517,39 @@
       </dd>
     </dl>
     <hr />
-    <a name='validatefield(integer,character,handle,handle)'><!-- --></a>
+    <a name='validatefield(openedge.presentationlayer.common.modelactionenum,character,character,character)'><!-- --></a>
     <h3>ValidateField</h3>
     <code>PUBLIC  VOID
-      <b>ValidateField</b>(INTEGER pcAction, CHARACTER pcFieldName, HANDLE phBeforeField, HANDLE phAfterField)
+      <b>ValidateField</b>(<a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poAction, CHARACTER pcTableName, CHARACTER pcRecordKey, CHARACTER pcFieldName)
     </code>
     <dl>
+      <dd>Local/client-side field-level validation for a field in the model. If the validation <p> </dd>
+      <dd>fails, an error will be thrown. </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ModelActionEnum - The action being performed on the record.<br/>character - The field name being validated.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
-    <a name='validaterow(integer,handle,handle)'><!-- --></a>
+    <a name='validaterow(openedge.presentationlayer.common.modelactionenum,character,character)'><!-- --></a>
     <h3>ValidateRow</h3>
     <code>PUBLIC  VOID
-      <b>ValidateRow</b>(INTEGER pcAction, HANDLE phBeforeBuffer, HANDLE phAfterBuffer)
+      <b>ValidateRow</b>(<a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEnum" target="classFrame">ModelActionEnum</a> poAction, CHARACTER pcTableName, CHARACTER pcRecordKey)
     </code>
     <dl>
+      <dd>Local/client-side record- or row-level validation for a field in <p> </dd>
+      <dd>the model. If the validation fails, an error will be thrown. </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ModelActionEnum - The action being performed on the record.<br/>character - The Record key for the record.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />

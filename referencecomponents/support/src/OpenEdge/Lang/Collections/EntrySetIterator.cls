@@ -4,7 +4,7 @@
     Purpose     : Iterator for entrysets
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Mon Apr 12 00:18:04 EDT 2010
     Notes       : The IMappedEntry Key Value are created in next().      
   ----------------------------------------------------------------------*/

@@ -6,7 +6,7 @@
 
     Description : 
 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jun 04 16:04:42 EDT 2010
     Notes       :
   ----------------------------------------------------------------------*/

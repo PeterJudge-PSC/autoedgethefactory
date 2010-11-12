@@ -4,7 +4,7 @@
     Purpose     : A collection that contains no duplicate elements.
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Wed Jan 09 09:57:42 EST 2008
     Notes       : 
   ----------------------------------------------------------------------*/

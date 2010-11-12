@@ -1,4 +1,3 @@
-@todo(task="question", action="interface? or just use concreate ServiceRequest?").
 /** ------------------------------------------------------------------------
     File        : IServiceRequest
     Purpose     : General interface for a service message request.
@@ -13,5 +12,5 @@
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest /* inherits IServiceMessage */:  
-  
+    
 end interface.

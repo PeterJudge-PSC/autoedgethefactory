@@ -26,9 +26,9 @@ class OpenEdge.Lang.FindTypeEnum final inherits EnumMember:
          FindTypeEnum:Last   = new FindTypeEnum('last').
          FindTypeEnum:Unique = new FindTypeEnum('unique').        
     end constructor.
-		
-	constructor public FindTypeEnum (input pcName as character ):
-		super (input pcName).
-	end constructor.
+        
+    constructor public FindTypeEnum (input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

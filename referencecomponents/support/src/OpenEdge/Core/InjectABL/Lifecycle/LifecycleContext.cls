@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : Contains information about the activation of a single instance.
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Mar 03 10:03:26 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -77,25 +77,30 @@ class OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext implements ILifecycleCo
         return Binding:GetProvider().
     end method.
     
-    /** Resolves the instance associated with this hook.
-        @return The resolved instance.
-     */
+    /** Resolves the instance associated with this context.
+        
+        @return The resolved instance.  */
     method public Object Resolve():
         define variable oInstance as Object no-undo.
         
-        oInstance = Cache:TryGet(this-object).
-        if valid-object(oInstance) then
-            return oInstance.
-        
-        /* This will perform any constructor injection, via the provider. */
-        oInstance = GetProvider():Create(this-object).
-        
-        /* Transient object aren't cached */
-        if valid-object(GetScope()) then
-            Cache:Remember(this-object, oInstance).
-        
-        /* Activation may have method and/or property injection */
-        Pipeline:Activate(this-object, oInstance).
+        if Binding:TargetType:IsInterface() then
+            oInstance = Kernel:Get(Binding:TargetType).
+        else
+        do:
+            oInstance = Cache:TryGet(this-object).
+            if valid-object(oInstance) then
+                return oInstance.
+            
+            /* This will perform any constructor injection, via the provider. */
+            oInstance = GetProvider():Create(this-object).
+            
+            /* Transient object aren't cached */
+            if valid-object(GetScope()) then
+                Cache:Remember(this-object, oInstance).
+            
+            /* Activation may have method and/or property injection */
+            Pipeline:Activate(this-object, oInstance).
+        end.
         
         return oInstance.
     end method.

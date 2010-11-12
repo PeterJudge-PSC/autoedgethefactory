@@ -5,7 +5,7 @@
                   both directions
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     :  
     Notes       : 
   ----------------------------------------------------------------------*/

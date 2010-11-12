@@ -19,13 +19,19 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum final in
     define public static property Last     as TableRequestTypeEnum no-undo get. private set.
     /** position request resort/reopen to current key */
     define public static property Position as TableRequestTypeEnum no-undo get. private set.
+    
     /** search in resultset  */
     define public static property Search   as TableRequestTypeEnum no-undo get. private set.
+    
     /** For child tables = default defined by dataset relation (to not use All on a child 
         requires advanced data request management). Logically this is possibly more of a 
         jointype, but it will never conflict with the other options */        
     define public static property All      as TableRequestTypeEnum no-undo get. private set.
-
+    
+    /** No Operation. We do nothing for this table. This state may be set when the client has all
+        records, or for some other reason. */
+    define public static property NoOp     as TableRequestTypeEnum no-undo get. private set.
+    
     constructor static TableRequestTypeEnum():
          TableRequestTypeEnum:First    = new TableRequestTypeEnum('first').
          TableRequestTypeEnum:Next     = new TableRequestTypeEnum('next').
@@ -33,7 +39,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum final in
          TableRequestTypeEnum:Last     = new TableRequestTypeEnum('last'). 
          TableRequestTypeEnum:Position = new TableRequestTypeEnum('position').        
          TableRequestTypeEnum:Search   = new TableRequestTypeEnum('search').
-         TableRequestTypeEnum:All      = new TableRequestTypeEnum('all').        
+         TableRequestTypeEnum:All      = new TableRequestTypeEnum('all').
+         TableRequestTypeEnum:NoOp     = new TableRequestTypeEnum('NoOp').
     end constructor.
 
     constructor public TableRequestTypeEnum ( input pcName as character ):

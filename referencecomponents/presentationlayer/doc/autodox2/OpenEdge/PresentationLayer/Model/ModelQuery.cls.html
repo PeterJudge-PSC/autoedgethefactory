@@ -38,64 +38,13 @@
       <font size='-1'>OpenEdge\PresentationLayer\Model</font>
       <br />CLASS ModelQuery
     </h2>
-    <p>CLASS OpenEdge.PresentationLayer.Model.ModelQuery INHERITS <a href="../../../OpenEdge/Core/System/Query.cls.html" title="OpenEdge.Core.System.Query" target="classFrame">Query</a> IMPLEMENTS <a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> </p>
+    <p>CLASS OpenEdge.PresentationLayer.Model.ModelQuery INHERITS <a href="../../../OpenEdge/Core/System/Query.cls.html" title="OpenEdge.Core.System.Query" target="classFrame">Query</a> IMPLEMENTS <a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> , <a href="../../../OpenEdge/PresentationLayer/Model/IModelEventHandler.cls.html" title="OpenEdge.PresentationLayer.Model.IModelEventHandler" target="classFrame">IModelEventHandler</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-				<A NAME="field_summary"><!-- --></A>
-				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-				<B>Field Summary</B></FONT></TH>
-				</TR>
-				
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.QueryClosed'>QueryClosed</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.QueryOpened'>QueryOpened</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.QueryRepositioned'>QueryRepositioned</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-				</TABLE>&nbsp;<P>
-				
 				<A NAME="property_summary"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -143,6 +92,20 @@
             <a href='#property.QueryName'>QueryName</a>
           </b> PUBLIC GET PROTECTED SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.RequiresReopen'>RequiresReopen</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does this query object require a Reopen() call? A query might be flagged as such
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -199,15 +162,141 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LOGICAL</code>
+          <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#closequery(handle)'> CloseQuery</a>
-          </b>(HANDLE phQuery)
+            <a href='#dataadderrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataAddErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#dataaddhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataAddHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been created in the model (local)
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datacommiterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataCommitErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datacommittedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataCommittedHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a FetchData()
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datadeleteerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataDeleteErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datadeletehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataDeleteHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been removed (local)
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataFetchedHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a SaveData()
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datafetcherrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataFetchErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datasaveerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataSaveErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datasavehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataSaveHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been saved to the model (local save,
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -261,49 +350,7 @@
       <td>
         <code>
           <b>
-            <a href='#onqueryclose(handle)'> OnQueryClose</a>
-          </b>(HANDLE phQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#onqueryopen(handle)'> OnQueryOpen</a>
-          </b>(HANDLE phQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#onqueryrepos(handle)'> OnQueryRepos</a>
-          </b>(HANDLE phQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#openquery(handle)'> OpenQuery</a>
+            <a href='#open(handle)'> Open</a>
           </b>(HANDLE phQuery)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -317,23 +364,9 @@
       <td>
         <code>
           <b>
-            <a href='#repositionquery(handle,integer)'> RepositionQuery</a>
-          </b>(HANDLE phQuery, INTEGER piRow)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>LOGICAL</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#repositionquery(handle,rowid)'> RepositionQuery</a>
-          </b>(HANDLE phQuery, ROWID prRecord)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#queryrequiresreopen(character)'> QueryRequiresReopen</a>
+          </b>(CHARACTER pcActionTables)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assume query requries a reopen if any of the tables in the Model Action are in the
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -387,47 +420,41 @@
       <td>
         <code>
           <b>
+            <a href='#servicerequestcompletedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> ServiceRequestCompletedHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a service request.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#servicerequesterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> ServiceRequestErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
             <a href='#setqueryhandle(handle)'> SetQueryHandle</a>
           </b>(HANDLE phQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the DatasetModel to use the queries created by
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
 				
-				<A NAME="field_detail"><!-- --></A>
-				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-				<B>Field Detail</B></FONT></TH>
-				</TR></TABLE>
-				
-    <a name='1194.QueryClosed'><!-- --></a>
-    <h3>QueryClosed</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='1194.QueryOpened'><!-- --></a>
-    <h3>QueryOpened</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='1194.QueryRepositioned'><!-- --></a>
-    <h3>QueryRepositioned</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
 				<A NAME="property_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -457,6 +484,17 @@
     <h3>QueryName</h3>
     <code>CHARACTER PUBLIC GET PROTECTED SET </code>
     <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.RequiresReopen'><!-- --></a>
+    <h3>RequiresReopen</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>Does this query object require a Reopen() call? A query might be flagged as such <p> </dd>
+      <dd>by a Model when new data is added from a busines entity (or even locally) in batch/bundle mode. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -502,14 +540,146 @@
       </dd>
     </dl>
     <hr />
-    <a name='closequery(handle)'><!-- --></a>
-    <h3>CloseQuery</h3>
-    <code>OVERRIDE PROTECTED  LOGICAL
-      <b>CloseQuery</b>(HANDLE phQuery)
+    <a name='dataadderrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataAddErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataAddErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
     </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='dataaddhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataAddHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataAddHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Fired after a record has been created in the model (local) <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datacommiterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataCommitErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataCommitErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datacommittedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataCommittedHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataCommittedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a FetchData() <p> </dd>
+      <dd>service request. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datadeleteerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataDeleteErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataDeleteErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datadeletehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataDeleteHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataDeleteHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Fired after a record has been removed (local) <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataFetchedHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataFetchedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a SaveData() <p> </dd>
+      <dd>service request. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datafetcherrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataFetchErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataFetchErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datasaveerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataSaveErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataSaveErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datasavehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataSaveHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataSaveHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Fired after a record has been saved to the model (local save, <p> </dd>
+      <dd>not a commit). </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -546,43 +716,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='onqueryclose(handle)'><!-- --></a>
-    <h3>OnQueryClose</h3>
-    <code>PROTECTED  VOID
-      <b>OnQueryClose</b>(HANDLE phQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='onqueryopen(handle)'><!-- --></a>
-    <h3>OnQueryOpen</h3>
-    <code>PROTECTED  VOID
-      <b>OnQueryOpen</b>(HANDLE phQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='onqueryrepos(handle)'><!-- --></a>
-    <h3>OnQueryRepos</h3>
-    <code>PROTECTED  VOID
-      <b>OnQueryRepos</b>(HANDLE phQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='openquery(handle)'><!-- --></a>
-    <h3>OpenQuery</h3>
+    <a name='open(handle)'><!-- --></a>
+    <h3>Open</h3>
     <code>OVERRIDE PROTECTED  VOID
-      <b>OpenQuery</b>(HANDLE phQuery)
+      <b>Open</b>(HANDLE phQuery)
     </code>
     <dl>
       <dd>
@@ -590,25 +727,25 @@
       </dd>
     </dl>
     <hr />
-    <a name='repositionquery(handle,integer)'><!-- --></a>
-    <h3>RepositionQuery</h3>
-    <code>OVERRIDE PROTECTED  LOGICAL
-      <b>RepositionQuery</b>(HANDLE phQuery, INTEGER piRow)
+    <a name='queryrequiresreopen(character)'><!-- --></a>
+    <h3>QueryRequiresReopen</h3>
+    <code>PROTECTED  LOGICAL
+      <b>QueryRequiresReopen</b>(CHARACTER pcActionTables)
     </code>
     <dl>
+      <dd>Assume query requries a reopen if any of the tables in the Model Action are in the <p> </dd>
+      <dd>query itself. </dd>
       <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='repositionquery(handle,rowid)'><!-- --></a>
-    <h3>RepositionQuery</h3>
-    <code>OVERRIDE PROTECTED  LOGICAL
-      <b>RepositionQuery</b>(HANDLE phQuery, ROWID prRecord)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - An array of tables being checked<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>logical Whether the query needs to be reopened.</dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -645,14 +782,50 @@
       </dd>
     </dl>
     <hr />
+    <a name='servicerequestcompletedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>ServiceRequestCompletedHandler</h3>
+    <code>PUBLIC  VOID
+      <b>ServiceRequestCompletedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a service request. <p> </dd>
+      <dd>Individual events like DataFetched above will also fire. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>EventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='servicerequesterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>ServiceRequestErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>ServiceRequestErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='setqueryhandle(handle)'><!-- --></a>
     <h3>SetQueryHandle</h3>
     <code>PUBLIC  VOID
       <b>SetQueryHandle</b>(HANDLE phQuery)
     </code>
     <dl>
+      <dd>Allows the DatasetModel to use the queries created by <p> </dd>
+      <dd>the ProBindingSource if it needs to. DatasetModel:CreateDefaultQUeries() creates a bunch of queries based on the relations; the PBS uses the same queries (the PDS' relation queries) as a basis for its' own 'smaller'/individual queries when its working in a heirachical grid like the UlraControls' UltraGrid. The query definitions will stay the same for all queries on a relation - so you won't be able to sort customer 1's orders differently from customer 2's in the same grid - but we're going to use that single query def for all the individual queries, and will do so by pushing the actual query in use in to this object. </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - An ABL query handle<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />

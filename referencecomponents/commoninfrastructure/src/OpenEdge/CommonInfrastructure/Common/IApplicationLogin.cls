@@ -4,7 +4,7 @@
                   managers that the implementing class is the login service. 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Apr 14 16:04:27 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/

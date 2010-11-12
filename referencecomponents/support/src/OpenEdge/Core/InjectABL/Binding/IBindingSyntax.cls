@@ -75,54 +75,54 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     
     /** Indicates that the specified constructor argument should be overridden with the specified value. */    
     method public IBindingSyntax WithConstructorArgument(poService as class Class).
-    method public IBindingSyntax WithConstructorArgument(poService as class Class, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(poService as class Class, input poDataType as DataTypeEnum).
     method public IBindingSyntax WithConstructorArgument(poService as class Class extent).
-    method public IBindingSyntax WithConstructorArgument(poService as class Class extent, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(poService as class Class extent, input poDataType as DataTypeEnum).
     
-    method public IBindingSyntax WithConstructorArgument(poValue as Object).
-    method public IBindingSyntax WithConstructorArgument(poValue as Object, poDeclaringType as class Class).
-    method public IBindingSyntax WithConstructorArgument(poValue as Object extent).
-    method public IBindingSyntax WithConstructorArgument(poValue as Object extent, poDeclaringType as class Class).
+    method public IBindingSyntax WithConstructorArgument(input poValue as Object).
+    method public IBindingSyntax WithConstructorArgument(input poValue as Object, input poDeclaringType as class Class).
+    method public IBindingSyntax WithConstructorArgument(input poValue as Object extent).
+    method public IBindingSyntax WithConstructorArgument(input poValue as Object extent, input poDeclaringType as class Class).
     
     method public IBindingSyntax WithConstructorArgument(pcValue as character).
-    method public IBindingSyntax WithConstructorArgument(pcValue as character, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(pcValue as character, input poDataType as DataTypeEnum).
     method public IBindingSyntax WithConstructorArgument(pcValue as character extent).
-    method public IBindingSyntax WithConstructorArgument(pcValue as character extent, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(pcValue as character extent, input poDataType as DataTypeEnum).
     
     /** Indicates that the specified property should be injected with the specified value.  */
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poService as class Class).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poService as class Class, poDataType as DataTypeEnum).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poService as class Class extent).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poService as class Class extent, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class extent).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class extent, input poDataType as DataTypeEnum).
     
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poValue as Object).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poValue as Object, poDeclaringType as class Class).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poValue as Object extent).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, poValue as Object extent, poDeclaringType as class Class).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poValue as Object).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poValue as Object, input poDeclaringType as class Class).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poValue as Object extent).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poValue as Object extent, input poDeclaringType as class Class).
     
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, pcValue as character).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, pcValue as character, poDataType as DataTypeEnum).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, pcValue as character extent).
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as char, pcValue as character extent, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input pcValue as character).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input pcValue as character, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input pcValue as character extent).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input pcValue as character extent, input poDataType as DataTypeEnum).
     
     /** Indicates that the specified method should be injected with the specified value.  */
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poService as class Class).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poService as class Class, poDataType as DataTypeEnum).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poService as class Class extent).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poService as class Class extent, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class extent).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class extent, input poDataType as DataTypeEnum).
     
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poValue as Object).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poValue as Object, poDeclaringType as class Class).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poValue as Object extent).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, poValue as Object extent, poDeclaringType as class Class).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poValue as Object).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poValue as Object, input poDeclaringType as class Class).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poValue as Object extent).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poValue as Object extent, input poDeclaringType as class Class).
     
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, pcValue as character).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, pcValue as character, poDataType as DataTypeEnum).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, pcValue as character extent).
-    method public IBindingSyntax WithMethodValue(pcMethodName as char, pcValue as character extent, poDataType as DataTypeEnum).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input pcValue as character).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input pcValue as character, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input pcValue as character extent).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input pcValue as character extent, input poDataType as DataTypeEnum).
     
     @IBindingNamedSyntax.
     /** Gives the service an instance name. By default this is the service name  */
-    method public IBindingSyntax Named(pcName as character).
+    method public IBindingSyntax Named(input pcName as character).
     
 end interface.

@@ -37,8 +37,8 @@ class OpenEdge.Core.System.ErrorSeverityEnum  inherits FlagsEnum :
         ErrorSeverityEnum:Default = ErrorSeverityEnum:Error.
     end constructor.
 
-	constructor public ErrorSeverityEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+    constructor public ErrorSeverityEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
 
 end class.

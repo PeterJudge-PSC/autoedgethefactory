@@ -4,7 +4,7 @@
     Syntax      : 
     Description : AgentRequest object : this object lives for the lifespan of 
                   an AppServer
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jun 04 15:00:56 EDT 2010
     Notes       : * The instance's lifespan is managed by as AppServer activate/deactivate
                     procedures.

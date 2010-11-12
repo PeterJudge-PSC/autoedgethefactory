@@ -27,9 +27,9 @@ class OpenEdge.Lang.SortDirectionEnum final inherits EnumMember:
         SortDirectionEnum:Default = SortDirectionEnum:Ascending.        
     end constructor.
 
-	constructor public SortDirectionEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+    constructor public SortDirectionEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
     
     method static public SortDirectionEnum EnumFromString(pcSortDirection as character):
         define variable oMember as SortDirectionEnum no-undo.
