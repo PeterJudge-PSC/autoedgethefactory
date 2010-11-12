@@ -92,48 +92,6 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#aftercommitdata()'> AfterCommitData</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#assigndefaultvalues(character,handle)'> AssignDefaultValues</a>
-          </b>(CHARACTER pcTable, HANDLE phBuffer)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#assignkeyvalues(character,handle)'> AssignKeyValues</a>
-          </b>(CHARACTER pcTable, HANDLE phBuffer)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assign parent values based on the relation a (child) buffer is part of.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
           <code>LOGICAL</code>
         </font>
       </td>
@@ -154,7 +112,7 @@
       <td>
         <code>
           <b>
-            <a href='#collectchanges()'> CollectChanges</a>
+            <a href='#commitdata()'> CommitData</a>
           </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -198,20 +156,6 @@
           <b>
             <a href='#doaddrecord(character)'> DoAddRecord</a>
           </b>(CHARACTER pcBufferName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#docommitdata()'> DoCommitData</a>
-          </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -330,20 +274,6 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LOGICAL</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#mergechanges(character)'> MergeChanges</a>
-          </b>(CHARACTER pcQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
           <code>VOID</code>
         </font>
       </td>
@@ -352,20 +282,6 @@
           <b>
             <a href='#openquery(character)'> OpenQuery</a>
           </b>(CHARACTER pcQuery)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#processmodelerrors(character)'> ProcessModelErrors</a>
-          </b>(CHARACTER pcBuffer)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -405,40 +321,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='aftercommitdata()'><!-- --></a>
-    <h3>AfterCommitData</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AfterCommitData</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='assigndefaultvalues(character,handle)'><!-- --></a>
-    <h3>AssignDefaultValues</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AssignDefaultValues</b>(CHARACTER pcTable, HANDLE phBuffer)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='assignkeyvalues(character,handle)'><!-- --></a>
-    <h3>AssignKeyValues</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>AssignKeyValues</b>(CHARACTER pcTable, HANDLE phBuffer)
-    </code>
-    <dl>
-      <dd>Assign parent values based on the relation a (child) buffer is part of. <p> </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='closequery(character)'><!-- --></a>
     <h3>CloseQuery</h3>
     <code>PUBLIC  LOGICAL
@@ -450,10 +332,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='collectchanges()'><!-- --></a>
-    <h3>CollectChanges</h3>
+    <a name='commitdata()'><!-- --></a>
+    <h3>CommitData</h3>
     <code>OVERRIDE PUBLIC  VOID
-      <b>CollectChanges</b>()
+      <b>CommitData</b>()
     </code>
     <dl>
       <dd>
@@ -487,17 +369,6 @@
     <h3>DoAddRecord</h3>
     <code>OVERRIDE PROTECTED  CHARACTER
       <b>DoAddRecord</b>(CHARACTER pcBufferName)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='docommitdata()'><!-- --></a>
-    <h3>DoCommitData</h3>
-    <code>OVERRIDE PROTECTED  VOID
-      <b>DoCommitData</b>()
     </code>
     <dl>
       <dd>
@@ -593,32 +464,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='mergechanges(character)'><!-- --></a>
-    <h3>MergeChanges</h3>
-    <code>OVERRIDE PUBLIC  LOGICAL
-      <b>MergeChanges</b>(CHARACTER pcQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='openquery(character)'><!-- --></a>
     <h3>OpenQuery</h3>
     <code>PUBLIC  VOID
       <b>OpenQuery</b>(CHARACTER pcQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='processmodelerrors(character)'><!-- --></a>
-    <h3>ProcessModelErrors</h3>
-    <code>OVERRIDE PUBLIC  <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a>
-      <b>ProcessModelErrors</b>(CHARACTER pcBuffer)
     </code>
     <dl>
       <dd>

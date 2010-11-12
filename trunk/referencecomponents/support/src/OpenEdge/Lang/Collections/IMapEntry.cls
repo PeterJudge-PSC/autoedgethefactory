@@ -7,7 +7,7 @@
                    
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Sun Apr 11 23:46:14 EDT 2010
     Notes       : The only way to obtain a reference to a map entry is 
                   from the iterator of the IEntrySet.

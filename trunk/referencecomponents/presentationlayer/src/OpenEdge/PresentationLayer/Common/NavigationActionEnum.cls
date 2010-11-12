@@ -26,9 +26,9 @@ class OpenEdge.PresentationLayer.Common.NavigationActionEnum final inherits Enum
         NavigationActionEnum:Last  = new NavigationActionEnum(4, 'last').
     end constructor.
 
-	constructor public NavigationActionEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+    constructor public NavigationActionEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
     
     method public static NavigationActionEnum EnumFromValue(piNavigationAction as integer):        
         define variable oMember as NavigationActionEnum no-undo.

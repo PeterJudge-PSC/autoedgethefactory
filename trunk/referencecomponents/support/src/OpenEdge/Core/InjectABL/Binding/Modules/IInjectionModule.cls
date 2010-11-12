@@ -1,10 +1,9 @@
-
-/*------------------------------------------------------------------------
+/* ------------------------------------------------------------------------
     File        : IInjectionModule
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 11:09:36 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -12,7 +11,6 @@
 using Progress.Lang.*.
 using OpenEdge.Core.InjectABL.Binding.Modules.*.
 using OpenEdge.Core.InjectABL.*.
-
 
 interface OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule:
     

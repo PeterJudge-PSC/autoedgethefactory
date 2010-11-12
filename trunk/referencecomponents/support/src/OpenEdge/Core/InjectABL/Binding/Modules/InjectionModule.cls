@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      :
     Description : A loadable unit that defines bindings for your application.
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 11:08:44 EST 2010 
     Notes       : 
   ----------------------------------------------------------------------*/

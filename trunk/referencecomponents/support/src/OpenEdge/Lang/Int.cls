@@ -4,7 +4,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 27 08:22:29 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/

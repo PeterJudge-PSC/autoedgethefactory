@@ -89,7 +89,6 @@ class OpenEdge.Core.System.QueryDefinition
         index idx1 as primary unique BufferName FieldName       
         .
 
-
     method public void AddFilter (pcBufferName as char,
                                   pcFieldName as char,
                                   poOperator as OperatorEnum,
@@ -325,7 +324,7 @@ class OpenEdge.Core.System.QueryDefinition
         
         return oMode.
     end method.
-                    
+    
     method public character GetBufferTable(pcBuffer as char):
         define variable cTable as char no-undo.
         define buffer lbBuffer for ttBuffer.
@@ -340,7 +339,7 @@ class OpenEdge.Core.System.QueryDefinition
     constructor public QueryDefinition():
         super ().
     end constructor.
-            
+    
     method public void AddJoin (pcBufferName as char,
                                 pcFieldName as char,
                                 poOperator as OperatorEnum,
@@ -550,7 +549,7 @@ class OpenEdge.Core.System.QueryDefinition
         return cWhereClause. 
     end method.
     
-    method protected character GetJoin (pcBuffersInQuery as character, pcBufferName as character):
+    method protected character GetJoin(pcBuffersInQuery as character, pcBufferName as character):
         define variable cWhereClause as character no-undo.
         
         define buffer lbJoin for ttJoin.

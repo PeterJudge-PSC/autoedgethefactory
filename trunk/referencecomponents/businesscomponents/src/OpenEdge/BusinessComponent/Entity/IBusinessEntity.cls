@@ -14,11 +14,11 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 
-interface OpenEdge.BusinessComponent.Entity.IBusinessEntity: 
-    /** (mandatory) The DataAccess object for this entity.
+interface OpenEdge.BusinessComponent.Entity.IBusinessEntity:
+    /** The DataAccess object for this entity.
         The SetDataAccess method is a workaround for the lack of dynamic
         property invocation in the ABL.     */
-    define public property DataAccess as IDataAccess no-undo get.
+    define public property DataAccess as IDataAccess no-undo get. set.
     method public void SetDataAccess (input poDataAccess as IDataAccess).
         
     /** Retrieve data according to the request, and

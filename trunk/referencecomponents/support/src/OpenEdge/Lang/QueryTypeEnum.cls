@@ -27,10 +27,10 @@ class OpenEdge.Lang.QueryTypeEnum inherits EnumMember:
         QueryTypeEnum:Default = QueryTypeEnum:Each.
     end constructor.
 
-	constructor public QueryTypeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
-	
+    constructor public QueryTypeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
+    
     method public static QueryTypeEnum EnumFromString(pcQueryType as char):        
         define variable oMember as QueryTypeEnum no-undo.
         

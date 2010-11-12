@@ -7,32 +7,62 @@
     Created     : Fri Jul 31 16:33:06 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
+using OpenEdge.Core.System.IQuery.
 using OpenEdge.Core.System.RowPositionEnum.   
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.ITableOwner.
 using OpenEdge.Lang.FindTypeEnum.
 
+using OpenEdge.Core.System.EventArgs.
+
 interface OpenEdge.Core.System.IQuery:
-      
+    
+    /* Events */
+    /** Fired when the query is opened or reopened. This event only fires on query represented by the public QueryHandle.
+        
+        @param IQuery The query being operated on
+        @param EventArgs Arguments pertaining to the operation. */
+    define public event QueryOpened signature void (input poQuery as IQuery, input poArgs as EventArgs).
+    
+    /** Fired when the query is closed. This event only fires on query represented by the public QueryHandle.
+        
+        @param IQuery The query being operated on
+        @param EventArgs Arguments pertaining to the operation. */
+    define public event QueryClosed signature void (input poQuery as IQuery, input poArgs as EventArgs).
+
+    /** Fired when the query is repositioned. This even only fires on query represented by the 
+        public QueryHandle property, not any (internal) clones.
+        
+        @param IQuery The query being operated on
+        @param EventArgs Arguments pertaining to the operation. */
+    define public event QueryRepositioned signature void (input poQuery as IQuery, input poArgs as EventArgs).
+    
+    /** The ABL handle to the underlying query. Read-only. */
     define public property QueryHandle as handle no-undo get.
-    define public property QueryDefinition as IQueryDefinition no-undo get.
+    
+    /** (derived) Is the query open? */
+    define public property IsOpen as logical no-undo get.
+
+    define public property Definition as IQueryDefinition no-undo get.
     define public property NumRows as integer no-undo get.
     define public property CurrentRow as integer no-undo get.
     define public property RowPosition as RowPositionEnum no-undo get.
     define public property TableOwner as ITableOwner no-undo get.
     
+    method public void Prepare().
+    
     /* Constructs an ABL query based on the existing QueryDefinition */
-    method public void OpenQuery().
-    method public logical CloseQuery().
+    method public void Open().
+    method public logical Close().
         
-    method public logical ReopenQuery().
-    method public logical ReopenQuery(input pcRowKey as character extent).
-    method public logical ReopenQuery(input piRow as integer).
+    method public logical Reopen().
+    method public logical Reopen(input pcRowKey as character extent).
+    method public logical Reopen(input piRow as integer).
     
     /* position to rowid specified by keys */
-    method public logical RepositionQuery(input pcRowKey as character extent).
+    method public logical Reposition(input pcRowKey as character extent).
     /* reposition to row number */
-    method public logical RepositionQuery(input piRow as integer).    
+    method public logical Reposition(input piRow as integer).    
     /* navigate through query */
     method public logical GetFirst().
     method public logical GetNext().
@@ -52,5 +82,7 @@ interface OpenEdge.Core.System.IQuery:
     
     method public character GetCurrentBufferKey(input pcBufferName as character).
     method public character GetBufferTableName(input pcBufferName as character).
+    
+    
     
 end interface.

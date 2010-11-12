@@ -26,8 +26,8 @@ class OpenEdge.Core.System.QueryElementEnum final inherits FlagsEnum:
         QueryElementEnum:Sort = new QueryElementEnum(8).
     end constructor.
 
-	constructor public QueryElementEnum ( input piValue as integer ):
-		super (input piValue).
-	end constructor.
+    constructor public QueryElementEnum ( input piValue as integer ):
+        super (input piValue).
+    end constructor.
     
 end class.

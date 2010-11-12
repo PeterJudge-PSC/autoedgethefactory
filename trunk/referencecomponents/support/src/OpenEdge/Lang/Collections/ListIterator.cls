@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Wed Jan 02 23:38:28 EST 2008
     Notes       : 
   ----------------------------------------------------------------------*/

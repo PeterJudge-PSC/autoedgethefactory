@@ -3,7 +3,7 @@
     Purpose     : Interface for table info (context)  
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Tue Feb 09 18:28:13 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/

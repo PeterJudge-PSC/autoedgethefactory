@@ -22,8 +22,8 @@ class OpenEdge.CommonInfrastructure.Client.ServiceTypeEnum inherits OpenEdge.Com
         ServiceTypeEnum:Presenter = new ServiceTypeEnum('Presenter').
     end constructor.
 
-	constructor public ServiceTypeEnum(pcName as character):
-		super(pcName).
-	end constructor.
+    constructor public ServiceTypeEnum(pcName as character):
+        super(pcName).
+    end constructor.
     
 end class.

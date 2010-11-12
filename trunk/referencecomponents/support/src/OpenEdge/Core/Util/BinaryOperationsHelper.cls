@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jan 15 14:56:25 EST 2010
     Notes       : * This class based on Garry Hall's binop.i utility    
                   * Utilities to perform bitwise logical operations,

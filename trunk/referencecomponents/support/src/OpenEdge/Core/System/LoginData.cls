@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Jun 12 13:44:10 EDT 2009
     Notes       : * This is a sample LoginData: ILoginData could have 
                     anything in it, really. 

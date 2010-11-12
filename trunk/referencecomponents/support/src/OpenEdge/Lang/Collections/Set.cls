@@ -4,7 +4,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : Wed Jan 09 10:45:45 EST 2008
     Notes       : 
   ----------------------------------------------------------------------*/

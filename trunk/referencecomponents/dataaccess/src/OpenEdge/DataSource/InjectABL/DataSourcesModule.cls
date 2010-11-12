@@ -21,6 +21,7 @@ class OpenEdge.DataSource.InjectABL.DataSourcesModule inherits InjectionModule:
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
         
+        /* The below won't run since StandardDataSource is abstract */
         oBindingSyntax = Bind('OpenEdge.DataSource.IDataSource').
         oBindingSyntax
                 :To('OpenEdge.DataSource.StandardDataSource').

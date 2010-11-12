@@ -75,62 +75,6 @@
       <td>
         <code>
           <b>
-            <a href='#1194.DataCommitError'>DataCommitError</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.DataDeleteError'>DataDeleteError</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.DataFetchError'>DataFetchError</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.DataSaveError'>DataSaveError</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#1194.NavigationPanelStateChanged'>NavigationPanelStateChanged</a>
           </b>PUBLIC 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Events
@@ -159,6 +103,20 @@
 				<B>Method Summary</B></FONT></TH>
 				</TR>
 				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addmodel(openedge.presentationlayer.model.imodel)'> AddModel</a>
+          </b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> poModel)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add multiple Models to the Presenter.
+      </td>
+    </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
@@ -226,7 +184,7 @@
           <b>
             <a href='#commitdata(openedge.commoninfrastructure.common.icomponentinfo)'> CommitData</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commits data for the specified Models. Executes a single bundle/request for these.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -255,20 +213,6 @@
             <a href='#createquery(openedge.commoninfrastructure.common.icomponentinfo,character,openedge.core.system.iquerydefinition)'> CreateQuery</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, CHARACTER pcQueryName, <a href="../../../OpenEdge/Core/System/IQueryDefinition.cls.html" title="OpenEdge.Core.System.IQueryDefinition" target="classFrame">IQueryDefinition</a> poQueryDefinition)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;These are only meant to be called by another Presenter, NOT any Views
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.datafetcheventargs)'> DataFetchedHandler</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/DataFetchEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.DataFetchEventArgs" target="classFrame">DataFetchEventArgs</a> poEventArgs)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -338,7 +282,7 @@
           <b>
             <a href='#fetchdata()'> FetchData</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetches data for all Models. Executes a single bundle/request for
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -352,7 +296,7 @@
           <b>
             <a href='#fetchdata(openedge.commoninfrastructure.common.icomponentinfo)'> FetchData</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetches data for the specified Models. Executes a single bundle/request for these.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -672,48 +616,6 @@
       <td>
         <code>
           <b>
-            <a href='#queryclosedhandler(openedge.presentationlayer.model.imodelquery,openedge.core.system.eventargs)'> QueryClosedHandler</a>
-          </b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> poQuery, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#queryopenedhandler(openedge.presentationlayer.model.imodelquery,openedge.core.system.eventargs)'> QueryOpenedHandler</a>
-          </b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> poQuery, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#queryrepositionedhandler(openedge.presentationlayer.model.imodelquery,openedge.core.system.eventargs)'> QueryRepositionedHandler</a>
-          </b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> poQuery, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#reopenquery(openedge.commoninfrastructure.common.icomponentinfo,character)'> ReopenQuery</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, CHARACTER pcQuery)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -947,42 +849,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='1194.DataCommitError'><!-- --></a>
-    <h3>DataCommitError</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='1194.DataDeleteError'><!-- --></a>
-    <h3>DataDeleteError</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='1194.DataFetchError'><!-- --></a>
-    <h3>DataFetchError</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='1194.DataSaveError'><!-- --></a>
-    <h3>DataSaveError</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='1194.NavigationPanelStateChanged'><!-- --></a>
     <h3>NavigationPanelStateChanged</h3>
     <code> PUBLIC </code>
@@ -1009,6 +875,23 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='addmodel(openedge.presentationlayer.model.imodel)'><!-- --></a>
+    <h3>AddModel</h3>
+    <code>PUBLIC  VOID
+      <b>AddModel</b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModel.cls.html" title="OpenEdge.PresentationLayer.Model.IModel" target="classFrame">IModel</a> poModel)
+    </code>
+    <dl>
+      <dd>Add multiple Models to the Presenter. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IModel - An array of IModel objects to add to the Presenter<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='addrecord(openedge.commoninfrastructure.common.icomponentinfo,character,character)'><!-- --></a>
     <h3>AddRecord</h3>
     <code>PUBLIC  CHARACTER
@@ -1059,6 +942,7 @@
       <b>CommitData</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService)
     </code>
     <dl>
+      <dd>Commits data for the specified Models. Executes a single bundle/request for these. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -1083,17 +967,6 @@
     </code>
     <dl>
       <dd>These are only meant to be called by another Presenter, NOT any Views <p> </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.datafetcheventargs)'><!-- --></a>
-    <h3>DataFetchedHandler</h3>
-    <code>PUBLIC  VOID
-      <b>DataFetchedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/DataFetchEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.DataFetchEventArgs" target="classFrame">DataFetchEventArgs</a> poEventArgs)
-    </code>
-    <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -1149,6 +1022,8 @@
       <b>FetchData</b>()
     </code>
     <dl>
+      <dd>Fetches data for all Models. Executes a single bundle/request for <p> </dd>
+      <dd>all the models that this Presenter knows about. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -1160,6 +1035,7 @@
       <b>FetchData</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService)
     </code>
     <dl>
+      <dd>Fetches data for the specified Models. Executes a single bundle/request for these. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -1401,39 +1277,6 @@
     <h3>OpenQuery</h3>
     <code>PUBLIC  VOID
       <b>OpenQuery</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, CHARACTER pcQuery)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='queryclosedhandler(openedge.presentationlayer.model.imodelquery,openedge.core.system.eventargs)'><!-- --></a>
-    <h3>QueryClosedHandler</h3>
-    <code>PUBLIC  VOID
-      <b>QueryClosedHandler</b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> poQuery, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='queryopenedhandler(openedge.presentationlayer.model.imodelquery,openedge.core.system.eventargs)'><!-- --></a>
-    <h3>QueryOpenedHandler</h3>
-    <code>PUBLIC  VOID
-      <b>QueryOpenedHandler</b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> poQuery, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='queryrepositionedhandler(openedge.presentationlayer.model.imodelquery,openedge.core.system.eventargs)'><!-- --></a>
-    <h3>QueryRepositionedHandler</h3>
-    <code>PUBLIC  VOID
-      <b>QueryRepositionedHandler</b>(<a href="../../../OpenEdge/PresentationLayer/Model/IModelQuery.cls.html" title="OpenEdge.PresentationLayer.Model.IModelQuery" target="classFrame">IModelQuery</a> poQuery, <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> poEventArgs)
     </code>
     <dl>
       <dd>

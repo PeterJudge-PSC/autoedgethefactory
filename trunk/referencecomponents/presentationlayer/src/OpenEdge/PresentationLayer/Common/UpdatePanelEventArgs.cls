@@ -10,20 +10,36 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using OpenEdge.PresentationLayer.Common.ModelActionEnum .
+using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.PresentationLayer.Common.ModelEventArgs.
 using Progress.Lang.Class.
 
-class OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs inherits ModelEventArgs  : 
 
-    constructor public UpdatePanelEventArgs ():
-        super().
-    end constructor.
-            
-    constructor public UpdatePanelEventArgs (poModelService as IComponentInfo,
-                                             pcQuery as char,
-                                             pcTable as char  ):
-        super(poModelService, pcQuery, pcTable).
-    end constructor.
-        
+class OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs inherits ModelActionEventArgs: 
+
+	constructor public UpdatePanelEventArgs ( input poModelService as IComponentInfo, input poModelAction as ModelActionEnum ):
+		super (input poModelService, input poModelAction).
+		
+	end constructor.
+
+		
+	constructor public UpdatePanelEventArgs ( input poModelService as IComponentInfo, input poModelAction as ModelActionEnum, input pcTable as character extent, input pcKey as character extent ):
+		super (input poModelService, input poModelAction, input pcTable, input pcKey).
+		
+	end constructor.
+
+		
+	constructor public UpdatePanelEventArgs ( input poModelService as IComponentInfo, input poModelAction as ModelActionEnum, input pcTable as character, input pcKey as character ):
+		super (input poModelService, input poModelAction, input pcTable, input pcKey).
+		
+	end constructor.
+
+		
+	constructor public UpdatePanelEventArgs ( input poModelService as IComponentInfo, input poModelAction as ModelActionEnum, input pcTables as character extent, input pcMessageId as character ):
+		super (input poModelService, input poModelAction, input pcTables, input pcMessageId).
+		
+	end constructor.
+
+
 end class.

@@ -63,7 +63,7 @@
           <b>
             <a href='#property.ComponentInfo'>ComponentInfo</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stores information about the component, such as a developer-defined instance name
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) Stores information about the component, such as a developer-defined instance name
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -100,7 +100,7 @@
           <b>
             <a href='#destroycomponent()'> DestroyComponent</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General destruction code that can be called outside of the destructor
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -130,8 +130,8 @@
     <h3>ComponentInfo</h3>
     <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> PUBLIC GET </code>
     <dl>
-      <dd>Stores information about the component, such as a developer-defined instance name <p> </dd>
-      <dd>(so as to be able to uniquely identify the component). </dd>
+      <dd>(mandatory) Stores information about the component, such as a developer-defined instance name <p> </dd>
+      <dd>so as to be able to uniquely identify the component. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -163,6 +163,8 @@
       <b>DestroyComponent</b>()
     </code>
     <dl>
+      <dd>General destruction code that can be called outside of the destructor <p> </dd>
+      <dd>if needed (but will also be called from within the dtor). </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

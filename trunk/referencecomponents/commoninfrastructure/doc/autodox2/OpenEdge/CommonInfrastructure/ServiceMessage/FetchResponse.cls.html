@@ -63,7 +63,7 @@
           <b>
             <a href='#property.TableResponses'>TableResponses</a>
           </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A collection of individual table responses for this larger request
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -98,9 +98,9 @@
       <td>
         <code>
           <b>
-            <a href='#inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> InitTableResponseFromRequest</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.itablerequestcollection)'> InitTableResponseFromRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequestCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection" target="classFrame">ITableRequestCollection</a> poRequestCollection)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre-populates the table response collection from the request's tablerequests
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -116,6 +116,7 @@
     <h3>TableResponses</h3>
     <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponseCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection" target="classFrame">ITableResponseCollection</a> PUBLIC GET PRIVATE SET </code>
     <dl>
+      <dd>A collection of individual table responses for this larger request <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -140,12 +141,13 @@
       </dd>
     </dl>
     <hr />
-    <a name='inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
+    <a name='inittableresponsefromrequest(openedge.commoninfrastructure.servicemessage.itablerequestcollection)'><!-- --></a>
     <h3>InitTableResponseFromRequest</h3>
     <code>PUBLIC  VOID
-      <b>InitTableResponseFromRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
+      <b>InitTableResponseFromRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableRequestCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection" target="classFrame">ITableRequestCollection</a> poRequestCollection)
     </code>
     <dl>
+      <dd>Pre-populates the table response collection from the request's tablerequests <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

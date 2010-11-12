@@ -1,104 +1,133 @@
- /*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : DataboundPresenter
-    Purpose     : 
+    Purpose     : A data-aware Presenter. Not all Presenters need to be data aware;
+                  they may simply perform actions locally. 
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Fri Mar 06 14:12:00 EST 2009
-    Notes       : 
-  ----------------------------------------------------------------------*/
+    Notes       : * The Models collection property is protected since only the 
+                    Presenter may talk directly to the Model object. Note that 
+                    while a ProBindingSource talks directly to the dataset/query 
+                    in the Model, it doesn't actually talk directly to the Model
+                    as an object.
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.IDataboundPresenter.
+using OpenEdge.PresentationLayer.Presenter.DataboundPresenter.
 using OpenEdge.PresentationLayer.Presenter.Presenter.
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 using OpenEdge.PresentationLayer.Model.IModel.
+using OpenEdge.PresentationLayer.Model.Model.
 using OpenEdge.PresentationLayer.Model.IModelQuery.
-using OpenEdge.PresentationLayer.Model.OperationDoneForContextError.
+using OpenEdge.PresentationLayer.Model.IModelEventHandler.
+using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
-using OpenEdge.PresentationLayer.Common.ModelEventArgs.
+using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.PresentationLayer.Common.NavigationPanelEventArgs.
 using OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs.
 using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
 using OpenEdge.PresentationLayer.Common.DataFetchEventArgs.
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection.
+
+using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager. 
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.EventArgs.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.IQuery.
 using OpenEdge.Lang.FindTypeEnum.
+
 using OpenEdge.Lang.Collections.IIterator.
+using OpenEdge.Lang.Collections.ICollection.
+ using OpenEdge.Lang.Collections.IMap.
+using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.Assert.
+using OpenEdge.Lang.String.
 
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits Presenter 
-                    implements IDataboundPresenter:
-    
-    define protected property Models as IServiceCollection no-undo get. set.
+                    implements IDataboundPresenter, IMessageConsumer, IModelEventHandler:
     
     /* Events */
     define public event NavigationPanelStateChanged signature void (poComponent as IComponent, poEventArgs as NavigationPanelEventArgs).
     define public event UpdatePanelStateChanged signature void (poComponent as IComponent, poEventArgs as UpdatePanelEventArgs).
-    
-    define public event DataFetchError  signature void (poComponent as IComponent, poEventArgs as ModelErrorEventArgs).
-    define public event DataCommitError signature void (poComponent as IComponent, poEventArgs as ModelErrorEventArgs).    
-    define public event DataSaveError   signature void (poComponent as IComponent, poEventArgs as ModelErrorEventArgs).
-    define public event DataDeleteError signature void (poComponent as IComponent, poEventArgs as ModelErrorEventArgs).
-    
     define public event AddUndoAction signature void (poComponent as IComponent, poEventArgs as UndoActionEventArgs).
     
-    constructor public DataboundPresenter(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
+    /** A set of Models that this Presenter uses. */
+    define protected property Models as IServiceCollection no-undo get. set.
+    
+    /** The ServicemessageManager is used plentifully; we keep it as a property so that
+        we can get it whenever needed, without fuss. */
+    define protected property ServiceMessageManager as IServiceMessageManager no-undo
+        get():
+            if not valid-object(ServiceMessageManager) then
+                ServiceMessageManager = cast(ServiceManager:GetService(
+                        Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager')),
+                    IServiceMessageManager).
+            
+            return ServiceMessageManager.
+        end get.
+        private set.
+    
+    /* A collection (Map) of the grouped requests. We have a map of these requests since we
+       could have more than one series of request being executed at any given time. The map 
+       stores the ServiceMessageConsumerCollection and is keyed by the RequestKey. This is an 
+       integer value and is an arbitrary, unique value. */
+    define protected property ServiceRequests as IMap no-undo get. private set.
+    
+    constructor public DataboundPresenter(input poServiceManager as IServiceManager,
+                                          input poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).
     end constructor.
     
-    constructor public DataboundPresenter(poServiceManager as IServiceManager,
-                                          poComponentInfo as IComponentInfo,
-                                          poModel as IModel extent):
-        super(poServiceManager, poComponentInfo).
+    constructor public DataboundPresenter(input poServiceManager as IServiceManager,
+                                          input poComponentInfo as IComponentInfo,
+                                          input poModel as IModel extent):
+        this-object(poServiceManager, poComponentInfo).
         
-        AddModel(poModel, false).
+        AddModel(poModel).
     end constructor.
+
+	method override public void CreateComponent(  ):
+		super:CreateComponent().
+		
+		Models = new IServiceCollection().		
+		ServiceRequests = new TypedMap(
+		                      Class:GetClass('OpenEdge.Lang.String'), 
+		                      Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection')).
+	end method.
     
-    /** Assume that this is called externally, and that we want the models
-        initialized.
+    /** Add a Model to the Presenter.
         
-        @param poModel The IModel being added to the Presenter
-      */
-    method public void AddModel(poModel as IModel):
-        AddModel(poModel, true).
-    end method.
-    
-    method protected void AddModel(poModel as IModel, plInit as logical):
+        @param IModel The IModel being added to the Presenter. */
+    method public void AddModel(input poModel as IModel):
         Assert:ArgumentNotNull(poModel, 'Model').
         
-        if not valid-object(Models) then 
-            Models = new IServiceCollection().
-        
-        Models:Put(cast(cast(poModel, IComponent):ComponentInfo, IComponentInfo), poModel).
-        
-        if plInit then
-            cast(poModel, IComponent):Initialize().
+        Models:Put(cast(poModel, IComponent):ComponentInfo, poModel).
     end method.
     
-    /** The 'bulk' adding of models is assumed to be done at init by injection (via InjectABL).
-    
-        @param poModel An array of IModel objects to add to the Presenter
-      */
-    method public void AddModel(poModel as IModel extent):
-        AddModel(poModel, true).
-    end method.
-    
-    method public void AddModel(poModel as IModel extent, plInit as logical):
+    /** Add a Model to the Presenter.
+        
+        @param IModel An array of IModel being added to the Presenter. */    
+    method public void AddModel(input poModel as IModel extent):
         define variable iMax as integer no-undo.
         define variable iLoop as integer no-undo.
         
@@ -106,7 +135,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         
         iMax = extent(poModel).
         do iLoop = 1 to iMax:
-            AddModel(poModel[iLoop], plInit).
+            AddModel(poModel[iLoop]).
         end.
     end method.
     
@@ -114,20 +143,53 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
 
+    /* Commits data for all Models that the Presenter knows about. Creates and executes a
+       single bundle for all. */
     method public void CommitData(  ):
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+        BuildAndExecuteRequests(ServiceMessageActionEnum:Save,
+                              cast(Models:KeySet:ToArray(), IComponentInfo)).
     end method.
 
-    method public void CommitData(poModelService as IComponentInfo ):
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    /* Commits data for the specified Model. */
+    method public void CommitData(poModelService as IComponentInfo):
+        define variable oComponentInfo as IComponentInfo extent 1 no-undo.
+        
+        oComponentInfo[1] = poModelService.
+        BuildAndExecuteRequests(ServiceMessageActionEnum:Save, oComponentInfo).
     end method.
-
+    
+    /** Commits data for the specified Models. Executes a single bundle/request for these. */
     method public void CommitData(poModelService as IComponentInfo extent ):
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+        BuildAndExecuteRequests(ServiceMessageActionEnum:Save, poModelService).
     end method.
+    
+    method public void CreateQuery(poModelService as IComponentInfo,
+                                   pcQueryName as character,
+                                   poQueryDefinition as IQueryDefinition):
+        define variable oModel as IModel no-undo.
+        define variable oModelQuery as IModelQuery no-undo.
+        
+        oModel = GetModel(poModelService).
+        oModelQuery = oModel:CreateQuery(pcQueryName, poQueryDefinition).
+        
+        cast(oModelQuery, IQuery):QueryOpened:Subscribe(this-object:QueryOpenedHandler).
+        cast(oModelQuery, IQuery):QueryClosed:Subscribe(this-object:QueryOpenedHandler).
+        cast(oModelQuery, IQuery):QueryRepositioned:Subscribe(this-object:QueryOpenedHandler).
+    end method.
+    
+    method public void CreateQuery(poModelService as IComponentInfo,
+                                   pcQueryName as character,
+                                   pcTableName as character ):
+        define variable oModel as IModel no-undo.
+        define variable oModelQuery as IModelQuery no-undo.
+        
+        oModel = GetModel(poModelService).
+        oModelQuery = oModel:CreateQuery(pcQueryName, pcTableName).
+        
+        cast(oModelQuery, IQuery):QueryOpened:Subscribe(this-object:QueryOpenedHandler).
+        cast(oModelQuery, IQuery):QueryClosed:Subscribe(this-object:QueryOpenedHandler).
+        cast(oModelQuery, IQuery):QueryRepositioned:Subscribe(this-object:QueryOpenedHandler).
 
-    method public void CreateQuery(poModelService as IComponentInfo, pcQueryName as character,pcTableName as character ):
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
 
     method public void DataReceivedHandler(poComponent as IComponent,poEventArgs as EventArgs ):
@@ -142,9 +204,6 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
 
-    method public void FetchData(  ):
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
-    end method.
 
     method public integer GetNumSelectedRows(poModelService as IComponentInfo, pcQueryName as character ):
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
@@ -174,35 +233,19 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         UpdatePanelStateChanged:Publish(cast(this-object, IComponent), poEventArgs). 
     end method.
     
-    method public void OnDataFetchError (poEventArgs as ModelErrorEventArgs):
-        DataFetchError:Publish(cast(this-object, IComponent), poEventArgs).
-    end method.
-    
-    method public void OnDataCommitError (poEventArgs as ModelErrorEventArgs):
-        DataCommitError:Publish(cast(this-object, IComponent), poEventArgs).
-    end method.
-        
-    method public void OnDataSaveError (poEventArgs as ModelErrorEventArgs):
-        DataSaveError:Publish(cast(this-object, IComponent), poEventArgs).
-    end method.
-    
-    method public void OnDataDeleteError (poEventArgs as ModelErrorEventArgs):
-        DataDeleteError:Publish(cast(this-object, IComponent), poEventArgs).
-    end method.
-    
     method public void OnAddUndoAction (poEventArgs as UndoActionEventArgs):
         AddUndoAction:Publish(cast(this-object, IComponent), poEventArgs).
     end method.
     
-    method public void QueryClosedHandler(poQuery as IModelQuery,poEventArgs as EventArgs ):
+    method public void QueryClosedHandler(poQuery as IQuery,poEventArgs as EventArgs ):
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
     
-    method public void QueryOpenedHandler(poQuery as IModelQuery,poEventArgs as EventArgs ):
+    method public void QueryOpenedHandler(poQuery as IQuery,poEventArgs as EventArgs ):
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
     
-    method public void QueryRepositionedHandler(poQuery as IModelQuery,poEventArgs as EventArgs ):
+    method public void QueryRepositionedHandler(poQuery as IQuery,poEventArgs as EventArgs ):
         undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
     end method.
     
@@ -221,36 +264,21 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
     end method.
     
     method protected void InitializeModels():
-        define variable oModel as IModel no-undo.
         define variable oIterator as IIterator no-undo. 
         
-        @todo(task="Get request ID for FetchData ").
+        /* collect all the requests */
         oIterator = Models:Values:Iterator().
         do while oIterator:HasNext():
-            oModel = cast(oIterator:Next(), IModel).
-            
-            InitializeModel(oModel).
-            
-            @todo(task="Add to FetchData request").
-            /*
-            BuildModelRequest(oModel).
-            */
+            InitializeModel(cast(oIterator:Next(), IModel)).
         end.
         
-        @todo(task="Execute FetchData request").
+        BuildAndExecuteRequests(ServiceMessageActionEnum:FetchSchema,
+                              cast(Models:KeySet:ToArray(), IComponentInfo)).        
     end method.
     
     method protected void InitializeModel(poModel as IModel):
-        cast(poModel, IComponent):Initialize().
-        
-        @todo(task="Client Service Manager publishes").
-/**     
-        poModel:DataFetch:Subscribe(this-object:DataFetchHandler).
-        poModel:DataCommit:Subscribe(this-object:DataCommitHandler).
-**/        
-        poModel:DataAdd:Subscribe(this-object:DataAddHandler).
-        poModel:DataDelete:Subscribe(this-object:DataDeleteHandler).
-        poModel:DataSave:Subscribe(this-object:DataSaveHandler).
+        /* As presenter, we want/need to be notified of the Model's events. */
+        Model:SubscribeModelEvents(poModel, this-object).        
     end method.
     
     method public IModel GetModel(poModelService as IComponentInfo):
@@ -272,139 +300,142 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
             oIterator = Models:Values:Iterator().
             do while oIterator:HasNext():
                 oModel = cast(oIterator:Next(), IModel).
-    /*                oModel:DataFetch:Unsubscribe(this-object:DataFetchHandler).*/
-    /*                oModel:DataCommit:Unsubscribe(this-object:DataCommitHandler).*/
-    
-                oModel:DataAdd:Unsubscribe(this-object:DataAddHandler).
-                oModel:DataDelete:Unsubscribe(this-object:DataDeleteHandler).
-                oModel:DataSave:Unsubscribe(this-object:DataSaveHandler).
+                
+                Model:UnsubscribeModelEvents(oModel, this-object).
                 
                 /* Remove the model from the  collection. Releasing the reference 
                    will let the GC take it's course (unless there's a cached or 
-                   singleton componentm, which is possible with Models). */
+                   singleton component, which is possible with Models). */
                 Models:Remove(oModel).
             end.
         end.
+        
+        /* Clear out the messages we know about */
+        cast(ServiceRequests:Get(new String('1')), ServiceMessageConsumerCollection):ReleaseMessages().
+    end method.
+    
+    /** General method to construct and execute a message bundle for the specified models.
+        
+        @param ServiceMessageActionEnum The action being performed (Fetch, FetchSchema, Save, etc)
+        @param IComponentInfo An array of identifying information about the Models on which to act. */
+    method protected void BuildAndExecuteRequests(input poMessageAction as ServiceMessageActionEnum,
+                                                  input poModelService as IComponentInfo extent):
+        define variable oModel as IModel no-undo.
+        define variable oRequests as IServiceRequest extent no-undo.
+        define variable oModelRequest as IServiceRequest no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable cRequestKey as character no-undo.
+        define variable oMessages as ServiceMessageConsumerCollection no-undo.
+        
+        extent(oRequests) = extent(poModelService).
+        
+        oMessages = new ServiceMessageConsumerCollection(). 
+        
+        ServiceRequests:Put(new String(oMessages:RequestGroupKey), oMessages).
+        
+        /* collect all the requests */
+        iMax = extent(poModelService).
+        do iLoop = 1 to iMax:
+            oModel = GetModel(poModelService[iLoop]).
+            oModelRequest = oModel:BuildRequest(poMessageAction).
+            oRequests[iLoop] = oModelRequest.
+            
+            /* Maintain a map of requests and their consumers/models */
+            oMessages:AddMessage(
+                    cast(oModelRequest, IServiceMessage):MessageId,
+                    cast(oModel, IMessageConsumer)).
+        end.
+        
+        /* Execute the request */
+        ServiceMessageManager:ExecuteRequest(this-object, oRequests).                        
     end method.
     
     /* Speaking to the Model, getting data */
+    /** Fetches data for all Models. Executes a single bundle/request for
+        all the models that this Presenter knows about. */
+    method public void FetchData():
+        BuildAndExecuteRequests(ServiceMessageActionEnum:Fetch,
+                              cast(Models:KeySet:ToArray(), IComponentInfo)).
+    end method.
+          
+    /** Fetches data for the specified Models. Executes a single bundle/request for these. */    
     method public void FetchData (poModelService as IComponentInfo extent):
-        define variable iExtent as integer no-undo.
-                
-        do iExtent = 1 to extent(poModelService):
-            FetchData(poModelService[iExtent]).
-        end.
+        BuildAndExecuteRequests(ServiceMessageActionEnum:Fetch, poModelService).
     end method.
     
+    /* Fetches data for the specified Model. */
     method public void FetchData (poModelService as IComponentInfo):
-        FetchData(GetModel(poModelService)).
+        define variable oComponentInfo as IComponentInfo extent 1 no-undo.
+        
+        oComponentInfo[1] = poModelService.
+        BuildAndExecuteRequests(ServiceMessageActionEnum:Fetch, oComponentInfo).
     end method.
-    
-    method public void FetchData (poModel as IModel):
-        define variable cErrorBuffer as character extent no-undo.
-        define variable iLoop        as int       no-undo.
-        
-        poModel:FetchData().
-                
-        /* no-error needed in case there are no errors ie the ErrorBuffer 
-           is extent not fixed */
-        cErrorBuffer = poModel:ErrorBuffer no-error.
-        
-        if extent(cErrorBuffer) ne ? then
-        do iLoop = 1 to extent(cErrorBuffer):
-            DataFetchError:Publish(cast(this-object, IComponent), poModel:ProcessModelErrors(cErrorBuffer[iLoop])).
-        end.
-        
-        catch oDoneForContextError as OperationDoneForContextError:
-            if ApplicationError:ShowDebugMessages then
-                oDoneForContextError:ShowError().
-        end catch.
-        
-        @todo(task="implement").
-
-/**         
-        finally:
-            /* Whoever calls FetchData needs to reopen and reposition their query.
-               If we previously got a OperationDoneForContextError we know that
-               we didn't get any new data. */
-            poModel:OnDataFetch(new DataFetchEventArgs(
-                poModel:GetClass():TypeName,
-                /* New data fetched? */
-                not valid-object(oDoneForContextError))).
-        end finally.
-**/        
-    end method.
-    
-    method public handle GetBindingHandle(poModelService as IComponentInfo, pcQueryName as char):
+       
+    method public handle GetBindingHandle(poModelService as IComponentInfo, pcQueryName as character):
         return GetModel(poModelService):GetBindingHandle(pcQueryName).
     end method.
     
-    method public void OpenQuery(poModelService as IComponentInfo, pcQuery as char):
-        cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):OpenQuery().
+    method public void OpenQuery(poModelService as IComponentInfo, pcQuery as character):
+        cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):Open().
     end method.
     
-    method public void CloseQuery(poModelService as IComponentInfo, pcQuery as char):
-        cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):CloseQuery().
+    method public void CloseQuery(poModelService as IComponentInfo, pcQuery as character):
+        cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):Close().
     end method.        
         
-    method public void ReopenQuery(poModelService as IComponentInfo, pcQuery as char):
-        cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):ReopenQuery().
+    method public void ReopenQuery(poModelService as IComponentInfo, pcQuery as character):
+        cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):Reopen().
     end method.
                 
-    method public logical GetFirst(poModelService as IComponentInfo, pcQuery as char):
+    method public logical GetFirst(poModelService as IComponentInfo, pcQuery as character):
         define variable lAvailable as logical no-undo.
         
-        lAvailable = cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):GetFirst().
-        DataRefresh(new ModelEventArgs(poModelService, pcQuery)).
+        lAvailable = cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):GetFirst().
+        DataRefresh(new ModelActionEventArgs(poModelService, ModelActionEnum:Navigate)).
         
         return lAvailable.
     end method.
     
-    method public logical GetPrev(poModelService as IComponentInfo, pcQuery as char):
+    method public logical GetPrev(poModelService as IComponentInfo, pcQuery as character):
         define variable lAvailable as logical no-undo.
         
-        lAvailable = cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):GetPrev().
-        DataRefresh(new ModelEventArgs(poModelService, pcQuery)).
+        lAvailable = cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):GetPrev().
+        DataRefresh(new ModelActionEventArgs(poModelService, ModelActionEnum:Navigate)).
         
         return lAvailable.
     end method.
     
-    method public logical GetNext(poModelService as IComponentInfo, pcQuery as char):
+    method public logical GetNext(poModelService as IComponentInfo, pcQuery as character):
         define variable lAvailable as logical no-undo.
         
-        lAvailable = cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):GetNext().
-        DataRefresh(new ModelEventArgs(poModelService, pcQuery)).
+        lAvailable = cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):GetNext().
+        DataRefresh(new ModelActionEventArgs(poModelService, ModelActionEnum:Navigate)).
         
         return lAvailable.
     end method.
     
-    method public logical GetLast(poModelService as IComponentInfo, pcQuery as char):
+    method public logical GetLast(poModelService as IComponentInfo, pcQuery as character):
         define variable lAvailable as logical no-undo.
         
-        lAvailable = cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):GetLast().
-        DataRefresh(new ModelEventArgs(poModelService, pcQuery, ?)).
+        lAvailable = cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):GetLast().
+        DataRefresh(new ModelActionEventArgs(poModelService, ModelActionEnum:Navigate)).
         
         return lAvailable.
     end method.
     
-    method public IQueryDefinition GetQueryDefinition(poModelService as IComponentInfo, pcQuery as char):
-        return cast(GetModel(poModelService):GetQuery(pcQuery), IQuery):QueryDefinition.
+    method public IQueryDefinition GetQueryDefinition(poModelService as IComponentInfo, pcQuery as character):
+        return cast(GetModel(poModelService):ModelQueries:Get(pcQuery), IQuery):Definition.
     end method.
     
-    method public void CreateQuery(poModelService as IComponentInfo,
-                                   pcQueryName as character,
-                                   poQueryDefinition as IQueryDefinition):
-        GetModel(poModelService):CreateQuery(pcQueryName, poQueryDefinition).
+    method public IModelQuery GetQuery(poModelService as IComponentInfo, pcQuery as character):
+        return GetModel(poModelService):ModelQueries:Get(pcQuery).
     end method.
     
-    method public IModelQuery GetQuery(poModelService as IComponentInfo, pcQuery as char):
-        return GetModel(poModelService):GetQuery(pcQuery).
+    method public void DeleteQuery(poModelService as IComponentInfo, pcQuery as character).
+        GetModel(poModelService):ModelQueries:Remove(pcQuery).
     end method.
     
-    method public void DeleteQuery(poModelService as IComponentInfo, pcQuery as char).
-        GetModel(poModelService):DeleteQuery(pcQuery).
-    end method.
-        
     /* Get values from Model */ 
     method public void GetValue(poModelService as IComponentInfo, pcRecordKey as char, pcBufferName as char, pcFieldName as char, output pcValue as character ):
         GetModel(poModelService):GetValue(pcRecordKey, pcBufferName, pcFieldName, output pcValue).
@@ -486,35 +517,76 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         GetModel(poModelService):GetValue(pcRecordKey, pcBufferName, pcFieldName, output prValue).
     end method.
 
-    method public void DataFetchedHandler (poSender as IComponent, poEventArgs as DataFetchEventArgs):
+    method public void DataFetchedHandler (input poSender as IComponent, input poEventArgs as ModelActionEventArgs):
         DataFetched(poEventArgs).
     end method.
     
-    method public void DataAddHandler (poSender as IComponent, poEventArgs as ModelEventArgs):
+    method public void DataAddHandler (poSender as IComponent, poEventArgs as ModelActionEventArgs):
         DataRefresh(poEventArgs).
     end method.
     
-    method public void DataDeleteHandler (poSender as IComponent, poEventArgs as ModelEventArgs):
+    method public void DataDeleteHandler (poSender as IComponent, poEventArgs as ModelActionEventArgs):
         DataRefresh(poEventArgs).
     end method.
     
-    method public void DataSaveHandler(poSender as IComponent, poEventArgs as ModelEventArgs):
+    method public void DataSaveHandler(poSender as IComponent, poEventArgs as ModelActionEventArgs):
         DataRefresh(poEventArgs).
     end method.
     
-    method public void DataCommitHandler(poSender as IComponent, poEventArgs as ModelEventArgs):
+    method public void DataCommitHandler(poSender as IComponent, poEventArgs as ModelActionEventArgs):
         DataRefresh(poEventArgs).
     end method.
+
+	method public void DataAddErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void DataDeleteErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void DataSaveErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void DataCommittedHandler( input poSender as IComponent, input poEventArgs as ModelActionEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void DataCommitErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void DataFetchErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void ServiceRequestCompletedHandler( input poSender as IComponent, input poEventArgs as ModelActionEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void ServiceRequestErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
     
-    method protected void DataFetched(poEventArgs as DataFetchEventArgs):
+    method protected void DataFetched(poEventArgs as ModelActionEventArgs):
         define variable oView as IView no-undo.
         
         oView = this-object:View.
         if valid-object(oView) then
-            oView:DataFetched(poEventArgs:ModelService, poEventArgs:NewData).
+            oView:DataFetched(poEventArgs:ModelService, true).
     end method.
-        
-    method protected void DataRefresh (poEventArgs as ModelEventArgs):
+    
+    method protected void DataRefresh (poEventArgs as ModelActionEventArgs):
         define variable oModel      as IModel    no-undo.
         define variable oView       as IView     no-undo.
         define variable cCurrentRow as character extent no-undo.
@@ -522,6 +594,8 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         oModel = GetModel(poEventArgs:ModelService).
         oView = this-object:View.
         
+@todo(task="implement", action="").
+/**        
         /* The view knows which queries it's navigating, and will decide
            if anything needs to be done. Note that the query on which the
            operation was performed has already been updated if needed. */
@@ -534,16 +608,17 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
             new NavigationPanelEventArgs(
             poEventArgs:ModelService,
             poEventArgs:QueryName,
-            cast(oModel:GetQuery(poEventArgs:QueryName), IQuery):RowPosition)).
+            cast(oModel:ModelQueries:Get(poEventArgs:QueryName), IQuery):RowPosition)).
         
         UpdatePanelStateChanged:Publish(cast(this-object, IComponent),
             new UpdatePanelEventArgs(
             poEventArgs:ModelService,
             poEventArgs:QueryName,
             poEventArgs:TableName)).
+**/            
     end method.
         
-    method public character AddRecord(poModelService as IComponentInfo, pcQuery as char, pcTable as char):
+    method public character AddRecord(poModelService as IComponentInfo, pcQuery as char, pcTable as character):
         define variable oModel        as IModel    no-undo.
         define variable cCurrentRow   as character extent no-undo.
         define variable cNewRecordKey as character no-undo.
@@ -552,7 +627,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         oModel = GetModel(poModelService).
         cNewRecordKey = oModel:AddRecord(pcTable).
         
-        cCurrentRow = cast(oModel:GetQuery(pcQuery), IQuery):GetCurrentRowKey().
+        cCurrentRow = cast(oModel:ModelQueries:Get(pcQuery), IQuery):GetCurrentRowKey().
         AddUndoAction:Publish(cast(this-object, IComponent),
             new UndoActionEventArgs(poModelService,
             pcQuery,
@@ -560,12 +635,12 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
             cCurrentRow,
             UpdateActionEnum:Add)).
         
-/*        oModel:OnDataAdd(new ModelEventArgs(pcModel, pcQuery, pcTable, cCurrentRow)).*/
+/*        oModel:OnDataAdd(new ModelActionEventArgs(pcModel, pcQuery, pcTable, cCurrentRow)).*/
         
         return cNewRecordKey.
     end method.
     
-    method public void SaveRecord(poModelService as IComponentInfo, pcQuery as char, pcBuffer as char):
+    method public void SaveRecord(poModelService as IComponentInfo, pcQuery as char, pcBuffer as character):
         define variable cErrorBuffer as character extent no-undo.
         define variable iLoop        as integer   no-undo.
         define variable oModel       as IModel    no-undo.
@@ -582,7 +657,8 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         
         this-object:View:SaveData(poModelService, pcBuffer).
         oModel:SaveRecord(pcQuery, pcBuffer).
-        
+
+/***        
         cErrorBuffer = oModel:ErrorBuffer no-error.
                                                 
         if extent(cErrorBuffer) ne ? then
@@ -591,10 +667,11 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
             if pcBuffer eq ? or cErrorBuffer[iLoop] eq pcBuffer then
                 DataSaveError:Publish(cast(this-object, IComponent), oModel:ProcessModelErrors(cErrorBuffer[iLoop])).
         end.
-        
-        oQuery = cast(oModel:GetQuery(pcQuery), IQuery).
+****/
+
+        oQuery = cast(oModel:ModelQueries:Get(pcQuery), IQuery).
         cCurrentRow = oQuery:GetCurrentRowKey().
-        oQuery:ReopenQuery(cCurrentRow).
+        oQuery:Reopen(cCurrentRow).
         
         AddUndoAction:Publish(cast(this-object, IComponent),
             new UndoActionEventArgs(
@@ -604,48 +681,16 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
                 cCurrentRow,
                 UpdateActionEnum:Save) ).
         
-/*        oModel:OnDataSave(new ModelEventArgs(pcModel, pcQuery, pcBuffer, cCurrentRow)).*/
+/*        oModel:OnDataSave(new ModelActionEventArgs(pcModel, pcQuery, pcBuffer, cCurrentRow)).*/
     end method.
     
-    method public void CommitData(poModelService as IComponentInfo, pcQuery as char, pcTable as char):
-        define variable cErrorBuffer as character extent no-undo.
-        define variable iLoop        as integer   no-undo.
-        define variable oModel       as IModel    no-undo.
-        
-        /* Make sure we write from the screen to the Model first. */
-        SaveRecord(poModelService, pcQuery, pcTable).
-        
-        /* Commits Model's data to DB/service */
-        oModel = GetModel(poModelService).
-        
-        oModel:CollectChanges().
-        oModel:CommitData().
-        
-        /* no-error needed in case there are no errors ie the ErrorBuffer 
-           is extent not fixed */
-        cErrorBuffer = oModel:ErrorBuffer no-error.
-        
-        if extent(cErrorBuffer) ne ? then
-        do iLoop = 1 to extent(cErrorBuffer):
-            /* Only notify of the table we're working on. */
-            if pcTable eq ? or cErrorBuffer[iLoop] eq pcTable then
-                DataCommitError:Publish(cast(this-object, IComponent), oModel:ProcessModelErrors(cErrorBuffer[iLoop])).
-        end.
-        
-        /* Merge reopens the query */
-        oModel:MergeChanges(pcQuery).
-        
-        @todo(task="client service manager").
-/* oModel:OnDataCommit(new ModelEventArgs(pcModel, pcQuery, pcTable)).*/
-    end method.
-                    
     /* Delete is local, like Save */
-    method public void DeleteRecord(poModelService as IComponentInfo, pcQuery as char, pcTable as char):
+    method public void DeleteRecord(poModelService as IComponentInfo, pcQuery as char, pcTable as character):
         define variable cCurrentRow as character extent no-undo.
         define variable oModel      as IModel    no-undo.
         
         oModel = GetModel(poModelService).
-        cCurrentRow = cast(oModel:GetQuery(pcQuery), IQuery):GetCurrentRowKey().
+        cCurrentRow = cast(oModel:ModelQueries:Get(pcQuery), IQuery):GetCurrentRowKey().
         
         /*        oQuery = GetQuery(pcQuery).                */
         /*        hQuery  = cast(oQuery, IQuery):QueryHandle.*/
@@ -654,7 +699,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
 /*        oModel:DeleteRecord(pcQuery, pcTable).*/
     end method.
     
-    method public void RecordDeletedHandler(poSender as IComponent, poEventArgs as ModelEventArgs):
+    method public void RecordDeletedHandler(poSender as IComponent, poEventArgs as ModelActionEventArgs):
         define variable oModel as IModel no-undo.
 
         @todo(task="Refresh all queries").
@@ -662,6 +707,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         /*        cast(oQuery, IQuery):RepositionQuery(iRow).*/
 
                                
+        /*
         AddUndoAction:Publish(cast(this-object, IComponent),
             new UndoActionEventArgs(
             poEventArgs:ModelService,
@@ -669,21 +715,23 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
             poEventArgs:TableName,
             poEventArgs:CurrentRowKey,
             UpdateActionEnum:Delete)).
+        */
         
-        /*        oModel:OnDataDelete(new ModelEventArgs(pcModel, pcQuery, pcTable, cCurrentRow)).*/
+        /*        oModel:OnDataDelete(new ModelActionEventArgs(pcModel, pcQuery, pcTable, cCurrentRow)).*/
         
         oModel = cast(poSender, IModel).
 /*        oModel:OnDataDelete(poEventArgs).*/
     end method.
          
     method public void UndoAction(poModelService as IComponentInfo, pcQuery as char, pcTable as char, poAction as UpdateActionEnum, pcCurrentRowKey as char extent):
-        /* find row */
+        /* find row 
         @todo(task="undo the action (delete, revert, etc)").
         
-        DataRefresh(new ModelEventArgs(poModelService, pcQuery, pcTable)).
+        DataRefresh(new ModelActionEventArgs(poModelService, pcQuery, pcTable)).
+        */
     end method.
         
-    method public logical SetValue(poModelService as IComponentInfo, pcRecordKey as char, pcBufferName as char, pcFieldName as char, pcValue as char):
+    method public logical SetValue(poModelService as IComponentInfo, pcRecordKey as char, pcBufferName as char, pcFieldName as char, pcValue as character):
         GetModel(poModelService):SetValue(pcRecordKey, pcBufferName, pcFieldName, pcValue).
     end method.
         
@@ -769,6 +817,57 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
 
     method public logical SetValue(poModelService as IComponentInfo, pcRecordKey as char, pcBufferName as char, pcFieldName as char, poValue as Object extent).
         GetModel(poModelService):SetValue(pcRecordKey, pcBufferName, pcFieldName, poValue).
-    end method.    
+    end method.
     
+    /* IMessageConsumer implementations */
+    /** Method called upon completion of the action for the ServiceMessage. 
+        The actual action type is contained within the response.
+        
+        @param IServiceResponse The response to the request.      */
+    method public void ReceiveMessageResponse(input poResponse as IServiceResponse):
+	    define variable oModelConsumer as IMessageConsumer /*extent*/ no-undo.
+	    define variable cMessageId as character extent no-undo.
+	    define variable iLoop as integer no-undo.
+	    define variable iMax as integer no-undo.
+	    define variable cRequestKey as character no-undo.
+    	define variable oIterator as IIterator no-undo.
+        define variable oMQ as IModelQuery no-undo.
+        define variable oMessages as ServiceMessageConsumerCollection no-undo.
+        
+        cRequestKey = ServiceMessageConsumerCollection:GetMessageRequestGroupKey(cast(poResponse, IServiceMessage):MessageId).
+	    oMessages = cast(ServiceRequests:Get(new String(cRequestKey)), ServiceMessageConsumerCollection).
+	    
+	    /* tell the actual consumer that we got a response, and pass it on. */
+	    oMessages
+	       :ResponseReceived(cast(poResponse, IServiceMessage):MessageId)
+	           :ReceiveMessageResponse(poResponse).
+        
+        /* Tell the model to reopen its queries, or do whatever it needs to after 
+           the whole request has completed. */
+	    if oMessages:OutstandingMessages eq 0 then
+	    do:
+	        cMessageId = oMessages:GetMessages().
+	        iMax = extent(cMessageId).
+	        
+	        /* We no longer need this request collection */
+	        ServiceRequests:Remove(new String(cRequestKey)).
+	        
+    	    do iLoop = 1 to iMax:
+    	        oModelConsumer = oMessages:GetMessageConsumer(cMessageId[iLoop]).
+    	        
+    	        /* We're completely done with this message, get rid of it. */
+    	        oMessages:RemoveMessage(cMessageId[iLoop]).
+    	        
+                /* Reopen queries if necessary. The individual ReceiveMessageResponse() calls will
+                   have set this flag. */
+                oIterator = cast(oModelConsumer, IModel):ModelQueries:Values:Iterator().
+                do while oIterator:HasNext():
+                    oMQ = cast(oIterator:Next(), IModelQuery).
+                    if oMQ:RequiresReopen then
+                        cast(oMq, IQuery):Reopen().
+               end.
+           end.
+        end.
+	end method.
+	
 end class.

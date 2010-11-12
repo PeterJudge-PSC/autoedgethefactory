@@ -63,7 +63,7 @@
           <b>
             <a href='#property.Service'>Service</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The service for which this service adapter is servicing a request.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The service for which this provider is servicing a request.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -84,9 +84,23 @@
       <td>
         <code>
           <b>
-            <a href='#executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.common.iservicemessagemanager)'> ExecuteRequest</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> poServiceMessageManager)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager
+            <a href='#executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> ExecuteRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services a request. The service provider will call ExecuteResponse() in
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> ExecuteSyncRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services a request in a synchronous manner. The responses are returned from the
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -102,7 +116,7 @@
     <h3>Service</h3>
     <code>CHARACTER PUBLIC GET </code>
     <dl>
-      <dd>(mandatory) The service for which this service adapter is servicing a request. <p> </dd>
+      <dd>(mandatory) The service for which this provider is servicing a request. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -115,20 +129,42 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest,openedge.commoninfrastructure.common.iservicemessagemanager)'><!-- --></a>
+    <a name='executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
     <h3>ExecuteRequest</h3>
     <code>PUBLIC  VOID
-      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> poServiceMessageManager)
+      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
     </code>
     <dl>
-      <dd>Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager <p> </dd>
-      <dd>once it's done with the request. The object that implements this interface will call back to the ServiceMessageManager when it is done and it's ready with a response (IServiceResponse). </dd>
+      <dd>Services a request. The service provider will call ExecuteResponse() in <p> </dd>
+      <dd>the ServiceMessageManager once it's done with the request and ready with a response (IServiceResponse); typically this will happen in a callback of some sort. </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poRequest - The request to service.<br/>poServiceMessageManager - The message manager controlling this request.<br/></dd>
+          <dd>IServiceRequest - An array of requests to service.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
+    <h3>ExecuteSyncRequest</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a>
+      <b>ExecuteSyncRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+    </code>
+    <dl>
+      <dd>Services a request in a synchronous manner. The responses are returned from the <p> </dd>
+      <dd>ExecuteSyncRequest() call, rather than the service provider calling ExecuteResponse() in the ServiceMessageManager at a later time. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IServiceRequest - An array of requests to service.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IServiceResponse An array of responses to the request.</dd>
         </dl>
       </dd>
     </dl>

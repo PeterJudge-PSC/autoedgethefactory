@@ -34,8 +34,8 @@ class OpenEdge.Lang.CompareStrengthEnum final inherits EnumMember:
         CompareStrengthEnum:Quaternary = new CompareStrengthEnum(8, 'QUATERNARY').
     end constructor.
 
-	constructor public CompareStrengthEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+    constructor public CompareStrengthEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
     
 end class.

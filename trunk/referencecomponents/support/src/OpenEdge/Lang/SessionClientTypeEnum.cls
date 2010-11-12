@@ -31,10 +31,10 @@ class OpenEdge.Lang.SessionClientTypeEnum final inherits EnumMember:
         SessionClientTypeEnum:CurrentSession = SessionClientTypeEnum:EnumFromString(session:client-type).
     end constructor.
 
-	constructor public SessionClientTypeEnum(pcName as character):
-		super(pcName).
-	end constructor.
-	
+    constructor public SessionClientTypeEnum(pcName as character):
+        super(pcName).
+    end constructor.
+    
     method public static SessionClientTypeEnum EnumFromString(pcSessionClientType as char):
         define variable oMember as SessionClientTypeEnum no-undo.
         

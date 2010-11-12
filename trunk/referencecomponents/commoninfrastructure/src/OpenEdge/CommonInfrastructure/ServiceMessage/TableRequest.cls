@@ -23,19 +23,38 @@ using OpenEdge.Lang.JoinEnum.
 class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDefinition
         implements ITableRequest: 
     
-    define public property TableName as character no-undo get. private set.
-    define public property PageSize as integer no-undo get. set. 
-    define public property FullPage as logical no-undo get. set.
-    define public property TableRequestType as TableRequestTypeEnum no-undo get. set. 
-    define public property SearchType as FindTypeEnum no-undo get. set.
-    define public property PageContext as character extent no-undo get. set. 
-    define public property RowKey as character extent no-undo get. set. 
+    /** protected set - not changeable - provide with constructor  */  
+    define property TableName as char no-undo get. private set.
+    
+    /** The number of records to return per page or batch */
+    define property PageSize as integer no-undo get. set.
+    
+    /** Retrieve full page when page position is at beginning or end of result-set */
+    define property FullPage as logical no-undo get. set.
+
+    /** The number of remaining pages to retrieve. If this is zero, then
+        all data has been retrieved. */
+    define public property NumRemainingPages as integer no-undo get. set.
+    
+    define property TableRequestType as TableRequestTypeEnum no-undo get. set.
+    
+    /** context info/key for where to start appending page begin or end */
+    define property PageContext as char extent no-undo get. set.
+    
+    /** Return page positioned to this key (i.e. resort request/ reopen ) 
+        Typically used with TableRequestTypeEnum:Position */ 
+    define property RowKey as char extent no-undo get. set.
     
     constructor public TableRequest(pcTableName as character):
         super().
         TableName = pcTableName.
     end constructor.
     
+    /** Add search expression  (need to be kept separate from filter.). 
+       - Allthough this in theory could be any complex expression it normally 
+         only makes sense when the field(s) correspond(s) to the sort.    
+       - AddSearch can be refactored to have type-specific signatures, removing the need to pass a
+         DataTypeEnum. */
     method public void AddSearch(pcBufferName as character,
                                  pcFieldName as character,
                                  poOperator as OperatorEnum,

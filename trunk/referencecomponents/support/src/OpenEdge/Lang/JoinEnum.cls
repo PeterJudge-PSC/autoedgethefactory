@@ -26,8 +26,8 @@ class OpenEdge.Lang.JoinEnum final inherits EnumMember:
         JoinEnum:Not  = new JoinEnum('not').
     end constructor.
 
-	constructor public JoinEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public JoinEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

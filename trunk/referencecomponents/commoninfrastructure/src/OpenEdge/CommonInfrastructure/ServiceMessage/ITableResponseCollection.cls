@@ -27,11 +27,27 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection inhe
     end constructor.
 
     method public ITableResponse Get(input pcKey as character):
-        return cast(super:Get(input new String(pcKey)), ITableResponse).
+        return this-object:Get(new String(pcKey)).
+    end method.
+    
+    method public ITableResponse Get(input poKey as String):
+        return cast(super:Get(poKey), ITableResponse).
+    end method.
+    
+    method public String Put(input poKey as String, input poValue as ITableResponse):        
+        return cast(super:Put(poKey, poValue), String).
     end method.
 
-	method public ITableResponse Put(input pcKey as character, input poValue as ITableResponse):
-		return cast(super:Put(input new String(pcKey), input poValue), ITableResponse).
-	end method.
+    method public String Put(input pcKey as character, input poValue as ITableResponse):     
+        return this-object:Put(new String(pcKey), poValue). 
+    end method.
+    
+    method public String Remove(input poKey as String):
+        return cast(super:Remove(input poKey), String).
+    end method.
+    
+    method public String Remove(input pcKey as character):
+        return this-object:Remove(new String(pcKey)).
+    end method.
 
 end class.

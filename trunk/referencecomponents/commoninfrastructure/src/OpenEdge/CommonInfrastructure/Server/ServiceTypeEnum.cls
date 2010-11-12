@@ -22,8 +22,8 @@ class OpenEdge.CommonInfrastructure.Server.ServiceTypeEnum inherits OpenEdge.Com
         ServiceTypeEnum:BusinessWorkflow = new ServiceTypeEnum('BusinessWorkflow').
     end constructor.
     
-	constructor public ServiceTypeEnum(input pcName as character):
-		super(pcName).
-	end constructor.
+    constructor public ServiceTypeEnum(input pcName as character):
+        super(pcName).
+    end constructor.
     
 end class.

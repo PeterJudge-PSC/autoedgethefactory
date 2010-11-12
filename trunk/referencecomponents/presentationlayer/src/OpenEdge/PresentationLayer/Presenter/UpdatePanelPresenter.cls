@@ -162,47 +162,58 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
         define variable oCancelState as ActionStateEnum no-undo.
         define variable oCommitState as ActionStateEnum no-undo.
         define variable oSaveState   as ActionStateEnum no-undo.
+        
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
 
-        if ModelService eq poEventArgs:ModelService and 
-            QueryName eq poEventArgs:QueryName and
-            TableName eq poEventArgs:TableName then
+        if ModelService eq poEventArgs:ModelService then
+/*            QueryName eq poEventArgs:QueryName and*/
         do:
-            /*
-                        case poEventArgs:ModelState:
-                            when ModelStateEnum:Add then
+            iMax = extent(poEventArgs:TableName).
+            
+            do iLoop = 1 to iMax:
+                if TableName eq poEventArgs:TableName[iLoop] then
+                do:
+                /*
+                            case poEventArgs:ModelState:
+                                when ModelStateEnum:Add then
+                                    assign 
+                                        iAddState    = UpdateActionEnum:Disable
+                                        iDeleteState = UpdateActionEnum:Disable
+                                        iCancelState = UpdateActionEnum:Enable
+                                        iCommitState = UpdateActionEnum:Enable
+                                        iSaveState   = UpdateActionEnum:Enable.
+                                when ModelStateEnum:ReadOnly then
+                                    assign 
+                                        iAddState    = UpdateActionEnum:Disable
+                                        iDeleteState = UpdateActionEnum:Disable
+                                        iCancelState = UpdateActionEnum:Disable
+                                        iCommitState = UpdateActionEnum:Disable
+                                        iSaveState   = UpdateActionEnum:Disable.
+                                otherwise
                                 assign 
-                                    iAddState    = UpdateActionEnum:Disable
-                                    iDeleteState = UpdateActionEnum:Disable
+                                    iAddState    = UpdateActionEnum:Enable
+                                    iDeleteState = UpdateActionEnum:Enable
                                     iCancelState = UpdateActionEnum:Enable
                                     iCommitState = UpdateActionEnum:Enable
                                     iSaveState   = UpdateActionEnum:Enable.
-                            when ModelStateEnum:ReadOnly then
-                                assign 
-                                    iAddState    = UpdateActionEnum:Disable
-                                    iDeleteState = UpdateActionEnum:Disable
-                                    iCancelState = UpdateActionEnum:Disable
-                                    iCommitState = UpdateActionEnum:Disable
-                                    iSaveState   = UpdateActionEnum:Disable.
-                            otherwise
-                            assign 
-                                iAddState    = UpdateActionEnum:Enable
-                                iDeleteState = UpdateActionEnum:Enable
-                                iCancelState = UpdateActionEnum:Enable
-                                iCommitState = UpdateActionEnum:Enable
-                                iSaveState   = UpdateActionEnum:Enable.
-                        end case.
-                        */
-            
-            assign 
-                oActions[1] = UpdateActionEnum:Add
-                oActions[2] = UpdateActionEnum:Delete
-                oActions[3] = UpdateActionEnum:Commit
-                oActions[4] = UpdateActionEnum:Save
-                oActions[5] = UpdateActionEnum:Undo.
-            
-            oStates = ActionStateEnum:Enable.
-            if type-of(this-object:View, IUpdatePanelView) then            
-                cast(this-object:View, IUpdatePanelView):UpdateStateChange(oActions, oStates).
+                            end case.
+                            */
+                
+                    assign 
+                        oActions[1] = UpdateActionEnum:Add
+                        oActions[2] = UpdateActionEnum:Delete
+                        oActions[3] = UpdateActionEnum:Commit
+                        oActions[4] = UpdateActionEnum:Save
+                        oActions[5] = UpdateActionEnum:Undo.
+                    
+                    oStates = ActionStateEnum:Enable.
+                    if type-of(this-object:View, IUpdatePanelView) then            
+                        cast(this-object:View, IUpdatePanelView):UpdateStateChange(oActions, oStates).
+                    
+                    leave.                    
+                end.
+            end.
         end.
     end method.
         
@@ -229,7 +240,7 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
         poEventArgs:Order = UndoActionOrder.
         SetValue(oComponentInfo, cNewRecordKey, mcUndoActionTable, 'Order', poEventArgs:Order).
         
-        CommitData(oComponentInfo, mcUndoActionQuery, mcUndoActionTable).
+        CommitData(oComponentInfo).
     end method.
     
     method protected void UndoAction ():
@@ -240,7 +251,7 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
         
         oComponentInfo = cast(cast(moUndoActionModel, IComponent):ComponentInfo, IComponentInfo).
                         
-        cRecordKey = cast(GetModel(oComponentInfo):GetQuery(mcUndoActionQuery), IQuery):GetCurrentBufferKey(mcUndoActionTable).
+        cRecordKey = cast(GetModel(oComponentInfo):ModelQueries:Get(mcUndoActionQuery), IQuery):GetCurrentBufferKey(mcUndoActionTable).
         
         GetValue(oComponentInfo, cRecordKey, mcUndoActionTable,
             'UndoActionType', output iAction). 
@@ -255,7 +266,7 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
         
         /* Remove the undo action. */
         DeleteRecord(oComponentInfo, mcUndoActionQuery, mcUndoActionTable).
-        CommitData(oComponentInfo, mcUndoActionQuery, mcUndoActionTable).
+        CommitData(oComponentInfo).
     end method.
     
 end class.

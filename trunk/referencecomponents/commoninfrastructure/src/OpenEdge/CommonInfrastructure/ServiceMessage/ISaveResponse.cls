@@ -1,12 +1,21 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ISaveResponse
     Purpose     : Interface for data save response  
     Syntax      : 
     Description : 
     @author hdaniels
     Created     : Tue Feb 09 14:28:13 EST 2010
-    Notes       : * Corresponds with OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum:Save
-  ----------------------------------------------------------------------*/
-interface OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse: /* inherits IServiceMessage */
-
+    Notes       : 
+  ---------------------------------------------------------------------- */
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponseCollection.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection.
+  
+interface OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse: /* inherits IServiceResponse */
+    
+    /** A collection of individual table responses for this larger request */
+    define public property TableResponses as ITableResponseCollection no-undo get.
+    
+    /** Pre-populates the table response collection from the request's tablerequests */
+    method public void InitTableResponseFromRequest(input poRequestCollection as ITableRequestCollection).
+    
 end interface.

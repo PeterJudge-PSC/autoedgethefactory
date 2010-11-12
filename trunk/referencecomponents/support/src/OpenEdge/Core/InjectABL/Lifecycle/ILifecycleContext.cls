@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : Contains information about the activation of a single instance.
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 11:45:31 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/

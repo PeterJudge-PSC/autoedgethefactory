@@ -9,7 +9,7 @@
     @author pjudge
     Created     : Tue Jan 27 16:17:52 EST 2009
     Notes       : * The vast bulk of this code is infrastructure - the only 'real'
-                    work that this procedure does is the call to ExecuteSyncRequest().
+                    work that this procedure does is the call to ExecuteRequest().
                     The session validation should happen in the activation procedure (will as of 11.0.0);
                     the serialisation is also simply infrastructure.
                   * There are 3 separate loops that could be combined into 1 or 2 for performance reasons.
@@ -20,9 +20,9 @@ routine-level on error undo, throw.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle. 
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum. 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
@@ -43,7 +43,7 @@ define input-output parameter pmUserContext as memptr no-undo.
 
 define variable oInjectABLKernel as IKernel no-undo.
 define variable oServiceMessageManager as IServiceMessageManager no-undo.
-define variable oBundle as IServiceRequestBundle no-undo.
+define variable oSecMgr as ISecurityManager no-undo.
 define variable iLoop as integer no-undo.
 define variable iMax as integer no-undo.
 define variable mTemp as memptr no-undo.
@@ -51,7 +51,7 @@ define variable oOutput as ObjectOutputStream no-undo.
 define variable oInput as ObjectInputStream no-undo.
 define variable oRequest as IFetchRequest extent no-undo.
 define variable cRequestId as character extent no-undo.
-define variable oResponse as IFetchResponse extent no-undo.
+define variable oResponse as IServiceResponse extent no-undo.
 define variable oContext as IUserContext no-undo.
 define variable hDataSet as handle no-undo.
 
@@ -74,9 +74,12 @@ oContext = cast(oInput:ReadObjectArray(), IUserContext).
 oInjectABLKernel = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')),
                         IKernel).
 
-/* Are we who we say we are? Note that this should really happen on activate. */
-cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
-                        ,ISecurityManager):ValidateSession(oContext:ClientSessionId).
+/* Are we who we say we are? Note that this should really happen on activate. activate doesn't run for state-free AppServers */
+oSecMgr = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
+               ,ISecurityManager).
+
+oSecMgr:ValidateSession(oContext:ClientSessionId).
+oSecMgr:SetClientContext(oContext).
 
 oServiceMessageManager = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
                         , IServiceMessageManager).
@@ -84,7 +87,7 @@ oServiceMessageManager = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.Comm
 /* Perform request. This is where the actual work happens.
    If this was a specialised service interface, we might construct the service request here, rather than
    taking it as an input. */
-oResponse = cast(oServiceMessageManager:ExecuteSyncRequest(cast(oRequest, IServiceRequest)), IFetchResponse).                         
+oResponse = oServiceMessageManager:ExecuteRequest(cast(oRequest, IServiceRequest)).                         
 
 /* Serialize requests, context */
 assign iMax = extent(oResponse)
@@ -94,7 +97,7 @@ assign iMax = extent(oResponse)
 oOutput = new ObjectOutputStream().
 
 do iLoop = 1 to iMax:
-    cast(oResponse[iLoop], IServiceMessage):GetData(output hDataSet). 
+    cast(oResponse[iLoop], IServiceMessage):GetMessageData(output hDataSet). 
     
     phResponseDataset[iLoop] = hDataSet. 
     

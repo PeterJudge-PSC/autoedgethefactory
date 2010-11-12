@@ -92,6 +92,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getservice(progress.lang.class,character)'> GetService</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an instance of a service, if one exists.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceProvider.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider" target="classFrame">IServiceProvider</a></code>
         </font>
       </td>
@@ -100,7 +114,7 @@
           <b>
             <a href='#getserviceprovider(character)'> GetServiceProvider</a>
           </b>(CHARACTER pcService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a service provider for a given service. This service p
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds (and starts if needed) an IServiceProvider which applies to the service name passed as
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -114,7 +128,7 @@
           <b>
             <a href='#startservice(openedge.commoninfrastructure.common.servicetypeenum,character)'> StartService</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a service
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts and returns a running instance of a service
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -128,7 +142,21 @@
           <b>
             <a href='#startservice(progress.lang.class)'> StartService</a>
           </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a service using the InjectABL dependency injection container.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts and returns a service as specified by a type/class. Typically
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#startservice(progress.lang.class,character)'> StartService</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts and returns a service as specified by a type/class. Typically
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -222,24 +250,45 @@
       </dd>
     </dl>
     <hr />
+    <a name='getservice(progress.lang.class,character)'><!-- --></a>
+    <h3>GetService</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a>
+      <b>GetService</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName)
+    </code>
+    <dl>
+      <dd>Returns an instance of a service, if one exists. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - The class of the service to start<br/>character - An instance name for the service. InjectABL allows usto have mulitple bindings for a single type, specialised by instance name. <br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IService The running instance of the requested service</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='getserviceprovider(character)'><!-- --></a>
     <h3>GetServiceProvider</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceProvider.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider" target="classFrame">IServiceProvider</a>
       <b>GetServiceProvider</b>(CHARACTER pcService)
     </code>
     <dl>
-      <dd>Returns a service provider for a given service. This service p <p> </dd>
-      <dd>See OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider for more details. </dd>
+      <dd>Finds (and starts if needed) an IServiceProvider which applies to the service name passed as <p> </dd>
+      <dd>an argument. The client-side service provider is typically a service adapter, which talks across a session boundary to a service interface. That service interface talks to the server-side service provider and asks it to perform a task ("service a request"). The server-side service provider is typically a business component such as a business entity, task or workflow. </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>pcService - The<br/></dd>
+          <dd>character - The name of the service for which we need to perform a request.<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>An IServiceProvider instance</dd>
+          <dd>IServiceProvider An object capable of serviving that request.</dd>
         </dl>
       </dd>
     </dl>
@@ -250,17 +299,17 @@
       <b>StartService</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
     </code>
     <dl>
-      <dd>Starts a service <p> </dd>
+      <dd>Starts and returns a running instance of a service <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poServiceType - component type; ignored when InjectABL used, since we work off interfaces, which areunique within the application. <br/>pcComponentName - <br/></dd>
+          <dd>ServiceTypeEnum - The component type; ignored when InjectABL used,since we work off interfaces, which are unique within the application. <br/>character - The name of the service (interface name in InjectABL)<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>An IService instance of the requested service</dd>
+          <dd>IService An IService instance of the requested service</dd>
         </dl>
       </dd>
     </dl>
@@ -271,17 +320,40 @@
       <b>StartService</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
     </code>
     <dl>
-      <dd>Starts a service using the InjectABL dependency injection container. <p> </dd>
+      <dd>Starts and returns a service as specified by a type/class. Typically <p> </dd>
+      <dd>an interface type name. </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poService - The class of the service to start<br/></dd>
+          <dd>Class - The class of the service to start<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>An IService instance of the requested service</dd>
+          <dd>IService The running instance of the requested service</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='startservice(progress.lang.class,character)'><!-- --></a>
+    <h3>StartService</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a>
+      <b>StartService</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcInstanceName)
+    </code>
+    <dl>
+      <dd>Starts and returns a service as specified by a type/class. Typically <p> </dd>
+      <dd>an interface type name. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - The class of the service to start<br/>character - An instance name for the service. InjectABL allows usto have mulitple bindings for a single type, specialised by instance name. <br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IService The running instance of the requested service</dd>
         </dl>
       </dd>
     </dl>

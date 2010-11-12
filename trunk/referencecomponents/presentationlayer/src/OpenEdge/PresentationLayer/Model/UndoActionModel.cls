@@ -30,24 +30,41 @@ class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
     constructor public UndoActionModel (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).
     end constructor.
-
-    method override protected handle CreateMasterDataset():
+    
+    method override protected void CreateMasterDataset():
         /* no service adapter - all data is local */
-        return dataset dsUndoAction:handle.
+        MasterDataset = dataset dsUndoAction:handle.
     end method.
-                                        
-    method override protected void DoCommitData():
+    
+    method override public void CommitData():
         /* all data is local */
         MasterDataset:write-xml('file', 'UndoActionModel.xml', 
                                 yes, /*formatted*/
                                 ?,?,?,
                                 yes).   /* write BI */
     end method.
-        
-    method override protected void AssignDefaultValues(pcTable as character, phBuffer as handle):
-    end method.
-
+    
     method override protected void SetBufferCallbacks(pcBufferName as char, phBuffer as handle):
     end method.
+
+	/*
+	method override protected handle GetBufferField( input pcBufferName as character, input pcFieldName as character ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+*/
+
+	method override protected void AssignDefaultValues( input pcTableName as character, input phBuffer as handle ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+
+	method override protected logical FindTableByKey( input pcTableName as character, input pcRecordKey as character ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
 
 end class.

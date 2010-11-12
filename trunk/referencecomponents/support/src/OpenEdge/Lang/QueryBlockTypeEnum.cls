@@ -28,8 +28,8 @@ class OpenEdge.Lang.QueryBlockTypeEnum final inherits EnumMember:
         QueryBlockTypeEnum:Default = QueryBlockTypeEnum:Preselect.        
     end constructor.
 
-	constructor public QueryBlockTypeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
-	
+    constructor public QueryBlockTypeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
+    
 end class.

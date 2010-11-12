@@ -11,9 +11,11 @@
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer:
+    
     /** Method called upon completion of the action for the ServiceMessage. 
         The actual action type is contained within the response.
         
-        @param poResponse The response to the request.      */
-    method public void ActionCompleted(poResponse as IServiceResponse).
+        @param IServiceResponse The response to the request.      */
+    method public void ReceiveMessageResponse(input poResponse as IServiceResponse).
+    
 end interface.

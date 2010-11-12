@@ -29,8 +29,8 @@ class OpenEdge.Core.System.RowPositionEnum final inherits EnumMember:
         RowPositionEnum:NotFirstOrLast = new RowPositionEnum('NotFirstOrLast').        
     end constructor.
 
-	constructor public RowPositionEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
-	
+    constructor public RowPositionEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
+    
 end class.

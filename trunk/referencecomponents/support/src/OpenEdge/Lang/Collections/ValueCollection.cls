@@ -5,7 +5,7 @@
                   used to return Values IMap 
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : 2010
     Notes       : no empty constructor, specialized for IMap 
                  - Changes to the map are reflected here, and vice-versa. 
@@ -27,7 +27,7 @@ class OpenEdge.Lang.Collections.ValueCollection implements ICollection:
     define protected property OwningMap as IMap no-undo get. set.
     
     define public property Size as integer no-undo 
-    get:
+    get():
         return OwningMap:Size.
     end. 
     

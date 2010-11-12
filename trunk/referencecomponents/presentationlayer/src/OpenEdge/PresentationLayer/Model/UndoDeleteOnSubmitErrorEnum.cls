@@ -34,8 +34,8 @@ class OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum final inherit
         UndoDeleteOnSubmitErrorEnum:Default = UndoDeleteOnSubmitErrorEnum:Error.
     end constructor.
 
-	constructor public UndoDeleteOnSubmitErrorEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public UndoDeleteOnSubmitErrorEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

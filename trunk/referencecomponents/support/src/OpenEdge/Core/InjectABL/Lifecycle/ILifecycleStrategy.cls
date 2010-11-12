@@ -3,7 +3,7 @@
     Purpose     : Is called during the activation and deactivation of an instance.
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Mar 05 07:55:45 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/

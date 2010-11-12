@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 16:41:44 EST 2010
     Notes       : * We need to catch certain P.L.SysErrors since we don't
                     know in advance what the callees' signatures are, and so
@@ -97,8 +97,6 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
         define variable iNumParam as integer no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oArg as IParameter no-undo.
-
-        undo, throw new AppError('Setting property values via reflection not supported yet').
         
         Assert:ArgumentNotNull(poPropertyValue, 'Injection property value parameter').
         
@@ -108,7 +106,11 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
                           1, 
                           poPropertyValue).
         
-        poInstance:GetClass():Invoke(poInstance, poPropertyValue:Name, oPL).
+        /*poInstance:GetClass():Invoke(poInstance, poPropertyValue:Name, oPL).*/
+        
+        /* Assume there's a Set<PropertyName> method in the interim, while we wait for
+           dynamic proeprty setting. */
+        poInstance:GetClass():Invoke(poInstance, 'Set' + poPropertyValue:Name, oPL).
         
         @todo(task="implement", action="the msg number will change").
         /** 'transform' any ABL errors into an ApplicationError. */

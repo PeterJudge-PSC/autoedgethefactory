@@ -30,7 +30,6 @@ class OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider inherits StandardP
         poContext:Parameters:Add(
                 new ConstructorArgument(
                         Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'))).
-        
         poContext:Parameters:Add(
                 new ConstructorArgument(
                     new ComponentInfo(

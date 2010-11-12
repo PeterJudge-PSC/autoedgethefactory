@@ -1,4 +1,3 @@
-@todo(task="question", action="why do we need this specialisation? for ISaveRequest only?").
 /** ------------------------------------------------------------------------
     File        : SaveRequest
     Purpose     : A request for committing data.
@@ -18,6 +17,8 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 class OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest inherits ServiceRequest
         implements ISaveRequest:
     
+	define public property TableNames as character extent no-undo get. set. 
+
     constructor public SaveRequest(input pcService as character):
         super(pcService, ServiceMessageActionEnum:Save).
     end constructor.

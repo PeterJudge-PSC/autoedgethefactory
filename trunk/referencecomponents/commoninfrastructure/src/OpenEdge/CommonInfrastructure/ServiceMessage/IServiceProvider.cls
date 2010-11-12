@@ -13,27 +13,33 @@
                     implementation will call across an AppServer. On the service, it 
                     will simply call into the business components layer.
                   * Note that this interface has nothing to do with the InjectABL concept 
-                    of providers. This interface is a provider of data.
+                    of providers. This interface is a provider of data from a service
+                    (OERA Business Component).
                   * A service provider instance is responsible for interacting
                     with a single service.
-                  * Each request, however, can potentially interact with a different
-                    ServiceMessageManager.
   --------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider:  
-    /** (mandatory) The service for which this service adapter is servicing a request. */
+    /** (mandatory) The service for which this provider is servicing a request. */
     define public property Service as character no-undo get.
     
-    /** Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager
-        once it's done with the request. The object that implements this interface will call back to
-        the ServiceMessageManager when it is done and it's ready with a response (IServiceResponse).
+    /** Services a request. The service provider will call ExecuteResponse() in 
+        the ServiceMessageManager once it's done with the request and ready with 
+        a response (IServiceResponse); typically this will happen in a callback of
+        some sort.
         
-        @param poRequest The request to service.
-        @param poServiceMessageManager The message manager controlling this request. */
-    method public void ExecuteRequest(input poRequest as IServiceRequest extent,
-                                      input poServiceMessageManager as IServiceMessageManager).
-                                      
+        @param IServiceRequest An array of requests to service. */
+    method public void ExecuteRequest(input poRequest as IServiceRequest extent).
+    
+    /** Services a request in a synchronous manner. The responses are returned from the
+        ExecuteSyncRequest() call, rather than the service provider calling ExecuteResponse() in the
+        ServiceMessageManager at a later time.
+        
+        @param IServiceRequest An array of requests to service.
+        @return IServiceResponse An array of responses to the request.  */
+    method public IServiceResponse extent ExecuteSyncRequest(input poRequest as IServiceRequest extent).
+    
 end interface.

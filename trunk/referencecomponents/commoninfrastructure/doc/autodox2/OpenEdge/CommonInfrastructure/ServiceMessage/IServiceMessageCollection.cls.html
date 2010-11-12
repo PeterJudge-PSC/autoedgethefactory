@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
       <br />CLASS IServiceMessageCollection
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection INHERITS <a href="../../../OpenEdge/Lang/Collections/TypedList.cls.html" title="OpenEdge.Lang.Collections.TypedList" target="classFrame">TypedList</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection INHERITS <a href="../../../OpenEdge/Lang/Collections/TypedMap.cls.html" title="OpenEdge.Lang.Collections.TypedMap" target="classFrame">TypedMap</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -80,6 +80,90 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#containskey(openedge.commoninfrastructure.servicemessage.iservicemessage)'> ContainsKey</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#containsvalue(openedge.commoninfrastructure.servicemessage.imessageconsumer)'> ContainsValue</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#get(openedge.commoninfrastructure.servicemessage.iservicemessage)'> Get</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#put(openedge.commoninfrastructure.servicemessage.iservicemessage,openedge.commoninfrastructure.servicemessage.imessageconsumer)'> Put</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#putall(openedge.commoninfrastructure.servicemessage.iservicemessagecollection)'> PutAll</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessageCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection" target="classFrame">IServiceMessageCollection</a> poMap)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#remove(openedge.commoninfrastructure.servicemessage.iservicemessage)'> Remove</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="method_detail"><!-- --></A>
@@ -104,6 +188,72 @@
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
       <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessageCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection" target="classFrame">IServiceMessageCollection</a> poCollection)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='containskey(openedge.commoninfrastructure.servicemessage.iservicemessage)'><!-- --></a>
+    <h3>ContainsKey</h3>
+    <code>PUBLIC  LOGICAL
+      <b>ContainsKey</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='containsvalue(openedge.commoninfrastructure.servicemessage.imessageconsumer)'><!-- --></a>
+    <h3>ContainsValue</h3>
+    <code>PUBLIC  LOGICAL
+      <b>ContainsValue</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='get(openedge.commoninfrastructure.servicemessage.iservicemessage)'><!-- --></a>
+    <h3>Get</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a>
+      <b>Get</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='put(openedge.commoninfrastructure.servicemessage.iservicemessage,openedge.commoninfrastructure.servicemessage.imessageconsumer)'><!-- --></a>
+    <h3>Put</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a>
+      <b>Put</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey, <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='putall(openedge.commoninfrastructure.servicemessage.iservicemessagecollection)'><!-- --></a>
+    <h3>PutAll</h3>
+    <code>PUBLIC  VOID
+      <b>PutAll</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessageCollection.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection" target="classFrame">IServiceMessageCollection</a> poMap)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='remove(openedge.commoninfrastructure.servicemessage.iservicemessage)'><!-- --></a>
+    <h3>Remove</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a>
+      <b>Remove</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceMessage.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage" target="classFrame">IServiceMessage</a> poKey)
     </code>
     <dl>
       <dd>

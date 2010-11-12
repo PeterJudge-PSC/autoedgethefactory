@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\PresentationLayer\Common</font>
       <br />CLASS DataFetchEventArgs
     </h2>
-    <p>CLASS OpenEdge.PresentationLayer.Common.DataFetchEventArgs INHERITS <a href="../../../OpenEdge/PresentationLayer/Common/ModelEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelEventArgs" target="classFrame">ModelEventArgs</a> </p>
+    <p>CLASS OpenEdge.PresentationLayer.Common.DataFetchEventArgs INHERITS <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -84,8 +84,22 @@
       <td>
         <code>
           <b>
-            <a href='#()'>CONSTRUCTOR </a>
-          </b>()
+            <a href='#(openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.commoninfrastructure.common.icomponentinfo,character,character)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, CHARACTER pcTables, CHARACTER pcMessageId)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -128,10 +142,21 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='()'><!-- --></a>
+    <a name='(openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>()
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(openedge.commoninfrastructure.common.icomponentinfo,character,character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poModelService, CHARACTER pcTables, CHARACTER pcMessageId)
     </code>
     <dl>
       <dd>

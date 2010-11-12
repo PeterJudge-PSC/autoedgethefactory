@@ -71,30 +71,6 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         this-object:Kernel = ?.
     end destructor.
     
-    method override public void CreateComponent():
-        define variable oBinding as IBinding no-undo.
-        define variable oBindings as IBindingCollection no-undo.
-        define variable oIterator as IIterator no-undo.
-        
-        /** Components can be added via RegisterService() or via a custom Scope in the Kernel of ManagerScope:ServiceManager.
-        RegisterService(ServiceTypeEnum:Manager, 'OpenEdge.CommonInfrastructure.Common.ISecurityManager').
-        */
-        
-        /** Work with the Kernel's bindings at this point, since there are (probably) no instances in the cache 
-            at this point. */
-        oBindings = Kernel:GetBindings(
-                        Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
-                        ManagerScopeEnum:ServiceManager).
-        oIterator = oBindings:Iterator().
-        
-        do while oIterator:HasNext():
-            oBinding = cast(oIterator:Next(), IBinding).
-            
-            /* we don't know what we've got here, so use generic AppComponent */            
-            RegisterService(ServiceTypeEnum:AppService, oBinding:Service:TypeName).
-        end.
-    end method.
-    
     method protected logical RegisterService(input poServiceType as ServiceTypeEnum,
                                              input pcServiceName as character):
         define variable lNew as logical no-undo.
@@ -136,8 +112,30 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         define variable oService as IService no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oContext as ILifecycleContext no-undo.
+        define variable oScopedInstance as Object extent no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         define buffer lbService for Service.
+        
+        /** Components can be added via RegisterService() or via a custom Scope in the Kernel of ManagerScope:ServiceManager.
+        RegisterService(ServiceTypeEnum:Manager, 'OpenEdge.CommonInfrastructure.Common.ISecurityManager').
+        */
+        
+        /* Get running instances of all scoped objects. */
+        oScopedInstance = Kernel:Get(ManagerScopeEnum:ServiceManager,
+                                     Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope')).
+        
+        if extent(oScopedInstance) ge 1 then
+        do:
+            iMax = extent(oScopedInstance).
+            do iLoop = 1 to iMax:
+                /* we don't know what we've got here, so use generic AppComponent */
+                RegisterService(
+                        ServiceTypeEnum:AppService,
+                        oScopedInstance[iLoop]:GetClass():TypeName).
+            end.
+        end.
         
         for each lbService:
             oService = StartService(cast(lbService.Service, Class)).
@@ -181,11 +179,38 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         @param poComponent The class of the service to start 
         @return An IComponent instance of the requested service */
     method public IService StartService(input poService as class Class):
-        return cast(StartComponent(poService), IService).
+        return StartService(poService, ''). 
     end method.
     
+    /** Starts and returns a service as specified by a type/class. Typically
+        an interface type name.
+                
+        @param Class The class of the service to start
+        @param character An instance name for the service. InjectABL allows us
+               to have mulitple bindings for a single type, specialised by instance name. 
+        @return IService The running instance of the requested service */    
+	method public IService StartService(input poService as class Class,
+	                                    input pcInstanceName as character):
+        return cast(StartComponent(poService, pcInstanceName), IService).
+	end method.
+	
+    /** Returns an instance of a service, if one exists. May AutoStart
+        an instance.
+        @param poService The class of the service to start 
+        @return An IService instance of the requested service */	
     method public IService GetService(input poService as class Class):
-        return StartService(poService).
+        return StartService(poService, '').
+    end method.
+    
+    /** Returns an instance of a service, if one exists.
+        
+        @param Class The class of the service to start
+        @param character An instance name for the service. InjectABL allows us
+               to have mulitple bindings for a single type, specialised by instance name. 
+        @return IService The running instance of the requested service */
+    method public IService GetService(input poService as class Class,
+                                      input pcInstanceName as character).
+        return StartService(poService, pcInstanceName).
     end method.
     
     /** Stops a running service.
@@ -194,9 +219,10 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         StopComponent(cast(poServiceInstance, IComponent)).
     end method.
     
-    method protected  IComponent StartComponent(input poComponent as class Class):
-        return cast(Kernel:Get(poComponent), IComponent).
-    end method.
+    method protected IComponent StartComponent(input poComponent as class Class,
+                                               input pcInstanceName as character ):
+        return cast(Kernel:Get(poComponent, pcInstanceName), IComponent).
+    end method. 
     
     method protected void StopComponent(input poComponentInstance as IComponent):
         define variable lReleased as logical no-undo.
@@ -212,24 +238,22 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         end.
     end method.
     
+    /** Finds (and starts if needed) an IServiceProvider which applies to the service name passed as 
+        an argument. 
+    
+        The client-side service provider is typically a service adapter, which talks across a session boundary
+        to a service interface. That service interface talks to the server-side service provider and asks it 
+        to perform a task ("service a request").
+       
+        The server-side service provider is typically a business component such as a business entity, task or 
+        workflow.
+        
+        @param character The name of the service for which we need to perform a request.
+        @return IServiceProvider An object capable of serviving that request.   */
     method public IServiceProvider GetServiceProvider(input pcService as character):
-        define variable oServiceProvider as IServiceProvider no-undo.
-        
-        oServiceProvider = cast(Kernel:Get(Class:GetClass(pcService)), IServiceProvider).
-        
-        /* If there's not specialised service provider, use the generic one. This might occur more often 
-           on the client, where a generalised service adapter would take care of passing requests through 
-           to the server. This default mapping is descibed in the 
-           OpenEdge.CommonInfrastructure.InjectABL.ServiceMessageModule. 
-           
-           The server-side provider is typically a business component such as a business entity, task or 
-           workflow.            
-          */
-        if not valid-object(oServiceProvider) then
-            oServiceProvider = cast(Kernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider'))
-                                , IServiceProvider).
-        
-        return oServiceProvider.
+        return cast(StartService(
+                        Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider'),
+                        pcService), IServiceProvider).
     end method.
     
 end class.

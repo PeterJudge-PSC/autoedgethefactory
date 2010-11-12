@@ -1,12 +1,12 @@
- /*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ComponentTypeEnum
-    Purpose     : 
+    Purpose     : Enumeration of server-side component types
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Apr 20 12:12:37 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Server.ComponentTypeEnum.
@@ -22,8 +22,8 @@ class OpenEdge.CommonInfrastructure.Server.ComponentTypeEnum inherits OpenEdge.C
         ComponentTypeEnum:DataSourceObject = new ComponentTypeEnum('DataSourceObject').
     end constructor.
 
-	constructor public ComponentTypeEnum(pcName as character ):
-		super(pcName).
-	end constructor.
+    constructor public ComponentTypeEnum(pcName as character ):
+        super(pcName).
+    end constructor.
 
 end class.

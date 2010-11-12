@@ -25,8 +25,8 @@ class OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum inherits Standard
         ManagerScopeEnum:SecurityManager = new ManagerScopeEnum('SecurityManager Scope').
     end constructor.
     
-	constructor public ManagerScopeEnum(input pcName as character):
-		super(pcName).
-	end constructor.
-	
+    constructor public ManagerScopeEnum(input pcName as character):
+        super(pcName).
+    end constructor.
+    
 end class.

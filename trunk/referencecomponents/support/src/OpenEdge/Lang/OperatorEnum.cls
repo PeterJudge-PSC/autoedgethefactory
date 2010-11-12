@@ -38,10 +38,10 @@ class OpenEdge.Lang.OperatorEnum final inherits EnumMember :
         OperatorEnum:None = new OperatorEnum('').
     end constructor.
     
-	constructor public OperatorEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
-	
+    constructor public OperatorEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
+    
     method static public logical Equals (pcOperator as char, poOperator as OperatorEnum):
         define variable lEqual as logical no-undo.
         

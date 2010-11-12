@@ -25,8 +25,29 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection inher
     constructor public ITableRequestCollection(c as ITableRequestCollection):
         super(c).
     end constructor.
+    
+    method public ITableRequest Get(input pcKey as character):
+        return this-object:Get(new String(pcKey)).
+    end method.
+    
+    method public ITableRequest Get(input poKey as String):
+        return cast(super:Get(poKey), ITableRequest).
+    end method.
+    
+    method public String Put(input poKey as String, input poValue as ITableRequest):        
+        return cast(super:Put(poKey, poValue), String).
+    end method.
 
-	method public ITableRequest Get( input pcKey as character ):
-		return cast(super:Get(new String(pcKey)), ITableRequest).
-	end method.
+    method public String Put(input pcKey as character, input poValue as ITableRequest):     
+        return this-object:Put(new String(pcKey), poValue). 
+    end method.
+    
+    method public String Remove(input poKey as String):
+        return cast(super:Remove(input poKey), String).
+    end method.
+    
+    method public String Remove(input pcKey as character):
+        return this-object:Remove(new String(pcKey)).
+    end method.
+    
 end class.

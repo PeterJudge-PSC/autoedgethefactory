@@ -17,7 +17,8 @@ using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-class OpenEdge.Core.InjectABL.Lifecycle.Cache implements ICache:
+class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
+        implements ICache:
     
     define private temp-table InstanceCache no-undo
         field Binding as Object                 /* IBinding */
@@ -65,9 +66,9 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache implements ICache:
     end constructor.
 
     /** Stores the specified context in the cache.
-     @param context The context to store.
-     @param reference The instance reference.
-     */
+        
+        @param context The context to store.
+        @param reference The instance reference.    */
     method public void Remember(poContext as ILifecycleContext, poInstance as Object):
         define buffer lbCache for InstanceCache.
         
@@ -83,9 +84,9 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache implements ICache:
     end method.
     
     /** Tries to retrieve an instance to re-use in the specified context.
+    
         @param context The context that is being activated.
-        @return The instance for re-use, or unknown if none has been stored.
-     */
+        @return The instance for re-use, or unknown if none has been stored. */
     method public Object TryGet(poContext as ILifecycleContext):
         define variable oInstance as Object no-undo.
         define variable oScope as Object no-undo.

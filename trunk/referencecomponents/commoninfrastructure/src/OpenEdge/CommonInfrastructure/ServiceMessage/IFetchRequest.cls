@@ -10,7 +10,7 @@
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection.
  
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest /* inherits IServiceRequest */:
-
+    
     /** (mandatory) A collection of one of more tables for this request. */
     define public property TableRequests as ITableRequestCollection no-undo get.
     

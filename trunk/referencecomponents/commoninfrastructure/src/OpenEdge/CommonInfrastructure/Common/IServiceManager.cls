@@ -29,24 +29,46 @@ interface OpenEdge.CommonInfrastructure.Common.IServiceManager /* inherits IMana
     /** Starts all registered services */
     method public void StartServices().
     
-    /** Starts a service
-        @param poServiceType component type; ignored when InjectABL used, since we work off interfaces, which are
-               unique within the application.
-        @param pcComponentName 
-        @return An IService instance of the requested service */    
+    /** Starts and returns a running instance of a service
+        
+        @param ServiceTypeEnum The component type; ignored when InjectABL used,
+               since we work off interfaces, which are unique within the application.
+        @param character The name of the service (interface name in InjectABL)
+        @return IService An IService instance of the requested service */
     method public IService StartService(input poServiceType as ServiceTypeEnum,
                                         input pcServiceName as character).
-
-    /** Starts a service using the InjectABL dependency injection container.
-        @param poService The class of the service to start 
-        @return An IService instance of the requested service */
+    
+    /** Starts and returns a service as specified by a type/class. Typically
+        an interface type name.
+                
+        @param Class The class of the service to start 
+        @return IService The running instance of the requested service */
     method public IService StartService(input poService as class Class).
+    
+    /** Starts and returns a service as specified by a type/class. Typically
+        an interface type name.
+                
+        @param Class The class of the service to start
+        @param character An instance name for the service. InjectABL allows us
+               to have mulitple bindings for a single type, specialised by instance name. 
+        @return IService The running instance of the requested service */
+    method public IService StartService(input poService as class Class,
+                                        input pcInstanceName as character).
     
     /** Returns an instance of a service, if one exists. May AutoStart
         an instance.
         @param poService The class of the service to start 
         @return An IService instance of the requested service */
     method public IService GetService(input poService as class Class).
+
+    /** Returns an instance of a service, if one exists.
+        
+        @param Class The class of the service to start
+        @param character An instance name for the service. InjectABL allows us
+               to have mulitple bindings for a single type, specialised by instance name. 
+        @return IService The running instance of the requested service */
+    method public IService GetService(input poService as class Class,
+                                      input pcInstanceName as character).
     
     /** Stop all services */
     method public void StopServices().
@@ -59,15 +81,18 @@ interface OpenEdge.CommonInfrastructure.Common.IServiceManager /* inherits IMana
     @todo(task="doc", action="remove from OERA UML").
 /*    method public character GetServiceFile(pcServiceName as character, poComponentType as EnumMember).*/
 
-/*    method public IServiceAdapter GetServiceAdapter(input pcService as character).*/
-
-
-    /** Returns a service provider for a given service. This service p
+    /** Finds (and starts if needed) an IServiceProvider which applies to the service name passed as 
+        an argument. 
     
-        See OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider for more details.         
+        The client-side service provider is typically a service adapter, which talks across a session boundary
+        to a service interface. That service interface talks to the server-side service provider and asks it 
+        to perform a task ("service a request").
+       
+        The server-side service provider is typically a business component such as a business entity, task or 
+        workflow.
         
-        @param pcService The 
-        @return An IServiceProvider instance */
+        @param character The name of the service for which we need to perform a request.
+        @return IServiceProvider An object capable of serviving that request.   */
     method public IServiceProvider GetServiceProvider(input pcService as character).
     
 end interface.

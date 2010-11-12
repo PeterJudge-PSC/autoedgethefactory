@@ -3,7 +3,7 @@
     Purpose     : Window-specific events. 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Wed Dec 17 15:17:01 EST 2008
     Notes       : 
   ----------------------------------------------------------------------*/

@@ -26,8 +26,8 @@ class OpenEdge.Core.System.QueryDefinitionOperationEnum final inherits EnumMembe
         QueryDefinitionOperationEnum:Update = new QueryDefinitionOperationEnum('Update').
     end constructor.
 
-	constructor public QueryDefinitionOperationEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public QueryDefinitionOperationEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
 end class.

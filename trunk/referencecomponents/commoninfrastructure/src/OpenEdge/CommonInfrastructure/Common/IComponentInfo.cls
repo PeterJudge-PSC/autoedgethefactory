@@ -1,16 +1,15 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IComponentInfo
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Feb 23 13:49:11 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum.
-using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.
 
 interface OpenEdge.CommonInfrastructure.Common.IComponentInfo:
@@ -23,7 +22,12 @@ interface OpenEdge.CommonInfrastructure.Common.IComponentInfo:
       */
     define public property Service as class Class no-undo get.
     
-    /** Instance name for the running component. Optionally unique. */
+    /** Whether the component is auto-started when it is requested, or whether
+        it should be explicitly started first.  */
+    define public property AutoStart as logical no-undo get.
+    
+    /** Instance name for the running component. Optionally a unique value, although
+        often (usually?) just the typename of the component instance . */
     define public property InstanceName as character no-undo get.
     
     /** The component type (per ComponentTypeEnum) */

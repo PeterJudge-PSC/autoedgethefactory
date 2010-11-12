@@ -62,6 +62,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>DATETIME-TZ</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.LastUpdateAt'>LastUpdateAt</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The last time that a request was serviced (ie on response) for the table
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>CHARACTER</code>
         </font>
       </td>
@@ -69,8 +83,8 @@
         <code>
           <b>
             <a href='#property.NextPosition'>NextPosition</a>
-          </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context info/key for where to start appending next page
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Context info/key for where to start appending next page
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -82,9 +96,23 @@
       <td>
         <code>
           <b>
-            <a href='#property.NumRows'>NumRows</a>
-          </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num rows in resultset (on server if paging)
+            <a href='#property.NumRemainingPages'>NumRemainingPages</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of remaining pages to retrieve. If this is zero, then
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PageSize'>PageSize</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Num rows in resultset (on server if paging). If this is set to -1,
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -97,8 +125,22 @@
         <code>
           <b>
             <a href='#property.PrevPosition'>PrevPosition</a>
-          </b> PROPERTY GET SET 
+          </b> PUBLIC GET SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context info/key for where to start appending next page
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableHandle'>TableHandle</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The buffer/table handle corresponding to the tableName
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -111,7 +153,7 @@
         <code>
           <b>
             <a href='#property.TableName'>TableName</a>
-          </b> PROPERTY GET 
+          </b> PUBLIC GET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected set - not changeable - provide with constructor
       </td>
     </tr>
@@ -124,21 +166,44 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='property.NextPosition'><!-- --></a>
-    <h3>NextPosition</h3>
-    <code>CHARACTER PROPERTY GET SET </code>
+    <a name='property.LastUpdateAt'><!-- --></a>
+    <h3>LastUpdateAt</h3>
+    <code>DATETIME-TZ PUBLIC GET SET </code>
     <dl>
-      <dd>context info/key for where to start appending next page <p> </dd>
+      <dd>The last time that a request was serviced (ie on response) for the table <p> </dd>
+      <dd>to be updated (either fetched or saved). </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='property.NumRows'><!-- --></a>
-    <h3>NumRows</h3>
-    <code>INTEGER PROPERTY GET SET </code>
+    <a name='property.NextPosition'><!-- --></a>
+    <h3>NextPosition</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
     <dl>
-      <dd>num rows in resultset (on server if paging) <p> </dd>
+      <dd>Context info/key for where to start appending next page <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NumRemainingPages'><!-- --></a>
+    <h3>NumRemainingPages</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>The number of remaining pages to retrieve. If this is zero, then <p> </dd>
+      <dd>all data has been retrieved. If it is negative, then we haven't yet retrieved any pages and don't know how many there are. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PageSize'><!-- --></a>
+    <h3>PageSize</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>Num rows in resultset (on server if paging). If this is set to -1, <p> </dd>
+      <dd>all data is retrieved </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -146,7 +211,7 @@
     <hr />
     <a name='property.PrevPosition'><!-- --></a>
     <h3>PrevPosition</h3>
-    <code>CHARACTER PROPERTY GET SET </code>
+    <code>CHARACTER PUBLIC GET SET </code>
     <dl>
       <dd>context info/key for where to start appending next page <p> </dd>
       <dd>
@@ -154,9 +219,19 @@
       </dd>
     </dl>
     <hr />
+    <a name='property.TableHandle'><!-- --></a>
+    <h3>TableHandle</h3>
+    <code>HANDLE PUBLIC GET SET </code>
+    <dl>
+      <dd>The buffer/table handle corresponding to the tableName <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='property.TableName'><!-- --></a>
     <h3>TableName</h3>
-    <code>CHARACTER PROPERTY GET </code>
+    <code>CHARACTER PUBLIC GET </code>
     <dl>
       <dd>protected set - not changeable - provide with constructor <p> </dd>
       <dd>

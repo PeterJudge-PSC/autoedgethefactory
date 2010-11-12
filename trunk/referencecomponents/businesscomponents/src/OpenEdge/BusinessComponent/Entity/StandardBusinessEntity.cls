@@ -17,7 +17,7 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
@@ -49,12 +49,13 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
 		super(input poServiceManager, input poComponentInfo).
 	end constructor.
 	
-    method override public void BeforeFetchData(poRequest as IFetchRequest):
+    method override public void FetchData(poRequest as IFetchRequest):
         /* We assume new data 
            appending requests would possibly need direction to MERGE or APPEND in fill */
         /*        DatasetHandle:empty-dataset () .*/
-        if cast(poRequest, IServiceMessage):MessageDataFormat eq MessageDataFormatEnum:ProDataSet then       
-            cast(poRequest, IServiceMessage):SetData(DatasetHandle, MessageDataFormatEnum:ProDataSet).            
+        cast(poRequest, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
+        
+        super:FetchData(poRequest).                        
     end method.
     
     /* Override example */
@@ -69,12 +70,12 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
         
         /* make post-save BusinessEntity  validation calls here */
     end method.
-
+    
 	method override public IFetchResponse FetchSchema(input poDefineRequest as IFetchRequest):
 	    define variable oFetchSchemaResponse as IFetchResponse no-undo.
 	    
         oFetchSchemaResponse = new FetchResponse(poDefineRequest).
-        cast(oFetchSchemaResponse, IServiceMessage):SetData(DatasetHandle, MessageDataFormatEnum:ProDataSet).
+        cast(oFetchSchemaResponse, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         return oFetchSchemaResponse.
 	end method.

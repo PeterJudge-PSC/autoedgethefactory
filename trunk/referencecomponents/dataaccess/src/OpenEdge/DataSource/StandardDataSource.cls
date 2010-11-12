@@ -10,115 +10,57 @@
   --------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.DataSource.IDataSource.
+using OpenEdge.DataSource.DataSource.
+
 using OpenEdge.DataSource.DataSourceEventArgs.
 using OpenEdge.DataSource.DataSourceEventEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.TableContext.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.ITableOwner.
 using OpenEdge.Core.System.ApplicationError.
-using OpenEdge.Core.System.IQuery. 
-
+using OpenEdge.Core.System.IQuery.
+ 
+using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.FillModeEnum.
 using OpenEdge.Lang.RowStateEnum.
+using OpenEdge.Lang.ABLSession.
 
 using Progress.Lang.AppError.
 using Progress.Lang.Object.
 
-class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool /*inherits Query*/ 
-        implements IDataSource, ITableOwner:
-    
-    /** The default Page or batch size for this datasource. Can be overridden
-        by the page size on the table request. */
-    define public property PageSize as integer no-undo get. set.
-    
-    /** Buffer handle for the temp-table being operated on. Likely to change for 
-        each operation  */
-    define protected property BufferHandle as handle no-undo get. set.
-
-    /** The data transport type for this message. These may differ for request and response. */
-    define private variable MessageDataFormat as DataFormatEnum no-undo.    
-    define private variable moMessageDataType as DataTypeEnum no-undo.
-    define private variable mhDataTarget as handle   no-undo.
-    define private variable mmDataTarget as memptr   no-undo.
-    define private variable mcDataTarget as longchar no-undo.
-    define private variable moDataTarget as Object   no-undo.
-
-
-    /** The fill mode for the data fetch (merge etc). */     
-    define public property FillMode as FillModeEnum no-undo get. set.
-    
-    /* DataSource Fetch/Fill events */
-    define public event BeforeFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event BeforeRowFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterRowFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    
-    /* DataSource Save/Commit events */
-    define public event BeforeSaveTransaction signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event BeforeSave            signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterSave             signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterSaveTransaction  signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    
-    define private variable moCurrentRequest as IServiceRequest no-undo.
-    define private variable moCurrentQuery as IQuery no-undo.
+class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits DataSource
+        implements ITableOwner:
+        
+    define protected property CurrentQuery as IQuery no-undo get. private set.
     
     constructor public StandardDataSource ():
-        AttachDataStore().
+        super().
     end constructor.
     
-    /** Attaches the actual datasource - this could be an ABL datasource, or some other 
-        mechanism (XML or a service or something else). These are specific to each 
-        datasource instance, and thus is abstract. 
-        
-        For example, for an ABL/ProDataSet data source:
-            
-            <code>
-            DEFINE DATA-SOURCE srcCar FOR Car .
-            DATA-SOURCE srcCar:HANDLE:prefer-dataset = TRUE.
-            hBuffer:ATTACH-DATA-SOURCE(DATA-SOURCE srcCar:HANDLE,"").
-            </code>        
-        */
-    method abstract protected void AttachDataStore().
-    
     /** Prepare with query, batchsize and more.
-       
+    
        @param ITableRequest Parameters for the fetch (query modifications, page size etc). */
-    method public void PrepareForFetch(input poRequest as ITableRequest):
+    method override public void Prepare(input poRequest as ITableRequest):
+        /* Here we transform the query on the ITableRequest and map from (say)
+                eSalesrep.QuoteJanuary to sports2000.SalesRep.MonthQuota[1]
+           */
         
-        moCurrentQuery = new Query(this-object, cast(poRequest, IQueryDefinition)).
+        CurrentQuery = new Query(this-object, cast(poRequest, IQueryDefinition)).
         
-/*        BufferHandle = phBuffer.*/
-        BufferHandle:fill-mode = FillMode:ToString().
+        HandleDataTarget:fill-mode = FillMode:ToString().
+        
+        CurrentQuery:Prepare().
     end method.
     
-/** The SetDataTarget() methods are called by the DataAccess object, to specify 
-        the target for the DataSource's operations (usually the fill/fetch). 
-        
-        This data is formatted per the MessageDataFormat above;
-        and is stored in the message as either LONGCHAR, MEMPTR, HANDLE or P.L.O. */
-    method public void SetDataTarget(input pmData as longchar,
-                                     input poMessageDataFormat as DataFormatEnum):
-    end method.
-    
-    method public void SetDataTarget(input pmData as memptr,
-                                     input poMessageDataFormat as DataFormatEnum):
-    end method.
-    
-    method public void SetDataTarget(input phData as handle,
-                                     input poMessageDataFormat as DataFormatEnum):
-    end method.
-    
-    method public void SetDataTarget(input poData as Object,
-                                     input poMessageDataFormat as DataFormatEnum):
-    end method.
-        
     /** Perform fetch: populate the previously-passed buffer from the
         physical data store.
         
@@ -133,63 +75,67 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool /*inherits
             - there are no events (before-fill etc) fired since this code
         doesn't use prodataset; we should therefor create our own events and 
         fire them if we so desire.          */
-    method public void PerformFetch():
+    method override public void FetchData():
         define variable lAvailable as logical no-undo.
+        define variable cRowKey as character extent no-undo.
         
-        moCurrentQuery:OpenQuery().
+        CurrentQuery:Open().
         
-        lAvailable = moCurrentQuery:GetFirst().
+        lAvailable = CurrentQuery:GetFirst().
         if lAvailable then
-            OnBeforeFill(?).
-            
-        do while lAvailable:
-            /* Get values and populate this-object:BufferHandle */
-            OnBeforeRowFill(BufferHandle).
-            BufferHandle:buffer-create().
-            BufferHandle:buffer-copy(moCurrentQuery:QueryHandle:get-buffer-handle(BufferHandle:name)).
-            BufferHandle:buffer-release().
-            OnAfterRowFill(BufferHandle).
-            lAvailable = moCurrentQuery:GetNext().
-        end.
-        OnAfterFill(?).
+            OnBeforeFill().
         
-        moCurrentQuery:CloseQuery().
+        do while lAvailable:
+            cRowKey = CurrentQuery:GetCurrentRowKey().
+            /* Get values and populate this-object:HandleDataTarget */
+            OnBeforeRowFill(cRowKey).
+            HandleDataTarget:buffer-create().
+            HandleDataTarget:buffer-copy(CurrentQuery:QueryHandle:get-buffer-handle(HandleDataTarget:name)).
+            HandleDataTarget:buffer-release().
+            OnAfterRowFill(cRowKey).
+            lAvailable = CurrentQuery:GetNext().
+        end.
+        OnAfterFill().
+        
+        CurrentQuery:Close().
     end method.
     
     /** Called on completion of a data fetch request, typically by the data access object.
     
         @return ITableContext - the context for the request (num records, position etc).    
       */
-    method final public ITableResponse GetData():
+    method override public ITableResponse GetData():
         define variable oTableResponse as ITableResponse no-undo.
+        define variable oTC as ITableContext no-undo.
         
-        oTableResponse = new TableResponse(cast(moCurrentRequest, ITableRequest):TableName).
-        cast(oTableResponse, ITableContext):NumRows = moCurrentQuery:NumRows.
+        oTableResponse = new TableResponse(cast(CurrentRequest, ITableRequest):TableName).
+        oTC = new TableContext(oTableResponse:TableName, ?).
         
+        oTableResponse:TableContext = oTC.
+        
+        /* update the context with the results of the fetch */
         @todo(task="implement", action="").
-        cast(oTableResponse, ITableContext):NextPosition = ?.
-        cast(oTableResponse, ITableContext):PrevPosition = ?.
+        oTC:PageSize = CurrentQuery:NumRows.
         
         return oTableResponse.
         finally:
-            BufferHandle = ?.
-            moCurrentQuery = ?.
-            moCurrentRequest = ?.
+            ClearDataTarget().
+            CurrentQuery = ?.
+            CurrentRequest = ?.
         end finally.
-    end method.
+    end method.    
     
     /** Saves all records in the buffer argument to the physical data store. This
         buffer comes from the DataAccess object.
     
-        @param handle The buffer being saved.   */
-    method public void SaveData(input phBuffer as handle):
-    
+        @return ITableResponse The response to the save operation. */
+    method override public ITableResponse SaveData():
         define variable hQuery as handle no-undo.
         define variable hBeforeBuffer as handle no-undo.
         define variable hBeforeQry as handle no-undo.
+        define variable oTableResponse as ITableResponse no-undo.
         
-                
-        hBeforeBuffer = phBuffer:before-buffer.
+        hBeforeBuffer = HandleDataTarget:before-buffer.
         
         create query hBeforeQry.
         hBeforeQry:set-buffers(hBeforeBuffer).
@@ -203,17 +149,23 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool /*inherits
                need it; it can do this on its own). If it's a Delete, then
                there *is* no after-table row. */
             if not hBeforeBuffer:row-state eq RowStateEnum:Deleted:Value then
-                phBuffer:find-by-rowid(hBeforeBuffer:after-rowid).
+                HandleDataTarget:find-by-rowid(hBeforeBuffer:after-rowid).
         
-            SaveData(phBuffer, Query:GetCurrentRowKey(hQuery)).
+            SaveRowData(Query:GetCurrentRowKey(hQuery)).
             
             hBeforeQry:get-next().
         end.
         
+        oTableResponse = new TableResponse(HandleDataTarget:name).
+        oTableResponse:HasError = HandleDataTarget:error.
+        oTableResponse:ErrorText = HandleDataTarget:error-string.
+        
+        return oTableResponse.
         finally:
             hBeforeQry:query-close().
             delete object hBeforeQry no-error.
-            BufferHandle = ?.
+            delete object hBeforeBuffer no-error.
+            hBeforeBuffer = ?.            
         end finally.
     end method.
     
@@ -222,101 +174,47 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool /*inherits
     
         @param character[] An array of keys allowing us to find one or more rows 
         in the physical data store.  */
-    method public void SaveData(input phSourceBuffer as handle,
-                                input pcRowKey as character extent):
+    method protected void SaveRowData(input pcRowKey as character extent):
         define variable hDataSource as handle     no-undo.
         define variable iBufferIndex as integer    no-undo.
         
-        BufferHandle = phSourceBuffer.
+        /*HandleDataTarget = phSourceBuffer.*/
         
-        OnBeforeSaveTransaction(phSourceBuffer).
+        
+        OnBeforeSaveTransaction(pcRowKey).
         do transaction on error undo, throw :                       
-            OnBeforeSave(phSourceBuffer).
+            OnBeforeSave(pcRowKey).
         
-            if not phSourceBuffer:error then
+            if not HandleDataTarget:error then
             do:
                 /* save changes to the buffers in the datasource that should not be ignored */ 
-                hDataSource = phSourceBuffer:data-source.
-                do iBufferIndex = 1 to hDataSource:num-source-buffers :
-                    phSourceBuffer:save-row-changes(iBufferIndex).
+                hDataSource = HandleDataTarget:data-source.
+                do iBufferIndex = 1 to HandleDataTarget:num-source-buffers :
+                    HandleDataTarget:save-row-changes(iBufferIndex).
                 end.
                 
-                if not phSourceBuffer:error then
-                    OnAfterSave(phSourceBuffer).
+                if not HandleDataTarget:error then
+                    OnAfterSave(pcRowKey).
             end.    /* error */
         end.    /* transaction */
         
-        OnAfterSaveTransaction(phSourceBuffer).
+        OnAfterSaveTransaction(pcRowKey).
         
         finally:
-            BufferHandle = ?.
+            ClearDataTarget().
         end finally.
     end method.
-    
-    /** Find the 
-    
-        @param character[] An array of keys allowing us to find one or more rows 
-        in the physical data store.  */
-    method abstract protected void FindSourceData(input pcRowKey as character extent).
-    
-    /* Save events */    
-    method protected void OnBeforeSaveTransaction (input phBuffer as handle):
-        this-object:BeforeSaveTransaction:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:BeforeSaveTransaction, phBuffer)).
-    end method.
 
-    method protected void OnBeforeSave (input phBuffer as handle):
-        this-object:BeforeSave:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:BeforeSave, phBuffer)).
-    end method.
-    
-    method protected void OnAfterSave (input phBuffer as handle):
-        this-object:AfterSave:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:AfterSave, phBuffer)).
-    end method.
-    
-    method protected void OnAfterSaveTransaction (input phBuffer as handle):
-        this-object:AfterSaveTransaction:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:AfterSaveTransaction, phBuffer)).
-    end method.
-    
-    method protected void OnBeforeFill(input phBuffer as handle):
-        this-object:BeforeFill:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:BeforeFill, phBuffer)).
-    end method.
-
-    method protected void OnBeforeRowFill (input phBuffer as handle):
-        this-object:BeforeRowFill:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:BeforeRowFill, phBuffer)).
-    end method.
-    
-    method protected void OnAfterRowFill (input phBuffer as handle):
-        this-object:AfterRowFill:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:AfterRowFill, phBuffer)).        
-    end method.
-    
-    method protected void OnAfterFill (input phBuffer as handle):
-        this-object:AfterFill:Publish(
-                this-object,
-                new DataSourceEventArgs(DataSourceEventEnum:AfterFill, phBuffer)).        
-    end method.
-    
     /** IQuery:ITableOwner implementation. The table name passed in here will be the
         name of the database table (say) that this data source uses to populate
-        the table represented by the BufferHandle property.
+        the table represented by the HandleDataTarget property.
         
         @param character A table or buffer name. The implementer will
         know how to interpret the name. The name passed in is the name
         that the query will use together with its IQueryDefinition.
         
         @return A buffer handle corresponding to the requested name. */
-	method abstract public handle GetTableHandle(input pcTableName as character).
-	
+    method abstract public handle GetTableHandle(input pcTableName as character).    
+
+
 end class.

@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\ServiceMessage</font>
       <br />CLASS TableResponse
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse INHERITS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/TableContext.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.TableContext" target="classFrame">TableContext</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -63,7 +63,7 @@
           <b>
             <a href='#property.ErrorText'>ErrorText</a>
           </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The error text associated with the error, if any.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -77,7 +77,35 @@
           <b>
             <a href='#property.HasError'>HasError</a>
           </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the service request resulted in an error or not.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContext.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext" target="classFrame">ITableContext</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableContext'>TableContext</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ITableContext (page size retrieved, etc) for this response, if any.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableName'>TableName</a>
+          </b> PROPERTY GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The name of the table
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -116,6 +144,7 @@
     <h3>ErrorText</h3>
     <code>CHARACTER PUBLIC GET SET </code>
     <dl>
+      <dd>The error text associated with the error, if any. <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -125,6 +154,29 @@
     <h3>HasError</h3>
     <code>LOGICAL PUBLIC GET SET </code>
     <dl>
+      <dd>Whether the service request resulted in an error or not. <p> </dd>
+      <dd>Defaults to false. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableContext'><!-- --></a>
+    <h3>TableContext</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ITableContext.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext" target="classFrame">ITableContext</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>The ITableContext (page size retrieved, etc) for this response, if any. <p> </dd>
+      <dd>Typically only Fetch actions will have one of these; Save not so much. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableName'><!-- --></a>
+    <h3>TableName</h3>
+    <code>CHARACTER PROPERTY GET PRIVATE SET </code>
+    <dl>
+      <dd>(mandatory) The name of the table <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

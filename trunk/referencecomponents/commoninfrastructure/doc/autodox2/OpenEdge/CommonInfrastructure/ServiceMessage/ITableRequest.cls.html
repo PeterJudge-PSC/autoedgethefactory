@@ -63,7 +63,21 @@
           <b>
             <a href='#property.FullPage'>FullPage</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieve full page when page position is at beginning or end of result-set
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve full page when page position is at beginning or end of result-set
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.NumRemainingPages'>NumRemainingPages</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of remaining pages to retrieve. If this is zero, then
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -91,7 +105,7 @@
           <b>
             <a href='#property.PageSize'>PageSize</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aka batch size
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of records to return per page or batch
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -105,21 +119,7 @@
           <b>
             <a href='#property.RowKey'>RowKey</a>
           </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return page positioned to this key (i.e. resort request/ reopen )
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/FindTypeEnum.cls.html" title="OpenEdge.Lang.FindTypeEnum" target="classFrame">FindTypeEnum</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.SearchType'>SearchType</a>
-          </b> PROPERTY GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return page positioned to this key (i.e. resort request/ reopen )
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -214,7 +214,18 @@
     <h3>FullPage</h3>
     <code>LOGICAL PROPERTY GET SET </code>
     <dl>
-      <dd>retrieve full page when page position is at beginning or end of result-set <p> </dd>
+      <dd>Retrieve full page when page position is at beginning or end of result-set <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NumRemainingPages'><!-- --></a>
+    <h3>NumRemainingPages</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>The number of remaining pages to retrieve. If this is zero, then <p> </dd>
+      <dd>all data has been retrieved. This value is returned from the server/business component layer. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -234,7 +245,7 @@
     <h3>PageSize</h3>
     <code>INTEGER PROPERTY GET SET </code>
     <dl>
-      <dd>aka batch size <p> </dd>
+      <dd>The number of records to return per page or batch <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -244,17 +255,8 @@
     <h3>RowKey</h3>
     <code>CHARACTER PROPERTY GET SET </code>
     <dl>
-      <dd>return page positioned to this key (i.e. resort request/ reopen ) <p> </dd>
+      <dd>Return page positioned to this key (i.e. resort request/ reopen ) <p> </dd>
       <dd>Typically used with TableRequestTypeEnum:Position </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.SearchType'><!-- --></a>
-    <h3>SearchType</h3>
-    <code><a href="../../../OpenEdge/Lang/FindTypeEnum.cls.html" title="OpenEdge.Lang.FindTypeEnum" target="classFrame">FindTypeEnum</a> PROPERTY GET SET </code>
-    <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>

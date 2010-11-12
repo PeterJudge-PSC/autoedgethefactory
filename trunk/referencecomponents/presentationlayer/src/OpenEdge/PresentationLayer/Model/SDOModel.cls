@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue May 19 12:19:42 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
@@ -28,13 +28,6 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
     
     define private variable mhSdo as handle no-undo.
     
-    method override protected void AfterCommitData(  ):
-    end method.
-
-    method override protected void AssignDefaultValues(pcTable as character, phBuffer as handle ):
-        /* SDO does this */
-    end method.
-    
      method public logical CloseQuery( input pcQuery as character ):
         return dynamic-function('closeQuery' in mhSdo).
     end method.
@@ -53,8 +46,8 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
         
         run fetchFirst in mhSDO.
         
-        oQuery = cast(GetQuery(pcQuery), IQuery).
-        oQuery:RepositionQuery(oQuery:GetCurrentRowKey()).
+        oQuery = cast(ModelQueries:Get(pcQuery), IQuery).
+        oQuery:Reposition(oQuery:GetCurrentRowKey()).
         
         return (dynamic-function('rowAvailable' in mhSdo, ?)).
     end method.
@@ -64,8 +57,8 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
         
         run fetchLast in mhSDO.
 
-        oQuery = cast(GetQuery(pcQuery), IQuery).
-        oQuery:RepositionQuery(oQuery:GetCurrentRowKey()).
+        oQuery = cast(ModelQueries:Get(pcQuery), IQuery).
+        oQuery:Reposition(oQuery:GetCurrentRowKey()).
         
         return (dynamic-function('rowAvailable' in mhSdo, ?)).
     end method.
@@ -75,8 +68,8 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
         
         run fetchNext in mhSDO.
 
-        oQuery = cast(GetQuery(pcQuery), IQuery).
-        oQuery:RepositionQuery(oQuery:GetCurrentRowKey()).
+        oQuery = cast(ModelQueries:Get(pcQuery), IQuery).
+        oQuery:Reposition(oQuery:GetCurrentRowKey()).
         
         return (dynamic-function('rowAvailable' in mhSdo, ?)).
     end method.
@@ -86,8 +79,8 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
         
         run fetchPrev in mhSDO.
         
-        oQuery = cast(GetQuery(pcQuery), IQuery).
-        oQuery:RepositionQuery(oQuery:GetCurrentRowKey()).
+        oQuery = cast(ModelQueries:Get(pcQuery), IQuery).
+        oQuery:Reposition(oQuery:GetCurrentRowKey()).
         
         return (dynamic-function('rowAvailable' in mhSdo, ?)).
     end method.
@@ -145,26 +138,17 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
         dynamic-function('openQuery' in mhSdo).
     end method.
                     
-    method override public void CollectChanges():
-    end method.
-                                                
     /* Operations */
     method override protected char DoAddRecord(pcBufferName as char):
         define variable cNewRecordKey as character no-undo.
         
         dynamic-function('addRow' in mhSdo, '').
         
-/*        cast(GetQuery(pcQuery), IQuery):GetCurrentRowKey().*/
+/*        cast(ModelQueries:Get(pcQuery), IQuery):GetCurrentRowKey().*/
         return cNewRecordKey. 
     end method.
-            
-    /** Assign parent values based on the relation a (child) buffer is part of.
-     **/
-    method override protected void AssignKeyValues (pcTable as char, phBuffer as handle):
-        /* SDO does this itself */
-    end method.
     
-    method override protected void DoCommitData():
+    method override public void CommitData():
         define variable cUndoRowids                 as character     no-undo.
         define variable cErrorList                  as character     no-undo.
         
@@ -176,33 +160,6 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
                "RowNumCHR(3)ADM-ERROR-STRING,RowNumCHR(3)ADM-ERROR-STRING,..."
         */
         run bufferCommit in mhSDO (output cErrorList, output cUndoRowids) no-error.
-                
-        if cUndoRowids ne '' then
-            ErrorBuffer = 'RowObject'.
-    end method.
-        
-    method override public ModelErrorEventArgs ProcessModelErrors (pcBuffer as char):
-        define variable hChangeBuffer              as handle                    no-undo.
-        define variable hChangeBefore              as handle                    no-undo.
-        define variable hChangeAfter               as handle                    no-undo.
-        define variable hMasterBuffer              as handle                    no-undo.
-        define variable hMasterBefore              as handle                    no-undo.
-        define variable hMasterAfter               as handle                    no-undo.
-        define variable hQuery                     as handle                    no-undo.
-        define variable oModelErrorEventArgs as ModelErrorEventArgs no-undo.
-        
-        oModelErrorEventArgs = new ModelErrorEventArgs(pcBuffer).
-        /*
-        oModelErrorEventArgs:AddErrorRecord(
-                            hChangeAfter:rowid,
-                            BufferHelper:BufferCompare(hMasterAfter, hChangeAfter),
-                            hChangeAfter:error-string).
-        */
-        return oModelErrorEventArgs.
-    end method.
-    
-    method override public logical MergeChanges(pcQuery as char):
-        /* SDO does this itself */
     end method.
                     
     method override protected void DoDeleteRecord(pcBufferName as char, pcRecordKey as char):

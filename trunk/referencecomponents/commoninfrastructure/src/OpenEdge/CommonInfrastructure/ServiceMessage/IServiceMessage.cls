@@ -11,9 +11,15 @@
                     those interfaces are empty (they exist only as a means to identify
                     the type of message to the compiler and programmer).
                   * All properties are mandatory. 
+                  * The GetMessagaeData() and SetMessageData() methods allow access to the data 
+                    being sent/received by this message. This data is formatted per the 
+                    MessageDataFormat and is stored in the message as either LONGCHAR, HANDLE or 
+                    ISerializable object.
   ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.MessageDataFormatEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
+using OpenEdge.Core.Util.ISerializable.
+using OpenEdge.Lang.DataTypeEnum.
 using Progress.Lang.Object.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage:
@@ -33,26 +39,31 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage:
         Used to find the ServiceAdapter and Business component */
     define public property Service as character no-undo get.
     
-    /** (mandatory) The data transport type for this message. These may differ for request and response. */
-    define public property MessageDataFormat as MessageDataFormatEnum no-undo get.
+    /** Set the data associated with the message.         
+        @param lonchar Stores a values 
+        @param DataFormatEnum The format of the data target value */
+    method public void SetMessageData(input pcData as longchar,
+                                      input poMessageDataFormat as DataFormatEnum).
+    method public void SetMessageData (input pcData as longchar).
     
-    /** The GetData() and SetData() methods allow access to the data being sent/
-        received by this message. This data is formatted per the MessageDataFormat above;
-        and is stored in the message as either LONGCHAR, MEMPTR, HANDLE or P.L.O. */
-    method public void SetData(input pmData as longchar,
-                               input poMessageDataFormat as MessageDataFormatEnum).
-    method public void GetData(output pcData as longchar).
-    
-    method public void SetData(input pmData as memptr,
-                               input poMessageDataFormat as MessageDataFormatEnum).
-    method public void GetData(output pmData as memptr).
-    
-    method public void SetData(input phData as handle,
-                               input poMessageDataFormat as MessageDataFormatEnum).
-    method public void GetData(output phData as handle).
+    /** Retrieve the message data.       
+        @param output-longchar Message data, returned as a longchar. */
+    method public void GetMessageData(output pcData as longchar).
 
-    method public void SetData(input poData as Object,
-                               input poMessageDataFormat as MessageDataFormatEnum).
-    method public void GetData(output poData as Object).
+    /** The message's data is transported as temp-table/prodataset and is referenced by handle */    
+    method public void SetMessageData(input phData as handle,
+                                      input poMessageDataFormat as DataFormatEnum).
+                                        
+    /** Retrieve the message data.      
+        @param output-longchar Message data, returned as a handle (prodataset/buffer) */    
+    method public void GetMessageData(output phData as handle).
+        
+    /** The message's data is transported in object form and is referenced as such */
+    method public void SetMessageData(input poData as ISerializable,
+                                      input poMessageDataFormat as DataFormatEnum).
+                               
+    /** Retrieve the message data.       
+        @param output-longchar Message data, returned as an Object. */
+    method public void GetMessageData(output poData as ISerializable).
     
 end interface.

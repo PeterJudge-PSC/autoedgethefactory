@@ -18,7 +18,7 @@ using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
-using OpenEdge.Lang.ObjectStack.
+using OpenEdge.Lang.Collections.ObjectStack.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -76,16 +76,8 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
     define public property PropertyValues       as IParameterCollection no-undo get. private set.
     define public property MethodArguments      as IParameterCollection no-undo get. private set.
     
-    /** Gets or sets the optional name defined for the binding.
-        If not set, we use the Service name */
-    define public property Name as character no-undo
-        get():
-            if this-object:Name eq ? or this-object:Name eq '' then
-                this-object:Name = this-object:Service:TypeName.
-            
-            return this-object:Name.
-        end get.
-        set.
+    /** Gets or sets the optional name defined for the binding. */
+    define public property Name as character no-undo get. set.
     
     constructor public Binding(poService as class Class):
         Assert:ArgumentNotNull(poService, "service").
@@ -97,7 +89,6 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
     end constructor.
     
     /** Gets the provider for the binding.
-        @param context The context.
         @return The provider to use.
      */
     method public IProvider GetProvider():

@@ -4,7 +4,7 @@
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : hdaniels
+    @author hdaniels
     Created     : apr 2010
     Notes       : no empty constructor, specialized for KeySet of IMap 
                  - Changes to the map are reflected here, and vice-versa. 

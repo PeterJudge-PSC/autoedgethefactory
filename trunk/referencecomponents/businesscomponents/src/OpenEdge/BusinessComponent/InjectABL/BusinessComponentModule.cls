@@ -18,6 +18,7 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule inherits Inje
 	end constructor.
 
 	method override public void Load(  ):
+	    
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
         
@@ -26,12 +27,30 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule inherits Inje
             IBusinessEntity, and also that a generic Business Entity is unlikely. */
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
         oBindingSyntax:To('OpenEdge.BusinessComponent.Entity.IBusinessEntity')
+            :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
             :OnServerSession().
-        
+    
         oBindingSyntax = Bind('OpenEdge.BusinessComponent.Entity.IBusinessEntity').
         oBindingSyntax:To('OpenEdge.BusinessComponent.Entity.BusinessEntity')
+            :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
             .
-        
+            
+        /* example */
+        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
+        oBindingSyntax
+            :Named('CustomerService')
+            :Using('OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider')
+            :To('OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter')
+            :OnClientSession().
+
+        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
+        oBindingSyntax
+            :Named('CustomerService')
+            /*:Using('OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider')*/
+            :To('OpenEdge.BusinessComponent.Entity.StandardBusinessEntity') /* CustomerBusinessEntity */
+            :WithConstructorArgument('OpenEdge.DataAccess.IDataAccess') /* ICustomerDataAccess */
+            :OnServerSession().
+            
 	end method.
 
 end class.

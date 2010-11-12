@@ -3,7 +3,7 @@
     Purpose     : 
     Syntax      : 
     Description : Creates instances of services.
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 13:27:19 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/

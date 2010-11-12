@@ -10,61 +10,37 @@
   ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequestBundle.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageRequestor.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
 interface OpenEdge.CommonInfrastructure.Common.IServiceMessageManager:
-    
-    /** Factory method that creates a message bundle for a given component.
+
+    /** Executes the request(s) asynchroronously. Services a request. The service 
+        provider will call ExecuteResponse() in the ServiceMessageManager once it's
+        done with the request and ready with a response (IServiceResponse).
         
-        @param poRequestor The object making the request.
-        @param  poMessageType OpenEdge.Core.System.MessageTypeEnum (Fetch, Save or Define)  
-        @return Returns an IServiceRequestBundle instance, into which we can add ServiceRequests,
-                and execute requests.   */
-    method public IServiceRequestBundle CreateMessageBundle(input poRequestor as IMessageRequestor,
-                                                            input poMessageType as ServiceMessageActionEnum).
-    
-    /** Add a request to the specified Request list
-        @param poMessageBundle The message bundle in which to add the request 
-        @param poRequest This is going to be a request specialised by the
-                         request type: IFetchRequest, ISaveRequest, IDefineRequest
-        @param poMessageConsumer The component that will consumer the message response.                         
-      */
-    method public void AddRequest(input poMessageBundle as IServiceRequestBundle,
-                                  input poRequest as IServiceRequest,
-                                  input poMessageConsumer as IMessageConsumer).
-    
-    /** Remove a request from its message bundle
-        @param poRequest The request to remove from its bundle */
-    method public void RemoveRequest(input poRequest as IServiceRequest).
-    
-    /** Execute the request for the component. This method creates a bundle
-        and executes the request in one call. It's a wrapper around 
-        CreateMessageBundle, AddRequest and ExecuteBundle.
-         
-        @param poRequestor The object making the request. 
-        @param poRequest The Service request being made
-        @param poMessageConsumer The component that will consumer the message response. */
-    method public void ExecuteRequest(input poRequestor as IMessageRequestor,
-                                      input poRequest as IServiceRequest,
-                                      input poMessageConsumer as IMessageConsumer).
-    
-    /** A synchronous/linear/connected/combined request and response call.
-        
-        @param poRequest An array of service requests. 
-        @return Returns an array of responses for the provided requests
-      */
-    method public IServiceResponse extent ExecuteSyncRequest(input poRequest as IServiceRequest extent).
-    
-    /** Executes responses for the message(s) requested earlier.
-        @param poResponse An array of request responses. */
-    method public void ExecuteResponse(input poResponse as IServiceResponse extent).
+        @param IMessageConsumer The object initiating this request that will be
+                                receive the responses as they are received by
+                                the Service Message Manager.
+        @param IServiceRequest An array of the request(s) to be executed.  */
+    method public void ExecuteRequest (input poMessageConsumer as IMessageConsumer,
+                                       input poRequests as IServiceRequest extent).
     
     /** Executes responses for the message requested earlier.
         
         @param poResponse A single response message */
     method public void ExecuteResponse(input poResponse as IServiceResponse).
+    
+    /** Executes responses for the message(s) requested earlier.
+        
+        @param poResponse An array of request responses. */
+    method public void ExecuteResponse(input poResponse as IServiceResponse extent).
+    
+    /** A synchronous/linear/connected service request call. Services a 
+        request in a synchronous manner. There are no no IMessageConsumers,
+        and that whoever calls this method knows how to deal with the responses.
+        
+        @param IServiceRequest An array of the request(s) to be executed.
+        @return IServiceResponse An array of response for the requests.     */
+    method public IServiceResponse extent ExecuteRequest(input poRequests as IServiceRequest extent).
     
 end interface.

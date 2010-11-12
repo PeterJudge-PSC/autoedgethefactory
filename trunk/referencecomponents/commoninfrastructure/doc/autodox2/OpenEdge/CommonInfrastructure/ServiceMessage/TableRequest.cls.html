@@ -62,8 +62,22 @@
         <code>
           <b>
             <a href='#property.FullPage'>FullPage</a>
+          </b> PROPERTY GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve full page when page position is at beginning or end of result-set
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.NumRemainingPages'>NumRemainingPages</a>
           </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of remaining pages to retrieve. If this is zero, then
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -76,8 +90,8 @@
         <code>
           <b>
             <a href='#property.PageContext'>PageContext</a>
-          </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b> PROPERTY GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context info/key for where to start appending page begin or end
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -90,8 +104,8 @@
         <code>
           <b>
             <a href='#property.PageSize'>PageSize</a>
-          </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b> PROPERTY GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of records to return per page or batch
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -104,22 +118,8 @@
         <code>
           <b>
             <a href='#property.RowKey'>RowKey</a>
-          </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/FindTypeEnum.cls.html" title="OpenEdge.Lang.FindTypeEnum" target="classFrame">FindTypeEnum</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.SearchType'>SearchType</a>
-          </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b> PROPERTY GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return page positioned to this key (i.e. resort request/ reopen )
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -132,8 +132,8 @@
         <code>
           <b>
             <a href='#property.TableName'>TableName</a>
-          </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b> PROPERTY GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected set - not changeable - provide with constructor
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -146,7 +146,7 @@
         <code>
           <b>
             <a href='#property.TableRequestType'>TableRequestType</a>
-          </b> PUBLIC GET SET 
+          </b> PROPERTY GET SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -184,7 +184,7 @@
           <b>
             <a href='#addsearch(character,character,openedge.lang.operatorenum,character,openedge.lang.datatypeenum,openedge.lang.joinenum)'> AddSearch</a>
           </b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add search expression  (need to be kept separate from filter.).
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -226,8 +226,20 @@
 				
     <a name='property.FullPage'><!-- --></a>
     <h3>FullPage</h3>
-    <code>LOGICAL PUBLIC GET SET </code>
+    <code>LOGICAL PROPERTY GET SET </code>
     <dl>
+      <dd>Retrieve full page when page position is at beginning or end of result-set <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NumRemainingPages'><!-- --></a>
+    <h3>NumRemainingPages</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>The number of remaining pages to retrieve. If this is zero, then <p> </dd>
+      <dd>all data has been retrieved. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -235,8 +247,9 @@
     <hr />
     <a name='property.PageContext'><!-- --></a>
     <h3>PageContext</h3>
-    <code>CHARACTER PUBLIC GET SET </code>
+    <code>CHARACTER PROPERTY GET SET </code>
     <dl>
+      <dd>context info/key for where to start appending page begin or end <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -244,8 +257,9 @@
     <hr />
     <a name='property.PageSize'><!-- --></a>
     <h3>PageSize</h3>
-    <code>INTEGER PUBLIC GET SET </code>
+    <code>INTEGER PROPERTY GET SET </code>
     <dl>
+      <dd>The number of records to return per page or batch <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -253,17 +267,10 @@
     <hr />
     <a name='property.RowKey'><!-- --></a>
     <h3>RowKey</h3>
-    <code>CHARACTER PUBLIC GET SET </code>
+    <code>CHARACTER PROPERTY GET SET </code>
     <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.SearchType'><!-- --></a>
-    <h3>SearchType</h3>
-    <code><a href="../../../OpenEdge/Lang/FindTypeEnum.cls.html" title="OpenEdge.Lang.FindTypeEnum" target="classFrame">FindTypeEnum</a> PUBLIC GET SET </code>
-    <dl>
+      <dd>Return page positioned to this key (i.e. resort request/ reopen ) <p> </dd>
+      <dd>Typically used with TableRequestTypeEnum:Position </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -271,8 +278,9 @@
     <hr />
     <a name='property.TableName'><!-- --></a>
     <h3>TableName</h3>
-    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <code>CHARACTER PROPERTY GET PRIVATE SET </code>
     <dl>
+      <dd>protected set - not changeable - provide with constructor <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -280,7 +288,7 @@
     <hr />
     <a name='property.TableRequestType'><!-- --></a>
     <h3>TableRequestType</h3>
-    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/TableRequestTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum" target="classFrame">TableRequestTypeEnum</a> PUBLIC GET SET </code>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/TableRequestTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum" target="classFrame">TableRequestTypeEnum</a> PROPERTY GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -311,6 +319,8 @@
       <b>AddSearch</b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, CHARACTER pcFieldValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
     </code>
     <dl>
+      <dd>Add search expression  (need to be kept separate from filter.). <p> </dd>
+      <dd>- Allthough this in theory could be any complex expression it normally only makes sense when the field(s) correspond(s) to the sort. - AddSearch can be refactored to have type-specific signatures, removing the need to pass a DataTypeEnum. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

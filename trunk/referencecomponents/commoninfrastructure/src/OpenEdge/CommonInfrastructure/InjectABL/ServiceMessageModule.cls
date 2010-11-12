@@ -17,25 +17,23 @@ class OpenEdge.CommonInfrastructure.InjectABL.ServiceMessageModule inherits Inje
 		super ().
 	end constructor.
 	
-	method override public void Load(  ):
+	method override public void Load():
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
-
-        /** The IServiceRequestBundle executes the requests; this execution may differ depending
-            on whether we're on the client (call to ServiceAdapter) or server (call to Business Component) */
-        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IServiceRequestBundle').
-        oBindingSyntax
-            :To('OpenEdge.CommonInfrastructure.Common.ServiceRequestBundle')
-            :InTransientScope()
-            .
         
         /** Standard service adapter binding on the client. This can be customised for specific services
             if needed. */
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
         oBindingSyntax
+            :Named('CustomerService')
             :To('OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter')
             :OnClientSession().
-        
+
+        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
+        oBindingSyntax
+            :Named('CustomerService')
+            :To('OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter')
+            :OnServerSession().
 	end method.
 	
 end class.

@@ -39,8 +39,8 @@ class OpenEdge.Lang.IOModeEnum final inherits EnumMember:
         IOModeEnum:Default = IOModeEnum:Input.
     end constructor.
 
-	constructor public IOModeEnum(input pcName as character):
-		super (input pcName).
-	end constructor.
+    constructor public IOModeEnum(input pcName as character):
+        super (input pcName).
+    end constructor.
     
 end class.

@@ -35,8 +35,8 @@ class OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum final inherits Enu
         ToolbarActionTypeEnum:Default = ToolbarActionTypeEnum:Event.
     end constructor.
 
-	constructor public ToolbarActionTypeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public ToolbarActionTypeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
             
 end class.

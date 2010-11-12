@@ -14,10 +14,10 @@ using OpenEdge.Lang.DateTimeAddIntervalEnum.
 
 class OpenEdge.Core.InjectABL.KernelSettings:
     define static public property NO_PRUNE_INTERVAL as integer init -1 no-undo get. private set.
-        
+    
     define public property CachePruningInterval as integer no-undo get. set.    
     define public property CachePruningUnit as DateTimeAddIntervalEnum no-undo get. set.
-    
+        
     constructor public KernelSettings():
         CachePruningInterval = KernelSettings:NO_PRUNE_INTERVAL.
         CachePruningUnit = DateTimeAddIntervalEnum:Default.

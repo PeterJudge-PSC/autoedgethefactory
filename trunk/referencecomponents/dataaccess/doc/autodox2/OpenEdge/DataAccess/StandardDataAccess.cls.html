@@ -128,7 +128,7 @@
           <b>
             <a href='#addbuffercallbacks(handle,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'> AddBufferCallbacks</a>
           </b>(HANDLE phBuffer, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add ABL callbacks for the action.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add ABL callbacks to a buffer handle for an action.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -142,7 +142,7 @@
           <b>
             <a href='#adddatasetcallbacks(handle,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'> AddDatasetCallbacks</a>
           </b>(HANDLE phDataset, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add ABL callbacks to a buffer handle for an action.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -168,9 +168,9 @@
       <td>
         <code>
           <b>
-            <a href='#fetchdata(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> FetchData</a>
-          </b>(<a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#fetchdata()'> FetchData</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch/retrieve data from the datasource, and populate the business entity with
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -182,8 +182,8 @@
       <td>
         <code>
           <b>
-            <a href='#fetchdata(openedge.lang.collections.icollection)'> FetchData</a>
-          </b>(<a href="../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> poDataSources)
+            <a href='#fetchdata(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> FetchData</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -226,7 +226,7 @@
           <b>
             <a href='#removeallcallbacks(handle,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'> RemoveAllCallbacks</a>
           </b>(HANDLE phDatasetHandle, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes all the callbacks on a dataset and its buffers, for a given action.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -240,7 +240,7 @@
           <b>
             <a href='#removebuffercallbacks(handle,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'> RemoveBufferCallbacks</a>
           </b>(HANDLE phBuffer, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove ABL callbacks from a buffer handle for an action.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -254,7 +254,7 @@
           <b>
             <a href='#removedatasetcallbacks(handle,openedge.commoninfrastructure.servicemessage.servicemessageactionenum)'> RemoveDatasetCallbacks</a>
           </b>(HANDLE phDataset, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove ABL callbacks from a dataset handle for an action.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -333,9 +333,13 @@
       <b>AddBufferCallbacks</b>(HANDLE phBuffer, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
     </code>
     <dl>
-      <dd>Add ABL callbacks for the action. <p> </dd>
+      <dd>Add ABL callbacks to a buffer handle for an action. <p> </dd>
       <dd>
         <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The buffer on which to attach the callback<br/>ServiceMessageActionEnum - The action being performed.<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
@@ -350,13 +354,17 @@
       <b>AddDatasetCallbacks</b>(HANDLE phDataset, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
     </code>
     <dl>
-      <dd>General <p> </dd>
+      <dd>Add ABL callbacks to a buffer handle for an action. <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The dataset on which to attach the callback<br/>ServiceMessageActionEnum - The action being performed.<br/></dd>
+          <dt>
             <b>Returns:</b>
           </dt>
-          <dd>Logical value indicating whether there are any callbacks set for the ProDataSet</dd>
+          <dd>Logical value indicating whether there are any callbacks set for the buffer</dd>
         </dl>
       </dd>
     </dl>
@@ -372,6 +380,19 @@
       </dd>
     </dl>
     <hr />
+    <a name='fetchdata()'><!-- --></a>
+    <h3>FetchData</h3>
+    <code>PROTECTED  VOID
+      <b>FetchData</b>()
+    </code>
+    <dl>
+      <dd>Fetch/retrieve data from the datasource, and populate the business entity with <p> </dd>
+      <dd>it. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='fetchdata(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
     <h3>FetchData</h3>
     <code>PUBLIC  VOID
@@ -380,22 +401,6 @@
     <dl>
       <dd>
         <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='fetchdata(openedge.lang.collections.icollection)'><!-- --></a>
-    <h3>FetchData</h3>
-    <code>PROTECTED  VOID
-      <b>FetchData</b>(<a href="../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> poDataSources)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>ICollection - The datasources being used for this request<br/></dd>
-        </dl>
       </dd>
     </dl>
     <hr />
@@ -427,8 +432,14 @@
       <b>RemoveAllCallbacks</b>(HANDLE phDatasetHandle, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
     </code>
     <dl>
+      <dd>Removes all the callbacks on a dataset and its buffers, for a given action. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The dataset handle for which to remove the callbacks.<br/>ServiceMessageActionEnum - The action being performed.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -438,8 +449,14 @@
       <b>RemoveBufferCallbacks</b>(HANDLE phBuffer, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
     </code>
     <dl>
+      <dd>Remove ABL callbacks from a buffer handle for an action. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The dataset from which to remove the callback<br/>ServiceMessageActionEnum - The action being performed.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -449,8 +466,14 @@
       <b>RemoveDatasetCallbacks</b>(HANDLE phDataset, <a href="../../OpenEdge/CommonInfrastructure/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
     </code>
     <dl>
+      <dd>Remove ABL callbacks from a dataset handle for an action. <p> </dd>
       <dd>
-        <dl><!-- --></dl>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The dataset from which to remove the callback<br/>ServiceMessageActionEnum - The action being performed.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
