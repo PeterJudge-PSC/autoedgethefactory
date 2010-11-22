@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ObjectInputStream
     Purpose     : 
     Syntax      : 
@@ -10,7 +10,7 @@
                     have  Read<type>Array() methods that return the valid type.
                   * For the protocol definition, see 
                     https://wiki.progress.com/display/OEBP/Object+Serialization+Protocol
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.Util.ObjectInputStream.
@@ -21,6 +21,7 @@ using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.Collections.ObjectStack.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.IOModeEnum.
+using OpenEdge.Lang.EnumMember.
 
 using Progress.Lang.ParameterList.
 using Progress.Lang.Error.
@@ -186,47 +187,60 @@ class OpenEdge.Core.Util.ObjectInputStream:
         define variable iRepositionTo as integer no-undo.
         define variable lInvoke as logical no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_OBJECT).
-        
-        /* The TC_OBJECT byte is always followed by one of
-           - TC_METADATA: contains class desc and values (if the object is serializable/externalizable
-           - TC_NULL: invalid object reference
-           - TC_REFERENCE: a pointer (typically backwards) to a previously-define TC_OBJECT location.
-         */
+        /* The first Byte must be one of TC_OBJECT, TC_ENUM or TC_NULL. */        
         case ReadByte():
-            when ObjectStreamConstants:TC_REFERENCE then
-            do:
-                iRepositionTo = ReadInt().
-                if iRepositionTo eq ? then
-                    ThrowError(ObjectInputError:VALUE,
-                                   DataTypeEnum:Integer:ToString(),
-                                   miCursor - ObjectStreamConstants:SIZE_LONG).
-                
-                oObj = GetReference(ObjectStreamConstants:REFTYPE_OBJECT,
-                                    iRepositionTo + ObjectStreamConstants:SIZE_BYTE).
-                if not valid-object(oObj) then
-                    ThrowError(ObjectInputError:CLASS_REFERENCE,
-                                   'reference',
-                                   miCursor - ObjectStreamConstants:SIZE_LONG).
-            end.
-            when ObjectStreamConstants:TC_METADATA then
-                /* Now we have a pointer to a TC_METADATA byte . We think.
-                   Go to the reference position, and then back one, since we want 
-                   to make double-sure that we have the TC_METADATA.
-                   
-                   We're going to re-read this byte (yeah, wasteful, but
-                   makes coding more consistent). */
-                assign miCursor = miCursor - ObjectStreamConstants:SIZE_BYTE
-                       oObj = ReadObjectInternal().
             when ObjectStreamConstants:TC_NULL then
-                assign oObj = ?.
+                assign oObj = ?.            
+            when ObjectStreamConstants:TC_ENUM then
+            do:
+                miCursor = miCursor - ObjectStreamConstants:SIZE_BYTE.
+                AddWarning(ObjectInputError:API_CALL,
+                           ObjectStreamConstants:EXTERNALIZABLE_METHOD_READENUM,
+                           miCursor).
+                oObj = ReadEnum().
+            end.    /* enum */
+            when ObjectStreamConstants:TC_OBJECT then
+            /* The TC_OBJECT byte is always followed by one of
+               - TC_METADATA: contains class desc and values (if the object is serializable/externalizable)
+               - TC_REFERENCE: a pointer (typically backwards) to a previously-defined TC_OBJECT location. */
+            case ReadByte():
+                when ObjectStreamConstants:TC_REFERENCE then
+                do:
+                    iRepositionTo = ReadInt().
+                    if iRepositionTo eq ? then
+                        ThrowError(ObjectInputError:VALUE,
+                                       DataTypeEnum:Integer:ToString(),
+                                       miCursor - ObjectStreamConstants:SIZE_LONG).
+                    
+                    oObj = GetReference(ObjectStreamConstants:REFTYPE_OBJECT,
+                                        iRepositionTo + ObjectStreamConstants:SIZE_BYTE).
+                    if not valid-object(oObj) then
+                        ThrowError(ObjectInputError:CLASS_REFERENCE,
+                                       'reference',
+                                       miCursor - ObjectStreamConstants:SIZE_LONG).
+                end.
+                when ObjectStreamConstants:TC_METADATA then
+                    /* Now we have a pointer to a TC_METADATA byte . We think.
+                       Go to the reference position, and then back one, since we want 
+                       to make double-sure that we have the TC_METADATA.
+                       
+                       We're going to re-read this byte (yeah, wasteful, but
+                       makes coding more consistent). */
+                    assign miCursor = miCursor - ObjectStreamConstants:SIZE_BYTE
+                           oObj = ReadObjectInternal().
+                otherwise
+                    ThrowError(ObjectInputError:BYTE,
+                                   ObjectStreamConstants:ToString(ObjectStreamConstants:TC_METADATA)
+                                   + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_REFERENCE),
+                                   miCursor - ObjectStreamConstants:SIZE_BYTE).
+            end case.   /* byte following the TC_OBJECT byte */
             otherwise
                 ThrowError(ObjectInputError:BYTE,
-                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_METADATA)
-                               + ', ' + ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
-                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_REFERENCE),
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ', ' + ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ENUM)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_OBJECT),
                                miCursor - ObjectStreamConstants:SIZE_BYTE).
-        end case.
+        end case.   /* first byte TC_ENUM or TC_OBJECT */
         
         return oObj.
     end method.
@@ -404,6 +418,49 @@ class OpenEdge.Core.Util.ObjectInputStream:
         moCurrentType = ?.                          
     end method.
     
+    method public EnumMember ReadEnum():
+        define variable oEnum as EnumMember no-undo.
+        define variable iValue as integer no-undo.
+        define variable cName as character no-undo.
+        define variable cType as character no-undo.
+        define variable iPos as integer no-undo.
+        
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                oEnum = ?.
+            when ObjectStreamConstants:TC_ENUM then
+            do:
+                /* keep in case of error */
+                iPos = miCursor - ObjectStreamConstants:SIZE_BYTE.
+                
+                cType = ReadChar().
+                iValue = ReadInt().
+                cName = ReadChar().
+                
+                /* value trumps name */
+                if iValue ne ? then
+                    oEnum = cast(dynamic-invoke(cType, 'EnumFromValue', iValue), EnumMember) no-error.
+                else
+                if cName ne '' and cName ne ? then
+                    oEnum = cast(dynamic-invoke(cType, 'EnumFromString', cName), EnumMember) no-error.
+                
+                if not valid-object(oEnum) then
+                    ThrowError(ObjectInputError:VALUE,
+                               substitute('valid EnumMember from Type &1, Name &2, Value &3 and EnumFromString() or EnumFromValue() method',
+                                           cType, cName, iValue),
+                               iPos).
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_METADATA)
+                               + ', ' + ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ENUM),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
+        
+        return oEnum. 
+    end method.
+    
     /**  READ ABL PRIMITIVE DATA TYPES **/
     method public char ReadChar():
         return ReadString().
@@ -414,16 +471,26 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var cVal as char extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-
-        iExtent = ReadByte().
-        extent(cVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            cVal[iLoop] = ReadChar().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
-        
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(cVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    cVal[iLoop] = ReadChar().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
+                
         return cVal.
     end method.
         
@@ -436,15 +503,25 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var cVal as longchar extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-            
-        iExtent = ReadByte().
-        extent(cVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            cVal[iLoop] = ReadLongChar().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(cVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    cVal[iLoop] = ReadChar().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
                 
         return cVal.
     end method.
@@ -469,15 +546,25 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var iVal as int extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-        
-        iExtent = ReadByte().
-        extent(iVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            iVal[iLoop] = ReadInt().
-        end.
-
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(iVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    iVal[iLoop] = ReadInt().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
 
         return iVal.
     end method.
@@ -502,16 +589,26 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var iVal as int64 extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-        
-        iExtent = ReadByte().
-        extent(iVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            iVal[iLoop] = ReadInt64().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
-        
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(iVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    iVal[iLoop] = ReadInt64().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
+
         return iVal.
     end method.
     
@@ -528,18 +625,28 @@ class OpenEdge.Core.Util.ObjectInputStream:
     method public dec extent ReadDecimalArray():
         def var iExtent as int no-undo.
         def var iLoop as int no-undo.
-        def var dVal as dec extent no-undo.
+        def var dVal as decimal extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-
-        iExtent = ReadByte().
-        extent(dVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            dVal[iLoop] = ReadDecimal().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(dVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    dVal[iLoop] = ReadDecimal().
+                end.
                 
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
+
         return dVal.
     end method.
     
@@ -563,16 +670,26 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var tVal as date extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-        
-        iExtent = ReadByte().
-        extent(tVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            tVal[iLoop] = ReadDate().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
-        
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(tVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    tVal[iLoop] = ReadDate().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
+
         return tVal.
     end method.
 
@@ -596,15 +713,25 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var tVal as datetime extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-        
-        iExtent = ReadByte().
-        extent(tVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            tVal[iLoop] = ReadDateTime().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(tVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    tVal[iLoop] = ReadDateTime().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
                 
         return tVal.
     end method.
@@ -629,15 +756,25 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var tVal as datetime-tz extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-        
-        iExtent = ReadByte().
-        extent(tVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            tVal[iLoop] = ReadDateTimeTz().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(tVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    tVal[iLoop] = ReadDateTimeTz().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
                 
         return tVal.
     end method.
@@ -662,15 +799,25 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var lVal as logical extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-        
-        iExtent = ReadByte().
-        extent(lVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            lVal[iLoop] = ReadLogical().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(lVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    lVal[iLoop] = ReadLogical().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
         
         return lVal.
     end method.
@@ -684,15 +831,25 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var rVal as rowid extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(rVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    rVal[iLoop] = ReadRowid().
+                end.
                 
-        iExtent = ReadByte().
-        extent(rVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            rVal[iLoop] = ReadRowid().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
                     
         return rVal.
     end method.
@@ -709,15 +866,25 @@ class OpenEdge.Core.Util.ObjectInputStream:
         def var iLoop as int no-undo.
         def var rVal as recid extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-
-        iExtent = ReadByte().
-        extent(rVal) = iExtent.
-        do iLoop = 1 to iExtent:
-            rVal[iLoop] = ReadRecid().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(rVal) = iExtent.
+                do iLoop = 1 to iExtent:
+                    rVal[iLoop] = ReadRecid().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
         
         return rVal.
     end method.
@@ -1191,11 +1358,12 @@ class OpenEdge.Core.Util.ObjectInputStream:
     end method.
     
     method protected void AddWarning(pcType as char, pcParam1 as char, piPosition as int ):
-        message 
-        pcType skip
-        pcParam1 skip
-        piPosition
-        view-as alert-box.    
+        message
+            pcType skip
+            pcParam1 skip
+            piPosition
+        view-as alert-box warning.
+        
         @todo(task="implement").
     end method.
     
