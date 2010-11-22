@@ -15,13 +15,14 @@ using Progress.Lang.Error.
 
 class OpenEdge.Core.System.ObjectInputError inherits ApplicationError:    
     define static public property TYPE as character no-undo init 'type' get.
-    define static public property BYTE as character no-undo init 'byte' get.    
+    define static public property BYTE as character no-undo init 'byte' get.
     define static public property STREAM_VERSION as character no-undo init 'stream version' get.
     define static public property BYTE_ORDER as character no-undo init 'byte order' get.
     define static public property MD5_VALUE as character no-undo init 'r-code MD5 value' get.
     define static public property VALUE as character no-undo init 'value' get.
     define static public property CLASS_REFERENCE as character no-undo init 'class reference' get.
     define static public property ABL_VERSION as character no-undo init 'ABL version' get.
+    define static public property API_CALL as character no-undo init 'API call' get.
     
     define override protected property ErrorTitle as character init 'Object Input Error' no-undo get. set. 
     define override protected property ErrorText as character init 'Invalid &1 encountered. Expecting &2 at position &3' no-undo get. set.
