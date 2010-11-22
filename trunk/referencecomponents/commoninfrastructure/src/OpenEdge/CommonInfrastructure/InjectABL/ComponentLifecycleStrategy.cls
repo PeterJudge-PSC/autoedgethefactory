@@ -9,10 +9,13 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+
 using OpenEdge.Core.InjectABL.Lifecycle.LifecycleStrategy.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
-using OpenEdge.Lang.Assert.
 
+using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -22,22 +25,29 @@ class OpenEdge.CommonInfrastructure.InjectABL.ComponentLifecycleStrategy inherit
     end constructor.
     
     method override public void Activate(poContext as ILifecycleContext, poInstance as Object):
-        Assert:ArgumentIsType(poInstance, Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponent')).
+        define variable lInvokeCreate as logical no-undo.
+        define variable lInvokeInit as logical no-undo.
         
         super:Activate(poContext, poInstance).
         
-        dynamic-invoke(poInstance, 'CreateComponent').
+        /* IServiceManager is a special type of compoent. */
+        lInvokeCreate = type-of(poInstance, IServiceManager) or
+                        type-of(poInstance, IComponent).
         
-        @todo(task="question", action="does this happen here or elsewhere?").
-        dynamic-invoke(poInstance, 'Initialize').
+        lInvokeInit = type-of(poInstance, IComponent).
+        
+        if lInvokeCreate then
+            dynamic-invoke(poInstance, 'CreateComponent').
+
+        if lInvokeInit then 
+            dynamic-invoke(poInstance, 'Initialize').
     end method.
     
     method override public void Deactivate(poContext as ILifecycleContext, poInstance as Object):
-        Assert:ArgumentIsType(poInstance, Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponent')).
-        
         super:Deactivate(poContext, poInstance).
         
-        dynamic-invoke(poInstance, 'DestroyComponent').
+        if type-of(poInstance, IComponent) then
+            dynamic-invoke(poInstance, 'DestroyComponent').
     end method.
     
 end class.

@@ -1,11 +1,17 @@
 /** ------------------------------------------------------------------------
     File        : ServiceManager
-    Purpose     : 
+    Purpose     : The ServiceManager provides access into a session's services.
+                  Services are things that are exposed internally to the application
+                  - such as a ContextManager - and also externally such as to a WebService.
+                  These services can be composed of Components (and are in fact specialised
+                  Components).
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Thu Feb 18 14:41:08 EST 2010
-    Notes       :  
+    Notes       : * The ServiceManager bootstraps the session.
+                  * The ServiceManager is a special type, and is not itself a service
+                    or component (even though other services/components usually are).               
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
@@ -26,18 +32,17 @@ using OpenEdge.CommonInfrastructure.Common.IManager.
 
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
 using OpenEdge.Core.InjectABL.Lifecycle.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext. 
 using OpenEdge.Core.InjectABL.IKernel.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
-using OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument.
 
 using OpenEdge.Core.System.NotFoundError.
 using OpenEdge.Lang.Collections.IIterator.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
+class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         implements IServiceManager, IManager:
     
     define private variable moAppStart as IService no-undo.
@@ -51,16 +56,11 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         index idx2 Instance
         index idx3 Service.
     
-    /** Dependency injection/Inversion of Control container. */
+    /** InjectABL Dependency injection/Inversion of Control container. */
     define public property Kernel as IKernel no-undo get. private set.
     
     constructor public ServiceManager(input poKernel as IKernel):
-        super (this-object,       /* OpenEdge.CommonInfrastructure.Common.IServiceManager */
-               new ComponentInfo(
-                  Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'),
-                  this-object:GetClass():TypeName,
-                  ServiceTypeEnum:Manager,
-                  true)).
+        super().
         
         this-object:Kernel = poKernel.
     end constructor.
@@ -70,6 +70,24 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         
         this-object:Kernel = ?.
     end destructor.
+    
+    /** General creation code; constructors should only be used for property setting, 
+        not for any more complex wiring.  */
+    method public void CreateComponent():
+    end method.
+    
+    /** Not InitializeComponent, since the Gui for .NET uses that name already, 
+       as a PRIVATE member, and we want to have only 1 IComponent interface. */
+    method public void Initialize():
+        StartServices().        
+        moAppStart = StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IApplicationStart')).
+    end method.
+    
+    /** General destruction code that can be called outside of the destructor
+        if needed (but will also be called from within the dtor). */
+    method public void DestroyComponent():
+        StopServices().
+    end method.
     
     method protected logical RegisterService(input poServiceType as ServiceTypeEnum,
                                              input pcServiceName as character):
@@ -89,19 +107,6 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         end.
         
         return lNew.
-    end method.
-    
-    /* This is the DestroyComponent() method for this component: the ServiceManager */
-    method override public void DestroyComponent():
-        StopService(moAppStart).
-        
-        StopServices().
-    end method.
-    
-    method override public void Initialize():
-        StartServices().
-        
-        moAppStart = StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IApplicationStart')).
     end method.
     
     method public void ResetManager():
@@ -150,6 +155,9 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
     
     method public void StopServices():
         define buffer lbService for Service.
+        
+        /* first stop the appstart object*/
+        StopService(moAppStart).
         
         for each lbService:
             StopService(cast(lbService.Instance, IService)).
@@ -216,7 +224,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
     /** Stops a running service.
         @param poComponent A running component instance */
     method public void StopService(input poServiceInstance as IService):
-        StopComponent(cast(poServiceInstance, IComponent)).
+        if valid-object(poServiceInstance) then
+            StopComponent(cast(poServiceInstance, IComponent)).
     end method.
     
     method protected IComponent StartComponent(input poComponent as class Class,
@@ -232,7 +241,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager inherits Service
         if valid-object(poComponentInstance) then
         do:
             lReleased = Kernel:Release(poComponentInstance).
-        
+            
             if not lReleased then
                 poComponentInstance:DestroyComponent().
         end.

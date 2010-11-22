@@ -27,9 +27,6 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.Service.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
-using OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument.
-
 using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.IIterator.

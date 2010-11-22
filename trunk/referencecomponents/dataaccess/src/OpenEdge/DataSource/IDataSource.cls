@@ -7,42 +7,40 @@
     Created     : Wed Feb 10 01:30:45 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
+using OpenEdge.DataSource.IDataSource.
 using OpenEdge.DataSource.DataSourceEventArgs.
+using OpenEdge.DataAccess.IDataAccess.  
+
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.FillModeEnum.
 using Progress.Lang.Object.
 
-interface OpenEdge.DataSource.IDataSource: /* inherits IQuery */
-
+interface OpenEdge.DataSource.IDataSource:
+    /** The default Page or batch size for this datasource. Can be overridden by the TableRequest in Prepare(). */ 
+    define property PageSize as integer no-undo get. set.
+    
+    /** The default FillMode for fetch requests. Can be overridden by the TableRequest in Prepare(). */
+    define property FillMode as FillModeEnum no-undo get. set.
+    
     /** DataSource Fetch/Fill events. These map to ProDataSet callbacks, although the events below are only fired
        in cases where PerformFetch() is called. This is typically not the case for ProDataSets, since the PDS:Fill()
        method will be called from the DataAccess, rather than the Datasource. */
-    define public event BeforeFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event BeforeRowFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterRowFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeRowFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterRowFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
     /** DataSource Save/Commit events */
-    define public event BeforeSaveTransaction signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event BeforeSave            signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterSave             signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterSaveTransaction  signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    
-    /** The default Page or batch size for this datasource. Can be overridden
-        by the page size on the table request. */
-    define property PageSize as integer no-undo get. set.
-    
-    /** The default Fill mode for fetch requests. */
-    define property FillMode as FillModeEnum no-undo get. set.
-    
-    /** Prepare with query, batchsize and more.
-
-        @param ITableRequest Parameters for the fetch (query modifications, page size etc). */
-    method public void Prepare(input poRequest as ITableRequest).
+    define public event BeforeSaveTransaction signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeSave            signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterSave             signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterSaveTransaction  signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
     /** The SetDataTarget() method is called by the DataAccess object, to specify 
         the target for the DataSource's operations (usually the fill/fetch). 
@@ -65,7 +63,7 @@ interface OpenEdge.DataSource.IDataSource: /* inherits IQuery */
         will be buffers (possibly datasets).
         
         An exception will be thrown if the handle has a type of anything other than 
-        'buffer' or 'dataset'.  
+        'buffer' or 'dataset'.
         
         @param handle A buffer or dataset handle that is the data target. */
     method public void SetDataTarget(input phData as handle).
@@ -80,6 +78,18 @@ interface OpenEdge.DataSource.IDataSource: /* inherits IQuery */
         @return longchar The value of the datatarget property (not necessarily its contents).
      */
     method public longchar GetDataTarget().
+    
+    /** Prepare with query, batchsize and more.
+        
+        @param ServiceMessageActionEnum The action that we're preparing the datasource for. 
+               We may have different actions based on whether this is a Fetch or a Save.
+        @param ITableRequest Parameters for the fetch (query modifications, page size etc).
+        @param IDataAccess The DataAccess object making this request. The DAO can be used to
+               resolve table- or field name mappings (from the Business Entity names to the 
+               Data Source names.           */
+    method public void Prepare(input poAction as ServiceMessageActionEnum,
+                               input poRequest as ITableRequest,
+                               input poDAO as IDataAccess).
     
     /** Perform fetch: populate the previously-passed buffer from the
         physical data store.

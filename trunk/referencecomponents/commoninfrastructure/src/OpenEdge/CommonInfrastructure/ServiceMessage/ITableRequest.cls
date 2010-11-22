@@ -30,13 +30,15 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherit
     define public property NumRemainingPages as integer no-undo get. set.
     
     define property TableRequestType as TableRequestTypeEnum no-undo get. set.
-       
+    
     /** context info/key for where to start appending page begin or end */
     define property PageContext as char extent no-undo get. set.
     
     /** Return page positioned to this key (i.e. resort request/ reopen ) 
-        Typically used with TableRequestTypeEnum:Position */ 
+        Typically used with TableRequestTypeEnum:Position */                
     define property RowKey as char extent no-undo get. set.
+    
+    @todo(task="question", action="no fill mode on tablerequest? ").
     
     /** Add search expression  (need to be kept separate from filter.). 
        - Allthough this in theory could be any complex expression it normally 

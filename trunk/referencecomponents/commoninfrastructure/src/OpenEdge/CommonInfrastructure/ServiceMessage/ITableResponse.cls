@@ -8,18 +8,20 @@
     Notes       : 
   ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
+using OpenEdge.Lang.Collections.IMap.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse:
     
     /** (mandatory) The name of the table */  
     define property TableName as char no-undo get.
     
-    /** Whether the service request resulted in an error or not.
-        Defaults to false.  */
+    /** Whether the service request resulted in an error or not. */
     define public property HasError as logical no-undo get. set.
     
-    /** The error text associated with the error, if any. */
-    define public property ErrorText as character no-undo get. set.
+    /** The error texts associated with the request, if any.
+        There's an entry in the map for each row that has an error,
+        keyed on the RowKey. */
+    define public property ErrorText as IMap no-undo get.
     
     /** The ITableContext (page size retrieved, etc) for this response, if any.
         Typically only Fetch actions will have one of these; Save not so much.  */

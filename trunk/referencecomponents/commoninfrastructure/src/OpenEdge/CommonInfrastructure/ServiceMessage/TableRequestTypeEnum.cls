@@ -30,7 +30,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum final in
     
     /** No Operation. We do nothing for this table. This state may be set when the client has all
         records, or for some other reason. */
-    define public static property NoOp     as TableRequestTypeEnum no-undo get. private set.
+    define public static property None     as TableRequestTypeEnum no-undo get. private set.
     
     constructor static TableRequestTypeEnum():
          TableRequestTypeEnum:First    = new TableRequestTypeEnum('first').
@@ -40,11 +40,28 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum final in
          TableRequestTypeEnum:Position = new TableRequestTypeEnum('position').        
          TableRequestTypeEnum:Search   = new TableRequestTypeEnum('search').
          TableRequestTypeEnum:All      = new TableRequestTypeEnum('all').
-         TableRequestTypeEnum:NoOp     = new TableRequestTypeEnum('NoOp').
+         TableRequestTypeEnum:None     = new TableRequestTypeEnum('none').
     end constructor.
-
+    
     constructor public TableRequestTypeEnum ( input pcName as character ):
         super (input pcName).
     end constructor.
+    
+    method static public TableRequestTypeEnum EnumFromString(input pcName as character):
+        define variable oEnum as TableRequestTypeEnum no-undo.
+        
+        case pcName:
+            when TableRequestTypeEnum:First:ToString() then oEnum = TableRequestTypeEnum:First.
+            when TableRequestTypeEnum:Next:ToString() then oEnum = TableRequestTypeEnum:Next.
+            when TableRequestTypeEnum:Prev:ToString() then oEnum = TableRequestTypeEnum:Prev.
+            when TableRequestTypeEnum:Last:ToString() then oEnum = TableRequestTypeEnum:Last.
+            when TableRequestTypeEnum:Position:ToString() then oEnum = TableRequestTypeEnum:Position.
+            when TableRequestTypeEnum:Search:ToString() then oEnum = TableRequestTypeEnum:Search.
+            when TableRequestTypeEnum:All:ToString() then oEnum = TableRequestTypeEnum:All.
+            when TableRequestTypeEnum:None:ToString() then oEnum = TableRequestTypeEnum:None.            
+        end case.
+        
+        return oEnum.
+    end method.
         
 end class.
