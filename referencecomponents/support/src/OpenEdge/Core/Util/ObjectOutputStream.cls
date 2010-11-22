@@ -20,6 +20,7 @@ using OpenEdge.Lang.Collections.ObjectStack.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.IOModeEnum.
 using OpenEdge.Lang.CompareStrengthEnum.
+using OpenEdge.Lang.EnumMember.
 
 using Progress.Lang.ParameterList.
 using Progress.Lang.Error.
@@ -27,6 +28,7 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.Core.Util.ObjectOutputStream:
+    
     define private variable miCursor       as integer               no-undo.
     define private variable mrStreamBuffer as raw                   no-undo.
     define private variable moTopLevel     as Object                no-undo.
@@ -173,13 +175,20 @@ class OpenEdge.Core.Util.ObjectOutputStream:
             moTopLevel = poIn.
         end.
         
-        WriteByte(ObjectStreamConstants:TC_OBJECT).
-        
         /* The first byte folling TC_OBJECT will always be another byte marker.
            It should be either TC_NULL, TC_REFERENCE or TC_METADATA, depending
            on circumstance. */
         if valid-object(poIn) then
         do:
+            /* Enumerations (EnumMember) must be written using WriteEnum() rather than
+               WriteObject. */
+            if type-of(poIn, EnumMember) then
+            do:
+                WriteEnum(cast(poIn, EnumMember)).
+                return.
+            end.
+            
+            WriteByte(ObjectStreamConstants:TC_OBJECT).
             if poIn eq moTopLevel then
                 lWriteDetails = true.
             else
@@ -219,7 +228,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         end.    /* valid-object */
         else
             WriteByte(ObjectStreamConstants:TC_NULL).
-    end method.
+    end method.    
     
     method protected void InvokeWriteObject(poIn as Object):
         define variable oType as class Class no-undo.
@@ -319,16 +328,37 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteObjectArray(pIn as Object extent):        
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
         
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteObject(pIn[i]).
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to extent(iMax):
+                WriteObject(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
+    end method.
+    
+    method public void WriteEnum(input poMember as EnumMember):
+        ValidateStream().
+        
+        if valid-object(poMember) then
+        do:
+            WriteByte(ObjectStreamConstants:TC_ENUM).
+            WriteChar(poMember:GetClass():TypeName).
+            WriteInt(poMember:Value).
+            WriteChar(poMember:Name).
+        end.
+        else
+            WriteByte(ObjectStreamConstants:TC_NULL).
     end method.
     
     method public void WriteChar(pc as char):
@@ -337,32 +367,48 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
         
     method public void WriteCharArray(pIn as character extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteChar(pIn[i]).
-        end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
-    end method.
         
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteChar(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
+        end.
+    end method.
+    
     method public void WriteLongchar(pc as longchar):
         ValidateStream().
         WriteString(pc).
     end method.
     
     method public void WriteLongcharArray(pIn as longchar extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteLongchar(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteLongchar(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
     
     method public void WriteInt(pi as int):
@@ -378,15 +424,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteIntArray(pIn as integer extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteInt(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteInt(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
     
     method public void WriteInt64(pi as int64):
@@ -401,15 +455,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
             
     method public void WriteInt64Array(pIn as int64 extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteInt64(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteInt64(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
     
     method public void WriteDecimal(pd as dec):
@@ -430,15 +492,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteDecimalArray(pIn as dec extent):
-        define variable i as integer no-undo.
-        
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteDecimal(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteDecimal(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
     
     method public void WriteDate(pt as date):
@@ -453,19 +523,28 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
         
     method public void WriteDateArray(pIn as date extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteDate(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteDate(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
 
     method public void WriteDateTime(pt as datetime):
         ValidateStream().
+        
         if pt eq ? then
             WriteByte(ObjectStreamConstants:TC_NULL).
         else
@@ -477,19 +556,28 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteDateTimeArray(pIn as datetime extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteDateTime(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteDateTime(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
     
     method public void WriteDateTimeTz(pt as datetime-tz):
         ValidateStream().
+        
         if pt eq ? then
             WriteByte(ObjectStreamConstants:TC_NULL).
         else
@@ -502,15 +590,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteDateTimeTzArray(pIn as datetime-tz extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteDateTimeTz(pIn[i]).
+    
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteDateTimeTz(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
     
     method public void WriteLogical(pl as log):
@@ -525,15 +621,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteLogicalArray(pIn as log extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteLogical(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteLogical(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
 
     method public void WriteRowid(pr as rowid):
@@ -542,15 +646,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteRowidArray(pIn as rowid extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteRowid(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteRowid(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
 
     method public void WriteRecid(pr as recid):
@@ -559,15 +671,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteRecidArray(pIn as recid extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteRecid(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iMax eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).        
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteRecid(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
         
     method protected void WriteDatasetDesc(phIn as handle):
@@ -770,7 +890,12 @@ class OpenEdge.Core.Util.ObjectOutputStream:
                 when DataTypeEnum:Class or 
                 when DataTypeEnum:ProgressLangObject then
                     if hField:extent eq 0 then
-                        WriteObject(hField:buffer-value).
+                    do:
+                        if type-of(hField:buffer-value, EnumMember) then
+                            WriteEnum(hField:buffer-value).
+                        else
+                            WriteObject(hField:buffer-value).
+                    end.
                     else
                         WriteObjectArray(hField:buffer-value).
                 when DataTypeEnum:Recid then
@@ -820,6 +945,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         define variable hBuffer as handle no-undo.
         
         ValidateStream().
+        
         if not valid-handle(phIn) then
             WriteByte(ObjectStreamConstants:TC_NULL).
         else
@@ -870,15 +996,23 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     end method.
     
     method public void WriteHandleArray(pIn as handle extent):
-        define variable i as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
         ValidateStream().
-        WriteByte(ObjectStreamConstants:TC_ARRAY).
-        WriteByte(extent(pIn)).
-        do i = 1 to extent(pIn):
-            WriteHandle(pIn[i]).
+        
+        iMax = extent(pIn).
+        if iLoop eq ? then
+            WriteByte(ObjectStreamConstants:TC_NULL).
+        else
+        do:
+            WriteByte(ObjectStreamConstants:TC_ARRAY).
+            WriteByte(iMax).
+            do iLoop = 1 to iMax:
+                WriteHandle(pIn[iLoop]).
+            end.
+            WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
         end.
-        WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
     end method.
     
     /* Protected Write*() methods below do the actual writes to the stream. */
