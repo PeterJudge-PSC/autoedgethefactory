@@ -44,6 +44,7 @@ class OpenEdge.Core.System.ObjectStreamConstants final:
 /*    define public static property /* BYTE */ TC_LONGSTRING         as integer init 124     no-undo get.*/
     define public static property /* BYTE */ TC_NULL               as integer init 112     no-undo get.
     define public static property /* BYTE */ TC_OBJECT             as integer init 115     no-undo get.
+    define public static property /* BYTE */ TC_ENUM               as integer init 116     no-undo get.
     define public static property /* BYTE */ TC_REFERENCE          as integer init 113     no-undo get.
 /*    define public static property /* BYTE */ TC_STRING             as integer init 116     no-undo get.*/
     define public static property /* BYTE */ TC_TABLE              as integer init 122     no-undo get.
@@ -62,13 +63,15 @@ class OpenEdge.Core.System.ObjectStreamConstants final:
     define public static property REFTYPE_OBJECT as integer init 1 no-undo get.
     define public static property REFTYPE_TYPE   as integer init 2 no-undo get.
     
-    define public static property SERIALIZABLE_IFACE_TYPE   as character init 'OpenEdge.Core.Interfaces.ISerializable' no-undo get.    
-    define public static property EXTERNALIZABLE_IFACE_TYPE as character init 'OpenEdge.Core.Interfaces.IExternalizable' no-undo get.
+    define public static property SERIALIZABLE_IFACE_TYPE   as character init 'OpenEdge.Core.Util.ISerializable' no-undo get.    
+    define public static property EXTERNALIZABLE_IFACE_TYPE as character init 'OpenEdge.Core.Util.IExternalizable' no-undo get.
         
     define public static property EXTERNALIZABLE_METHOD_READOBJECT as character init 'ReadObject' no-undo get.
     define public static property EXTERNALIZABLE_METHOD_WRITEOBJECT as character init 'WriteObject' no-undo get.
     define public static property EXTERNALIZABLE_METHOD_WRITETABLE as character init 'WriteTable' no-undo get.
     define public static property EXTERNALIZABLE_METHOD_WRITEDATASET as character init 'WriteDataset' no-undo get.
+    define public static property EXTERNALIZABLE_METHOD_WRITEENUM as character init 'WriteEnum' no-undo get.
+    define public static property EXTERNALIZABLE_METHOD_READENUM as character init 'ReadEnum' no-undo get.
     
     define public static property SIZE_INDEX_ARRAY as integer init 20 no-undo get.
     
@@ -92,6 +95,7 @@ class OpenEdge.Core.System.ObjectStreamConstants final:
 /*            when ObjectStreamConstants:TC_LONGSTRING then cString ='TC_LONGSTRING'.*/
             when ObjectStreamConstants:TC_NULL then cString ='TC_NULL'.
             when ObjectStreamConstants:TC_OBJECT then cString ='TC_OBJECT'.
+            when ObjectStreamConstants:TC_ENUM then cString ='TC_ENUM'.
             when ObjectStreamConstants:TC_REFERENCE then cString ='TC_REFERENCE'.
 /*            when ObjectStreamConstants:TC_STRING then cString ='TC_STRING'.*/
             when ObjectStreamConstants:TC_TABLE then cString ='TC_TABLE'.
