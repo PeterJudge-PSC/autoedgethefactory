@@ -10,11 +10,12 @@
 
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.IInjectionRequest.
 using OpenEdge.Core.InjectABL.ComponentContainer.
 using OpenEdge.Core.InjectABL.KernelSettings.
+
+using OpenEdge.Lang.Collections.ICollection.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -56,12 +57,12 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
         as determined by the bindings in a loaded module. 
     
         @param Class A service represented by a Progress.Lang.Class type instance.
-        @param IParameterCollection A collection of parameters to add to the bindings for the
+        @param ICollection A collection of arguments to add to the bindings for the
                             object being instantiated.  
         @return Object An instance of the requested service/interface    */
     method public Object Get(input poService as class Class,
-                             input poParameters as IParameterCollection).
-
+                             input poArguments as ICollection).
+    
     @todo(task="question", action="legit?").
     /** Instantiates all instances matching the specified scope. Typically
         used to pre-start a set of objects when a Manager, for example, starts.
@@ -99,9 +100,10 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
     
     /** Injects the specified existing instance, without managing its lifecycle.
         @param Object The instance to inject.
-        @param IParameterCollection The parameters to pass to the request.  */
+        @param ICollection A collection of arguments to add to the bindings for the
+                            object being instantiated.  */
     method public void Inject(input poInstance as Object,
-                              input poParameters as IParameterCollection).
+                              input poArguments as ICollection).
 
     /** Deactivates and releases the specified instance if it is currently managed by InjectABL.
     

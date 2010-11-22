@@ -15,6 +15,8 @@ using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.System.InvalidValueSpecifiedError.
 using OpenEdge.Core.System.InvalidCallError.
 using OpenEdge.Core.System.ArgumentError.
+
+using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.Assert.
 
@@ -22,25 +24,37 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter:
-    define public property Name as character no-undo get. private set. 
-    define public property Type as DataTypeEnum no-undo get. private set.
-
-    /** Specify a declared type for cases where the parameter an object or array thereof. ABL doesn't currently (10.2B)
-        allow us to discover either the declared type of the array, or the signature of the callee (method, property, ctor),
-        and so we need to specify the type for the InjectABL kernel. */
+    /** (optional) Gets the name of the parameter. Only informational.*/
+    define public property Name as character no-undo get. set.
+    
+    /** (optional) Gets the instance name of the parameter value. This is only used when the parameter
+        is a type/class which InjectABL will resolves from a pre-existing binding. The parameter 
+        might be a general interface (IDataAccess) but the binding will specify a name ("EmployeeDA");
+        this property allows us to specify that object.
+        
+        Note that this is only valid for scalar arguments, not vectors/arrays.  */
+    define public property ServiceInstanceName as character no-undo get. set.
+    
+    /** (mandatory) The datatype of the parameter. */
+    define public property DataType as DataTypeEnum no-undo get. private set.
+    
+    /** (mandatory) Specify a declared type for cases where the parameter an object or array
+        thereof. ABL doesn't currently (10.2B) allow us to discover either the declared type
+        of the array, or the signature of the callee (method, property, ctor), and so we need
+        to specify the type for the InjectABL kernel. */
     define public property DeclaredType as class Class no-undo get. private set.
     
     define private variable moValue as Object extent no-undo.
     define private variable mcValue as character extent no-undo.
     
     method public void GetValue(poContext as ILifecycleContext, output poValue as Object):
-        if DataTypeEnum:IsPrimitive(Type) then
-            undo, throw new InvalidCallError('method', 'parameter type is not an object').
-        if DataTypeEnum:IsArray(Type) then
-            undo, throw new InvalidCallError('method', 'parameter value is an not a scalar value').
+        if DataTypeEnum:IsPrimitive(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is not an object data type ').
+        if DataTypeEnum:IsArray(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is an not a scalar value').
         
-        if Type eq DataTypeEnum:Class then
-            poValue = poContext:Kernel:Get(cast(moValue[1], Class)).
+        if DataType:Equals(DataTypeEnum:Class) then
+            poValue = poContext:Kernel:Get(cast(moValue[1], Class), ServiceInstanceName).
         else
             poValue = moValue[1].
     end method.
@@ -49,17 +63,17 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         
-        if DataTypeEnum:IsPrimitive(Type) then
-            undo, throw new InvalidCallError('method', 'parameter type is not an object').
+        if DataTypeEnum:IsPrimitive(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is not an object data type').
         
-        if not DataTypeEnum:IsArray(Type) then
-            undo, throw new InvalidCallError('method', 'parameter value is an not array').
+        if not DataTypeEnum:IsArray(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is an not array').
         
         iMax = extent(moValue).
         extent(poValue) = iMax.
         
         do iLoop = 1 to iMax:
-            if Type eq DataTypeEnum:ClassArray then
+            if DataType:Equals(DataTypeEnum:ClassArray) then
                 poValue[iLoop] = poContext:Kernel:Get(cast(moValue[iLoop], Class)).
             else
                 poValue = moValue.
@@ -67,120 +81,125 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter
     end method.
     
     method public void GetValue(poContext as ILifecycleContext, output pcValue as character):
-        if not DataTypeEnum:IsPrimitive(Type) then
-            undo, throw new InvalidCallError('method', 'parameter value is not a primitive value').
+        if not DataTypeEnum:IsPrimitive(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is not a primitive data type').
         
-        if DataTypeEnum:IsArray(Type) then
-            undo, throw new InvalidCallError('method', 'parameter value is not a scalar value').
+        if DataTypeEnum:IsArray(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is not a scalar value').
         
         pcValue = mcValue[1].
     end method.
     
     method public void GetValue(poContext as ILifecycleContext, output pcValue as character extent):
-        if not DataTypeEnum:IsPrimitive(Type) then
-            undo, throw new InvalidCallError('method', 'parameter value is not a primitive value').
-
-        if not DataTypeEnum:IsArray(Type) then
-            undo, throw new InvalidCallError('method', 'parameter value is an not array').
+        if not DataTypeEnum:IsPrimitive(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is not a primitive data tye').
+                           
+        if not DataTypeEnum:IsArray(DataType) then
+            undo, throw new InvalidCallError(RoutineTypeEnum:Method:ToString(), 'parameter value is an not array').
         
         pcValue = mcValue.
     end method.
     
-    /* Primitive value constructors */
-    constructor public Parameter(pcName as character, pcValue as char, poType as DataTypeEnum):
-        assign Name = pcName
-               Type = poType
+/* Primitive value constructors */
+    constructor public Parameter(input pcValue as character):
+        this-object(pcValue, DataTypeEnum:character).
+    end constructor.
+    
+    constructor public Parameter(input pcValue as character extent):
+        this-object(pcValue, DataTypeEnum:character).
+    end constructor.
+    
+    constructor public Parameter(input pcValue as character, input poDataType as DataTypeEnum):
+        assign DataType = poDataType
                extent(mcValue) = 1
                mcValue[1] = pcValue.
     end constructor.
     
-    constructor public Parameter(pcName as character, pcValue as char extent, poType as DataTypeEnum):
-        assign Name = pcName
-               Type = poType
+    constructor public Parameter(input pcValue as character extent, input poDataType as DataTypeEnum):
+        assign DataType = poDataType
                mcValue = pcValue.
     end constructor.
     
-    constructor public Parameter(pcName as character, pcValue as char):
-        this-object(pcName, pcValue, DataTypeEnum:Character).
+/* Object value constructors */
+    constructor public Parameter(input poValue as Object):
+        this-object(poValue,
+                    if valid-object(poValue) then poValue:GetClass() else Class:GetClass('Progress.Lang.Object') ).
     end constructor.
     
-    constructor public Parameter(pcName as character, pcValue as char extent):
-        this-object(pcName, pcValue, DataTypeEnum:CharacterArray).
-    end constructor.
-    
-    /* Object value constructors */
-    constructor public Parameter(pcName as character, poValue as Object):
-        this-object(pcName, poValue, poValue:GetClass()).
-    end constructor.
-    
-    constructor public Parameter(pcName as character, poValue as Object, poDeclaredType as class Class):
-        Assert:ArgumentNotNull(poValue, 'Object value').
+    constructor public Parameter(input poValue as Object, input poDeclaredType as class Class):
         Assert:ArgumentNotNull(poDeclaredType, 'Declared type').
         
-        if type-of(poValue, Progress.Lang.Class) then
+        /* Use another ctor for this */
+        if valid-object(poValue) and type-of(poValue, Progress.Lang.Class) then
             undo, throw new ArgumentError('Argument cannot be of type Progress.Lang.Class', 'poValue').
         
-        assign Name = pcName
-               extent(moValue) = 1
+        assign extent(moValue) = 1
                moValue[1] = poValue
                DeclaredType = poDeclaredType
-               Type = DataTypeEnum:ProgressLangObject.
+               DataType = DataTypeEnum:ProgressLangObject.
+    end constructor.
+            
+    constructor public Parameter(input poValue as Object extent):
+        this-object(poValue,
+                    if valid-object(poValue[1]) then poValue[1]:GetClass() else Class:GetClass('Progress.Lang.Object')).
     end constructor.
     
-    constructor public Parameter(pcName as character, poValue as Object extent, poDeclaredType as class Class):
-        Assert:ArgumentNotNull(poValue[1], 'Object value').
+    constructor public Parameter(input poValue as Object extent, input poDeclaredType as class Class):
         Assert:ArgumentNotNull(poDeclaredType, 'Declared type').
         
-        if type-of(poValue[1], Progress.Lang.Class) then
+        if valid-object(poValue[1]) and type-of(poValue[1], Progress.Lang.Class) then
             undo, throw new ArgumentError('Argument cannot be of type Progress.Lang.Class', 'poValue').
         
-        assign Name = pcName
-               moValue = poValue
+        assign moValue = poValue
                DeclaredType = poDeclaredType
-               Type = DataTypeEnum:ProgressLangObject.
-    end constructor.
-    
-    constructor public Parameter(pcName as character, poValue as Object extent):
-        this-object(pcName, poValue, poValue[1]:GetClass()).
-    end constructor.
-    
-    /* Class (service or value) constructors */
-    constructor public Parameter(pcName as character, poType as class Class):
+               DataType = DataTypeEnum:ProgressLangObject.        
+    end constructor.        
+
+/* Class (service or value) constructors */
+    constructor public Parameter(input poType as class Class):
         /* Defaults to a service */ 
-        this-object(pcName, poType, DataTypeEnum:Class).
+        this-object(poType, DataTypeEnum:Class, '').
     end constructor.
     
-    constructor public Parameter(pcName as character, poType as class Class, poDataType as DataTypeEnum):
+    constructor public Parameter(input poType as class Class, input pcInstanceName as character):
+        /* Defaults to a service */ 
+        this-object(poType, DataTypeEnum:Class, pcInstanceName).
+    end constructor.
+    
+    constructor public Parameter(input poType as class Class, input poDataType as DataTypeEnum):
+        this-object(poType, poDataType, '').
+    end constructor.        
+    
+    constructor public Parameter(input poType as class Class,
+                                 input poDataType as DataTypeEnum,
+                                 input pcServiceInstanceName as character):
         Assert:ArgumentNotNull(poType, 'Object value').
         Assert:ArgumentNotNull(poDataType, 'Data type').
         
-        assign Name = pcName
-               extent(moValue) = 1
+        assign extent(moValue) = 1
                moValue[1] = poType               
-               Type = poDataType.
+               DataType = poDataType
+               ServiceInstanceName = pcServiceInstanceName.
         
         /* If this is a reference, the declared type is a Progress.Lang.Class object;
            if not, then we take the given type as the declared type.  */
-        if poDataType eq DataTypeEnum:ProgressLangObject then
+        if poDataType:Equals(DataTypeEnum:ProgressLangObject) then
             DeclaredType = Class:GetClass('Progress.Lang.Class').
         else
             DeclaredType = poType.
-    end constructor.
+    end constructor.        
     
-    constructor public Parameter(pcName as character, poType as class Class extent):
-        this-object(pcName,
-                    poType,
-                    Class:GetClass('Progress.Lang.Class')).
+    constructor public Parameter(input poType as class Class extent):
+        this-object(poType, Class:GetClass('Progress.Lang.Class')).
+        
         /* Assume this is a service */
-        Type = DataTypeEnum:Class.                    
+        DataType = DataTypeEnum:Class.
     end constructor.
-    
-    constructor public Parameter(pcName as character, poType as class Class extent, poDataType as DataTypeEnum):
+            
+    constructor public Parameter(input poType as class Class extent, input poDataType as DataTypeEnum):
         /* These are always PLC */
-        this-object(pcName,
-                    poType,
-                    Class:GetClass('Progress.Lang.Class')).
-        Type = poDataType.
-    end constructor.
+        this-object(poType, Class:GetClass('Progress.Lang.Class')).
+        DataType = poDataType.
+    end constructor.        
     
 end class.

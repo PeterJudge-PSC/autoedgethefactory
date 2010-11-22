@@ -12,15 +12,18 @@ routine-level on error undo, throw.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.BindingTargetEnum.
-using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
-using OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument.
-using OpenEdge.Core.InjectABL.Binding.Parameters.MethodArgument.
-using OpenEdge.Core.InjectABL.Binding.Parameters.PropertyValue.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
+using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder.
+using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
+
+using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
@@ -125,189 +128,382 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return this-object.
     end method.
     
-    /* WithConstructorArgument */
-    method public IBindingSyntax WithConstructorArgument(poValue as class Class):
-        Binding:Parameters:Add(new ConstructorArgument(poValue)).
+/* WithConstructorArgument */
+    /* generalised case; all other WithConstructorArgument() methods pass through this one. */
+    method public IBindingSyntax WithConstructorArgument(input poParameter as IParameter extent).    
+        define variable oRoutine as Routine no-undo.
+        
+        oRoutine = new Routine(Binding:Service, '', RoutineTypeEnum:Constructor).
+        oRoutine:Parameters = poParameter.
+        
+        Binding:Arguments:Add(oRoutine).
         return this-object.
+    end method.
+    
+    method public IBindingSyntax WithConstructorArgument(poValue as class Class):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue).
+        
+        return WithConstructorArgument(oParameter). 
+    end method.
+    
+    method public IBindingSyntax WithConstructorArgument(poValue as class Class, input pcInstanceName as character):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue).
+        oParameter[1]:ServiceInstanceName = pcInstanceName.
+        
+        return WithConstructorArgument(oParameter). 
     end method.
     
     method public IBindingSyntax WithConstructorArgument(poValue as class Class, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new ConstructorArgument(poValue)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue, poDataType).
+        
+        return WithConstructorArgument(oParameter). 
+    end method.
+
+    method public IBindingSyntax WithConstructorArgument(poValue as class Class, poDataType as DataTypeEnum, input pcInstanceName as character):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue, poDataType).
+        oParameter[1]:ServiceInstanceName = pcInstanceName.
+        
+        return WithConstructorArgument(oParameter). 
     end method.
 
     method public IBindingSyntax WithConstructorArgument(poService as class Class extent):
-        Binding:Parameters:Add(new ConstructorArgument(poService)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
 
     method public IBindingSyntax WithConstructorArgument(poService as class Class extent, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new ConstructorArgument(poService, poDataType)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService, poDataType).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
     
     method public IBindingSyntax WithConstructorArgument(poValue as Object):
-        Binding:Parameters:Add(new ConstructorArgument(poValue)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
 
     method public IBindingSyntax WithConstructorArgument(poValue as Object, poDeclaringType as class Class):
-        Binding:Parameters:Add(new ConstructorArgument(poValue, poDeclaringType)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue, poDeclaringType).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
     
     method public IBindingSyntax WithConstructorArgument(poValue as Object extent):
-        Binding:Parameters:Add(new ConstructorArgument(poValue)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
     
     method public IBindingSyntax WithConstructorArgument(poValue as Object extent, poDeclaringType as class Class):
-        Binding:Parameters:Add(new ConstructorArgument(poValue, poDeclaringType)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue, poDeclaringType).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
     
     method public IBindingSyntax WithConstructorArgument(pcValue as character):
-        Binding:Parameters:Add(new ConstructorArgument(pcValue)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
 
     method public IBindingSyntax WithConstructorArgument(pcValue as character, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new ConstructorArgument(pcValue, poDataType)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue, poDataType).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
 
     method public IBindingSyntax WithConstructorArgument(pcValue as character extent):
-        Binding:Parameters:Add(new ConstructorArgument(pcValue)).
-        return this-object.
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue).
+        
+        return WithConstructorArgument(oParameter). 
     end method.
     
     method public IBindingSyntax WithConstructorArgument(pcValue as character extent, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new ConstructorArgument(pcValue, poDataType)).
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue, poDataType).
+        
+        return WithConstructorArgument(oParameter). 
+    end method.
+    
+/* WithPropertyValue */
+    /** Generalised case for more complex scenarios; all other WithPropertyValue() methods pass through this one. This method will probably never be called directly, but
+        it doesn't hurt to have here. */
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character,
+                                                   input poParameter as IParameter extent).    
+        define variable oRoutine as Routine no-undo.
+        
+        oRoutine = new Routine(Binding:Service, pcPropertyName, RoutineTypeEnum:PropertySetter).
+        oRoutine:Parameters = poParameter.
+        
+        Binding:Arguments:Add(oRoutine).
         return this-object.
     end method.
     
-    /* WithPropertyValue */
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class Class):
-        Binding:Parameters:Add(new PropertyValue(pcPropertyName, poService)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poService as class Class):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class Class, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new PropertyValue(pcPropertyName, poService, poDataType)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poService as class Class, input pcInstanceName as character):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService, pcInstanceName).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class  Class extent ):
-        Binding:Parameters:Add(new PropertyValue(pcPropertyName, poService)).
-        return this-object.
-    end method.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poService as class Class, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
 
-    method public IBindingSyntax WithPropertyValue(pcPropertyName as character, poService as class Class extent, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new PropertyValue(pcPropertyName, poService, poDataType)).
-        return this-object.
-    end method.
-
-    method public IBindingSyntax WithPropertyValue(pcName as character, poValue as Object ):
-        Binding:Parameters:Add(new PropertyValue(pcName, poValue)).
-        return this-object.
+        oParameter[1] = new Parameter(poService, poDataType).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
     
-    method public IBindingSyntax WithPropertyValue(pcName as character, poValue as Object, poDeclaringType as class Class):
-        Binding:Parameters:Add(new PropertyValue(pcName, poValue, poDeclaringType)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poService as class Class, poDataType as DataTypeEnum, input pcInstanceName as character):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService, poDataType, pcInstanceName).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
+    end method.
+
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poService as class  Class extent ):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
+    end method.
+
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poService as class Class extent, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService, poDataType).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
+    end method.
+
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poValue as Object ):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue).
+
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
     
-    method public IBindingSyntax WithPropertyValue(pcName as character, poValue as Object extent):
-        Binding:Parameters:Add(new PropertyValue(pcName, poValue)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poValue as Object, poDeclaringType as class Class):
+        define variable oParameter as IParameter extent 1 no-undo.
+        
+        oParameter[1] = new Parameter(poValue, poDeclaringType).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
     
-    method public IBindingSyntax WithPropertyValue(pcName as character, poValue as Object extent, poDeclaringType as class Class):
-        Binding:Parameters:Add(new PropertyValue(pcName, poValue, poDeclaringType)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poValue as Object extent):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
+    end method.
+    
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, poValue as Object extent, poDeclaringType as class Class):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue, poDeclaringType).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
         
-    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character ):
-        Binding:Parameters:Add(new PropertyValue(pcName, pcValue)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, pcValue as character ):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new PropertyValue(pcName, pcValue, poDataType)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, pcValue as character, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue, poDataType).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character extent):
-        Binding:Parameters:Add(new PropertyValue(pcName, pcValue)).
-        return this-object.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, pcValue as character extent):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
 
-    method public IBindingSyntax WithPropertyValue(pcName as character, pcValue as character extent, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new PropertyValue(pcName, pcValue, poDataType)).
-        return this-object.
-    end method.
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, pcValue as character extent, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
 
-    /* WithMethodValue */
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poService as class Class):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poService)).
-        return this-object.
-    end method.
-
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poService as class Class extent):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poService)).
-        return this-object.
+        oParameter[1] = new Parameter(pcValue, poDataType).
+        
+        return WithPropertyValue(pcPropertyName, oParameter). 
     end method.
     
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as Object, poDeclaringType as class Class):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue, poDeclaringType)).
-        return this-object.
+/* WithMethodValue */
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poService as class Class):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( poService).
+
+        return WithMethodValue(pcMethodName, oParameter). 
+    end method.
+
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poService as class Class, input pcInstanceName as character):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poService, pcInstanceName).
+
+        return WithMethodValue(pcMethodName, oParameter). 
+    end method.
+
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poService as class Class extent):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( poService).
+
+        return WithMethodValue(pcMethodName, oParameter). 
     end method.
     
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as Object):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue)).
-        return this-object.
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poValue as Object, poDeclaringType as class Class):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( poValue, poDeclaringType).
+
+        return WithMethodValue(pcMethodName, oParameter). 
+    end method.
+    
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poValue as Object):
+        define variable oParameter as IParameter extent 1 no-undo.
+        
+        oParameter[1] = new Parameter( poValue).
+
+        return WithMethodValue(pcMethodName, oParameter). 
     end method.
         
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as class Class, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue, poDataType)).
-        return this-object.
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poValue as class Class, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( poValue, poDataType).
+
+        return WithMethodValue(pcMethodName, oParameter). 
     end method.
     
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as Object extent):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue)).
-        return this-object.
-    end method.
-    
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as Object extent, poDeclaringType as class Class):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue, poDeclaringType)).
-        return this-object.
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poValue as class Class, poDataType as DataTypeEnum, input pcInstanceName as character):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(poValue, poDataType, pcInstanceName).
+
+        return WithMethodValue(pcMethodName, oParameter). 
     end method.
 
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, poValue as class Class extent, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, poValue, poDataType)).
-        return this-object.
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poValue as Object extent):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( poValue).
+        
+        return WithMethodValue(pcMethodName, oParameter). 
     end method.
     
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, pcValue)).
-        return this-object.
-    end method.
-    
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, pcValue, poDataType)).
-        return this-object.
-    end method.
-    
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character extent):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, pcValue)).
-        return this-object.
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poValue as Object extent, poDeclaringType as class Class):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( poValue, poDeclaringType).
+        
+        return WithMethodValue(pcMethodName, oParameter). 
     end method.
 
-    method public IBindingSyntax WithMethodValue(pcMethodName as character, pcValue as character extent, poDataType as DataTypeEnum):
-        Binding:Parameters:Add(new MethodArgument(pcMethodName, pcValue, poDataType)).
-        return this-object.
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, poValue as class Class extent, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( poValue, poDataType).
+        
+        return WithMethodValue(pcMethodName, oParameter). 
+    end method.
+    
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, pcValue as character):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( pcValue).
+        
+        return WithMethodValue(pcMethodName, oParameter). 
+    end method.
+    
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, pcValue as character, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter(pcValue, poDataType).
+        
+        return WithMethodValue(pcMethodName, oParameter). 
+    end method.
+    
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, pcValue as character extent):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( pcValue).
+        
+        return WithMethodValue(pcMethodName, oParameter). 
     end method.
 
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, pcValue as character extent, poDataType as DataTypeEnum):
+        define variable oParameter as IParameter extent 1 no-undo.
+
+        oParameter[1] = new Parameter( pcValue, poDataType).
+        
+        return WithMethodValue(pcMethodName, oParameter). 
+    end method.
+    
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character,
+                                                 input poParameter as IParameter extent):
+        define variable oRoutine as Routine no-undo.
+        
+        oRoutine = new Routine(Binding:Service, pcMethodName, RoutineTypeEnum:Method).
+        oRoutine:Parameters = poParameter.
+        
+        Binding:Arguments:Add(oRoutine).
+        return this-object.
+    end method.
+    
     /* When */    
     method public IConditionSyntax When():
         define variable oConditionBuilder as IConditionSyntax no-undo.

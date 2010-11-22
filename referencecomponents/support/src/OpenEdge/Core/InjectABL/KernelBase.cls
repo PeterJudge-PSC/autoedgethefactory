@@ -19,7 +19,6 @@ using OpenEdge.Core.InjectABL.Binding.IBindingResolver.
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.ICache.
@@ -29,6 +28,8 @@ using OpenEdge.Core.InjectABL.IInjectionRequest.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.ComponentContainer.
 using OpenEdge.Core.InjectABL.KernelSettings.
+
+using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Collections.IList.
 using OpenEdge.Lang.Assert.
@@ -159,6 +160,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         define variable oIterator as IIterator no-undo.
         define variable oInstance as Object extent no-undo.
         define variable iExtent as integer no-undo.
+        def var oContext as ILifecycleContext no-undo.
         
         oBindings = GetBindings(poScope, poScopeCallback).
         if oBindings:Size gt 0 then
@@ -169,7 +171,10 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
             do while oIterator:HasNext():
                 oBinding = cast(oIterator:Next(), IBinding).
                 iExtent = iExtent + 1.
-                oInstance[iExtent] = cast(CreateContext(oBinding), ILifecycleContext):Resolve().
+                
+                /* [PJ] something buggy */        
+                oContext = CreateContext(oBinding).
+                oInstance[iExtent] = oContext:Resolve().
             end.
         end.
         
@@ -177,8 +182,8 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
 	end method.
     
     method public Object Get(input poService as class Class,
-                             input poParameters as IParameterCollection):
-        return this-object:Get(poService, '', poParameters).                                 
+                             input poArguments as ICollection):
+        return this-object:Get(poService, '', poArguments).                                 
     end method.
     
     /** Instantiates an instance of an object that matches the passed service,
@@ -194,8 +199,9 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     
     method protected Object Get(input poService as class Class,
                                 input pcName as character,
-                                input poParameters as IParameterCollection):
+                                input poArguments as ICollection):
         define variable oBinding as IBinding no-undo.
+        def var oContext as ILifecycleContext no-undo.
         
         Assert:ArgumentNotNull(poService, 'Service').
         Assert:ArgumentNotNull(pcName, 'Name').
@@ -205,10 +211,14 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         
         oBinding = SelectBinding(poService, pcName).
         
-        if valid-object(poParameters) then
-            oBinding:Parameters:AddAll(poParameters).
+        if valid-object(poArguments) then
+            oBinding:Arguments:AddAll(poArguments).
+
+/*        return CreateContext(oBinding):Resolve().*/
+        /* [PJ] something buggy */        
+        oContext = CreateContext(oBinding).
         
-        return cast(CreateContext(oBinding), ILifecycleContext):Resolve().
+        return oContext:Resolve().
     end method.
     
     /** Retrieve the binding to use for the service. */
@@ -236,20 +246,20 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     
     /** Injects (from outside) **/
     method public void Inject(poInstance as Object,
-                              poParameters as IParameterCollection):
+                              poArguments as ICollection):
         define variable oBinding as IBinding no-undo.
         define variable oCache as ICache no-undo.
         define variable oContext as ILifecycleContext no-undo. 
         
         Assert:ArgumentNotNull(poInstance, "instance").
-        Assert:ArgumentNotNull(poParameters, "parameters").
+        Assert:ArgumentNotNull(poArguments, "arguments").
         
         oContext = cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
                 , ICache):TryGetContext(poInstance).
         if not valid-object(oContext) then
             oContext = CreateContext(CreateDefaultBinding(poInstance:GetClass())).
         
-        oContext:Binding:Parameters:AddAll(poParameters).
+        oContext:Binding:Arguments:AddAll(poArguments).
                 
         cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.IPipeline'))
                 , IPipeline):Activate(oContext, poInstance).
@@ -313,8 +323,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     end method.
     
     method protected logical TypeIsSelfBindable(poService as class Class):
-        return (not poService:IsAbstract() and
-                not poService:IsInterface() ).
+        return (not poService:IsAbstract() and not poService:IsInterface() ).
     end method.
-
+    
 end class.

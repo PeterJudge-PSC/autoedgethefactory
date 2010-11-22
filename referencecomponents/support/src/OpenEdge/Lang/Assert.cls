@@ -96,10 +96,23 @@ class OpenEdge.Lang.Assert:
             undo, throw new AppError(substitute('&1 is not a valid type', pcTypeName)).
     end method.
 
+    method public static void ArgumentIsType(input poArgument as Object extent, poType as class Class):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        
+        if extent(poArgument) eq ? then
+            undo, throw new AppError('argument cannot be an indeterminiate array').
+        
+        iMax = extent(poArgument).
+        do iLoop = 1 to iMax:
+            Assert:ArgumentIsType(poArgument[iLoop], poType).
+        end.
+    end method.
+    
     method public static void ArgumentIsType(input poArgument as Object, poType as class Class):
         define variable oDerivedClass as class Class no-undo.
         
-        Assert:ArgumentNotNull(input poArgument, 'argument').
+        Assert:ArgumentNotNull(poArgument, 'argument').
         Assert:ArgumentNotNull(poType, 'type').
         
         if type-of(poArgument, Progress.Lang.Class) then 

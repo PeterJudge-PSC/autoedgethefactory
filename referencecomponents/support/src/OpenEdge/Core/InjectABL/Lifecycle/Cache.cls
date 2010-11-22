@@ -85,17 +85,16 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
     
     /** Tries to retrieve an instance to re-use in the specified context.
     
-        @param context The context that is being activated.
-        @return The instance for re-use, or unknown if none has been stored. */
-    method public Object TryGet(poContext as ILifecycleContext):
+        @param ILifecycleContext The context that is being activated.
+        @return Object The instance for re-use, or unknown if none has been stored. */
+    method public Object TryGet(input poContext as ILifecycleContext):
         define variable oInstance as Object no-undo.
         define variable oScope as Object no-undo.
-        
         define buffer lbCache for InstanceCache.
         
         Assert:ArgumentNotNull(poContext, "Context").
-        
         oScope = poContext:GetScope().
+        
         find first lbCache where
                    lbCache.Binding = poContext:Binding and
                    lbCache.Scope = int(oScope)

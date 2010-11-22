@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : StandardProvider
     Purpose     : 
     Syntax      : 
@@ -11,20 +11,19 @@
                     This catch allows us to handle these conditions gracefully,
                     which is what we would do if we could determine the callee
                     signatures in advance. 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
-using OpenEdge.Core.InjectABL.Binding.Parameters.MethodArgument.
-using OpenEdge.Core.InjectABL.Binding.Parameters.PropertyValue.
-using OpenEdge.Core.InjectABL.Binding.Parameters.ConstructorArgument.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.InvocationError.
 
 using OpenEdge.Core.System.ArgumentError.
+using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.IOModeEnum.
@@ -47,78 +46,34 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
     
     /** Method injection **/
     method protected void InjectViaMethod(poInstance as Object,
-                                          pcMethodName as character,
-                                          poParameters as IParameterCollection,
+                                          poMethod as Routine,
                                           poContext as ILifecycleContext):
         define variable oPL as ParameterList no-undo.
-        define variable oMethArg as MethodArgument extent no-undo.
         define variable iLoop as integer no-undo.
-        define variable iNumParam as integer no-undo.
-        define variable oIterator as IIterator no-undo.
-        define variable oArg as IParameter no-undo.
+        define variable iMax as integer no-undo.
+                
+        Assert:ArgumentNotNull(poMethod, 'injection method').
         
-        Assert:ArgumentNotNull(poParameters, 'Injection parameters').
-        Assert:ArgumentNotNullOrEmpty(pcMethodName, 'Injection method name').
+        iMax = extent(poMethod:Parameters).
+        if iMax eq ? then
+            iMax = 0.
+        oPL = new ParameterList(iMax).
         
-        oPL = new ParameterList(poParameters:Size).
-        
-        oIterator = poParameters:Iterator().
-        do while oIterator:HasNext():
-            oArg = cast(oIterator:Next(), IParameter).
-            iLoop = iLoop + 1.
+        do iLoop = 1 to iMax:
             SetParameterValue(poContext,
                               oPL,
                               iLoop,
-                              oArg).
+                              poMethod:Parameters[iLoop]).
         end.
-
-        poInstance:GetClass():Invoke(poInstance, pcMethodName, oPL).
+        
+        poInstance:GetClass():Invoke(poInstance, poMethod:RoutineName, oPL).
         
         /** 'transform' any ABL errors into an ApplicationError. */
         catch eSysErr as SysError:
             /* Could not dynamically find method ''<name> in class ''<name> with <number> matching parameter(s). (15312) */
             case eSysErr:GetMessageNum(1):
                 when 15312 then
-                    undo, throw new InvocationError(eSysErr, 'method', poContext:Binding:TargetType:TypeName).
-                otherwise
-                    undo, throw eSysErr.
-            end case.
-        end catch.
-    end method.
-    
-    /** Property injection **/
-    method protected void InjectViaProperty(poInstance as Object,
-                                            poPropertyValue as PropertyValue,
-                                            poContext as ILifecycleContext):
-        define variable oPL as ParameterList no-undo.
-
-        define variable oMethArg as PropertyValue extent no-undo.
-        define variable iLoop as integer no-undo.
-        define variable iNumParam as integer no-undo.
-        define variable oIterator as IIterator no-undo.
-        define variable oArg as IParameter no-undo.
-        
-        Assert:ArgumentNotNull(poPropertyValue, 'Injection property value parameter').
-        
-        oPL = new ParameterList(1).
-        SetParameterValue(poContext,
-                          oPL,
-                          1, 
-                          poPropertyValue).
-        
-        /*poInstance:GetClass():Invoke(poInstance, poPropertyValue:Name, oPL).*/
-        
-        /* Assume there's a Set<PropertyName> method in the interim, while we wait for
-           dynamic proeprty setting. */
-        poInstance:GetClass():Invoke(poInstance, 'Set' + poPropertyValue:Name, oPL).
-        
-        @todo(task="implement", action="the msg number will change").
-        /** 'transform' any ABL errors into an ApplicationError. */
-        catch eSysErr as SysError:
-            /* Could not dynamically find method ''<name> in class ''<name> with <number> matching parameter(s). (15312) */
-            case eSysErr:GetMessageNum(1):
-                when 15312 then
-                    undo, throw new InvocationError(eSysErr, 'property', poContext:Binding:TargetType:TypeName).
+                    undo, throw new InvocationError(eSysErr, RoutineTypeEnum:Method:ToString(), poContext:Binding:TargetType:TypeName).
                 otherwise
                     undo, throw eSysErr.
             end case.
@@ -129,34 +84,46 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
     /** Constructor injection 
     
         At some point in the future, we may add a generic/dynamic constructor injection 
-        strategy, which will determine which constructor to use. At the moment, this code
-        takes all of the ConstructorArguments that are part of this context, and attempts
-        to invoke an object with those arguments.
-     **/
-    method public Object Create(poContext as ILifecycleContext):
+        strategy, which will determine which constructor to use. At the moment, this decision
+        is based on the first constructor in the bindings with the most arguments, and attempts
+        to invoke an object with those arguments. 
+        
+        @param ILifecycleContext The context for creating an object.
+        @return Object The newly-created object         */
+    method public Object Create(input poContext as ILifecycleContext):
         define variable oNew as Object no-undo.
         define variable oPL as ParameterList no-undo.
-        define variable oCtorArg as ConstructorArgument extent no-undo.
+        define variable oCtorArg as Parameter extent no-undo.
         define variable iLoop as integer no-undo.
         define variable iNumParam as integer no-undo.
         define variable oIterator as IIterator no-undo.
-        define variable oArg as Object no-undo.
+        define variable oCtor as Routine no-undo.
+        define variable oRoutine as Routine no-undo.
         
         Assert:ArgumentNotNull(poContext:Binding:TargetType, 'Binding target').
         
         iNumParam = 0.
-        if not poContext:Parameters:IsEmpty() then
+        if not poContext:Arguments:IsEmpty() then
         do:
-            extent(oCtorArg) = poContext:Parameters:Size.
+            oIterator = poContext:Arguments:Iterator().
             
-            oIterator = poContext:Parameters:Iterator().
+            /* find the ctor with the largest number of parameters */
             do while oIterator:HasNext():
-                oArg = oIterator:Next().
-                
-                if type-of(oArg, ConstructorArgument) then
-                    assign iNumParam = iNumParam + 1
-                           oCtorArg[iNumParam] = cast(oArg, ConstructorArgument).
+                oRoutine = cast(oIterator:Next(), Routine).
+                if oRoutine:RoutineType:Equals(RoutineTypeEnum:Constructor) then
+                do:
+                    if not valid-object(oCtor) then
+                        oCtor = oRoutine.
+                    else
+                    if extent(oRoutine:Parameters) gt extent(oCtor:Parameters) then
+                        oCtor = oRoutine.
+                end.
             end.
+            
+            if valid-object(oCtor) and extent(oCtor:Parameters) ne ? then
+                assign iNumParam = extent(oCtor:Parameters)
+                       extent(oCtorArg) = iNumParam
+                       oCtorArg = cast(oCtor:Parameters, Parameter).
         end.
         
         oPL = new ParameterList(iNumParam).
@@ -179,7 +146,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
             /* Dynamic NEW cannot NEW class <type> because an unambiguous appropriate constructor could not be found. (15310) */ 
             case eSysErr:GetMessageNum(1):
                 when 15310 then
-                    undo, throw new InvocationError(eSysErr, 'constructor', poContext:Binding:TargetType:TypeName).
+                    undo, throw new InvocationError(eSysErr, RoutineTypeEnum:Constructor:ToString(), poContext:Binding:TargetType:TypeName).
                 otherwise
                     undo, throw eSysErr.                                                    
             end case.
@@ -188,66 +155,65 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
     
     method public void InjectMethods(poInstance as Object,
                                      poContext as ILifecycleContext):
-        define variable oParameter as IParameter no-undo.
         define variable oIterator as IIterator no-undo.
-        define variable cMethod as character no-undo.
-        define variable cPrevMethod as character no-undo.
-        def var oMethArgs as IParameterCollection.
+        define variable oRoutine as Routine no-undo.
         
-        if not poContext:Parameters:IsEmpty() then
+        if not poContext:Arguments:IsEmpty() then
         do:
-            cPrevMethod = ''.
-            oIterator = poContext:Parameters:Iterator().
-            do while oIterator:HasNext():
-                oParameter = cast(oIterator:Next(), IParameter).
-                
-                if type-of(oParameter, MethodArgument) then
-                do:
-                    cMethod = oParameter:Name.
-                    
-                    if cPrevMethod ne cMethod then
-                    do:
-                        /* inject the previous method */
-                        if valid-object(oMethArgs) then
-                            InjectViaMethod(poInstance,
-                                            cPrevMethod,
-                                            oMethArgs,
-                                            poContext).
-                        oMethArgs = new IParameterCollection().
-                    end.
-                    
-                    oMethArgs:Add(oParameter).
-                    
-                    cPrevMethod = cMethod.
-                end.    /* is MethodArgument */
-            end.    /* iterate */
+            oIterator = poContext:Arguments:Iterator().
             
-            /* inject the last method. this is an artifact of the way that the Collection Iterator works. */
-            if valid-object(oMethArgs) and cMethod ne '' then
-                InjectViaMethod(poInstance,
-                                cMethod,
-                                oMethArgs,
-                                poContext).
-        end.    /* empty params */
+            /* find the ctor with the largest number of parameters */
+            do while oIterator:HasNext():
+                oRoutine = cast(oIterator:Next(), Routine).
+                if oRoutine:RoutineType:Equals(RoutineTypeEnum:Method) then
+                    InjectViaMethod(poInstance,
+                                    oRoutine,
+                                    poContext).
+            end.
+        end.
     end method.
     
     method public void InjectProperties(poInstance as Object,
                                         poContext as ILifecycleContext):
         define variable oPropValue as IParameter no-undo.
         define variable oIterator as IIterator no-undo.
+        define variable oRoutine as Routine no-undo.
+        define variable oPL as ParameterList no-undo.
         
-        if not poContext:Parameters:IsEmpty() then
+        if not poContext:Arguments:IsEmpty() then
         do:
-            oIterator = poContext:Parameters:Iterator().
+            oIterator = poContext:Arguments:Iterator().
+            oPL = new ParameterList(1).
+            
             do while oIterator:HasNext():
-                oPropValue = cast(oIterator:Next(), IParameter).
-                
-                if type-of(oPropValue, PropertyValue) then
-                    InjectViaProperty(poInstance,
-                                      cast(oPropValue, PropertyValue),
-                                      poContext).
+                oRoutine = cast(oIterator:Next(), Routine).
+                if oRoutine:RoutineType:Equals(RoutineTypeEnum:PropertySetter) then
+                do:
+                    oPL:Clear().
+                    oPL:NumParameters = 1.
+                    SetParameterValue(poContext,
+                                      oPL,
+                                      1, 
+                                      cast(oRoutine:Parameters[1], Parameter)).
+                    /* FUTURE? poInstance:GetClass():Invoke(poInstance, poPropertyValue:Name, oPL).*/
+                    
+                    /* Assume there's a Set<PropertyName> method in the interim, while we wait for
+                       dynamic property setting. */
+                    poInstance:GetClass():Invoke(poInstance, 'Set' + oRoutine:RoutineName, oPL).
+                end.                                      
             end.
         end.
+        
+        /** 'transform' any ABL errors into an ApplicationError. */
+        catch eSysErr as SysError:
+            /* Could not dynamically find method ''<name> in class ''<name> with <number> matching parameter(s). (15312) */
+            case eSysErr:GetMessageNum(1):
+                when 15312 then
+                    undo, throw new InvocationError(eSysErr, RoutineTypeEnum:PropertySetter:ToString(), poContext:Binding:TargetType:TypeName).
+                otherwise
+                    undo, throw eSysErr.
+            end case.
+        end catch.
     end method.
     
     method protected void SetParameterValue(poContext as ILifecycleContext,
@@ -260,15 +226,15 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
         define variable cValueArray as character extent no-undo.
         define variable lIsArray as logical no-undo.
         
-        lIsArray = DataTypeEnum:IsArray(poArgument:Type).
+        lIsArray = DataTypeEnum:IsArray(poArgument:DataType).
         
-        if DataTypeEnum:IsPrimitive(poArgument:Type) then
+        if DataTypeEnum:IsPrimitive(poArgument:DataType) then
         do:
             if lIsArray then
             do:
                 poArgument:GetValue(poContext, output cValueArray).
                 poParams:SetParameter(piOrder,
-                                      poArgument:Type:ToString(),
+                                      poArgument:DataType:ToString(),
                                       IOModeEnum:Input:ToString(),
                                       cValueArray).
             end.
@@ -276,7 +242,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
             do:
                 poArgument:GetValue(poContext, output cValue).
                 poParams:SetParameter(piOrder,
-                                      poArgument:Type:ToString(),
+                                      poArgument:DataType:ToString(),
                                       IOModeEnum:Input:ToString(),
                                       cValue).
             end.
@@ -306,7 +272,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
             case eSysErr:GetMessageNum(1):
                 /* Unable to convert SET-PARAMETER value to datatype passed. (10059) */
                 when 10059 then
-                    undo, throw new ArgumentError(eSysErr, 'SetParameter', poArgument:Name).
+                    undo, throw new ArgumentError(eSysErr, 'Progress.Lang.ParameterList:SetParameter', poArgument:Name).
                 otherwise
                     undo, throw eSysErr.
             end case.
