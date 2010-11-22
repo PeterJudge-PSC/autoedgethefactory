@@ -10,10 +10,11 @@
 using OpenEdge.Core.InjectABL.Binding.BindingTargetEnum.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
+/*using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.*/
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Lang.Collections.ObjectStack.
+using OpenEdge.Lang.Collections.ICollection.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -43,7 +44,7 @@ interface OpenEdge.Core.InjectABL.Binding.IBinding:
     define public property ScopeCallbackType as class Class no-undo get. set.
     
     /** Gets the parameters defined for the binding. */
-    define public property Parameters as IParameterCollection no-undo get.
+    define public property Arguments as ICollection no-undo get.
     
     /** Gets or sets  the optional name defined for the binding. */
     define public property Name as character no-undo get. set.

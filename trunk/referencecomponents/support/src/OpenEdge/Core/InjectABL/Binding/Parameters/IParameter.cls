@@ -14,9 +14,17 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 interface OpenEdge.Core.InjectABL.Binding.Parameters.IParameter:
-    /** Gets the name of the parameter. */
-    define public property Name as character no-undo get.    
-    define public property Type as DataTypeEnum no-undo get.
+    /** (optional) Gets the name of the parameter. Only informational.*/
+    define public property Name as character no-undo get. set.
+    
+    /** Gets the optional instance name of the parameter. This is only used when the parameter
+        is a type/class which InjectABL will resolves from a pre-existing binding. The parameter 
+        might be a general interface (IDataAccess) but the binding will specify a name ("EmployeeDA");
+        this property allows us to specify that object. */
+    define public property ServiceInstanceName as character no-undo get. set.
+    
+    /** (mandatory) The datatype of the parameter. */
+    define public property DataType as DataTypeEnum no-undo get.
     
     /** Specify a declared type for cases where the parameter an object or array thereof. ABL doesn't currently (10.2B)
         allow us to discover either the declared type of the array, or the signature of the callee (method, property, ctor),

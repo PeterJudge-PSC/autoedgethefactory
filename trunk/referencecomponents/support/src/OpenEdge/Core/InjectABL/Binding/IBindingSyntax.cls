@@ -10,6 +10,7 @@
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
+using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Lang.DataTypeEnum.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -68,30 +69,42 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
         invoked by InjectABL, or a simple reference which the application uses for its own purposes. For
         simple references, we specify DataTypeEnum:ProgressLangObject in the methods that support it; 
         for a service we specify DataTypeEnum:Class.
-        
+
         If the overload with PLO is called and a PLC passed in, we assume it's a service.
         
-        The default is a Service (ie DataTypeEnum:Class or DataTypeEnum:ClassArray). */
+        The default is a Service (ie DataTypeEnum:Class or DataTypeEnum:ClassArray).
+        
+        If a Service is being used, we can specify an optional InstanceName, but only for scalar values.
+        
+        All the With*() methods have the follwoing return signature
+        @return IBindingSyntax The binding being constructed, for a fluent interface. */    
+    /** Indicates that the specified constructor argument should be overridden with the specified value. */
+    method public IBindingSyntax WithConstructorArgument(input poService as class Class).
+    method public IBindingSyntax WithConstructorArgument(input poService as class Class, input pcInstanceName as character).
+    method public IBindingSyntax WithConstructorArgument(input poService as class Class, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(input poService as class Class, input poDataType as DataTypeEnum, input pcInstanceName as character).
     
-    /** Indicates that the specified constructor argument should be overridden with the specified value. */    
-    method public IBindingSyntax WithConstructorArgument(poService as class Class).
-    method public IBindingSyntax WithConstructorArgument(poService as class Class, input poDataType as DataTypeEnum).
-    method public IBindingSyntax WithConstructorArgument(poService as class Class extent).
-    method public IBindingSyntax WithConstructorArgument(poService as class Class extent, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(input poService as class Class extent).
+    method public IBindingSyntax WithConstructorArgument(input poService as class Class extent, input poDataType as DataTypeEnum).
     
     method public IBindingSyntax WithConstructorArgument(input poValue as Object).
     method public IBindingSyntax WithConstructorArgument(input poValue as Object, input poDeclaringType as class Class).
     method public IBindingSyntax WithConstructorArgument(input poValue as Object extent).
     method public IBindingSyntax WithConstructorArgument(input poValue as Object extent, input poDeclaringType as class Class).
     
-    method public IBindingSyntax WithConstructorArgument(pcValue as character).
-    method public IBindingSyntax WithConstructorArgument(pcValue as character, input poDataType as DataTypeEnum).
-    method public IBindingSyntax WithConstructorArgument(pcValue as character extent).
-    method public IBindingSyntax WithConstructorArgument(pcValue as character extent, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(input pcValue as character).
+    method public IBindingSyntax WithConstructorArgument(input pcValue as character, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithConstructorArgument(input pcValue as character extent).
+    method public IBindingSyntax WithConstructorArgument(input pcValue as character extent, input poDataType as DataTypeEnum).
+    
+    /** Generalised case for more complex scenarios; all other WithConstructorArgument() methods pass through this one. */
+    method public IBindingSyntax WithConstructorArgument(input poParameter as IParameter extent).    
     
     /** Indicates that the specified property should be injected with the specified value.  */
     method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class, input pcInstanceName as character).
     method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class, input poDataType as DataTypeEnum, input pcInstanceName as character).
     method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class extent).
     method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class extent, input poDataType as DataTypeEnum).
     
@@ -105,9 +118,15 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input pcValue as character extent).
     method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input pcValue as character extent, input poDataType as DataTypeEnum).
     
+    /** Generalised case for more complex scenarios; all other WithPropertyValue() methods pass through this one. This method will probably never be called directly, but
+        it doesn't hurt to have here. */
+    method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poParameter as IParameter extent).    
+    
     /** Indicates that the specified method should be injected with the specified value.  */
     method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class, input pcInstanceName as character).
     method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class, input poDataType as DataTypeEnum).
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class, input poDataType as DataTypeEnum, input pcInstanceName as character).
     method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class extent).
     method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poService as class Class extent, input poDataType as DataTypeEnum).
     
@@ -121,8 +140,11 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     method public IBindingSyntax WithMethodValue(input pcMethodName as character, input pcValue as character extent).
     method public IBindingSyntax WithMethodValue(input pcMethodName as character, input pcValue as character extent, input poDataType as DataTypeEnum).
     
+    /** Generalised case for more complex scenarios; all other WithMethodValue() methods pass through this one. */
+    method public IBindingSyntax WithMethodValue(input pcMethodName as character, input poParameter as IParameter extent).
+    
     @IBindingNamedSyntax.
     /** Gives the service an instance name. By default this is the service name  */
-    method public IBindingSyntax Named(input pcName as character).
+    method public IBindingSyntax Named(input pcInstanceName as character).
     
 end interface.

@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ILifecycleContext
     Purpose     : 
     Syntax      : 
@@ -6,12 +6,13 @@
     @author pjudge
     Created     : Tue Mar 02 11:45:31 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 using OpenEdge.Core.InjectABL.Binding.IBinding.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.IKernel.
+
+using OpenEdge.Lang.Collections.ICollection.
 using Progress.Lang.Object.
 
 interface OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext:  
@@ -25,8 +26,8 @@ interface OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext:
     /** Gets the binding. **/
     define public property Binding as IBinding no-undo get.
     
-    /** Gets the parameters that were passed to manipulate the activation process. **/
-    define public property Parameters as IParameterCollection no-undo get.
+    /** Gets the arguments for the constructor/methods/etc that were passed to manipulate the activation process. **/
+    define public property Arguments as ICollection no-undo get.
     
     /** Gets or sets the pipeline component. **/
     define public property Pipeline as IPipeline no-undo get.

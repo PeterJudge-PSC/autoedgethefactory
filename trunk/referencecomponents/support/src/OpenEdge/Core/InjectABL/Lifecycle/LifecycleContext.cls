@@ -14,13 +14,17 @@ using OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.IKernel.
+
+using OpenEdge.Lang.Collections.ICollection.
+using OpenEdge.Lang.Collections.Collection.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Object.
 
-class OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext implements ILifecycleContext:
+class OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext
+        implements ILifecycleContext:
+    
     /** Gets the kernel that is driving the activation. */
     define public property Kernel as IKernel no-undo get. private set.
     
@@ -28,7 +32,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext implements ILifecycleCo
     define public property Binding as IBinding no-undo get. private set.
 
     /** Gets the parameters that were passed to manipulate the activation process. */
-    define public property Parameters as IParameterCollection no-undo get. private set.
+    define public property Arguments as ICollection no-undo get. private set.
 
     /** Gets or sets the cache component. */
     define public property Cache as ICache no-undo get. private set.
@@ -55,7 +59,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext implements ILifecycleCo
         
         Kernel = poKernel.
         Binding = poBinding.
-        Parameters = new IParameterCollection(poBinding:Parameters).
+        Arguments = new Collection(poBinding:Arguments).
         Pipeline = poPipeline.
         Cache = poCache.
     end constructor.
@@ -112,9 +116,6 @@ class OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext implements ILifecycleCo
                                       this-object:Binding,
                                       this-object:Pipeline,
                                       this-object:Cache).
-        
-        oClone:Parameters:AddAll(this-object:Parameters).
-        
         return oClone.
     end method.
     

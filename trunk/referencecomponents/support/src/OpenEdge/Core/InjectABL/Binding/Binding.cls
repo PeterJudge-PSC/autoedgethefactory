@@ -12,13 +12,14 @@ routine-level on error undo, throw.
 using OpenEdge.Core.InjectABL.Binding.Binding.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.BindingTargetEnum.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScope.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
+
 using OpenEdge.Lang.Collections.ObjectStack.
+using OpenEdge.Lang.Collections.TypedCollection.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -68,13 +69,9 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
             
             TargetType = poTargetType.            
         end set.
-    
+        
     /** Gets the parameters defined for the binding. */
-    define public property Parameters as IParameterCollection no-undo get. private set.
-    
-    define public property ConstructorArguments as IParameterCollection no-undo get. private set.
-    define public property PropertyValues       as IParameterCollection no-undo get. private set.
-    define public property MethodArguments      as IParameterCollection no-undo get. private set.
+    define public property Arguments as OpenEdge.Lang.Collections.ICollection no-undo get. private set.
     
     /** Gets or sets the optional name defined for the binding. */
     define public property Name as character no-undo get. set.
@@ -83,8 +80,9 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
         Assert:ArgumentNotNull(poService, "service").
         
         /* Binding defaults to self-binding */
+        
         assign Service = poService
-               Parameters = new IParameterCollection()
+               Arguments = new TypedCollection(Class:GetClass('OpenEdge.Core.InjectABL.Binding.Parameters.Routine'))
                Scope = StandardScopeEnum:Transient.
     end constructor.
     
