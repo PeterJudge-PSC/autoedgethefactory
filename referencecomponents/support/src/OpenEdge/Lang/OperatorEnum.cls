@@ -61,4 +61,23 @@ class OpenEdge.Lang.OperatorEnum final inherits EnumMember :
         return lEqual.
     end method.
     
+    method static public OperatorEnum EnumFromString (input pcName as character):
+        define variable oEnum as OperatorEnum no-undo.
+        
+        case pcName:
+            when OperatorEnum:IsEqual:ToString() then oEnum = OperatorEnum:IsEqual.
+            when OperatorEnum:GreaterThan:ToString() then oEnum = OperatorEnum:GreaterThan.
+            when OperatorEnum:GreaterEqual:ToString() then oEnum = OperatorEnum:GreaterEqual.
+            when OperatorEnum:LessThan:ToString() then oEnum = OperatorEnum:LessThan.
+            when OperatorEnum:LessEqual:ToString() then oEnum = OperatorEnum:LessEqual.
+            when OperatorEnum:NotEqual:ToString() then oEnum = OperatorEnum:NotEqual.
+            when OperatorEnum:Matches:ToString() then oEnum = OperatorEnum:Matches.
+            when OperatorEnum:Begins:ToString() then oEnum = OperatorEnum:Begins.
+            when OperatorEnum:Contains:ToString() then oEnum = OperatorEnum:Contains.
+            when OperatorEnum:None:ToString() then oEnum = OperatorEnum:None.
+        end case.
+        
+        return oEnum.
+    end method.
+    
 end class.

@@ -8,6 +8,7 @@
     Notes       : * We could add a temp-table to manage the EnumMembers' values
                     etc. That's not done right now because there's no pressing 
                     need for it.
+                 * Value takes precedence over name, when both are specified.
   --------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
@@ -17,6 +18,7 @@ using Progress.Lang.AppError.
 using Progress.Lang.Object.
 
 class OpenEdge.Lang.EnumMember abstract:
+    
     define public property Name as character no-undo get. private set.
     define public property Value as integer no-undo get. private set.
     
@@ -48,9 +50,9 @@ class OpenEdge.Lang.EnumMember abstract:
         
         /* ABL deals with unknown values just fine */
         if not lEquals then
-            lEquals = type-of(poEnumMember, EnumMember)
-                                      and this-object:Value eq cast(poEnumMember, EnumMember):Value.
-        
+            lEquals = type-of(poEnumMember, EnumMember) and 
+                      this-Object:ToString() eq  cast(poEnumMember, EnumMember):ToString().
+
         return lEquals.
     end method.
 

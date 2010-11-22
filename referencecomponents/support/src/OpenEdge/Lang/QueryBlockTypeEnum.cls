@@ -9,15 +9,18 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Lang.QueryBlockTypeEnum.
 using OpenEdge.Lang.EnumMember.
 
-class OpenEdge.Lang.QueryBlockTypeEnum final inherits EnumMember: 
+class OpenEdge.Lang.QueryBlockTypeEnum final inherits EnumMember:
     
     define public static property Default   as QueryBlockTypeEnum no-undo get. private set.
     define public static property For       as QueryBlockTypeEnum no-undo get. private set.
     define public static property Preselect as QueryBlockTypeEnum no-undo get. private set.
-        
+    
     constructor static QueryBlockTypeEnum():
         QueryBlockTypeEnum:For = new QueryBlockTypeEnum('For').
         QueryBlockTypeEnum:Preselect = new QueryBlockTypeEnum('Preselect').
@@ -27,9 +30,20 @@ class OpenEdge.Lang.QueryBlockTypeEnum final inherits EnumMember:
            which prefers a preselect. */
         QueryBlockTypeEnum:Default = QueryBlockTypeEnum:Preselect.        
     end constructor.
-
-    constructor public QueryBlockTypeEnum ( input pcName as character ):
+    
+    constructor public QueryBlockTypeEnum (input pcName as character):
         super (input pcName).
     end constructor.
+    
+    method static public QueryBlockTypeEnum EnumFromString(input pcName as character):
+        define variable oEnum as QueryBlockTypeEnum no-undo.
+        
+        case pcName:
+            when QueryBlockTypeEnum:For:ToString() then oEnum = QueryBlockTypeEnum:For. 
+            when QueryBlockTypeEnum:Preselect:ToString() then oEnum = QueryBlockTypeEnum:Preselect.
+        end case.
+        
+        return oEnum.
+    end method. 
     
 end class.

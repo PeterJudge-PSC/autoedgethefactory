@@ -25,18 +25,28 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError:
     define abstract protected property ErrorTitle as character no-undo get.         
     define abstract protected property ErrorText as character no-undo get.
     
+    define protected property LogFileName as character no-undo get. set.
+    
+    define private stream sLog.
+    
     constructor public ApplicationError():               
+        super().
+        
         /* can/will be overwritten by individual Error */
         this-object:Severity = ErrorSeverityEnum:Default:Value.
+        
+        LogFileName = session:temp-directory + '/' + 'error.log'.
     end constructor.
     
     constructor public ApplicationError(poInnerError as Error):               
-        super().
+        this-object().
         this-object:InnerError = poInnerError.
     end constructor.
     
     method public void LogError():
-        @todo(task="implement").
+        output stream sLog to value(LogFileName) append.
+            put stream sLog unformatted ResolvedMessageText().
+        output stream sLog close.
     end method.
     
     method public void ShowError():
@@ -62,8 +72,9 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError:
     method public character ResolvedTitle():
         return substitute('&1', this-object:ErrorTitle).
     end method.
-            
-    method public character ResolvedMessageText ():
+    
+    @todo(task="implement", action="needs refactoring sans formatting").            
+    method public character ResolvedMessageText():
         define variable cMsg      as character no-undo.        
         define variable cInnerMsg as character no-undo.
         define variable oError    as Error no-undo.        

@@ -80,7 +80,7 @@ class OpenEdge.Core.System.Query use-widget-pool
     define public property IsOpen as logical no-undo
         get():
             return (valid-handle(QueryHandle) and QueryHandle:is-open).
-        end get.    
+        end get.
     
     /* Query only has one this-object:Definition associated with it. Once it's created, we can
        manipulate to our hearts' content, but the object instance stays the same. */

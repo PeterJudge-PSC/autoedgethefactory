@@ -1,13 +1,13 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : QueryDefinition
     Purpose     : 
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Fri Mar 27 16:02:48 EDT 2009
-    Notes       : * needs to be IExternalizable because its derived class
-                    ServerDataContext is.
-  ----------------------------------------------------------------------*/
+    Notes       : * Is IExternalizable because its derived TableRequest is
+                    potentially passed across the wire. 
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.System.IQueryDefinition.
@@ -31,7 +31,6 @@ using OpenEdge.Lang.SortDirectionEnum.
 using OpenEdge.Lang.EnumMember.
 
 using Progress.Lang.Object.
-
 
 class OpenEdge.Core.System.QueryDefinition
         implements IQueryDefinition, IExternalizable :
@@ -408,7 +407,7 @@ class OpenEdge.Core.System.QueryDefinition
     end method.
     
     method public void WriteObject(po as ObjectOutputStream):
-        po:WriteObject(QueryBlockType).
+        po:WriteEnum(QueryBlockType).
         
         po:WriteTable(buffer ttBuffer:handle).
         po:WriteTable(buffer ttFilter:handle).
@@ -417,7 +416,7 @@ class OpenEdge.Core.System.QueryDefinition
     end method.
     
     method public void ReadObject(po as ObjectInputStream):
-        QueryBlockType = cast(po:ReadObject(), QueryBlockTypeEnum).
+        QueryBlockType = cast(po:ReadEnum(), QueryBlockTypeEnum).
         
         po:ReadTable(table ttBuffer by-reference).
         po:ReadTable(table ttFilter by-reference).

@@ -1,16 +1,20 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : String
-    Purpose     : 
+    Purpose     : Primitive class for character/longchar variables
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Tue Aug 11 13:08:46 EDT 2009
     Notes       : * Named 'String' because of keyword/namespace conflicts with
-                  ABL Primitive 'character'
-  ----------------------------------------------------------------------*/
+                    ABL Primitive 'character'. There's no built-in class for this.
+                  * Initial requirement for collections; having a class for the
+                    primitive value means that we don't have to distinguish between
+                    primitives and types, which makes the code more readable.
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Lang.String.
+using Progress.Lang.Object.
 
 class OpenEdge.Lang.String:
     define static private variable moEmptyString as String no-undo.
@@ -38,5 +42,12 @@ class OpenEdge.Lang.String:
         
         return moEmptyString.
     end method.
-
+    
+	    	method override public logical Equals(input p0 as Object):
+        if type-of(p0, String) then
+            return (this-object:Value eq cast(p0, String):Value).
+        else
+    return super:Equals(p0).    
+	end method.
+	
 end class.
