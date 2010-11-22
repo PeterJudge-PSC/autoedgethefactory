@@ -89,7 +89,6 @@ interface OpenEdge.Core.System.IQueryDefinition:
     /* WHERE clause elements per buffer. Filter and Join have
        no real meaning outside of the per-buffer context. */
     method public character GetFilter(input pcBufferName as character).
- 
     
     /* Methods returning query elements for buffers in arg order */
     method public character GetQueryString(input pcBufferName as char extent).

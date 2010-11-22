@@ -31,5 +31,29 @@ class OpenEdge.Lang.LockModeEnum final inherits EnumMember:
     constructor public LockModeEnum ( input piValue as integer, input pcName as character ):
         super (input piValue, input pcName).
     end constructor.
+    
+    method static public LockModeEnum EnumFromValue(input piValue as integer):
+        define variable oLockModeEnum as LockModeEnum no-undo.
+        
+        case piValue:
+            when LockModeEnum:ShareLock:Value then oLockModeEnum = LockModeEnum:ShareLock.
+            when LockModeEnum:ExclusiveLock:Value then oLockModeEnum = LockModeEnum:ExclusiveLock.
+            when LockModeEnum:NoLock:Value then oLockModeEnum = LockModeEnum:NoLock. 
+        end case.
+        
+        return oLockModeEnum.
+    end method.
+
+    method static public LockModeEnum EnumFromString(input pcName as character):
+        define variable oLockModeEnum as LockModeEnum no-undo.
+        
+        case pcName:
+            when LockModeEnum:ShareLock:ToString() then oLockModeEnum = LockModeEnum:ShareLock.
+            when LockModeEnum:ExclusiveLock:ToString() then oLockModeEnum = LockModeEnum:ExclusiveLock.
+            when LockModeEnum:NoLock:ToString() then oLockModeEnum = LockModeEnum:NoLock. 
+        end case.
+        
+        return oLockModeEnum.
+    end method.
 
 end class.

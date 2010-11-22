@@ -29,5 +29,18 @@ class OpenEdge.Lang.JoinEnum final inherits EnumMember:
     constructor public JoinEnum ( input pcName as character ):
         super (input pcName).
     end constructor.
+
+    method static public JoinEnum EnumFromString (input pcName as character):
+        define variable oEnum as JoinEnum no-undo.
+        
+        case pcName:
+            when JoinEnum:None:ToString() then oEnum = JoinEnum:None.
+            when JoinEnum:And:ToString() then oEnum = JoinEnum:And.
+            when JoinEnum:Or:ToString() then oEnum = JoinEnum:Or.
+            when JoinEnum:Not:ToString() then oEnum = JoinEnum:Not.
+        end case.
+        
+        return oEnum.
+    end method.
     
 end class.

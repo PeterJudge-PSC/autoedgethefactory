@@ -58,6 +58,7 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
 
     /* User-defined types */
     define public static property ProgressLangObject as DataTypeEnum no-undo get. private set.
+    define public static property Enumeration        as DataTypeEnum no-undo get. private set.
     define public static property Class              as DataTypeEnum no-undo get. private set.
     define public static property ClassArray         as DataTypeEnum no-undo get. private set.
     
@@ -101,6 +102,8 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
         DataTypeEnum:Dataset = new DataTypeEnum(37, 'Dataset').
         DataTypeEnum:Buffer = new DataTypeEnum(38, 'Buffer').
         DataTypeEnum:TempTable = new DataTypeEnum(39, 'Temp-Table').
+        
+        DataTypeEnum:Enumeration = new DataTypeEnum(40, 'Enumeration').
         
         DataTypeEnum:Default = DataTypeEnum:Character.
     end constructor.
@@ -152,8 +155,9 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
             when DataTypeEnum:Dataset:Value            then oMember = DataTypeEnum:Dataset.
             when DataTypeEnum:Buffer:Value             then oMember = DataTypeEnum:Buffer.
             when DataTypeEnum:TempTable:Value          then oMember = DataTypeEnum:TempTable.
+            when DataTypeEnum:Enumeration:Value        then oMember = DataTypeEnum:Enumeration.
         end case.
-                
+        
         return oMember.        
     end method.
     
@@ -200,6 +204,7 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
             when DataTypeEnum:Dataset:ToString()            then oMember = DataTypeEnum:Dataset.
             when DataTypeEnum:Buffer:ToString()             then oMember = DataTypeEnum:Buffer.
             when DataTypeEnum:TempTable:ToString()          then oMember = DataTypeEnum:TempTable.
+            when DataTypeEnum:Enumeration:ToString()        then oMember = DataTypeEnum:Enumeration.
         end case.
                 
         return oMember.   
@@ -212,6 +217,7 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
             when DataTypeEnum:Class or
             when DataTypeEnum:ClassArray or
             when DataTypeEnum:ProgressLangObject or
+            when DataTypeEnum:Enumeration or
             when DataTypeEnum:None then 
                 lPrimitive = false.
             otherwise
