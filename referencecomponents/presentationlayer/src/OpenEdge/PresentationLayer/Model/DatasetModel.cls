@@ -454,6 +454,8 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
         end.
         
         /* Get the change data */
+        create dataset hTransportDataset.
+        hTransportDataset:create-like(MasterDataset).
         hTransportDataset:get-changes(MasterDataset).
         
         oSaveRequest = new SaveRequest(ServiceName).
@@ -469,8 +471,10 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
            change the size of an array. The stack will never be larger than num buffers */
         oStack = new CharacterStack(iMax).
         do iLoop = 1 to iMax:
-            if hTransportDataset:get-buffer-handle(pcTables[iLoop]):table-handle:has-records then
-                oStack:Push(hTransportDataset:get-buffer-handle(iLoop):buffer-name).
+            /* there will always be records int he before buffer, regardless of the operation.
+               the 'after' buffer won't contain deletes. */
+            if hTransportDataset:get-buffer-handle(pcTables[iLoop]):before-buffer:table-handle:has-records then
+                oStack:Push(hTransportDataset:get-buffer-handle(iLoop):name).
         end.
         
         /* Fill the array backwards, since a stack is always LIFO. Order is

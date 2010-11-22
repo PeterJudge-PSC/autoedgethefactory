@@ -63,7 +63,7 @@ class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentIn
                                      input pcInstanceName as character,
                                      input poComponentType as ComponentTypeEnum,
                                      input plAutoStart as logical):
-        Assert:ArgumentNotNull(poService, 'Service').
+         Assert:ArgumentNotNull(poService, 'Service').
         Assert:ArgumentNotNullOrEmpty(pcInstanceName, 'Instance name').
         Assert:ArgumentNotNull(poComponentType, 'Component type').
         

@@ -703,7 +703,7 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
             
             /* only get more data if we really need more data */
             oTableRequest = CreateTableRequestFromContext(oTableContext).
-            if not oTableRequest:TableRequestType:Equals(TableRequestTypeEnum:NoOp) then
+            if not oTableRequest:TableRequestType:Equals(TableRequestTypeEnum:None) then
                 oFetchRequest:TableRequests:Put(pcTables[iLoop], oTableRequest).
         end.
         
@@ -736,7 +736,7 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         
         /* If there are 0 remaining pages, then we have all the data, and we don't need to do anything more. */
         if poContext:NumRemainingPages ne 0 then
-            oTR:TableRequestType = TableRequestTypeEnum:NoOp.
+            oTR:TableRequestType = TableRequestTypeEnum:None.
         else
         do:
             oTR:PageSize = poContext:PageSize.

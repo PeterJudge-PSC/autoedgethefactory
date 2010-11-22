@@ -10,15 +10,18 @@
 routine-level on error undo, throw.
 
 using OpenEdge.DataSource.IDataSource.
+using OpenEdge.DataAccess.IDataAccess.
 using OpenEdge.DataSource.DataSourceEventArgs.
 using OpenEdge.DataSource.DataSourceEventEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 
+using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.ITableOwner.
@@ -47,7 +50,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     define protected property LongCharDataTarget as longchar no-undo get. private set.    
     define protected property ObjectDataTarget as Object   no-undo get. private set.
     
-    define protected property CurrentRequest as IServiceRequest no-undo get. set.
+    define protected property CurrentTableRequest as ITableRequest no-undo get. set.
      
     /** The default Page or batch size for this datasource. Can be overridden
         by the page size on the table request. */
@@ -57,21 +60,21 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     define public property FillMode as FillModeEnum no-undo get. set.
     
     /* DataSource Fetch/Fill events */
-    define public event BeforeFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event BeforeRowFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterRowFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterFill signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeRowFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterRowFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
     /* DataSource Save/Commit events */
-    define public event BeforeSaveTransaction signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event BeforeSave            signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterSave             signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
-    define public event AfterSaveTransaction  signature void(input poSender as Object, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeSaveTransaction signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeSave            signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterSave             signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterSaveTransaction  signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
-    constructor public DataSource ():
-        CreateDataStore().
+    constructor public DataSource():
+        CreateDataStore().        
     end constructor.
-
+    
     destructor public DataSource ():
         DeleteDataStore().
         ClearDataTarget().
@@ -89,7 +92,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
             </code>
       */
     method abstract protected void CreateDataStore().
-    /* Deletes the datastore once done. */
+    /** Deletes the datastore once done. */
     method abstract protected void DeleteDataStore().
     
     /** Attaches the actual datasource - this could be an ABL datasource, or some other 
@@ -106,9 +109,18 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     method abstract protected void DetachDataStoreFromTarget().
     
     /** Prepare with query, batchsize and more.
-    
-       @param ITableRequest Parameters for the fetch (query modifications, page size etc). */
-    method abstract public void Prepare(input poRequest as ITableRequest).
+        
+        @param ServiceMessageActionEnum The action that we're preparing the datasource for. 
+               We may have different actions based on whether this is a Fetch or a Save.
+        @param ITableRequest Parameters for the fetch (query modifications, page size etc).
+        @param IDataAccess The DataAccess object making this request. The DAO can be used to
+               resolve table- or field name mappings (from the Business Entity names to the 
+               Data Source names.           */
+    method public void Prepare(input poAction as ServiceMessageActionEnum,
+                               input poRequest as ITableRequest,
+                               input poDAO as IDataAccess):
+        CurrentTableRequest = poRequest.
+    end method.
     
     /** This SetDataTarget override is provided since the bulk of datatargets in ABL
         will be buffers (possibly datasets).
@@ -152,7 +164,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
         AttachDataStoreToTarget().                                                            
     end method.
     
-        /** Clears the Datatarget and associated properties */
+    /** Clears the Datatarget and associated properties */
     method public void ClearDataTarget():
         DetachDataStoreFromTarget().
         
@@ -170,8 +182,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
         the inverse of the SetDataTarget() method; this is basically just a STRING()
         of the value or reference.
         
-        @return longchar
-     */
+        @return longchar A longchar representation of the data target. */
     method public longchar GetDataTarget():
         define variable cValue as longchar no-undo.
         
@@ -205,7 +216,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
                 new DataSourceEventArgs(
                         DataSourceEventEnum:BeforeSaveTransaction,
                         this-object:DataTargetFormat,
-                        this-object:DataTargetType,                        
+                        this-object:DataTargetType,
                         GetDataTarget(),
                         pcRowKey)).
     end method.

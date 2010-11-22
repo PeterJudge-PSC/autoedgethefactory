@@ -15,13 +15,17 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum.
 
 using OpenEdge.Core.System.QueryDefinition.
 
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.ObjectInputStream.
+
 using OpenEdge.Lang.FindTypeEnum.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.JoinEnum.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDefinition
-        implements ITableRequest: 
+        implements ITableRequest, IExternalizable: 
     
     /** protected set - not changeable - provide with constructor  */  
     define property TableName as char no-undo get. private set.
@@ -45,9 +49,15 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
         Typically used with TableRequestTypeEnum:Position */ 
     define property RowKey as char extent no-undo get. set.
     
+    /* default ctor required for serialization */
+    constructor public TableRequest():
+    end constructor.
+        
     constructor public TableRequest(pcTableName as character):
-        super().
+        this-object().
+        
         TableName = pcTableName.
+        AddBuffer(TableName).
     end constructor.
     
     /** Add search expression  (need to be kept separate from filter.). 
@@ -81,5 +91,30 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
     method public character BuildSearchString():
         return GetQueryString().
     end method.
+
+/** IExternalizable **/
+    method override public void WriteObject(po as ObjectOutputStream):
+        super:WriteObject(po).
+        
+        po:WriteChar(TableName).
+        po:WriteInt(PageSize).
+        po:WriteLogical(FullPage).
+        po:WriteInt(NumRemainingPages).
+        po:WriteEnum(TableRequestType).
+        po:WriteCharArray(PageContext).
+        po:WriteCharArray(RowKey).
+    end method.
     
+    method override public void ReadObject(po as ObjectInputStream):
+        super:ReadObject(po).
+        
+        TableName = po:ReadChar().
+        PageSize = po:ReadInt().
+        FullPage = po:ReadLogical().
+        NumRemainingPages = po:ReadInt().
+        TableRequestType = cast(po:ReadEnum(), TableRequestTypeEnum).
+        PageContext = po:ReadCharArray().
+        RowKey = po:ReadCharArray().
+    end method.
+        
 end class.

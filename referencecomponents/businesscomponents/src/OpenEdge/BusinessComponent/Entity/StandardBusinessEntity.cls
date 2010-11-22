@@ -37,18 +37,21 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
     define protected property StaticDatasetHandle as handle no-undo 
         get.
         private set.
-    
-    constructor public StandardBusinessEntity(input poDAO as IDataAccess,
-                                              input poServiceManager as IServiceManager,
-                                              input poComponentInfo as IComponentInfo):
-        this-object(input poDAO, input poServiceManager, input poComponentInfo).
-    end constructor.
-    
+
 	constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
-	                                          input poComponentInfo as IComponentInfo):
-		super(input poServiceManager, input poComponentInfo).
+	                                          input poComponentInfo as IComponentInfo,
+	                                          input pcServiceName as character,
+	                                          input poDAO as IDataAccess ):
+		super(input poServiceManager, input poComponentInfo, input pcServiceName, input poDAO).
 	end constructor.
-	
+
+	constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
+	                                          input poComponentInfo as IComponentInfo,
+	                                          input pcServiceName as character):
+		super (input poServiceManager, input poComponentInfo, input pcServiceName).
+	end constructor.
+    
+
     method override public void FetchData(poRequest as IFetchRequest):
         /* We assume new data 
            appending requests would possibly need direction to MERGE or APPEND in fill */
@@ -60,15 +63,19 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
     
     /* Override example */
     method override public ISaveResponse SaveData(input poRequest as ISaveRequest):
+        define variable oSaveResponse as ISaveResponse no-undo.
+        
         /* Make any pre-save BusinessEntity validation calls here. No need for a generic
           'dataset+PreSave' name, since each BE will add its own overrides. 
           
           The DataAccess and DataSources take care of ProDataSet- and Buffer-level events/
           callbacks if needed. */
         
-        super:SaveData(poRequest).
+        oSaveResponse = super:SaveData(poRequest).
         
         /* make post-save BusinessEntity  validation calls here */
+        
+        return oSaveResponse.
     end method.
     
 	method override public IFetchResponse FetchSchema(input poDefineRequest as IFetchRequest):
@@ -80,7 +87,7 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
         return oFetchSchemaResponse.
 	end method.
     
-    method private handle CopyStaticDataset (output dataset-handle phDataset):
+    method protected handle CopyStaticDataset (output dataset-handle phDataset):
         phDataset = StaticDatasetHandle.
     end method.
     

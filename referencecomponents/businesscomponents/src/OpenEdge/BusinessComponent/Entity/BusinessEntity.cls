@@ -1,6 +1,7 @@
 /** ------------------------------------------------------------------------
     File        : BusinessEntity
-    Purpose     : 
+    Purpose     : General Business entity class. The Business Entity is the primary
+                  unit of business logic and data in the OERA.
     Syntax      : 
     Description : 
     @author hdaniels
@@ -29,6 +30,8 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using OpenEdge.Core.System.ArgumentError.
+
+using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 
 class OpenEdge.BusinessComponent.Entity.BusinessEntity abstract inherits Service 
@@ -113,16 +116,23 @@ class OpenEdge.BusinessComponent.Entity.BusinessEntity abstract inherits Service
         return oResponse.
     end method.
     
-    constructor public BusinessEntity(input poDAO as IDataAccess,
-                                      input poServiceManager as IServiceManager,
-                                      input poComponentInfo as IComponentInfo):
-        this-object(input poServiceManager, input poComponentInfo).
+    constructor public BusinessEntity(input poServiceManager as IServiceManager,
+                                      input poComponentInfo as IComponentInfo,
+                                      input pcServiceName as character, 
+                                      input poDAO as IDataAccess):
+        this-object(poServiceManager, poComponentInfo, pcServiceName).
+        
         DataAccess = poDAO.
     end constructor.
     
     constructor public BusinessEntity(input poServiceManager as IServiceManager,
-                                      input poComponentInfo as IComponentInfo):
+                                      input poComponentInfo as IComponentInfo,
+                                      input pcServiceName as character):
         super(input poServiceManager, input poComponentInfo).
+        
+        Assert:ArgumentNotNullOrEmpty(pcServiceName, 'Service Name').
+        
+        this-object:Service = pcServiceName.
     end constructor.
     
     method public void FetchData(poRequest as IFetchRequest):
