@@ -13,10 +13,13 @@ routine-level on error undo, throw.
 
 using OpenEdge.Lang.AgentRequest.
 using OpenEdge.Lang.Collections.Map.
+using OpenEdge.Lang.Collections.IMap.
 
 class OpenEdge.Lang.AgentRequest:
+    define public property ActiveSince as datetime-tz no-undo get. private set.
+    
     /* A collection of user-defined properties */
-    define public property RequestProperties as Map no-undo get. private set.
+    define public property RequestProperties as IMap no-undo get. private set.
     
     define static public property Instance as AgentRequest no-undo  
         get():
@@ -30,7 +33,8 @@ class OpenEdge.Lang.AgentRequest:
     
     constructor private AgentRequest():
         assign this-object:Id = guid(generate-uuid)
-               RequestProperties = new Map().
+               RequestProperties = new Map()
+               ActiveSince = now.
     end constructor.
     
 end class.

@@ -18,8 +18,7 @@ interface OpenEdge.CommonInfrastructure.Common.IComponentInfo:
         implements.
         
         Typically defaults to the concrete type when the component is
-        not started as a service (or interface by InjectABL). 
-      */
+        not started as a service (or interface by InjectABL).   */
     define public property Service as class Class no-undo get.
     
     /** Whether the component is auto-started when it is requested, or whether

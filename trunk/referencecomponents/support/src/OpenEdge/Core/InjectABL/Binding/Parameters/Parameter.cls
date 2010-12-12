@@ -102,11 +102,11 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter
     
 /* Primitive value constructors */
     constructor public Parameter(input pcValue as character):
-        this-object(pcValue, DataTypeEnum:character).
+        this-object(pcValue, DataTypeEnum:Character).
     end constructor.
     
     constructor public Parameter(input pcValue as character extent):
-        this-object(pcValue, DataTypeEnum:character).
+        this-object(pcValue, DataTypeEnum:Character).
     end constructor.
     
     constructor public Parameter(input pcValue as character, input poDataType as DataTypeEnum):
@@ -200,6 +200,8 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Parameter implements IParameter
         /* These are always PLC */
         this-object(poType, Class:GetClass('Progress.Lang.Class')).
         DataType = poDataType.
-    end constructor.        
+    end constructor.
+    
+            
     
 end class.

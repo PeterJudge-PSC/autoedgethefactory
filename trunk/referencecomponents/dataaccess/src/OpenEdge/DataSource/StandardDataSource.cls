@@ -1,6 +1,6 @@
 /** ------------------------------------------------------------------------
     File        : StandardDataSource
-    Purpose     : Datasource that populates a buffer using an ABL query
+    Purpose     : DataSource that populates a BE based on an ABL DB Table
     Syntax      : 
     Description : 
     @author hdaniels
@@ -24,8 +24,14 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ITenantManager.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 
 using OpenEdge.Core.System.Query.
+using OpenEdge.Core.System.QueryBuffer.
+using OpenEdge.Core.System.QuerySort.
+using OpenEdge.Core.System.QueryFilter.
+using OpenEdge.Core.System.QueryJoin.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
 using OpenEdge.Core.System.ITableOwner.
@@ -33,6 +39,10 @@ using OpenEdge.Core.System.IQuery.
 using OpenEdge.Core.System.ArgumentError.
 using OpenEdge.Core.System.ApplicationError.
 
+using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.QueryBlockTypeEnum.
+using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.LockModeEnum.
 using OpenEdge.Lang.QueryTypeEnum.
 using OpenEdge.Lang.DataTypeEnum.
@@ -41,18 +51,33 @@ using OpenEdge.Lang.RowStateEnum.
 using OpenEdge.Lang.String.
 
 using Progress.Lang.SysError.
+using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits DataSource
         implements ITableOwner:
-                    
+    
+    define protected property TenantManager as ITenantManager no-undo
+        get():
+            if not valid-object(TenantManager) then
+                TenantManager = cast(cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'))
+                                      , IServiceManager)
+                                  :StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ITenantManager'))
+                                      , ITenantManager).
+            
+            return TenantManager.
+        end get.
+        set.
+        
     define protected property CurrentQuery as IQuery no-undo get. private set.
+        
+    define abstract protected property TableBuffer as handle no-undo get. set.
     
     /** The ABL DATA-SOURCE handle being used */
     define protected property DataSourceHandle as handle no-undo get. set.
     define protected property DataSourceAttached as logical no-undo get. set.
     
-    constructor public StandardDataSource ():
+    constructor public StandardDataSource():
         super().
     end constructor.
     
@@ -68,6 +93,9 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                                         input poRequest as ITableRequest,
                                         input poDAO as IDataAccess):
         super:Prepare(poAction, poRequest, poDAO).
+        
+        CurrentQuery = new Query(this-object,   /* ITableOwner */
+                                 DefineSourceDataQuery(poRequest, poDAO) ).
         
         HandleDataTarget:fill-mode = FillMode:ToString().
     end method.
@@ -120,7 +148,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         define variable hBuffer as handle no-undo.
         
         oTableResponse = new TableResponse(CurrentTableRequest:TableName).
-                
+        
         /* pop the target buffer into the context. not the 'database table' */
         if DataTargetType eq DataTypeEnum:Handle and
            DataTargetFormat eq DataFormatEnum:TempTable then
@@ -315,6 +343,88 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         end case.
         
 	    return hTarget.
+    end method.
+    
+    /** Returns a filter clause on the tenant ID for this datasource.  
+    
+        Note that this method may become redundant in OE 11.0.0 with the introduction of
+        multi-tenant databases.
+        
+        @return QueryFilter The filter object with tenancy. */
+    method abstract protected QueryFilter GetTenantFilter().
+    
+    method protected IQueryDefinition DefineSourceDataQuery(input poRequest as ITableRequest,
+                                                            input poDAO as IDataAccess  ):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable oBuffer as QueryBuffer no-undo.
+        define variable oFilter as QueryFilter no-undo.
+        define variable oJoin as QueryJoin no-undo.
+        define variable oSort as QuerySort no-undo.
+        define variable oElements as Object extent no-undo.
+        define variable oDefinition as IQueryDefinition no-undo.
+        define variable cResolvedBuffer as character no-undo.
+        
+        oElements = cast(poRequest, IQueryDefinition):GetQueryElements().
+        iMax = extent(oElements).
+        oDefinition = new QueryDefinition().
+        
+        do iLoop = 1 to iMax:
+            case oElements[iLoop]:GetClass():
+                when Class:GetClass('OpenEdge.Lang.QueryBlockTypeEnum') then
+                    oDefinition:QueryBlockType = cast(oElements[iLoop], QueryBlockTypeEnum).
+
+                when Class:GetClass('OpenEdge.Core.System.QueryBuffer') then
+                do:
+                    oBuffer = cast(oElements[iLoop], QueryBuffer).
+                    oDefinition:AddBuffer(
+                        poDAO:ResolveTableName(oBuffer:Name),
+                        poDAO:ResolveTableName(oBuffer:TableName),
+                        oBuffer:QueryType,
+                        oBuffer:LockMode).
+                end.
+
+                when Class:GetClass('OpenEdge.Core.System.QueryFilter') then
+                do:
+                    oFilter = cast(oElements[iLoop], QueryFilter).
+                    cResolvedBuffer = poDAO:ResolveTableName(oFilter:BufferName). 
+                    oDefinition:AddFilter(
+                        cResolvedBuffer,
+                        poDAO:ResolveFieldName(oFilter:BufferName, oFilter:FieldName),
+                        oFilter:Operator,
+                        oFilter:FieldValue,
+                        oFilter:FieldType,
+                        oFilter:JoinType).
+                end.
+
+                when Class:GetClass('OpenEdge.Core.System.QueryJoin') then
+                do:
+                    oJoin = cast(oElements[iLoop], QueryJoin).
+                    oDefinition:AddJoin(
+                        poDAO:ResolveTableName(oJoin:BufferName),
+                        poDAO:ResolveFieldName(oJoin:BufferName, oJoin:FieldName),
+                        oJoin:Operator,
+                        poDAO:ResolveTableName(oJoin:JoinBufferName),
+                        poDAO:ResolveFieldName(oJoin:JoinBufferName, oJoin:JoinFieldName),
+                        oJoin:JoinType).
+                end.
+
+                when Class:GetClass('OpenEdge.Core.System.QuerySort') then                
+                do:
+                    oSort = cast(oElements[iLoop], QuerySort).
+                    oDefinition:AddSort(
+                        poDAO:ResolveTableName(oSort:BufferName),
+                        poDAO:ResolveFieldName(oSort:BufferName, oSort:FieldName),
+                        oSort:Direction).
+                end.
+            end case.
+        end.
+        
+        oFilter = GetTenantFilter().
+        if valid-object(oFilter) then
+            oDefinition:AddFilter(oFilter).
+        
+        return oDefinition.        
     end method.
     
 end class.

@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : InvocationError
     Purpose     : 
     Syntax      : 
@@ -6,13 +6,13 @@
     @author pjudge
     Created     : Mon Apr 12 15:06:24 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
 using Progress.Lang.Error.
 
-class OpenEdge.Core.InjectABL.InvocationError inherits ApplicationError: 
+class OpenEdge.Core.System.InvocationError inherits ApplicationError: 
 
     define override protected property ErrorText as character no-undo get. set. 
     define override protected property ErrorTitle as character no-undo get. set. 
@@ -28,6 +28,14 @@ class OpenEdge.Core.InjectABL.InvocationError inherits ApplicationError:
                                        pcArgs1 as char,
                                        pcArgs2 as char):
         this-object(poErr).
+        
+        AddMessage(pcArgs1, 1).
+        AddMessage(pcArgs2, 2).
+    end constructor.
+
+    constructor public InvocationError(pcArgs1 as char,
+                                       pcArgs2 as char):
+        this-object().
         
         AddMessage(pcArgs1, 1).
         AddMessage(pcArgs2, 2).

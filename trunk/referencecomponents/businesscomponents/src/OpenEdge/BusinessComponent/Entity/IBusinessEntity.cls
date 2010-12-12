@@ -26,8 +26,9 @@ interface OpenEdge.BusinessComponent.Entity.IBusinessEntity:
     method public void FetchData(input poRequest as IFetchRequest).   
     
     /** Response complement method for FetchData above.
+        @param character The message id for the request/response
         @return IFetchResponse */
-    method public IFetchResponse GetData().
+    method public IFetchResponse GetData(input pcMessageId as longchar).
     
     /** Commit the data to the DataSource(s) through the DataAccess object.
         

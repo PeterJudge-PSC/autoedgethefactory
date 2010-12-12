@@ -26,7 +26,7 @@ interface OpenEdge.Core.InjectABL.Binding.Parameters.IParameter:
     /** (mandatory) The datatype of the parameter. */
     define public property DataType as DataTypeEnum no-undo get.
     
-    /** Specify a declared type for cases where the parameter an object or array thereof. ABL doesn't currently (10.2B)
+    /** (mandatory) Specify a declared type for cases where the parameter an object or array thereof. ABL doesn't currently (10.2B)
         allow us to discover either the declared type of the array, or the signature of the callee (method, property, ctor),
         and so we need to specify the type for the InjectABL kernel. */
     define public property DeclaredType as class Class no-undo get.

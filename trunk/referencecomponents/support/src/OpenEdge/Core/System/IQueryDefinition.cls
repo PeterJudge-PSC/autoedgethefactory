@@ -9,6 +9,11 @@
   ---------------------------------------------------------------------- */
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinitionEventArgs.
+using OpenEdge.Core.System.QueryBuffer.
+using OpenEdge.Core.System.QueryFilter.
+using OpenEdge.Core.System.QueryJoin.
+using OpenEdge.Core.System.QuerySort.
+
 using OpenEdge.Lang.QueryBlockTypeEnum.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.DataTypeEnum.
@@ -16,8 +21,12 @@ using OpenEdge.Lang.LockModeEnum.
 using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.QueryTypeEnum.
 using OpenEdge.Lang.SortDirectionEnum.
+using OpenEdge.Lang.String.
+
+using Progress.Lang.Object.
 
 interface OpenEdge.Core.System.IQueryDefinition:
+    
     /* Allows us to optimize building of queries (ie we don't need to create a new buffer).
        The setting of the *Changed properties to FALSE is an exogenous event: whoever's
        using this object needs to do that. It will probably happen on open. */
@@ -27,7 +36,7 @@ interface OpenEdge.Core.System.IQueryDefinition:
     define public property QueryBlockType as QueryBlockTypeEnum no-undo get. set.
     define public property NumBuffers as integer no-undo get.
     
-    /* Old-school */    
+    /* Old-school */
     method public void ClearAll().
     method public void ClearBuffers().
     method public void ClearFilters().
@@ -43,12 +52,18 @@ interface OpenEdge.Core.System.IQueryDefinition:
                                  input pcTable as character,
                                  input poQueryType as QueryTypeEnum,
                                  input poLockMode as LockModeEnum).
+    method public void AddBuffer(input poQueryBuffer as QueryBuffer).
     
     /* IQuery will use these methods when constructing an ABL query */
     method public character extent GetBufferList().
     method public character extent GetBufferList(output pcTables as char extent,
                                                  output poQueryTypes as QueryTypeEnum extent,
                                                  output poLockModes as LockModeEnum extent).
+    
+    /** Returns the buffers in the definition. 
+        
+        @return QueryBuffer[] An ordered array of buffers in this definition. */
+    method public QueryBuffer extent GetQueryBuffers().
 
     method public void SetBufferTable(input pcBuffer as character, input pcTable as character).
     method public void SetBufferLockMode(input pcBuffer as character, input poLockMode as LockModeEnum).   /* OpenEdge.System.Core.LockModeEnum  */
@@ -59,40 +74,143 @@ interface OpenEdge.Core.System.IQueryDefinition:
     method public QueryTypeEnum GetBufferQueryType(input pcBuffer as character).
     
     @todo(task="Refactor AddFilter to have type-specific signatures; remove need to pass DataTypeEnum. ").
+    /** Filter the query per the arguments.
+        
+        @param character The buffer name being filtered 
+        @param character The buffer field being filtered
+        @param OperatorEnum The operator (=,>, etc)
+        @param String The string value for the filter.
+        @param DataTypeEnum The datatype being stored in the string parameter.
+        @param JoinEnum The join type (and/or etc) for the filter. */
     method public void AddFilter (input pcBufferName as character,
                                   input pcFieldName as character,
                                   input poOperator as OperatorEnum,
-                                  input pcFieldValue as character,
-                                  input poFieldType as DataTypeEnum,       /* OpenEdge.Core.System.DataTypeEnum */
+                                  input poFieldValue as String,
+                                  input poFieldType as DataTypeEnum,
                                   input poJoinType as JoinEnum).
     
+    /** Filter the query per the arguments.
+                    
+        @param QueryFilter The query filter used to filter the query. */                                  
+    method public void AddFilter (input poQueryFilter as QueryFilter).
+    
+    /** Create a join between 2 buffers in this definition.
+        
+        @param character The first buffer name in the join
+        @param character The first buffer field in the join
+        @param OperatorEnum The operator (=,>, etc)
+        @param character The second buffer name in the join
+        @param character The second buffer field in the join
+        @param JoinEnum The join type (and/or etc) for the filter. */
     method public void AddJoin (input pcBufferName as character,
                                 input pcFieldName as character,
                                 input poOperator as OperatorEnum,
                                 input pcJoinBufferName as character,
                                 input pcJoinFieldName as character,
                                 input poJoinType as JoinEnum).
+
+    /** Create a join between 2 buffers in this definition.
     
+        @param QueryJoin Parameters for the join. */    
+    method public void AddJoin(input poQueryJoin as QueryJoin).
+
+    /** Add a sort condition to the definition.
+    
+        @param character The buffer being sorted
+        @param character The field being sorted
+        @param SortDirection The direction of the sort. */
     method public void AddSort (input pcBufferName as character,
                                 input pcFieldName as character,
                                 input poSortDirection as SortDirectionEnum).
 
+    /** Add a sort condition to the definition.
+        
+        @param character The buffer being sorted
+        @param character The field being sorted
+        @param SortDirection The direction of the sort.
+        @param integer The ordinal position of the sort phrase for the buffer. */
     method public void AddSort (input pcBufferName as character,
                                 input pcFieldName as character,
                                 input poSortDirection as SortDirectionEnum,
-                                input piOrder as integer).
-                                
-    /* Methods returning query elements for all buffers in default (added-to-def) order */
-    method public character GetQueryString().    
-    method public character GetSort().
+                                input piPosition as integer).
     
-    /* WHERE clause elements per buffer. Filter and Join have
-       no real meaning outside of the per-buffer context. */
-    method public character GetFilter(input pcBufferName as character).
-    
-    /* Methods returning query elements for buffers in arg order */
-    method public character GetQueryString(input pcBufferName as char extent).
-    method public character GetSort(input pcBufferName as character extent).
+    /** Add a sort condition to the definition.
+        
+        @param QuerySort Parameters for the sort. */ 
+    method public void AddSort(input poQuerySort as QuerySort).
+                                    
+    /** Returns the complete query string (ready for QUERY-PREPARE).
+        
+        @param longchar The complete query prepare string. */
+    method public longchar GetQueryString().
     
     
+    /** Returns the complete query string (ready for QUERY-PREPARE).
+        
+        @param character[] An array of buffer names for which 
+               return a where clause that filters and joins between all
+               buffers.
+        @return longchar The query clause string. */
+    method public longchar GetQueryString(input pcBufferName as character extent).
+    
+    /** Returns all of the query elements for the query.
+        
+        @return Object[] An array of the elements that make up this query. */
+    method public Object extent GetQueryElements().
+    
+    /** Returns sort information for all buffers in the definition.
+        
+        @return longchar A complete sort string for all buffers in the definition. */
+    method public longchar GetSort().
+    
+    /** Returns sort information.
+        
+        @param character The buffer name for which to retrieve sort information
+        @return longchar A complete sort string for the specified buffer. */
+    method public longchar GetSort(input pcBufferName as character).
+    
+    /** Returns the Sort information for the given buffer.
+        
+        @param character The buffer name for which to retrieve sort information
+        @return QuerySort[] An ordered array of sort parameters */
+    method public QuerySort extent GetQuerySort(input pcBufferName as character).
+    
+    /** Returns the Sort information for all buffers. 
+        
+        @return QuerySort[] An ordered array of sort parameters */    
+    method public QuerySort extent GetQuerySort().
+    
+    /** Returns the filter criteria for a buffer, in string form. This
+        could be used as-is for a WHERE clause.
+        
+        @param character The buffer name 
+        @return longchar The where-clause-compatible string. */       
+    method public longchar GetFilter(input pcBufferName as character).
+    
+    /** Returns the filters applicable to a buffer.
+       
+        @param character The buffer name
+        @return QueryFilter[] An array of query filter objects that
+                apply to this buffer. */
+    method public QueryFilter extent GetQueryFilter(input pcBufferName as character).
+
+    /** Returns the filters applicable to all the buffers in the query.
+       
+        @return QueryFilter[] An array of query filter objects that apply 
+                to all the buffers. The filters are ordered by buffer order. */
+    method public QueryFilter extent GetQueryFilters().
+
+    /** Returns the joins applicable to a buffer.
+        
+        @param character The buffer name
+        @return QueryJoin[] An array of query filter objects that
+                apply to this buffer. */
+    method public QueryJoin extent GetQueryJoin(input pcBufferName as character).
+    
+    /** Returns the filters applicable to all the buffers in the query.
+       
+        @return QueryJoin [] An array of query filter objects that apply 
+                to all the buffers. The filters are ordered by buffer order. */
+    method public QueryJoin extent GetQueryJoins().
+
 end interface.

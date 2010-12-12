@@ -23,8 +23,7 @@ class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentIn
         implements.
         
         Typically defaults to the concrete type when the component is
-        not started as a service (or interface by InjectABL). 
-      */
+        not started as a service (or interface by InjectABL).   */
     define public property Service as class Class no-undo get. private set.
     
     /** Instance name for the running component. Optionally a unique value, although
@@ -63,8 +62,7 @@ class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentIn
                                      input pcInstanceName as character,
                                      input poComponentType as ComponentTypeEnum,
                                      input plAutoStart as logical):
-         Assert:ArgumentNotNull(poService, 'Service').
-        Assert:ArgumentNotNullOrEmpty(pcInstanceName, 'Instance name').
+        Assert:ArgumentNotNull(poService, 'Service').
         Assert:ArgumentNotNull(poComponentType, 'Component type').
         
         assign InstanceName = pcInstanceName

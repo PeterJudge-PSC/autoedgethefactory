@@ -22,6 +22,7 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.Lang.ABLSession:    
+    define public property ActiveSince as datetime-tz no-undo get. private set.
     define public property Id as char no-undo get. private set.
     
     /* A collection of user-defined properties */
@@ -37,9 +38,9 @@ class OpenEdge.Lang.ABLSession:
         private set.
     
     constructor private ABLSession():
-        this-object:Id = guid(generate-uuid).
-        
-        SessionProperties = new Map().
+        assign this-object:Id = guid(generate-uuid)
+               ActiveSince = now
+               SessionProperties = new Map().
     end constructor.
     
     /** Returns the first running persistent procedure instance found

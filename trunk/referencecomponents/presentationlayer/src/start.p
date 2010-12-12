@@ -35,17 +35,11 @@ cModulePaths[1] = 'OpenEdge/PresentationLayer/InjectABL'.
 
 oInjectABLKernel:Load(cModulePaths).
 
-ABLSession:Instance:SessionProperties:Put(Class:GetClass('OpenEdge.Core.InjectABL.IKernel'), oInjectABLKernel).
-
 oServiceManager = cast(oInjectABLKernel:Get('OpenEdge.CommonInfrastructure.Common.IServiceManager'), IServiceManager).
-
-message 
-    'started servicemanager of type ' oServiceManager:GetClass():TypeName skip
-view-as alert-box.
-
-/* Run, app, run. See app run! 
+/* Run, app, run. See app run! */ 
 oServiceManager:Initialize().
-*/
+
+ABLSession:Instance:SessionProperties:Put(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'), oServiceManager).
 
 catch oException as ApplicationError:
     oException:ShowError().

@@ -13,7 +13,7 @@
 routine-level on error undo, throw.
 
 /* ***************************  Main Block  *************************** */
-using OpenEdge.Core.InjectABL.IKernel.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.AgentConnection.
 
@@ -21,8 +21,8 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 /* ***************************  Main Block  *************************** */
-cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')),
-        IKernel):Clear(AgentConnection:Instance).
+cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager')),
+        IServiceManager):Kernel:Clear(AgentConnection:Instance).
 
 delete object AgentConnection:Instance.
 

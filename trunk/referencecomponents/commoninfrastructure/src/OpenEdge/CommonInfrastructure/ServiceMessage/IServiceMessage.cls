@@ -26,7 +26,7 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage:
     
     /** Unique message identifier. Allows for completely decoupled request and response
         messages to be tied back together. This will probably be a GUID. */
-    define public property MessageId as character no-undo get.
+    define public property MessageId as longchar no-undo get.
     
     /** Type of request (ServiceMessageActionEnum). The defaults are Fetch,Save,Define but
         may be overridden (by FetchByRegion or something similar). 

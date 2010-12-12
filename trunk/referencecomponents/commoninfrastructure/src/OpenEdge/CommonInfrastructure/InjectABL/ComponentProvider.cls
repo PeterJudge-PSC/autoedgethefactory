@@ -18,6 +18,7 @@ using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
 
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.RoutineTypeEnum.
@@ -31,21 +32,32 @@ class OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider inherits Standar
     constructor public ComponentProvider(poClass as class Class):
         super(poClass).
     end constructor.
-    
+
     method override public Object Create(poContext as ILifecycleContext):
         define variable oNewParams as IParameter extent no-undo.
         define variable oRoutine as Routine no-undo.
         define variable oIterator as IIterator no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
+        define variable iOffset as integer no-undo init 1.
+        
+        if poContext:Arguments:Size eq 0 then
+            poContext:Arguments:Add(new Routine(poContext:Binding:Service, '', RoutineTypeEnum:Constructor)).
         
         oIterator = poContext:Arguments:Iterator().
         do while oIterator:HasNext():
-            oRoutine = cast(oIterator:Next(), Routine).            
-            iMax = extent(oRoutine:Parameters) + 1.            
-            if iMax eq ? then iMax = 1.
-                extent(oNewParams) = iMax. 
+            oRoutine = cast(oIterator:Next(), Routine).
             
+            /* We only care about constructors here */
+            if not oRoutine:RoutineType:Equals(RoutineTypeEnum:Constructor) then
+                next.
+            
+            extent(oNewParams) = ?.
+            iMax = extent(oRoutine:Parameters) + iOffset.            
+            if iMax eq ? then
+                iMax = iOffset.
+            extent(oNewParams) = iMax.
+
             oNewParams[1] = new Parameter(
                                 new ComponentInfo(
                                     poContext:Binding:Service,
@@ -53,9 +65,13 @@ class OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider inherits Standar
                                     ComponentTypeEnum:ApplicationComponent,
                                     true),
                                 Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo')).
-            do iLoop = 2 to iMax:
-                oNewParams[iLoop] = oRoutine:Parameters[iLoop - 1].
+            do iLoop = (iOffset + 1) to iMax:
+                oNewParams[iLoop] = oRoutine:Parameters[iLoop - iOffset].
             end.
+            
+            /* replace old with new */
+            oRoutine:Parameters = ?.
+            extent(oRoutine:Parameters) = ?.
             oRoutine:Parameters = oNewParams.
         end.
         

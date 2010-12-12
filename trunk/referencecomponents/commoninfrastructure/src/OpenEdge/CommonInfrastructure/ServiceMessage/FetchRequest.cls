@@ -27,7 +27,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.FetchRequest inherits Service
         private set. 
     
     constructor public FetchRequest(input pcService as character):
-        super(input pcService, input ServiceMessageActionEnum:Fetch).
+        super(input pcService, input ServiceMessageActionEnum:FetchData).
     end constructor.
     
 	constructor public FetchRequest(input pcService as character,

@@ -9,7 +9,7 @@
   ---------------------------------------------------------------------- */
 interface OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest /* inherits IServiceRequest */:
     
-    /* A list of tables being saved */
+    /** A list of tables being saved */
     define public property TableNames as character extent no-undo get. set.
     
 end interface.

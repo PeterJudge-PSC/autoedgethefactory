@@ -22,6 +22,9 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ITenantManager.
+
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.ITableOwner.
@@ -33,9 +36,10 @@ using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.FillModeEnum.
 using OpenEdge.Lang.RowStateEnum.
 using OpenEdge.Lang.ABLSession.
-
+using OpenEdge.Lang.Assert.
 using Progress.Lang.AppError.
 using Progress.Lang.Object.
+using Progress.Lang.Class.
 
 class OpenEdge.DataSource.DataSource abstract use-widget-pool
         implements IDataSource:
@@ -50,13 +54,14 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     define protected property LongCharDataTarget as longchar no-undo get. private set.    
     define protected property ObjectDataTarget as Object   no-undo get. private set.
     
+    /** The table request object that's currently being processed. */
     define protected property CurrentTableRequest as ITableRequest no-undo get. set.
      
     /** The default Page or batch size for this datasource. Can be overridden
         by the page size on the table request. */
     define public property PageSize as integer no-undo get. set.
     
-    /** The fill mode for the data fetch (merge etc). */     
+    /** The fill mode for the data fetch (merge etc). */
     define public property FillMode as FillModeEnum no-undo get. set.
     
     /* DataSource Fetch/Fill events */
@@ -72,7 +77,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     define public event AfterSaveTransaction  signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
     constructor public DataSource():
-        CreateDataStore().        
+        CreateDataStore().
     end constructor.
     
     destructor public DataSource ():
@@ -118,7 +123,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
                Data Source names.           */
     method public void Prepare(input poAction as ServiceMessageActionEnum,
                                input poRequest as ITableRequest,
-                               input poDAO as IDataAccess):
+                               input poDAO as IDataAccess):                                   
         CurrentTableRequest = poRequest.
     end method.
     

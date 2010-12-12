@@ -24,7 +24,7 @@ interface OpenEdge.DataAccess.IDataAccess:
     
     /** A map of the IDataSource objects that this DataAccess objects knows about. */
     define public property DataSources as IMap no-undo get.
-        
+    
     /** Helper method for adding DataSource objects from InjectABL
         
         @param character The name of the datasource
@@ -37,11 +37,11 @@ interface OpenEdge.DataAccess.IDataAccess:
         @param IFetchRequest The fetch request service message which defines
         parameters for the request.         */
     method public void FetchData(input poRequest as IFetchRequest).
-    
+
     /** The response to a data retrieval request made in FetchData.
-        
+        @param character The message id for the request/response
         @return IFetchResponse */
-    method public IFetchResponse GetData().
+    method public IFetchResponse GetData(input pcMessageId as longchar).
     
     /** A call to save data in the data source. 
         
@@ -49,26 +49,21 @@ interface OpenEdge.DataAccess.IDataAccess:
         @return ISaveResponse The response message  */
     method public ISaveResponse SaveData(input poRequest as ISaveRequest).
     
-    /** Adds a datasource to the DataAccess object. This is an externa
-        
-        @param character The table name of the datasource
-        @param IDataSource The datasource for that table   
-        method public void AddDataSource(input pcTableName as character,
-                                     input poDataSource as IDataSource).    
-         */
-         
     /** Resolves a table name from the Business Entity into a physical table name in the
-        DataSource.
+        DataSource. The values passed in here are usually taken from the ITableRequest that's
+        part of the IServiceRequest.
         
-        @param character The business entity's table name (usually from the IServiceRequest/ITableRequest).
+        @param character A table name in the business entity
         @return character The table name in the datasource. */
     method public character ResolveTableName (input pcBETable as character).
     
     /** Resolves a field name from the Business Entity into a physical field name in the
-        DataSource.
+        DataSource. The values passed in here are usually taken from the ITableRequest that's
+        part of the IServiceRequest.
         
-        @param character The business entity's table name (usually from the IServiceRequest/ITableRequest).
+        @param character A table name in the business entity (not resolved)
+        @param character A field name in the business entity
         @return character The field name in the datasource. */
-    method public character ResolveFieldName (input pcBEField as character).
+    method public character ResolveFieldName (input pcBETable as character, input pcBEField as character).
     
 end interface.

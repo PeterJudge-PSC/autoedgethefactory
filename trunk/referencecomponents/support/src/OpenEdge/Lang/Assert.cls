@@ -10,6 +10,7 @@
 routine-level on error undo, throw.
 
 using OpenEdge.Lang.Assert.
+using OpenEdge.Lang.DataTypeEnum.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 using Progress.Lang.AppError.
@@ -32,6 +33,12 @@ class OpenEdge.Lang.Assert:
     end method.
     
     method public static void ArgumentNotNullOrEmpty(pcArgument as character, pcName as character):
+        define variable cLongCharArg as longchar no-undo.
+        cLongCharArg = pcArgument.
+        Assert:ArgumentNotNullOrEmpty(cLongCharArg, pcName).
+    end method.
+    
+    method public static void ArgumentNotNullOrEmpty(pcArgument as longchar, pcName as character):
         if pcArgument eq ? or pcArgument eq '' then 
             undo, throw new AppError(substitute('&1 cannot be unknown or empty', pcName)).
     end method.
@@ -87,7 +94,7 @@ class OpenEdge.Lang.Assert:
             undo, throw new AppError(substitute('&1 is not a final type', poArgument:TypeName)).                        
     end method.
     
-    method public void ArgumentIsType(pcTypeName as character):
+    method static public void ArgumentIsValidType(input pcTypeName as character):
         define variable oType as class Class no-undo.
         
         Assert:ArgumentNotNullOrEmpty(pcTypeName, 'TypeName').
@@ -131,7 +138,7 @@ class OpenEdge.Lang.Assert:
     method public static void ArgumentNotType(input poArgument as Object, poType as class Class):
         define variable oDerivedClass as class Class no-undo.
         
-        Assert:ArgumentNotNull(input poArgument, 'argument').
+        Assert:ArgumentNotNull(poArgument, 'argument').
         Assert:ArgumentNotNull(poType, 'type').
         
         if type-of(poArgument, Progress.Lang.Class) then 
@@ -146,4 +153,51 @@ class OpenEdge.Lang.Assert:
                         oDerivedClass:TypeName,
                         poType:TypeName)).
     end method.
+    
+    /** Asserts that a handle is valid.
+        
+        @param handle The handle being checked.
+        @param character The name of the handle/variable being checked. */
+    method public static void ArgumentNotNull(input phArgument as handle, input pcName as character):
+        if not valid-handle(phArgument) then
+            undo, throw new AppError(substitute('&1 cannot be null', pcName)).        
+    end method.
+
+    /** Asserts that a handle is valid and of a particular datatype
+        
+        @param handle The handle being checked.
+        @param DataTypeEnum The type the handle/variable being checked should be.
+        @param character The name of the variable/handle.   */
+    method public static void ArgumentIsType(input phArgument as handle,
+                                             input poCheckType as DataTypeEnum,
+                                             input pcName as character):
+        define variable cCheckType as character no-undo.
+        
+        Assert:ArgumentNotNull(phArgument, pcName).
+        Assert:ArgumentNotNull(poCheckType, 'Check DataType').
+        
+        cCheckType = poCheckType:ToString().
+        if phArgument:type ne cCheckType then
+            undo, throw new AppError(substitute('&1 is not of type &2', pcName, cCheckType)).        
+    end method.
+
+    /** Asserts that a handle is valid and not of a particular datatype
+        
+        @param handle The handle being checked.
+        @param DataTypeEnum The type the handle/variable being checked should be.
+        @param character The name of the variable/handle.   */
+    method public static void ArgumentNotType(input phArgument as handle,
+                                             input poCheckType as DataTypeEnum,
+                                             input pcName as character):
+        define variable cCheckType as character no-undo.
+        
+        Assert:ArgumentNotNull(phArgument, pcName).
+        Assert:ArgumentNotNull(poCheckType, 'Check DataType').
+        
+        cCheckType = poCheckType:ToString().
+        if phArgument:type eq cCheckType then
+            undo, throw new AppError(substitute('&1 cannot be of type &2', pcName, cCheckType)).        
+    end method.
+    
+    
 end class.

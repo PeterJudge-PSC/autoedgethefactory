@@ -1,25 +1,31 @@
-/** ------------------------------------------------------------------------
+ 
+ /*------------------------------------------------------------------------
     File        : AckResponse
-    Purpose     : Simple acknowledgement response for a service request 
+    Purpose     : 
     Syntax      : 
     Description : 
-    @author pjudge
-    Created     : Tue Nov 09 14:40:49 EST 2010
+    Author(s)   : pjudge
+    Created     : Mon Dec 06 09:49:17 EST 2010
     Notes       : 
-  ---------------------------------------------------------------------- */
+  ----------------------------------------------------------------------*/
+
+using Progress.Lang.*.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse.
+
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
+class OpenEdge.CommonInfrastructure.ServiceMessage.AckResponse inherits ServiceResponse: 
 
-class OpenEdge.CommonInfrastructure.ServiceMessage.AckResponse inherits ServiceResponse:
-    
-	constructor public AckResponse (input poServiceRequest as IServiceRequest):
-        super(input cast(poServiceRequest, IServiceMessage):MessageId,
-              input cast(poServiceRequest, IServiceMessage):Service,
-              input ServiceMessageActionEnum:ACK).
+		
+	constructor public AckResponse ( input poServiceRequest as OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest ):
+		super (input poServiceRequest).
+		
+	end constructor.
+
+		
+	constructor public AckResponse ( input pcMessageId as longchar, input pcService as character, input poActionType as OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum ):
+		super (input pcMessageId, input pcService, input poActionType).
+		
 	end constructor.
 
 end class.

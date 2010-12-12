@@ -146,7 +146,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
     /* Commits data for all Models that the Presenter knows about. Creates and executes a
        single bundle for all. */
     method public void CommitData(  ):
-        BuildAndExecuteRequests(ServiceMessageActionEnum:Save,
+        BuildAndExecuteRequests(ServiceMessageActionEnum:SaveData,
                               cast(Models:KeySet:ToArray(), IComponentInfo)).
     end method.
 
@@ -155,12 +155,12 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         define variable oComponentInfo as IComponentInfo extent 1 no-undo.
         
         oComponentInfo[1] = poModelService.
-        BuildAndExecuteRequests(ServiceMessageActionEnum:Save, oComponentInfo).
+        BuildAndExecuteRequests(ServiceMessageActionEnum:SaveData, oComponentInfo).
     end method.
     
     /** Commits data for the specified Models. Executes a single bundle/request for these. */
     method public void CommitData(poModelService as IComponentInfo extent ):
-        BuildAndExecuteRequests(ServiceMessageActionEnum:Save, poModelService).
+        BuildAndExecuteRequests(ServiceMessageActionEnum:SaveData, poModelService).
     end method.
     
     method public void CreateQuery(poModelService as IComponentInfo,
@@ -355,13 +355,13 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
     /** Fetches data for all Models. Executes a single bundle/request for
         all the models that this Presenter knows about. */
     method public void FetchData():
-        BuildAndExecuteRequests(ServiceMessageActionEnum:Fetch,
+        BuildAndExecuteRequests(ServiceMessageActionEnum:FetchData,
                               cast(Models:KeySet:ToArray(), IComponentInfo)).
     end method.
           
     /** Fetches data for the specified Models. Executes a single bundle/request for these. */    
     method public void FetchData (poModelService as IComponentInfo extent):
-        BuildAndExecuteRequests(ServiceMessageActionEnum:Fetch, poModelService).
+        BuildAndExecuteRequests(ServiceMessageActionEnum:FetchData, poModelService).
     end method.
     
     /* Fetches data for the specified Model. */
@@ -369,7 +369,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         define variable oComponentInfo as IComponentInfo extent 1 no-undo.
         
         oComponentInfo[1] = poModelService.
-        BuildAndExecuteRequests(ServiceMessageActionEnum:Fetch, oComponentInfo).
+        BuildAndExecuteRequests(ServiceMessageActionEnum:FetchData, oComponentInfo).
     end method.
        
     method public handle GetBindingHandle(poModelService as IComponentInfo, pcQueryName as character):

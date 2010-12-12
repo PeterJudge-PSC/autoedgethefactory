@@ -26,9 +26,9 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum. 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
-using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
 
@@ -41,7 +41,8 @@ define output       parameter phResponseDataset as handle extent no-undo.
 define output       parameter pmResponse as memptr extent no-undo.
 define input-output parameter pmUserContext as memptr no-undo.
 
-define variable oInjectABLKernel as IKernel no-undo.
+/** **/
+define variable oServiceMgr as IServiceManager no-undo.
 define variable oServiceMessageManager as IServiceMessageManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
 define variable iLoop as integer no-undo.
@@ -50,15 +51,13 @@ define variable mTemp as memptr no-undo.
 define variable oOutput as ObjectOutputStream no-undo.
 define variable oInput as ObjectInputStream no-undo.
 define variable oRequest as IFetchRequest extent no-undo.
-define variable cRequestId as character extent no-undo.
 define variable oResponse as IServiceResponse extent no-undo.
 define variable oContext as IUserContext no-undo.
 define variable hDataSet as handle no-undo.
 
 /* Deserialize requests, context */
 assign iMax = extent(pmRequest)
-       extent(oRequest) = iMax
-       extent(cRequestId) = iMax.
+       extent(oRequest) = iMax.
 
 oInput = new ObjectInputStream().
 do iLoop = 1 to iMax:
@@ -71,17 +70,17 @@ oInput:Reset().
 oInput:Read(pmUserContext).
 oContext = cast(oInput:ReadObjectArray(), IUserContext).
 
-oInjectABLKernel = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')),
-                        IKernel).
+oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'))
+               , IServiceManager).
 
 /* Are we who we say we are? Note that this should really happen on activate. activate doesn't run for state-free AppServers */
-oSecMgr = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
+oSecMgr = cast(oServiceMgr:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
                ,ISecurityManager).
 
 oSecMgr:ValidateSession(oContext:ClientSessionId).
 oSecMgr:SetClientContext(oContext).
 
-oServiceMessageManager = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
+oServiceMessageManager = cast(oServiceMgr:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
                         , IServiceMessageManager).
 
 /* Perform request. This is where the actual work happens.

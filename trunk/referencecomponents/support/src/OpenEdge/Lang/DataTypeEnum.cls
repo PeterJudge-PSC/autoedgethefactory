@@ -55,12 +55,19 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
     define public static property Dataset            as DataTypeEnum no-undo get. private set.
     define public static property Buffer             as DataTypeEnum no-undo get. private set.
     define public static property TempTable          as DataTypeEnum no-undo get. private set.
-
+    
     /* User-defined types */
     define public static property ProgressLangObject as DataTypeEnum no-undo get. private set.
     define public static property Enumeration        as DataTypeEnum no-undo get. private set.
     define public static property Class              as DataTypeEnum no-undo get. private set.
     define public static property ClassArray         as DataTypeEnum no-undo get. private set.
+
+    /* Streams */
+    define public static property Stream as DataTypeEnum no-undo get. private set.
+    
+    /* XML */
+    define public static property XmlDocument as DataTypeEnum no-undo get. private set.
+    define public static property XmlNodeRef as DataTypeEnum no-undo get. private set.
     
     constructor static DataTypeEnum():
         DataTypeEnum:None = new DataTypeEnum(01, '').
@@ -104,6 +111,10 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
         DataTypeEnum:TempTable = new DataTypeEnum(39, 'Temp-Table').
         
         DataTypeEnum:Enumeration = new DataTypeEnum(40, 'Enumeration').
+        DataTypeEnum:Stream = new DataTypeEnum(41, 'Stream').
+        
+        DataTypeEnum:XmlNodeRef = new DataTypeEnum(42, 'x-noderef').
+        DataTypeEnum:XmlDocument = new DataTypeEnum(43, 'x-document').
         
         DataTypeEnum:Default = DataTypeEnum:Character.
     end constructor.
@@ -156,6 +167,9 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
             when DataTypeEnum:Buffer:Value             then oMember = DataTypeEnum:Buffer.
             when DataTypeEnum:TempTable:Value          then oMember = DataTypeEnum:TempTable.
             when DataTypeEnum:Enumeration:Value        then oMember = DataTypeEnum:Enumeration.
+            when DataTypeEnum:Stream:Value             then oMember = DataTypeEnum:Stream.
+            when DataTypeEnum:XmlDocument:Value        then oMember = DataTypeEnum:XmlDocument.
+            when DataTypeEnum:XmlNodeRef:Value         then oMember = DataTypeEnum:XmlNodeRef.
         end case.
         
         return oMember.        
@@ -205,6 +219,9 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
             when DataTypeEnum:Buffer:ToString()             then oMember = DataTypeEnum:Buffer.
             when DataTypeEnum:TempTable:ToString()          then oMember = DataTypeEnum:TempTable.
             when DataTypeEnum:Enumeration:ToString()        then oMember = DataTypeEnum:Enumeration.
+            when DataTypeEnum:Stream:ToString()             then oMember = DataTypeEnum:Stream.
+            when DataTypeEnum:XmlDocument:ToString()        then oMember = DataTypeEnum:XmlDocument.
+            when DataTypeEnum:XmlNodeRef:ToString()         then oMember = DataTypeEnum:XmlNodeRef.
         end case.
                 
         return oMember.   
@@ -227,8 +244,42 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
         return lPrimitive.
     end method.
     
-    method static public logical IsArray(poDataType as DataTypeEnum):
+    method static public logical IsArray(input poDataType as DataTypeEnum):
         return (entry(num-entries(poDataType:Name, ' '), poDataType:Name, ' ') eq 'extent').
+    end method.
+    
+    /** Mapping from ABL data type to XML Schema supported data types. Taken from 
+        the Working With XML book from the documentation set.
+        
+        Note that the converse is not supported, since there are multiple ABL types
+        that map to a single XML schema type.
+        
+        @param DataTypeEnum The ABL data type
+        @return character The XML data type. */
+    method static public character ToXmlSchemaType(input poDataType as DataTypeEnum):
+        define variable cXmlSchemaType as character no-undo.
+        
+        case poDataType:
+            when DataTypeEnum:BLOB then cXmlSchemaType = 'base64Binary'.
+            when DataTypeEnum:Character then cXmlSchemaType = 'string'.
+            when DataTypeEnum:CLOB then cXmlSchemaType = 'string'.
+            when DataTypeEnum:ComHandle then cXmlSchemaType = 'long'.
+            when DataTypeEnum:Date then cXmlSchemaType = 'date'.
+            when DataTypeEnum:DateTime then cXmlSchemaType = 'dateTime'.
+            when DataTypeEnum:DatetimeTZ then cXmlSchemaType = 'dateTime'.
+            when DataTypeEnum:Decimal then cXmlSchemaType = 'decimal'.
+            when DataTypeEnum:Int64 then cXmlSchemaType = 'long'.
+            when DataTypeEnum:Integer then cXmlSchemaType = 'int'.
+            when DataTypeEnum:Logical then cXmlSchemaType = 'boolean'.
+            when DataTypeEnum:Raw then cXmlSchemaType = 'base64Binary'.
+            when DataTypeEnum:Recid then cXmlSchemaType = 'long'.
+            when DataTypeEnum:Rowid then cXmlSchemaType = 'base64Binary'.
+            when DataTypeEnum:Handle then cXmlSchemaType = 'long'.
+            /*@todo(task="question", action="decent default?").*/
+            otherwise cXmlSchemaType = poDataType:ToString().
+        end case.
+        
+        return cXmlSchemaType.
     end method.
     
 end class.

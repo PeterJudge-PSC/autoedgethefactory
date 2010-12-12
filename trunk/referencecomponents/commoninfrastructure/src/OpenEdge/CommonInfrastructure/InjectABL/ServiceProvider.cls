@@ -9,6 +9,7 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider.
 using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum.
@@ -19,6 +20,7 @@ using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
 
+using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.Collections.IIterator.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -37,13 +39,22 @@ class OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider inherits StandardP
         define variable iMax as integer no-undo.
         define variable iOffset as integer no-undo init 2.
         
+        if poContext:Arguments:Size eq 0 then
+            poContext:Arguments:Add(new Routine(poContext:Binding:Service, '', RoutineTypeEnum:Constructor)).
+        
         oIterator = poContext:Arguments:Iterator().
         do while oIterator:HasNext():
-            oRoutine = cast(oIterator:Next(), Routine).            
+            oRoutine = cast(oIterator:Next(), Routine).
+            
+            /* We only care about constructors here */
+            if not oRoutine:RoutineType:Equals(RoutineTypeEnum:Constructor) then
+                next.
+            
+            extent(oNewParams) = ?.
             iMax = extent(oRoutine:Parameters) + iOffset.            
-            if iMax eq ? then iMax = iOffset.
-                extent(oNewParams) = iMax.
-                             
+            if iMax eq ? then
+                iMax = iOffset.
+            extent(oNewParams) = iMax.
             oNewParams[1] = new Parameter(
                                 Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager')).
             oNewParams[2] = new Parameter(
@@ -53,15 +64,14 @@ class OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider inherits StandardP
                                     ComponentTypeEnum:ApplicationComponent,
                                     true),
                                 Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo')).
+            
             do iLoop = (iOffset + 1) to iMax:
                 oNewParams[iLoop] = oRoutine:Parameters[iLoop - iOffset].
             end.
             
             /* replace old with new */
-            oRoutine:Parameters = ?.
+            /*oRoutine:Parameters = ?.*/
             extent(oRoutine:Parameters) = ?.
-            
-/*            extent(oRoutine:Parameters) = iMax.*/
             oRoutine:Parameters = oNewParams.
         end.
         

@@ -33,7 +33,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage abstract
     
     /** Unique message identifier. Allows for completely decoupled request and response
         messages to be tied back together. This will probably be a GUID. */
-    define public property MessageId as character no-undo get. private set.
+    define public property MessageId as longchar no-undo get. private set.
     
     /** Type of request (ServiceMessageActionEnum). The defaults are Fetch,Save,Define but
         may be overridden (by FetchByRegion or something similar). 
@@ -69,7 +69,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage abstract
         @param pcMessageId 
         @param pcService The service name for which this message is being invoked.
         @param poMessageType Uses the ServiceMessageActionEnum to define the action of the message.  */    
-    constructor public ServiceMessage(input pcMessageId as character,
+    constructor public ServiceMessage(input pcMessageId as longchar,
                                       input pcService as character,
                                       input poActionType as ServiceMessageActionEnum):
         Assert:ArgumentNotNullOrEmpty(pcMessageId, 'Message Id').

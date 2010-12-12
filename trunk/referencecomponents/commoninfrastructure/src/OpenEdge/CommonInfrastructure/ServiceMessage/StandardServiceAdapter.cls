@@ -30,6 +30,7 @@ using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
 
+using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 
@@ -94,8 +95,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
         
         /* Requests are bundled by service message type, so we can only check this once. */
         case cast(poRequest[1], IServiceMessage):ActionType:
-            when ServiceMessageActionEnum:Fetch then this-object:Fetch(cast(poRequest, IFetchRequest), oContext).
-            when ServiceMessageActionEnum:Save then this-object:Save(cast(poRequest, ISaveRequest), oContext).
+            when ServiceMessageActionEnum:FetchData then this-object:Fetch(cast(poRequest, IFetchRequest), oContext).
+            when ServiceMessageActionEnum:SaveData then this-object:Save(cast(poRequest, ISaveRequest), oContext).
         end case.
     end method.
     
@@ -116,9 +117,9 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
         
         /* Requests are bundled by service message type, so we can only check this once. */
         case cast(poRequest[1], IServiceMessage):ActionType:
-            when ServiceMessageActionEnum:Fetch then
+            when ServiceMessageActionEnum:FetchData then
                 oResponse = cast(this-object:SyncFetch(cast(poRequest, IFetchRequest), oContext), IServiceResponse).
-            when ServiceMessageActionEnum:Save then
+            when ServiceMessageActionEnum:SaveData then
                 oResponse = cast(this-object:SyncSave(cast(poRequest, ISaveRequest), oContext), IServiceResponse).
         end case.
         
@@ -340,12 +341,11 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
 
     /** Returns a procedure handle which will be used as the async event handler.
         
-        @return handle A procedure handle.
-      */
+        @return handle A procedure handle. */
     method protected handle GetCallbackProcedure():
         define variable hProcedure as handle no-undo.
         
-        hProcedure = OpenEdge.Lang.ABLSession:Instance:GetFirstRunningProc(mcCallbackProcedureName).
+        hProcedure = ABLSession:Instance:GetFirstRunningProc(mcCallbackProcedureName).
         if not valid-handle(hProcedure) then
             run value(mcCallbackProcedureName) persistent set hProcedure (input ServiceManager).
         

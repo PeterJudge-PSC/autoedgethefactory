@@ -26,9 +26,9 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
-using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
 
@@ -41,7 +41,7 @@ define input-output parameter phResponseDataset as handle extent no-undo.
 define output       parameter pmResponse as memptr extent no-undo.
 define input-output parameter pmUserContext as memptr no-undo.
 
-define variable oInjectABLKernel as IKernel no-undo.
+define variable oServiceManager as IServiceManager no-undo.
 define variable oServiceMessageManager as IServiceMessageManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
 define variable iLoop as integer no-undo.
@@ -71,17 +71,17 @@ oInput:Reset().
 oInput:Read(pmUserContext).
 oContext = cast(oInput:ReadObjectArray(), IUserContext).
 
-oInjectABLKernel = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')),
-                        IKernel).
+oServiceManager = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager')),
+                        IServiceManager).
 
 /* Are we who we say we are? Note that this should really happen on activate. */
-oSecMgr = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
+oSecMgr = cast(oServiceManager:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
                ,ISecurityManager).
 
 oSecMgr:ValidateSession(oContext:ClientSessionId).
 oSecMgr:SetClientContext(oContext).
 
-oServiceMessageManager = cast(oInjectABLKernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
+oServiceMessageManager = cast(oServiceManager:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
                         , IServiceMessageManager).
 
 /* Perform request. This is where the actual work happens.
