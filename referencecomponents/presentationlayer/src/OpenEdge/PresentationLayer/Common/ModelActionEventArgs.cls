@@ -32,7 +32,7 @@ class OpenEdge.PresentationLayer.Common.ModelActionEventArgs inherits EventArgs:
     */
     
     /** (optional) The unique identifier for the service request that results in this message */
-    define public property ServiceMessageId as character no-undo get. set.
+    define public property ServiceMessageId as longchar no-undo get. set.
     
     /* default ctor */
     constructor public ModelActionEventArgs (input poModelService as IComponentInfo,
@@ -72,7 +72,7 @@ class OpenEdge.PresentationLayer.Common.ModelActionEventArgs inherits EventArgs:
     constructor public ModelActionEventArgs (input poModelService as IComponentInfo,
                                              input poModelAction as ModelActionEnum,
                                              input pcTables as character extent,
-                                             input pcMessageId as character):
+                                             input pcMessageId as longchar):
         this-object(poModelService, poModelAction).
         
         assign ServiceMessageId = pcMessageId

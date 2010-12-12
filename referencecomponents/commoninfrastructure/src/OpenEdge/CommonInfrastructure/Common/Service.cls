@@ -19,7 +19,7 @@ using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.Service inherits Component
         implements IService:
-            
+                
     /** (mandatory) Stores a reference to the session's Service Manager */        
     define public property ServiceManager as IServiceManager no-undo get. private set. 
     

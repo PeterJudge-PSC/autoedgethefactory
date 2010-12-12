@@ -15,10 +15,10 @@ using OpenEdge.Lang.EnumMember.
 class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum inherits EnumMember: 
     
     /** Data fetch request */
-    define public static property Fetch       as ServiceMessageActionEnum no-undo get. private set.
+    define public static property FetchData as ServiceMessageActionEnum no-undo get. private set.
     
     /** Data commit/save request */
-    define public static property Save        as ServiceMessageActionEnum no-undo get. private set.
+    define public static property SaveData as ServiceMessageActionEnum no-undo get. private set.
     
     /** Schema fetch request. This is typically only made to a Business Entity. */
     define public static property FetchSchema as ServiceMessageActionEnum no-undo get. private set.
@@ -26,11 +26,19 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum inhe
     /** Acknowledge receipt of request */
     define public static property ACK as ServiceMessageActionEnum no-undo get. private set.
     
+    /** Service message is a Workflow workstep request. */
+    define public static property PerformWorkStep as ServiceMessageActionEnum no-undo get. private set.
+    
+    /** Service message is a Workflow request. */
+    define public static property PerformWorkFlow as ServiceMessageActionEnum no-undo get. private set.
+    
     constructor static ServiceMessageActionEnum():
-        ServiceMessageActionEnum:Fetch       = new ServiceMessageActionEnum('Fetch').
-        ServiceMessageActionEnum:Save        = new ServiceMessageActionEnum('Save').
-        ServiceMessageActionEnum:FetchSchema = new ServiceMessageActionEnum('FetchSchema').
-        ServiceMessageActionEnum:ACK         = new ServiceMessageActionEnum('ACK'). 
+        ServiceMessageActionEnum:FetchData       = new ServiceMessageActionEnum('FetchData').
+        ServiceMessageActionEnum:SaveData        = new ServiceMessageActionEnum('SaveData').
+        ServiceMessageActionEnum:FetchSchema     = new ServiceMessageActionEnum('FetchSchema').
+        ServiceMessageActionEnum:ACK             = new ServiceMessageActionEnum('ACK').
+        ServiceMessageActionEnum:PerformWorkStep = new ServiceMessageActionEnum('PerformWorkStep').  
+        ServiceMessageActionEnum:PerformWorkFlow = new ServiceMessageActionEnum('PerformWorkFlow').
     end method.
     
     constructor public ServiceMessageActionEnum(pcName as character):

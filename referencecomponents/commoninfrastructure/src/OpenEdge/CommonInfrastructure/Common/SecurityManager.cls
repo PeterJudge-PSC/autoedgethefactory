@@ -22,7 +22,7 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager inherits Service
         super(poServiceManager, poComponentInfo).
     end constructor.
     
-    method public void ValidateSession(input pcSessionId as character):
+    method public void ValidateSession(input pcSessionId as longchar): 
         @todo(task="implement", action="").
         /* HappyPlace! */
     end method.
@@ -34,6 +34,7 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager inherits Service
 	end method.
 
 	method public void SetClientContext(input poUserContext as IUserContext):
+	    ValidateSession(poUserContext:ClientSessionId).
 	end method.
 
 end class.

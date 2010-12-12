@@ -12,6 +12,7 @@ using OpenEdge.Lang.FindTypeEnum.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.String.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherits IQueryDefinition */:
     
@@ -40,26 +41,26 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherit
     
     @todo(task="question", action="no fill mode on tablerequest? ").
     
-    /** Add search expression  (need to be kept separate from filter.). 
+    /** Add search expression  (need to be kept separate from filter). 
        - Allthough this in theory could be any complex expression it normally 
          only makes sense when the field(s) correspond(s) to the sort.    
        - AddSearch can be refactored to have type-specific signatures, removing the need to pass a
          DataTypeEnum. */
-    method public void AddSearch (pcBufferName as char,
-                                  pcFieldName as char,
-                                  poOperator as OperatorEnum,
-                                  pcFieldValue as char,
-                                  poFieldType as DataTypeEnum,
-                                  poJoinType as JoinEnum).
+    method public void AddSearch (input pcBufferName as char,
+                                  input pcFieldName as char,
+                                  input poOperator as OperatorEnum,
+                                  input poFieldValue as String,
+                                  input poFieldType as DataTypeEnum,
+                                  input poJoinType as JoinEnum).
     
-    method public void GetSearch (pcBufferName as char,
+    method public void GetSearch (input pcBufferName as char,
                                   output pcFieldName as char extent,
                                   output poOperator as OperatorEnum extent,
-                                  output pcFieldValue as char extent,
+                                  output pcFieldValue as String extent,
                                   output poFieldType as DataTypeEnum extent,
                                   output poJoinType as JoinEnum extent).
     
     /** returns the search expression applied to the BuildQueryString */
-    method public character BuildSearchString().
+    method public longchar BuildSearchString().
     
 end interface.

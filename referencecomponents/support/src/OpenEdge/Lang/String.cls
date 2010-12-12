@@ -13,18 +13,28 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.ObjectInputStream.
+
 using OpenEdge.Lang.String.
 using Progress.Lang.Object.
 
-class OpenEdge.Lang.String:
+class OpenEdge.Lang.String
+        implements IExternalizable:
+    
     define static private variable moEmptyString as String no-undo.
     define public property Value as longchar no-undo get. private set.
+    
+    constructor public String():
+        super().        
+    end constructor.
     
     constructor public String(pcString as longchar):
         super().
         this-object:Value = pcString.
     end constructor.
-
+    
     constructor public String(pcString as char):
         super().
         this-object:Value = pcString.
@@ -43,11 +53,21 @@ class OpenEdge.Lang.String:
         return moEmptyString.
     end method.
     
-	    	method override public logical Equals(input p0 as Object):
+    method override public logical Equals(input p0 as Object):
         if type-of(p0, String) then
             return (this-object:Value eq cast(p0, String):Value).
         else
-    return super:Equals(p0).    
+    
+        return super:Equals(p0).    
 	end method.
 	
+/** IExternalizable **/
+    method public void WriteObject(po as ObjectOutputStream):
+        po:WriteLongChar(this-object:Value).
+    end method.
+    
+    method public void ReadObject(po as ObjectInputStream):
+        this-object:Value = po:ReadLongChar().
+    end method.
+    
 end class.

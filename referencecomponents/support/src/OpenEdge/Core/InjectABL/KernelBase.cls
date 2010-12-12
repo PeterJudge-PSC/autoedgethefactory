@@ -139,14 +139,8 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     end method.
     
     method public Object Get(pcService as character):
-        define variable oService as class Class no-undo.
-        
-        /* no-error since we want to ensure that the class name actually exists. */
-        oService = Class:GetClass(pcService) no-error.
-        
-        Assert:ArgumentNotNull(oService, 'Service ' + pcService).
-        
-        return this-object:Get(oService, '').
+        Assert:ArgumentIsValidType(pcService).
+        return this-object:Get(Class:GetClass(pcService), '').
     end method.
     
     method public Object Get(poService as class Class):
@@ -172,13 +166,13 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                 oBinding = cast(oIterator:Next(), IBinding).
                 iExtent = iExtent + 1.
                 
-                /* [PJ] something buggy */        
+                /* [PJ] something buggy */
                 oContext = CreateContext(oBinding).
                 oInstance[iExtent] = oContext:Resolve().
             end.
         end.
         
-        return oInstance.		
+        return oInstance.
 	end method.
     
     method public Object Get(input poService as class Class,

@@ -27,8 +27,7 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
         define variable oConditionSyntax as IConditionSyntax no-undo.
         
         /** Bind IServiceManager to the relevant client or server-side implementation
-            based on session.
-          */
+            based on session.    */
         /** ServiceManager does not use the ComponentProvider */
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IServiceManager').
         oBindingSyntax

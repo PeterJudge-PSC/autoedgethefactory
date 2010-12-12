@@ -12,13 +12,18 @@ routine-level on error undo, throw.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
 
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.ObjectInputStream.
+
+using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.String.
 using Progress.Lang.Class.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse
-            implements ITableResponse:
+            implements ITableResponse, IExternalizable:
     
     /** (mandatory) The name of the table */  
     define property TableName as character no-undo get. private set.
@@ -26,7 +31,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse
     /** The error texts associated with the request, if any.
         There's an entry in the map for each row that has an error,
         keyed on the RowKey. */
-    define public property ErrorText as IMap no-undo get. private set.    
+    define public property ErrorText as IMap no-undo get. private set.
     
     /** Whether the service request resulted in an error or not. */
     define public property HasError as logical no-undo
@@ -53,4 +58,29 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse
 		                  Class:GetClass('OpenEdge.Lang.String')).
 	end constructor.
 	
+/** IExternalizable **/
+    method public void WriteObject(po as ObjectOutputStream):
+        po:WriteChar(TableName).
+        po:WriteLogical(HasError).
+        po:WriteObject(TableContext).
+        
+        /* Serialize these separately, so we don't carry all the bumpf along. */
+        po:WriteObjectArray(ErrorText:KeySet:ToArray()).
+        po:WriteObjectArray(ErrorText:Values:ToArray()).
+    end method.
+    
+    method public void ReadObject(po as ObjectInputStream):
+        TableName = po:ReadChar().
+        HasError = po:ReadLogical().
+        TableContext =  cast(po:ReadObject(), ITableContext).
+         
+        /*ErrorText = cast(po:ReadObject(), IMap).*/
+        ErrorText = new TypedMap(
+                          Class:GetClass('OpenEdge.Lang.String'),
+                          Class:GetClass('OpenEdge.Lang.String')).
+                          
+        cast(ErrorText:KeySet, ICollection):AddArray(po:ReadObjectArray()).
+        cast(ErrorText:Values, ICollection):AddArray(po:ReadObjectArray()).
+    end method.
+    
 end class.

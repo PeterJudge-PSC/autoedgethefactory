@@ -20,8 +20,8 @@ using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
-using OpenEdge.Core.InjectABL.InvocationError.
 
+using OpenEdge.Core.System.InvocationError.
 using OpenEdge.Core.System.ArgumentError.
 using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.Collections.IIterator.

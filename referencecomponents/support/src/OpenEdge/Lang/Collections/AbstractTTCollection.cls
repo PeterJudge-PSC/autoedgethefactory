@@ -178,4 +178,25 @@ class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollec
     /* override this in subclass - used by remove   */      
     method protected abstract void FindBufferUseObject (obj as Object).
     
+    /* Deep clone. or rather deep enough since we don't know what the elements' Clone()
+       operations do, so this may end up being a memberwise clone */
+		    method override public Object Clone():
+	        define variable oClone as ICollection no-undo.
+	    
+    	    oClone = cast(this-object:GetClass():New(), ICollection).
+	        CloneElements(oClone).
+	    
+        return oClone.	    
+    	end method.
+	
+    	method protected void CloneElements(input poClone as ICollection):
+        define variable oIterator as IIterator no-undo. 
+
+        oIterator = this-object:Iterator().
+        do while oIterator:HasNext():
+           poClone:Add(oIterator:Next():Clone()).
+        end.
+    end method.
+    
+    
 end class.

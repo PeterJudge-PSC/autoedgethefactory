@@ -22,6 +22,7 @@ using Progress.Lang.Object.
 class OpenEdge.CommonInfrastructure.InjectABL.ComponentLifecycleStrategy inherits LifecycleStrategy: 
     
     constructor public ComponentLifecycleStrategy ():
+        super().
     end constructor.
     
     method override public void Activate(poContext as ILifecycleContext, poInstance as Object):
@@ -30,7 +31,7 @@ class OpenEdge.CommonInfrastructure.InjectABL.ComponentLifecycleStrategy inherit
         
         super:Activate(poContext, poInstance).
         
-        /* IServiceManager is a special type of compoent. */
+        /* IServiceManager is a special type of component. */
         lInvokeCreate = type-of(poInstance, IServiceManager) or
                         type-of(poInstance, IComponent).
         
@@ -44,9 +45,15 @@ class OpenEdge.CommonInfrastructure.InjectABL.ComponentLifecycleStrategy inherit
     end method.
     
     method override public void Deactivate(poContext as ILifecycleContext, poInstance as Object):
+        define variable lInvokeDestroy as logical no-undo.
+        
         super:Deactivate(poContext, poInstance).
         
-        if type-of(poInstance, IComponent) then
+        /* IServiceManager is a special type of component. */
+        lInvokeDestroy = type-of(poInstance, IServiceManager) or
+                         type-of(poInstance, IComponent).
+        
+        if lInvokeDestroy then
             dynamic-invoke(poInstance, 'DestroyComponent').
     end method.
     

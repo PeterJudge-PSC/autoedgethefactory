@@ -18,16 +18,20 @@ using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.IOModeEnum.
 using OpenEdge.Lang.Collections.ObjectStack.
+using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.TypedCollection.
 using OpenEdge.Lang.Assert.
+using Progress.Lang.ParameterList.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding: 
     /** Gets the service type that is controlled by the binding. */
     define public property Service as class Class no-undo get. private set.
-
+    
     /** Gets or sets the condition defined for the binding. */
     define public property Condition as ObjectStack no-undo get. set. 
     
@@ -69,9 +73,9 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
             
             TargetType = poTargetType.            
         end set.
-        
+    
     /** Gets the parameters defined for the binding. */
-    define public property Arguments as OpenEdge.Lang.Collections.ICollection no-undo get. private set.
+    define public property Arguments as ICollection no-undo get. private set.
     
     /** Gets or sets the optional name defined for the binding. */
     define public property Name as character no-undo get. set.
@@ -95,7 +99,7 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
         oProvider = StandardProvider:GetProvider(this-object:ProviderType, this-object:Service).
         return oProvider.
     end method.
-            
+    
     /** Gets the scope for the binding, if any.
         @param context The context.
         @return The object that will act as the scope, or unknown if the service is transient.
@@ -120,4 +124,31 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
         return lMatches.
     end method.
     
+    method override public Object Clone():
+	    define variable oClone as IBinding no-undo.
+        define variable oPL as ParameterList no-undo.
+                
+        oPL = new ParameterList(1).
+        oPL:SetParameter(1,
+                         DataTypeEnum:Class:ToString(),
+                         IOModeEnum:Input:ToString(),
+                         this-object:Service).
+        
+        assign oClone = cast(this-object:GetClass():New(oPL), IBinding)
+               
+               oClone:Condition = cast(this-object:Condition:Clone(), ObjectStack)
+               oClone:Target = this-object:Target
+               oClone:Scope = this-object:Scope
+               oClone:ScopeCallbackType = this-object:ScopeCallbackType
+               oClone:ProviderType = this-object:ProviderType
+               oClone:TargetType = this-object:TargetType
+               oClone:Name = this-object:Name.
+        
+        /* Create a new set of arguments, but keep the actual arguments the same
+           (ie this is a reasonably shallow copy)  */
+        oClone:Arguments:Add(this-object:Arguments).
+        
+	    return oClone. 
+	end method.
+	
 end class.

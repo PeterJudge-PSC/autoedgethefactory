@@ -21,7 +21,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceRequest inherits Servi
         super(input pcService, input poMessageType).
     end constructor.
     
-	constructor public ServiceRequest (input pcMessageId as character,
+	constructor public ServiceRequest (input pcMessageId as longchar,
 	                                   input pcService as character,
 	                                   input poActionType as ServiceMessageActionEnum ):
 		super (input pcMessageId, input pcService, input poActionType).

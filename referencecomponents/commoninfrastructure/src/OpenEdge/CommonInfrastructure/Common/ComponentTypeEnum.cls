@@ -26,7 +26,6 @@ class OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum inherits EnumMember
     constructor static ComponentTypeEnum():
         ComponentTypeEnum:ApplicationComponent = new ComponentTypeEnum('ApplicationComponent').
         ComponentTypeEnum:Service = new ComponentTypeEnum('Service').
-        ComponentTypeEnum:ServiceAdapter = new ComponentTypeEnum('ServiceAdapter').
     end constructor.
     
     constructor public ComponentTypeEnum(pcName as character):

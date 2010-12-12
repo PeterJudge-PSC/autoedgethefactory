@@ -11,5 +11,5 @@ using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
 interface OpenEdge.CommonInfrastructure.Common.IUserContext:
     /** Unique identifier for the client session */
-    define public property ClientSessionId as character no-undo get.
+    define public property ClientSessionId as longchar no-undo get.
 end interface.

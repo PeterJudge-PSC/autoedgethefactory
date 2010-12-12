@@ -31,6 +31,7 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
+using OpenEdge.Core.System.InvalidValueSpecifiedError.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IIterator.
@@ -38,8 +39,11 @@ using OpenEdge.Lang.Collections.TypedCollection.
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.FillModeEnum.
-using OpenEdge.Lang.String.
 using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.String.
+
 
 using Progress.Lang.Object.
 using Progress.Lang.Class.
@@ -53,6 +57,10 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     define public property DataSources as IMap no-undo get. private set.
     
     /* The datasources currently in use for the current request */
+    
+    /* [futures] This data access object could be servicing multiple concurrent requests. The 
+       moCurrent* variables could (should?) be made into maps so that we can find the relevant
+       objects. */
     define private variable moCurrentRequest as IServiceRequest no-undo.
     define private variable moCurrentRequestDataSources as ICollection no-undo.
     
@@ -75,11 +83,18 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     method public void AddDataSource(input pcName as character, input poDataSource as IDataSource).    
         DataSources:Put(new String(pcName), poDataSource).
     end method.
-    
-    method public IFetchResponse GetData():
+
+    /** Response complement method for FetchData above.
+        
+        @param character The message id for the request/response
+        @return IFetchResponse */
+    method public IFetchResponse GetData(input pcMessageId as longchar):
         define variable oIterator as IIterator no-undo.
         define variable oFetchResponse as IFetchResponse no-undo.
         define variable oTableResponse as ITableResponse no-undo.
+        
+        if cast(moCurrentRequest, IServiceMessage):MessageId ne pcMessageId then
+            undo, throw new InvalidValueSpecifiedError('message id', ' for GetData() request').
         
         oFetchResponse = new FetchResponse(cast(moCurrentRequest, IFetchRequest)). 
         cast(oFetchResponse, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
@@ -252,12 +267,12 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                                                 input poServiceMessageAction as ServiceMessageActionEnum):
             /* Example below */
             case poServiceMessageAction:
-                when ServiceMessageActionEnum:Fetch then
+                when ServiceMessageActionEnum:FetchData then
                 do:
                     /* GetDataSource(phBuffer:name):BeforeRowFill:Subscribe(XXX).*/
                     /* ohBuffer:set-callback(CallbackNameEnum:BeforeRowFill:ToString(), 'XXX', this-object). */
                 end.
-                when ServiceMessageActionEnum:Save then
+                when ServiceMessageActionEnum:SaveData then
                 do:
                     /*  
                     OpenEdge.DataSource.DataSource:SubscribeDataSourceEvents(
@@ -296,17 +311,24 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     end method.
     
     /** Resolves a table name from the Business Entity into a physical table name in the
-        DataSource.
+        DataSource. The values passed in here are usually taken from the ITableRequest that's
+        part of the IServiceRequest.
         
-        @param character The business entity's table name (usually from the IServiceRequest/ITableRequest).
+        This method is typically called from a DataSource.
+        
+        @param character A table name in the business entity
         @return character The table name in the datasource. */
     method abstract public character ResolveTableName (input pcBETable as character).
     
     /** Resolves a field name from the Business Entity into a physical field name in the
-        DataSource.
+        DataSource. The values passed in here are usually taken from the ITableRequest that's
+        part of the IServiceRequest.
         
-        @param character The business entity's table name (usually from the IServiceRequest/ITableRequest).
+        This method is typically called from a DataSource.
+        
+        @param character A table name in the business entity
+        @param character A field name in the business entity
         @return character The field name in the datasource. */
-    method abstract public character ResolveFieldName (input pcBETable as character).
+    method abstract public character ResolveFieldName (input pcBETable as character, input pcBEField as character).
     
 end class.

@@ -11,7 +11,7 @@ using OpenEdge.CommonInfrastructure.Common.IUserContext.
   
 interface OpenEdge.CommonInfrastructure.Common.ISecurityManager:
     
-    method public void ValidateSession(input pcSessionId as character).
+    method public void ValidateSession(input pcSessionId as longchar).
     
     method public IUserContext GetPendingContext().
     

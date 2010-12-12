@@ -1,23 +1,25 @@
 /** ------------------------------------------------------------------------
-    File        : saxparserfacade.p
-    Purpose     : XML SAX parser
-
+    File        : SaxReaderfacade.p
+    Purpose     : XML SAX parser facade procedure.
     Syntax      :
-
     Description : 
-
     @author pjudge
     Created     : Tue Jul 13 09:40:09 EDT 2010
-    Notes       :
+    Notes       : * This procedure acts as a facade object for the SaxReader
+                    class, since classes can't be subscribed as event listeners
+                    for the ABL SAX-READER.
+                  * The individual procedures here are as documented in the
+                    ABL documentation set. 
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Core.XML.SaxParser.
+using OpenEdge.Core.XML.SaxReader.
+using OpenEdge.Lang.SerializationModeEnum.
 
 /* ***************************  Definitions  ************************** */
 /** The facade object that handles the callbacks from the SAX parser, and which
     publishes them as typed events. */
-define input parameter poWrapper as SaxParser no-undo.
+define input parameter poSaxReader as SaxReader no-undo.
 
 create widget-pool.
 
@@ -34,11 +36,13 @@ procedure ParseDocument:
     
     create sax-attributes hSaxAttributes.
     
-    hSaxReader:set-input-source('longchar', pcXML).
-    hSaxReader:sax-parse() no-error.
+    hSaxReader:set-input-source(SerializationModeEnum:LongChar:ToString(), pcXML).
+    hSaxReader:sax-parse().
     
-    delete object hSaxAttributes no-error.
-    delete object hSaxReader no-error.
+    finally:
+        delete object hSaxAttributes no-error.
+        delete object hSaxReader no-error.
+    end finally.
 end procedure.
 
 /* ***************************  Callbacks  *************************** */
@@ -50,32 +54,32 @@ procedure ResolveEntity:
     define output parameter filePath   as character no-undo.
     define output parameter memPointer as longchar no-undo.
     
-    poWrapper:ResolveEntity(publicID, systemID, output filePath, output memPointer).
+    poSaxReader:ResolveEntity(publicID, systemID, output filePath, output memPointer).
 end procedure.
 
 /** Process various XML tokens. */
 procedure StartDocument:
-    poWrapper:StartDocument().
+    poSaxReader:StartDocument().
 end procedure.
 
 procedure ProcessingInstruction:
     define input parameter target as character no-undo.
     define input parameter data   as character no-undo.
     
-    poWrapper:ProcessingInstruction(target, data).
+    poSaxReader:ProcessingInstruction(target, data).
 end procedure.
 
 procedure StartPrefixMapping:
     define input parameter prefix as character no-undo.
     define input parameter uri    as character no-undo.
     
-    poWrapper:StartPrefixMapping(prefix, uri).
+    poSaxReader:StartPrefixMapping(prefix, uri).
 end procedure.
 
 procedure EndPrefixMapping:    
     define input parameter prefix as character no-undo.
     
-    poWrapper:EndPrefixMapping(prefix).
+    poSaxReader:EndPrefixMapping(prefix).
 end procedure.
 
 procedure StartElement:
@@ -84,21 +88,21 @@ procedure StartElement:
     define input parameter qName        as character no-undo.
     define input parameter attributes   as handle no-undo.
     
-    poWrapper:StartElement(namespaceURI, localName, qName, attributes).
+    poSaxReader:StartElement(namespaceURI, localName, qName, attributes).
 end procedure.
 
 procedure Characters:
     define input parameter charData as longchar no-undo.
     define input parameter numChars as integer no-undo.
     
-    poWrapper:Characters(charData, numChars).
+    poSaxReader:Characters(charData, numChars).
 end procedure.
 
 procedure IgnorableWhitespace:
     define input parameter charData as character no-undo.
     define input parameter numChars as integer.
     
-    poWrapper:IgnorableWhitespace(charData, numChars).
+    poSaxReader:IgnorableWhitespace(charData, numChars).
 end procedure.
 
 procedure EndElement:
@@ -106,11 +110,11 @@ procedure EndElement:
      define input parameter localName    as character no-undo.
      define input parameter qName        as character no-undo.
      
-     poWrapper:EndElement(namespaceURI, localName, qName).
+     poSaxReader:EndElement(namespaceURI, localName, qName).
 end procedure.
 
 procedure EndDocument:
-    poWrapper:EndDocument().
+    poSaxReader:EndDocument().
 end procedure.
 
 /** Process notations and unparsed entities.*/
@@ -119,7 +123,7 @@ procedure NotationDecl:
     define input parameter publicID as character no-undo.
     define input parameter systemID as character no-undo.
     
-    poWrapper:NotationDecl(name, publicID, systemID).
+    poSaxReader:NotationDecl(name, publicID, systemID).
 end procedure.
 
 procedure UnparsedEntityDecl:
@@ -128,24 +132,26 @@ procedure UnparsedEntityDecl:
     define input parameter systemID     as character no-undo.
     define input parameter notationName as character no-undo.
     
-    poWrapper:UnparsedEntityDecl(name, publicID, systemID, notationName).
+    poSaxReader:UnparsedEntityDecl(name, publicID, systemID, notationName).
 end procedure.
 
 /*Handle errors.*/
 procedure Warning:
     define input parameter errMessage as character no-undo.
     
-    poWrapper:Warning(errMessage).
+    poSaxReader:Warning(errMessage).
 end procedure.
 
 procedure Error:
     define input parameter errMessage as character no-undo.
      
-    poWrapper:Error(errMessage).
+    poSaxReader:Error(errMessage).
 end procedure.
 
 procedure FatalError:
     define input parameter errMessage as character no-undo.
     
-    poWrapper:FatalError(errMessage).
+    poSaxReader:FatalError(errMessage).
 end procedure.
+
+/** EOF **/

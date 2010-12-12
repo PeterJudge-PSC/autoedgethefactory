@@ -138,10 +138,35 @@ class OpenEdge.Core.System.Query use-widget-pool
     
     define protected property BuildQuery as logical no-undo get. set.
     
+    /** 
+        allows us to pass in an existing query def and use this class as a helper for repos, row key etc. 
+    constructor public Query(input phQuery as handle,
+                             input plExtraDefinition as logical):
+        Assert:ArgumentNotNull(phQuery, 'Query handle').
+        
+    define protected property FromExternal as logical no-undo get. private set.
+        
+        assign QueryHandle = phQuery
+               FromExternal = false
+               BuildQuery = true.
+    end constructor.
+         */
+    
+    method protected IQueryDefinition ExtractDefinitions(input phQuery as handle):
+        define variable oQueryDef as IQueryDefinition no-undo.
+        
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable cBufferName as character no-undo.
+        define variable cFieldName as character no-undo.
+        
+        return oQueryDef. 
+    end method.
+    
     constructor public Query(input poTableOwner as ITableOwner,
                              input poDefinition as IQueryDefinition):
         Assert:ArgumentNotNull(poDefinition, 'Query Definition').
-                                                 
+        
         assign this-object:Definition = poDefinition
                TableOwner = poTableOwner
                BaseDefinition = cast(poDefinition:Clone(), IQueryDefinition)
@@ -192,7 +217,7 @@ class OpenEdge.Core.System.Query use-widget-pool
         
         return lOK.
     end method.
-               
+    
     method public logical Reposition(input piRow as integer):
         return this-object:Reposition(QueryHandle, piRow).
     end method.
@@ -218,8 +243,14 @@ class OpenEdge.Core.System.Query use-widget-pool
         return lOK.
     end method.
     
-    method protected logical Reposition (input phQuery as handle,
-                                         input prRecord as rowid extent):
+    /** Repositions a query.  
+        
+        @param handle The query handle to reposition
+        @param rowid[] An array of rowids used to reposition the query.
+        @return logical Returns true if the query successfully repositioned to the
+                row specified by the rowid array.   */
+    method static public logical Reposition (input phQuery as handle,
+                                             input prRecord as rowid extent):
         define variable lOk as logical no-undo.
                                                      
         if prRecord[1] ne ? then
@@ -239,23 +270,33 @@ class OpenEdge.Core.System.Query use-widget-pool
         else
             lOK = false.
            
-        if phQuery eq QueryHandle then
-            OnQueryRepositioned(EventArgs:Empty).
-        
+/*        if phQuery eq QueryHandle then           */
+/*            OnQueryRepositioned(EventArgs:Empty).*/
+/*                                                 */
         return lOK.
     end method.
     
     method public logical Reposition (input pcRowKey as char extent):
-        return this-object:Reposition(QueryHandle, pcRowKey).
+        define variable lOk as logical no-undo.
+        
+        lOK = Query:Reposition(QueryHandle, pcRowKey).
+        OnQueryRepositioned(EventArgs:Empty).
+        
+        return lOk. 
     end method.
     
-    method protected logical Reposition (input phQuery as handle,
-                                         input pcRowKey as char extent):
+    /** Repositions a query.  
+        
+        @param handle The query handle to reposition
+        @param character[] An array of character row keys (either where clauses or rowids)
+        @return logical Returns true if the query successfully repositioned to the
+                row specified by the rowid array.   */            
+    method static public logical Reposition(input phQuery as handle,
+                                            input pcRowKey as char extent):
         define variable rCurrentRow as rowid extent no-undo.
         define variable iExtent as integer no-undo.
         define variable hBuffer as handle no-undo.
-
-        extent(rCurrentRow) = extent(pcRowKey).
+                extent(rCurrentRow) = extent(pcRowKey).
         rCurrentRow = ?.
         
         do iExtent = 1 to extent(pcRowKey):
@@ -274,7 +315,7 @@ class OpenEdge.Core.System.Query use-widget-pool
                 rCurrentRow[iExtent] = to-rowid(pcRowKey[iExtent]).
         end.    /* loop through where */
         
-        return this-object:Reposition(phQuery, rCurrentRow).
+        return Query:Reposition(phQuery, rCurrentRow).
     end method.
             
     method public logical Reopen():
@@ -291,7 +332,7 @@ class OpenEdge.Core.System.Query use-widget-pool
     
     method protected logical Reopen(input phQuery as handle, input pcRowKey as char extent):
         this-object:Open(phQuery).
-        return this-object:Reposition(phQuery, pcRowKey).
+        return Query:Reposition(phQuery, pcRowKey).
     end method.
     
     method public logical Reopen(input piRow as integer):
@@ -431,7 +472,7 @@ class OpenEdge.Core.System.Query use-widget-pool
         define variable iMax as integer no-undo.
         
         hQuery = CloneQuery(QueryHandle).
-        hQuery:query-prepare(poDefinition:GetQueryString()).
+        hQuery:query-prepare(string(poDefinition:GetQueryString())).
         hQuery:query-open().
         
         case poFindType:
@@ -536,6 +577,13 @@ class OpenEdge.Core.System.Query use-widget-pool
         end.        
     end method.
     
+    /** Resets the query definition to it's original state */
+    method public void Reset():
+        this-object:Close().
+        Definition = BaseDefinition.
+        Prepare().
+    end method.
+    
     method public void Prepare():
         /* Always prepare this query. */
         BuildQuery = true.
@@ -589,7 +637,7 @@ class OpenEdge.Core.System.Query use-widget-pool
             end.
         end.
         
-        phQuery:query-prepare(this-object:Definition:GetQueryString()).
+        phQuery:query-prepare(string(this-object:Definition:GetQueryString())).
         
         /* for this query, we're at rest */
         BuildQuery = false.

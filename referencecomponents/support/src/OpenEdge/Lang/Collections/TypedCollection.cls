@@ -44,5 +44,16 @@ class OpenEdge.Lang.Collections.TypedCollection inherits Collection:
         Assert:ArgumentIsType(checkObject, CollectionType).
         return super:Contains(checkObject).
     end method.
+    
+    /* Deep clone. or rather deep enough since we don't know what the elements' Clone()
+       operations do, so this may end up being a memberwise clone */
+    method override public Object Clone():
+        define variable oClone as ICollection no-undo.
+        
+        oClone = new TypedCollection(this-object:CollectionType). 
+        CloneElements(oClone).
+        
+        return oClone.      
+    end method.
 
 end class.

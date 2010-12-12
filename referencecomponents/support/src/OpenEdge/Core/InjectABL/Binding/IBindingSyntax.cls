@@ -21,13 +21,13 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     /** Indicates that the service should be self-bound.  */
     method public IBindingSyntax ToSelf().
     /** Indicates that the service should be bound to the specified implementation type.  */
-    method public IBindingSyntax To(poImplementation as class Class).
-    method public IBindingSyntax To(pcImplementation as character).
+    method public IBindingSyntax To(input poImplementation as class Class).
+    method public IBindingSyntax To(input pcImplementation as character).
     
     @IBindingUsingSyntax.
     /** Indicates that the service will be constructed with an instance of the specified provider type.  */
-    method public IBindingSyntax Using(poProvider as class Class).
-    method public IBindingSyntax Using(pcProvider as character).
+    method public IBindingSyntax Using(input poProvider as class Class).
+    method public IBindingSyntax Using(input pcProvider as character).
         
     @IBindingInSyntax.
     /** Indicates that only a single instance of the binding 
@@ -46,7 +46,7 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     method public IBindingSyntax InAgentRequestScope().
     
     /* Custom scope */    
-    method public IBindingSyntax InScope(poScopeCallback as class Class, poScope as StandardScopeEnum).
+    method public IBindingSyntax InScope(input poScopeCallback as class Class, input poScope as StandardScopeEnum).
     
     @IBindingOnSyntax.
     method public IBindingSyntax OnClientSession().
@@ -78,6 +78,10 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
         
         All the With*() methods have the follwoing return signature
         @return IBindingSyntax The binding being constructed, for a fluent interface. */    
+
+    /** Generalised case for more complex scenarios; all other WithConstructorArgument() methods pass through this one. */
+    method public IBindingSyntax WithConstructorArgument(input poParameter as IParameter extent).    
+
     /** Indicates that the specified constructor argument should be overridden with the specified value. */
     method public IBindingSyntax WithConstructorArgument(input poService as class Class).
     method public IBindingSyntax WithConstructorArgument(input poService as class Class, input pcInstanceName as character).
@@ -96,9 +100,6 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     method public IBindingSyntax WithConstructorArgument(input pcValue as character, input poDataType as DataTypeEnum).
     method public IBindingSyntax WithConstructorArgument(input pcValue as character extent).
     method public IBindingSyntax WithConstructorArgument(input pcValue as character extent, input poDataType as DataTypeEnum).
-    
-    /** Generalised case for more complex scenarios; all other WithConstructorArgument() methods pass through this one. */
-    method public IBindingSyntax WithConstructorArgument(input poParameter as IParameter extent).    
     
     /** Indicates that the specified property should be injected with the specified value.  */
     method public IBindingSyntax WithPropertyValue(input pcPropertyName as character, input poService as class Class).

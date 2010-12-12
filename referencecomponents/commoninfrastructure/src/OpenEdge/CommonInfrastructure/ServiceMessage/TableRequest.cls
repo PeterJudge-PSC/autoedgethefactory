@@ -14,15 +14,21 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum.
 
 using OpenEdge.Core.System.QueryDefinition.
-
+using OpenEdge.Core.System.QueryFilter.
 using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
+
+using OpenEdge.Lang.Collections.IMap.
+using OpenEdge.Lang.Collections.IIterator.
+using OpenEdge.Lang.Collections.ICollection.
+using OpenEdge.Lang.Collections.Map.
 
 using OpenEdge.Lang.FindTypeEnum.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.String.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDefinition
         implements ITableRequest, IExternalizable: 
@@ -49,13 +55,17 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
         Typically used with TableRequestTypeEnum:Position */ 
     define property RowKey as char extent no-undo get. set.
     
+    define protected property QuerySearch as IMap no-undo get. private set.
+    
     /* default ctor required for serialization */
     constructor public TableRequest():
+        super().
     end constructor.
-        
+    
     constructor public TableRequest(pcTableName as character):
         this-object().
         
+        QuerySearch = new Map().
         TableName = pcTableName.
         AddBuffer(TableName).
     end constructor.
@@ -68,27 +78,30 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
     method public void AddSearch(pcBufferName as character,
                                  pcFieldName as character,
                                  poOperator as OperatorEnum,
-                                 pcFieldValue as character,
+                                 poFieldValue as String,
                                  poFieldType as DataTypeEnum,
                                  poJoinType as JoinEnum):
-        this-object:AddFilter(pcBufferName,
-                              pcFieldName,
-                              poOperator,
-                              pcFieldValue,
-                              poFieldType,
-                              poJoinType).
+        QuerySearch:Put(
+            new QueryFilter(pcBufferName,
+                        pcFieldName,
+                        poOperator,
+                        poFieldValue,
+                        poFieldType,
+                        poJoinType),
+            new String(pcBufferName)).
     end method.
     
     method public void GetSearch(pcBufferName as character,
                                  output pcFieldName as character extent,
                                  output poOperator as OperatorEnum extent,
-                                 output pcFieldValue as character extent,
+                                 output poFieldValue as String extent,
                                  output poFieldType as DataTypeEnum extent,
                                  output poJoinType as JoinEnum extent):
+                            
         @todo(task="implement", action="").
     end method.
     
-    method public character BuildSearchString():
+    method public longchar BuildSearchString():
         return GetQueryString().
     end method.
 
@@ -103,6 +116,9 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
         po:WriteEnum(TableRequestType).
         po:WriteCharArray(PageContext).
         po:WriteCharArray(RowKey).
+        
+        po:WriteObjectArray(QuerySearch:KeySet:ToArray()).
+        po:WriteObjectArray(QuerySearch:Values:ToArray()).
     end method.
     
     method override public void ReadObject(po as ObjectInputStream):
@@ -115,6 +131,9 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest inherits QueryDe
         TableRequestType = cast(po:ReadEnum(), TableRequestTypeEnum).
         PageContext = po:ReadCharArray().
         RowKey = po:ReadCharArray().
-    end method.
         
+        cast(QuerySearch:KeySet, ICollection):AddArray(po:ReadObjectArray()).
+        QuerySearch:Values:AddArray(po:ReadObjectArray()).
+    end method.
+    
 end class.

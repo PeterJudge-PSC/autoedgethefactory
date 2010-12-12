@@ -39,9 +39,9 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     define public property Kernel as IKernel no-undo get. private set.
     
     /** Initializes a new instance of the BindingBuilder&lt.T&gt. class.
-        @param binding The binding to build.
-        @param kernel The kernel. */
-    constructor public BindingBuilder(poBinding as IBinding, poKernel as IKernel):
+        @param IBinding The binding to build.
+        @param IKernel The kernel. */
+    constructor public BindingBuilder(input poBinding as IBinding, input poKernel as IKernel):
         Assert:ArgumentNotNull(poBinding, "binding").
         Assert:ArgumentNotNull(poKernel, "kernel").
         
@@ -49,7 +49,8 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         Kernel = poKernel.
     end constructor.
     
-    /** Indicates that the service should be self-bound.  */
+    /** Indicates that the service should be self-bound.
+        @return IBindingSyntax The current binding builder (for fluent syntax) */
     method public IBindingSyntax ToSelf():   
         Binding:TargetType = Binding:Service.
         Binding:Target = BindingTargetEnum:Self.
@@ -58,17 +59,20 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     end method.
     
     /** Indicates that the service should be bound to the specified implementation type.
-        @param implementation The implementation type.
-      */
-    method public IBindingSyntax To(pcImplementation as character):
+        @param character The implementation type name.
+        @return IBindingSyntax The current binding builder (for fluent syntax) */
+    method public IBindingSyntax To(input pcImplementation as character):
+        Assert:ArgumentIsValidType(pcImplementation).
+        
         return this-object:To(Class:GetClass(pcImplementation)).
     end method.
 
     /** Indicates that the service should be bound to the specified implementation type.
         
-        @param poImplementation The implementation type. This has to be a concrete type
-        (ie not abstract or an interface). */    
-    method public IBindingSyntax To(poImplementation as class Class):
+        @param Class The implementation type. This has to be a concrete type (ie not abstract 
+               or an interface). 
+        @return IBindingSyntax The current binding builder (for fluent syntax) */    
+    method public IBindingSyntax To(input poImplementation as class Class):
         Binding:TargetType = poImplementation.
         Binding:Target = BindingTargetEnum:Type.
         
@@ -77,13 +81,21 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     
     /** Indicates that the service should be bound to an instance of the specified provider type.
         The instance will be activated via the kernel when an instance of the service is activated.
-        @param poProviderType The type of provider to activate.
-     */
-    method public IBindingSyntax Using(pcProviderType as character):
+        
+        @param poProviderTypecharacter The type name of provider to activate.
+        @return IBindingSyntax The current binding builder (for fluent syntax)  */
+    method public IBindingSyntax Using(input pcProviderType as character):
+        Assert:ArgumentIsValidType(pcProviderType).
+        
         return this-object:Using(Class:GetClass(pcProviderType)).
     end method.
     
-    method public IBindingSyntax Using(poProviderType as class Class):
+    /** Indicates that the service should be bound to an instance of the specified provider type.
+        The instance will be activated via the kernel when an instance of the service is activated.
+        
+        @param Class The type of provider to activate.
+        @return IBindingSyntax The current binding builder (for fluent syntax)  */    
+    method public IBindingSyntax Using(input poProviderType as class Class):
         Binding:ProviderType = poProviderType.
         return this-object.
     end method.
@@ -96,29 +108,39 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     end method.
     
     /** Indicates that instances activated via the binding should not be re-used, nor have
-        their lifecycle managed by InjectABL.  */
+        their lifecycle managed by InjectABL.  
+        
+        @return IBindingSyntax The current binding builder (for fluent syntax) */
     method public IBindingSyntax InTransientScope():
         Binding:Scope = StandardScopeEnum:Transient.
         return this-object.
     end method.
     
     /** Indicates that an instance will be reused across an AppServer connection. 
-        Meaningless for statefree AppServers. */
+        Meaningless for statefree AppServers. 
+        
+        @return IBindingSyntax The current binding builder (for fluent syntax) */
     method public IBindingSyntax InAgentConnectionScope():
         Binding:Scope = StandardScopeEnum:AgentConnection.
         return this-object.
     end method.
     
-    /** Indicates that an instance will be reused across an AppServer request. */
+    /** Indicates that an instance will be reused across an AppServer request.
+     
+        @return IBindingSyntax The current binding builder (for fluent syntax) */
     method public IBindingSyntax InAgentRequestScope():
         Binding:Scope = StandardScopeEnum:AgentRequest.
         return this-object.
     end method.
     
-    method public IBindingSyntax InScope(poScopeCallback as class Class, poScope as StandardScopeEnum):
+    /** Generic scope binding
+        
+        @param Class The type providing the scope
+        @return IBindingSyntax The current binding builder (for fluent syntax) */
+    method public IBindingSyntax InScope(input poScopeCallback as class Class, poScope as StandardScopeEnum):
         Assert:ArgumentNotNull(poScopeCallback, 'Custom scope callback type').
         Assert:ArgumentNotNull(poScope, 'Custom scope').
-        
+                
         /* Even though this is statically-called, we can still type-check */
         Assert:ArgumentIsType(poScopeCallback, Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.StandardScope')).
         
@@ -130,7 +152,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     
 /* WithConstructorArgument */
     /* generalised case; all other WithConstructorArgument() methods pass through this one. */
-    method public IBindingSyntax WithConstructorArgument(input poParameter as IParameter extent).    
+    method public IBindingSyntax WithConstructorArgument(input poParameter as IParameter extent):    
         define variable oRoutine as Routine no-undo.
         
         oRoutine = new Routine(Binding:Service, '', RoutineTypeEnum:Constructor).
@@ -208,6 +230,9 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     
     method public IBindingSyntax WithConstructorArgument(poValue as Object extent):
         define variable oParameter as IParameter extent 1 no-undo.
+        
+        /* compiler should call WithConstructorArg(IParameter[]) not this one! */
+        Assert:ArgumentNotType(poValue[1], Class:GetClass('OpenEdge.Core.InjectABL.Binding.Parameters.IParameter')).
 
         oParameter[1] = new Parameter(poValue).
         
@@ -508,7 +533,7 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     method public IConditionSyntax When():
         define variable oConditionBuilder as IConditionSyntax no-undo.
         
-        If valid-object(Binding:Condition) then
+        if valid-object(Binding:Condition) then
             oConditionBuilder = new ConditionBuilder(Binding:Condition).
         else
             oConditionBuilder = new ConditionBuilder(Binding).

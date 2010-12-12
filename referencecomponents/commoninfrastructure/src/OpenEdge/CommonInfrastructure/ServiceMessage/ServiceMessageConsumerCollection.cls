@@ -103,12 +103,15 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
         
         @param character The message's unique ID
         @param IMessageConsumer A consumer for the message.  */
-    method public IMessageConsumer GetMessageConsumer(input pcMessageId as character):
+    method public IMessageConsumer GetMessageConsumer(input pcMessageId as longchar):
+        define variable cStringId as character no-undo.
+        
         define buffer lbMsg for Messages.
         
+        cStringId  = pcMessageId.
         find lbMsg where
              lbMsg.RequestGroupKey = RequestGroupKey and
-             lbMsg.MessageId = pcMessageId.
+             lbMsg.MessageId = cStringId. 
         
         return cast(lbMsg.Consumer, IMessageConsumer). 
     end method.
@@ -117,7 +120,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
         
         @param character An array of message ids
         @param IMessageConsumer An array of message consumers for the message.  */
-    method public IMessageConsumer extent GetMessageConsumer(input pcMessageId as character extent):
+    method public IMessageConsumer extent GetMessageConsumer(input pcMessageId as longchar extent):
         define variable oMC as IMessageConsumer extent no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
@@ -135,7 +138,7 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
     /** Returns an array of the message IDs for the messages bundled herein.
         
         @return String An array of message ID for this bundle. */ 
-    method public character extent GetMessages():
+    method public longchar extent GetMessages():
         define variable cMsg as character extent no-undo.
         define buffer lbMsg for Messages.
         define query qryMsg for lbMsg.
@@ -161,10 +164,12 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
          
         @param character The Message Id 
         @return character The request key for the input message ID.      */
-    method static public character GetMessageRequestGroupKey (input pcMessageId as character):
+    method static public character GetMessageRequestGroupKey (input pcMessageId as longchar):
+        define variable cStringId as character no-undo.
         define buffer lbMsg for Messages.
         
-        find lbMsg where lbMsg.MessageId = pcMessageId.
+        cStringId = pcMessageId.
+        find lbMsg where lbMsg.MessageId = cStringId.
         
         return lbMsg.RequestGroupKey.
     end method.
@@ -173,13 +178,15 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
         
         @param character The unique identifier of the message.
         @param IMessageConsumer The object that responds to the message.    */
-    method public void AddMessage(input pcMessageId as character,
+    method public void AddMessage(input pcMessageId as longchar,
                                   input poMessageConsumer as IMessageConsumer):
+        define variable cStringMsgId as character no-undo.
         define buffer lbMsg for Messages.
         
+        cStringMsgId = pcMessageId.
         create lbMsg.
         assign lbMsg.RequestGroupKey = RequestGroupKey
-               lbMsg.MessageId = pcMessageId
+               lbMsg.MessageId = cStringMsgId
                lbMsg.Consumer = poMessageConsumer
                lbMsg.IsOutstanding = true.
     end method.
@@ -187,12 +194,15 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
     /** Removes a request from this collection.
         
         @param character The unique message ID for a message. */    
-    method public void RemoveMessage(input pcMessageId as character):
+    method public void RemoveMessage(input pcMessageId as longchar):
+        define variable cStringMsg as character no-undo.
+        
         define buffer lbMsg for Messages.
         
+        cStringMsg  = pcMessageId.        
         find lbMsg where
              lbMsg.RequestGroupKey = RequestGroupKey and
-             lbMsg.MessageId = pcMessageId.        
+             lbMsg.MessageId = cStringMsg .
         delete lbMsg.
     end method.
     
@@ -224,13 +234,15 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
         
         @param character The unique identifier of the message.
         @param IMessageConsumer The consumer for the message received. */
-    method public IMessageConsumer ResponseReceived(input pcMessageId as character):
+    method public IMessageConsumer ResponseReceived(input pcMessageId as longchar):
         define variable oMC as IMessageConsumer no-undo.
+        define variable cStringId as character no-undo.
         define buffer lbMsg for Messages.
         
+        cStringId = pcMessageId.
         find lbMsg where
              lbMsg.RequestGroupKey = RequestGroupKey and
-             lbMsg.MessageId = pcMessageId.
+             lbMsg.MessageId = cStringId.
         lbMsg.IsOutstanding = false.
         
         return cast(lbMsg.Consumer, IMessageConsumer).
@@ -240,11 +252,11 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollect
         
         @param character An array of unique identifiers of the message.
         @param IMessageConsumer An attay of the consumers for the messages received. */
-    method public IMessageConsumer extent ResponseReceived(input pcMessageId as character extent):
+    method public IMessageConsumer extent ResponseReceived(input pcMessageId as longchar extent):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         define variable oMC as IMessageConsumer extent no-undo.
-        
+
         iMax = extent(pcMessageId).
         extent(oMC) = iMax.
         

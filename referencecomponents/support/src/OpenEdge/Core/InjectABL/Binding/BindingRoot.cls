@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : BindingRoot
     Purpose     : 
     Syntax      : 
@@ -6,7 +6,7 @@
     @author pjudge
     Created     : Tue Mar 02 11:56:07 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.IBindingRoot.
@@ -21,15 +21,10 @@ using Progress.Lang.Class.
 class OpenEdge.Core.InjectABL.Binding.BindingRoot abstract implements IBindingRoot:
     define abstract public property Bindings as IBindingCollection no-undo get.
     
-    method public IBindingSyntax Bind(pcService as char):
-        define variable oService as class Class no-undo.
+    method public IBindingSyntax Bind(input pcService as char):
+        Assert:ArgumentIsValidType(pcService).
         
-        /* no-error since we want to ensure that the class name actually exists. */
-        oService = Class:GetClass(pcService) no-error.
-        
-        Assert:ArgumentNotNull(oService, 'Service ' + pcService).
-        
-        return this-object:Bind(oService).
+        return this-object:Bind(Class:GetClass(pcService)).
     end method.
     
     method public IBindingSyntax Bind(poService as class Class):
@@ -58,10 +53,14 @@ class OpenEdge.Core.InjectABL.Binding.BindingRoot abstract implements IBindingRo
     end method.
     
     method public void Unbind(pcService as char):
+        Assert:ArgumentIsValidType(pcService).
+        
         Unbind(Class:GetClass(pcService)).
     end method.
     
     method public IBindingSyntax Rebind(pcService as character):
+        Assert:ArgumentIsValidType(pcService).
+        
         return Rebind(Class:GetClass(pcService)).
     end method.
             

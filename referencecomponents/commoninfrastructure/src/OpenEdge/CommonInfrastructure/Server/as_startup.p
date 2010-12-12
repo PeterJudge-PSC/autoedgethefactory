@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------
     File        : as_startup.p
-    Purpose     : AppServer starup procedure 
+    Purpose     : AppServer startup procedure 
     
     Syntax      :
 
@@ -35,9 +35,8 @@ oModules = new IInjectionModuleCollection().
 oModules:Add(new CommonInfrastructureModule()).
 oInjectABLKernel = new ComponentKernel(oModules).
 
-oSession:SessionProperties:Put(Class:GetClass('OpenEdge.Core.InjectABL.IKernel'), oInjectABLKernel).
-
 oServiceManager = cast(oInjectABLKernel:Get('OpenEdge.CommonInfrastructure.Common.IServiceManager'), IServiceManager).
+oSession:SessionProperties:Put(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'), oServiceManager).
 
 catch oApplicationError as ApplicationError:
     oApplicationError:ShowError().

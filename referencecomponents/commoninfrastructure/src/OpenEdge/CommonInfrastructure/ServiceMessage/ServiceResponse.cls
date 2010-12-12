@@ -17,7 +17,7 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
-class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse abstract inherits ServiceMessage
+class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse /* abstract */ inherits ServiceMessage
             implements IServiceResponse:
     
     /** Was there an error on the request? */
@@ -28,9 +28,9 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse abstract inhe
        Progress.Lang.Error object. */
     define public property ErrorText as longchar no-undo get. set.
     
-	constructor protected ServiceResponse(input pcMessageId as character,
-	                                      input pcService as character,
-	                                      input poActionType as ServiceMessageActionEnum ):
+	constructor public ServiceResponse(input pcMessageId as longchar,
+	                                   input pcService as character,
+	                                   input poActionType as ServiceMessageActionEnum ):
 		super (input pcMessageId, input pcService, input poActionType).
 	end constructor.
 	

@@ -16,6 +16,12 @@ using OpenEdge.CommonInfrastructure.Common.Service.
 
 class OpenEdge.CommonInfrastructure.Server.TenantManager inherits Service
     implements ITenantManager: 
+
+    /** (mandatory) the current tenant id */
+    define public property CurrentTenantId as longchar no-undo
+        get():
+            return 'ae90e4c7-57de-a780-e011-bd0361d4b88f'.
+        end get. 
     
     constructor public TenantManager (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).

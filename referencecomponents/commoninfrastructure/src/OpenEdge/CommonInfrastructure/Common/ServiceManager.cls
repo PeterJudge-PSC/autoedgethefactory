@@ -39,6 +39,7 @@ using OpenEdge.Core.InjectABL.IKernel.
 
 using OpenEdge.Core.System.NotFoundError.
 using OpenEdge.Lang.Collections.IIterator.
+using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
@@ -46,11 +47,13 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         implements IServiceManager, IManager:
     
     define private variable moAppStart as IService no-undo.
+    define private variable moIServiceProviderType as class Class no-undo.
+    define private variable moIInjectABLCacheType as class Class no-undo.
     
     define private temp-table Service no-undo
         field ServiceType  as Object        /* ServiceTypeEnum */
-        field Service        as Object       /* Progress.Lang.Class */
-        field Instance       as Object       /* IComponent or IService */
+        field Service       as Object       /* Progress.Lang.Class */
+        field Instance      as Object       /* IComponent or IService */
         /* Order added, per component type */
         index idx1 as primary ServiceType Service
         index idx2 Instance
@@ -62,7 +65,10 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
     constructor public ServiceManager(input poKernel as IKernel):
         super().
         
-        this-object:Kernel = poKernel.
+        assign this-object:Kernel = poKernel
+               
+               moIServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider')
+               moIInjectABLCacheType = Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache').
     end constructor.
     
     destructor public ServiceManager():
@@ -80,7 +86,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
        as a PRIVATE member, and we want to have only 1 IComponent interface. */
     method public void Initialize():
         StartServices().        
-        moAppStart = StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IApplicationStart')).
+/*        moAppStart = StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IApplicationStart')).*/
     end method.
     
     /** General destruction code that can be called outside of the destructor
@@ -88,21 +94,25 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
     method public void DestroyComponent():
         StopServices().
     end method.
-    
+
     method protected logical RegisterService(input poServiceType as ServiceTypeEnum,
                                              input pcServiceName as character):
+        Assert:ArgumentIsValidType(pcServiceName).
+        return RegisterService(poServiceType, Class:GetClass(pcServiceName)).
+    end method.
+        
+    method protected logical RegisterService(input poServiceType as ServiceTypeEnum,
+                                             input poService as class Class):
         define variable lNew as logical no-undo.
-        define variable oService as class Class no-undo.
         define buffer lbService for Service.
         
-        oService = Class:GetClass(pcServiceName).
         lNew = not can-find(lbService where 
-                            lbService.Service     = oService and
+                            lbService.Service     = poService and
                             lbService.ServiceType = poServiceType ).
         if lNew then
         do:
             create lbService.
-            assign lbService.Service = oService
+            assign lbService.Service = poService
                    lbService.ServiceType = poServiceType.
         end.
         
@@ -116,10 +126,10 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
     method public void StartServices():
         define variable oService as IService no-undo.
         define variable oIterator as IIterator no-undo.
-        define variable oContext as ILifecycleContext no-undo.
         define variable oScopedInstance as Object extent no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
+        define variable oServiceType as class Class no-undo.
         
         define buffer lbService for Service.
         
@@ -135,21 +145,21 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         do:
             iMax = extent(oScopedInstance).
             do iLoop = 1 to iMax:
+                oServiceType = oScopedInstance[iLoop]:GetClass(). 
+                
                 /* we don't know what we've got here, so use generic AppComponent */
-                RegisterService(
-                        ServiceTypeEnum:AppService,
-                        oScopedInstance[iLoop]:GetClass():TypeName).
+                RegisterService(ServiceTypeEnum:AppService, oServiceType).
+                
+                find lbService where
+                     lbService.Service     = oServiceType and
+                     lbService.ServiceType = ServiceTypeEnum:AppService.
+                lbService.Instance = oScopedInstance[iLoop].
             end.
         end.
         
-        for each lbService:
+        @todo(task="implement", action="refactor").
+        for each lbService where lbService.Instance = ?:
             oService = StartService(cast(lbService.Service, Class)).
-            
-            /* Try to get the context. If we can, the object has a scope and so can be appropriately released */
-            oContext = cast(Kernel:Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
-                            , ICache):TryGetContext(oService).
-            if valid-object(oContext) then
-                lbService.Instance = oService.
         end.
     end method.
     
@@ -162,12 +172,12 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         for each lbService:
             StopService(cast(lbService.Instance, IService)).
             lbService.Instance = ?.
+            delete lbService.
         end.
         
         /* Also stop any that are scoped to the service manager, although these
            are registered services, so should be stopped already anyway. */
-        cast(Kernel:Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
-                , ICache):Clear(this-object).
+        cast(Kernel:Components:Get(moIInjectABLCacheType), ICache):Clear(this-object).
     end method.
     
     /** Starts a service
@@ -260,9 +270,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         @param character The name of the service for which we need to perform a request.
         @return IServiceProvider An object capable of serviving that request.   */
     method public IServiceProvider GetServiceProvider(input pcService as character):
-        return cast(StartService(
-                        Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider'),
-                        pcService), IServiceProvider).
+        return cast(Kernel:Get(moIServiceProviderType, pcService), IServiceProvider).
+/*        return cast(StartService(moIServiceProviderType, pcService), IServiceProvider).*/
     end method.
     
 end class.

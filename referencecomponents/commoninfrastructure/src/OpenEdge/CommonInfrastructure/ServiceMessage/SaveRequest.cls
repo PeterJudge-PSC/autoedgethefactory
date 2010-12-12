@@ -20,12 +20,12 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest inherits ServiceR
 	define public property TableNames as character extent no-undo get. set. 
 
     constructor public SaveRequest(input pcService as character):
-        super(pcService, ServiceMessageActionEnum:Save).
+        super(pcService, ServiceMessageActionEnum:SaveData).
     end constructor.
     
     constructor public SaveRequest(input pcMessageId as character,
                                    input pcService as character):
-        super(pcMessageId, pcService, ServiceMessageActionEnum:Save).
+        super(pcMessageId, pcService, ServiceMessageActionEnum:SaveData).
     end constructor.
 
 	constructor public SaveRequest(input pcService as character,

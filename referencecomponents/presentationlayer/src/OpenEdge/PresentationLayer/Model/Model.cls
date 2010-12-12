@@ -72,7 +72,7 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         model, or whether we need to get more. */
     define protected property TableContexts as IMap no-undo get. private set.
     
-    /** The ServicemessageManager is used plentifully; we keep it as a property so that
+    /** The ServiceMessageManager is used plentifully; we keep it as a property so that
         we can get it whenever needed, without fuss. */
     define protected property ServiceMessageManager as IServiceMessageManager no-undo
         get():
@@ -686,7 +686,7 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         define variable iMax as integer no-undo.
         define variable iLoop as integer no-undo.
         
-        oFetchRequest = new FetchRequest(this-object:ServiceName, ServiceMessageActionEnum:Fetch).
+        oFetchRequest = new FetchRequest(this-object:ServiceName, ServiceMessageActionEnum:FetchData).
         iMax = extent(pcTables).
         
         do iLoop = 1 to iMax:
@@ -769,11 +769,11 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
     
     method public IServiceRequest BuildRequest(input poServiceMessageAction as ServiceMessageActionEnum):
         case poServiceMessageAction:
-            when ServiceMessageActionEnum:Fetch or when ServiceMessageActionEnum:FetchSchema then
+            when ServiceMessageActionEnum:FetchData or when ServiceMessageActionEnum:FetchSchema then
                 return cast(BuildFetchRequest(GetTableNames()), IServiceRequest).
-            when ServiceMessageActionEnum:Save then
+            when ServiceMessageActionEnum:SaveData then
                 return cast(BuildSaveRequest(GetTableNames()), IServiceRequest).
-            otherwise 
+            otherwise
                 return BuildServiceRequest(GetTableNames()).
         end case.
     end method.
@@ -840,11 +840,11 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         @param IServiceResponse The response to the request. */
     method public void ReceiveMessageResponse(input poResponse as IServiceResponse).
         case cast(poResponse, IServiceMessage):ActionType:
-	        when ServiceMessageActionEnum:Fetch then
+	        when ServiceMessageActionEnum:FetchData then
 	           ReceiveFetchResponse(cast(poResponse, IFetchResponse)).
 	        when ServiceMessageActionEnum:FetchSchema then
 	           ReceiveFetchSchemaResponse(cast(poResponse, IFetchResponse)).
-            when ServiceMessageActionEnum:Save then
+            when ServiceMessageActionEnum:SaveData then
                 ReceiveSaveResponse(cast(poResponse, ISaveResponse)).
             otherwise
                 ReceiveServiceResponse(poResponse).

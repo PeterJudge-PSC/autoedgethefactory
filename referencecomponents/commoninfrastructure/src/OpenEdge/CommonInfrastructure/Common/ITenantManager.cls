@@ -11,5 +11,8 @@
 using Progress.Lang.*.
 
 interface OpenEdge.CommonInfrastructure.Common.ITenantManager:  
-  
+
+    /** (mandatory) the current tenant id */
+    define public property CurrentTenantId as longchar no-undo get.
+    
 end interface.

@@ -34,23 +34,18 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
         end.
         private set.
     
-    define protected property StaticDatasetHandle as handle no-undo 
-        get.
-        private set.
+    define protected property StaticDatasetHandle as handle no-undo get. private set.
 
 	constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
 	                                          input poComponentInfo as IComponentInfo,
-	                                          input pcServiceName as character,
 	                                          input poDAO as IDataAccess ):
-		super(input poServiceManager, input poComponentInfo, input pcServiceName, input poDAO).
+		super(input poServiceManager, input poComponentInfo, input poDAO).
 	end constructor.
 
-	constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
-	                                          input poComponentInfo as IComponentInfo,
-	                                          input pcServiceName as character):
-		super (input poServiceManager, input poComponentInfo, input pcServiceName).
-	end constructor.
-    
+    constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
+                                              input poComponentInfo as IComponentInfo ):
+        super(input poServiceManager, input poComponentInfo).
+    end constructor.
 
     method override public void FetchData(poRequest as IFetchRequest):
         /* We assume new data 

@@ -10,16 +10,24 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.Core.System.QueryBuffer.
+using OpenEdge.Core.System.QueryFilter.
+using OpenEdge.Core.System.QueryJoin.
+using OpenEdge.Core.System.QuerySort.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
-using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.System.QueryDefinitionEventArgs.
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
-using OpenEdge.Lang.QueryBlockTypeEnum.
 using OpenEdge.Core.System.QueryDefinitionOperationEnum.
 using OpenEdge.Core.System.QueryElementEnum.
 
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.ObjectInputStream.
+
+using OpenEdge.Lang.Collections.ICollection.
+using OpenEdge.Lang.Collections.Collection.
+
+using OpenEdge.Lang.QueryBlockTypeEnum.
 using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.CompareStrengthEnum.
 using OpenEdge.Lang.QueryTypeEnum.
@@ -29,7 +37,7 @@ using OpenEdge.Lang.LockModeEnum.
 using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.SortDirectionEnum.
 using OpenEdge.Lang.EnumMember.
-
+using OpenEdge.Lang.String.
 using Progress.Lang.Object.
 
 class OpenEdge.Core.System.QueryDefinition
@@ -49,11 +57,12 @@ class OpenEdge.Core.System.QueryDefinition
 
     /* Only ever set by AddBuffer(). */
     define public property NumBuffers as integer no-undo get. protected set.
-        
+    
     define private temp-table ttBuffer no-undo
-        field BufferName as char
-        field TableName as char
-        field Order as int
+        field Order as integer
+        
+        field BufferName as character 
+        field TableName as character 
         field QueryType as Object   /* OpenEdge.Lang.QueryTypeEnum */
         field LockMode as Object       /* OpenEdge.Lang.LockModeEnum */
         index idx1 as unique BufferName
@@ -61,19 +70,19 @@ class OpenEdge.Core.System.QueryDefinition
     
     define private temp-table ttFilter no-undo
         field BufferName as character
-        field FieldName as char
+        field FieldName as character 
         field Operator as Object           /* OpenEdge.Lang.OperatorEnum */
-        field FieldValue as char
+        field FieldValue as Object  /*OE.Lang.String */
         field FieldType as Object          /* OpenEdge.Lang.DataTypeEnum */
         field JoinType as Object /* OpenEdge.Lang.JoinEnum */
         index idx1 as primary unique BufferName FieldName Operator FieldValue         
         .        
     define private temp-table ttJoin no-undo
         field BufferName as character
-        field FieldName as char
+        field FieldName as character 
         field Operator as Object   /* OpenEdge.Lang.OperatorEnum:EnumMember */
-        field JoinBufferName as char
-        field JoinFieldName as char
+        field JoinBufferName as character 
+        field JoinFieldName as character 
         field JoinType as Object       /* OpenEdge.Lang.JoinEnum:EnumMember */
         index idx1 as primary unique BufferName FieldName Operator JoinBufferName JoinFieldName
         index idx2 JoinBufferName
@@ -88,63 +97,32 @@ class OpenEdge.Core.System.QueryDefinition
         index idx1 as primary unique BufferName FieldName       
         .
 
-    method public void AddFilter (pcBufferName as char,
-                                  pcFieldName as char,
+    method public void AddFilter (pcBufferName as character,
+                                  pcFieldName as character,
                                   poOperator as OperatorEnum,
-                                  pcFieldValue as char,
+                                  poFieldValue as String,
                                   poFieldType as DataTypeEnum,
                                   poJoinType as JoinEnum):
-        
         define buffer lbFilter for ttFilter.
         
         create lbFilter.
         assign lbFilter.BufferName = pcBufferName
                lbFilter.FieldName = pcFieldName
                lbFilter.Operator = poOperator
-               lbFilter.FieldValue = pcFieldValue
+               lbFilter.FieldValue = poFieldValue
                lbFilter.FieldType = poFieldType
                lbFilter.JoinType = poJoinType.
         
         OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Filter, QueryDefinitionOperationEnum:Create)).
     end method.
     
-    method public void AddSort (pcBufferName as char,
-                                pcFieldName as char,
-                                poSortDirection as SortDirectionEnum):
-        define variable iOrder as integer no-undo.
-
-        define buffer lbSort for ttSort.
-        define query qrySort for lbSort.
-        
-        open query qrySort 
-            preselect each lbSort by lbSort.Order.
-        
-        iOrder = query qrySort:num-results + 1.
-        
-        AddSort(pcBufferName, pcFieldName, poSortDirection, iOrder).                                
-    end method.
-    
-    method public void AddSort (pcBufferName as char,
-                                pcFieldName as char,
-                                poSortDirection as SortDirectionEnum,
-                                piOrder as integer ):
-        define buffer lbSort for ttSort.
-        
-        find lbSort where
-             lbSort.BufferName = pcBufferName and
-             lbSort.FieldName = pcFieldName
-             no-error.
-        if not available lbSort then
-        do:
-            create lbSort.
-            assign lbSort.BufferName = pcBufferName
-                   lbSort.FieldName = pcFieldName.
-        end.
-        
-        assign lbSort.Direction = poSortDirection
-               lbSort.Order     = piOrder.
-        
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Sort, QueryDefinitionOperationEnum:Create)).
+    method public void AddFilter(input poQueryFilter as QueryFilter):
+        AddFilter(poQueryFilter:BufferName,
+                  poQueryFilter:FieldName,
+                  poQueryFilter:Operator,
+                  poQueryFilter:FieldValue,
+                  poQueryFilter:FieldType,
+                  poQueryFilter:JoinType).
     end method.
     
     method public void ClearFilters():
@@ -182,13 +160,13 @@ class OpenEdge.Core.System.QueryDefinition
     end method.
     
     method public character extent GetBufferList():
-        define variable cTables as char extent no-undo.
+        define variable cTables as character extent no-undo.
         define variable oDummy as EnumMember extent no-undo.
         
         return GetBufferList(output cTables, output oDummy, output oDummy).
     end method.
     
-    method public character extent GetBufferList(output pcTables as char extent,
+    method public character extent GetBufferList(output pcTables as character extent,
                                                  output poQueryTypes as QueryTypeEnum extent,
                                                  output poLockModes as LockModeEnum extent):
         
@@ -224,20 +202,53 @@ class OpenEdge.Core.System.QueryDefinition
         
         return cBuffer.        
     end method.
-
+    
+    method public QueryBuffer extent GetQueryBuffers():
+        define variable oQB as QueryBuffer extent no-undo.
+        
+        define buffer lbBuffer for ttBuffer.
+        define query qryBuffer for lbBuffer.
+        
+        open query qryBuffer preselect each lbBuffer by lbBuffer.Order.
+        
+        if query qryBuffer:num-results gt 0 then
+        do:
+            extent(oQB) = query qryBuffer:num-results.
+            query qryBuffer:get-first().
+            do while not query qryBuffer:query-off-end:
+                oQB[query qryBuffer:current-result-row] =
+                        new QueryBuffer(lbBuffer.BufferName,
+                                        lbBuffer.TableName,
+                                        cast(lbBuffer.QueryType, QueryTypeEnum),
+                                        cast(lbBuffer.LockMode, LockModeEnum)).
+                query qryBuffer:get-next().
+            end.
+            close query qryBuffer.
+        end.
+                
+        return oQB.
+    end method.
+    
     method public void AddBuffer(pcBuffer as character):
         AddBuffer(pcBuffer, pcBuffer).
     end method.
             
-    method public void AddBuffer(pcBuffer as char, pcTable as char):        
+    method public void AddBuffer(pcBuffer as character, pcTable as char):        
         AddBuffer(pcBuffer,
                   pcTable,
                   QueryTypeEnum:Default,
                   LockModeEnum:Default).
     end method.
-            
-    method public void AddBuffer(pcBuffer as char,
-                                 pcTable as char,
+    
+    method public void AddBuffer(input poQueryBuffer as QueryBuffer):
+        AddBuffer(poQueryBuffer:Name,
+                  poQueryBuffer:TableName,
+                  poQueryBuffer:QueryType,
+                  poQueryBuffer:LockMode).
+    end method.
+    
+    method public void AddBuffer(pcBuffer as character,
+                                 pcTable as character,
                                  poQueryType as QueryTypeEnum,
                                  poLockMode as LockModeEnum):
         define buffer lbBuffer for ttBuffer.
@@ -253,7 +264,7 @@ class OpenEdge.Core.System.QueryDefinition
         OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Create)).
     end method.
 
-    method public void SetBuffers(pcBuffer as char extent, pcTable as char extent):
+    method public void SetBuffers(pcBuffer as character extent, pcTable as character extent):
         define variable iLoop as integer no-undo.
                        
         do iLoop = 1 to extent(pcBuffer):
@@ -262,11 +273,11 @@ class OpenEdge.Core.System.QueryDefinition
         end.
     end method.
             
-    method public void SetBuffers(pcBuffer as char extent):
+    method public void SetBuffers(pcBuffer as character extent):
         SetBuffers(pcBuffer, pcBuffer).
     end method.
         
-    method public void SetBufferTable(pcBuffer as char, pcTable as char):
+    method public void SetBufferTable(pcBuffer as character, pcTable as char):
         define buffer lbBuffer for ttBuffer.
         
         find lbBuffer where lbBuffer.BufferName = pcBuffer no-error.
@@ -278,7 +289,7 @@ class OpenEdge.Core.System.QueryDefinition
         OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Update)).
     end method.
     
-    method public void SetBufferLockMode(pcBuffer as char, poLockMode as LockModeEnum):
+    method public void SetBufferLockMode(pcBuffer as character, poLockMode as LockModeEnum):
         define buffer lbBuffer for ttBuffer.
         
         find lbBuffer where lbBuffer.BufferName = pcBuffer no-error.
@@ -290,7 +301,7 @@ class OpenEdge.Core.System.QueryDefinition
         OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Update)).
     end method.
     
-    method public void SetBufferQueryType(pcBuffer as char, poQueryType as QueryTypeEnum):
+    method public void SetBufferQueryType(pcBuffer as character, poQueryType as QueryTypeEnum):
         define buffer lbBuffer for ttBuffer.
         
         find lbBuffer where lbBuffer.BufferName = pcBuffer no-error.
@@ -339,11 +350,20 @@ class OpenEdge.Core.System.QueryDefinition
         super ().
     end constructor.
     
-    method public void AddJoin (pcBufferName as char,
-                                pcFieldName as char,
+    method public void AddJoin(input poQueryJoin as QueryJoin):
+        AddJoin(poQueryJoin:BufferName,
+                poQueryJoin:FieldName,
+                poQueryJoin:Operator,
+                poQueryJoin:JoinBufferName,
+                poQueryJoin:JoinFieldName,
+                poQueryJoin:JoinType).
+    end method.
+    
+    method public void AddJoin (pcBufferName as character,
+                                pcFieldName as character,
                                 poOperator as OperatorEnum,
-                                pcJoinBufferName as char,
-                                pcJoinFieldName as char,
+                                pcJoinBufferName as character,
+                                pcJoinFieldName as character,
                                 poJoinType as JoinEnum):
         define buffer lbJoin for ttJoin.
         
@@ -426,6 +446,44 @@ class OpenEdge.Core.System.QueryDefinition
     
     method public override Object Clone():
         define variable oClone as IQueryDefinition no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable oBuffer as QueryBuffer extent no-undo.
+        define variable oFilter as QueryFilter extent no-undo.
+        define variable oJoin as QueryJoin extent no-undo.
+        define variable oSort as QuerySort extent no-undo.
+        
+        oClone = cast(this-object:GetClass():New(), IQueryDefinition).
+        oClone:QueryBlockType = this-object:QueryBlockType.
+        
+        oBuffer = this-object:GetQueryBuffers().
+        iMax = extent(oBuffer).
+        do iLoop = 1 to iMax:
+            oClone:AddBuffer(oBuffer[iLoop]).
+        end.
+        
+        oFilter = this-object:GetQueryFilters().
+        iMax = extent(oFilter).
+        do iLoop = 1 to iMax:
+            oClone:AddFilter(oFilter[iLoop]).
+        end.
+        
+        oJoin = this-object:GetQueryJoins().
+        iMax = extent(oJoin).
+        do iLoop = 1 to iMax:
+            oClone:AddJoin(oJoin[iLoop]).
+        end.
+        
+        oSort = this-object:GetQuerySort().
+        iMax = extent(oSort).
+        do iLoop = 1 to iMax:
+            oClone:AddSort(oSort[iLoop]).
+        end.
+        
+        return oClone.
+        
+        /*
+        
         define variable oOOS as ObjectOutputStream no-undo.
         define variable oOIS as ObjectInputStream no-undo.
         define variable mStream as memptr no-undo.
@@ -447,18 +505,42 @@ class OpenEdge.Core.System.QueryDefinition
         finally:
             set-size(mStream) = 0.
         end finally.
+        */
     end method.
-   
-    method public character GetQueryString():
+    
+    /** Returns all of the query elements for the query.
+        
+        @return Object[] An array of the elements that make up this query. */
+    method public Object extent GetQueryElements().
+        define variable oElements as ICollection no-undo.
+        
+        oElements = new Collection().
+        oElements:Add(QueryBlockType).
+        oElements:AddArray(GetQueryBuffers()).
+        oElements:AddArray(GetQueryFilters()).
+        oElements:AddArray(GetQueryJoins()).
+        oElements:AddArray(GetQuerySort()).
+        
+        return oElements:ToArray().    
+    end method.
+    
+    method public longchar GetQueryString():
         return GetQueryString(GetBufferList()). 
     end.
-    
-    method public character GetQueryString(pcBuffers as char extent):
+        
+    /** Returns the complete query string (ready for QUERY-PREPARE).
+        
+        @param character[] An array of buffer names for which 
+               return a where clause that filters and joins between all
+               buffers.
+        @return longchar The query clause string. */        
+    method public longchar GetQueryString(pcBuffers as character extent):
         define variable cTables as character extent no-undo.
         define variable iExtent as integer no-undo.
         define variable cJoin as character no-undo.
         define variable cFilter as character no-undo.
         define variable cWhere as character no-undo.
+        define variable cSortBy as character no-undo.
         define variable cBufferName as character no-undo.
         define variable cQueryBufferList as character no-undo.
         
@@ -472,6 +554,9 @@ class OpenEdge.Core.System.QueryDefinition
             assign cQueryBufferList = cQueryBufferList + ',' + lbBuffer.BufferName 
                    cJoin = GetJoin(cQueryBufferList, cBufferName)
                    cFilter = GetFilter(cBufferName)
+                   
+                   cSortBy = cSortBy + ' ' 
+                           + GetSort(cBufferName)
                    
                    /* Note: where string broken up for readability. */
                    cWhere = cWhere + ' ' 
@@ -495,42 +580,194 @@ class OpenEdge.Core.System.QueryDefinition
                    + (if iExtent ne extent(pcBuffers) then ', ' else '').
         end.
         
-        return cWhere + ' ' + GetSort(pcBuffers).
+        return cWhere + ' ' + cSortBy.
+    end method.
+
+/** SORT CRITERIA **/
+    /** Add a sort condition to the definition.
+    
+        @param character The buffer being sorted
+        @param character The field being sorted
+        @param SortDirection The direction of the sort. */
+    method public void AddSort (pcBufferName as character,
+                                pcFieldName as character,
+                                poSortDirection as SortDirectionEnum):
+        define variable iOrder as integer no-undo.
+
+        define buffer lbSort for ttSort.
+        define query qrySort for lbSort.
+        
+        open query qrySort 
+            preselect each lbSort by lbSort.Order.
+        
+        iOrder = query qrySort:num-results + 1.
+        
+        AddSort(pcBufferName, pcFieldName, poSortDirection, iOrder).                                
     end method.
     
-    method public character GetSort():
-        return GetSort(GetBufferList()).
+    /** Add a sort condition to the definition.
+        
+        @param character The buffer being sorted
+        @param character The field being sorted
+        @param SortDirection The direction of the sort.
+        @param integer The ordinal position of the sort phrase for the buffer. */    
+    method public void AddSort (pcBufferName as character,
+                                pcFieldName as character,
+                                poSortDirection as SortDirectionEnum,
+                                piOrder as integer ):
+        define buffer lbSort for ttSort.
+        
+        find lbSort where
+             lbSort.BufferName = pcBufferName and
+             lbSort.FieldName = pcFieldName
+             no-error.
+        if not available lbSort then
+        do:
+            create lbSort.
+            assign lbSort.BufferName = pcBufferName
+                   lbSort.FieldName = pcFieldName.
+        end.
+        
+        assign lbSort.Direction = poSortDirection
+               lbSort.Order     = piOrder.
+        
+        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Sort, QueryDefinitionOperationEnum:Create)).
     end method.
     
-    method public character GetSort(pcBufferName as char extent):
-        define variable cSort as character no-undo.
+    /** Add a sort condition to the definition.
+        
+        @param QuerySort Parameters for the sort. */     
+    method public void AddSort(input poQuerySort as QuerySort):
+        define variable iOrder as integer no-undo.
+
+        define buffer lbSort for ttSort.
+        define query qrySort for lbSort.
+        
+        open query qrySort 
+            preselect each lbSort by lbSort.Order.
+        
+        iOrder = query qrySort:num-results + 1.
+        
+        AddSort(poQuerySort:BufferName,
+                poQuerySort:FieldName,
+                poQuerySort:Direction,
+                iOrder).
+    end method.
+    /** Returns sort information for all buffers in the definition.
+        
+        @return longchar A complete sort string for all buffers in the definition. */
+    method public longchar GetSort():
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
+        define variable cBuffers as character extent no-undo.
+        define variable cSortBy as longchar no-undo.
+        
+        cBuffers = GetBufferList().
+        iMax = extent(cBuffers).
+        
+        do iLoop = 1 to iMax:
+            cSortBy = cSortBy + ' ' + GetSort(cBuffers[iLoop]).
+        end.
+        
+        return cSortBy.
+    end method.
+    
+    /** Returns sort information.
+        
+        @param character The buffer name for which to retrieve sort information
+        @return longchar A complete sort string for the specified buffer. */
+    method public longchar GetSort(input pcBufferName as character):
+        define variable cSortBy as longchar no-undo.
         define variable oSortDirection as EnumMember no-undo.
         
         define buffer lbSort for ttSort.
         
-        iMax = extent(pcBufferName).
-        do iLoop = 1 to iMax:
-            for each lbSort where
-                     lbSort.BufferName = pcBufferName[iLoop]
-                     by lbSort.Order:
-                assign oSortDirection = cast(lbSort.Direction, EnumMember)
-                       cSort = cSort + ' by '
-                             + lbSort.BufferName 
-                             + '.'
-                             + lbSort.FieldName                      
-                             + ' ' 
-                             + (if oSortDirection:Equals(SortDirectionEnum:Ascending) then '' 
-                                else oSortDirection:ToString() ).
-            end.
+        for each lbSort where
+                 lbSort.BufferName = pcBufferName
+                 by lbSort.Order:
+            assign oSortDirection = cast(lbSort.Direction, EnumMember)
+                   cSortBy = cSortBy + ' by '
+                         + lbSort.BufferName + '.' + lbSort.FieldName + ' ' 
+                         + (if oSortDirection:Equals(SortDirectionEnum:Ascending) then '' 
+                            else oSortDirection:ToString() ).
         end.
         
-        return cSort.
+        return cSortBy.
     end method.
     
-    method public character GetFilter(pcBufferName as char):
-        define variable cWhereClause as character no-undo.
+    /** Returns the Sort information for the given buffer.
+           
+        @param character The buffer name for which to retrieve sort information
+        @return QuerySort[] An ordered array of sort parameters */    
+    method public QuerySort extent GetQuerySort(input pcBufferName as character):
+        define buffer lbSort for ttSort.
+        define query qrySort for lbSort.
+        
+        open query qrySort 
+            preselect each lbSort where
+                           lbSort.BufferName = pcBufferName
+                           by lbSort.Order.
+        return FillQuerySort(query qrySort:handle).
+    end method.
+
+    /** Returns the Sort information for all buffers. 
+        
+        @return QuerySort[] An ordered array of sort parameters */    
+    method public QuerySort extent GetQuerySort():
+        define buffer lbBuffer for ttBuffer.
+        define buffer lbSort for ttSort.
+        
+        define query qrySort for lbBuffer, lbSort.
+        
+        open query qrySort
+            preselect each lbBuffer,
+                      each lbSort where
+                           lbSort.BufferName = lbBuffer.BufferName
+                      by lbBuffer.Order
+                      by lbSort.Order.
+        
+        return FillQuerySort(query qrySort:handle).            
+    end method.
+    
+    /** Creates QuerySort objects based on a query.
+        
+        @param handle The open query used to filter sort records.
+        @return QuerySort[] An ordered array of sort parameter objects. */
+    method protected QuerySort extent FillQuerySort(input phQuery as handle):
+        define variable oQS as QuerySort extent no-undo.
+        define variable hBuffer as handle no-undo.
+        
+        if valid-handle(phQuery) and 
+           phQuery:is-open and 
+           phQuery:num-results gt 0 then
+        do:
+            extent(oQS) = phQuery:num-results.
+            hBuffer = phQuery:get-buffer-handle('lbSort') no-error.
+            if not valid-handle(hBuffer) then
+                hBuffer = phQuery:get-buffer-handle('ttSort').
+            
+            phQuery:get-first().
+            do while not phQuery:query-off-end:
+                oQS[phQuery:current-result-row] =
+                        new QuerySort(hBuffer::BufferName,
+                                      hBuffer::FieldName,
+                                      cast(hBuffer::Direction, SortDirectionEnum)).
+                phQuery:get-next().
+            end.
+            phQuery:query-close().
+        end.
+        
+        return oQS.        
+    end method.
+    
+    /** Returns the filter criteria for a buffer, in string form. This
+        could be used as-is for a WHERE clause.
+        
+        @param character The buffer name 
+        @return longchar The where-clause-compatible string. */    
+    method public longchar GetFilter(pcBufferName as character):
+        define variable cWhereClause as longchar no-undo.
+        define variable cValue as character no-undo.
         
         define buffer lbFilter for ttFilter.
         
@@ -539,22 +776,168 @@ class OpenEdge.Core.System.QueryDefinition
                 cWhereClause = cWhereClause + ' '
                               + cast(lbFilter.JoinType, EnumMember):ToString() + ' '.
             
-            cWhereClause = cWhereClause + ' '
+            assign cValue = string(cast(lbFilter.FieldValue, String):Value)
+                   cWhereClause = cWhereClause + ' '
                           + lbFilter.BufferName + '.' + lbFilter.FieldName + ' ' 
                           + cast(lbFilter.Operator, EnumMember):ToString() + ' '
-                          + quoter(lbFilter.FieldValue).
+                          + quoter(cValue).
         end.
         
         return cWhereClause. 
     end method.
     
-    method protected character GetJoin(pcBuffersInQuery as character, pcBufferName as character):
-        define variable cWhereClause as character no-undo.
+    /** Returns the filters applicable to a buffer.
+       
+        @param character The buffer name
+        @return QueryFilter[] An array of query filter objects that
+                apply to this buffer. */    
+    method public QueryFilter extent GetQueryFilter(input pcBufferName as character):
+        define buffer lbFilter for ttFilter.
+        define query qryFilter for lbFilter.
         
-        define buffer lbJoin for ttJoin.
+        open query qryFilter 
+            preselect each lbFilter where
+                           lbFilter.BufferName = pcBufferName.
+        
+        return FillQueryFilter(query qryFilter:handle).
+    end method.
+    
+    /** Returns the filters applicable to all the buffers in the query.
+       
+        @return QueryFilter[] An array of query filter objects that apply 
+                to all the buffers. The filters are ordered by buffer order. */
+    method public QueryFilter extent GetQueryFilters():
+        define buffer lbBuffer for ttBuffer.
+        define buffer lbFilter for ttFilter.
+        
+        define query qryFilter for lbBuffer, lbFilter.
+        
+        open query qryFilter
+            preselect each lbBuffer, 
+                      each lbFilter where
+                           lbFilter.BufferName = lbBuffer.BufferName
+                           by lbBuffer.Order.
+        
+        return FillQueryFilter(query qryFilter:handle).
+    end method.    
 
-        define variable iExtentSize as integer no-undo.
+    /** Returns the joins applicable to a buffer.
+        
+        @param character The buffer name
+        @return QueryJoin[] An array of query filter objects that
+                apply to this buffer. */
+    method public QueryJoin extent GetQueryJoin(input pcBufferName as character):
+        define buffer lbBuffer for ttBuffer.
+        define buffer lbJoin for ttJoin.
+        
+        define query qryJoin for lbBuffer, lbJoin.
+        
+        open query qryJoin
+            preselect each lbBuffer where
+                           lbBuffer.BufferName = pcBufferName, 
+                      each lbJoin where
+                           lbJoin.BufferName = lbBuffer.BufferName.
+        
+        return FillQueryJoin(query qryJoin:handle, pcBufferName).        
+    end method.
+    
+    /** Returns the joins applicable to all the buffers in the query.
+       
+        @return QueryJoin[] An array of query join objects that apply 
+                to all the buffers. The joins are ordered by buffer order. */
+    method public QueryJoin extent GetQueryJoins():
+        define buffer lbBuffer for ttBuffer.
+        define buffer lbJoin for ttJoin.
+        
+        define query qryJoin for lbBuffer, lbJoin.
+        
+        open query qryJoin
+            preselect each lbBuffer, 
+                      each lbJoin where
+                           lbJoin.BufferName = lbBuffer.BufferName
+                           by lbBuffer.Order.
+        
+        return FillQueryJoin(query qryJoin:handle, '*').
+    end method.
+    
+    /** Creates QueryJoin objects based on a query.
+        
+        @param handle The open query used to filter sort records.
+        @param character The name of the buffers that will be used in the 
+               query. This allows us to join from and to a buffer.
+        @return QueryJoin[] An ordered array of sort parameter objects. */
+    method protected QueryJoin extent FillQueryJoin(input phQuery as handle,
+                                                    input pcBuffersInQuery as character):
+        define variable oQJ as QueryJoin extent no-undo.
+        define variable hBuffer as handle no-undo.
+        
+        if valid-handle(phQuery) and 
+           phQuery:is-open and 
+           phQuery:num-results gt 0 then
+        do:
+            extent(oQJ) = phQuery:num-results.
+            hBuffer = phQuery:get-buffer-handle('lbJoin') no-error.
+            if not valid-handle(hBuffer) then
+                hBuffer = phQuery:get-buffer-handle('ttJoin').
+            
+            phQuery:get-first().
+            do while not phQuery:query-off-end:
+                if can-do(pcBuffersInQuery, hBuffer::BufferName) and 
+                   can-do(pcBuffersInQuery, hBuffer::JoinBufferName) then
+                do:
+                    oQJ[phQuery:current-result-row] =
+                        new QueryJoin(hBuffer::BufferName,
+                                      hBuffer::FieldName,
+                                      cast(hBuffer::Operator, OperatorEnum),
+                                      hBuffer::JoinBufferName,
+                                      hBuffer::JoinFieldName,
+                                      cast(hBuffer::JoinType, JoinEnum)).
+                end.
+                phQuery:get-next().
+            end.
+            phQuery:query-close().
+        end.
+        
+        return oQJ.        
+    end method.    
+    /** Creates QuerySort objects based on a query.
+        
+        @param handle The open query used to filter sort records.
+        @return QuerySort[] An ordered array of sort parameter objects. */
+    method protected QueryFilter extent FillQueryFilter(input phQuery as handle):
+        define variable oQF as QueryFilter extent no-undo.
+        define variable hBuffer as handle no-undo.
+        
+        if valid-handle(phQuery) and 
+           phQuery:is-open and 
+           phQuery:num-results gt 0 then
+        do:
+            extent(oQF) = phQuery:num-results.
+            hBuffer = phQuery:get-buffer-handle('lbFilter') no-error.
+            if not valid-handle(hBuffer) then
+                hBuffer = phQuery:get-buffer-handle('ttFilter').
+            
+            phQuery:get-first().
+            do while not phQuery:query-off-end:
+                oQF[phQuery:current-result-row] =
+                        new QueryFilter(hBuffer::BufferName,
+                                        hBuffer::FieldName,
+                                        cast(hBuffer::Operator, OperatorEnum),
+                                        cast(hBuffer::FieldValue, String),
+                                        cast(hBuffer::FieldType, DataTypeEnum),
+                                        cast(hBuffer::JoinType, JoinEnum)).
+                phQuery:get-next().
+            end.
+            phQuery:query-close().
+        end.
+        
+        return oQF.        
+    end method.
+        
+    method protected longchar GetJoin(pcBuffersInQuery as character, pcBufferName as character):
+        define variable cWhereClause as character no-undo.
         define variable iExtent as integer no-undo.
+        define buffer lbJoin for ttJoin.
            
         for each lbJoin where 
                  lbJoin.BufferName = pcBufferName or

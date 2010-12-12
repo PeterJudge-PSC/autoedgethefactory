@@ -57,11 +57,12 @@ class OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext
         Assert:ArgumentNotNull(poPipeline, "pipeline").
         Assert:ArgumentNotNull(poCache, "cache").
         
-        Kernel = poKernel.
-        Binding = poBinding.
-        Arguments = new Collection(poBinding:Arguments).
-        Pipeline = poPipeline.
-        Cache = poCache.
+        assign Kernel = poKernel
+               Binding = poBinding
+               /* (Deep) Clone the arguments, since we may mess with them on our travels here. */
+               Arguments = cast(poBinding:Arguments:Clone(), ICollection)
+               Pipeline = poPipeline
+               Cache = poCache.
     end constructor.
     
     /** Gets the scope for the context that "owns" the instance activated therein.
