@@ -79,19 +79,19 @@ class AutoEdge.Factory.Build.CompleteVehicleBuild inherits VehicleBuildStep:
         define variable cDSName as character extent 1 no-undo.
         define variable cDSValue as character extent 1 no-undo.
         define variable oDSI as DataSlotInstance extent no-undo.
-        define variable oBZRequest as BizLogicWorkStepRequest no-undo.
+        define variable oBLRequest as BizLogicWorkStepRequest no-undo.
         
         super:PerformStep(input poRequest).
         
         /* easier/more readable than continually casting */
-        oBZRequest = cast(poRequest, BizLogicWorkStepRequest).
+        oBLRequest = cast(poRequest, BizLogicWorkStepRequest).
         
         CompleteWorkItem(oDSI).
         cDSName[1] = 'VehicleBuildComplete'.
         cDSValue[1] = 'true'.
         
-        UpdateDataSlotValue(oBZRequest:ProcessInstanceId,
-                            oBZRequest:ProcessInstanceName,
+        UpdateDataSlotValue(oBLRequest:ProcessInstanceId,
+                            oBLRequest:ProcessInstanceName,
                             cDSName,
                             cDSValue).
     end method.

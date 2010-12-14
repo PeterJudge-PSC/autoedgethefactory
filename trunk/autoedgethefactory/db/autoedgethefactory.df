@@ -712,8 +712,7 @@ ADD INDEX "Customer_PK" ON "Customer"
 
 ADD INDEX "Comments" ON "Customer" 
   AREA "Schema Area"
-  WORD
-  INDEX-FIELD "TenantId" ASCENDING 
+  WORD  
   INDEX-FIELD "Comments" ASCENDING 
 
 ADD INDEX "CustNum" ON "Customer" 
@@ -1224,14 +1223,12 @@ ADD INDEX "Feedback_PK" ON "Feedback"
 
 ADD INDEX "Comments" ON "Feedback" 
   AREA "Schema Area"
-  WORD
-  INDEX-FIELD "TenantId" ASCENDING 
+  WORD  
   INDEX-FIELD "Comments" ASCENDING 
 
 ADD INDEX "Company" ON "Feedback" 
   AREA "Schema Area"
   WORD
-  INDEX-FIELD "TenantId" ASCENDING 
   INDEX-FIELD "Company" ASCENDING 
 
 ADD INDEX "ContactName" ON "Feedback" 
@@ -2435,8 +2432,7 @@ ADD INDEX "RefCall_PK" ON "RefCall"
 
 ADD INDEX "CallDetail" ON "RefCall" 
   AREA "Schema Area"
-  WORD
-  INDEX-FIELD "TenantId" ASCENDING 
+  WORD 
   INDEX-FIELD "Detail" ASCENDING 
 
 ADD INDEX "CallNum" ON "RefCall" 

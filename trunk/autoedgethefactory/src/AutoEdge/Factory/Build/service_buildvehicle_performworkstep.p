@@ -32,10 +32,16 @@ using Progress.Lang.AppError.
 using Progress.Lang.Error.
 
 /** -- params, defs -- **/
-define input parameter pcWorkstepName as character no-undo. /* expecting 'ProcessComponents' or similar. */
-define input parameter piProcessInstanceId as int64 no-undo.
+/* AETF info */
 define input parameter pcOrderId as character no-undo.
 define input parameter pcContextId as longchar no-undo.
+
+/* BizLogic info */
+define input parameter pcProcessInstanceName as character no-undo.
+define input parameter piProcessInstanceId as int64 no-undo.
+define input parameter pcWorkstepName as character no-undo.             /* expecting 'ProcessComponents' or similar. */
+
+/* return */
 define output parameter pcBuildStatus as longchar no-undo.
 
 define variable oServiceMessageManager as IServiceMessageManager no-undo.
@@ -49,6 +55,12 @@ define variable oContext as IUserContext no-undo.
 Assert:ArgumentNotNullOrEmpty(pcWorkstepName, 'Workstep Name').
 Assert:ArgumentNotNullOrEmpty(pcOrderId, 'Order Id').
 Assert:ArgumentNotNullOrEmpty(pcContextId, 'User Context Id').
+
+message 'pcOrderId=' pcOrderId.
+message 'pcContextId=' string(pcContextId).
+message 'pcProcessInstanceName='pcProcessInstanceName.
+message 'piProcessInstanceId='piProcessInstanceId.
+message 'pcWorkstepName='pcWorkstepName.
 
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'))

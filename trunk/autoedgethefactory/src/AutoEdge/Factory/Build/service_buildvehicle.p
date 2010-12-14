@@ -29,8 +29,10 @@ using Progress.Lang.Class.
 
 /* ***************************  parameters, definitions  *************************** */
 define input parameter pcOrderId as character no-undo.
-define input parameter piProcessInstanceId as int64 no-undo.
 define input parameter pcContextId as longchar no-undo.
+
+define input parameter piProcessInstanceId as int64 no-undo.
+define input parameter piProcessInstanceId as int64 no-undo.
 
 define variable oInjectABLKernel as IKernel no-undo.
 define variable oServiceMessageManager as IServiceMessageManager no-undo.

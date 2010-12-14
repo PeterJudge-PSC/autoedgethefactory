@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<WSAD xmlns="urn:schemas-progress-com:WSAD:0009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AppObject>
+    <PGVersion>
+      <PXGVersion>03</PXGVersion>
+    </PGVersion>
+    <PGGenInfo isSessionFree="true">
+      <Author />
+      <VersionString>1.0</VersionString>
+      <VersionNumber>1</VersionNumber>
+      <Package />
+      <Service>aetf</Service>
+      <WorkDir>cfg\</WorkDir>
+      <VerboseLogging>true</VerboseLogging>
+      <SaveBeforeGen>true</SaveBeforeGen>
+      <DotNetClient>false</DotNetClient>
+      <JavaClient>false</JavaClient>
+      <WebServicesClient>true</WebServicesClient>
+      <ESBClient>false</ESBClient>
+      <ESBClient2>false</ESBClient2>
+      <UserDefinedAppService>true</UserDefinedAppService>
+      <JavaCompilerType>1</JavaCompilerType>
+      <JavaCompiler>&lt;Install Dir&gt;\jdk\bin\javac</JavaCompiler>
+      <JavaSwitches />
+      <JavaClasspathSwitch>-classpath</JavaClasspathSwitch>
+      <JavaClasspath>&lt;Proxy Dir&gt;;&lt;Install Dir&gt;\java\progress.jar;&lt;Install Dir&gt;\java\messages.jar;;&lt;Default classes.zip&gt;</JavaClasspath>
+      <DotNetCompilerType>4</DotNetCompilerType>
+      <DotNetCompiler>csc</DotNetCompiler>
+      <DotNetSwitches />
+      <DotNetXSDGenerator>xsd</DotNetXSDGenerator>
+      <DotNetNamespace />
+      <DotNetTitle />
+      <DotNetVersion />
+      <DotNetDesc />
+      <DotNetCompany />
+      <DotNetProduct />
+      <DotNetPublicKey />
+      <DotNetDelaySign>false</DotNetDelaySign>
+      <DotNetRuntime>digitally signed</DotNetRuntime>
+      <DotNetDataSetNamespace>StrongTypesNS</DotNetDataSetNamespace>
+      <DNUseDefaultDSNamespace>true</DNUseDefaultDSNamespace>
+      <DNUseNamespaceAsDirs>true</DNUseNamespaceAsDirs>
+      <DotNetUseNullableTypes>false</DotNetUseNullableTypes>
+    </PGGenInfo>
+    <DeploymentWizard>
+      <CurrentEncoding>3</CurrentEncoding>
+      <SoapEndpointURL>http://www.tempuri.org/wsa/wsa1</SoapEndpointURL>
+      <WebServiceNamespace userDefined="true">urn:factory-autoedge-com</WebServiceNamespace>
+      <SoapAction appendToSoapAction="false" />
+      <ConnectReturnString userDefined="false" />
+      <TestWSDL bGen="true" RPCEncoded="false" RPCLiteral="false" DocLiteral="true" />
+      <ESBEncoding>3</ESBEncoding>
+      <EntryEndpoint useDefault="true" />
+      <FaultEndpoint useDefault="true" />
+      <RejectedEndpoint useDefault="true" />
+      <Container />
+      <AppserverURL>AppServerDC://localhost:3091</AppserverURL>
+      <FileName overWrite="false">AutoEdgeTheFactoryBuildWebServices</FileName>
+      <ResourceDirectory>/Resources/OpenEdgeServices</ResourceDirectory>
+      <SonicAppService useFileSystem="false" deployToDS="false" createXAR="false">
+        <ResourceDirectory overWrite="false" />
+        <XARName />
+      </SonicAppService>
+      <SonicConnectionInfo>
+        <SonicURL>tcp://localhost:2506</SonicURL>
+        <SonicDomain>Domain1</SonicDomain>
+        <User>Administrator</User>
+        <Password />
+      </SonicConnectionInfo>
+    </DeploymentWizard>
+    <Name>AutoEdgeTheFactoryBuildWebServices</Name>
+    <ProPath>c:\devarea\projects\oebp\autoedgethefactory\bin\</ProPath>
+    <HelpString />
+    <ODLHelpString />
+    <ObjectType>false</ObjectType>
+    <AllowUnknown>false</AllowUnknown>
+    <IsTTResultSet>false</IsTTResultSet>
+    <WriteDatasetBeforeImage>false</WriteDatasetBeforeImage>
+    <Procedure isPersistent="false" useFullName="false">
+      <Name>service_buildvehicle</Name>
+      <ProcPath>AutoEdge\Factory\Build\</ProcPath>
+      <ProPath>c:\devarea\projects\oebp\autoedgethefactory\bin\</ProPath>
+      <ProcExt>p</ProcExt>
+      <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+        <Name>BuildVehicleWorkFlow</Name>
+        <HelpString />
+        <ODLHelpString />
+        <Parameter allowUnknown="false" ordinal="1" writeXmlBeforeImage="false">
+          <Name>pcOrderId</Name>
+          <Type>1</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="false" ordinal="2" writeXmlBeforeImage="false">
+          <Name>piProcessInstanceId</Name>
+          <Type>41</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="false" ordinal="3" writeXmlBeforeImage="false">
+          <Name>pcContextId</Name>
+          <Type>39</Type>
+          <Mode>1</Mode>
+        </Parameter>
+      </ProcDetail>
+    </Procedure>
+    <Procedure isPersistent="false" useFullName="false">
+      <Name>service_buildvehicle_performworkstep</Name>
+      <ProcPath>AutoEdge\Factory\Build\</ProcPath>
+      <ProPath>c:\devarea\projects\oebp\autoedgethefactory\bin\</ProPath>
+      <ProcExt>p</ProcExt>
+      <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+        <Name>PerformBuildVehicleWorkStep</Name>
+        <HelpString />
+        <ODLHelpString />
+        <Parameter allowUnknown="false" ordinal="1" writeXmlBeforeImage="false">
+          <Name>pcWorkstepName</Name>
+          <Type>1</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="false" ordinal="2" writeXmlBeforeImage="false">
+          <Name>pcOrderId</Name>
+          <Type>1</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="false" ordinal="3" writeXmlBeforeImage="false">
+          <Name>pcContextId</Name>
+          <Type>39</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="false" ordinal="4" writeXmlBeforeImage="false">
+          <Name>pcBuildStatus</Name>
+          <Type>39</Type>
+          <Mode>2</Mode>
+        </Parameter>
+      </ProcDetail>
+    </Procedure>
+  </AppObject>
+</WSAD>
