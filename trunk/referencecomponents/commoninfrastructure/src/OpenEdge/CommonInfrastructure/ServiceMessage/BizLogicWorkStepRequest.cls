@@ -12,10 +12,9 @@ routine-level on error undo, throw.
 using OpenEdge.CommonInfrastructure.ServiceMessage.WorkstepRequest.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.BizLogicWorkStepRequest inherits WorkstepRequest:
-        
+    define public property WorkItemName as character no-undo get. set.
     define public property ProcessInstanceName as character no-undo get. set. 
     define public property ProcessInstanceId as int64 no-undo get. set.
-    define public property WorkItemName as character no-undo get. set.
     define public property WorkItemId as int64 no-undo get. set.
     
 	constructor public BizLogicWorkStepRequest ( input pcService as character ):

@@ -79,9 +79,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
     define protected property ServiceMessageManager as IServiceMessageManager no-undo
         get():
             if not valid-object(ServiceMessageManager) then
-                ServiceMessageManager = cast(ServiceManager:GetService(
-                        Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager')),
-                    IServiceMessageManager).
+                ServiceMessageManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
             
             return ServiceMessageManager.
         end get.
@@ -111,7 +109,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
 		
 		Models = new IServiceCollection().		
 		ServiceRequests = new TypedMap(
-		                      Class:GetClass('OpenEdge.Lang.String'), 
+		                      String:Type, 
 		                      Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection')).
 	end method.
     

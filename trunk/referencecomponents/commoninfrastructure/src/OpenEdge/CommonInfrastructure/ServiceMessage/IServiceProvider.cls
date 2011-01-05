@@ -23,8 +23,11 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 
 interface OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider:  
-    /** (mandatory) The service for which this provider is servicing a request. */
-    define public property Service as character no-undo get.
+    /** The service for which this provider is currently servicing a request. */
+    define public property Service as character no-undo get. set.
+
+    /** External method to dynamically set the service property via InjectABL */
+    method public void SetService (input pcService as character).
     
     /** Services a request. The service provider will call ExecuteResponse() in 
         the ServiceMessageManager once it's done with the request and ready with 

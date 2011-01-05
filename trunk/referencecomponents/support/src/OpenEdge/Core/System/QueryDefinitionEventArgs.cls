@@ -18,7 +18,9 @@ class OpenEdge.Core.System.QueryDefinitionEventArgs inherits EventArgs:
     define public property Element   as QueryElementEnum no-undo get. set.
     define public property Operation as QueryDefinitionOperationEnum no-undo get. set.
     define public property Value     as character no-undo get. set.
-            
+    
+    @todo(task="implement", action="add querybuffer/filter that changed?").
+    
     constructor public QueryDefinitionEventArgs():
         super().
     end constructor.

@@ -34,7 +34,7 @@ class OpenEdge.PresentationLayer.Presenter.LoginPresenter
         /* authenticate & authorise
          
         define private variable moAuthenticationService as ISecurityManager no-undo.
-        moAuthenticationService = cast(ServiceManager:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
+        moAuthenticationService = cast(ServiceManager:StartService(SecurityManager:SecurityManagerType)
                     , ISecurityManager).
         */
         

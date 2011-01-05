@@ -54,8 +54,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse
 		assign TableName = pcTableName
 		       HasError = false
 		       ErrorText = new TypedMap(
-		                  Class:GetClass('OpenEdge.Lang.String'),
-		                  Class:GetClass('OpenEdge.Lang.String')).
+		                  String:Type,
+		                  String:Type).
 	end constructor.
 	
 /** IExternalizable **/
@@ -76,8 +76,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse
          
         /*ErrorText = cast(po:ReadObject(), IMap).*/
         ErrorText = new TypedMap(
-                          Class:GetClass('OpenEdge.Lang.String'),
-                          Class:GetClass('OpenEdge.Lang.String')).
+                          String:Type,
+                          String:Type).
                           
         cast(ErrorText:KeySet, ICollection):AddArray(po:ReadObjectArray()).
         cast(ErrorText:Values, ICollection):AddArray(po:ReadObjectArray()).

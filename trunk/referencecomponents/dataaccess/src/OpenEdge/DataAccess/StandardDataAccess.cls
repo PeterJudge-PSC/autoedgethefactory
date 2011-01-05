@@ -65,14 +65,14 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     define private variable moCurrentRequestDataSources as ICollection no-undo.
     
     constructor public StandardDataAccess():
-        this-object(new TypedMap('OpenEdge.Lang.String', 'OpenEdge.DataSource.IDataSource')).
+        this-object(new TypedMap(String:Type, Class:GetClass('OpenEdge.DataSource.IDataSource'))).
     end constructor.
     
     constructor public StandardDataAccess(input poDataSources as IMap):
         super().
         
-        DataSources = poDataSources.
-        moCurrentRequestDataSources = new TypedCollection(Class:GetClass('OpenEdge.DataSource.IDataSource')).
+        assign DataSources = poDataSources
+               moCurrentRequestDataSources = new TypedCollection(Class:GetClass('OpenEdge.DataSource.IDataSource')).
     end constructor.
     
     /** Helper method for adding DataSource objects from InjectABL. It's also perfectly legitimate to
@@ -80,7 +80,7 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         
         @param character The name of the datasource
         @param IDataSource The datasource object.   */
-    method public void AddDataSource(input pcName as character, input poDataSource as IDataSource).    
+    method public void AddDataSource(input pcName as character, input poDataSource as IDataSource).
         DataSources:Put(new String(pcName), poDataSource).
     end method.
 
@@ -150,8 +150,10 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                    hBuffer is the after-table. */
                 oDataSource:SetDataTarget(hBuffer).
                 
-                /* A save has no TableRequest object. */
-                oDataSource:Prepare(cast(poRequest, IServiceMessage):ActionType, ?, this-object).
+                oDataSource:Prepare(cast(poRequest, IServiceMessage):ActionType,
+                                    CreateDefaultTableRequest(hBuffer:name),
+                                    this-object).
+
                 oTableResponse = oDataSource:SaveData().
                 
                 /* Add the table response to the total response */
@@ -185,7 +187,9 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         define variable oTableRequest as ITableRequest no-undo.
         define variable oDataSource as IDataSource no-undo.
         define variable oServiceMessage as IServiceMessage no-undo. 
-
+        define variable lAllTables as logical no-undo.
+        define variable lHasAttachedDataSources as logical no-undo.
+        
         oServiceMessage = cast(poRequest, IServiceMessage).
         oServiceMessage:GetMessageData(output DatasetHandle).
         
@@ -197,19 +201,20 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         /* Clean out just to be sure.*/
         moCurrentRequestDataSources:Clear().
         
-        iMax = DatasetHandle:num-buffers.
+        assign iMax = DatasetHandle:num-buffers
+               lAllTables = poRequest:TableRequests:IsEmpty()
+               lHasAttachedDataSources = false.
+               
         do iLoop = 1 to iMax:
             hBuffer = DatasetHandle:get-buffer-handle(iLoop).
             
-            if not poRequest:TableRequests:IsEmpty() then
-                oTableRequest = poRequest:TableRequests:Get(hBuffer:name).
+            oTableRequest = poRequest:TableRequests:Get(hBuffer:name).
+            if not valid-object(oTableRequest) and lAllTables then
+                oTableRequest = CreateDefaultTableRequest(hBuffer:name).
             
             /* no tableRequests = all tables */
-            if valid-object(oTableRequest) or poRequest:TableRequests:IsEmpty() then
+            if valid-object(oTableRequest) then
             do:
-                if not valid-object(oTableRequest) then
-                    oTableRequest = new TableRequest(hBuffer:name).
-                
                 oDataSource = cast(DataSources:Get(new String(ResolveTableName(oTableRequest:TableName))), IDataSource).
                 if valid-object(oDataSource) then
                 do:
@@ -217,15 +222,18 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                     
                     oDataSource:FillMode = FillModeEnum:Append.
                     oDataSource:SetDataTarget(hBuffer).
-                    oDataSource:Prepare(oServiceMessage:ActionType, oTableRequest, this-object).
-                    
+                    oDataSource:Prepare(oServiceMessage:ActionType,
+                                        oTableRequest,
+                                        this-object).
                     AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType).
+                    lHasAttachedDataSources = true.
                 end.
             end.
         end.
         
         /* Get data into this dataset */
-        FetchData().
+        if lHasAttachedDataSources then
+            FetchData().
     end method.
     
     /** Fetch/retrieve data from the datasource, and populate the business entity with 
@@ -270,7 +278,7 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                 when ServiceMessageActionEnum:FetchData then
                 do:
                     /* GetDataSource(phBuffer:name):BeforeRowFill:Subscribe(XXX).*/
-                    /* ohBuffer:set-callback(CallbackNameEnum:BeforeRowFill:ToString(), 'XXX', this-object). */
+/*                     ohBuffer:set-callback(CallbackNameEnum:BeforeRowFill:ToString(), 'XXX', this-object).*/
                 end.
                 when ServiceMessageActionEnum:SaveData then
                 do:
@@ -318,7 +326,9 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         
         @param character A table name in the business entity
         @return character The table name in the datasource. */
-    method abstract public character ResolveTableName (input pcBETable as character).
+    method public character ResolveTableName (input pcBETable as character):
+        return pcBETable.
+    end method.
     
     /** Resolves a field name from the Business Entity into a physical field name in the
         DataSource. The values passed in here are usually taken from the ITableRequest that's
@@ -329,6 +339,12 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         @param character A table name in the business entity
         @param character A field name in the business entity
         @return character The field name in the datasource. */
-    method abstract public character ResolveFieldName (input pcBETable as character, input pcBEField as character).
+    method public character ResolveFieldName (input pcBETable as character, input pcBEField as character):
+        return pcBEField.
+    end method.
+    
+    method protected ITableRequest CreateDefaultTableRequest(input pcBufferName as character):
+        return new TableRequest(pcBufferName).
+    end method.
     
 end class.

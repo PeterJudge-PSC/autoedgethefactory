@@ -55,7 +55,7 @@ interface OpenEdge.DataAccess.IDataAccess:
         
         @param character A table name in the business entity
         @return character The table name in the datasource. */
-    method public character ResolveTableName (input pcBETable as character).
+    method public character ResolveTableName (input pcSourceTable as character).
     
     /** Resolves a field name from the Business Entity into a physical field name in the
         DataSource. The values passed in here are usually taken from the ITableRequest that's
@@ -64,6 +64,6 @@ interface OpenEdge.DataAccess.IDataAccess:
         @param character A table name in the business entity (not resolved)
         @param character A field name in the business entity
         @return character The field name in the datasource. */
-    method public character ResolveFieldName (input pcBETable as character, input pcBEField as character).
-    
+    method public character ResolveFieldName (input pcSourceTable as character, input pcSourceField as character).
+        
 end interface.

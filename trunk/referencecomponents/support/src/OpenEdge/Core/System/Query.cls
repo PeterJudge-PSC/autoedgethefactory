@@ -12,6 +12,7 @@
 routine-level on error undo, throw.
 
 using OpenEdge.Core.System.Query.
+using OpenEdge.Core.System.QueryFilter.
 using OpenEdge.Core.System.QueryDefinitionEventArgs.
 using OpenEdge.Core.System.IQuery.
 using OpenEdge.Core.System.ITableOwner.
@@ -23,14 +24,20 @@ using OpenEdge.Core.System.UnsupportedOperationError.
 
 using OpenEdge.Core.System.EventArgs.
 
+using OpenEdge.Lang.Collections.ICollection.
+using OpenEdge.Lang.Collections.Collection.
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.FindTypeEnum.
 using OpenEdge.Lang.LockModeEnum.
 using OpenEdge.Lang.QueryTypeEnum.
 using OpenEdge.Lang.Assert.
+using OpenEdge.Lang.String.
 using Progress.Lang.Error.
 
 class OpenEdge.Core.System.Query use-widget-pool 
-    implements IQuery:
+        implements IQuery:
 
     /** Fired when the query is opened or reopened. This event only fires on query represented by the public QueryHandle.
         
@@ -136,23 +143,22 @@ class OpenEdge.Core.System.Query use-widget-pool
             return oRowPosition.
         end get.
     
-    define protected property BuildQuery as logical no-undo get. set.
-    
+    define protected property BuildQuery as logical no-undo get. set.       
+
     /** 
         allows us to pass in an existing query def and use this class as a helper for repos, row key etc. 
-    constructor public Query(input phQuery as handle,
-                             input plExtraDefinition as logical):
-        Assert:ArgumentNotNull(phQuery, 'Query handle').
-        
     define protected property FromExternal as logical no-undo get. private set.
+      
+    constructor public Query(input phQuery as handle):
+        Assert:ArgumentNotNull(phQuery, 'Query handle').
         
         assign QueryHandle = phQuery
                FromExternal = false
                BuildQuery = true.
     end constructor.
-         */
+      */
     
-    method protected IQueryDefinition ExtractDefinitions(input phQuery as handle):
+    method protected IQueryDefinition ExtractDefinitionFromQuery(input phQuery as handle):
         define variable oQueryDef as IQueryDefinition no-undo.
         
         define variable iLoop as integer no-undo.
@@ -163,16 +169,22 @@ class OpenEdge.Core.System.Query use-widget-pool
         return oQueryDef. 
     end method.
     
+    constructor protected Query():
+        create query QueryHandle.
+                
+        /* Obviously, we'll need to build the query at some point. */
+        BuildQuery = true.
+    end constructor.
+    
     constructor public Query(input poTableOwner as ITableOwner,
                              input poDefinition as IQueryDefinition):
-        Assert:ArgumentNotNull(poDefinition, 'Query Definition').
+        this-object().
         
+        Assert:ArgumentNotNull(poDefinition, 'Query Definition').
+
         assign this-object:Definition = poDefinition
-               TableOwner = poTableOwner
-               BaseDefinition = cast(poDefinition:Clone(), IQueryDefinition)
-               
-               /* Obviously, we'll need to build the query at some point. */
-               BuildQuery = true.
+               TableOwner = poTableOwner.
+        Rebase().
         
         /* If someone changes the query, we want to know about it so that when we
            (re)open a query, we know whether to rebuild the query string again (or 
@@ -187,7 +199,7 @@ class OpenEdge.Core.System.Query use-widget-pool
     method protected void Open(input phQuery as handle):
         /* Build called since the defs may have changed.
            Build checks whether it needs to do anything. */
-        BuildQuery(phQuery).
+        Prepare(phQuery).
         
         if valid-handle(phQuery) then
         do:
@@ -347,7 +359,31 @@ class OpenEdge.Core.System.Query use-widget-pool
     method public character extent GetCurrentRowKey():
         return Query:GetCurrentRowKey(QueryHandle).
     end method.
-    
+
+    method static public character GetBufferRowKey(input phBuffer as handle):
+        define variable cKeyWhere as character no-undo.
+        define variable iLoop as integer no-undo.
+        define variable cKeys as character no-undo.
+        define variable iMax as integer no-undo.
+        
+        if not phBuffer:available then
+            return ?.
+
+        cKeys = phBuffer:keys. 
+        if cKeys eq 'Rowid' then
+            return string(phBuffer:rowid).
+        
+        iMax = num-entries(cKeys).
+        do iLoop = 1 to iMax:
+            cKeyWhere = cKeyWhere
+                      + (if iLoop eq 1 then 'where ' else ' and ')
+                      + phBuffer:name + '.' + entry(iLoop, cKeys)
+                      + OperatorEnum:IsEqual:ToString() + quoter(phBuffer:buffer-field(entry(iLoop, cKeys)):buffer-value).
+        end.    /* key fields */
+        
+        return cKeyWhere.
+    end method.
+                
     method static public character extent GetCurrentRowKey(input phQuery as handle):
         define variable cKeyWhere as character extent no-undo.
         define variable iLoop as integer no-undo.
@@ -360,24 +396,7 @@ class OpenEdge.Core.System.Query use-widget-pool
             extent(cKeyWhere) = phQuery:num-buffers.
             
             do iLoop = 1 to phQuery:num-buffers:
-                hBuffer = phQuery:get-buffer-handle(iLoop).
-                if not hBuffer:available then
-                do:
-                    cKeyWhere[iLoop] = ?.
-                    leave.
-                end.
-                
-                cKeys = hBuffer:keys.
-                if cKeys eq 'Rowid' then
-                    cKeyWhere[iLoop] = string(hBuffer:rowid). 
-                else
-                do iFields = 1 to num-entries(cKeys):
-                    cKeyWhere[iLoop] = cKeyWhere[iLoop]
-                                     + (if iFields eq 1 then 'where ' else ' and ')
-                                     + hBuffer:name + '.' + entry(iFields, cKeys)
-                                     + ' = ' + quoter(hBuffer:buffer-field(entry(iFields, cKeys)):buffer-value)
-                                     .
-                end.    /* key fields */
+                cKeyWhere[iLoop] = Query:GetBufferRowKey(phQuery:get-buffer-handle(iLoop)).
             end.
         end.
         else
@@ -386,6 +405,50 @@ class OpenEdge.Core.System.Query use-widget-pool
         
         return cKeyWhere.
     end method.
+    
+    method static public QueryFilter extent GetCurrentRowKeyElements(input phQuery as handle):
+        define variable oFilters as ICollection no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iFields as integer no-undo.
+        define variable cKeys as character no-undo.
+        define variable hBuffer as handle no-undo.
+        
+        if valid-handle(phQuery) and phQuery:is-open then
+        do:
+            oFilters = new Collection().
+            
+            do iLoop = 1 to phQuery:num-buffers:
+                hBuffer = phQuery:get-buffer-handle(iLoop).
+                if not hBuffer:available then
+                do:
+                    oFilters:Add(?).
+                    leave.
+                end.
+                
+                cKeys = hBuffer:keys.
+                if cKeys eq 'Rowid' then
+                    oFilters:Add(new QueryFilter(
+                                            hBuffer:name,
+                                            cKeys,
+                                            OperatorEnum:IsEqual,
+                                            new String(string(hBuffer:rowid)),
+                                            DataTypeEnum:Rowid,
+                                            JoinEnum:And)).
+                else
+                do iFields = 1 to num-entries(cKeys):
+                    oFilters:Add(new QueryFilter(
+                                            hBuffer:name,
+                                            entry(iFields, cKeys),
+                                            OperatorEnum:IsEqual,
+                                            new String(hBuffer:buffer-field(entry(iFields, cKeys)):buffer-value),
+                                            DataTypeEnum:Rowid,
+                                            JoinEnum:And)).
+                end.    /* key fields */
+            end.
+        end.
+        
+        return cast(oFilters:ToArray(), QueryFilter).
+    end method.    
     
     method public character extent GetFirstRowKey().
         define variable hQuery as handle no-undo.
@@ -580,16 +643,32 @@ class OpenEdge.Core.System.Query use-widget-pool
     /** Resets the query definition to it's original state */
     method public void Reset():
         this-object:Close().
-        Definition = BaseDefinition.
+        
+        Definition = cast(BaseDefinition:Clone(), IQueryDefinition).
         Prepare().
     end method.
     
-    method public void Prepare():
-        /* Always prepare this query. */
-        BuildQuery = true.
-        BuildQuery(QueryHandle).
+    /** Sets the base query definition to the current query definition. */
+    method public void Rebase():
+        BaseDefinition = cast(Definition:Clone(), IQueryDefinition).
     end method.
     
+    method public void Prepare():
+        Prepare(QueryHandle).
+    end method.
+    
+    method protected void Prepare(input phQuery as handle):        
+        /* Always prepare this query. */
+        BuildQuery = true.
+        BuildQuery(phQuery).
+                
+        phQuery:query-prepare(string(this-object:Definition:GetQueryString())).
+    end method.
+    
+    /** Construct and prepare a query based on the current query definition.
+            
+        @param handle The query handle being built. This may be an invalid handle, hence the
+                      return value of a handle. */
     method protected void BuildQuery(input phQuery as handle):
         define variable cBuffers as character extent no-undo.
         define variable cTables as character extent no-undo.
@@ -603,13 +682,11 @@ class OpenEdge.Core.System.Query use-widget-pool
         if not BuildQuery then
             return.
         
-        if not valid-handle(phQuery) then
-            create query phQuery.
-        
         /* (re)build the query's buffers.
            don't delete the query since the consumer of this query may use the 
            handle as a name (and probably does, in fact) so we don't want to mess 
-           with that. 
+           with that.
+           
            Don't touch the buffers if we aren't able to create them via a TableOwner. */
         if valid-object(TableOwner) then
         do:
@@ -622,13 +699,11 @@ class OpenEdge.Core.System.Query use-widget-pool
             
             /* And now add the new buffer(s) */
             cBuffers = this-object:Definition:GetBufferList(output cTables,
-                                                     output oQueryTypes,
-                                                     output oLockModes).
-            
+                                                            output oQueryTypes,
+                                                            output oLockModes).
             do iExtent = 1 to extent(cBuffers):
-                create buffer hBuffer
-                    for table TableOwner:GetTableHandle(cTables[iExtent])  
-                    buffer-name cBuffers[iExtent].
+                
+                hBuffer = GetQueryBuffer(cTables[iExtent], cBuffers[iExtent]).
                 
                 if iExtent eq 1 then
                     phQuery:set-buffers(hBuffer).
@@ -637,11 +712,35 @@ class OpenEdge.Core.System.Query use-widget-pool
             end.
         end.
         
-        phQuery:query-prepare(string(this-object:Definition:GetQueryString())).
-        
-        /* for this query, we're at rest */
+        /* for this query, we're at rest and ready to go */
         BuildQuery = false.
     end method.
+    
+    /** Returns a buffer handle for use in the query.
+        
+        Note: this is method makes Query a candidate for abstraction, since we
+              use(d) the ITableOwner construct for determining the buffer. However,
+              since there are now different deriviatives of the Query class which
+              supply the buffer handle in different ways (eg. DataSourceQuery and/or
+              ModelQuery), it can be argues that this functionality doesn't really belong 
+              in this base Query class.
+              
+              However, the ITableOwner code will remain in place for now, barring
+              refactoring.
+        
+        @param character The table name        
+        @param character The buffer name for the buffer
+        @return handle The buffer handle for use in the query.  */
+    method protected handle GetQueryBuffer(input pcTableName as character,
+                                           input pcBufferName as character):
+        define variable hBuffer as handle no-undo.
+        
+        create buffer hBuffer
+                    for table TableOwner:GetTableHandle(pcTableName)  
+                    buffer-name pcBufferName.
+                    
+        return hBuffer.                    
+    end method. 
     
     method public logical GetFirst():
         return GetFirst(QueryHandle).

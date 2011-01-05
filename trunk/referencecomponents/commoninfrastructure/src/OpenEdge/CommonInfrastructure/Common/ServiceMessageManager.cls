@@ -13,7 +13,6 @@
   ----------------------------------------------------------------------  */
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessageCollection.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
@@ -23,6 +22,7 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
 
 using OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.Service.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
@@ -39,6 +39,13 @@ using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.ServiceMessageManager inherits Service 
             implements IServiceMessageManager:
+    
+    /** Use this property in lieu of having to say Class:GetClass('....IServiceManager') every time */
+    define static public property ServiceMessageManagerType as class Class no-undo get. private set.
+    
+    constructor static ServiceMessageManager():
+        ServiceMessageManager:ServiceMessageManagerType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager').
+    end constructor.
     
     /** A (lookup) map of message ID's and their requestors. */
     define protected property MessageConsumers as IMap no-undo get. private set.
@@ -153,8 +160,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceMessageManager inherits Servic
         
         /* Group all together requests by service, which allows us to make one
            call per service (via the service adapter). */
-        oRequestByService = new TypedMap(Class:GetClass('OpenEdge.Lang.String'),
-                                         Class:GetClass('OpenEdge.Lang.Collections.Collection')).
+        oRequestByService = new TypedMap(String:Type,
+                                         Class:GetClass('OpenEdge.Lang.Collections.ICollection')).
         iMax = extent(poRequests).
         do iLoop = 1 to IMax:
             oRequest = poRequests[iLoop].
@@ -184,7 +191,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceMessageManager inherits Servic
         super:CreateComponent().
         
         MessageConsumers = new TypedMap(
-                                    Class:GetClass('OpenEdge.Lang.String'),
+                                    String:Type,
                                     Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer')).
     end method.
     

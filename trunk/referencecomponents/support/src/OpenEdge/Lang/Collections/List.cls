@@ -78,6 +78,9 @@ class OpenEdge.Lang.Collections.List inherits AbstractTTCollection implements IL
         define variable iSeq as integer no-undo.
         if super:Add(obj) then
         do:
+            /* once in a while we lose the availability of the ttList buffer. */
+            findBufferUseObject(obj).
+            
             ttList.Sequence = Size.
             return true.
         end.

@@ -198,6 +198,18 @@ class OpenEdge.Lang.Assert:
         if phArgument:type eq cCheckType then
             undo, throw new AppError(substitute('&1 cannot be of type &2', pcName, cCheckType)).        
     end method.
+        
+    method public static void ArgumentHasDeterminateExtent(input pcArgument as character extent,
+                                                           input pcName as character):
+        if extent(pcArgument) eq ? then
+            undo, throw new AppError(substitute('&1 array cannot be indeterminate', pcName)).                                                               
+    end method.
+    
+    method public static void ArgumentIsIndeterminateArray(input pcArgument as character extent,
+                                                           input pcName as character):
+        if extent(pcArgument) ne ? then
+            undo, throw new AppError(substitute('&1 array must be indeterminate', pcName)).                                                               
+    end method.
     
     
 end class.

@@ -441,8 +441,10 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
         define variable oSaveRequest as ISaveRequest no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
-        define variable oStack as CharacterStack no-undo.
+        define variable iExtent as integer no-undo. 
+        define variable cChangedTables as character extent no-undo.
         define variable hTransportDataset as handle no-undo.
+        define variable hBuffer as handle no-undo.
         
         /* Check whether we're attempting to update a R-O model */
         if type-of(this-object, IModelReadOnly) then 
@@ -466,22 +468,25 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
         /* We set the ISaveRequest:TableNames property, but we
            can probably also derive that from the dataset. */
         iMax = extent(pcTables).
-        
-        /* Store the tables with changes in a stack, since we can't dynamically 
-           change the size of an array. The stack will never be larger than num buffers */
-        oStack = new CharacterStack(iMax).
+        extent(cChangedTables) = iMax.
         do iLoop = 1 to iMax:
-            /* there will always be records int he before buffer, regardless of the operation.
-               the 'after' buffer won't contain deletes. */
-            if hTransportDataset:get-buffer-handle(pcTables[iLoop]):before-buffer:table-handle:has-records then
-                oStack:Push(hTransportDataset:get-buffer-handle(iLoop):name).
+            hBuffer = hTransportDataset:get-buffer-handle(pcTables[iLoop]).
+            
+            /* There will always be records in the before buffer, regardless of the operation.
+               The 'after' buffer won't contain deletes. */
+            if hBuffer:before-buffer:table-handle:has-records then
+                assign iExtent = iExtent + 1
+                       cChangedTables[iExtent] = hBuffer:name.
         end.
         
-        /* Fill the array backwards, since a stack is always LIFO. Order is
-           probably not important anyway, but ... */
-        extent(oSaveRequest:TableNames) = oStack:Size.
-        do while oStack:Size gt 0:
-            oSaveRequest:TableNames[oStack:Size] = oStack:Pop().
+        if iExtent gt 0 then
+        do:
+            /* Fill the array backwards, since a stack is always LIFO. Order is
+               probably not important anyway, but ... */
+            extent(oSaveRequest:TableNames) = iExtent.
+            do iLoop = 1 to iMax while cChangedTables[iLoop] ne '':
+                oSaveRequest:TableNames[iLoop] = cChangedTables[iloop].
+            end.
         end.
         
         return oSaveRequest.

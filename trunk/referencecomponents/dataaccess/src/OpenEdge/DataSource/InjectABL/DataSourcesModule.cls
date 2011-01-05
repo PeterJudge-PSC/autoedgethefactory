@@ -13,18 +13,13 @@ using OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 
 class OpenEdge.DataSource.InjectABL.DataSourcesModule inherits InjectionModule:
-    constructor protected DataSourcesModule (  ):
+    constructor public DataSourcesModule (  ):
         super ().
     end constructor.
-
+    
     method override public void Load(  ):
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
-        
-        /* The below won't run since StandardDataSource is abstract */
-        oBindingSyntax = Bind('OpenEdge.DataSource.IDataSource').
-        oBindingSyntax
-                :To('OpenEdge.DataSource.StandardDataSource').
     end method.
     
 end class.

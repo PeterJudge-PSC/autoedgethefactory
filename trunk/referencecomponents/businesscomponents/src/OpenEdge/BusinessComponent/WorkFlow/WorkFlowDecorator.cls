@@ -12,8 +12,8 @@
 routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.WorkFlow.IWorkFlow.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkFlowRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkFlowResponse.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowRequest.
+using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowResponse.
 
 using OpenEdge.Lang.Assert.
 

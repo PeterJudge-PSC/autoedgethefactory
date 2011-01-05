@@ -1,5 +1,5 @@
 
-using OpenEdge.Lang.*.
+using OpenEdge.Lang.Collections.*.
 
 def var oMyStack as CharacterStack.
 def var i as int.

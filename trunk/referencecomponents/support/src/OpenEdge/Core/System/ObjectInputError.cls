@@ -25,7 +25,7 @@ class OpenEdge.Core.System.ObjectInputError inherits ApplicationError:
     define static public property API_CALL as character no-undo init 'API call' get.
     
     define override protected property ErrorTitle as character init 'Object Input Error' no-undo get. set. 
-    define override protected property ErrorText as character init 'Invalid &1 encountered. Expecting &2 at position &3' no-undo get. set.
+    define override protected property ErrorText as longchar init 'Invalid &1 encountered. Expecting &2 at position &3' no-undo get. set.
     
     constructor public ObjectInputError (pcArg1 as char, pcArg2 as char, pcArg3 as char):
         define variable oUnknown as Error no-undo.

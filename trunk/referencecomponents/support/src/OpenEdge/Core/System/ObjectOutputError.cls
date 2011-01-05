@@ -21,7 +21,7 @@ class OpenEdge.Core.System.ObjectOutputError inherits ApplicationError:
     define static public property DB_REFS as character no-undo init 'references to database fields' get.
     
     define override protected property ErrorTitle as character no-undo get. set. 
-    define override protected property ErrorText as character no-undo get. set.
+    define override protected property ErrorText as longchar no-undo get. set.
     
     constructor public ObjectOutputError ( ):
         define variable oUnknown as Error no-undo.

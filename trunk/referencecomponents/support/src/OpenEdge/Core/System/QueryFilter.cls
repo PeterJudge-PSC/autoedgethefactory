@@ -90,4 +90,31 @@ class OpenEdge.Core.System.QueryFilter
                FieldValue = cast(poStream:ReadObject(), String).
     end method.
     
+    method override public character ToString():
+        define variable cWhereClause as character no-undo.
+        define variable cValue as character no-undo.
+        
+        assign cWhereClause = ' ' + JoinType:ToString() + ' '
+               cValue = string(FieldValue:Value).
+        
+        if FieldType:Equals(DataTypeEnum:Rowid) then
+            cWhereClause = cWhereClause 
+                         + 'rowid(' + quoter(BufferName) + ')' 
+                         + Operator:ToString() + ' '
+                         + 'to-rowid(' + quoter(cValue) + ')'.
+        else                         
+        if FieldType:Equals(DataTypeEnum:Handle) then
+            cWhereClause = cWhereClause 
+                         + BufferName + '.' + FieldName + ' ' 
+                         + Operator:ToString() + ' '
+                         + 'widget-handle(' + quoter(cValue) + ')'.
+        else
+            cWhereClause = cWhereClause
+                         + BufferName + '.' + FieldName + ' ' 
+                         + Operator:ToString() + ' '
+                         + quoter(cValue).
+        
+    	return cWhereClause.
+    end method.
+		
 end class.

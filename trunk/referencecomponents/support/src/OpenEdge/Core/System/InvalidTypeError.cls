@@ -15,7 +15,7 @@ using Progress.Lang.Error.
 
 class OpenEdge.Core.System.InvalidTypeError inherits ApplicationError: 
 
-    define override protected property ErrorText as character no-undo get. set.
+    define override protected property ErrorText as longchar no-undo get. set.
     define override protected property ErrorTitle as character no-undo get. set.
         
     constructor public InvalidTypeError(pcArgs1 as char, pcArgs2 as char, pcArgs3 as char):

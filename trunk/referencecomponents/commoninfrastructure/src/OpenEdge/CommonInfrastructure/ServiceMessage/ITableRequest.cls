@@ -29,7 +29,7 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherit
         all data has been retrieved. This value is returned from the server/business
         component layer. */
     define public property NumRemainingPages as integer no-undo get. set.
-    
+
     define property TableRequestType as TableRequestTypeEnum no-undo get. set.
     
     /** context info/key for where to start appending page begin or end */
@@ -40,7 +40,7 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest /** inherit
     define property RowKey as char extent no-undo get. set.
     
     @todo(task="question", action="no fill mode on tablerequest? ").
-    
+
     /** Add search expression  (need to be kept separate from filter). 
        - Allthough this in theory could be any complex expression it normally 
          only makes sense when the field(s) correspond(s) to the sort.    

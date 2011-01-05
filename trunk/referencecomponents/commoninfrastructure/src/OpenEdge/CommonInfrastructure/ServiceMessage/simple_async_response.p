@@ -17,6 +17,7 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
@@ -28,9 +29,7 @@ define input parameter poServiceManager as IServiceManager no-undo.
 /* ***************************  Main Block  *************************** */
 define variable moSMM as IServiceMessageManager no-undo.
 
-moSMM = cast(poServiceManager:GetService(
-                        Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager')),
-                    IServiceMessageManager).
+moSMM = cast(poServiceManager:GetService(ServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
 
 /* ***************************  Procedures *************************** */
 procedure EventProcedure_FetchData:

@@ -91,12 +91,13 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
     end constructor.
     
     /** Gets the provider for the binding.
-        @return The provider to use.
-     */
+        
+        @return IProvider The provider to use.    */        
     method public IProvider GetProvider():
         define variable oProvider as IProvider no-undo.
         
         oProvider = StandardProvider:GetProvider(this-object:ProviderType, this-object:Service).
+        
         return oProvider.
     end method.
     

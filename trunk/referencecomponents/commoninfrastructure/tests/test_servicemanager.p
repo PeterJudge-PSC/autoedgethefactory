@@ -6,7 +6,7 @@
 
     Description : 
 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Mar 18 10:46:31 EDT 2010
     Notes       :
   ----------------------------------------------------------------------*/
@@ -14,7 +14,6 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.PInject.CommonInfrastructureModule.
 using OpenEdge.CommonInfrastructure.PInject.ComponentKernel.
 using OpenEdge.Core.PInject.IKernel.
-using OpenEdge.Core.PInject.StandardKernel.
 using OpenEdge.Core.PInject.Binding.Modules.IInjectionModuleCollection.  
 using OpenEdge.Core.PInject.Binding.Parameters.IParameterCollection.
 using OpenEdge.Core.PInject.Binding.Parameters.MethodArgument. 

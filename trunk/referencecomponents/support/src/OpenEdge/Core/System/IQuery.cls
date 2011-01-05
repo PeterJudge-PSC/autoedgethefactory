@@ -54,6 +54,9 @@ interface OpenEdge.Core.System.IQuery:
     /** Resets the query definition to it's original state */
     method public void Reset().
     
+    /** Sets the base query definition to the current query definition. */
+    method public void Rebase().
+    
     /* Constructs an ABL query based on the existing QueryDefinition */
     method public void Open().
     method public logical Close().

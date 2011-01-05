@@ -83,6 +83,7 @@ class OpenEdge.Core.Util.ObjectInputStream:
         Initialize().
     end method.
     
+    @todo(task="refactor", action="merg input CHAR and input LONGCHAR to one; disambiguate with params? names?").
     method public void Read(pcStream as longchar):
         define variable mStream as memptr no-undo.
         
@@ -98,7 +99,7 @@ class OpenEdge.Core.Util.ObjectInputStream:
         end finally.
     end method.
     
-    method public void Read(pcFile as char):
+    method public void Read(input pcFile as character):
         define variable mStream as memptr no-undo.
         
         set-byte-order(mStream) = ByteOrderEnum:BigEndian:Value.

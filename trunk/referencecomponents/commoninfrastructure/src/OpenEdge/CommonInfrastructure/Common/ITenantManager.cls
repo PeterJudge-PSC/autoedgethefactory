@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ITenantManager
     Purpose     : 
     Syntax      : 
@@ -6,13 +6,22 @@
     @author pjudge
     Created     : Tue Apr 06 11:40:31 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
-
-using Progress.Lang.*.
+  ---------------------------------------------------------------------- */
+using OpenEdge.Lang.Collections.IMap.
 
 interface OpenEdge.CommonInfrastructure.Common.ITenantManager:  
-
-    /** (mandatory) the current tenant id */
-    define public property CurrentTenantId as longchar no-undo get.
     
+    /** Returns the tenant name for a given security domain.
+    
+        @param character The domain name.
+        @return character The tenant name. */
+    method public character GetDomainTenant(input pcDomain as character).
+    
+    /** Returns the tenant Ids associated with a tenant by name.
+        
+        @param character The tenant name
+        @return IMap A map of the logical DB names and tenant Id's for the
+                given tenant.   */
+    method public IMap GetTenantId (input pcTenantName as character).
+
 end interface.

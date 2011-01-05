@@ -25,8 +25,8 @@ using OpenEdge.Lang.Assert.
 class OpenEdge.BusinessComponent.WorkFlow.WorkFlowServiceInterface inherits WorkFlowDecorator 
         implements IServiceProvider: 
 
-    /** (mandatory) The service for which this service interface is servicing a request. */
-    define public property Service as character no-undo get. private set.
+    /** The service for which this provider is currently servicing a request. */
+    define public property Service as character no-undo get. set.
 		
 	constructor public WorkFlowServiceInterface(input poWorkFlow as IWorkFlow,
                                                 input pcServiceName as character):
@@ -35,6 +35,11 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkFlowServiceInterface inherits Work
         Assert:ArgumentNotNullOrEmpty(pcServiceName, 'Service name').
         this-object:Service = pcServiceName.
 	end constructor.
+
+    /** External method to dynamically set the service property via InjectABL */
+    method public void SetService (input pcService as character):
+        this-object:Service = pcService.
+    end method.
 
     method public void ExecuteRequest(input poRequest as IServiceRequest extent):
         define variable iLoop as integer no-undo.

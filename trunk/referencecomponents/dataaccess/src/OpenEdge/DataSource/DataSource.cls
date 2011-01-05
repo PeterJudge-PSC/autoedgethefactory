@@ -24,6 +24,8 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ITenantManager.
+using OpenEdge.CommonInfrastructure.Common.Component.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.IQueryDefinition.
@@ -41,14 +43,14 @@ using Progress.Lang.AppError.
 using Progress.Lang.Object.
 using Progress.Lang.Class.
 
-class OpenEdge.DataSource.DataSource abstract use-widget-pool
+class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
         implements IDataSource:
     
     /** The data transport type for this message. These may differ for request and response. */
     define protected property DataTargetFormat as DataFormatEnum no-undo get. private set.
     define protected property DataTargetType as DataTypeEnum no-undo get. private set.
     
-    /** Individual data target stores. Manipulated by SetDataTarget(), and GetDataTarget() */
+    /** Individual data target types. Manipulated by SetDataTarget(), and GetDataTarget() */
     define protected property HandleDataTarget as handle   no-undo get. private set.
     define protected property MemptrDataTarget as memptr   no-undo get. private set.
     define protected property LongCharDataTarget as longchar no-undo get. private set.    
@@ -56,7 +58,13 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     
     /** The table request object that's currently being processed. */
     define protected property CurrentTableRequest as ITableRequest no-undo get. set.
-     
+    
+    /** The DataAccess object making the current request. */
+    define protected property CurrentDAO as IDataAccess no-undo get. set.
+
+    /** The type of request currently underway making the current request. */
+    define protected property CurrentActionType as ServiceMessageActionEnum no-undo get. set.
+    
     /** The default Page or batch size for this datasource. Can be overridden
         by the page size on the table request. */
     define public property PageSize as integer no-undo get. set.
@@ -76,13 +84,12 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     define public event AfterSave             signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event AfterSaveTransaction  signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
-    constructor public DataSource():
-        CreateDataStore().
-    end constructor.
+	constructor public DataSource(input poComponentInfo as IComponentInfo):
+		super(input poComponentInfo).
+	end constructor.
     
     destructor public DataSource ():
-        DeleteDataStore().
-        ClearDataTarget().
+        DestroyComponent().
     end destructor.
     
     /** Creates the actual datasource - this could be an ABL datasource, or some other 
@@ -99,8 +106,8 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     method abstract protected void CreateDataStore().
     /** Deletes the datastore once done. */
     method abstract protected void DeleteDataStore().
-    
-    /** Attaches the actual datasource - this could be an ABL datasource, or some other 
+        
+    /** Attaches the actual datastore - this could be an ABL datasource, or some other 
         mechanism (XML or a service or something else). These are specific to each 
         datasource instance, and thus is abstract. 
         
@@ -108,10 +115,15 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
             <code>
             DATA-SOURCE srcCar:HANDLE:prefer-dataset = TRUE.
             hBuffer:ATTACH-DATA-SOURCE(DATA-SOURCE srcCar:HANDLE,"").
-            </code>        */
-    method abstract protected void AttachDataStoreToTarget().
-    /** Detaches the datastore from the datatarget  */
-    method abstract protected void DetachDataStoreFromTarget().
+            </code>        
+    
+        @param ServiceMessageActionEnum The action being performed (fetch/save).    */
+    method abstract protected void AttachDataStoreToTarget(input poAction as ServiceMessageActionEnum).
+    
+    /** Detaches the datastore from the datatarget
+    
+        @param ServiceMessageActionEnum The action being performed (fetch/save).    */
+    method abstract protected void DetachDataStoreFromTarget(input poAction as ServiceMessageActionEnum).
     
     /** Prepare with query, batchsize and more.
         
@@ -123,9 +135,27 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
                Data Source names.           */
     method public void Prepare(input poAction as ServiceMessageActionEnum,
                                input poRequest as ITableRequest,
-                               input poDAO as IDataAccess):                                   
-        CurrentTableRequest = poRequest.
+                               input poDAO as IDataAccess):
+        Assert:ArgumentNotNull(poAction, 'Action Type').
+        Assert:ArgumentNotNull(poRequest, 'Table Request').
+        Assert:ArgumentNotNull(poDAO, 'Data Access Object').
+        
+        assign CurrentTableRequest = poRequest
+               CurrentDAO = poDAO
+               CurrentActionType = poAction.
+        
+        /* Now attach the physical data store to the data target */
+        AttachDataStoreToTarget(poAction).
+        
+        /* filter by tenant */
+        AddTenantFilter(poAction).
     end method.
+    
+    /** Adds filtering by tenant to for a given action. 
+        
+        @param ServiceMessageActionEnum The current request's action type.
+        @return logical Whether a filter was added to the QD.       */
+    method abstract protected void AddTenantFilter(input poAction as ServiceMessageActionEnum).
     
     /** This SetDataTarget override is provided since the bulk of datatargets in ABL
         will be buffers (possibly datasets).
@@ -164,15 +194,10 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
             when DataTypeEnum:ProgressLangObject then ObjectDataTarget = ABLSession:Instance:ResolveWeakReference(integer(pcData)).
             when DataTypeEnum:LongChar then LongCharDataTarget = pcData.
         end case.
-        
-        /* Now attach the physical data store to the data target */
-        AttachDataStoreToTarget().                                                            
     end method.
     
     /** Clears the Datatarget and associated properties */
     method public void ClearDataTarget():
-        DetachDataStoreFromTarget().
-        
         assign HandleDataTarget = ?
                ObjectDataTarget = ?
                LongCharDataTarget = ?
@@ -216,9 +241,7 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
     
     /* Save events */
     method protected void OnBeforeSaveTransaction(input pcRowKey as character extent):
-        this-object:BeforeSaveTransaction:Publish(
-                this-object,
-                new DataSourceEventArgs(
+        OnBeforeSaveTransaction(new DataSourceEventArgs(
                         DataSourceEventEnum:BeforeSaveTransaction,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,
@@ -226,85 +249,119 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool
                         pcRowKey)).
     end method.
     
+    method protected void OnBeforeSaveTransaction(input poArgs as DataSourceEventArgs):
+        this-object:BeforeSaveTransaction:Publish(this-object, poArgs).
+    end method.
+    
     method protected void OnBeforeSave (input pcRowKey as character extent):
-        this-object:BeforeSave:Publish(
-                this-object,
-                new DataSourceEventArgs(
-                        DataSourceEventEnum:BeforeSaveTransaction,
+        OnBeforeSave(new DataSourceEventArgs(
+                        DataSourceEventEnum:BeforeSave,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,                        
                         GetDataTarget(),
                         pcRowKey)).
+    end method.
+    
+    method protected void OnBeforeSave (input poArgs as DataSourceEventArgs):
+        this-object:BeforeSave:Publish(this-object, poArgs).
     end method.
     
     method protected void OnAfterSave(input pcRowKey as character extent):
-        this-object:AfterSave:Publish(
-                this-object,
-                new DataSourceEventArgs(
-                        DataSourceEventEnum:BeforeSaveTransaction,
+        OnAfterSave(new DataSourceEventArgs(
+                        DataSourceEventEnum:AfterSave,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,                        
                         GetDataTarget(),
                         pcRowKey)).
+    end method.
+    
+    method protected void OnAfterSave(input poArgs as DataSourceEventArgs):
+        this-object:AfterSave:Publish(this-object, poArgs).
     end method.
     
     method protected void OnAfterSaveTransaction(input pcRowKey as character extent):
-        this-object:AfterSaveTransaction:Publish(
-                this-object,
+        OnAfterSaveTransaction(
                 new DataSourceEventArgs(
-                        DataSourceEventEnum:BeforeSaveTransaction,
+                        DataSourceEventEnum:AfterSaveTransaction,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,                        
                         GetDataTarget(),
                         pcRowKey)).
     end method.
     
+    method protected void OnAfterSaveTransaction(input poArgs as DataSourceEventArgs):
+        this-object:AfterSaveTransaction:Publish(this-object, poArgs).
+    end method.
+
     method protected void OnBeforeFill():
         define variable cDummy as character extent no-undo.
         
-        this-object:BeforeFill:Publish(
-                this-object,
-                new DataSourceEventArgs(
-                        DataSourceEventEnum:BeforeSaveTransaction,
+        OnBeforeFill(new DataSourceEventArgs(
+                        DataSourceEventEnum:BeforeFill,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,                        
                         GetDataTarget(),
                         cDummy)).
     end method.
 
+    method protected void OnBeforeFill(input poArgs as DataSourceEventArgs):
+        this-object:BeforeFill:Publish(this-object, poArgs).
+    end method.
+
     method protected void OnBeforeRowFill(input pcRowKey as character extent):
-        this-object:BeforeRowFill:Publish(
-                this-object,
+        OnBeforeRowFill(
                 new DataSourceEventArgs(
-                        DataSourceEventEnum:BeforeSaveTransaction,
+                        DataSourceEventEnum:BeforeRowFill,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,                        
                         GetDataTarget(),
                         pcRowKey)).
     end method.
+
+    method protected void OnBeforeRowFill(input poArgs as DataSourceEventArgs):
+        this-object:BeforeRowFill:Publish(this-object, poArgs).
+    end method.
     
     method protected void OnAfterRowFill(input pcRowKey as character extent):
-        this-object:AfterRowFill:Publish(
-                this-object,
+        OnAfterRowFill(
                 new DataSourceEventArgs(
-                        DataSourceEventEnum:BeforeSaveTransaction,
+                        DataSourceEventEnum:AfterRowFill,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,                        
                         GetDataTarget(),
                         pcRowKey)).
+    end method.
+
+    method protected void OnAfterRowFill(input poArgs as DataSourceEventArgs):
+        this-object:AfterRowFill:Publish(this-object, poArgs).
     end method.
     
     method protected void OnAfterFill():
         define variable cDummy as character extent no-undo.
         
-        this-object:AfterFill:Publish(
-                this-object,
-                new DataSourceEventArgs(
-                        DataSourceEventEnum:BeforeSaveTransaction,
+        OnAfterFill(new DataSourceEventArgs(
+                        DataSourceEventEnum:AfterFill,
                         this-object:DataTargetFormat,
                         this-object:DataTargetType,                        
                         GetDataTarget(),
                         cDummy)).
     end method.
+
+    method protected void OnAfterFill(input poArgs as DataSourceEventArgs):
+        this-object:AfterFill:Publish(this-object, poArgs).
+    end method.
+
+	method override public void CreateComponent(  ):
+		super:CreateComponent().
+		
+		CreateDataStore().
+	end method.
+
+	method override public void DestroyComponent(  ):
+		super:DestroyComponent().
+
+        DeleteDataStore().
+        ClearDataTarget().
+	end method.
     
 end class.

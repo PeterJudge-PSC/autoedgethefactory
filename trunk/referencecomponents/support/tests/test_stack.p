@@ -6,11 +6,11 @@
 
     Description : 
 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Feb 12 16:41:04 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-using OpenEdge.Lang.*.
+using OpenEdge.Lang.Collections.*.
 using Progress.Lang.*.
 
 def var o as CharacterStack.

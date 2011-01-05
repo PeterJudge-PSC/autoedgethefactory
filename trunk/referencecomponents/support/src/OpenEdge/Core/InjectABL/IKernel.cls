@@ -63,7 +63,6 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
     method public Object Get(input poService as class Class,
                              input poArguments as ICollection).
     
-    @todo(task="question", action="legit?").
     /** Instantiates all instances matching the specified scope. Typically
         used to pre-start a set of objects when a Manager, for example, starts.
         
@@ -92,7 +91,7 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
     /** Loads modules from the files that match the specified pattern(s).
         @param character An array of file patterns (i.e. "*.dll", "modules/ *.rb") 
                          to match. */
-    method void Load(input pcFilePatterns as character extent).
+    method public void Load(input pcFilePatterns as character extent).
     
     /** Unloads the plugin with the specified name.
         @param character The plugin's name. */

@@ -15,7 +15,7 @@ using Progress.Lang.Error.
 class OpenEdge.Core.System.ArgumentError inherits ApplicationError: 
 
     define override protected property ErrorTitle as character no-undo get. private set. 
-    define override protected property ErrorText as character no-undo get. private set.
+    define override protected property ErrorText as longchar no-undo get. private set.
 
     constructor public ArgumentError(poInnerError as Error):
         super(poInnerError).

@@ -27,6 +27,7 @@ using OpenEdge.CommonInfrastructure.Common.IService.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
 
@@ -37,22 +38,26 @@ using Progress.Lang.Class.
 class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
         implements IServiceProvider:
     
-    /** (mandatory) The service for which this service adapter is servicing a request. */   
-    define public property Service as character no-undo get. private set.
+    /** The service for which this provider is currently servicing a request. */
+    define public property Service as character no-undo get. set.
     
     /** (mandatory) The session's service manager. Used to determine the ServiceMessageManager and 
         other managers for callbacks, context and more. */
-    define protected property ServiceManager as IServiceManager no-undo get. private set.
+    define protected property ServiceManager as IServiceManager no-undo
+        get():
+            if not valid-object(ServiceManager) then
+                ServiceManager = cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:ServiceManagerType), IServiceManager).
+            
+            return ServiceManager.
+        end get.
+        private set.
     
     /** The ServicemessageManager is used plentifully; we keep it as a property so that
         we can get it whenever needed, without fuss. */
     define protected property ServiceMessageManager as IServiceMessageManager no-undo
         get():
             if not valid-object(ServiceMessageManager) then
-                ServiceMessageManager = 
-                    cast(ServiceManager:GetService(
-                            Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
-                          , IServiceMessageManager).
+                ServiceMessageManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ServiceMessageManager:ServiceMessageManagerType) , IServiceMessageManager).
             
             return ServiceMessageManager.
         end get.
@@ -60,14 +65,10 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
                 
     define private variable mcCallbackProcedureName as character no-undo.
     
-    constructor public StandardServiceAdapter(input pcService as character,
-                                              input poServiceManager as IServiceManager):
+    constructor public StandardServiceAdapter(input pcService as character):
         Assert:ArgumentNotNullOrEmpty(pcService, 'Service').
-        Assert:ArgumentNotNull(poServiceManager, 'Service Manager').
         
         assign Service = pcService
-               ServiceManager = poServiceManager
-               
                mcCallbackProcedureName = 'OpenEdge/CommonInfrastructure/ServiceMessage/simple_async_response.p'.
     end constructor.
     
@@ -79,6 +80,11 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
         */
     end destructor.
     
+    /** External method to dynamically set the service property via InjectABL */
+    method public void SetService (input pcService as character):
+        this-object:Service = pcService.
+    end method.
+        
     /** Services a request. The service provider will call ExecuteResponse() in 
         the ServiceMessageManager once it's done with the request and ready with 
         a response (IServiceResponse); typically this will happen in a callback of
@@ -90,8 +96,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
         
         Assert:ArgumentNotNull(poRequest, "Service request").
         
-        oContext = cast(ServiceManager:GetService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
-            , ISecurityManager):GetPendingContext().
+        oContext = cast(ServiceManager:GetService(SecurityManager:SecurityManagerType)
+            , ISecurityManager):CurrentUserContext.
         
         /* Requests are bundled by service message type, so we can only check this once. */
         case cast(poRequest[1], IServiceMessage):ActionType:
@@ -112,8 +118,8 @@ class OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter
         
         Assert:ArgumentNotNull(poRequest, "Service request").
         
-        oContext = cast(ServiceManager:GetService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
-            , ISecurityManager):GetPendingContext().
+        oContext = cast(ServiceManager:GetService(SecurityManager:SecurityManagerType)
+            , ISecurityManager):CurrentUserContext.
         
         /* Requests are bundled by service message type, so we can only check this once. */
         case cast(poRequest[1], IServiceMessage):ActionType:

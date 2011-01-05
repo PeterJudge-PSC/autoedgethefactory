@@ -28,6 +28,7 @@ using OpenEdge.Core.InjectABL.IInjectionRequest.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.ComponentContainer.
 using OpenEdge.Core.InjectABL.KernelSettings.
+using OpenEdge.Core.System.InvalidValueSpecifiedError.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IIterator.
@@ -100,39 +101,109 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     end.
     
     /** Unregisters the specified binding.
-        <param name="binding">The binding to remove.</param>
-      **/
+        
+        @param Ibinding The binding to remove. */
     method override public void RemoveBinding(poBinding as IBinding):
         Assert:ArgumentNotNull(poBinding, "binding").
         Bindings:Remove(poBinding).
     end.
     
-    method public void Load(poModules as IInjectionModuleCollection):
+    method public void Load(input poModules as IInjectionModuleCollection):
         define variable oIterator as IIterator no-undo.
         
-        oIterator = poModules:Iterator().
+        oIterator = poModules:Values:Iterator().
         do while oIterator:HasNext():
             this-object:Load(cast(oIterator:Next(), IInjectionModule)).
         end.
     end method.
     
-    @todo(task="implement", action="").
     method public logical HasModule(pcName as character):
+        return Modules:ContainsKey(pcName).
     end method.
     
-    method public void Load(poModule as IInjectionModule):
-        if not Modules:Contains(poModule) then
+    method public void Load(input poModule as IInjectionModule):
+        if not Modules:ContainsValue(poModule) then
             Modules:Add(poModule).
-        
         poModule:OnLoad(this-object).
     end method.
     
-    @todo(task="implement", action="").
-    method public void Load(pcFilePatterns as character extent):
-                
-        /* foo.bar.*module*/
+    /* InjectABLModuleLoaderModule */
+    /** Loads IInjectionModules from files matching the pattern. 
         
+        @param character A file pattern */
+    method protected void Load(input pcFilePattern as character):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable cOriginalExtension as character no-undo.
+        define variable cFileBase as character no-undo.
+        define variable cFolderBase as character no-undo.
+        define variable cFile as character no-undo.
+        define variable cPWD as character no-undo.
+        define variable cFolder as character no-undo.
+        define variable oModules as IInjectionModuleCollection no-undo.
+        
+        Assert:ArgumentNotNullOrEmpty(pcFilePattern, 'file pattern').
+        
+        /* Remove the extension, since we may only have the .R present. */
+        iMax = num-entries(pcFilePattern, '.').
+        case iMax:
+            when 1 then cFileBase = pcFilePattern.
+            otherwise
+            do:
+                cOriginalExtension = entry(iMax, pcFilePattern, '.'). 
+                do iLoop = (iMax - 1) to 1 by -1:
+                    cFileBase = entry(iLoop, pcFilePattern, '.')
+                              + '.' +
+                              cFileBase.
+                end.
+            end.
+        end case.
+        
+        /* Resolve the working folder into something meaningful, since
+           SEARCH() is significantly faster with a fully-qualified path  */
+        file-info:file-name = '.'.
+        cPWD = file-info:full-pathname. 
+        
+        iMax = num-entries(propath).
+        do iLoop = 1 to iMax:
+            cFolder = entry(iLoop, propath).
+            
+            if cFolder begins '.' and
+               /* don't mess up relative pathing */
+               not cFolder begins '..' then
+            do:
+                if cFolder eq '.' then
+                    cFolder = cPWD.
+                else
+                    cFolder = cPWD + substring(cFolder, 2).
+            end.
+            
+            /* Always looks for .R. We can write a specialised resolver here if we want 
+               to get fancy and look for .r and .p */
+            assign cFolderBase = right-trim(cFolder, '/') + '/' + cFileBase
+                   cFile = search(cFolderBase + 'r').
+            if cFile ne ? then
+                /* run NO-ERROR in case theres a file matching the pattern
+                   that doesn't match signatures. Move along in that case. */
+                run value(cFile) (input this-object) no-error.
+        end.
     end method.
+    
+    /** Loads IInjectionModules from files matching the pattern. 
+        
+        @param character[] An array of file patterns */    
+    method public void Load(input pcFilePatterns as character extent):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        
+        Assert:ArgumentHasDeterminateExtent(pcFilePatterns, 'file patterns').
+        
+        iMax = extent(pcFilePatterns).
+        
+        do iLoop = 1 to iMax:
+            this-object:Load(pcFilePatterns[iLoop]).
+        end.
+    end method.                    
     
     @todo(task="implement", action="").
     method public void Unload(pcName as character):
@@ -226,10 +297,14 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         if oBindings:IsEmpty() then
             oBinding = CreateDefaultBinding(poService).
         else
-            /* Always use the last matching binding. If this behaviour is 
-               undesirable, then a setting should be added to the KernelSettings
-               object to define it.  */
-            oBinding = cast(oBindings:Get(oBindings:Size), IBinding).
+            /* Always use the first matching binding, since we assume that the bindings
+               are added in PROPATH order, and that the PROPATH is ordered in importance 
+               from left to right.
+               
+               If this behaviour is undesirable, then a setting should be added to 
+               the KernelSettings object to define it, or a BindingSelection component
+               created and added to the kernel. */
+            oBinding = cast(oBindings:Get(1), IBinding).
         
         /* Need to be able to invoke this type. */
         Assert:ArgumentNotAbstract(oBinding:TargetType).
@@ -286,17 +361,18 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                              , IBindingResolver):Resolve(Bindings, poScopeCallback, poScope).
     end method.
         
-    method protected IBinding CreateDefaultBinding(poService as class Class):
+    method protected IBinding CreateDefaultBinding(input poService as class Class):
         define variable oBinding as IBinding no-undo.
         define variable oBuilder as IBindingSyntax no-undo.
+        
+        if not TypeIsSelfBindable(poService) then
+            undo, throw new InvalidValueSpecifiedError(
+                                'default binding',
+                                ': Type ' + poService:TypeName + ' cannot bind to itself').
         
         oBinding = new Binding(poService).
         AddBinding(oBinding).
         oBuilder = CreateBindingBuilder(oBinding).
-        
-        if not TypeIsSelfBindable(poService) then
-            undo, throw new AppError('Type ' + poService:TypeName + ' cannot bind to itself').
-        
         oBuilder:ToSelf().
         
         return oBinding.
@@ -312,8 +388,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         return new LifecycleContext(this-object,
                                     poBinding,
                                     cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.IPipeline')), IPipeline),
-                                    cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache')), ICache)
-                                    ).
+                                    cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache')), ICache)).
     end method.
     
     method protected logical TypeIsSelfBindable(poService as class Class):

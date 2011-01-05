@@ -79,14 +79,18 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
                not ResolveCondition(oBinding) then
                 next.
             
-            /* We can use this binding */    
+            /* We can use this binding */
             oResolvedBindings:Add(oBinding).
         end.
         
         return oResolvedBindings.
     end method.
     
-    method protected logical ResolveCondition(poBinding as IBinding):
+    /** Resolved the conditions attached to a binding
+        
+        @param IBinding The biding in question
+        @return Logical Whether the binding meets the conditions or not. */
+    method protected logical ResolveCondition(input poBinding as IBinding):
         define variable oFIFOConditions as ObjectStack no-undo.
         define variable oCondition as ICondition no-undo.
         define variable lConditionsMet as logical no-undo.
@@ -124,7 +128,8 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
                     assign oLHS = oCondition
                            oClauseOperator = cast(oFIFOConditions:Pop(), ICondition) 
                            oRHS = cast(oFIFOConditions:Pop(), ICondition)
-                           lSubconditionMet = EvaluateClause(oLHS, oClauseOperator, oRHS).
+                           /* Use LHS for resolver. The resolver can check the RHS if it chooses, for type compatability */            
+                           lSubconditionMet = oLHS:GetResolver():EvaluateClause(oLHS, oClauseOperator, oRHS).
             end case.
             
             /* if need be, do the comparison */
@@ -147,7 +152,7 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
                         lConditionsMet = lConditionsMet and lSubconditionMet.
                         
                         /* If we come across a single false condition, leave, since we know there
-                           nothing more to do.  */
+                           is nothing more to do.  */
                         if not lConditionsMet then
                             leave.
                     end.
@@ -158,18 +163,4 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
         return lConditionsMet.
     end method.
     
-    method protected logical EvaluateClause(poLHS as ICondition,
-                                            poOperator as ICondition,
-                                            poRHS as ICondition):
-        
-        define variable lConditionsMet as logical no-undo.
-        
-        case poOperator:
-            when Condition:Is  then lConditionsMet = poLHS:Equals(poRHS). 
-            when Condition:Not then lConditionsMet = not poLHS:Equals(poRHS).
-        end case.
-        
-        return lConditionsMet.
-    end method.
-
 end class.

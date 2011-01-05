@@ -12,6 +12,7 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.BusinessComponent.Entity.BusinessEntity.
 using OpenEdge.BusinessComponent.Entity.IBusinessEntity.
 using OpenEdge.DataAccess.IDataAccess.
 

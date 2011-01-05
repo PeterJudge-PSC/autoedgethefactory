@@ -25,6 +25,7 @@ interface OpenEdge.Core.InjectABL.Binding.IBinding:
     /** Gets or sets the type of target for the binding. */
     define public property Target as BindingTargetEnum no-undo get. set.
     define public property TargetType as class Class no-undo get. set.
+    
     @todo(task="implement", action="").
     /** Gets or sets  the optional name defined for the binding target. 
     define public property TargetName as character no-undo get. set.

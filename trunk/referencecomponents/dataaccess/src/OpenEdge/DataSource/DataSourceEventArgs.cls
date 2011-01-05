@@ -20,7 +20,7 @@ class OpenEdge.DataSource.DataSourceEventArgs inherits EventArgs:
     
     /** The data format type fpr the DataTarget data.  */
     define public property DataTargetFormat as DataFormatEnum no-undo get. set.
-        
+    
     /** The data type of the data stored in the DataTarget */
     define public property DataTargetType as DataTypeEnum no-undo get. set.
     
