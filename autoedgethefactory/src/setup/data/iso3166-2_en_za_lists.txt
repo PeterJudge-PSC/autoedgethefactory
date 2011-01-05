@@ -1,0 +1,10 @@
+#Code	Subdivision name (en)	
+ZA-EC	,Eastern Cape	
+ZA-FS	,Free State	
+ZA-GP	,Gauteng	
+ZA-ZN	,KwaZulu-Natal	
+ZA-LP	,Limpopo	
+ZA-MP	,Mpumalanga	
+ZA-NC	,Northern Cape	
+ZA-NW	,North West	
+ZA-WC	,Western Cape

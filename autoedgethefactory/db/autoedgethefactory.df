@@ -426,6 +426,14 @@ ADD TABLE "Component"
   DESCRIPTION "Component items of a FinishedItem"
   DUMP-NAME "component"
 
+ADD FIELD "TenantId" OF "Component" AS character 
+  DESCRIPTION "Object ID"
+  FORMAT "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+  INITIAL ?
+  POSITION 21
+  MAX-WIDTH 25
+  ORDER 4
+
 ADD FIELD "ItemId" OF "Component" AS character 
   DESCRIPTION "Object ID"
   FORMAT "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
@@ -453,11 +461,13 @@ ADD INDEX "Component_PK" ON "Component"
   AREA "Schema Area"
   UNIQUE
   PRIMARY
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "FinishedItemId" ASCENDING 
   INDEX-FIELD "ItemId" ASCENDING 
 
 ADD INDEX "Item_FK" ON "Component" 
   AREA "Schema Area"
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "ItemId" ASCENDING 
 
 ADD TABLE "ContactDetail"
@@ -1251,6 +1261,14 @@ ADD TABLE "FinishedItem"
   DESCRIPTION "A unqie, completed item for sale. Composed of a number of Components."
   DUMP-NAME "finisheditem"
 
+ADD FIELD "TenantId" OF "FinishedItem" AS character 
+  DESCRIPTION "Object ID"
+  FORMAT "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+  INITIAL ?
+  POSITION 11
+  MAX-WIDTH 32
+  ORDER 5
+
 ADD FIELD "FinishedItemId" OF "FinishedItem" AS character 
   DESCRIPTION "Object ID"
   FORMAT "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
@@ -1295,10 +1313,12 @@ ADD INDEX "FinishedItem_PK" ON "FinishedItem"
   AREA "Schema Area"
   UNIQUE
   PRIMARY
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "FinishedItemId" ASCENDING 
 
 ADD INDEX "ExternalId" ON "FinishedItem" 
   AREA "Schema Area"
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "ExternalId" ASCENDING 
 
 ADD INDEX "Status_FK" ON "FinishedItem" 
@@ -1524,6 +1544,14 @@ ADD TABLE "Item"
   DESCRIPTION "The item table provides a quick reference for items in stock and quantity on-hand."
   DUMP-NAME "item"
 
+ADD FIELD "TenantId" OF "Item" AS character 
+  DESCRIPTION "Object ID"
+  FORMAT "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+  INITIAL ?
+  POSITION 12
+  MAX-WIDTH 32
+  ORDER 5
+
 ADD FIELD "ItemNum" OF "Item" AS integer 
   FORMAT "zzzzzzzzz9"
   INITIAL "0"
@@ -1656,6 +1684,7 @@ ADD INDEX "Item_PK" ON "Item"
   AREA "Schema Area"
   UNIQUE
   PRIMARY
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "ItemId" ASCENDING 
 
 ADD INDEX "Description" ON "Item" 
@@ -1663,14 +1692,20 @@ ADD INDEX "Description" ON "Item"
   WORD
   INDEX-FIELD "Description" ASCENDING 
 
-ADD INDEX "ItemName" ON "Item" 
+ADD INDEX "ItemName_W" ON "Item" 
   AREA "Schema Area"
   WORD
+  INDEX-FIELD "ItemName" ASCENDING 
+
+ADD INDEX "ItemName" ON "Item" 
+  AREA "Schema Area"
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "ItemName" ASCENDING 
 
 ADD INDEX "ItemNum" ON "Item" 
   AREA "Schema Area"
   UNIQUE
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "ItemNum" ASCENDING 
 
 ADD INDEX "ItemType_FK" ON "Item" 
@@ -1681,6 +1716,14 @@ ADD TABLE "ItemOption"
   AREA "Schema Area"
   DESCRIPTION "Contains all possible options which can be used to create a FInishedItem"
   DUMP-NAME "itemoption"
+
+ADD FIELD "TenantId" OF "ItemOption" AS character 
+  DESCRIPTION "Object ID"
+  FORMAT "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+  INITIAL ?
+  POSITION 12
+  MAX-WIDTH 32
+  ORDER 5
 
 ADD FIELD "ChildItemId" OF "ItemOption" AS character 
   DESCRIPTION "Object ID"
@@ -1703,11 +1746,13 @@ ADD INDEX "ItemOption_PK" ON "ItemOption"
   AREA "Schema Area"
   UNIQUE
   PRIMARY
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "ItemId" ASCENDING 
   INDEX-FIELD "ChildItemId" ASCENDING 
 
 ADD INDEX "ChildItem_FK" ON "ItemOption" 
   AREA "Schema Area"
+  INDEX-FIELD "TenantId" ASCENDING
   INDEX-FIELD "ChildItemId" ASCENDING 
 
 ADD TABLE "ItemType"
