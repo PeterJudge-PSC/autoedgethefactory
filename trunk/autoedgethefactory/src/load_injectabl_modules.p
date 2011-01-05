@@ -9,13 +9,17 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using AutoEdge.Factory.InjectABL.FactoryModule.
+using AutoEdge.Factory.InjectABL.FactoryCommonModule.
+using AutoEdge.Factory.InjectABL.FactoryOrderModule.
+using AutoEdge.Factory.InjectABL.FactoryBuildModule.
 using OpenEdge.Core.InjectABL.IKernel.
 
 /** -- defs  -- **/
 define input parameter poKernel as IKernel no-undo.
 
 /** -- main -- **/
-poKernel:Load(new FactoryModule()).
+poKernel:Load(new FactoryCommonModule()).
+poKernel:Load(new FactoryOrderModule()).
+poKernel:Load(new FactoryBuildModule()).
 
 /** -- eof -- **/
