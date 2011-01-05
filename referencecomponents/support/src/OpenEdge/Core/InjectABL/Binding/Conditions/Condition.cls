@@ -12,14 +12,18 @@ routine-level on error undo, throw.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionResolver.
+using OpenEdge.Core.InjectABL.Binding.Conditions.StandardConditionResolver.
+
+using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition:
-    define private variable moObjectValue as Object no-undo.
-    define private variable mcPrimitiveValue as character no-undo.    
-    define private variable mlIsObjectValue as logical no-undo.
+    
+    define static private property ConditionResolverType as class Class no-undo get. set.
+    
+    define private variable moValue as Object no-undo.
     
     /* Operators */
     define static public property And as ICondition no-undo get. private set.
@@ -33,7 +37,9 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
     constructor static Condition():
         define variable oType as class Class no-undo.
         
-        assign Condition:And = new Condition('and')
+        assign Condition:ConditionResolverType = Class:GetClass('OpenEdge.Core.InjectABL.Binding.Conditions.StandardConditionResolver')
+               
+               Condition:And = new Condition('and')
                Condition:Or = new Condition('or')
                
                Condition:Is = new Condition('is')
@@ -43,22 +49,22 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
     end constructor.
     
     constructor public Condition(pcValue as char):
-        Assert:ArgumentNotNullOrEmpty(pcValue, 'Condition value').
-        
-        assign mlIsObjectValue = false
-               mcPrimitiveValue = pcValue.
+        this-object(new String(pcValue)).
     end constructor.
 
     constructor public Condition(poValue as Object):
         Assert:ArgumentNotNull(poValue, 'Condition value').
-        assign mlIsObjectValue = true
-               moObjectValue = poValue.
+        moValue = poValue.
     end constructor.
+    
+    method public IConditionResolver GetResolver():
+        return StandardConditionResolver:GetResolver(Condition:ConditionResolverType). 
+    end method.
     
     method static public logical Equals(poCondition1 as ICondition, poCondition2 as ICondition):
         define variable lEquals as logical no-undo.
         
-        if not valid-object(poCondition1) or  
+        if not valid-object(poCondition1) or
            not valid-object(poCondition2) then
            lEquals = false.
         
@@ -80,14 +86,7 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
     end method.
     
     method override public character ToString():
-        define variable cString as character no-undo.
-        
-        if mlIsObjectValue then
-            cString = moObjectValue:ToString().
-        else
-            cString = mcPrimitiveValue.
-        
-        return cString.
+        return moValue:ToString().
     end method.
     
 end class.

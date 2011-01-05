@@ -25,8 +25,8 @@ using OpenEdge.Lang.Assert.
 class OpenEdge.BusinessComponent.WorkFlow.WorkStepServiceInterface inherits WorkStepDecorator
         implements IServiceProvider: 
 
-    /** [IServiceProvider] (mandatory) The service for which this service interface is servicing a request. */
-    define public property Service as character no-undo get. private set.
+    /** The service for which this provider is currently servicing a request. */
+    define public property Service as character no-undo get. set.
     
     constructor public WorkStepServiceInterface(input poWorkStep as IWorkStep,
                                                 input pcServiceName as character):
@@ -37,6 +37,11 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStepServiceInterface inherits Work
                /* Name defaults to Service */
                DecoratedWorkStep:Name = pcServiceName.
     end constructor.
+    
+    /** External method to dynamically set the service property via InjectABL */
+    method public void SetService (input pcService as character):
+        this-object:Service = pcService.
+    end method.
     
     method public void ExecuteRequest(input poRequest as IServiceRequest extent):
         define variable iLoop as integer no-undo.

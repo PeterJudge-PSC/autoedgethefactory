@@ -14,25 +14,33 @@ using OpenEdge.CommonInfrastructure.Common.IService.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager. 
 using OpenEdge.CommonInfrastructure.Common.Component.
+using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
-using Progress.Lang.Object.
+using Progress.Lang.Class.
 
 class OpenEdge.CommonInfrastructure.Common.Service inherits Component
         implements IService:
-                
-    /** (mandatory) Stores a reference to the session's Service Manager */        
-    define public property ServiceManager as IServiceManager no-undo get. private set. 
     
+    /** (mandatory) Stores a reference to the session's Service Manager */
+    define public property ServiceManager as IServiceManager no-undo
+        get():
+            if not valid-object(ServiceManager) then
+                ServiceManager = cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:ServiceManagerType), IServiceManager).
+            
+            return ServiceManager.
+        end get.
+        private set.
+    
+    constructor public Service (poComponentInfo as IComponentInfo):
+        super(poComponentInfo).
+    end constructor.
+    
+    @todo(task="refactor", action="remove this ctor").
     constructor public Service (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
         super(cast(poComponentInfo, IComponentInfo)).
         
         Assert:ArgumentNotNull(poServiceManager, 'Service Manager').
         ServiceManager = poServiceManager. 
     end constructor.
-    
-    method override public logical Equals(p0 as Object):
-        return (super:Equals(input p0) and
-               this-object:ServiceManager:Equals(cast(p0, Service):ServiceManager)).
-    end method.
     
 end class.

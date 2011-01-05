@@ -25,14 +25,20 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum. 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.System.ApplicationError.
 
 using OpenEdge.Lang.ABLSession.
+using Progress.Lang.AppError.
+using Progress.Lang.Error.
 using Progress.Lang.Class.
 
 /* ***************************  Main Block  *************************** */
@@ -70,17 +76,15 @@ oInput:Reset().
 oInput:Read(pmUserContext).
 oContext = cast(oInput:ReadObjectArray(), IUserContext).
 
-oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager'))
-               , IServiceManager).
+oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:ServiceManagerType), IServiceManager).
 
 /* Are we who we say we are? Note that this should really happen on activate. activate doesn't run for state-free AppServers */
-oSecMgr = cast(oServiceMgr:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager'))
+oSecMgr = cast(oServiceMgr:StartService(SecurityManager:SecurityManagerType)
                ,ISecurityManager).
 
-oSecMgr:ValidateSession(oContext:ClientSessionId).
-oSecMgr:SetClientContext(oContext).
+oSecMgr:ValidateSession(oContext).
 
-oServiceMessageManager = cast(oServiceMgr:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceMessageManager'))
+oServiceMessageManager = cast(oServiceMgr:StartService(ServiceMessageManager:ServiceMessageManagerType)
                         , IServiceMessageManager).
 
 /* Perform request. This is where the actual work happens.
@@ -114,4 +118,24 @@ oOutput:Write(output pmUserContext).
 
 error-status:error = no.
 return.
-/* EOF */
+
+/** -- error handling -- **/
+catch oApplError as ApplicationError:
+    return error oApplError:ResolvedMessageText().
+end catch.
+
+catch oAppError as AppError:
+    return error oAppError:ReturnValue. 
+end catch.
+
+catch oError as Error:
+    return error oError:GetMessage(1).
+end catch.
+
+finally:
+    do iLoop = 1 to iMax:
+        set-size(pmResponse[iLoop]) = 0.
+    end.
+    set-size(pmUserContext) = 0.
+end finally.
+/** -- eof -- **/

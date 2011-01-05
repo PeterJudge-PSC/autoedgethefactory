@@ -10,6 +10,7 @@
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
+using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
 using OpenEdge.Lang.Collections.TypedMap.
 using Progress.Lang.Class.
 
@@ -19,7 +20,7 @@ class OpenEdge.CommonInfrastructure.Common.IServiceCollection inherits TypedMap:
     end constructor.
     
     constructor public IServiceCollection():
-        super(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo'),
+        super(ComponentInfo:ComponentInfoType,
               Class:GetClass('OpenEdge.CommonInfrastructure.Common.IService')).
     end constructor.
     

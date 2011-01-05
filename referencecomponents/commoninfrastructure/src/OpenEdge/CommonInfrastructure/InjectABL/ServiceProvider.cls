@@ -1,18 +1,20 @@
- /*------------------------------------------------------------------------
+ /** ------------------------------------------------------------------------
     File        : ServiceProvider
-    Purpose     : 
+    Purpose     : InjectABL provider for objects of type IService.
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Wed Apr 07 14:41:39 EDT 2010
-    Notes       : 
-  ----------------------------------------------------------------------*/
+    Notes       : * The Create() override adds the common IServiceManager and
+                    IComponentInfo overrides to the constructor arguments.                    
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider.
 using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 
 using OpenEdge.Core.InjectABL.Lifecycle.StandardProvider.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
@@ -55,16 +57,14 @@ class OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider inherits StandardP
             if iMax eq ? then
                 iMax = iOffset.
             extent(oNewParams) = iMax.
-            oNewParams[1] = new Parameter(
-                                Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager')).
+            oNewParams[1] = new Parameter(ServiceManager:ServiceManagerType).
             oNewParams[2] = new Parameter(
                                 new ComponentInfo(
                                     poContext:Binding:Service,
                                     poContext:Binding:Name,
                                     ComponentTypeEnum:ApplicationComponent,
                                     true),
-                                Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo')).
-            
+                                ComponentInfo:ComponentInfoType). 
             do iLoop = (iOffset + 1) to iMax:
                 oNewParams[iLoop] = oRoutine:Parameters[iLoop - iOffset].
             end.

@@ -59,7 +59,7 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkFlow abstract inherits Service
         super(poServiceManager, poComponentInfo).
         
         assign ServiceResponses = new TypedMap(
-                                      Class:GetClass('OpenEdge.Lang.String'), 
+                                      String:Type, 
                                       Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse')).
     end constructor.
     

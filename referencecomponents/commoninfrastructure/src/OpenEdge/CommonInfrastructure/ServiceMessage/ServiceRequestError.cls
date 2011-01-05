@@ -14,7 +14,7 @@ using Progress.Lang.Error.
 
 class OpenEdge.CommonInfrastructure.ServiceMessage.ServiceRequestError inherits ApplicationError: 
 
-	define override protected property ErrorText as character no-undo get. private set. 
+	define override protected property ErrorText as longchar no-undo get. private set. 
 	define override protected property ErrorTitle as character no-undo get. private set. 
 		
 	constructor public ServiceRequestError(input poInnerError as Error):

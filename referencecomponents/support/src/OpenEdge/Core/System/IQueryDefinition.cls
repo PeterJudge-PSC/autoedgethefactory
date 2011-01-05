@@ -52,7 +52,9 @@ interface OpenEdge.Core.System.IQueryDefinition:
                                  input pcTable as character,
                                  input poQueryType as QueryTypeEnum,
                                  input poLockMode as LockModeEnum).
+    
     method public void AddBuffer(input poQueryBuffer as QueryBuffer).
+    method public void RemoveBuffer(input poQueryBuffer as QueryBuffer).
     
     /* IQuery will use these methods when constructing an ABL query */
     method public character extent GetBufferList().
@@ -94,6 +96,11 @@ interface OpenEdge.Core.System.IQueryDefinition:
         @param QueryFilter The query filter used to filter the query. */                                  
     method public void AddFilter (input poQueryFilter as QueryFilter).
     
+    /** Removes a filter clause from then definition.
+        
+        @param QueryFilter The query filter used to filter the query. */
+    method public void RemoveFilter (input poQueryFilter as QueryFilter).
+    
     /** Create a join between 2 buffers in this definition.
         
         @param character The first buffer name in the join
@@ -113,6 +120,11 @@ interface OpenEdge.Core.System.IQueryDefinition:
     
         @param QueryJoin Parameters for the join. */    
     method public void AddJoin(input poQueryJoin as QueryJoin).
+
+    /** Removes a join between 2 buffers in this definition.
+    
+        @param QueryJoin Parameters for the join. */    
+    method public void RemoveJoin(input poQueryJoin as QueryJoin).
 
     /** Add a sort condition to the definition.
     
@@ -138,7 +150,12 @@ interface OpenEdge.Core.System.IQueryDefinition:
         
         @param QuerySort Parameters for the sort. */ 
     method public void AddSort(input poQuerySort as QuerySort).
-                                    
+    
+    /** Removes a sort condition to the definition.
+        
+        @param QuerySort Parameters for the sort. */ 
+    method public void RemoveSort(input poQuerySort as QuerySort).
+    
     /** Returns the complete query string (ready for QUERY-PREPARE).
         
         @param longchar The complete query prepare string. */
@@ -184,7 +201,7 @@ interface OpenEdge.Core.System.IQueryDefinition:
         could be used as-is for a WHERE clause.
         
         @param character The buffer name 
-        @return longchar The where-clause-compatible string. */       
+        @return longchar The where-clause-compatible string. */
     method public longchar GetFilter(input pcBufferName as character).
     
     /** Returns the filters applicable to a buffer.

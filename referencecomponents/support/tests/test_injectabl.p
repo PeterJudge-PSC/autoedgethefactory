@@ -6,10 +6,14 @@
 
     Description : 
 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Mar 02 10:56:02 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
+using   OpenEdge.Core.InjectABL.IKernel.
+using   OpenEdge.Lang.Collections.ICollection.
+using   OpenEdge.Lang.Collections.Collection.
+using   OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Test.*.
 using OpenEdge.Core.InjectABL.*.
 using OpenEdge.Core.InjectABL.Binding.Parameters.*.
@@ -19,7 +23,8 @@ using Progress.Lang.*.
 
 def var kernel as IKernel.
 def var modules as IInjectionModuleCollection.
-def var params as IParameterCollection.
+def var params as ICollection.
+def var routine as Routine.
 
 def var warrior as Samurai.
 
@@ -32,12 +37,21 @@ warrior = cast(kernel:Get('OpenEdge.Test.Samurai'), Samurai).
 
 warrior:Attack("the evildoers").
 
-params = new IParameterCollection().
-params:Add(
-    new MethodArgument('SetPrimaryWeapon',
-            Class:GetClass('OpenEdge.Test.Shuriken'))).
+params = new Collection().
+
+routine = new Routine(Class:GetClass('OpenEdge.Test.Samurai'),
+                      'SetPrimaryWeapon',
+                      RoutineTypeEnum:Method).
+extent(routine:Parameters) = 1.
+routine:Parameters[1] = new Parameter(Class:GetClass('OpenEdge.Test.Shuriken')).
+params:Add(routine).
            
-params:Add(new PropertyValue('UseAlternate', 'true', DataTypeEnum:Logical)).
+routine = new Routine(Class:GetClass('OpenEdge.Test.Samurai'),
+                      'UseAlternate',
+                      RoutineTypeEnum:PropertySetter).
+extent(routine:Parameters) = 1.
+routine:Parameters[1] = new Parameter('true', DataTypeEnum:Logical).
+params:Add(routine).
 
 kernel:Inject(warrior, params).
 

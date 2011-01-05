@@ -32,23 +32,30 @@ using OpenEdge.CommonInfrastructure.Common.IManager.
 
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
+using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
+using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Core.InjectABL.Lifecycle.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext. 
 using OpenEdge.Core.InjectABL.IKernel.
 
 using OpenEdge.Core.System.NotFoundError.
 using OpenEdge.Lang.Collections.IIterator.
+using OpenEdge.Lang.Collections.ICollection.
+using OpenEdge.Lang.Collections.Collection.
+using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         implements IServiceManager, IManager:
+            
+    /** Use this property in lieu of having to say Class:GetClass('....IServiceManager') every time */
+    define static public property ServiceManagerType as class Class no-undo get. private set.
+    define static public property IServiceProviderType as class Class no-undo get. private set.
     
     define private variable moAppStart as IService no-undo.
-    define private variable moIServiceProviderType as class Class no-undo.
-    define private variable moIInjectABLCacheType as class Class no-undo.
     
     define private temp-table Service no-undo
         field ServiceType  as Object        /* ServiceTypeEnum */
@@ -62,13 +69,15 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
     /** InjectABL Dependency injection/Inversion of Control container. */
     define public property Kernel as IKernel no-undo get. private set.
     
+    constructor static ServiceManager():
+        ServiceManager:ServiceManagerType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager').
+        ServiceManager:IServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
+    end constructor.
+
     constructor public ServiceManager(input poKernel as IKernel):
         super().
         
-        assign this-object:Kernel = poKernel
-               
-               moIServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider')
-               moIInjectABLCacheType = Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache').
+        this-object:Kernel = poKernel.
     end constructor.
     
     destructor public ServiceManager():
@@ -85,7 +94,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
     /** Not InitializeComponent, since the Gui for .NET uses that name already, 
        as a PRIVATE member, and we want to have only 1 IComponent interface. */
     method public void Initialize():
-        StartServices().        
+        StartServices().
 /*        moAppStart = StartService(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IApplicationStart')).*/
     end method.
     
@@ -93,6 +102,10 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         if needed (but will also be called from within the dtor). */
     method public void DestroyComponent():
         StopServices().
+
+        /* Also stop objects that are scoped to the Service Manager, although  
+           any registered services should be stopped already anyway. */
+        cast(Kernel:Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache')), ICache):Clear(this-object).        
     end method.
 
     method protected logical RegisterService(input poServiceType as ServiceTypeEnum,
@@ -174,10 +187,6 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
             lbService.Instance = ?.
             delete lbService.
         end.
-        
-        /* Also stop any that are scoped to the service manager, although these
-           are registered services, so should be stopped already anyway. */
-        cast(Kernel:Components:Get(moIInjectABLCacheType), ICache):Clear(this-object).
     end method.
     
     /** Starts a service
@@ -270,8 +279,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager /*inherits Service*/
         @param character The name of the service for which we need to perform a request.
         @return IServiceProvider An object capable of serviving that request.   */
     method public IServiceProvider GetServiceProvider(input pcService as character):
-        return cast(Kernel:Get(moIServiceProviderType, pcService), IServiceProvider).
-/*        return cast(StartService(moIServiceProviderType, pcService), IServiceProvider).*/
+        return cast(Kernel:Get(ServiceManager:IServiceProviderType, pcService), IServiceProvider).
     end method.
     
 end class.

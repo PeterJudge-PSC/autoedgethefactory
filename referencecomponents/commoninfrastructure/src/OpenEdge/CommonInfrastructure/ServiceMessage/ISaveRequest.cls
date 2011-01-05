@@ -12,4 +12,9 @@ interface OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest /* inherits 
     /** A list of tables being saved */
     define public property TableNames as character extent no-undo get. set.
     
+    @todo(task="refactor", action="").
+    /** (mandatory) A collection of one of more tables for this request. 
+    define public property TableRequests as ITableRequestCollection no-undo get.
+    */
+    
 end interface.

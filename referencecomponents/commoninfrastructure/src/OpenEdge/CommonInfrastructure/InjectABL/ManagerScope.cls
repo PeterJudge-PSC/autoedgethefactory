@@ -11,6 +11,9 @@ routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScope.
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceManager.
+using OpenEdge.CommonInfrastructure.Common.SecurityManager.
+
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScope.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
@@ -24,11 +27,11 @@ class OpenEdge.CommonInfrastructure.InjectABL.ManagerScope inherits StandardScop
         
         case poScope:
             when ManagerScopeEnum:ServiceManager then
-                oScope = poContext:Kernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager')).
+                oScope = poContext:Kernel:Get(ServiceManager:ServiceManagerType).
             when ManagerScopeEnum:TenantManager then
                 oScope = poContext:Kernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ITenantManager')).
             when ManagerScopeEnum:SecurityManager then
-                oScope = poContext:Kernel:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.ISecurityManager')).
+                oScope = poContext:Kernel:Get(SecurityManager:SecurityManagerType).
             otherwise
             do:
                 /* Try with what we've got; if nothing, use default. */

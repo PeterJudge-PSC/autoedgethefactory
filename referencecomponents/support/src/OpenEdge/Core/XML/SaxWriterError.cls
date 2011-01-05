@@ -13,7 +13,7 @@ using OpenEdge.Core.System.ApplicationError.
 using Progress.Lang.Error.
 
 class OpenEdge.Core.XML.SaxWriterError inherits ApplicationError: 
-	define override protected property ErrorText as character no-undo get. set. 
+	define override protected property ErrorText as longchar no-undo get. set. 
 	define override protected property ErrorTitle as character no-undo get. set. 
 
     constructor public SaxWriterError(input poInnerError as Error):

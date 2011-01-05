@@ -36,17 +36,18 @@ using Progress.Lang.Class.
 class OpenEdge.BusinessComponent.Entity.ServiceInterface inherits BusinessEntityDecorator
         implements IServiceProvider: 
     
-    /** (mandatory) The service for which this service adapter is servicing a request. */
-    define public property Service as character no-undo get. private set.
-
-	constructor public ServiceInterface(input poBusinessEntity as IBusinessEntity,
-	                                    input pcServiceName as character):
+    /** The service for which this provider is currently servicing a request. */
+    define public property Service as character no-undo get. set.
+    
+	constructor public ServiceInterface(input poBusinessEntity as IBusinessEntity):
 		super (input poBusinessEntity).
-		
-        Assert:ArgumentNotNullOrEmpty(pcServiceName, 'Service Name').
-        this-object:Service = pcServiceName.
 	end constructor.
 
+    /** External method to dynamically set the service property via InjectABL */
+    method public void SetService (input pcService as character):
+        this-object:Service = pcService.
+    end method.
+    
     /** Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager
         once it's done with the request. The object that implements this interface will call back to
         the ServiceMessageManager when it is done and it's ready with a response (IServiceResponse).

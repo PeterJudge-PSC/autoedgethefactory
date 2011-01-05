@@ -64,13 +64,14 @@ class OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider inherits Standar
                                     poContext:Binding:Name,
                                     ComponentTypeEnum:ApplicationComponent,
                                     true),
-                                Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo')).
+                                ComponentInfo:ComponentInfoType).
             do iLoop = (iOffset + 1) to iMax:
                 oNewParams[iLoop] = oRoutine:Parameters[iLoop - iOffset].
             end.
             
-            /* replace old with new */
+            /* replace old with new 
             oRoutine:Parameters = ?.
+            */
             extent(oRoutine:Parameters) = ?.
             oRoutine:Parameters = oNewParams.
         end.

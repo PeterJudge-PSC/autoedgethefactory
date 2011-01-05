@@ -17,13 +17,24 @@ using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
 
-using OpenEdge.Lang.String.
+/* Don't have a USING for this class, so that we can avoid conflicts with the STRING() ABL keyword/function
+using OpenEdge.Lang.String.*/
 using Progress.Lang.Object.
+using Progress.Lang.Class.
 
 class OpenEdge.Lang.String
         implements IExternalizable:
+
+    define static public property Type as class Class no-undo
+        get():
+            if not valid-object(OpenEdge.Lang.String:Type) then
+                OpenEdge.Lang.String:Type = Class:GetClass('OpenEdge.Lang.String').
+            
+            return OpenEdge.Lang.String:Type.
+        end.
+        private set.
     
-    define static private variable moEmptyString as String no-undo.
+    define static private variable moEmptyString as OpenEdge.Lang.String no-undo.
     define public property Value as longchar no-undo get. private set.
     
     constructor public String():
@@ -46,16 +57,16 @@ class OpenEdge.Lang.String
         right-trim(left-trim(this-object:Value)).
     end method.
     
-    method static public String Empty ():
+    method static public OpenEdge.Lang.String Empty ():
         if not valid-object(moEmptyString) then
-            moEmptyString = new String('').
+            moEmptyString = new OpenEdge.Lang.String('').
         
         return moEmptyString.
     end method.
     
     method override public logical Equals(input p0 as Object):
-        if type-of(p0, String) then
-            return (this-object:Value eq cast(p0, String):Value).
+        if type-of(p0, OpenEdge.Lang.String) then
+            return (this-object:Value eq cast(p0, OpenEdge.Lang.String):Value).
         else
     
         return super:Equals(p0).    
@@ -68,6 +79,41 @@ class OpenEdge.Lang.String
     
     method public void ReadObject(po as ObjectInputStream):
         this-object:Value = po:ReadLongChar().
+    end method.
+
+    method public character extent Split(input pcDelimiter as character):
+        return OpenEdge.Lang.String:Split(this-object:Value, pcDelimiter).
+    end method.
+    
+    method public character extent Split():
+        return OpenEdge.Lang.String:Split(this-object:Value).
+    end method.
+        
+    method static public character extent Split(input pcValue as longchar):
+        return OpenEdge.Lang.String:Split(pcValue, ',').
+    end method.
+            
+    method static public character extent Split(input pcValue as longchar,
+                                                input pcDelimiter as character):
+        define variable cArray as character extent no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        
+        iMax = num-entries(pcValue, pcDelimiter).
+        extent(cArray) = iMax.
+        
+        do iLoop = 1 to iMax:
+            cArray[iLoop] = entry(iLoop, pcValue, pcDelimiter).
+        end. 
+        
+        return cArray.
+    end method.
+    
+    method public handle ToHandle():
+        define variable cValue as character no-undo.
+        cValue = this-object:Value.
+        
+        return widget-handle(cValue).
     end method.
     
 end class.

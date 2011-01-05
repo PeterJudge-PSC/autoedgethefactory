@@ -6,37 +6,30 @@
 
     Description : 
 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Fri Mar 12 11:36:58 EST 2010
     Notes       : * this test MUST be run with -nogc, otherwise the performance
                     test will fail miserably.
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Lang.WeakReference.
+using OpenEdge.Lang.ABLSession.
 using Progress.Lang.AppError.
 using Progress.Lang.Object.
 
 def var oInstance as Object no-undo.
 def var iRef as int no-undo.
 def var oRef as Object no-undo.
-def var oWeakRef as WeakReference no-undo.
 def var lAlive as log no-undo.
 
 oInstance = new Object().
 
-oWeakRef = new WeakReference(oInstance).
-
-iRef = oWeakRef:Reference.
+iRef = int(oInstance).
 
 if iref ne int(oInstance) then
     undo, throw new AppError('weak reference not same as int(obj)').
 
-lAlive = oWeakRef:IsAlive().
-if lalive eq false then
-    undo, throw new AppError('weak reference not alive; should be').
-    
-oRef = oWeakRef:Resolve().
+oRef = ABLSession:Instance:ResolveWeakReference(iRef).
 if not valid-object(oRef) then
     undo, throw new AppError('weak reference not resolve; should be').     
 
@@ -48,11 +41,7 @@ if oref ne oInstance then
  */
 delete object oInstance.
  
-lAlive = oWeakRef:IsAlive().
-if lalive eq true then
-    undo, throw new AppError('weak reference alive; should not be').
-
-oRef = oWeakRef:Resolve().
+oRef = ABLSession:Instance:ResolveWeakReference(iRef).
 if valid-object(oRef) then
     undo, throw new AppError('weak reference was resolved; should not be').     
 
@@ -70,7 +59,6 @@ procedure PerformanceTest:
     def var iRef as int no-undo.
     def var iRefLoc as int no-undo.
     def var oRef as Object no-undo.
-    def var oWeakRef as WeakReference no-undo.
     def var istart as int no-undo.
     def var iend as int no-undo.
         
@@ -85,7 +73,7 @@ procedure PerformanceTest:
     end.
 
     istart = mtime.
-    oRef = OpenEdge.Lang.WeakReference:ResolveWeakReference(iRef).
+    oRef = ABLSession:Instance:ResolveWeakReference(iRef).
     iend = mtime.
     
     message 

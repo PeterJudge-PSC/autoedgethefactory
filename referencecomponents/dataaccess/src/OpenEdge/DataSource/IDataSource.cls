@@ -30,7 +30,8 @@ interface OpenEdge.DataSource.IDataSource:
     
     /** DataSource Fetch/Fill events. These map to ProDataSet callbacks, although the events below are only fired
        in cases where PerformFetch() is called. This is typically not the case for ProDataSets, since the PDS:Fill()
-       method will be called from the DataAccess, rather than the Datasource. */
+       method will be called from the DataAccess, rather than the Datasource. 
+       */
     define public event BeforeFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event BeforeRowFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event AfterRowFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).

@@ -26,16 +26,18 @@ class OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule abstract inherits 
 
      /** Gets the kernel that the module is loaded into.  */
     define public property Kernel as IKernel no-undo get. protected set.
-
-     /** Gets the module's name. Only a single module with a given name can be loaded at one time.  */
+    
+    /** Gets the module's name. Only a single module with a given name can be loaded at one time.  */
     define public property Name as character no-undo
         get():
             return this-object:GetClass():TypeName.
         end get.
+        private set.
     
     define override public property Bindings as IBindingCollection no-undo get. private set.
          
-    constructor protected InjectionModule():
+    constructor public InjectionModule():
+        super().
         Bindings = new IBindingCollection().
     end constructor.
     

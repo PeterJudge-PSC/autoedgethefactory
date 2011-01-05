@@ -18,6 +18,9 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentInfo:
+    /** Use this property in lieu of having to say Class:GetClass('....IServiceManager') every time */
+    define static public property ComponentInfoType as class Class no-undo get. private set. 
+    
     /** The Service type that this service implements. This could be 
         the concrete type, or one of the interfaces the component 
         implements.
@@ -43,6 +46,10 @@ class OpenEdge.CommonInfrastructure.Common.ComponentInfo implements IComponentIn
     /** Whether the component is auto-started when it is requested, or whether
         it should be explicitly started first. The default is TRUE. */
     define public property AutoStart as logical no-undo get. private set.
+    
+    constructor static ComponentInfo():
+        ComponentInfo:ComponentInfoType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponentInfo').
+    end constructor.
     
     constructor public ComponentInfo(poService as class Class):
         this-object(poService,

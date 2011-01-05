@@ -52,6 +52,16 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     method public IBindingSyntax OnClientSession().
     method public IBindingSyntax OnWebSession().
     method public IBindingSyntax OnServerSession().
+
+    /*
+    @IBindingConnectedToSyntax.    
+    method public IBindingSyntax ConnectedTo(input pcServiceName as character).
+        
+        oConditionSyntax:Service:Is:Type('db'):And:Is:Name('aetf'):And:Is:Connnected).
+        
+    method public IBindingSyntax ConnectedToAppServer(input pcAppServerName as character).
+    method public IBindingSyntax ConnectedToDatabase(input pcDbName as character).
+    */
     
     /** Certain UI platforms support multiple UI technologies (eg ABL and .NET on GUI Windows).
     @IBindingAsSyntax.

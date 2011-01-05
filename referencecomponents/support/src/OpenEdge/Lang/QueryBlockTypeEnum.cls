@@ -9,7 +9,6 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Lang.QueryBlockTypeEnum.

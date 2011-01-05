@@ -59,43 +59,40 @@ class OpenEdge.Core.System.QueryDefinition
     define public property NumBuffers as integer no-undo get. protected set.
     
     define private temp-table ttBuffer no-undo
-        field Order as integer
-        
         field BufferName as character 
+        field Order as integer
         field TableName as character 
         field QueryType as Object   /* OpenEdge.Lang.QueryTypeEnum */
-        field LockMode as Object       /* OpenEdge.Lang.LockModeEnum */
+        field LockMode as Object    /* OpenEdge.Lang.LockModeEnum */
         index idx1 as unique BufferName
         index idx2 as primary unique Order.
     
     define private temp-table ttFilter no-undo
         field BufferName as character
         field FieldName as character 
-        field Operator as Object           /* OpenEdge.Lang.OperatorEnum */
-        field FieldValue as Object  /*OE.Lang.String */
-        field FieldType as Object          /* OpenEdge.Lang.DataTypeEnum */
-        field JoinType as Object /* OpenEdge.Lang.JoinEnum */
-        index idx1 as primary unique BufferName FieldName Operator FieldValue         
-        .        
+        field Operator as Object        /* OpenEdge.Lang.OperatorEnum */
+        field FieldValue as Object      /*OE.Lang.String */
+        field FieldType as Object       /* OpenEdge.Lang.DataTypeEnum */
+        field JoinType as Object        /* OpenEdge.Lang.JoinEnum */
+        index idx1 as primary unique BufferName FieldName Operator FieldValue.
+    
     define private temp-table ttJoin no-undo
         field BufferName as character
         field FieldName as character 
-        field Operator as Object   /* OpenEdge.Lang.OperatorEnum:EnumMember */
+        field Operator as Object   /* OpenEdge.Lang.OperatorEnum */
         field JoinBufferName as character 
         field JoinFieldName as character 
-        field JoinType as Object       /* OpenEdge.Lang.JoinEnum:EnumMember */
+        field JoinType as Object       /* OpenEdge.Lang.JoinEnum */
         index idx1 as primary unique BufferName FieldName Operator JoinBufferName JoinFieldName
         index idx2 JoinBufferName
-        index idx3 BufferName
-        .
+        index idx3 BufferName.
     
     define private temp-table ttSort no-undo
         field BufferName as char
         field FieldName as char
-        field Direction as Object /* OpenEdge.Lang.SortDirectionEnum:EnumMember */
+        field Direction as Object /* OpenEdge.Lang.SortDirectionEnum */
         field Order as int
-        index idx1 as primary unique BufferName FieldName       
-        .
+        index idx1 as primary unique BufferName FieldName.
 
     method public void AddFilter (pcBufferName as character,
                                   pcFieldName as character,
@@ -125,22 +122,58 @@ class OpenEdge.Core.System.QueryDefinition
                   poQueryFilter:JoinType).
     end method.
     
+    /** Removes a filter clause from then definition.
+        
+        @param QueryFilter The query filter used to filter the query. */
+    method public void RemoveFilter (input poQueryFilter as QueryFilter):
+        define buffer lbFilter for ttFilter.
+        
+        for each lbFilter where
+                 lbFilter.BufferName = poQueryFilter:BufferName and
+                 lbFilter.FieldName = poQueryFilter:FieldName and
+                 lbFilter.Operator = poQueryFilter:Operator
+                 no-lock:                     
+            
+            /* We may be using a different QuerySort object to the original, so use
+               Equals() instead of reference */
+            if cast(lbFilter.FieldValue, String):Equals(poQueryFilter:FieldValue) then
+            do:
+                delete lbFilter.
+                
+                OnQueryDefinitionChanged(
+                    new QueryDefinitionEventArgs(
+                            QueryElementEnum:Filter,
+                            QueryDefinitionOperationEnum:Delete)).
+                leave.
+            end.
+        end.
+    end method.
+            
     method public void ClearFilters():
         empty temp-table ttFilter.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Sort, QueryDefinitionOperationEnum:Empty)).
+        OnQueryDefinitionChanged(
+            new QueryDefinitionEventArgs(
+                    QueryElementEnum:Filter,
+                    QueryDefinitionOperationEnum:Empty)).
     end method.
         
     method public void ClearSort():
         empty temp-table ttSort.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Filter, QueryDefinitionOperationEnum:Empty)).
+        OnQueryDefinitionChanged(
+            new QueryDefinitionEventArgs(
+                    QueryElementEnum:Filter,
+                    QueryDefinitionOperationEnum:Empty)).
     end method.
 
     method public void ClearJoins():
         empty temp-table ttJoin.
         
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Join, QueryDefinitionOperationEnum:Empty)).
+        OnQueryDefinitionChanged(
+            new QueryDefinitionEventArgs(
+                    QueryElementEnum:Join,
+                    QueryDefinitionOperationEnum:Empty)).
     end method.
     
     method public void ClearBuffers():
@@ -247,23 +280,85 @@ class OpenEdge.Core.System.QueryDefinition
                   poQueryBuffer:LockMode).
     end method.
     
+    /** Removes a buffer and related records. Note that only one
+        QueryDefinitionChanged event first, for the buffer. The 
+        child records are simply removed.
+        
+        @param QueryBuffer The buffer being removed */
+    method public void RemoveBuffer(input poQueryBuffer as QueryBuffer):
+        define buffer lbBuffer for ttBuffer.
+        define buffer lbJoin for ttJoin.
+        define buffer lbFilter for ttFilter.
+        define buffer lbSort for ttSort.
+        
+        find lbBuffer where lbBuffer.BufferName = poQueryBuffer:Name no-error.
+        if available lbBuffer then
+        do:
+            for each lbFilter where lbFilter.BufferName = lbBuffer.BufferName:
+                delete lbFilter.
+            end.
+            
+            for each lbJoin where
+                     lbJoin.BufferName = lbBuffer.BufferName or
+                     lbJoin.JoinBufferName = lbBuffer.BufferName:
+                delete lbJoin.                         
+            end.
+            
+            for each lbSort where lbSort.BufferName = lbBuffer.BufferName:
+                delete lbSort.
+            end.
+            ReorderSort().
+            
+            delete lbBuffer.
+            ReorderBuffers().
+            
+            /* Only one event fires */
+            OnQueryDefinitionChanged(
+                new QueryDefinitionEventArgs(
+                        QueryElementEnum:Buffer,
+                        QueryDefinitionOperationEnum:Delete)).
+        end.
+    end method.    
+    
+    method protected void ReorderBuffers():
+        define buffer lbBuffer for ttBuffer.
+        define query qryBuffer for lbBuffer.
+        define variable iOrder as integer no-undo.
+        
+        open query qryBuffer
+            preselect each lbBuffer by lbBuffer.Order.
+        get first qryBuffer.
+
+        do while not query-off-end('qryBuffer'):
+            assign iOrder = iOrder + 1 
+                   lbBuffer.Order = iOrder.
+        end.
+        close query qryBuffer.
+    end method.
+    
     method public void AddBuffer(pcBuffer as character,
                                  pcTable as character,
                                  poQueryType as QueryTypeEnum,
                                  poLockMode as LockModeEnum):
         define buffer lbBuffer for ttBuffer.
         
-        create lbBuffer.
-        assign lbBuffer.BufferName = pcBuffer
-               lbBuffer.TableName = (if pcTable eq '' then pcBuffer else pcTable)
-               NumBuffers = NumBuffers + 1 
-               lbBuffer.Order = NumBuffers
-               lbBuffer.LockMode = poLockMode
-               lbBuffer.QueryType = poQueryType.
-        
-        OnQueryDefinitionChanged(new QueryDefinitionEventArgs(QueryElementEnum:Buffer, QueryDefinitionOperationEnum:Create)).
+        if not can-find(lbBuffer where lbBuffer.BufferName = pcBuffer) then
+        do:
+            create lbBuffer.
+            assign lbBuffer.BufferName = pcBuffer
+                   lbBuffer.TableName = (if pcTable eq '' then pcBuffer else pcTable)
+                   NumBuffers = NumBuffers + 1 
+                   lbBuffer.Order = NumBuffers
+                   lbBuffer.LockMode = poLockMode
+                   lbBuffer.QueryType = poQueryType.
+                   
+            OnQueryDefinitionChanged(
+                new QueryDefinitionEventArgs(
+                        QueryElementEnum:Buffer,
+                        QueryDefinitionOperationEnum:Create)).
+        end.
     end method.
-
+    
     method public void SetBuffers(pcBuffer as character extent, pcTable as character extent):
         define variable iLoop as integer no-undo.
                        
@@ -349,7 +444,10 @@ class OpenEdge.Core.System.QueryDefinition
     constructor public QueryDefinition():
         super ().
     end constructor.
+
+    /** Create a join between 2 buffers in this definition.
     
+        @param QueryJoin Parameters for the join. */    
     method public void AddJoin(input poQueryJoin as QueryJoin):
         AddJoin(poQueryJoin:BufferName,
                 poQueryJoin:FieldName,
@@ -359,6 +457,38 @@ class OpenEdge.Core.System.QueryDefinition
                 poQueryJoin:JoinType).
     end method.
     
+    /** Removes a join between 2 buffers in this definition.
+    
+        @param QueryJoin Parameters for the join. */    
+    method public void RemoveJoin(input poQueryJoin as QueryJoin):
+        define buffer lbJoin for ttJoin.
+        
+        find lbJoin where
+             lbJoin.BufferName = poQueryJoin:BufferName and
+             lbJoin.FieldName  = poQueryJoin:FieldName and
+             lbJoin.Operator = poQueryJoin:Operator and 
+             lbJoin.JoinBufferName = poQueryJoin:JoinBufferName and 
+             lbJoin.JoinFieldName = poQueryJoin:JoinFieldName
+             no-error.
+        if available lbJoin then
+        do:
+            delete lbJoin.             
+
+            OnQueryDefinitionChanged(
+                new QueryDefinitionEventArgs(
+                        QueryElementEnum:Join,
+                        QueryDefinitionOperationEnum:Delete)).                    
+        end.
+    end method.
+    
+    /** Create a join between 2 buffers in this definition.
+        
+        @param character The first buffer name in the join
+        @param character The first buffer field in the join
+        @param OperatorEnum The operator (=,>, etc)
+        @param character The second buffer name in the join
+        @param character The second buffer field in the join
+        @param JoinEnum The join type (and/or etc) for the filter. */        
     method public void AddJoin (pcBufferName as character,
                                 pcFieldName as character,
                                 poOperator as OperatorEnum,
@@ -481,31 +611,6 @@ class OpenEdge.Core.System.QueryDefinition
         end.
         
         return oClone.
-        
-        /*
-        
-        define variable oOOS as ObjectOutputStream no-undo.
-        define variable oOIS as ObjectInputStream no-undo.
-        define variable mStream as memptr no-undo.
-        
-        /* We know we can serialize this object, so use that. */
-        set-byte-order(mStream) = ByteOrderEnum:BigEndian:Value.
-        
-        oOOS = new ObjectOutputStream().        
-        oOOS:WriteObject(this-object).
-        oOOS:Write(output mStream).
-        
-        oOIS = new ObjectInputStream().
-        oOIS:Read(mStream).
-        oClone = cast(oOIS:ReadObject(), IQueryDefinition).
-        
-        return oClone.
-        
-        /* no, we don't like memory leaks. */
-        finally:
-            set-size(mStream) = 0.
-        end finally.
-        */
     end method.
     
     /** Returns all of the query elements for the query.
@@ -653,6 +758,47 @@ class OpenEdge.Core.System.QueryDefinition
                 poQuerySort:Direction,
                 iOrder).
     end method.
+    
+
+    /** Removes a sort condition from the definition.
+        
+        @param QuerySort Parameters for the sort. */ 
+    method public void RemoveSort(input poQuerySort as QuerySort).
+        define buffer lbSort for ttSort.
+        
+        find lbSort where
+             lbSort.BufferName = poQuerySort:BufferName and
+             lbSort.FieldName = poQuerySort:FieldName
+             no-error.
+        if available lbSort then
+        do:
+            delete lbSort.
+        
+            ReorderSort().
+            
+            OnQueryDefinitionChanged(
+                new QueryDefinitionEventArgs(
+                        QueryElementEnum:Sort,
+                        QueryDefinitionOperationEnum:Delete)).                    
+        end.
+    end method.
+    
+    method protected void ReorderSort():
+        define buffer lbSort for ttSort.
+        define query qrySort for lbSort.
+        define variable iOrder as integer no-undo.
+        
+        open query qrySort 
+            preselect each lbSort by lbSort.Order.
+        get first qrySort.
+        
+        do while not query-off-end('qrySort'):
+            assign iOrder = iOrder + 1 
+                   lbSort.Order = iOrder.
+        end.
+        close query qrySort.
+    end method.
+    
     /** Returns sort information for all buffers in the definition.
         
         @return longchar A complete sort string for all buffers in the definition. */
@@ -776,11 +922,17 @@ class OpenEdge.Core.System.QueryDefinition
                 cWhereClause = cWhereClause + ' '
                               + cast(lbFilter.JoinType, EnumMember):ToString() + ' '.
             
-            assign cValue = string(cast(lbFilter.FieldValue, String):Value)
-                   cWhereClause = cWhereClause + ' '
-                          + lbFilter.BufferName + '.' + lbFilter.FieldName + ' ' 
-                          + cast(lbFilter.Operator, EnumMember):ToString() + ' '
-                          + quoter(cValue).
+            cValue = string(cast(lbFilter.FieldValue, String):Value).
+            if cast(lbFilter.FieldType, DataTypeEnum):Equals(DataTypeEnum:Rowid) then
+                cWhereClause = cWhereClause + ' '
+                             + 'rowid(' + quoter(lbFilter.BufferName) + ')' 
+                             + cast(lbFilter.Operator, EnumMember):ToString() + ' '
+                             + 'to-rowid(' + quoter(cValue) + ')'.
+            else
+                cWhereClause = cWhereClause + ' '
+                             + lbFilter.BufferName + '.' + lbFilter.FieldName + ' ' 
+                             + cast(lbFilter.Operator, EnumMember):ToString() + ' '
+                             + quoter(cValue).
         end.
         
         return cWhereClause. 
@@ -942,7 +1094,7 @@ class OpenEdge.Core.System.QueryDefinition
         for each lbJoin where 
                  lbJoin.BufferName = pcBufferName or
                  lbJoin.JoinBufferName = pcBufferName:
-                
+            
             if can-do(pcBuffersInQuery, lbJoin.BufferName) and 
                can-do(pcBuffersInQuery, lbJoin.JoinBufferName) then
             do:
@@ -950,7 +1102,6 @@ class OpenEdge.Core.System.QueryDefinition
                 if cWhereClause <> '' then
                     cWhereClause = cWhereClause + ' '
                                   + cast(lbJoin.JoinType, EnumMember):ToString() + ' '.
-            
                 cWhereClause = cWhereClause
                              + lbJoin.BufferName + '.' + lbJoin.FieldName + ' ' 
                              + cast(lbJoin.Operator, EnumMember):ToString() + ' '

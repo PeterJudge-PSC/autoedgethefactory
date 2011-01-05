@@ -9,21 +9,27 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.ErrorSeverityEnum.
+
 using OpenEdge.Lang.FlagsEnum.
 using Progress.Lang.AppError.
 using Progress.Lang.Object.
 using Progress.Lang.Class.
 using Progress.Lang.Error.
 
-class OpenEdge.Core.System.ApplicationError abstract inherits AppError:
+class OpenEdge.Core.System.ApplicationError abstract inherits AppError
+        implements IExternalizable:
+    
     define static public property ShowDebugMessages as logical no-undo init false get. set.
     
     define public property InnerError as Error no-undo get. protected set.
     
     define abstract protected property ErrorTitle as character no-undo get.         
-    define abstract protected property ErrorText as character no-undo get.
+    define abstract protected property ErrorText as longchar no-undo get.
     
     define protected property LogFileName as character no-undo get. set.
     
@@ -158,5 +164,17 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError:
         
         return oClone.
     end method.
-    
+
+	method public void WriteObject(input poStream as ObjectOutputStream):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+
+	method public void ReadObject(input poStream as ObjectInputStream):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	
 end class.

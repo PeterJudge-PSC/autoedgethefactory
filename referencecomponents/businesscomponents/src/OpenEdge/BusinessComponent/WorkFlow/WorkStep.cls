@@ -44,7 +44,7 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStep abstract inherits Service
         super(poServiceManager, poComponentInfo).
         
         WorkstepResponses = new TypedMap(
-                                      Class:GetClass('OpenEdge.Lang.String'), 
+                                      String:Type, 
                                       Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepResponse')).
     end constructor.
     

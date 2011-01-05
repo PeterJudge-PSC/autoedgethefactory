@@ -16,7 +16,7 @@ using Progress.Lang.Error.
 class OpenEdge.Core.System.AccessViolationError inherits ApplicationError: 
     define static public property READ_ONLY as character no-undo init 'read-only' get.
     
-    define override protected property ErrorText as character no-undo get. set.
+    define override protected property ErrorText as longchar no-undo get. set.
     define override protected property ErrorTitle as character no-undo get. set.
             
     constructor public AccessViolationError(poErr as Error,pcArgs1 as char, pcArgs2 as char):

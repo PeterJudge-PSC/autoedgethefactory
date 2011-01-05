@@ -14,21 +14,13 @@ using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using Progress.Lang.Class
 .
 class OpenEdge.DataAccess.InjectABL.DataAccessModule inherits InjectionModule:
-    constructor protected DataAccessModule (  ):
+    constructor public DataAccessModule (  ):
         super ().
     end constructor.
 
     method override public void Load(  ):
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
-        
-        /* Example of standard DataAccess Object with named DataSource*/
-        oBindingSyntax = Bind('OpenEdge.DataAccess.IDataAccess').
-        oBindingSyntax
-                :Named('CustomerDataAccess')
-                :To('OpenEdge.DataAccess.StandardDataAccess')
-                :WithMethodValue("AddDataSource", "<tablename>")
-                :WithMethodValue("AddDataSource", Class:GetClass('OpenEdge.DataSource.IDataSource')).
     end method.
     
 end class.

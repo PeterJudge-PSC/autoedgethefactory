@@ -18,8 +18,7 @@ using Progress.Lang.Class.
 class OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequestCollection inherits TypedMap: 
         
     constructor public ITableRequestCollection():
-        super(Class:GetClass('OpenEdge.Lang.String'),
-              Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest')).
+        super(String:Type, Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest')).
     end constructor.
     
     constructor public ITableRequestCollection(c as ITableRequestCollection):

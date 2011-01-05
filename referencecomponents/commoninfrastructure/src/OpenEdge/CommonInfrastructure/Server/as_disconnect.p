@@ -14,15 +14,23 @@ routine-level on error undo, throw.
 
 /* ***************************  Main Block  *************************** */
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.AgentConnection.
 
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-/* ***************************  Main Block  *************************** */
-cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.CommonInfrastructure.Common.IServiceManager')),
-        IServiceManager):Kernel:Clear(AgentConnection:Instance).
+define variable oServiceMgr as IServiceManager no-undo.
+
+/** -- main -- **/
+oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:ServiceManagerType), IServiceManager).
+               
+cast(oServiceMgr:StartService(SecurityManager:SecurityManagerType), ISecurityManager):EndSession().
+               
+oServiceMgr:Kernel:Clear(AgentConnection:Instance).
 
 delete object AgentConnection:Instance.
 

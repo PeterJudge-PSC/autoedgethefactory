@@ -21,7 +21,7 @@ using Progress.Lang.Object.
 class OpenEdge.PresentationLayer.Model.IModelQueryCollection inherits TypedMap: 
     
     constructor public IModelQueryCollection():
-        super(Class:GetClass('OpenEdge.Lang.String'),
+        super(String:Type,
               Class:GetClass('OpenEdge.PresentationLayer.Model.IModelQuery')).
     end constructor.
     

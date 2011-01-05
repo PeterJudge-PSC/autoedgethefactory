@@ -14,7 +14,7 @@ using Progress.Lang.Error.
 
 class OpenEdge.Core.System.InvocationError inherits ApplicationError: 
 
-    define override protected property ErrorText as character no-undo get. set. 
+    define override protected property ErrorText as longchar no-undo get. set. 
     define override protected property ErrorTitle as character no-undo get. set. 
 
     constructor public InvocationError(poInnerError as Error):
