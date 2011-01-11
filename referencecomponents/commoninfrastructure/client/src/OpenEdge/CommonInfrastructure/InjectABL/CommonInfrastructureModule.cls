@@ -9,7 +9,7 @@
                     and so the OnClientSession() binding is probably not strictly necessary.
                     However, it's useful to have.
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.CommonSecurityManager.
 

@@ -7,7 +7,7 @@
     Created     : Thu Dec 02 11:37:05 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ITenantManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
@@ -52,9 +52,9 @@ class OpenEdge.CommonInfrastructure.UserContext
         /* only used for Serialization */
     end constructor.
         
-	constructor public UserContext (input pcUserName as character):
-	    Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
-	    
+    constructor public UserContext (input pcUserName as character):
+        Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
+        
         assign UserName = entry(1, pcUserName, '@')
                ContextId = guid(generate-uuid).
         
@@ -62,8 +62,8 @@ class OpenEdge.CommonInfrastructure.UserContext
             UserDomain = entry(2, pcUserName, '@').
     end method.
     
-	constructor public UserContext (input pcUserName as character,
-	                                input pcUserDomain as character):
+    constructor public UserContext (input pcUserName as character,
+                                    input pcUserDomain as character):
         Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
         Assert:ArgumentNotNullOrEmpty(pcUserDomain, 'User Domain').
         
@@ -78,17 +78,17 @@ class OpenEdge.CommonInfrastructure.UserContext
         TenantId = poTenantManager:GetTenantId(TenantName).
     end method.
     
-	method public void WriteObject(input poStream as ObjectOutputStream):
-	    poStream:WriteChar(UserName).
+    method public void WriteObject(input poStream as ObjectOutputStream):
+        poStream:WriteChar(UserName).
         poStream:WriteChar(UserDomain).
         poStream:WriteLongChar(ContextId).
         poStream:WriteChar(TenantName).
         
         poStream:WriteObjectArray(TenantId:KeySet:ToArray()).
         poStream:WriteObjectArray(TenantId:Values:ToArray()).
-	end method.
-	
-	method public void ReadObject(input poStream as ObjectInputStream):
+    end method.
+    
+    method public void ReadObject(input poStream as ObjectInputStream):
         UserName = poStream:ReadChar().
         UserDomain = poStream:ReadChar().
         ContextId = poStream:ReadLongChar().
@@ -96,6 +96,6 @@ class OpenEdge.CommonInfrastructure.UserContext
         
         cast(TenantId:KeySet, ICollection):AddArray(poStream:ReadObjectArray()).
         TenantId:Values:AddArray(poStream:ReadObjectArray()).
-	end method.
-	
+    end method.
+    
 end class.

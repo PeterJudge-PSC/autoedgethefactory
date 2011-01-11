@@ -10,7 +10,7 @@
     Created     : Fri Jun 04 16:01:48 EDT 2010
     Notes       : * Not run for statefree appservers.
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.AgentConnection.

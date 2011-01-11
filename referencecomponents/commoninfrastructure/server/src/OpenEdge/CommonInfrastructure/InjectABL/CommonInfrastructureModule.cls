@@ -9,7 +9,7 @@
                     and so the OnServerSession() binding is probably not strictly necessary.
                     However, it's useful to have, for clarity if nothing else.
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.CommonSecurityManager.
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.

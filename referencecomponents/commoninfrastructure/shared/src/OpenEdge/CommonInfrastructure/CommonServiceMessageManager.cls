@@ -13,7 +13,7 @@
                   * The CommonServiceMessageManager is named "Common" to avoid name conflicts with other
                     service managers in the OpenEdge.CommonInfrastructure namespace.                    
   ----------------------------------------------------------------------  */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.

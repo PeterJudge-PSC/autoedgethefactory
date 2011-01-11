@@ -15,7 +15,7 @@
                   * The CommonServiceManager is named "Common" to avoid name conflicts with other
                     service managers in the OpenEdge.CommonInfrastructure namespace.                    
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
@@ -217,8 +217,8 @@ class OpenEdge.CommonInfrastructure.CommonServiceManager
         @param character An instance name for the service. InjectABL allows us
                to have mulitple bindings for a single type, specialised by instance name. 
         @return IService The running instance of the requested service */    
-	method public IService StartService(input poService as class Class,
-	                                    input pcInstanceName as character):
+    method public IService StartService(input poService as class Class,
+                                        input pcInstanceName as character):
         define variable oService as IService no-undo.
         define variable lCache as logical no-undo.
         define buffer lbService for Service.
@@ -243,12 +243,12 @@ class OpenEdge.CommonInfrastructure.CommonServiceManager
         end.
         
         return oService.
-	end method.
-	
+    end method.
+    
     /** Returns an instance of a service, if one exists. May AutoStart
         an instance.
         @param poService The class of the service to start 
-        @return An IService instance of the requested service */	
+        @return An IService instance of the requested service */    
     method public IService GetService(input poService as class Class):
         return StartService(poService, '').
     end method.

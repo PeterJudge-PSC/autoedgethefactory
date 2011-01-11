@@ -8,7 +8,7 @@
     Notes       : * The CommonSecurityManager is name "Common" to avoid name conflicts with other
                    security managers in the OpenEdge.CommonInfrastructure namespace.                    
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.UserContext.
@@ -92,9 +92,9 @@ class OpenEdge.CommonInfrastructure.CommonSecurityManager abstract inherits Serv
         @param longchar The identifier for the context.
         @param IUserContext The user context object. */
     method public IUserContext GetClientContext(input pcContextId as longchar):
-	   return ValidateSession(pcContextId).
+       return ValidateSession(pcContextId).
     end method.
-	
+    
     /** Logs a user into the application
     
         @param character The user's login name
