@@ -48,10 +48,10 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
                .
     end constructor.
     
-    constructor public Condition(pcValue as char):
+    constructor public Condition(input pcValue as char):
         this-object(new String(pcValue)).
     end constructor.
-
+    
     constructor public Condition(poValue as Object):
         Assert:ArgumentNotNull(poValue, 'Condition value').
         moValue = poValue.
@@ -78,6 +78,10 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
         define variable lEquals as logical no-undo.
         
         lEquals = valid-object(poCondition).
+        
+        /* need to match types */
+        if lEquals then
+            lEquals = poCondition:GetClass():IsA(this-object:GetClass()).
         
         if lEquals then
             lEquals = poCondition:ToString() eq this-object:ToString().

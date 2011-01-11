@@ -70,8 +70,8 @@ class OpenEdge.Lang.String
         else
     
         return super:Equals(p0).    
-	end method.
-	
+    end method.
+    
 /** IExternalizable **/
     method public void WriteObject(po as ObjectOutputStream):
         po:WriteLongChar(this-object:Value).
@@ -114,6 +114,13 @@ class OpenEdge.Lang.String
         cValue = this-object:Value.
         
         return widget-handle(cValue).
+    end method.
+    
+    method override public character ToString():
+        define variable cValue as character no-undo.
+        cValue = this-object:Value.
+        
+        return cValue.
     end method.
     
 end class.

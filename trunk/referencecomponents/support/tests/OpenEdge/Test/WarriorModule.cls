@@ -26,7 +26,6 @@ class OpenEdge.Test.WarriorModule inherits InjectionModule:
     method override public void Load():
         /* use oBS as bug workaround */
         def var obs as IBindingSyntax.
-        def var ocs as IConditionSyntax.
         
         /* Samurai! */
         obs = Bind('OpenEdge.Test.IWeapon').
@@ -47,26 +46,14 @@ class OpenEdge.Test.WarriorModule inherits InjectionModule:
             
             :WithMethodValue('SetAlternateWeapon',
                               Class:GetClass('OpenEdge.Test.Shuriken'))
-            .
-        ocs = obs:When().
-           ocs:Session:Not(SessionTypeCondition:Client).
-
+            :OnServerSession().
         
         obs = Bind('OpenEdge.Test.Samurai').
         obs = obs
             :To('OpenEdge.Test.ClientSamurai')
-            :Using('OpenEdge.Test.SamuraiProvider').
-        
-        ocs = obs:When().
-           ocs:Session:Is(SessionTypeCondition:Client).
+            :Using('OpenEdge.Test.SamuraiProvider')
+            :OnClientSession().
            
-    end method.
-    
-
-    
-    method override public void Unload():
-        Unbind(('IWeapon')).
-        Unbind(('Samurai')).
     end method.
 
 end class.

@@ -13,11 +13,15 @@
 routine-level on error undo, throw.
 
 using OpenEdge.Lang.AgentConnection.
-using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.Collections.IMap.
+using OpenEdge.Lang.Collections.Map.
 
 class OpenEdge.Lang.AgentConnection:
+    /** Information regarding connection lifespan. */    
     define public property ActiveSince as datetime-tz no-undo get. private set.
+    
+    /** A unique identifier for this connection. */
+    define public property Id as character no-undo get. private set.
     
     /* A collection of user-defined properties */
     define public property ConnectionProperties as IMap no-undo get. private set.
@@ -30,7 +34,6 @@ class OpenEdge.Lang.AgentConnection:
         end get.
         private set.
     
-    define public property Id as char no-undo get. private set.
     
     constructor private AgentConnection():
         assign this-object:Id = guid(generate-uuid)

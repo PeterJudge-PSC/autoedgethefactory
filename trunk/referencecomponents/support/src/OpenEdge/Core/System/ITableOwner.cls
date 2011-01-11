@@ -8,7 +8,6 @@
     Notes       : * An implementation of this interface is required by an IQuery object
                     in order to create a buffer (or buffers) for the query to use. 
   ---------------------------------------------------------------------- */
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
 
 interface OpenEdge.Core.System.ITableOwner:
     

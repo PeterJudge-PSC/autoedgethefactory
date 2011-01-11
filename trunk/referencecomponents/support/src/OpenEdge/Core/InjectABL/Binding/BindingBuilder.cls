@@ -19,10 +19,13 @@ using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
+using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 
+using OpenEdge.Core.System.ConnectionTypeEnum.
+using OpenEdge.Lang.SessionClientTypeEnum.
 using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.Assert.
@@ -543,70 +546,56 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
     
     method public IBindingSyntax OnClientSession():
         define variable oConditionSyntax as IConditionSyntax no-undo.
-         
+        
         oConditionSyntax = this-object:When().
-        oConditionSyntax:Session:Is(SessionTypeCondition:Client).
-
-        return this-object.
-    end method.
-    
-    method public IBindingSyntax OnWebSession():
-        define variable oConditionSyntax as IConditionSyntax no-undo.
-         
-        oConditionSyntax = this-object:When().
-        oConditionSyntax:Session:Is(SessionTypeCondition:Web).
-
+        oConditionSyntax:Session:Is(new SessionTypeCondition(SessionClientTypeEnum:ABLClient))
+                        :Or
+                        :Session:Is(new SessionTypeCondition(SessionClientTypeEnum:WebClient)).
+        
         return this-object.
     end method.
     
     method public IBindingSyntax OnServerSession():
         define variable oConditionSyntax as IConditionSyntax no-undo.
-         
+        
         oConditionSyntax = this-object:When().
-        oConditionSyntax:Session:Is(SessionTypeCondition:Server).
+        oConditionSyntax:Session:Is(new SessionTypeCondition(SessionClientTypeEnum:AppServer))
+                        :Or
+                        :Session:Is(new SessionTypeCondition(SessionClientTypeEnum:WebSpeed)).
         
         return this-object.
     end method.
-
+    
+    method public IBindingSyntax OnSession(input pcSessionName as character):
+        define variable oConditionSyntax as IConditionSyntax no-undo.
+        
+        oConditionSyntax = this-object:When().
+        oConditionSyntax:Session:Is(new SessionTypeCondition(pcSessionName)).
+        
+        return this-object.
+    end method.
+    
     /*
-    @IBindingAsSyntax.
-    method public IBindingSyntax AsChui():
+    method public IBindingSyntax ConnectedToAppServer(input pcAppServerName as character):
         define variable oConditionSyntax as IConditionSyntax no-undo.
         
         oConditionSyntax = this-object:When().
-        oConditionSyntax:UIType:Is(UITypeCondition:Chui).
+        oConditionSyntax:Connection
+        
+        Session:Is(new SessionTypeCondition(SessionClientTypeEnum:AppServer))
+                        :Or
+                        :Session:Is(new SessionTypeCondition(SessionClientTypeEnum:WebSpeed)).
         
         return this-object.
     end method.
     
-    method public IBindingSyntax AsAblGui():
-        define variable oConditionSyntax as IConditionSyntax no-undo.
-         
-        oConditionSyntax = this-object:When().
-        oConditionSyntax:UIType:Is(UITypeCondition:ABLGui).
-        
-        return this-object.
+    method public IBindingSyntax ConnectedToDatabase(input pcDbName as character):
     end method.
     
-    method public IBindingSyntax AsDotNetGui():
-        define variable oConditionSyntax as IConditionSyntax no-undo.
-         
-        oConditionSyntax = this-object:When().
-        oConditionSyntax:UIType:Is(UITypeCondition:DotNetGui).
-        
-        return this-object.
-    end method.
-    
-    method public IBindingSyntax AsRiaGui():
-        define variable oConditionSyntax as IConditionSyntax no-undo.
-         
-        oConditionSyntax = this-object:When().
-        oConditionSyntax:UIType:Is(UITypeCondition:RiaGui).
-        
-        return this-object.
+    method public IBindingSyntax ConnectedTo(input poConnectionType as ConnectionTypeEnum, input pcConnectionName as character):
     end method.
     */
-    
+
     method public IBindingSyntax Named(pcName as character):
         Binding:Name = pcName.
         return this-object.

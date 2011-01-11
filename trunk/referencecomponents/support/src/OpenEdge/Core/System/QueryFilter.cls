@@ -114,7 +114,7 @@ class OpenEdge.Core.System.QueryFilter
                          + Operator:ToString() + ' '
                          + quoter(cValue).
         
-    	return cWhereClause.
+        return cWhereClause.
     end method.
-		
+        
 end class.

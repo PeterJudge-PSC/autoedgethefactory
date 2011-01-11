@@ -73,9 +73,9 @@ class OpenEdge.Lang.Collections.TypedMap inherits Map:
         return super:Get(poKey).
     end method.
     
-	method override public void PutAll( input poMap as IMap):
-		Assert:ArgumentIsType(poMap, this-object:GetClass()).
-		super:PutAll(poMap).
-	end method.
-	
+    method override public void PutAll( input poMap as IMap):
+        Assert:ArgumentIsType(poMap, this-object:GetClass()).
+        super:PutAll(poMap).
+    end method.
+    
 end class.

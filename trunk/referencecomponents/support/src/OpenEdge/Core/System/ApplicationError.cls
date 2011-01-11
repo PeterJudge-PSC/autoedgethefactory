@@ -165,16 +165,16 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
         return oClone.
     end method.
 
-	method public void WriteObject(input poStream as ObjectOutputStream):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void WriteObject(input poStream as ObjectOutputStream):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
-	method public void ReadObject(input poStream as ObjectInputStream):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void ReadObject(input poStream as ObjectInputStream):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	
+    end method.
+    
 end class.

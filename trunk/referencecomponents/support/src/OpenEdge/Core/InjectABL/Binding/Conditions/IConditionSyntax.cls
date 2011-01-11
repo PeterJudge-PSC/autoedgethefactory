@@ -22,9 +22,6 @@ interface OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax:
     method public IConditionSyntax Unique(poCondition as ICondition).
     
     define public property Session as IConditionSyntax no-undo get.
-    define public property UIType as IConditionSyntax no-undo get.
-    define public property Name as IConditionSyntax no-undo get.
-    
-    @todo(task="implement", action="database <name> connected; any database connected?").
+    define public property Connection as IConditionSyntax no-undo get.
     
 end interface.

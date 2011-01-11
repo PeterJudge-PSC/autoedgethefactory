@@ -36,15 +36,15 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Routine:
         RoutineType = poRoutineType.
     end method.
     
-	method override public Object Clone():
-	    define variable oClone as Routine no-undo.
-	    
-	    oClone = new Routine(this-object:Service,
-	                         this-object:RoutineName,
-	                         this-object:RoutineType).
+    method override public Object Clone():
+        define variable oClone as Routine no-undo.
         
-	    oClone:Parameters = this-object:Parameters.
-	    return oClone.	    
-	end method.    
+        oClone = new Routine(this-object:Service,
+                             this-object:RoutineName,
+                             this-object:RoutineType).
+        
+        oClone:Parameters = this-object:Parameters.
+        return oClone.        
+    end method.    
     
 end class.

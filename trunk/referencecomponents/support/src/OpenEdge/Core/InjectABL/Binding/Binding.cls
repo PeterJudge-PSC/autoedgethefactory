@@ -126,7 +126,7 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
     end method.
     
     method override public Object Clone():
-	    define variable oClone as IBinding no-undo.
+        define variable oClone as IBinding no-undo.
         define variable oPL as ParameterList no-undo.
                 
         oPL = new ParameterList(1).
@@ -149,7 +149,7 @@ class OpenEdge.Core.InjectABL.Binding.Binding implements IBinding:
            (ie this is a reasonably shallow copy)  */
         oClone:Arguments:Add(this-object:Arguments).
         
-	    return oClone. 
-	end method.
-	
+        return oClone. 
+    end method.
+    
 end class.

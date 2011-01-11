@@ -16,7 +16,6 @@ using OpenEdge.Core.InjectABL.Binding.Binding.
 using OpenEdge.Core.InjectABL.Binding.BindingBuilder.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.IBindingResolver.
-using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
@@ -33,25 +32,31 @@ using OpenEdge.Core.System.InvalidValueSpecifiedError.
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Collections.IList.
+using OpenEdge.Lang.Collections.List.
+using OpenEdge.Lang.Collections.IMap.
+using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.Assert.
 
 using Progress.Lang.Class.
 using Progress.Lang.AppError.
+using Progress.Lang.SysError.
 using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot 
-    implements IKernel, IBindingRoot /*, IResolutionRoot*/ :        
+        implements IKernel:        
     
     define public property Settings as KernelSettings no-undo get. private set.
     
     /** Gets the modules that have been loaded into the kernel. **/
     define public property Modules as IInjectionModuleCollection no-undo get. private set.
-    define override public property Bindings as IBindingCollection no-undo get. private set.
+    
+    /* Collection of bindings registered in this kernel  */
+    define override public property Bindings as IMap no-undo get. private set.
     
     /** Gets the component container, which holds components that contribute to InjectABL. **/
     define public property Components as ComponentContainer no-undo get. private set.
     
-    /** Stack of unique services (as define by their LiefcycleContext) being invoked. Used to prevent
+    /** Stack of unique services (as define by their LifecycleContext) being invoked. Used to prevent
         circular references. */
     @todo(task="implement", action="circ reference checks").
     define protected property InvocationStack as IList no-undo get. private set.
@@ -87,25 +92,40 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
 
         AddComponents().
         
-        Bindings = new IBindingCollection().
+        Bindings = new Map().
 
         this-object:Load(Modules).
     end constructor.
     
+    @method(virtual="true").
     method protected void AddComponents():
     end method.
     
-    method override public void AddBinding(poBinding as IBinding):
-        Assert:ArgumentNotNull(poBinding, "binding").
-        Bindings:Add(poBinding).
+    method override public void AddBinding(input poBinding as IBinding):
+        define variable oBindings as IList no-undo.
+        
+        Assert:ArgumentNotNull(input poBinding, "binding").
+        
+        oBindings = cast(Bindings:Get(input poBinding:Service), IList).
+        if not valid-object(oBindings) then
+        do:
+            oBindings = new List().
+            Bindings:Put(poBinding:Service, oBindings).
+        end.
+        
+        oBindings:Add(input poBinding).
     end.
     
     /** Unregisters the specified binding.
         
         @param Ibinding The binding to remove. */
-    method override public void RemoveBinding(poBinding as IBinding):
-        Assert:ArgumentNotNull(poBinding, "binding").
-        Bindings:Remove(poBinding).
+    method override public void RemoveBinding(input poBinding as IBinding):
+        define variable oBindings as IList no-undo.
+        
+        Assert:ArgumentNotNull(input poBinding, "binding").
+        oBindings = cast(Bindings:Get(input poBinding:Service), IList).
+        if valid-object(oBindings) then
+            oBindings:Remove(input poBinding).
     end.
     
     method public void Load(input poModules as IInjectionModuleCollection):
@@ -165,7 +185,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         cPWD = file-info:full-pathname. 
         
         iMax = num-entries(propath).
-        do iLoop = 1 to iMax:
+        do iLoop = 1 to iMax on error undo, throw:
             cFolder = entry(iLoop, propath).
             
             if cFolder begins '.' and
@@ -182,10 +202,23 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                to get fancy and look for .r and .p */
             assign cFolderBase = right-trim(cFolder, '/') + '/' + cFileBase
                    cFile = search(cFolderBase + 'r').
+            
+            /*if cFile eq ? then
+                cFile = search(cFolderBase + cOriginalExtension).*/
+            
             if cFile ne ? then
-                /* run NO-ERROR in case theres a file matching the pattern
-                   that doesn't match signatures. Move along in that case. */
-                run value(cFile) (input this-object) no-error.
+                run value(cFile) (input this-object).
+            
+            catch eSysErr as SysError:             
+                case eSysErr:GetMessageNum(1):
+                /* Skip cases where we have a parameter mismatch. We cannot be sure that a file on the
+                   propath that matches the file pattern is definitively ours. 
+                   
+                   Procedure <proc> passed parameters to <proc>, which didn't expect any. (1005) */
+                when 1005 then . /* Ignore these */
+                otherwise undo, throw eSysErr.                                                    
+                end case.
+            end catch.
         end.
     end method.
     
@@ -218,10 +251,10 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         return this-object:Get(poService, '', ?).
     end method.
 
-	method public Object extent Get(input poScope as StandardScopeEnum,
-	                                input poScopeCallback as class Class ):
+    method public Object extent Get(input poScope as StandardScopeEnum,
+                                    input poScopeCallback as class Class ):
         define variable oBinding as IBinding no-undo.
-        define variable oBindings as IBindingCollection no-undo.
+        define variable oBindings as IList no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oInstance as Object extent no-undo.
         define variable iExtent as integer no-undo.
@@ -244,7 +277,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         end.
         
         return oInstance.
-	end method.
+    end method.
     
     method public Object Get(input poService as class Class,
                              input poArguments as ICollection):
@@ -289,10 +322,10 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     /** Retrieve the binding to use for the service. */
     method protected IBinding SelectBinding(input poService as class Class,
                                             input pcName as character):
-        define variable oBindings as IBindingCollection no-undo.
+        define variable oBindings as IList no-undo.
         define variable oBinding as IBinding no-undo.
         
-        oBindings = GetBindings(poService, pcName).
+        oBindings = GetBindings(poService, pcName) no-error.
         
         if oBindings:IsEmpty() then
             oBinding = CreateDefaultBinding(poService).
@@ -348,14 +381,14 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                 , ICache):Clear(poScope).
     end method.
     
-    method protected IBindingCollection GetBindings(input poService as class Class,
-                                                    input pcName as character):
+    method protected IList GetBindings(input poService as class Class,
+                                       input pcName as character):
         return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
                              , IBindingResolver):Resolve(Bindings, poService, pcName).
     end method.
     
-    method protected IBindingCollection GetBindings(input poScope as StandardScopeEnum,    
-                                                    input poScopeCallback as class Class):
+    method protected IList GetBindings(input poScope as StandardScopeEnum,    
+                                       input poScopeCallback as class Class):
         
         return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
                              , IBindingResolver):Resolve(Bindings, poScopeCallback, poScope).
@@ -370,20 +403,18 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                                 'default binding',
                                 ': Type ' + poService:TypeName + ' cannot bind to itself').
         
-        oBinding = new Binding(poService).
-        AddBinding(oBinding).
-        oBuilder = CreateBindingBuilder(oBinding).
+        oBuilder = Bind(poService).
         oBuilder:ToSelf().
         
         return oBinding.
     end method. 
     
-    method override protected IBindingSyntax CreateBindingBuilder(poBinding as IBinding):
+    method override protected IBindingSyntax CreateBindingBuilder(input poBinding as IBinding):
         return new BindingBuilder(poBinding, this-object).
     end method.    
     
-    method protected ILifecycleContext CreateContext(poBinding as IBinding):
-        Assert:ArgumentNotNull(poBinding, "binding").
+    method protected ILifecycleContext CreateContext(input poBinding as IBinding):
+        Assert:ArgumentNotNull(input poBinding, "binding").
         
         return new LifecycleContext(this-object,
                                     poBinding,

@@ -33,9 +33,9 @@ class OpenEdge.Lang.RoutineTypeEnum inherits EnumMember:
         RoutineTypeEnum:Procedure = new RoutineTypeEnum('Procedure').
     end constructor.
     
-	constructor public RoutineTypeEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
+    constructor public RoutineTypeEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
     
     method public static RoutineTypeEnum EnumFromString(input pcName as character):
         define variable oEnum as RoutineTypeEnum no-undo.

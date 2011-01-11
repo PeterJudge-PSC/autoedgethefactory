@@ -57,6 +57,8 @@ class OpenEdge.Core.Util.ObjectOutputStream:
             
         empty temp-table lbRef.
         moTopLevel = ?.
+        
+        length(mrStreamBuffer) = 0. 
         mrStreamBuffer = ?.
         miCursor = 0.
         moWriteObjParam = ?.

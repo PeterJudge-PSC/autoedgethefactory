@@ -19,7 +19,7 @@ class OpenEdge.Core.XML.SaxWriterDataTypeEnum inherits EnumMember:
     define static public property Comment as SaxWriterDataTypeEnum  no-undo get. private set.
     define static public property EntityReference as SaxWriterDataTypeEnum  no-undo get. private set.
     define static public property Fragment as SaxWriterDataTypeEnum  no-undo get. private set.
-		
+        
     constructor static SaxWriterDataTypeEnum():
         SaxWriterDataTypeEnum:CData = new SaxWriterDataTypeEnum(1).
         SaxWriterDataTypeEnum:Characters = new SaxWriterDataTypeEnum(2).
@@ -28,8 +28,8 @@ class OpenEdge.Core.XML.SaxWriterDataTypeEnum inherits EnumMember:
         SaxWriterDataTypeEnum:Fragment = new SaxWriterDataTypeEnum(5).
     end constructor.
     
-	constructor public SaxWriterDataTypeEnum(input piValue as integer):
-		super (input piValue).
-	end constructor.
-	
+    constructor public SaxWriterDataTypeEnum(input piValue as integer):
+        super (input piValue).
+    end constructor.
+    
 end class.

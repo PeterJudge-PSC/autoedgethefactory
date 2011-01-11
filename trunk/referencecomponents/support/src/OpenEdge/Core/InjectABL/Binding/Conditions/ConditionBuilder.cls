@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : ConditionBuilder
     Purpose     : 
     Syntax      : 
@@ -6,22 +6,21 @@
     @author pjudge
     Created     : Mon Mar 08 11:50:07 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
+using OpenEdge.Core.InjectABL.Binding.Conditions.ConnectionCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.IKernel.
-using OpenEdge.Lang.Assert.
+
 using OpenEdge.Lang.Collections.ObjectStack.
-
-using OpenEdge.Core.InjectABL.Binding.Modules.*.
-using Progress.Lang.*.
-
+using OpenEdge.Lang.ABLSession.
+using OpenEdge.Lang.Assert.
 
 class OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder implements IConditionSyntax:
     define public property BindingCondition as ObjectStack no-undo get. private set.
@@ -38,10 +37,16 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder implements ICo
             BindingCondition:Push(Condition:Or).
             return this-object. 
         end get.
-
+    
+    define public property Connection as IConditionSyntax no-undo
+        get():
+            BindingCondition:Push(ConnectionCondition:CurrentConnection).
+            return this-object.
+        end get.
+    
     define public property Session as IConditionSyntax no-undo
         get():
-            BindingCondition:Push(SessionTypeCondition:CurrentSession).
+            BindingCondition:Push(new SessionTypeCondition(ABLSession:Instance:Name)).
             return this-object.
         end get.
     
