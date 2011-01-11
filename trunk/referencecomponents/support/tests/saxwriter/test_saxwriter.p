@@ -30,7 +30,7 @@ function StartSoapMessage returns log (input pcName as character, pcNS as char):
     moSaxWriter:WriteTo(session:temp-dir + 'test.xml').
     moSaxWriter:StartDocument().
     moSaxWriter:StartElement(substitute('&1:&2', pcns, pcName )).
-    moSaxWriter:DeclareNamespace("http://OpenEdge.BusinessComponent.WorkFlow.BizLogic.savvion.com", pcns).
+    moSaxWriter:DeclareNamespace("http://OpenEdge.EnterpriseServices.BizLogic.savvion.com", pcns).
 end.
 
 function EndSoapMessage returns logical (input pcName as character, pcNS as char):
@@ -65,7 +65,7 @@ message
         
         /*
         cWholeDSI = DataSlotInstance:ArrayToXML(dsi, 'dsi').
-        cInputParam = substitute('<ns0:completeWorkItem xmlns:ns0="http://OpenEdge.BusinessComponent.WorkFlow.BizLogic.savvion.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ns0:session>&1</ns0:session><ns0:wiName>&2</ns0:wiName>&3</ns0:completeWorkItem>'
+        cInputParam = substitute('<ns0:completeWorkItem xmlns:ns0="http://OpenEdge.EnterpriseServices.BizLogic.savvion.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ns0:session>&1</ns0:session><ns0:wiName>&2</ns0:wiName>&3</ns0:completeWorkItem>'
                         , pcSessionId, wiName, cWholeDSI).
         
         cOutputparam = ExecuteOperation(mcPortType, 'completeWorkItem', cInputParam).
