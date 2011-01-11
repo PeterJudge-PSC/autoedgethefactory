@@ -7,7 +7,7 @@
     Created     : Wed Dec 01 16:15:19 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
@@ -19,11 +19,11 @@ using Progress.Lang.Class.
 class AutoEdge.Factory.InjectABL.FactoryOrderModule inherits InjectionModule: 
     define protected property IServiceProviderType as class Class no-undo get. set.
     
-	constructor public FactoryOrderModule (  ):
-		super ().
-		
-		assign IServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
-	end constructor.
+    constructor public FactoryOrderModule (  ):
+        super ().
+        
+        assign IServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
+    end constructor.
     
     method protected void LoadServices():
         /* Use local variables oBS as bug workaround */
@@ -48,9 +48,9 @@ class AutoEdge.Factory.InjectABL.FactoryOrderModule inherits InjectionModule:
             :OnClientSession().
     end method.
     
-	method override public void Load(  ):
+    method override public void Load(  ):
         LoadServices().
         LoadUI().
-	end method.
-	
+    end method.
+    
 end class.

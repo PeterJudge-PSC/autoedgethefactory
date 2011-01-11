@@ -7,7 +7,7 @@
     Created     : Wed Dec 22 09:27:08 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.UserContext.
@@ -20,10 +20,10 @@ using OpenEdge.Core.System.ApplicationError.
 
 class AutoEdge.Factory.Common.CommonInfrastructure.SecurityManager inherits SecurityManager: 
 
-	constructor public SecurityManager ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-		super (input poServiceManager, input poComponentInfo).
-	end constructor.
-	
+    constructor public SecurityManager ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
+        super (input poServiceManager, input poComponentInfo).
+    end constructor.
+    
     method override public void ValidateCredentials(input pcUserName as character,
                                                     input pcUserDomain as character,
                                                     input pcPassword as character):

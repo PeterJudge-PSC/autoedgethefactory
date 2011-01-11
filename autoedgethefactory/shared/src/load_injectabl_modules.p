@@ -1,6 +1,6 @@
 /** ------------------------------------------------------------------------
     File        : load_injectabl_modules.p
-    Purpose     : InjectABL module loader for the AutoEdge|TheFactory sample application
+    Purpose     : InjectABL module loader for the AutoEdge|TheFactory (shared) sample application
     Syntax      :
     Description : 
     @author pjudge
@@ -10,8 +10,6 @@
 routine-level on error undo, throw.
 
 using AutoEdge.Factory.InjectABL.FactoryCommonModule.
-using AutoEdge.Factory.InjectABL.FactoryOrderModule.
-using AutoEdge.Factory.InjectABL.FactoryBuildModule.
 using OpenEdge.Core.InjectABL.IKernel.
 
 /** -- defs  -- **/
@@ -19,7 +17,5 @@ define input parameter poKernel as IKernel no-undo.
 
 /** -- main -- **/
 poKernel:Load(new FactoryCommonModule()).
-poKernel:Load(new FactoryOrderModule()).
-poKernel:Load(new FactoryBuildModule()).
 
 /** -- eof -- **/

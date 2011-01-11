@@ -11,11 +11,11 @@
 using Progress.Lang.*.
 using Progress.Windows.Form.
 
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 class AutoEdge.Factory.Order.PresentationLayer.TaskListForm inherits Form: 
-	
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable ultraPanel2 as Infragistics.Win.Misc.UltraPanel no-undo.
     define private variable uxDisconnect as Infragistics.Win.Misc.UltraButton no-undo.
     define private variable uxConnect as Infragistics.Win.Misc.UltraButton no-undo.
@@ -27,20 +27,20 @@ class AutoEdge.Factory.Order.PresentationLayer.TaskListForm inherits Form:
     define private variable lblPW as Infragistics.Win.Misc.UltraLabel no-undo.
     define private variable uxUser as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
     define private variable uxStatus as Infragistics.Win.UltraWinStatusBar.UltraStatusBar no-undo. 
-		
-	constructor public TaskListForm (  ):
-		
-		
+        
+    constructor public TaskListForm (  ):
+        
+        
         super().
         InitializeComponent().
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
 
-	end constructor.
+    end constructor.
 
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -239,25 +239,25 @@ class AutoEdge.Factory.Order.PresentationLayer.TaskListForm inherits Form:
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
-	/*------------------------------------------------------------------------------
-			Purpose:  																	  
-			Notes:  																	  
-	------------------------------------------------------------------------------*/
-	@VisualDesigner.
-	METHOD PRIVATE VOID uxConnect_Click( INPUT sender AS System.Object, INPUT e AS System.EventArgs ):
-		
-		RETURN.
+    /*------------------------------------------------------------------------------
+            Purpose:                                                                        
+            Notes:                                                                        
+    ------------------------------------------------------------------------------*/
+    @VisualDesigner.
+    METHOD PRIVATE VOID uxConnect_Click( INPUT sender AS System.Object, INPUT e AS System.EventArgs ):
+        
+        RETURN.
 
-	END METHOD.
+    END METHOD.
 
-	destructor public TaskListForm ( ):
+    destructor public TaskListForm ( ):
 
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
 
-	end destructor.
+    end destructor.
 
 end class.

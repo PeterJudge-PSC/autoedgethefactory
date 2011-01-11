@@ -7,7 +7,7 @@
     Created     : Fri Jul 09 08:10:42 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/ 
+routine-level on error undo, throw. 
 
 using AutoEdge.Factory.Order.PresentationLayer.ITaskListManager.
 using Progress.Windows.Form.
@@ -15,8 +15,8 @@ using Progress.Windows.UserControl.
 
 
 class AutoEdge.Factory.Order.PresentationLayer.ServerConnectPanel inherits UserControl: 
-	
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable uxInputPanel as Infragistics.Win.Misc.UltraPanel no-undo.
     define private variable uxUser as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
     define private variable uxPortal as Infragistics.Win.UltraWinEditors.UltraComboEditor no-undo.
@@ -30,12 +30,12 @@ class AutoEdge.Factory.Order.PresentationLayer.ServerConnectPanel inherits UserC
 
     define private variable moTaskListManager as ITaskListManager no-undo.
     
-	constructor public ServerConnectPanel(input poParent as ITaskListManager):
+    constructor public ServerConnectPanel(input poParent as ITaskListManager):
         this-object().
         moTaskListManager = poParent.
-	end constructor.
-	
-	constructor public ServerConnectPanel (  ):
+    end constructor.
+    
+    constructor public ServerConnectPanel (  ):
         super().
         
         InitializeComponent().
@@ -45,10 +45,10 @@ class AutoEdge.Factory.Order.PresentationLayer.ServerConnectPanel inherits UserC
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end constructor.
+    end constructor.
 
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -270,28 +270,28 @@ class AutoEdge.Factory.Order.PresentationLayer.ServerConnectPanel inherits UserC
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
     method override protected void OnLoad(input e as System.EventArgs ):
         super:OnLoad(input e).
         this-object:ActiveControl  = uxUser.
     end method.
 
-	method private void uxCancel_Click( input sender as System.Object, input e as System.EventArgs ):
+    method private void uxCancel_Click( input sender as System.Object, input e as System.EventArgs ):
         cast(this-object:Parent, Form):Close().
-	end method.
-	
-	method private void uxLogin_Click( input sender as System.Object, input e as System.EventArgs ):
+    end method.
+    
+    method private void uxLogin_Click( input sender as System.Object, input e as System.EventArgs ):
         moTaskListManager:ServerConnect(uxUser:Text, uxPassword:Text, uxPortal:Value:ToString()).
         
         /* do this here in case of error */
         cast(this-object:Parent, Form):Close().
-	end method.
-	
-	destructor public ServerConnectPanel ( ):
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
-	end destructor.
+    end method.
+    
+    destructor public ServerConnectPanel ( ):
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
+    end destructor.
 
 end class.

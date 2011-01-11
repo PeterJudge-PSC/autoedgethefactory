@@ -7,16 +7,16 @@
     Created     : Wed Jul 07 12:04:00 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using AutoEdge.Factory.Order.PresentationLayer.ITaskListManager.
 using AutoEdge.Factory.Order.PresentationLayer.CurrentTask.
 using AutoEdge.Factory.Order.PresentationLayer.TagWrapper.
 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkFlowWebService.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkItem.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.DataSlotInstance.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.SavvionType.
+using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
+using OpenEdge.EnterpriseServices.BizLogic.WorkItem.
+using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
+using OpenEdge.EnterpriseServices.BizLogic.SavvionType.
 using OpenEdge.Core.System.Query.
 using OpenEdge.Lang.Assert.
 
@@ -29,9 +29,9 @@ using Progress.Util.EnumHelper.
 using Progress.Lang.Class.
 
 class AutoEdge.Factory.Order.PresentationLayer.SavvionTaskDetailUC use-widget-pool inherits UserControl: 
-	
+    
     define private variable bsDataSlots as Progress.Data.BindingSource no-undo.
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable imageList1 as System.Windows.Forms.ImageList no-undo.
     define private variable lblProcessInstanceCreator as Infragistics.Win.Misc.UltraLabel no-undo.
     define private variable lblPTID as Infragistics.Win.Misc.UltraLabel no-undo.
@@ -67,16 +67,16 @@ class AutoEdge.Factory.Order.PresentationLayer.SavvionTaskDetailUC use-widget-po
     define public property CurrentTask as CurrentTask no-undo get. set.
     define public property TaskList as ITaskListManager no-undo get. set.
     
-	constructor public SavvionTaskDetailUC (  ):
+    constructor public SavvionTaskDetailUC (  ):
         super().
         InitializeComponent().
         
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end constructor.
+    end constructor.
 
-	method public void SetTask(poCurrentTask as CurrentTask, poTaskList as ITaskListManager):
+    method public void SetTask(poCurrentTask as CurrentTask, poTaskList as ITaskListManager):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         
@@ -103,7 +103,7 @@ class AutoEdge.Factory.Order.PresentationLayer.SavvionTaskDetailUC use-widget-po
                
         def var h as handle.
         
-        SavvionType:ArrayToTable(Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.BizLogic.DataSlotInstance'),
+        SavvionType:ArrayToTable(Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance'),
                                  CurrentTask:DataSlots,
                                  output table-handle h).        
         
@@ -116,8 +116,8 @@ class AutoEdge.Factory.Order.PresentationLayer.SavvionTaskDetailUC use-widget-po
         bsDataSlots:Handle = hquery.
     end method.
     
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -712,14 +712,14 @@ class AutoEdge.Factory.Order.PresentationLayer.SavvionTaskDetailUC use-widget-po
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
     method private void uxCompleteTask_Click( input sender as System.Object, input e as System.EventArgs ):
         TaskList:CompleteTask(CurrentTask).
     end method.
 
-	@VisualDesigner.
-	method private void uxDataslots_BeforeRowUpdate( input sender as System.Object, input e as Infragistics.Win.UltraWinGrid.CancelableRowEventArgs ):
+    @VisualDesigner.
+    method private void uxDataslots_BeforeRowUpdate( input sender as System.Object, input e as Infragistics.Win.UltraWinGrid.CancelableRowEventArgs ):
         define variable oRow as UltraGridRow no-undo.
         
         define variable oDSI as DataSlotInstance no-undo.        
@@ -739,17 +739,17 @@ class AutoEdge.Factory.Order.PresentationLayer.SavvionTaskDetailUC use-widget-po
         end.
     end method.
 
-	method private void uxReassignPerformer_Click( input sender as System.Object, input e as System.EventArgs ):
-		TaskList:ReassignTask(CurrentTask, uxReassignPerformer:Text).
-		
-		uxReassignPerformer:Text = ''.
-	end method.
+    method private void uxReassignPerformer_Click( input sender as System.Object, input e as System.EventArgs ):
+        TaskList:ReassignTask(CurrentTask, uxReassignPerformer:Text).
+        
+        uxReassignPerformer:Text = ''.
+    end method.
     
-	destructor public SavvionTaskDetailUC ( ):
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
-	end destructor.
+    destructor public SavvionTaskDetailUC ( ):
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
+    end destructor.
 
     @VisualDesigner.
     method private void uxDataslots_AfterSortChange( input sender as System.Object, input e as Infragistics.Win.UltraWinGrid.BandEventArgs ):

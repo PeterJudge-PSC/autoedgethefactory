@@ -9,7 +9,7 @@
   ----------------------------------------------------------------------*/
   
 using AutoEdge.Factory.Order.PresentationLayer.CurrentTask.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.DataSlotInstance.
+using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
 
 interface AutoEdge.Factory.Order.PresentationLayer.ITaskListManager:
         

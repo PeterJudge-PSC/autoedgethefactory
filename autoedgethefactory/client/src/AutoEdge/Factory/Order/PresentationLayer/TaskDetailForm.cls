@@ -7,20 +7,20 @@
     Created     : Wed Nov 24 11:43:26 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using AutoEdge.Factory.Order.PresentationLayer.CurrentTask.
 using AutoEdge.Factory.Order.PresentationLayer.ITaskListManager.
 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkFlowWebService.
+using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
 using OpenEdge.Lang.Assert.
 
 using Progress.Windows.Form.
 using Progress.Lang.Error. 
 
 class AutoEdge.Factory.Order.PresentationLayer.TaskDetailForm inherits Form: 
-	
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable savvionTaskDetailUC1 as AutoEdge.Factory.Order.PresentationLayer.SavvionTaskDetailUC no-undo.
 
     define public property TaskListManager as ITaskListManager no-undo get. private set.
@@ -41,17 +41,17 @@ class AutoEdge.Factory.Order.PresentationLayer.TaskDetailForm inherits Form:
         
         savvionTaskDetailUC1:SetTask(CurrentTask, TaskListManager).        
     end constructor.
-		
-	constructor public TaskDetailForm (  ):
+        
+    constructor public TaskDetailForm (  ):
         super().
         InitializeComponent().
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end constructor.
+    end constructor.
 
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -79,14 +79,14 @@ class AutoEdge.Factory.Order.PresentationLayer.TaskDetailForm inherits Form:
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
-	destructor public TaskDetailForm ( ):
+    destructor public TaskDetailForm ( ):
 
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
 
-	end destructor.
-	
+    end destructor.
+    
 end class.

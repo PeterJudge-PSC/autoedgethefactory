@@ -1,0 +1,6 @@
+# PF for Server
+ -pf cfg\shared.pf
+ 
+-db C:\Devarea\projects\OEBP\autoedgethefactory\server\db\aetf.db
+ -T C:\Devarea\projects\OEBP\autoedgethefactory\server\temp
+ 
