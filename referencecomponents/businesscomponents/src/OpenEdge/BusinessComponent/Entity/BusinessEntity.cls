@@ -21,9 +21,9 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 
-using OpenEdge.CommonInfrastructure.Common.Service.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Lang.Assert.
 

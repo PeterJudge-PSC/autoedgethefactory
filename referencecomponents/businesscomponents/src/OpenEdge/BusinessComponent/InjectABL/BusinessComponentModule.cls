@@ -44,9 +44,9 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
                
                IWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.IWorkStep')
                WorkStepServiceInterfaceType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.WorkStepServiceInterface') 
-               BizLogicWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkStep')
+               BizLogicWorkStepType = Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.BizLogicWorkStep')
                
-               IBizLogicServerParametersType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicServerParameters')
+               IBizLogicServerParametersType = Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters')
 
                InjectABLServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
                InjectABLComponentProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider').
@@ -55,7 +55,6 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
     /** BUSINESS WORKFLOWS **/
     method protected void BindBusinessEntity(input pcBindingName as character,
                                              input pcConcreteBEType as character,
-                                             input pcServiceAdapterType as character,
                                              input pcDAName as character,
                                              input pcConcreteDAType as character,
                                              input pcDataSourceName as character extent,
@@ -68,26 +67,18 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
         define variable iMax as integer no-undo.
         define variable oArgs as IParameter extent no-undo.
         
-        /* bind as a service adapter */
-        oBindingSyntax = Bind(IServiceProviderType).
-        oBindingSyntax
-            :Named(pcBindingName)
-            :To(pcServiceAdapterType)
-            :OnClientSession()
-            :WithPropertyValue('Service', pcBindingName).
-        
         /* bind as a service interface */
         oBindingSyntax = Bind(IServiceProviderType).
         oBindingSyntax
             :Named(pcBindingName)
             :To(BusinessEntityServiceInterfaceType)
-            :OnServerSession().
+            :OnServerSession()
+            :WithPropertyValue('Service', pcBindingName).
         
         assign extent(oArgs) = 1 
                oArgs[1] = new Parameter(IBusinessEntityType, pcBindingName).
         oBindingSyntax
-            :WithConstructorArgument(oArgs)
-            :WithPropertyValue('Service', pcBindingName).
+            :WithConstructorArgument(oArgs).
         
         /* Bind actual Business Entity */
         oBindingSyntax = Bind(IBusinessEntityType).
@@ -155,7 +146,7 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
             :Named(pcBindingName)
             :To(pcConcreteType)
             :Using(InjectABLServiceProviderType).
-
+        
         if plIsBizLogicStep then
         do:
             /* Bizlogic workstep. */
@@ -163,6 +154,7 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
             oBindingSyntax
                 :WithConstructorArgument(oBLArgs).
         end.
+        
     end method.
 
 end class.

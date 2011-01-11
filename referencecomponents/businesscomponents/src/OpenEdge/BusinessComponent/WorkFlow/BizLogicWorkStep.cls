@@ -11,24 +11,25 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicWorkFlow.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicAPI.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicServerParameters.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkFlowWebService.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.DataSlotInstance.
 using OpenEdge.BusinessComponent.WorkFlow.WorkStep.
 using OpenEdge.BusinessComponent.WorkFlow.IWorkStep.
+
+using OpenEdge.EnterpriseServices.BizLogic.IBizLogicWorkFlow.
+using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.
+using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.
+using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
+using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepResponse.
 
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class. 
 
-class OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkStep abstract inherits WorkStep:
+class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract inherits WorkStep:
     
     /** Host and port of the Savvion SBM Server */
     define public property ServerParameters as IBizLogicServerParameters no-undo get. private set.
@@ -45,21 +46,21 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkStep abstract inh
         super(input poServiceManager, input poComponentInfo).
     end constructor.
     
-	constructor public BizLogicWorkStep(input poServiceManager as IServiceManager,
-	                                    input poComponentInfo as IComponentInfo,
+    constructor public BizLogicWorkStep(input poServiceManager as IServiceManager,
+                                        input poComponentInfo as IComponentInfo,
                                         input poBizLogicParams as IBizLogicServerParameters):
-		this-object(input poServiceManager, poComponentInfo).
+        this-object(input poServiceManager, poComponentInfo).
 
         Assert:ArgumentNotNull(poBizLogicParams, 'BizLogic Server parameters').
         ServerParameters = poBizLogicParams.
-	end constructor.
-	
-	method protected void ConnectBizLogicService():
+    end constructor.
+    
+    method protected void ConnectBizLogicService():
         define variable cWorkStep as character no-undo.
         if not IsBizLogicConnected then
         do:
             if not valid-object(ServerParameters) then
-                ServerParameters = cast(ServiceManager:Kernel:Get(Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicServerParameters'))
+                ServerParameters = cast(ServiceManager:Kernel:Get(Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters'))
                                      , IBizLogicServerParameters).
             
             /* once we're done with the step, tell Savvion */
@@ -67,9 +68,9 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkStep abstract inh
             SessionId = ServerParameters:Connect(BizLogicService).
         end.
     end method.
-	
-	method protected void DisconnectBizLogicService():
-	    if IsBizLogicConnected then
+    
+    method protected void DisconnectBizLogicService():
+        if IsBizLogicConnected then
             BizLogicService:Disconnect(SessionId).
         
         finally:
@@ -85,11 +86,11 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkStep abstract inh
                                          string(Name),
                                          poDataSlotInstance).
     end method. 
-    	
-	method protected void UpdateDataSlotValue(input piProcessInstanceId as int64,
-	                                          input pcProcessInstanceName as character,
-	                                          input pcDataSlotName as character extent,
-	                                          input pcDataSlotValue as character extent):
+        
+    method protected void UpdateDataSlotValue(input piProcessInstanceId as int64,
+                                              input pcProcessInstanceName as character,
+                                              input pcDataSlotName as character extent,
+                                              input pcDataSlotValue as character extent):
         define variable oDataSlotInstance as DataSlotInstance extent no-undo.
         define variable iInnerLoop as integer no-undo.
         define variable iInnerMax as integer no-undo.
@@ -121,25 +122,25 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkStep abstract inh
                             pcProcessInstanceName,
                             oDataSlotInstance).
     end method.
-	
-	method override public void DestroyComponent(  ):
-		super:DestroyComponent().
+    
+    method override public void DestroyComponent(  ):
+        super:DestroyComponent().
     
         DisconnectBizLogicService().
-	end method.
+    end method.
 
 
-	method override public void Initialize(  ):
-		super:Initialize().
+    method override public void Initialize(  ):
+        super:Initialize().
 
 /*        ConnectBizLogicService().*/
-	end method.
+    end method.
 
-	method override public void PerformStep( input poRequest as OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest ):
+    method override public void PerformStep( input poRequest as OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest ):
         Assert:ArgumentNotType(poRequest,
                                Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.BizLogicWorkFlowRequest')).
         
-		super:PerformStep(input poRequest).
-	end method.
+        super:PerformStep(input poRequest).
+    end method.
 
 end class. 
