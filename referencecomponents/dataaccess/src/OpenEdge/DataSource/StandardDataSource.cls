@@ -26,11 +26,11 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
-using OpenEdge.CommonInfrastructure.Common.SecurityManager.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.ServiceManager.
+using OpenEdge.CommonInfrastructure.ISecurityManager.
+using OpenEdge.CommonInfrastructure.CommonSecurityManager.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.CommonServiceManager.
 
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.QueryBuffer.
@@ -71,8 +71,8 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
     define protected property SecurityManager as ISecurityManager no-undo
         get():
             if not valid-object(SecurityManager) then
-                SecurityManager = cast(cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:ServiceManagerType), IServiceManager)
-                                        :StartService(OpenEdge.CommonInfrastructure.Common.SecurityManager:SecurityManagerType), ISecurityManager).
+                SecurityManager = cast(cast(ABLSession:Instance:SessionProperties:Get(CommonServiceManager:ServiceManagerType), IServiceManager)
+                                        :StartService(CommonSecurityManager:SecurityManagerType), ISecurityManager).
             return SecurityManager.
         end get.
         set.
@@ -93,14 +93,14 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
     define protected property ABLDataSources  as IMap no-undo get. set.
     define protected property AttachedActions as ICollection no-undo get. set.
 
-	constructor public StandardDataSource(input poComponentInfo as IComponentInfo):
-		super (input poComponentInfo).
+    constructor public StandardDataSource(input poComponentInfo as IComponentInfo):
+        super (input poComponentInfo).
 
         assign ABLDataSources = new Map()
                AttachedActions = new Collection()
                TenantFilterFieldName = 'TenantId'.
-	end constructor.
-	
+    end constructor.
+    
     /** Prepare with query, batchsize and more.
         
         @param ServiceMessageActionEnum The action that we're preparing the datasource for. 
@@ -466,26 +466,26 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
     end method.
     
     /** Override to ensure that we only allow handles - buffers or datasets - as data types here.  */
-	method override public void SetDataTarget(input pcData as longchar,
-	                                          input poDataTargetFormat as DataFormatEnum,
-	                                          input poDataTargetType as DataTypeEnum):
+    method override public void SetDataTarget(input pcData as longchar,
+                                              input poDataTargetFormat as DataFormatEnum,
+                                              input poDataTargetType as DataTypeEnum):
         if not poDataTargetFormat:Equals(DataFormatEnum:ProDataSet) and
            not poDataTargetFormat:Equals(DataFormatEnum:TempTable) then                
                 undo, throw new ArgumentError(
                         'The StandardDataSource only supports ProDataSets and Temp-tables for data targets',
                         'StandardDataSource:SetDataTarget:input poDataTargetFormat as DataFormatEnum').
         
-		super:SetDataTarget(pcData, poDataTargetFormat, poDataTargetType).
-	end method.
-	
-	/* this could be pushed up */
-	method protected handle ConvertTargetToHandle():
-	    define variable hTarget as handle no-undo.
-	    
-	    case DataTargetType:
-	        when DataTypeEnum:Handle then
-	        do:
-        	    case DataTargetFormat:
+        super:SetDataTarget(pcData, poDataTargetFormat, poDataTargetType).
+    end method.
+    
+    /* this could be pushed up */
+    method protected handle ConvertTargetToHandle():
+        define variable hTarget as handle no-undo.
+        
+        case DataTargetType:
+            when DataTypeEnum:Handle then
+            do:
+                case DataTargetFormat:
                     when DataFormatEnum:ProDataSet then
                         hTarget = HandleDataTarget:get-buffer-handle(CurrentTableRequest:TableName).
                     when DataFormatEnum:TempTable then
@@ -498,7 +498,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
             when DataTypeEnum:LongChar then .
         end case.
         
-	    return hTarget.
+        return hTarget.
     end method.
     
     method protected void FilterQueryPerRequest(input poQueryDefinition as IQueryDefinition,

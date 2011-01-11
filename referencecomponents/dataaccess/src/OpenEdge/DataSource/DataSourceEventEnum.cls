@@ -24,13 +24,13 @@ class OpenEdge.DataSource.DataSourceEventEnum inherits EnumMember:
     define static public property BeforeSaveTransaction as DataSourceEventEnum no-undo get. private set.
     define static public property BeforeSave            as DataSourceEventEnum no-undo get. private set.
     define static public property AfterSave             as DataSourceEventEnum no-undo get. private set.
-    define static public property AfterSaveTransaction  as DataSourceEventEnum no-undo get. private set.		
-		
-	constructor public DataSourceEventEnum ( input pcName as character ):
-		super (input pcName).
-	end constructor.
-	
-	constructor static DataSourceEventEnum():
+    define static public property AfterSaveTransaction  as DataSourceEventEnum no-undo get. private set.        
+        
+    constructor public DataSourceEventEnum ( input pcName as character ):
+        super (input pcName).
+    end constructor.
+    
+    constructor static DataSourceEventEnum():
         /* DataSource Fetch/Fill events */
         DataSourceEventEnum:BeforeFill    = new DataSourceEventEnum('BeforeFill').
         DataSourceEventEnum:BeforeRowFill = new DataSourceEventEnum('BeforeRowFill').
@@ -41,7 +41,7 @@ class OpenEdge.DataSource.DataSourceEventEnum inherits EnumMember:
         DataSourceEventEnum:BeforeSaveTransaction = new DataSourceEventEnum('BeforeSaveTransaction').
         DataSourceEventEnum:BeforeSave            = new DataSourceEventEnum('BeforeSave').
         DataSourceEventEnum:AfterSave             = new DataSourceEventEnum('AfterSave').
-        DataSourceEventEnum:AfterSaveTransaction  = new DataSourceEventEnum('AfterSaveTransaction').	    
-	end constructor.
+        DataSourceEventEnum:AfterSaveTransaction  = new DataSourceEventEnum('AfterSaveTransaction').        
+    end constructor.
 
 end class.

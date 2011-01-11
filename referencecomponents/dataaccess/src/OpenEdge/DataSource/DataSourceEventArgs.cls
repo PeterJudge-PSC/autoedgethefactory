@@ -33,23 +33,23 @@ class OpenEdge.DataSource.DataSourceEventArgs inherits EventArgs:
     /** The row key used to identify the row being operated on in the data target. */
     define public property RowKey as character extent no-undo get. set.
     
-	constructor public DataSourceEventArgs(input poEvent as DataSourceEventEnum):
+    constructor public DataSourceEventArgs(input poEvent as DataSourceEventEnum):
         super().
         
         assign DataSourceEvent = poEvent.
     end constructor.
-    	    
-	constructor public DataSourceEventArgs(input poEvent as DataSourceEventEnum,
-	                                       input poFormat as DataFormatEnum,
-	                                       input poDataType as DataTypeEnum,
-	                                       input pcData as longchar,
-	                                       input pcRowKey as character extent):
-        super().		
-		assign DataSourceEvent = poEvent
-		       DataTargetFormat = poFormat
-		       DataTargetType = poDataType
-		       DataTarget = pcData
-		       RowKey = pcRowKey.
-	end constructor.
+            
+    constructor public DataSourceEventArgs(input poEvent as DataSourceEventEnum,
+                                           input poFormat as DataFormatEnum,
+                                           input poDataType as DataTypeEnum,
+                                           input pcData as longchar,
+                                           input pcRowKey as character extent):
+        super().        
+        assign DataSourceEvent = poEvent
+               DataTargetFormat = poFormat
+               DataTargetType = poDataType
+               DataTarget = pcData
+               RowKey = pcRowKey.
+    end constructor.
 
 end class.

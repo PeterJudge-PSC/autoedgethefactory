@@ -22,10 +22,10 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.ITenantManager.
-using OpenEdge.CommonInfrastructure.Common.Component.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.ITenantManager.
+using OpenEdge.CommonInfrastructure.Component.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.IQueryDefinition.
@@ -84,9 +84,9 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
     define public event AfterSave             signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event AfterSaveTransaction  signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
-	constructor public DataSource(input poComponentInfo as IComponentInfo):
-		super(input poComponentInfo).
-	end constructor.
+    constructor public DataSource(input poComponentInfo as IComponentInfo):
+        super(input poComponentInfo).
+    end constructor.
     
     destructor public DataSource ():
         DestroyComponent().
@@ -351,17 +351,17 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
         this-object:AfterFill:Publish(this-object, poArgs).
     end method.
 
-	method override public void CreateComponent(  ):
-		super:CreateComponent().
-		
-		CreateDataStore().
-	end method.
+    method override public void CreateComponent(  ):
+        super:CreateComponent().
+        
+        CreateDataStore().
+    end method.
 
-	method override public void DestroyComponent(  ):
-		super:DestroyComponent().
+    method override public void DestroyComponent(  ):
+        super:DestroyComponent().
 
         DeleteDataStore().
         ClearDataTarget().
-	end method.
+    end method.
     
 end class.
