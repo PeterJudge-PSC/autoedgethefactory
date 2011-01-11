@@ -11,7 +11,7 @@
 using OpenEdge.PresentationLayer.Model.IModelEventHandler.
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.IComponent.
 
 interface OpenEdge.PresentationLayer.Model.IModelEventHandler:
           

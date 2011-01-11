@@ -7,7 +7,7 @@
     Created     : Mon Mar 02 15:32:47 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 using Progress.Lang.Class.
 
 interface OpenEdge.PresentationLayer.Presenter.IUpdatePanel:

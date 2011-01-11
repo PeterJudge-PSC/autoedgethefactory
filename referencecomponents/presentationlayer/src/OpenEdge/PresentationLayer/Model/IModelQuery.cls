@@ -12,7 +12,7 @@ using OpenEdge.PresentationLayer.Model.IModelQuery.
 using OpenEdge.PresentationLayer.Model.IModel.
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 
-using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.IComponent.
 
 using OpenEdge.Core.System.EventArgs.
 

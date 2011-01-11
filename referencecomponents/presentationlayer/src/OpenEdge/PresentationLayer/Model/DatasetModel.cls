@@ -27,13 +27,13 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.SaveRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo. 
-using OpenEdge.CommonInfrastructure.Common.Service.
-using OpenEdge.CommonInfrastructure.Common.IService.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo. 
+using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.IService.
+using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Core.Util.BufferHelper.
 using OpenEdge.Core.System.IQuery.
@@ -341,9 +341,9 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
         end.
         
         return cTableNames.
-	end method.
-		
-	method override protected void ReceiveFetchResponse(input poResponse as IFetchResponse):
+    end method.
+        
+    method override protected void ReceiveFetchResponse(input poResponse as IFetchResponse):
         define variable oIterator as IIterator no-undo.
         define variable oTR as ITableResponse no-undo.
         define variable oMEE as ModelActionEventArgs no-undo.
@@ -387,8 +387,8 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
             delete object hTransportDataset no-error.
         end finally.        
                     
-	end method.
-	
+    end method.
+    
     /** Receive the Save response (may have data) from the service message.
         
         @param ISaveResponse The response message from the data save request. */
@@ -431,8 +431,8 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
             hTransportDataset:empty-dataset().
             delete object hTransportDataset no-error.
         end finally.        
-	end method.
-	
+    end method.
+    
     /** Builds a save request for the specified tables in the Model. 
         
         @param character An array of table for which to create the save request.

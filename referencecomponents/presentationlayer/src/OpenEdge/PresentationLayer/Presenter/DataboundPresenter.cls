@@ -37,14 +37,15 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection.
 
-using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager. 
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
-using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.CommonServiceMessageManager. 
+using OpenEdge.CommonInfrastructure.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.IServiceCollection.
+using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.ComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
 
 using OpenEdge.Core.System.ApplicationError.
@@ -79,7 +80,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
     define protected property ServiceMessageManager as IServiceMessageManager no-undo
         get():
             if not valid-object(ServiceMessageManager) then
-                ServiceMessageManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
+                ServiceMessageManager = cast(ServiceManager:GetService(CommonServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
             
             return ServiceMessageManager.
         end get.
@@ -104,14 +105,14 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         AddModel(poModel).
     end constructor.
 
-	method override public void CreateComponent(  ):
-		super:CreateComponent().
-		
-		Models = new IServiceCollection().		
-		ServiceRequests = new TypedMap(
-		                      String:Type, 
-		                      Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection')).
-	end method.
+    method override public void CreateComponent(  ):
+        super:CreateComponent().
+        
+        Models = new IServiceCollection().        
+        ServiceRequests = new TypedMap(
+                              String:Type, 
+                              Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection')).
+    end method.
     
     /** Add a Model to the Presenter.
         
@@ -535,46 +536,46 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         DataRefresh(poEventArgs).
     end method.
 
-	method public void DataAddErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void DataAddErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	method public void DataDeleteErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    end method.
+    method public void DataDeleteErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	method public void DataSaveErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    end method.
+    method public void DataSaveErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	method public void DataCommittedHandler( input poSender as IComponent, input poEventArgs as ModelActionEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    end method.
+    method public void DataCommittedHandler( input poSender as IComponent, input poEventArgs as ModelActionEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	method public void DataCommitErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    end method.
+    method public void DataCommitErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	method public void DataFetchErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    end method.
+    method public void DataFetchErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	method public void ServiceRequestCompletedHandler( input poSender as IComponent, input poEventArgs as ModelActionEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    end method.
+    method public void ServiceRequestCompletedHandler( input poSender as IComponent, input poEventArgs as ModelActionEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
-	method public void ServiceRequestErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    end method.
+    method public void ServiceRequestErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
     
     method protected void DataFetched(poEventArgs as ModelActionEventArgs):
         define variable oView as IView no-undo.
@@ -823,39 +824,39 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         
         @param IServiceResponse The response to the request.      */
     method public void ReceiveMessageResponse(input poResponse as IServiceResponse):
-	    define variable oModelConsumer as IMessageConsumer /*extent*/ no-undo.
-	    define variable cMessageId as character extent no-undo.
-	    define variable iLoop as integer no-undo.
-	    define variable iMax as integer no-undo.
-	    define variable cRequestKey as character no-undo.
-    	define variable oIterator as IIterator no-undo.
+        define variable oModelConsumer as IMessageConsumer /*extent*/ no-undo.
+        define variable cMessageId as character extent no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable cRequestKey as character no-undo.
+        define variable oIterator as IIterator no-undo.
         define variable oMQ as IModelQuery no-undo.
         define variable oMessages as ServiceMessageConsumerCollection no-undo.
         
         cRequestKey = ServiceMessageConsumerCollection:GetMessageRequestGroupKey(cast(poResponse, IServiceMessage):MessageId).
-	    oMessages = cast(ServiceRequests:Get(new String(cRequestKey)), ServiceMessageConsumerCollection).
-	    
-	    /* tell the actual consumer that we got a response, and pass it on. */
-	    oMessages
-	       :ResponseReceived(cast(poResponse, IServiceMessage):MessageId)
-	           :ReceiveMessageResponse(poResponse).
+        oMessages = cast(ServiceRequests:Get(new String(cRequestKey)), ServiceMessageConsumerCollection).
+        
+        /* tell the actual consumer that we got a response, and pass it on. */
+        oMessages
+           :ResponseReceived(cast(poResponse, IServiceMessage):MessageId)
+               :ReceiveMessageResponse(poResponse).
         
         /* Tell the model to reopen its queries, or do whatever it needs to after 
            the whole request has completed. */
-	    if oMessages:OutstandingMessages eq 0 then
-	    do:
-	        cMessageId = oMessages:GetMessages().
-	        iMax = extent(cMessageId).
-	        
-	        /* We no longer need this request collection */
-	        ServiceRequests:Remove(new String(cRequestKey)).
-	        
-    	    do iLoop = 1 to iMax:
-    	        oModelConsumer = oMessages:GetMessageConsumer(cMessageId[iLoop]).
-    	        
-    	        /* We're completely done with this message, get rid of it. */
-    	        oMessages:RemoveMessage(cMessageId[iLoop]).
-    	        
+        if oMessages:OutstandingMessages eq 0 then
+        do:
+            cMessageId = oMessages:GetMessages().
+            iMax = extent(cMessageId).
+            
+            /* We no longer need this request collection */
+            ServiceRequests:Remove(new String(cRequestKey)).
+            
+            do iLoop = 1 to iMax:
+                oModelConsumer = oMessages:GetMessageConsumer(cMessageId[iLoop]).
+                
+                /* We're completely done with this message, get rid of it. */
+                oMessages:RemoveMessage(cMessageId[iLoop]).
+                
                 /* Reopen queries if necessary. The individual ReceiveMessageResponse() calls will
                    have set this flag. */
                 oIterator = cast(oModelConsumer, IModel):ModelQueries:Values:Iterator().
@@ -866,6 +867,6 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
                end.
            end.
         end.
-	end method.
-	
+    end method.
+    
 end class.

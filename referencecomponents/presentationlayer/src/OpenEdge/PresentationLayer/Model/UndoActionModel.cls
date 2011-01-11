@@ -10,8 +10,8 @@
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Model.DatasetModel.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 using Progress.Lang.Object.
 
 class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
@@ -20,7 +20,7 @@ class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
         field QueryName as character
         field BufferName as character 
         field ModelService as Object    /* IComponentInfo */
-        field UndoActionType as Object /* OpenEdge.CommonInfrastructure.Common.UpdateActionEnum:EnumMember */
+        field UndoActionType as Object /* OpenEdge.CommonInfrastructure.UpdateActionEnum:EnumMember */
         field Order as integer
         index idx1 as primary unique ModelService QueryName BufferName Order
         .
@@ -47,24 +47,24 @@ class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
     method override protected void SetBufferCallbacks(pcBufferName as char, phBuffer as handle):
     end method.
 
-	/*
-	method override protected handle GetBufferField( input pcBufferName as character, input pcFieldName as character ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    /*
+    method override protected handle GetBufferField( input pcBufferName as character, input pcFieldName as character ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 */
 
-	method override protected void AssignDefaultValues( input pcTableName as character, input phBuffer as handle ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method override protected void AssignDefaultValues( input pcTableName as character, input phBuffer as handle ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
-	method override protected logical FindTableByKey( input pcTableName as character, input pcRecordKey as character ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method override protected logical FindTableByKey( input pcTableName as character, input pcRecordKey as character ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
 end class.

@@ -7,7 +7,7 @@
     Created     : Fri May 15 11:18:04 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 interface OpenEdge.PresentationLayer.Presenter.INavigationPanelPresenter:  
     

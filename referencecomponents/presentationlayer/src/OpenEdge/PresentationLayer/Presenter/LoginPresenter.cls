@@ -14,9 +14,9 @@ using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.Presenter.ILoginPresenter.
 using OpenEdge.PresentationLayer.Common.LoginError.
 
-using OpenEdge.CommonInfrastructure.Common.IApplicationLogin.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager. 
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IApplicationLogin.
+using OpenEdge.CommonInfrastructure.IServiceManager. 
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Core.System.ILoginData.
 using OpenEdge.Core.System.ApplicationError.
@@ -34,7 +34,7 @@ class OpenEdge.PresentationLayer.Presenter.LoginPresenter
         /* authenticate & authorise
          
         define private variable moAuthenticationService as ISecurityManager no-undo.
-        moAuthenticationService = cast(ServiceManager:StartService(SecurityManager:SecurityManagerType)
+        moAuthenticationService = cast(ServiceManager:StartService(CommonSecurityManager:SecurityManagerType)
                     , ISecurityManager).
         */
         

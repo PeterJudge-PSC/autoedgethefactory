@@ -25,7 +25,7 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.IComponent.
 
 using OpenEdge.Core.System.EventArgs.
 using OpenEdge.Core.System.IQueryDefinition.

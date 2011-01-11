@@ -19,7 +19,7 @@ using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
-using OpenEdge.CommonInfrastructure.Client.ServiceTypeEnum.
+using OpenEdge.CommonInfrastructure.ServiceTypeEnum.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest.
@@ -37,11 +37,12 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum.
 
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo. 
-using OpenEdge.CommonInfrastructure.Common.Service.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
-using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo. 
+using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.CommonServiceMessageManager.
 
 using OpenEdge.Core.System.ITableOwner.
 using OpenEdge.Core.System.IQueryDefinition.
@@ -76,7 +77,7 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
     define protected property ServiceMessageManager as IServiceMessageManager no-undo
         get():
             if not valid-object(ServiceMessageManager) then
-                ServiceMessageManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
+                ServiceMessageManager = cast(ServiceManager:GetService(CommonServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
             
             return ServiceMessageManager.
         end get.
@@ -260,14 +261,14 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         ServiceName = pcServiceName.
     end method.
 
-	method override public void CreateComponent(  ):
-		super:CreateComponent().
-		
+    method override public void CreateComponent(  ):
+        super:CreateComponent().
+        
         TableContexts = new TypedMap(String:Type,
                                      Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext')).
         
         ModelQueries = new IModelQueryCollection().
-	end method.
+    end method.
     
     method override public void DestroyComponent():
         super:DestroyComponent().
@@ -837,17 +838,17 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         @param IServiceResponse The response to the request. */
     method public void ReceiveMessageResponse(input poResponse as IServiceResponse).
         case cast(poResponse, IServiceMessage):ActionType:
-	        when ServiceMessageActionEnum:FetchData then
-	           ReceiveFetchResponse(cast(poResponse, IFetchResponse)).
-	        when ServiceMessageActionEnum:FetchSchema then
-	           ReceiveFetchSchemaResponse(cast(poResponse, IFetchResponse)).
+            when ServiceMessageActionEnum:FetchData then
+               ReceiveFetchResponse(cast(poResponse, IFetchResponse)).
+            when ServiceMessageActionEnum:FetchSchema then
+               ReceiveFetchSchemaResponse(cast(poResponse, IFetchResponse)).
             when ServiceMessageActionEnum:SaveData then
                 ReceiveSaveResponse(cast(poResponse, ISaveResponse)).
             otherwise
                 ReceiveServiceResponse(poResponse).
         end case.    
-	end method.
-	
+    end method.
+    
     /** Find a record in the Model by (unique) key. 
         
         @param character The table name 

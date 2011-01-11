@@ -15,7 +15,7 @@ using OpenEdge.PresentationLayer.Model.IModel.
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
 
-using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.IComponent.
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.ITableOwner.
@@ -179,18 +179,18 @@ class OpenEdge.PresentationLayer.Model.ModelQuery inherits Query
         RequiresReopen = QueryRequiresReopen(poEventArgs:TableName).
     end method.
 
-	method override protected void Open( input phQuery as handle ):
-		super:Open(phQuery).
-		RequiresReopen = false.
-	end method.
-	
-	/** Assume query requries a reopen if any of the tables in the Model Action are in the
-	    query itself. 
-	    
-	    @param character An array of tables being checked
-	    @return logical Whether the query needs to be reopened.    */
-	method protected logical QueryRequiresReopen (input pcActionTables as character extent):
-	    define variable cQueryTables as character extent no-undo.
+    method override protected void Open( input phQuery as handle ):
+        super:Open(phQuery).
+        RequiresReopen = false.
+    end method.
+    
+    /** Assume query requries a reopen if any of the tables in the Model Action are in the
+        query itself. 
+        
+        @param character An array of tables being checked
+        @return logical Whether the query needs to be reopened.    */
+    method protected logical QueryRequiresReopen (input pcActionTables as character extent):
+        define variable cQueryTables as character extent no-undo.
         define variable iLoop as integer no-undo.
         define variable iLoop2 as integer no-undo.
         define variable iMax as integer no-undo.
@@ -218,40 +218,40 @@ class OpenEdge.PresentationLayer.Model.ModelQuery inherits Query
         return lReopen.
     end method.
 
-	method public void DataAddErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void DataAddErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
-	method public void DataDeleteErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void DataDeleteErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
-	method public void DataSaveErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void DataSaveErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
-	method public void DataCommitErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void DataCommitErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
-	method public void DataFetchErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void DataFetchErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
 
-	method public void ServiceRequestErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
-		
-		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method public void ServiceRequestErrorHandler( input poComponent as IComponent, input poEventArgs as ModelErrorEventArgs ):
+        
+        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
 
-	end method.
+    end method.
     
 end class.

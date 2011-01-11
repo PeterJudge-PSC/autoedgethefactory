@@ -8,8 +8,8 @@
     Notes       : 
   ---------------------------------------------------------------------- */
   
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.UpdateActionEnum.
 
 interface OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter:  
     define public property ModelService as IComponentInfo no-undo get. set.

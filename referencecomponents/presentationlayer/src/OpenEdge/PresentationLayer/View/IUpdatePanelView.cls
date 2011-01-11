@@ -8,7 +8,7 @@
     Notes       : 
   ----------------------------------------------------------------------*/
 using OpenEdge.PresentationLayer.Common.ActionStateEnum.
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.UpdateActionEnum.
 
 interface OpenEdge.PresentationLayer.View.IUpdatePanelView:
       

@@ -21,10 +21,10 @@ using OpenEdge.PresentationLayer.Common.NavigationPanelEventArgs.
 using OpenEdge.PresentationLayer.Common.ActionStateEnum.
 using OpenEdge.PresentationLayer.Common.NavigationActionEnum.
 
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IComponent.
 
 using OpenEdge.Core.System.RowPositionEnum.
 using Progress.Lang.Class.
