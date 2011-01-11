@@ -47,21 +47,21 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         field Handle as handle
         index idx1 as primary unique BufferName.
     
-	constructor public DataSourceQuery(input phDataSource as handle):
-		super().
-		
-		assign ABLDataSource = phDataSource
-		       TableOwner = this-object
-		       SourceKeyFilters = new Map()
-		       
-		       Definition = ParseDataSource().
+    constructor public DataSourceQuery(input phDataSource as handle):
+        super().
+        
+        assign ABLDataSource = phDataSource
+               TableOwner = this-object
+               SourceKeyFilters = new Map()
+               
+               Definition = ParseDataSource().
         
         /* 'fix' the definition */
-        Rebase().		       
-	end constructor.
-	
-	method protected IQueryDefinition ParseDataSource():
-	    define variable oQD as IQueryDefinition no-undo.
+        Rebase().               
+    end constructor.
+    
+    method protected IQueryDefinition ParseDataSource():
+        define variable oQD as IQueryDefinition no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         define variable hBuffer as handle no-undo.
@@ -128,11 +128,11 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         return hBuffer.
     end method.
         
-	method public handle GetTableHandle( input pcTableName as character):
-	    return GetQueryBuffer(pcTableName, pcTableName).
-	end method.
-	
-	method protected void RegisterBuffer(input phBuffer as handle):
+    method public handle GetTableHandle( input pcTableName as character):
+        return GetQueryBuffer(pcTableName, pcTableName).
+    end method.
+    
+    method protected void RegisterBuffer(input phBuffer as handle):
         define buffer lbBuffer for ttBuffer.
         
         create lbBuffer.
