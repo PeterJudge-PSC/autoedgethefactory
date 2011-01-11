@@ -10,7 +10,7 @@
     Created     : Thu Dec 16 10:42:00 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 
 using AutoEdge.Factory.Order.PresentationLayer.ITaskListManager.

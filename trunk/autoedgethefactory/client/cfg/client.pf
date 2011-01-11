@@ -1,0 +1,6 @@
+# PF for AutoEdge|TheFactory Client session
+ -pf cfg\shared.pf
+ 
+ -T C:\Devarea\projects\OEBP\autoedgethefactory\client\temp
+ -assemblies C:\Devarea\projects\OEBP\autoedgethefactory\client
+

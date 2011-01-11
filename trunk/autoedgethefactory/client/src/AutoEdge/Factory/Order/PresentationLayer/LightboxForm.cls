@@ -7,7 +7,7 @@
     Created     : Fri Jul 09 09:52:53 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 using System.Drawing.Rectangle.
 using System.Drawing.Point.
 using System.Windows.Forms.Control.
@@ -16,8 +16,8 @@ using Progress.Windows.Form.
 
 
 class AutoEdge.Factory.Order.PresentationLayer.LightboxForm inherits Form: 
-	
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    
+    define private variable components as System.ComponentModel.IContainer no-undo.
     
     define public property OverlaidForm as Form no-undo get. private set.          
     define public property BrightControl as Control extent no-undo get. private set.
@@ -76,11 +76,11 @@ class AutoEdge.Factory.Order.PresentationLayer.LightboxForm inherits Form:
         this-object:Close().
     end method.
     
-	method private void LightboxForm_Shown( input sender as System.Object, input e as System.EventArgs ):
-	    this-object:Overlay:BringToFront().
-	    this-object:Overlay:Show().
-	end method.
-	
+    method private void LightboxForm_Shown( input sender as System.Object, input e as System.EventArgs ):
+        this-object:Overlay:BringToFront().
+        this-object:Overlay:Show().
+    end method.
+    
     method protected void ResizeMe():
         this-object:Size = OverlaidForm:ClientRectangle:Size.
         this-object:Overlay:Size = this-object:Size. 
@@ -103,7 +103,7 @@ class AutoEdge.Factory.Order.PresentationLayer.LightboxForm inherits Form:
         MoveMe().
     end method.
     
-	constructor public LightboxForm (  ):
+    constructor public LightboxForm (  ):
         super().
         InitializeComponent().
         
@@ -111,10 +111,10 @@ class AutoEdge.Factory.Order.PresentationLayer.LightboxForm inherits Form:
             undo, throw e.
         end catch.
 
-	end constructor.
+    end constructor.
 
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -167,21 +167,21 @@ class AutoEdge.Factory.Order.PresentationLayer.LightboxForm inherits Form:
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
-	method private void uxClose_Click(input sender as System.Object, input e as System.EventArgs ):
-	    this-object:Overlay:Close().
-	    this-object:Close().
-	end method.
-	
-	destructor public LightboxForm():
+    method private void uxClose_Click(input sender as System.Object, input e as System.EventArgs ):
+        this-object:Overlay:Close().
+        this-object:Close().
+    end method.
+    
+    destructor public LightboxForm():
         this-object:OverlaidForm:ResizeEnd:Unsubscribe(OverlaidForm_ResizeEnd).
         this-object:OverlaidForm:Move:Unsubscribe(OverlaidForm_Move).
         this-object:Overlay:Closed:Unsubscribe(Overlay_Closed).
         
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
-	end destructor.
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
+    end destructor.
 
 end class.

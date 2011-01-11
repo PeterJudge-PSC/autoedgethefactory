@@ -1,6 +1,6 @@
 /** ------------------------------------------------------------------------
-    File        : FactoryBuildModule
-    Purpose     : 
+    File        : FactoryCommonModule
+    Purpose     : AutoEdge|TheFactory Shared bindings
     Syntax      : 
     Description : 
     Author(s)   : pjudge
@@ -9,27 +9,27 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
+
 using OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
-using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
-using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
 
 using Progress.Lang.Class.
 
-class AutoEdge.Factory.InjectABL.FactoryBuildModule inherits InjectionModule:
-    
-    constructor public FactoryBuildModule (  ):
+class AutoEdge.Factory.InjectABL.FactoryCommonModule inherits InjectionModule:
+     
+    constructor public FactoryCommonModule (  ):
         super ().
     end constructor.
-
-    /** BUSINESS WORKFLOWS **/
-    method public void LoadWorkflows():
+    
+    method override public void Load():
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
-
-    end method.
-    
-    method override public void Load(  ):
+        
+        /* savvion parameters */
+        oBindingSyntax = Bind('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters').
+        oBindingSyntax
+            :To('AutoEdge.Factory.Common.SavvionParameters').
         
     end method.
     

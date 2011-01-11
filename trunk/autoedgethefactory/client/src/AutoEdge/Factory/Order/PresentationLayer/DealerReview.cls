@@ -7,7 +7,7 @@
     Created     : Wed Jul 07 11:55:28 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
   
 using AutoEdge.Factory.Order.PresentationLayer.CurrentTask.
 using AutoEdge.Factory.Order.PresentationLayer.TagWrapper.
@@ -17,12 +17,12 @@ using AutoEdge.Factory.Order.PresentationLayer.CreateProcessInstance.
 using AutoEdge.Factory.Order.PresentationLayer.TaskDetailForm.
 using AutoEdge.Factory.Order.PresentationLayer.OrderListForm.
 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkItemStatusEnum.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicAPI.  
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkFlowWebService.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkItem. 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.DataSlotInstance.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.ProcessTemplate.
+using OpenEdge.EnterpriseServices.BizLogic.WorkItemStatusEnum.
+using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.  
+using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
+using OpenEdge.EnterpriseServices.BizLogic.WorkItem. 
+using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
+using OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate.
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.XML.WebServiceInvocationError.
 
@@ -36,14 +36,14 @@ using Progress.Windows.Form.
 
 class AutoEdge.Factory.Order.PresentationLayer.DealerReview inherits Form
         implements ITaskListManager: 
-	
+    
     define private variable imageListSmall as System.Windows.Forms.ImageList no-undo.
     define private variable imageListLarge as System.Windows.Forms.ImageList no-undo.
     define private variable m_DealerReview_Toolbars_Dock_Area_Top as Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea no-undo.
     define private variable m_DealerReview_Toolbars_Dock_Area_Right as Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea no-undo.
     define private variable m_DealerReview_Toolbars_Dock_Area_Left as Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea no-undo.
     define private variable m_DealerReview_Toolbars_Dock_Area_Bottom as Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea no-undo.
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable splitter1 as System.Windows.Forms.Splitter no-undo.
     define private variable ultraTabbedMdiManager1 as Infragistics.Win.UltraWinTabbedMdi.UltraTabbedMdiManager no-undo.
     define private variable ultraToolbarsManager1 as Infragistics.Win.UltraWinToolbars.UltraToolbarsManager no-undo.
@@ -56,7 +56,7 @@ class AutoEdge.Factory.Order.PresentationLayer.DealerReview inherits Form
     
     define public event CurrentTaskUpdated signature void(input piTaskId as int64).
     
-	constructor public DealerReview (  ): 
+    constructor public DealerReview (  ): 
         super().
         
         InitializeComponent().
@@ -66,14 +66,14 @@ class AutoEdge.Factory.Order.PresentationLayer.DealerReview inherits Form
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end constructor.
+    end constructor.
 
-	method private void DealerReview_FormClosed( input sender as System.Object, input e as System.Windows.Forms.FormClosedEventArgs ):
-	    ServerDisconnect().
-	end method.
+    method private void DealerReview_FormClosed( input sender as System.Object, input e as System.Windows.Forms.FormClosedEventArgs ):
+        ServerDisconnect().
+    end method.
 
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -489,13 +489,13 @@ class AutoEdge.Factory.Order.PresentationLayer.DealerReview inherits Form
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
     method private void timer1_Tick( input sender as System.Object, input e as System.EventArgs ):
         RefreshTasksList().
     end method.
 
-	method private void ultraExplorerBar1_ItemClick( input sender as System.Object, input e as Infragistics.Win.UltraWinExplorerBar.ItemEventArgs):
+    method private void ultraExplorerBar1_ItemClick( input sender as System.Object, input e as Infragistics.Win.UltraWinExplorerBar.ItemEventArgs):
         define variable oTags as TagWrapper extent no-undo.
         define variable oTask as CurrentTask no-undo.
         define variable oForm as Form no-undo.
@@ -524,9 +524,9 @@ class AutoEdge.Factory.Order.PresentationLayer.DealerReview inherits Form
             oForm:MdiParent = this-object.
             oForm:Show().
         end.
-	end method.
-	
-	method public void CompleteTask(poTask as CurrentTask):
+    end method.
+    
+    method public void CompleteTask(poTask as CurrentTask):
         BizLogicService:CompleteWorkItemFromWIID(SessionId, poTask:WorkItem:Id, poTask:DataSlots).
         
         TaskCompleted(poTask:WorkItem:Id).
@@ -542,8 +542,8 @@ class AutoEdge.Factory.Order.PresentationLayer.DealerReview inherits Form
     method protected void OnCurrentTaskUpdated(piTaskId as int64):
         this-object:CurrentTaskUpdated:Publish(piTaskId).
     end method.
-	
-	method public void TaskCompleted(piTaskId as int64):
+    
+    method public void TaskCompleted(piTaskId as int64):
         define variable oGroup as UltraExplorerBarGroup no-undo.
         define variable oItem as UltraExplorerBarItem no-undo.
         define variable oForm as Form no-undo.
@@ -857,13 +857,13 @@ class AutoEdge.Factory.Order.PresentationLayer.DealerReview inherits Form
         end catch.        
     end method.
     
-	destructor public DealerReview ( ):
+    destructor public DealerReview ( ):
         ServerDisconnect().
         
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
-	end destructor.
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
+    end destructor.
 
 end class.
         

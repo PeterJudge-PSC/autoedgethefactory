@@ -7,10 +7,10 @@
     Created     : Wed Jul 14 10:34:40 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkItem.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.DataSlotInstance. 
+using OpenEdge.EnterpriseServices.BizLogic.WorkItem.
+using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance. 
 
 class AutoEdge.Factory.Order.PresentationLayer.CurrentTask:
     define public property WorkItem as WorkItem no-undo get. private set.

@@ -7,7 +7,7 @@
     Created     : Tue Dec 21 16:44:52 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.TenantManager.
 using OpenEdge.CommonInfrastructure.IServiceManager.

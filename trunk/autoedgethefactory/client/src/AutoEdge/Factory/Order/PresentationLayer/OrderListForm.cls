@@ -12,16 +12,16 @@
 using Progress.Lang.*.
 using Progress.Windows.Form.
 
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 class AutoEdge.Factory.Order.PresentationLayer.OrderListForm inherits Form: 
-	
+    
     define private variable bsOrders as Progress.Data.BindingSource no-undo.
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable uxOrders as Infragistics.Win.UltraWinGrid.UltraGrid no-undo.
     define private variable mcContextId as longchar no-undo. 
-		
-	constructor public OrderListForm (  ):
+        
+    constructor public OrderListForm (  ):
         super().
         InitializeComponent().
         
@@ -32,10 +32,10 @@ class AutoEdge.Factory.Order.PresentationLayer.OrderListForm inherits Form:
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end constructor.
+    end constructor.
 
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -429,13 +429,13 @@ class AutoEdge.Factory.Order.PresentationLayer.OrderListForm inherits Form:
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
-	destructor public OrderListForm ( ):
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
-	end destructor.
+    destructor public OrderListForm ( ):
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
+    end destructor.
 
     method protected void ShowOrders():
         define variable hOrders as handle no-undo.

@@ -7,17 +7,17 @@
     Created     : Fri Jul 16 12:03:50 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicAPI.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.WorkFlowWebService.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.ProcessTemplate.
+using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.
+using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
+using OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate.
 using AutoEdge.Factory.Order.PresentationLayer.CreateProcessInstance. 
 using Progress.Windows.Form.
 
 class AutoEdge.Factory.Order.PresentationLayer.CreateProcessInstance inherits Form: 
-	
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable lblInstanceName as Infragistics.Win.Misc.UltraLabel no-undo.
     define private variable lblPriority as Infragistics.Win.Misc.UltraLabel no-undo.
     define private variable lblName as Infragistics.Win.Misc.UltraLabel no-undo.
@@ -44,14 +44,14 @@ class AutoEdge.Factory.Order.PresentationLayer.CreateProcessInstance inherits Fo
         InitUI().               
     end constructor.
     
-	constructor public CreateProcessInstance(  ):
+    constructor public CreateProcessInstance(  ):
         super().
         InitializeComponent().
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
 
-	end constructor.
+    end constructor.
     
     method protected void InitUI():
         
@@ -70,8 +70,8 @@ class AutoEdge.Factory.Order.PresentationLayer.CreateProcessInstance inherits Fo
                .
     end method.
     
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -220,11 +220,11 @@ class AutoEdge.Factory.Order.PresentationLayer.CreateProcessInstance inherits Fo
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
-	method private void uxCreate_Click( input sender as System.Object, input e as System.EventArgs ):
-	
-	/*
+    method private void uxCreate_Click( input sender as System.Object, input e as System.EventArgs ):
+    
+    /*
             
         ' get the values from the wstestStartePage for the 
         Dim piName As String = Me.pinameValue.Text
@@ -233,17 +233,17 @@ class AutoEdge.Factory.Order.PresentationLayer.CreateProcessInstance inherits Fo
 
         pi = WorkFlow.LoginForm1.wf.createProcessInstance(WorkFlow.LoginForm1.sessionId, WorkFlow.MyHome1.currentPt.name, piName, priority, Nothing)
 
-    */		    
-		return.
+    */            
+        return.
 
-	end method.
+    end method.
 
-	destructor public CreateProcessInstance ( ):
+    destructor public CreateProcessInstance ( ):
 
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
 
-	end destructor.
+    end destructor.
 
 end class.

@@ -8,7 +8,7 @@
     Created     : Thu Jul 08 14:48:22 EDT 2010
     Notes       : * PABLO = Plain ABL Object
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
   
 /* No USING to make it clear which Object is which */
 
