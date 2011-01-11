@@ -12,9 +12,12 @@ routine-level on error undo, throw.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.IBindingResolver.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
-using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
+
+using OpenEdge.Lang.Collections.IMap.
+using OpenEdge.Lang.Collections.IList.
+using OpenEdge.Lang.Collections.List.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Collections.ObjectStack.
 using Progress.Lang.Class.
@@ -22,17 +25,21 @@ using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindingResolver:
     
-    /** Returns valid binding(s) for a scope from a set of bindings */
-    method public IBindingCollection Resolve(poBindings as IBindingCollection,
-                                             poScopeCallback as class Class,
-                                             poScope as StandardScopeEnum):
-        define variable oResolvedBindings as IBindingCollection no-undo.
+    /** Returns valid binding(s) for a scope from a set of bindings 
+        
+        @param IMap The complete set of bindings to resolve
+        @param Class The type of scope (standard, manager etc)
+        @param StandardScopeEnum The level of the scope (security manager, service manager etc)
+        @return IList  The list of bindings corresponding to the scope and type */
+    method public IList Resolve(input poBindings as IMap,
+                                input poScopeCallback as class Class,
+                                input poScope as StandardScopeEnum):
+        define variable oResolvedBindings as IList no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oBinding as IBinding no-undo.
         
-        oResolvedBindings = new IBindingCollection().
-        
-        oIterator = poBindings:Iterator().
+        oResolvedBindings = new List().
+        oIterator = poBindings:Values:Iterator().
         do while oIterator:HasNext():
             oBinding = cast(oIterator:Next(), IBinding).
             
@@ -53,22 +60,26 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
         return oResolvedBindings.
     end method.
     
-    method public IBindingCollection Resolve(input poBindings as IBindingCollection,
-                                             input poService as class Class,
-                                             input pcName as character):
-        define variable oResolvedBindings as IBindingCollection no-undo.
+    /** Returns valid binding(s) for the service from a set of bindings
+        
+        @param IMap The complete set of bindings to resolve
+        @param Class The service type
+        @param character The binding name
+        @return IList  The list of bindings corresponding to the service & name */
+    method public IList Resolve(input poBindings as IMap,
+                                input poService as class Class,
+                                input pcName as character):
+        define variable oResolvedBindings as IList no-undo.
+        define variable oServiceBindings as IList no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oBinding as IBinding no-undo.
         
-        oResolvedBindings = new IBindingCollection().
+        assign oResolvedBindings = new List()
+               oServiceBindings = cast(poBindings:Get(poService), IList)
+               oIterator = oServiceBindings:Iterator().
         
-        oIterator = poBindings:Iterator().
         do while oIterator:HasNext():
             oBinding = cast(oIterator:Next(), IBinding).
-            
-            /* Services need to match */
-            if oBinding:Service ne poService then
-                next.
             
             /* Names need to match */
             if oBinding:Name ne pcName then

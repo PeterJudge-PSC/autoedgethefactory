@@ -1,5 +1,5 @@
 /** ------------------------------------------------------------------------
-    File        : SessionTypeConditionResolver
+    File        : ConnectionConditionResolver
     Purpose     : 
     Syntax      : 
     Description : 
@@ -13,11 +13,11 @@ using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionResolver.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 
-class OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeConditionResolver implements IConditionResolver:
+class OpenEdge.Core.InjectABL.Binding.Conditions.ConnectionConditionResolver implements IConditionResolver:
     
-    constructor public SessionTypeConditionResolver():
+    constructor public ConnectionConditionResolver():
     end constructor. 
-    
+
     /** Evaluates the provided conditions. 
         
         @param ICondition The left-hand side argument for the clause

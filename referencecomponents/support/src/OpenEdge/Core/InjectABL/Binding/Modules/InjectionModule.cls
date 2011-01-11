@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : InjectionModule
     Purpose     : 
     Syntax      :
@@ -6,18 +6,22 @@
     @author pjudge
     Created     : Tue Mar 02 11:08:44 EST 2010 
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Core.InjectABL.IKernel.
-using OpenEdge.Core.InjectABL.Binding.BindingRoot.
 using OpenEdge.Core.InjectABL.Binding.IBindingRoot.
+using OpenEdge.Core.InjectABL.Binding.BindingRoot.
+using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.Binding.
 using OpenEdge.Core.InjectABL.Binding.BindingBuilder.
-using OpenEdge.Core.InjectABL.Binding.IBinding.
-using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule.
+using OpenEdge.Core.InjectABL.IKernel.
+
+using OpenEdge.Lang.Collections.IMap.
+using OpenEdge.Lang.Collections.Map.
+using OpenEdge.Lang.Collections.IList.
+using OpenEdge.Lang.Collections.List.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Assert.
 
@@ -34,11 +38,11 @@ class OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule abstract inherits 
         end get.
         private set.
     
-    define override public property Bindings as IBindingCollection no-undo get. private set.
+    define override public property Bindings as IMap no-undo get. private set.
          
     constructor public InjectionModule():
         super().
-        Bindings = new IBindingCollection().
+        Bindings = new Map().
     end constructor.
     
     /** Called when the module is loaded into a kernel.
@@ -52,18 +56,17 @@ class OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule abstract inherits 
     end.
 
      /** Called when the module is unloaded from a kernel. 
-        @param kernel The kernel that is unloading the module.
-       */
-    method public void OnUnload(poKernel as IKernel):
-        Assert:ArgumentNotNull(poKernel, "Injection kernel").
-        
+         
+         @param kernel The kernel that is unloading the module.  */
+    method public void OnUnload(input poKernel as IKernel):
         define variable oIterator as IIterator.
         define variable oBinding as IBinding.
         
+        Assert:ArgumentNotNull(poKernel, "InjectABL kernel").
+        
         Unload().
         
-        oIterator = Bindings:Iterator().
-                                        
+        oIterator = Bindings:Values:Iterator().
         do while oIterator:HasNext():
             oBinding = cast(oIterator:Next(), IBinding).
             cast(Kernel, IBindingRoot):RemoveBinding(oBinding).
@@ -83,13 +86,23 @@ class OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule abstract inherits 
     end method.
 
      /** Registers the specified binding.
-        @param binding The binding to add.
-       */
-    method override public void AddBinding(poBinding as IBinding):
-        Assert:ArgumentNotNull(poBinding, "binding").
+         
+         @param binding The binding to add. */
+    method override public void AddBinding(input poBinding as IBinding):
+        define variable oBindings as IList no-undo.
+        
+        Assert:ArgumentNotNull(input poBinding, "binding").
         
         cast(Kernel, IBindingRoot):AddBinding(poBinding).
-        Bindings:Add(poBinding).
+        
+        oBindings = cast(Bindings:Get(input poBinding:Service), IList).
+        if not valid-object(oBindings) then
+        do:
+            oBindings = new List().
+            Bindings:Put(poBinding:Service, oBindings).
+        end.
+        
+        oBindings:Add(input poBinding).
     end.
     
      /** Unregisters the specified binding.

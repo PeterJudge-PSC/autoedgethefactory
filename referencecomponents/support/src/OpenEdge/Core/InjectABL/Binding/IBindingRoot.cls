@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IBindingRoot
     Purpose     : 
     Syntax      : 
@@ -6,51 +6,51 @@
     @author pjudge
     Created     : Tue Mar 02 11:26:29 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
-using Progress.Lang.Class.
+  ---------------------------------------------------------------------- */
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
-using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
+using OpenEdge.Lang.Collections.IMap.
+using Progress.Lang.Class.
 
 interface OpenEdge.Core.InjectABL.Binding.IBindingRoot:
-    define public property Bindings as IBindingCollection no-undo get.
-      
-    /** <summary>
-     Declares a binding from the service to itself.
-     </summary>
-     <param name="service">The service to bind.</param>
-    **/
-    method public IBindingSyntax Bind(poService as class Class).
-    method public IBindingSyntax Bind(pcService as char).
+    /** A collection of bindings, keyed by the service they bind to. */
+    define public property Bindings as IMap no-undo get.
     
-    /** <summary>
-     Unregisters all bindings for the specified service.
-     </summary>
-     <param name="service">The service to unbind.</param>
-    **/
-    method public void Unbind(poService as class Class).
-    method public void Unbind(pcService as char).
+    /** Declares a binding from the service to itself.        
+        @param Class The service to bind. */
+    method public IBindingSyntax Bind(input poService as class Class).
+        
+    /** Declares a binding from the service to itself.        
+        @param character The service to bind. */
+    method public IBindingSyntax Bind(input pcService as character).
     
-    /** <summary>
-     Removes any existing bindings for the specified service, and declares a new one.
-     </summary>
-     <param name="service">The service to re-bind.</param>
-    **/
-    method public IBindingSyntax Rebind(poService as class Class).
-    method public IBindingSyntax Rebind(pcService as char).
+    /** Unregisters all bindings for the specified service.
+        
+        @param Class The service to unbind. */
+    method public void Unbind(input poService as class Class).
+
+    /** Unregisters all bindings for the specified service.
+        
+        @param character The service to unbind. */
+    method public void Unbind(input pcService as character).
     
-    /** <summary>
-     Registers the specified binding.
-     </summary>
-     <param name="binding">The binding to add.</param>
-    **/
-    method public void AddBinding(poBinding as IBinding).
+    /** Removes any existing bindings for the specified service, and declares a new one.
+        
+        @param Class The service to re-bind. **/
+    method public IBindingSyntax Rebind(input poService as class Class).
+
+    /** Removes any existing bindings for the specified service, and declares a new one.
+        
+        @param character The service to re-bind. **/
+    method public IBindingSyntax Rebind(input pcService as character).
     
-    /** <summary>
-     Unregisters the specified binding.
-     </summary>
-     <param name="binding">The binding to remove.</param>
-    **/
-    method public void RemoveBinding(poBinding as IBinding).
+    /** Registers the specified binding.
+        
+        @param IBinding The binding to add. */
+    method public void AddBinding(input poBinding as IBinding).
+    
+    /** Unregisters the specified binding.
+        @param IBinding The binding to remove. */
+    method public void RemoveBinding(input poBinding as IBinding).
     
 end interface.

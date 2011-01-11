@@ -8,9 +8,8 @@
     Created     : Wed Jan 09 10:45:45 EST 2008
     Notes       : 
   ----------------------------------------------------------------------*/
-
 routine-level on error undo, throw.
-using Progress.Lang.Object.
+
 using OpenEdge.Lang.Collections.AbstractTTCollection.
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IIterator.
@@ -19,6 +18,7 @@ using OpenEdge.Lang.Collections.IListIterator.
 using OpenEdge.Lang.Collections.ListIterator.
 using OpenEdge.Lang.Collections.IList.
 using OpenEdge.Lang.Collections.List.
+using Progress.Lang.Object.
 
 class OpenEdge.Lang.Collections.List inherits AbstractTTCollection implements IList : 
     /*------------------------------------------------------------------------------
@@ -38,7 +38,19 @@ class OpenEdge.Lang.Collections.List inherits AbstractTTCollection implements IL
        
     constructor public List (list as IList):
         super (cast (list,ICollection),temp-table ttList:handle,'objectref').        
-    end constructor.    
+    end constructor.
+    
+    constructor protected List ( input poCol as ICollection, input phtt as handle, input pcField as character ):
+        super (input poCol, input phtt, input pcField).
+    end constructor.
+        
+    constructor protected List ( input phtt as handle, input pcField as character ):
+        super (input phtt, input pcField).
+    end constructor.
+
+    constructor protected List ( input phtt as handle, input hField as handle ):
+        super (input phtt, input hField).
+    end constructor.
         
     method public override logical Contains(checkObject as Object):        
         define variable lContains as logical no-undo.

@@ -11,6 +11,8 @@ using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
+
+using OpenEdge.Core.System.ConnectionTypeEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -20,6 +22,7 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     @IBindingToSyntax.
     /** Indicates that the service should be self-bound.  */
     method public IBindingSyntax ToSelf().
+    
     /** Indicates that the service should be bound to the specified implementation type.  */
     method public IBindingSyntax To(input poImplementation as class Class).
     method public IBindingSyntax To(input pcImplementation as character).
@@ -49,18 +52,18 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     method public IBindingSyntax InScope(input poScopeCallback as class Class, input poScope as StandardScopeEnum).
     
     @IBindingOnSyntax.
+    /** General */
     method public IBindingSyntax OnClientSession().
-    method public IBindingSyntax OnWebSession().
     method public IBindingSyntax OnServerSession().
-
+    
+    /** Indicates that the binding is valid for a session as identified by an application-specific code */
+    method public IBindingSyntax OnSession(input pcSessionCode as character).
+    
     /*
-    @IBindingConnectedToSyntax.    
-    method public IBindingSyntax ConnectedTo(input pcServiceName as character).
-        
-        oConditionSyntax:Service:Is:Type('db'):And:Is:Name('aetf'):And:Is:Connnected).
-        
+    @IBindingConnectedToSyntax.
     method public IBindingSyntax ConnectedToAppServer(input pcAppServerName as character).
     method public IBindingSyntax ConnectedToDatabase(input pcDbName as character).
+    method public IBindingSyntax ConnectedTo(input poConnectionType as ConnectionTypeEnum, input pcConnectionName as character).
     */
     
     /** Certain UI platforms support multiple UI technologies (eg ABL and .NET on GUI Windows).

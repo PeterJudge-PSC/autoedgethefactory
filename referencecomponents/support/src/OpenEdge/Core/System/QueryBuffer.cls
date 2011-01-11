@@ -52,34 +52,34 @@ class OpenEdge.Core.System.QueryBuffer
         this-object(pcName, pcTableName, QueryTypeEnum:Default, LockModeEnum:Default).                               
     end constructor.
 
-	method override public logical Equals(input p0 as Object):
-	    define variable lEquals as logical no-undo.
-	    define variable oQB as QueryBuffer no-undo.
-	    		
-		lEquals = super:Equals(input p0).
-		
-		if not lEquals and type-of(p0, QueryBuffer) then
-		    assign oQB = cast(p0, QueryBuffer)
-		           lEquals = oQB:Name eq this-object:Name
-		                 and oQB:TableName eq this-object:TableName  		           
-		                 and oQB:QueryType:Equals(this-object:QueryType)
-        		         and oQB:LockMode:Equals(this-object:LockMode).
+    method override public logical Equals(input p0 as Object):
+        define variable lEquals as logical no-undo.
+        define variable oQB as QueryBuffer no-undo.
+                
+        lEquals = super:Equals(input p0).
+        
+        if not lEquals and type-of(p0, QueryBuffer) then
+            assign oQB = cast(p0, QueryBuffer)
+                   lEquals = oQB:Name eq this-object:Name
+                         and oQB:TableName eq this-object:TableName                     
+                         and oQB:QueryType:Equals(this-object:QueryType)
+                         and oQB:LockMode:Equals(this-object:LockMode).
         
         return lEquals.
-	end method.
-	
-	method public void WriteObject( input poStream as ObjectOutputStream):
-	    poStream:WriteChar(this-object:Name).
-	    poStream:WriteChar(TableName).
-	    poStream:WriteEnum(QueryType).
-	    poStream:WriteEnum(LockMode).
-	end method.
+    end method.
+    
+    method public void WriteObject( input poStream as ObjectOutputStream):
+        poStream:WriteChar(this-object:Name).
+        poStream:WriteChar(TableName).
+        poStream:WriteEnum(QueryType).
+        poStream:WriteEnum(LockMode).
+    end method.
 
-	method public void ReadObject( input poStream as ObjectInputStream ):
+    method public void ReadObject( input poStream as ObjectInputStream ):
         assign this-object:Name = poStream:ReadChar()
                TableName = poStream:ReadChar()
                QueryType = cast(poStream:ReadEnum(), QueryTypeEnum)
                LockMode =  cast(poStream:ReadEnum(), LockModeEnum).
-	end method.
-	
+    end method.
+    
 end class.

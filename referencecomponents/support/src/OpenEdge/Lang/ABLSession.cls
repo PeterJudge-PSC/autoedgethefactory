@@ -21,12 +21,30 @@ using OpenEdge.Lang.Collections.Collection.
 using Progress.Lang.Class. 
 using Progress.Lang.Object.
 
-class OpenEdge.Lang.ABLSession:    
-    define public property ActiveSince as datetime-tz no-undo get. private set.
-    define public property Id as char no-undo get. private set.
+class OpenEdge.Lang.ABLSession:
     
-    /* A collection of user-defined properties */
+    /** Information regarding session lifespan. */    
+    define public property ActiveSince as datetime-tz no-undo get. private set.
+    
+    /** A unique identifier for this session. The SESSION:HANDLE tends to be the
+        same every time; this gives us the opportunity to identify this session across all time and space */
+    define public property Id as character no-undo get. private set.
+    
+    /** A collection of user-defined properties */
     define public property SessionProperties as IMap no-undo get. private set.
+    
+    /** An optional session type identifier. Defaults to SESSION:CLIENT-TYPE, but we have
+        need for more complex session identifiers ('Development' or 'ClientRuntime'), which
+        are not limited to simple client types. */
+    define public property Name as character no-undo
+        get():
+            /* Simple default to client type */
+            if this-object:Name eq '' or this-object:Name  eq ? then
+                this-object:Name = session:client-type.
+            
+            return this-object:Name.
+        end get.
+        set.
     
     define static public property Instance as ABLSession no-undo  
         get():

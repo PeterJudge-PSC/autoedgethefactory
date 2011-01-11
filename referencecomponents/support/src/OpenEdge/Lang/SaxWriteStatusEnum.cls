@@ -48,9 +48,9 @@ class OpenEdge.Lang.SaxWriteStatusEnum inherits EnumMember:
         SaxWriteStatusEnum:Default = SaxWriteStatusEnum:Idle.
     end constructor.
 
-	constructor public SaxWriteStatusEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
+    constructor public SaxWriteStatusEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
 
     method static public SaxWriteStatusEnum EnumFromString(input pcName as character):
         define variable oEnum as SaxWriteStatusEnum no-undo.

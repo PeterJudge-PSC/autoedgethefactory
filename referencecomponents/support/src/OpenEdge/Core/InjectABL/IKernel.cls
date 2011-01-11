@@ -75,7 +75,7 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
     /** Determines whether a module with the specified name has been loaded in the kernel.
         
         @param character The name of the module.
-        @return <c>True</c> if the specified module has been loaded. otherwise, <c>false</c>. */
+        @return True if the specified module has been loaded. otherwise, <c>false</c>. */
     method public logical HasModule(input pcName as character).
 
     /** Loads module(s) into the kernel.

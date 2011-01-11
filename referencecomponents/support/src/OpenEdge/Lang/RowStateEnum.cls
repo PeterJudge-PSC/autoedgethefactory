@@ -27,28 +27,28 @@ class OpenEdge.Lang.RowStateEnum inherits EnumMember final:
     define static public property Modified      as RowStateEnum no-undo get. private set.
     define static public property Created       as RowStateEnum no-undo get. private set.     
 
-	constructor static RowStateEnum():
-	    RowStateEnum:Unmodified = new RowStateEnum(0, 'ROW-UNMODIFIED').
-	    RowStateEnum:Deleted = new RowStateEnum(1, 'ROW-DELETED').
-	    RowStateEnum:Modified = new RowStateEnum(2, 'ROW-MODIFIED').
-	    RowStateEnum:Created = new RowStateEnum(3, 'ROW-CREATED').
+    constructor static RowStateEnum():
+        RowStateEnum:Unmodified = new RowStateEnum(0, 'ROW-UNMODIFIED').
+        RowStateEnum:Deleted = new RowStateEnum(1, 'ROW-DELETED').
+        RowStateEnum:Modified = new RowStateEnum(2, 'ROW-MODIFIED').
+        RowStateEnum:Created = new RowStateEnum(3, 'ROW-CREATED').
     end constructor.
-	     	
-	constructor public RowStateEnum ( input piValue as integer, input pcName as character ):
-		super (input piValue, input pcName).
-	end constructor.
-	
-	method static public RowStateEnum ValueToEnum(input piValue as integer):
-	    define variable oRowStateEnum as RowStateEnum no-undo.
-	    
-	    case piValue:
-	        when RowStateEnum:Unmodified:Value then oRowStateEnum = RowStateEnum:Unmodified.
-	        when RowStateEnum:Deleted:Value then oRowStateEnum = RowStateEnum:Deleted.
-	        when RowStateEnum:Modified:Value then oRowStateEnum = RowStateEnum:Modified.
-	        when RowStateEnum:Created:Value then oRowStateEnum = RowStateEnum:Created.	          
+             
+    constructor public RowStateEnum ( input piValue as integer, input pcName as character ):
+        super (input piValue, input pcName).
+    end constructor.
+    
+    method static public RowStateEnum ValueToEnum(input piValue as integer):
+        define variable oRowStateEnum as RowStateEnum no-undo.
+        
+        case piValue:
+            when RowStateEnum:Unmodified:Value then oRowStateEnum = RowStateEnum:Unmodified.
+            when RowStateEnum:Deleted:Value then oRowStateEnum = RowStateEnum:Deleted.
+            when RowStateEnum:Modified:Value then oRowStateEnum = RowStateEnum:Modified.
+            when RowStateEnum:Created:Value then oRowStateEnum = RowStateEnum:Created.              
         end case.
         
-	    return oRowStateEnum.
+        return oRowStateEnum.
     end method. 
 
     method static public RowStateEnum NameToEnum(input pcName as character):

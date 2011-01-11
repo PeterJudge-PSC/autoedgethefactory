@@ -14,20 +14,28 @@ using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.Binding.
 using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
+using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.IIterator.
+using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 
-class OpenEdge.Core.InjectABL.Binding.BindingRoot abstract implements IBindingRoot:
-    define abstract public property Bindings as IBindingCollection no-undo get.
+class OpenEdge.Core.InjectABL.Binding.BindingRoot abstract 
+        implements IBindingRoot:
     
+    /** A collection of bindings, keyed by the service they bind to. */
+    define abstract public property Bindings as IMap no-undo get.
+    
+    /** Declares a binding from the service to itself.        
+        @param character The service to bind. */
     method public IBindingSyntax Bind(input pcService as char):
         Assert:ArgumentIsValidType(pcService).
-        
         return this-object:Bind(Class:GetClass(pcService)).
     end method.
     
-    method public IBindingSyntax Bind(poService as class Class):
+    /** Declares a binding from the service to itself.        
+        @param Class The service to bind. */    
+    method public IBindingSyntax Bind(input poService as class Class):
         define variable oBinding as IBinding no-undo.
         
         Assert:ArgumentNotNull(poService, 'Service').
@@ -38,39 +46,55 @@ class OpenEdge.Core.InjectABL.Binding.BindingRoot abstract implements IBindingRo
         return CreateBindingBuilder(oBinding).
     end method.
     
+    /** Unregisters all bindings for the specified service.
+        
+        @param Class The service to unbind. */    
     method public void Unbind(poService as class Class):
-        define variable oIterator as IIterator.
-        define variable oBinding as IBinding.
+        define variable oBindings as ICollection no-undo.
+        define variable oIterator as IIterator no-undo.
         
-        oIterator = Bindings:Iterator().
-        
+        assign oBindings = cast(Bindings:Get(poService), ICollection)
+               oIterator = oBindings:Iterator().
         do while oIterator:HasNext():
-            oBinding = cast(oIterator:Next(), IBinding).
-            
-            if oBinding:Service eq poService then
-                RemoveBinding(oBinding).
+            RemoveBinding(cast(oIterator:Next(), IBinding)).
         end.
     end method.
-    
+
+    /** Unregisters all bindings for the specified service.
+        
+        @param character The service to unbind. */
     method public void Unbind(pcService as char):
         Assert:ArgumentIsValidType(pcService).
         
         Unbind(Class:GetClass(pcService)).
     end method.
     
+    /** Removes any existing bindings for the specified service, and declares a new one.
+        
+        @param character The service to re-bind. **/
     method public IBindingSyntax Rebind(pcService as character):
         Assert:ArgumentIsValidType(pcService).
         
         return Rebind(Class:GetClass(pcService)).
     end method.
-            
+
+    /** Removes any existing bindings for the specified service, and declares a new one.
+        
+        @param Class The service to re-bind. **/
     method public IBindingSyntax Rebind(poService as class Class):
         Unbind(poService).
         return Bind(poService).
     end method.
     
-    method abstract protected IBindingSyntax CreateBindingBuilder(poBinding as IBinding).
+    /** Registers the specified binding.
+        
+        @param IBinding The binding to add. */    
     method abstract public void AddBinding(poBinding as IBinding).
+
+    /** Unregisters the specified binding.
+        @param IBinding The binding to remove. */
     method abstract public void RemoveBinding(poBinding as IBinding).
+    
+    method abstract protected IBindingSyntax CreateBindingBuilder(poBinding as IBinding).
     
 end class.

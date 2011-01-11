@@ -38,19 +38,19 @@ class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollec
     define public property Size as integer no-undo get. private set.
     
     /* pass Collection  */ 
-    constructor public AbstractTTCollection (poCol as ICollection,phtt as handle,pcField as char):
+    constructor protected AbstractTTCollection (poCol as ICollection,phtt as handle,pcField as char):
         this-object(phtt,pcField).
         poCol:ToTable(output table-handle phtt).
         Size = poCol:Size.  
     end constructor.
     
     /* pass temp-table handle and name of object field */ 
-    constructor public AbstractTTCollection ( phtt as handle, pcField as char ):
+    constructor protected AbstractTTCollection ( phtt as handle, pcField as char ):
         this-object(phtt,phtt:default-buffer-handle:buffer-field(pcField)).
     end constructor.
 
     /* pass temp-table handle and object field */ 
-    constructor public AbstractTTCollection (phtt as handle, hField as handle ):
+    constructor protected AbstractTTCollection (phtt as handle, hField as handle ):
         super ().
         assign
             mhTempTable     = phtt
@@ -180,16 +180,16 @@ class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollec
     
     /* Deep clone. or rather deep enough since we don't know what the elements' Clone()
        operations do, so this may end up being a memberwise clone */
-		    method override public Object Clone():
-	        define variable oClone as ICollection no-undo.
-	    
-    	    oClone = cast(this-object:GetClass():New(), ICollection).
-	        CloneElements(oClone).
-	    
-        return oClone.	    
-    	end method.
-	
-    	method protected void CloneElements(input poClone as ICollection):
+    method override public Object Clone():
+        define variable oClone as ICollection no-undo.
+        
+        oClone = cast(this-object:GetClass():New(), ICollection).
+        CloneElements(oClone).
+        
+        return oClone.        
+    end method.
+    
+    method protected void CloneElements(input poClone as ICollection):
         define variable oIterator as IIterator no-undo. 
 
         oIterator = this-object:Iterator().

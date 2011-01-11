@@ -31,6 +31,20 @@ class OpenEdge.Lang.Collections.TypedList inherits List:
         CollectionType = c:CollectionType.
     end constructor.
 
+    constructor protected TypedList (input poCol as ICollection, input phtt as handle, input pcField as character ):
+        super (input poCol, input phtt, input pcField).
+    end constructor.
+        
+    constructor protected TypedList (poType as class Class, input phtt as handle, input pcField as character ):
+        super (input phtt, input pcField).
+        CollectionType = poType.
+    end constructor.
+        
+    constructor protected TypedList (poType as class Class, input phtt as handle, input hField as handle ):
+        super (input phtt, input hField).
+        CollectionType = poType.
+    end constructor.
+
     method override public logical Add(poNewObject as Object):
         Assert:ArgumentIsType(poNewObject, CollectionType).
         return super:Add(poNewObject).

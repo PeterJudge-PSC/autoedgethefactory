@@ -1,5 +1,5 @@
 /** ------------------------------------------------------------------------
-    File        : SessionTypeCondition
+    File        : ConnectionCondition
     Purpose     : Session type and session code conditions for bindings.
     Syntax      : 
     Description : 
@@ -11,32 +11,35 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
+using OpenEdge.Core.InjectABL.Binding.Conditions.ConnectionCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionResolver.
+using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.StandardConditionResolver.
 
-using OpenEdge.Lang.String.
 using Progress.Lang.Class. 
 using Progress.Lang.Object.
 
-class OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition inherits Condition:
+class OpenEdge.Core.InjectABL.Binding.Conditions.ConnectionCondition inherits Condition:
+    define static public property CurrentConnection as ICondition no-undo get. set.
+    
     define static private property ConditionResolverType as class Class no-undo get. set.
     
-    constructor static SessionTypeCondition():
-          SessionTypeCondition:ConditionResolverType = Class:GetClass('OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeConditionResolver').
+    constructor static ConnectionCondition():
+          ConnectionCondition:CurrentConnection = new ConnectionCondition('CURRENT_CONNECTIONS'). 
+          ConnectionCondition:ConditionResolverType = Class:GetClass('OpenEdge.Core.InjectABL.Binding.Conditions.ConnectionConditionResolver').
     end constructor.
     
-    constructor public SessionTypeCondition (input pcValue as character):
-        super (new String(pcValue)).
+    constructor public ConnectionCondition (input pcValue as character):
+        super(pcValue).
     end constructor.
 
-    constructor public SessionTypeCondition (input poValue as Object):
+    constructor public ConnectionCondition (input poValue as Object):
         super (input poValue).
     end constructor.
     
     method override public IConditionResolver GetResolver():
-        return StandardConditionResolver:GetResolver(SessionTypeCondition:ConditionResolverType). 
+        return StandardConditionResolver:GetResolver(ConnectionCondition:ConditionResolverType). 
     end method.
     
 end class.

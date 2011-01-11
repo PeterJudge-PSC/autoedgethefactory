@@ -73,25 +73,25 @@ class OpenEdge.Lang.Assert:
     method public static void ArgumentIsAbstract(input poArgument as class Class):
         Assert:ArgumentNotNull(input poArgument, 'Type').
         if not poArgument:IsAbstract() then
-            undo, throw new AppError(substitute('&1 is an abstract type', poArgument:TypeName)).        
+            undo, throw new AppError(substitute('&1 is not an abstract type', poArgument:TypeName)).        
     end method.
 
     method public static void ArgumentNotAbstract(input poArgument as class Class):
         Assert:ArgumentNotNull(input poArgument, 'Type').
         if poArgument:IsAbstract() then
-            undo, throw new AppError(substitute('&1 is not an abstract type', poArgument:TypeName)).        
+            undo, throw new AppError(substitute('&1 is an abstract type', poArgument:TypeName)).        
     end method.
         
     method public static void ArgumentIsFinal(input poArgument as class Class):
         Assert:ArgumentNotNull(input poArgument, 'Type').
         if not poArgument:IsFinal() then
-            undo, throw new AppError(substitute('&1 is a final type', poArgument:TypeName)).                        
+            undo, throw new AppError(substitute('&1 is not a final type', poArgument:TypeName)).
     end method.
     
     method public static void ArgumentNotFinal(input poArgument as class Class):
         Assert:ArgumentNotNull(input poArgument, 'Type').
         if poArgument:IsFinal() then
-            undo, throw new AppError(substitute('&1 is not a final type', poArgument:TypeName)).                        
+            undo, throw new AppError(substitute('&1 is a final type', poArgument:TypeName)).                        
     end method.
     
     method static public void ArgumentIsValidType(input pcTypeName as character):
