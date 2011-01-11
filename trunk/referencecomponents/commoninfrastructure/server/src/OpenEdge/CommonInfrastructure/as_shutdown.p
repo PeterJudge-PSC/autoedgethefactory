@@ -10,7 +10,7 @@
     Created     : Fri Jun 04 13:57:59 EDT 2010
     Notes       :
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 /** -- main -- **/
 run OpenEdge/CommonInfrastructure/Common/stop_session.p.

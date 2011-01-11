@@ -7,7 +7,7 @@
     Created     : Tue Jan 04 14:23:46 EST 2011
     Notes       : 
   ----------------------------------------------------------------------*/
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
@@ -34,7 +34,7 @@ class OpenEdge.CommonInfrastructure.SecurityManagerServiceAdapter
     constructor public SecurityManagerServiceAdapter():
         super().
     end constructor.
-	
+    
     /** External method to dynamically set the service property via InjectABL */
     method public void SetService (input pcService as character):
         this-object:Service = pcService.

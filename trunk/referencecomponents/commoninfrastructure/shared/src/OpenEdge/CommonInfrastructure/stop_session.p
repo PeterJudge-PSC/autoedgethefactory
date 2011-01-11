@@ -10,7 +10,7 @@
     Created     : Tue Dec 28 11:01:25 EST 2010
     Notes       :
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.InjectABL.ComponentKernel.
 using OpenEdge.CommonInfrastructure.IServiceManager.

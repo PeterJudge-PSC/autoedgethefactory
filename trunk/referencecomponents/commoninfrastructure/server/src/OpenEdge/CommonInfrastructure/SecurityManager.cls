@@ -7,7 +7,7 @@
     Created     : Thu Mar 18 11:54:05 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.UserContext.
@@ -73,9 +73,9 @@ class OpenEdge.CommonInfrastructure.SecurityManager abstract inherits CommonSecu
     end method.
     
     method override public IUserContext GetClientContext(input pcContextId as longchar):
-	   return ValidateSession(pcContextId).
-	end method.
-	
+       return ValidateSession(pcContextId).
+    end method.
+    
     method abstract protected void ValidateCredentials(input pcUserName as character,
                                               input pcUserDomain as character,
                                               input pcPassword as character).

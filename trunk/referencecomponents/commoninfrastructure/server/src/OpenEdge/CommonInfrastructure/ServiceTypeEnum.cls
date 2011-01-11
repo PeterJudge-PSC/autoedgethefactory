@@ -7,7 +7,7 @@
     Created     : Mon Feb 22 11:34:26 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.ServiceTypeEnum.
 using OpenEdge.CommonInfrastructure.CommonServiceTypeEnum.

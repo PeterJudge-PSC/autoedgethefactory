@@ -7,7 +7,7 @@
     Created     : Tue Apr 20 12:12:37 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-/*routine-level on error undo, throw.*/
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.CommonComponentTypeEnum.
 using OpenEdge.CommonInfrastructure.ComponentTypeEnum.
