@@ -16,8 +16,8 @@ using OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs.
 using OpenEdge.PresentationLayer.Common.ActionStateEnum.
 using OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum.
 using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
-using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.UpdateActionEnum.
 using OpenEdge.Lang.DataTypeEnum.
 
 using Infragistics.Win.UltraWinListView.UltraListViewItem.

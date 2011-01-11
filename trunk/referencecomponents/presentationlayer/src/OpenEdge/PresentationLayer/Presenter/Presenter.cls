@@ -17,14 +17,14 @@ using OpenEdge.PresentationLayer.View.IContainedView.
 using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
 using OpenEdge.PresentationLayer.Common.DialogResultEnum.
 
-using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
-using OpenEdge.CommonInfrastructure.Common.Service.
-using OpenEdge.CommonInfrastructure.Common.IService.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.DestroyComponentError.
+using OpenEdge.CommonInfrastructure.IServiceCollection.
+using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.IService.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.ComponentInfo.
+using OpenEdge.CommonInfrastructure.DestroyComponentError.
 
 using OpenEdge.Core.System.InvalidActionError.
 using OpenEdge.Lang.Collections.IIterator.

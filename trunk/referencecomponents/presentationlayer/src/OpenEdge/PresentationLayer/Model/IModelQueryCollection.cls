@@ -41,18 +41,18 @@ class OpenEdge.PresentationLayer.Model.IModelQueryCollection inherits TypedMap:
         return cast(super:Put(poKey, poValue), String).
     end method.
 
-	method public logical ContainsKey(input poKey as String):
-		return super:ContainsKey(input poKey).
-	end method.
+    method public logical ContainsKey(input poKey as String):
+        return super:ContainsKey(input poKey).
+    end method.
 
     method public logical ContainsValue(input pcKey as character):
         return super:ContainsKey(new String(pcKey)).
     end method.
     
-	method public logical ContainsValue(input poValue as IModelQuery):
-		return super:ContainsValue(input poValue).
-	end method.
-	
+    method public logical ContainsValue(input poValue as IModelQuery):
+        return super:ContainsValue(input poValue).
+    end method.
+    
     method public String Put(input pcKey as character, input poValue as IModelQuery):     
         return this-object:Put(new String(pcKey), poValue). 
     end method.

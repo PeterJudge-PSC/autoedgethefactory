@@ -10,8 +10,8 @@
 routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Model.Model.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
  
 class OpenEdge.PresentationLayer.Model.DatabaseModel  abstract 
         inherits Model:
@@ -20,10 +20,10 @@ class OpenEdge.PresentationLayer.Model.DatabaseModel  abstract
         super(poServiceManager, poComponentInfo).
     end constructor.
     
-	constructor public DatabaseModel ( input pcServiceName as character, input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-		super (input pcServiceName, input poServiceManager, input poComponentInfo).
-	end constructor.
-	
+    constructor public DatabaseModel ( input pcServiceName as character, input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
+        super (input pcServiceName, input poServiceManager, input poComponentInfo).
+    end constructor.
+    
     method override protected handle GetBufferHandle(input pcTableName as character):
        define variable hBuffer as handle no-undo.
        

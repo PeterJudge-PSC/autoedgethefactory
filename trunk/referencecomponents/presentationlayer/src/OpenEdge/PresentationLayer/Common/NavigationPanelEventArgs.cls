@@ -10,7 +10,7 @@
 routine-level on error undo, throw.
 
 using OpenEdge.Core.System.RowPositionEnum. 
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 using OpenEdge.Core.System.EventArgs. 
 using Progress.Lang.Class.
 

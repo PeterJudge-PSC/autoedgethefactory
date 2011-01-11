@@ -13,8 +13,8 @@ using OpenEdge.PresentationLayer.Model.Model.
 using OpenEdge.PresentationLayer.Model.IModelQuery.
 using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
 
-using OpenEdge.CommonInfrastructure.Common.IServiceManager. 
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager. 
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Core.System.IQuery.
 using OpenEdge.Core.System.IQueryDefinition.
