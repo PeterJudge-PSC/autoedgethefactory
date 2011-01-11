@@ -10,15 +10,15 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicWorkFlow.
-using OpenEdge.BusinessComponent.WorkFlow.BizLogic.IBizLogicServerParameters.
+using OpenEdge.EnterpriseServices.BizLogic.IBizLogicWorkFlow.
+using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.
 using OpenEdge.BusinessComponent.WorkFlow.WorkFlowDecorator.
 using OpenEdge.BusinessComponent.WorkFlow.IWorkFlow.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 
-class OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkFlow inherits WorkFlowDecorator
+class OpenEdge.BusinessComponent.Workflow.BizLogicWorkFlow inherits WorkFlowDecorator
         implements IBizLogicWorkFlow:
     
     /* The Savvion Session ID */
@@ -27,12 +27,12 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogic.BizLogicWorkFlow inherits Wor
     /* Currently-running Process' instance ID  */
     define public property ProcessInstanceId as int64 no-undo get.
 
-	define public property ServerParameter as IBizLogicServerParameters no-undo get. set. 
+    define public property ServerParameter as IBizLogicServerParameters no-undo get. set. 
 
-	constructor public BizLogicWorkFlow(input poWorkFlow as IWorkFlow):
-		super(input poWorkFlow).
-	end constructor.
-	
+    constructor public BizLogicWorkFlow(input poWorkFlow as IWorkFlow):
+        super(input poWorkFlow).
+    end constructor.
+    
     method public void Login (input pcUsername as character,    
                               input pcPassword as character):
     end method.

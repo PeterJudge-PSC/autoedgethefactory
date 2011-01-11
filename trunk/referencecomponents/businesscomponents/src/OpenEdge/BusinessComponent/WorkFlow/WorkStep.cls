@@ -18,9 +18,9 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
-using OpenEdge.CommonInfrastructure.Common.Service.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.InvocationError.

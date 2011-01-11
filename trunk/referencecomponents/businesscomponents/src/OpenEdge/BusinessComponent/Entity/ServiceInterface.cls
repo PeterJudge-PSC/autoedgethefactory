@@ -23,10 +23,10 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Common.Service.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Core.System.ArgumentError.
 
@@ -39,9 +39,9 @@ class OpenEdge.BusinessComponent.Entity.ServiceInterface inherits BusinessEntity
     /** The service for which this provider is currently servicing a request. */
     define public property Service as character no-undo get. set.
     
-	constructor public ServiceInterface(input poBusinessEntity as IBusinessEntity):
-		super (input poBusinessEntity).
-	end constructor.
+    constructor public ServiceInterface(input poBusinessEntity as IBusinessEntity):
+        super (input poBusinessEntity).
+    end constructor.
 
     /** External method to dynamically set the service property via InjectABL */
     method public void SetService (input pcService as character):

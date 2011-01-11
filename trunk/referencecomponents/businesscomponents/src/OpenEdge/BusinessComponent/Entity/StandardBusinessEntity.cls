@@ -18,8 +18,8 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Lang.CallbackNameEnum.
 
@@ -36,11 +36,11 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
     
     define protected property StaticDatasetHandle as handle no-undo get. private set.
 
-	constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
-	                                          input poComponentInfo as IComponentInfo,
-	                                          input poDAO as IDataAccess ):
-		super(input poServiceManager, input poComponentInfo, input poDAO).
-	end constructor.
+    constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
+                                              input poComponentInfo as IComponentInfo,
+                                              input poDAO as IDataAccess ):
+        super(input poServiceManager, input poComponentInfo, input poDAO).
+    end constructor.
 
     constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
                                               input poComponentInfo as IComponentInfo ):
@@ -73,14 +73,14 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
         return oSaveResponse.
     end method.
     
-	method override public IFetchResponse FetchSchema(input poDefineRequest as IFetchRequest):
-	    define variable oFetchSchemaResponse as IFetchResponse no-undo.
-	    
+    method override public IFetchResponse FetchSchema(input poDefineRequest as IFetchRequest):
+        define variable oFetchSchemaResponse as IFetchResponse no-undo.
+        
         oFetchSchemaResponse = new FetchResponse(poDefineRequest).
         cast(oFetchSchemaResponse, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         return oFetchSchemaResponse.
-	end method.
+    end method.
     
     method protected handle CopyStaticDataset (output dataset-handle phDataset):
         phDataset = StaticDatasetHandle.

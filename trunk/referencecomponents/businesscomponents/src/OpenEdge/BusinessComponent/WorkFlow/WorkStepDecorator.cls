@@ -33,21 +33,21 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStepDecorator abstract
             DecoratedWorkStep:Name = pcName.
         end set.
     
-	constructor public WorkStepDecorator(input poWorkStep as IWorkStep):
+    constructor public WorkStepDecorator(input poWorkStep as IWorkStep):
         Assert:ArgumentNotNull(poWorkStep, 'WorkStep').
         DecoratedWorkStep = poWorkStep.
-	end constructor.
-	
-	method public void PerformStep():
-	    DecoratedWorkStep:PerformStep().
+    end constructor.
+    
+    method public void PerformStep():
+        DecoratedWorkStep:PerformStep().
     end method.
     
-	method public void PerformStep(input poRequest as IWorkstepRequest).
-	   DecoratedWorkStep:PerformStep(poRequest).
+    method public void PerformStep(input poRequest as IWorkstepRequest).
+       DecoratedWorkStep:PerformStep(poRequest).
    end method.
-	       
-	method public IWorkstepResponse GetResponse(input pcMessageId as longchar):
-	    return DecoratedWorkStep:GetResponse(pcMessageId).
-	end method.
-	
+           
+    method public IWorkstepResponse GetResponse(input pcMessageId as longchar):
+        return DecoratedWorkStep:GetResponse(pcMessageId).
+    end method.
+    
 end class.

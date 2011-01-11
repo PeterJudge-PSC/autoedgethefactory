@@ -17,9 +17,9 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 
-using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.IServiceManager.
-using OpenEdge.CommonInfrastructure.Common.Service.
+using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.Service.
 
 using OpenEdge.Core.System.ApplicationError.
 
@@ -63,9 +63,9 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkFlow abstract inherits Service
                                       Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse')).
     end constructor.
     
-	method abstract public void PerformFlow().
+    method abstract public void PerformFlow().
 
-	method public void PerformFlow(input poRequest as IWorkflowRequest):
+    method public void PerformFlow(input poRequest as IWorkflowRequest):
         ServiceResponses:Put(new String(cast(poRequest, IServiceMessage):MessageId),
                              new ServiceResponse(cast(poRequest, IServiceRequest))).
         
@@ -82,8 +82,8 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkFlow abstract inherits Service
                    oCurrentResponse:ErrorText = oError:ResolvedMessageText().
             undo, throw oError. 
         end catch.
-	end method.
-	
+    end method.
+    
     method public IWorkflowResponse GetResponse(input pcMessageId as longchar):
         return cast(ServiceResponses:Remove(new String(pcMessageId)), IWorkflowResponse).        
     end method.
