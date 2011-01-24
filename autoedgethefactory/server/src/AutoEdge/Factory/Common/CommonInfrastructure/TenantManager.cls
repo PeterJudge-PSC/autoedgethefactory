@@ -7,7 +7,7 @@
     Created     : Tue Dec 21 16:44:52 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.TenantManager.
 using OpenEdge.CommonInfrastructure.IServiceManager.
@@ -61,7 +61,7 @@ class AutoEdge.Factory.Common.CommonInfrastructure.TenantManager inherits Tenant
         define variable oTenantId as IMap no-undo.
         
         define buffer lbTenant for Tenant.
-
+        
         find lbTenant where
              lbTenant.Name eq pcTenantName 
              no-lock no-error.
