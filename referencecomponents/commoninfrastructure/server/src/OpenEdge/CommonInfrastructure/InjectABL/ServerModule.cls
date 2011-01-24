@@ -9,7 +9,7 @@
                     and so the OnServerSession() binding is probably not strictly necessary.
                     However, it's useful to have, for clarity if nothing else.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.CommonSecurityManager.
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
@@ -19,9 +19,9 @@ using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using Progress.Lang.Class.
 
-class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherits InjectionModule: 
+class OpenEdge.CommonInfrastructure.InjectABL.ServerModule inherits InjectionModule: 
     
-    constructor public CommonInfrastructureModule():
+    constructor public ServerModule():
         super().
     end constructor.
     
@@ -35,6 +35,7 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
 
              Server-side binding will also need to be done per-application, since we currently have no 
              generic auth code */
+        /* example only
         oBindingSyntax = Bind(CommonSecurityManager:SecurityManagerType).
         oBindingSyntax
             :To('OpenEdge.CommonInfrastructure.SecurityManager')
@@ -42,6 +43,7 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
                      ManagerScopeEnum:ServiceManager)
             :OnServerSession().
+        */
         
         /* scopes the tenant manager's lifecycle to the security manager's */
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ITenantManager').
