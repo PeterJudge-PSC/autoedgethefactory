@@ -7,7 +7,7 @@
    Created     : Thu Feb 26 14:18:30 EST 2009
    Notes       : 
  ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.UpdateActionEnum.  
 using OpenEdge.PresentationLayer.Presenter.DataboundPresenter.

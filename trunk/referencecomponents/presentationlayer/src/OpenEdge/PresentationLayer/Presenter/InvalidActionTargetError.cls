@@ -7,7 +7,7 @@
     Created     : Wed Jul 08 10:05:05 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.Presenter.InvalidActionTargetError.
 using OpenEdge.Core.System.ApplicationError.

@@ -7,7 +7,7 @@
     Created     : Tue Apr 14 10:53:05 EDT 2009
     Notes       : * The action performed is defined by ModelActionEnum  
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 using OpenEdge.CommonInfrastructure.IComponentInfo.

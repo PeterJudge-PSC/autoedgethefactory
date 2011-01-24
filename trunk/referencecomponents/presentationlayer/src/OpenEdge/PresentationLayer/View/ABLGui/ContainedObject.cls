@@ -7,7 +7,7 @@
     Created     : Fri Feb 20 14:41:33 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.  
+{routinelevel.i}  
   
 using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.View.IContainedView.

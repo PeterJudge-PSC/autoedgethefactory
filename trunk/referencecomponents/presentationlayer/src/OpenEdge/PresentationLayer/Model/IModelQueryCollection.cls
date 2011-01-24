@@ -8,7 +8,7 @@
     Notes       : * Specialised class makes for more readable code on Get(),
                     Put(), Remove() etc.
   --------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.Model.IModelQueryCollection.
 using OpenEdge.PresentationLayer.Model.IModelQuery.

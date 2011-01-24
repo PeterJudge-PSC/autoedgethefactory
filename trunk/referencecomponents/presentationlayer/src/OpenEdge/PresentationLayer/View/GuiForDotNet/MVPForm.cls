@@ -9,7 +9,7 @@
                  a form to inherit from a concrete class in order to paint it
                  on the canvas. 
  ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.View.IView.
 using OpenEdge.PresentationLayer.View.IContainerView.

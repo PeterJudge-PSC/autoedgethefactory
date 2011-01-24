@@ -5,7 +5,7 @@
     Created     : Tue Dec 11 11:31:41 EST 2007
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.Model.Model.
 using OpenEdge.PresentationLayer.Model.IModelReadOnly.
