@@ -1,3 +1,4 @@
+@todo(task="implement", action="split into client and server?").
 /*------------------------------------------------------------------------
     File        : ISecurityManager
     Purpose     : 
@@ -7,6 +8,7 @@
     Created     : Thu Mar 18 11:53:52 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 using OpenEdge.CommonInfrastructure.IUserContext.
   
 interface OpenEdge.CommonInfrastructure.ISecurityManager:
@@ -15,8 +17,7 @@ interface OpenEdge.CommonInfrastructure.ISecurityManager:
         a request being serviced by this AVM. */
     define public property CurrentUserContext as IUserContext no-undo get.
         
-    /** Describes whether the current session is managed or not. A managed session
-        basically has a user associated with it. */
+    /** Describes whether the current session is managed or not. */
     define public property IsManagedSession as logical no-undo get.
     
     /** Validates a user's session as identified by a context id.
@@ -47,8 +48,13 @@ interface OpenEdge.CommonInfrastructure.ISecurityManager:
     /** Resolves a context ID into a context object.
         
         @param longchar The identifier for the context.
-        @param IUserContext The user context object. */
-    method public IUserContext GetClientContext(input pcContextId as longchar).
+        @return IUserContext The user context object. */
+    method public IUserContext GetUserContext(input pcContextId as longchar).
+
+    /** Retrieves or build user context for passing across the wire (in either direction).
+        
+        @return IUserContext User context for sending across the wire */
+    method public IUserContext GetPendingContext().
     
     /** Logs a user into the application
     
@@ -77,5 +83,13 @@ interface OpenEdge.CommonInfrastructure.ISecurityManager:
         
         @param longchar The user context ID. */
     method public void UserLogout(input pcContextId as longchar).
+    
+    /** Authorises the current user to undertake the specified action on the
+        service. An error is thrown if the authentication fails.
+        
+        @param character The service being operated upon.
+        @param ServiceMessageActionEnum The Action being performed. */
+    method public void AuthenticateServiceAction (input pcService as character,
+                                                  input poServiceMessageAction as ServiceMessageActionEnum).
     
 end interface.

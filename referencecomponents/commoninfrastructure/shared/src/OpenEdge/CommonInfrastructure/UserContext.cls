@@ -7,7 +7,7 @@
     Created     : Thu Dec 02 11:37:05 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.ITenantManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
@@ -21,6 +21,7 @@ using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
+using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.UserContext
         implements IUserContext, IExternalizable:
@@ -94,8 +95,30 @@ class OpenEdge.CommonInfrastructure.UserContext
         ContextId = poStream:ReadLongChar().
         TenantName = poStream:ReadChar().
         
-        cast(TenantId:KeySet, ICollection):AddArray(poStream:ReadObjectArray()).
-        TenantId:Values:AddArray(poStream:ReadObjectArray()).
+        def var oo as Object extent.
+        
+        oo = poStream:ReadObjectArray().
+        cast(TenantId:KeySet, ICollection):AddArray(oo).
+
+        oo = poStream:ReadObjectArray().
+        TenantId:Values:AddArray(oo).
     end method.
+
+	method override public logical Equals(input p0 as Object ):
+		define variable lEquals as logical no-undo.
+		define variable oUserContext as IUserContext no-undo.
+		
+		lEquals = super:Equals(input p0).
+		if not lEquals then
+            lEquals = type-of(p0, IUserContext).
+            
+		if lEquals then
+            assign oUserContext = cast(p0, IUserContext) 
+                   lEquals = (this-object:UserName eq oUserContext:UserName and
+                              this-object:UserDomain eq oUserContext:UserDomain and
+                              this-object:TenantName eq oUserContext:TenantName and
+                              this-object:ContextId eq oUserContext:ContextId).
+        return lEquals.		
+	end method.
     
 end class.

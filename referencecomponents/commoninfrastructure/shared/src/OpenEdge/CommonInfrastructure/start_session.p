@@ -1,5 +1,5 @@
 /** ------------------------------------------------------------------------
-    File        : start_session.p
+    File        : OpenEdge/CommonInfrastructure/start_session.p
     Purpose     :  General / common session bootstrapping procedure.
     Syntax      :
     Description : 
@@ -7,7 +7,7 @@
     Created     : Thu Dec 23 14:36:11 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.InjectABL.ComponentKernel.
 using OpenEdge.CommonInfrastructure.IServiceManager.

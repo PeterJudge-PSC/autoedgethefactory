@@ -15,13 +15,14 @@
                   * The CommonServiceManager is named "Common" to avoid name conflicts with other
                     service managers in the OpenEdge.CommonInfrastructure namespace.                    
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
 using OpenEdge.CommonInfrastructure.CommonServiceTypeEnum.
 using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IService.
 using OpenEdge.CommonInfrastructure.Service.
 using OpenEdge.CommonInfrastructure.Component.
@@ -162,16 +163,15 @@ class OpenEdge.CommonInfrastructure.CommonServiceManager
                 oServiceType = oScopedInstance[iLoop]:GetClass(). 
                 
                 /* we don't know what we've got here, so use generic AppComponent */
-                RegisterService(CommonServiceTypeEnum:AppService, oServiceType).
+                RegisterService(CommonServiceTypeEnum:Manager, oServiceType).
                 
                 find lbService where
                      lbService.Service     = oServiceType and
-                     lbService.ServiceType = CommonServiceTypeEnum:AppService.
+                     lbService.ServiceType = CommonServiceTypeEnum:Manager.
                 lbService.Instance = oScopedInstance[iLoop].
             end.
         end.
         
-        @todo(task="implement", action="refactor").
         for each lbService where lbService.Instance = ?:
             oService = StartService(cast(lbService.Service, Class)).
         end.
@@ -183,7 +183,8 @@ class OpenEdge.CommonInfrastructure.CommonServiceManager
         /* first stop the appstart object*/
         StopService(moAppStart).
         
-        for each lbService:
+        for each lbService where :
+            
             StopService(cast(lbService.Instance, IService)).
             lbService.Instance = ?.
             delete lbService.
@@ -226,7 +227,7 @@ class OpenEdge.CommonInfrastructure.CommonServiceManager
         if pcInstanceName eq '' then
             find lbService where
                  lbService.Service     = poService and
-                 lbService.ServiceType = CommonServiceTypeEnum:AppService
+                 lbService.ServiceType = CommonServiceTypeEnum:Manager
                  no-error.
         lCache = available lbService. 
         if lCache then
@@ -237,7 +238,6 @@ class OpenEdge.CommonInfrastructure.CommonServiceManager
         if not valid-object(oService) then
         do:
             oService = cast(StartComponent(poService, pcInstanceName), IService).
-        
             if lCache then
                 lbService.Instance = oService. 
         end.

@@ -1,5 +1,5 @@
 /** ------------------------------------------------------------------------
-    File        : stop_session.p
+    File        : OpenEdge/CommonInfrastructure/stop_session.p
     Purpose     : 
 
     Syntax      :
@@ -10,7 +10,7 @@
     Created     : Tue Dec 28 11:01:25 EST 2010
     Notes       :
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.InjectABL.ComponentKernel.
 using OpenEdge.CommonInfrastructure.IServiceManager.
