@@ -9,7 +9,7 @@
                     the Savvion process of that fact. Or when we want to update 
                     DataSlotValues on completion.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.BusinessComponent.WorkFlow.WorkStep.
 using OpenEdge.BusinessComponent.WorkFlow.IWorkStep.

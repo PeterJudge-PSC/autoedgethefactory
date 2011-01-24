@@ -8,7 +8,7 @@
     Created     : Tue Dec 07 08:01:43 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.BusinessComponent.Entity.IBusinessEntity.
 using OpenEdge.BusinessComponent.Entity.BusinessEntityDecorator.
