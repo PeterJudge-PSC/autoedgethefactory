@@ -7,7 +7,7 @@
     Created     : Thu May 21 14:49:18 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
 using OpenEdge.PresentationLayer.Common.DialogResultEnum.

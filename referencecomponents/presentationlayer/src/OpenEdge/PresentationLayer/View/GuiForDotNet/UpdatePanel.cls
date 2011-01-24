@@ -7,7 +7,7 @@
     Created     : Thu Feb 26 13:43:16 EST 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.View.GuiForDotNet.MVPUserControl.
 using OpenEdge.PresentationLayer.View.IUpdatePanelView.

@@ -1,3 +1,4 @@
+@todo(task="refactor", action="belongs on CI - security, not PL").
 /*------------------------------------------------------------------------
     File        : NoUserLoggedInError
     Purpose     : 
@@ -7,7 +8,7 @@
     Created     : Wed Jul 08 11:04:30 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.Presenter.NoUserLoggedInError.
 using OpenEdge.Core.System.ApplicationError.

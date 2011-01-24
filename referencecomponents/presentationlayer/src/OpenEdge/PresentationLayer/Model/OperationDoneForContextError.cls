@@ -7,7 +7,7 @@
     Created     : Tue Jul 07 17:02:23 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.PresentationLayer.Model.OperationDoneForContextError.
 using OpenEdge.Core.System.ApplicationError.
