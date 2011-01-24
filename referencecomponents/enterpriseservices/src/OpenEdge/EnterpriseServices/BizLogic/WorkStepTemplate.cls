@@ -7,7 +7,7 @@
     Created     : Tue Jul 06 12:03:30 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.EnterpriseServices.BizLogic.WorkStepTemplateTypeEnum.
 using OpenEdge.EnterpriseServices.BizLogic.WorkItem.

@@ -7,7 +7,7 @@
     Created     : Wed Nov 24 13:14:52 EST 2010
     Notes       : * As per Savvion doc.
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.EnterpriseServices.BizLogic.WorkItemStatusEnum. 
 using OpenEdge.Lang.EnumMember.

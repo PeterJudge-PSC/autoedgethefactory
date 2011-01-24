@@ -7,7 +7,7 @@
     Created     : Wed Nov 24 13:42:31 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.EnterpriseServices.BizLogic.PriorityEnum.
 using OpenEdge.Lang.EnumMember.

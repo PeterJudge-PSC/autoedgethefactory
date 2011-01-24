@@ -7,7 +7,7 @@
     Created     : Tue Jul 06 12:13:31 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
 using OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate.
