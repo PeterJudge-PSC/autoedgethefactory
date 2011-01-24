@@ -7,7 +7,7 @@
     Created     : Wed Dec 22 09:27:08 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.UserContext.
@@ -40,8 +40,11 @@ class AutoEdge.Factory.Common.CommonInfrastructure.SecurityManager inherits Secu
         if lbUser.Password ne pcPassword then
            undo, throw new InvalidValueSpecifiedError('password', substitute(' for user ', '(&1)', pcUserName)).
         
-        find current lbUser exclusive-lock.
-        assign lbUser.LastLoginDate = now.
+        do transaction:
+            find current lbUser exclusive-lock.
+            assign lbUser.LastLoginDate = now.
+        end.
+        
     end method.
     
 end class.
