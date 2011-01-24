@@ -12,7 +12,7 @@
 using Progress.Lang.*.
 using Progress.Windows.Form.
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class AutoEdge.Factory.Order.PresentationLayer.OrderListForm inherits Form: 
     
@@ -25,7 +25,7 @@ class AutoEdge.Factory.Order.PresentationLayer.OrderListForm inherits Form:
         super().
         InitializeComponent().
         
-        run OpenEdge/CommonInfrastructure/Server/service_userlogin.p ('usah', 'p@ssword', output mcContextId).
+        run OpenEdge/CommonInfrastructure/Server/service_interface_userlogin.p ('usah', 'p@ssword', output mcContextId).
          
         ShowOrders().
         

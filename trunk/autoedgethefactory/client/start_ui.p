@@ -10,7 +10,7 @@
     Created     : Thu Dec 16 10:42:00 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 
 using AutoEdge.Factory.Order.PresentationLayer.ITaskListManager.
@@ -35,7 +35,7 @@ define variable cFilePattern as character extent 1 no-undo.
 define variable oServiceManager as IServiceManager no-undo.
 
 /** -- main -- **/
-run OpenEdge/CommonInfrastructure/Common/start_session.p ('').
+run OpenEdge/CommonInfrastructure/start_session.p ('').
 
 oTasks = oServiceManager:Kernel:Get('AutoEdge.Factory.Order.PresentationLayer.ITaskListManager').
 
