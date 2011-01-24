@@ -8,7 +8,7 @@
     Created     : Tue Dec 07 08:52:34 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.BusinessComponent.WorkFlow.WorkStepDecorator.
 using OpenEdge.BusinessComponent.WorkFlow.IWorkStep.

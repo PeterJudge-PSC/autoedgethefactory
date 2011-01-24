@@ -5,7 +5,7 @@
     Description : 
     @author pjudge
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.DataAccess.IDataAccess.
 
@@ -48,9 +48,9 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
     end constructor.
 
     method override public void FetchData(poRequest as IFetchRequest):
-        /* We assume new data 
-           appending requests would possibly need direction to MERGE or APPEND in fill */
-        /*        DatasetHandle:empty-dataset () .*/
+        /* We assume new data appending requests would possibly need 
+           direction to MERGE or APPEND in fill */
+
         cast(poRequest, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         super:FetchData(poRequest).                        

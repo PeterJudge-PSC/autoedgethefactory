@@ -8,7 +8,10 @@
     Created     : Wed Dec 01 16:15:19 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
+
+using OpenEdge.BusinessComponent.Entity.BusinessEntity.
+using OpenEdge.DataSource.DataSource.
 
 using OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
@@ -23,10 +26,8 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
     define protected property WorkStepServiceInterfaceType as class Class no-undo get. set.
     define protected property BizLogicWorkStepType as class Class no-undo get. set.
     define protected property IBizLogicServerParametersType as class Class no-undo get. set.
-    define protected property IBusinessEntityType as class Class no-undo get. set.
     define protected property BusinessEntityServiceInterfaceType as class Class no-undo get. set.
     define protected property IDataAccessType as class Class no-undo get. set.
-    define protected property IDataSourceType as class Class no-undo get. set.
     define protected property IServiceProviderType as class Class no-undo get. set.
     define protected property InjectABLServiceProviderType as class Class no-undo get. set.
     define protected property InjectABLComponentProviderType as class Class no-undo get. set.
@@ -35,19 +36,13 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
         super ().
         
         /* do this one per type, for readability and possibly performance too */
-        assign IBusinessEntityType = Class:GetClass('OpenEdge.BusinessComponent.Entity.IBusinessEntity')
-               BusinessEntityServiceInterfaceType  = Class:GetClass('OpenEdge.BusinessComponent.Entity.ServiceInterface')
+        assign BusinessEntityServiceInterfaceType = Class:GetClass('OpenEdge.BusinessComponent.Entity.ServiceInterface')
                IDataAccessType = Class:GetClass('OpenEdge.DataAccess.IDataAccess')
-               IDataSourceType = Class:GetClass('OpenEdge.DataSource.IDataSource')
-
                IServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider')
-               
                IWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.IWorkStep')
-               WorkStepServiceInterfaceType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.WorkStepServiceInterface') 
-               BizLogicWorkStepType = Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.BizLogicWorkStep')
-               
+               WorkStepServiceInterfaceType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.WorkStepServiceInterface')
+               BizLogicWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep')
                IBizLogicServerParametersType = Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters')
-
                InjectABLServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
                InjectABLComponentProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider').
     end constructor.
@@ -58,7 +53,7 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
                                              input pcDAName as character,
                                              input pcConcreteDAType as character,
                                              input pcDataSourceName as character extent,
-                                             input pcDataSourceTableName as character extent,
+                                             input pcDataSourceKey as character extent,
                                              input pcConcreteDataSourceType as character extent):
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
@@ -76,12 +71,12 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
             :WithPropertyValue('Service', pcBindingName).
         
         assign extent(oArgs) = 1 
-               oArgs[1] = new Parameter(IBusinessEntityType, pcBindingName).
+               oArgs[1] = new Parameter(BusinessEntity:IBusinessEntityType, pcBindingName).
         oBindingSyntax
             :WithConstructorArgument(oArgs).
         
         /* Bind actual Business Entity */
-        oBindingSyntax = Bind(IBusinessEntityType).
+        oBindingSyntax = Bind(BusinessEntity:IBusinessEntityType).
         oBindingSyntax
             :Named(pcBindingName)
             :To(pcConcreteBEType).
@@ -103,13 +98,13 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
         do iLoop = 1 to iMax:
             /* Add datasource to dataaccess binding. use this one loop
                for efficiency's sake */
-            assign oArgs[1] = new Parameter(pcDataSourceTableName[iLoop])
-                   oArgs[2] = new Parameter(IDataSourceType, pcDataSourceName[iLoop]).
+            assign oArgs[1] = new Parameter(pcDataSourceKey[iLoop])
+                   oArgs[2] = new Parameter(DataSource:IDataSourceType, pcDataSourceName[iLoop]).
             oBindingSyntax
                 :WithMethodValue('AddDataSource', oArgs).
             
             /* bind datasources */
-            oDataSourceBindingSyntax = Bind(IDataSourceType).
+            oDataSourceBindingSyntax = Bind(DataSource:IDataSourceType).
             oDataSourceBindingSyntax
                 :Named(pcDataSourceName[iLoop])
                 :To(pcConcreteDataSourceType[iLoop])

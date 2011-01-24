@@ -7,7 +7,7 @@
     Created     : Mon Dec 06 13:52:11 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.BusinessComponent.WorkFlow.IWorkFlow.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowRequest.

@@ -10,7 +10,7 @@
                     data store could be a prodataset, temp-table or some other 
                     construct.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.BusinessComponent.Entity.BusinessEntity.
 using OpenEdge.BusinessComponent.Entity.IBusinessEntity.
@@ -26,14 +26,21 @@ using OpenEdge.CommonInfrastructure.IServiceManager.
 using OpenEdge.CommonInfrastructure.IComponentInfo.
 
 using OpenEdge.Lang.Assert.
+using Progress.Lang.Class.
 
 class OpenEdge.BusinessComponent.Entity.BusinessEntity abstract inherits Service 
         implements IBusinessEntity:
+    
+    define static public property IBusinessEntityType as class Class no-undo get. private set.            
     
     define public property DataAccess as IDataAccess no-undo get. set.
     method public void SetDataAccess (input poDataAccess as IDataAccess):
         DataAccess = poDataAccess.
     end method.
+    
+    constructor static BusinessEntity():        
+        BusinessEntity:IBusinessEntityType = Class:GetClass('OpenEdge.BusinessComponent.Entity.IBusinessEntity').
+    end constructor.
     
     constructor public BusinessEntity(input poServiceManager as IServiceManager,
                                       input poComponentInfo as IComponentInfo,
