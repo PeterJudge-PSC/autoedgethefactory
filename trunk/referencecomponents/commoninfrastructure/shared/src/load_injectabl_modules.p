@@ -7,16 +7,16 @@
     Created     : Mon Dec 13 13:40:24 EST 2010
     Notes       :
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
-using OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule.
+using OpenEdge.CommonInfrastructure.InjectABL.SharedModule.
 using OpenEdge.Core.InjectABL.IKernel.
 
 /** -- defs  -- **/
 define input parameter poKernel as IKernel no-undo.
 
 /** -- main -- **/
-poKernel:Load(new CommonInfrastructureModule()).
+poKernel:Load(new SharedModule()).
 
 /** -- errors -- **/
 /** -- eof -- **/

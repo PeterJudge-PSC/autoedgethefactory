@@ -8,7 +8,7 @@
     Notes       : * The CommonSecurityManager is name "Common" to avoid name conflicts with other
                    security managers in the OpenEdge.CommonInfrastructure namespace.                    
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.UserContext.
@@ -18,6 +18,7 @@ using OpenEdge.CommonInfrastructure.IServiceManager.
 using OpenEdge.CommonInfrastructure.IComponentInfo. 
 using OpenEdge.CommonInfrastructure.ITenantManager.
 using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Core.Util.ObjectOutputStream.
@@ -54,7 +55,7 @@ class OpenEdge.CommonInfrastructure.CommonSecurityManager abstract inherits Serv
             return valid-object(CurrentUserContext).
         end get.
     
-    constructor public CommonSecurityManager(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
+    constructor public CommonSecurityManager(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).
     end constructor.
     
@@ -84,15 +85,26 @@ class OpenEdge.CommonInfrastructure.CommonSecurityManager abstract inherits Serv
         
         @param longchar The context ID identifying the user who's session is being ended. */    
     method public void EndSession(input pcContextId as longchar):
-        EndSession(GetClientContext(pcContextId)).
+        EndSession(GetUserContext(pcContextId)).
     end method.    
 
     /** Resolves a context ID into a context object.
         
         @param longchar The identifier for the context.
-        @param IUserContext The user context object. */
-    method public IUserContext GetClientContext(input pcContextId as longchar):
+        @return IUserContext The user context object. */
+    method public IUserContext GetUserContext(input pcContextId as longchar):
        return ValidateSession(pcContextId).
+    end method.
+    
+    /** Retrieves or build user context for passing across the wire (in either direction).
+        
+        @return IUserContext User context for sending across the wire */
+    method public IUserContext GetPendingContext():
+        /* In the absence of an override, return the current context.
+           An override to this call may take the contents of the CurrentUserContext,
+           and edit/manipulate them in some way, so that only some values are passed 
+           across the wire.     */
+        return CurrentUserContext.
     end method.
     
     /** Logs a user into the application
@@ -124,15 +136,17 @@ class OpenEdge.CommonInfrastructure.CommonSecurityManager abstract inherits Serv
         
         @param IUserContext The (validated) user context object for the given credentials. */
     method public void UserLogout(input poContext as IUserContext):
-        /* end the session*/
+        CurrentUserContext = ?.
+        
+        /* end the session */
         EndSession(poContext).
     end method.
     
     /** Logs a user out of the application.
         
         @param longchar The user context ID. */
-    method public void UserLogout( input pcContextId as longchar):
-        UserLogout(GetClientContext(pcContextId)).
+    method public void UserLogout(input pcContextId as longchar):
+        UserLogout(GetUserContext(pcContextId)).
     end method.
     
     /** Read and write allows us to turn context into a kind of cookie, if we so desire. */
@@ -151,16 +165,30 @@ class OpenEdge.CommonInfrastructure.CommonSecurityManager abstract inherits Serv
         
         return oUC.
     end method.
-
+    
     method protected void WriteSerializedContext(input poUserContext as IUserContext):
         define variable oOOS as ObjectOutputStream no-undo.
         define variable oUC as IUserContext no-undo.
         define variable cFilename as character no-undo.
         
-        cFilename = session:temp-dir + CommonSecurityManager:UserContextType:TypeName + '.' + poUserContext:ContextId + '.ser'.
-        
-        oOOS = new ObjectOutputStream().
-        oOOS:WriteObject(poUserContext).
-        oOOS:Write(cFilename).
+        if valid-object(poUserContext) then
+        do:
+            cFilename = session:temp-dir + CommonSecurityManager:UserContextType:TypeName + '.' + poUserContext:ContextId + '.ser'.
+            
+            oOOS = new ObjectOutputStream().
+            oOOS:WriteObject(poUserContext).
+            oOOS:Write(cFilename).
+        end.
     end method.
+    
+    /** Authorises the current user to undertake the specified action on the
+        service. AN error is thrown if the authentication fails.
+        
+        @param character The service being operated upon.
+        @param ServiceMessageActionEnum The Action being performed. */
+    method public void AuthenticateServiceAction (input pcService as character,
+                                                  input poServiceMessageAction as ServiceMessageActionEnum):
+        @todo(task="implement", action="").
+    end method.
+    
 end class.

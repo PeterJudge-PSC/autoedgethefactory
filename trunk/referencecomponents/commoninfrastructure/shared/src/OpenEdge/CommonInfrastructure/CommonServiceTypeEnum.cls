@@ -9,7 +9,7 @@
     Notes       : * Not final because we have client- and server-specific
                     service types.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.CommonServiceTypeEnum.
 using OpenEdge.CommonInfrastructure.CommonComponentTypeEnum.

@@ -7,7 +7,7 @@
     Created     : Wed Jul 08 10:01:28 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.DestroyComponentError.
 using OpenEdge.Core.System.ApplicationError.
