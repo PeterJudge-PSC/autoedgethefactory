@@ -1,6 +1,7 @@
 # PF for Server
- -pf cfg\shared.pf
+ -pf ../shared/cfg/shared.pf
  
--db C:\Devarea\projects\OEBP\autoedgethefactory\server\db\aetf.db
- -T C:\Devarea\projects\OEBP\autoedgethefactory\server\temp
+ # DB connections can also be managed by the ConnectionManager
+ -db ./db/aetf.db -H localhost -S 5000
+ -T ./temp
  
