@@ -7,7 +7,7 @@
     Created     : Wed Dec 29 14:39:34 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
@@ -32,7 +32,7 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
     /** The handle to the ABL DATA-SOURCE object that this query operates against.
         
         A case can be made for an OE.DataSource.ABLDatasource that contains
-            the DataSourceQuery and a HANDLE property (ie not held here). */
+        the DataSourceQuery and a HANDLE property (ie not held here). */
     define public property ABLDataSource as handle no-undo get. private set.
     
     /** A collection of QueryFilter objects that act as tokens for the key fields
@@ -41,11 +41,6 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         These filters are used when saving rows, where the values are used to identify the 
         DB rows uniquely. */
     define public property SourceKeyFilters as IMap no-undo get. set.
-    
-    define private temp-table ttBuffer no-undo
-        field BufferName as character
-        field Handle as handle
-        index idx1 as primary unique BufferName.
     
     constructor public DataSourceQuery(input phDataSource as handle):
         super().
@@ -71,18 +66,16 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         
         do iLoop = 1 to iMax:
             hBuffer = ABLDataSource:get-source-buffer(iLoop).
-            RegisterBuffer(hBuffer).
-            
             /* DataSource queries are effectively FIND FIRST's after the top-level buffer */
             case iLoop:
                 when 1 then
                     oQD:AddBuffer(hBuffer:name,
-                                  hBuffer:name,
+                                  hBuffer:table,
                                   QueryTypeEnum:Each,
                                   LockModeEnum:NoLock).
                 otherwise
                     oQD:AddBuffer(hBuffer:name,
-                                  hBuffer:name,
+                                  hBuffer:table,
                                   QueryTypeEnum:First,
                                   LockModeEnum:NoLock).
             end case.
@@ -118,26 +111,27 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
     
     method override protected handle GetQueryBuffer(input pcTableName as character,
                                                     input pcBufferName as character):
+        return GetTableHandle(pcTableName).                                                        
+    end method.
+        
+    method public handle GetTableHandle(input pcTableName as character):
         define variable hBuffer as handle no-undo.
-        define buffer lbBuffer for ttBuffer.
-       
-        find lbBuffer where lbBuffer.BufferName = pcTableName no-error.
-        if available lbBuffer then
-            hBuffer = lbBuffer.Handle.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+
+        /* We could use a temp-table for storing the table-name/buffer-name/handle values,
+           but that would probably be overkill, given that the number of DB buffers per ABL
+           data-source is (I assume) small, and so the loop is probably cheaper all round. */                
+        iMax = ABLDataSource:num-source-buffers.
+        hBuffer = ABLDataSource:get-source-buffer(1).
+        do iLoop = 2 to iMax while hBuffer:table ne pcTableName:
+            hBuffer = ABLDataSource:get-source-buffer(iLoop).
+        end.
+        
+        if hBuffer:table ne pcTableName then
+            hBuffer = ?.
         
         return hBuffer.
     end method.
-        
-    method public handle GetTableHandle( input pcTableName as character):
-        return GetQueryBuffer(pcTableName, pcTableName).
-    end method.
-    
-    method protected void RegisterBuffer(input phBuffer as handle):
-        define buffer lbBuffer for ttBuffer.
-        
-        create lbBuffer.
-        assign lbBuffer.BufferName = phBuffer:name
-               lbBuffer.Handle = phBuffer.
-    end method.
-    
+
 end class.

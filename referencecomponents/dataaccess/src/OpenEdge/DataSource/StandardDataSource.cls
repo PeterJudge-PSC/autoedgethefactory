@@ -8,7 +8,7 @@
     Notes       : * The QueryDefinition of this datasource is the 'base query';
                     the TableRequest adds to it for filtering. 
   --------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.DataSource.DataSource.
 using OpenEdge.DataAccess.IDataAccess.
@@ -89,6 +89,13 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         suffice for most cases. I think. */
     define protected property TenantFilterFieldName as character no-undo get. set.
     
+    /** The standard datasource populates buffers; this property makes it easier to access those
+        buffers. */
+    define protected property TargetBuffer as handle no-undo
+        get():
+            return ConvertTargetToHandle().
+        end get.
+    
     /** The ABL DATA-SOURCE handles being used */
     define protected property ABLDataSources  as IMap no-undo get. set.
     define protected property AttachedActions as ICollection no-undo get. set.
@@ -133,7 +140,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         /* We want to add any extra filter/paging etc data from the request to the base query */
         oDSQuery = cast(ABLDataSources:Get(ServiceMessageActionEnum:FetchData), IQuery).
         
-        FilterQueryPerRequest(oDSQuery:Definition, poRequest, poDAO).
+        FilterQueryPerRequest(ServiceMessageActionEnum:FetchData, cast(oDSQuery, DataSourceQuery), poRequest, poDAO).
         oDSQuery:Prepare().
         
         /* If there is more than one buffer in the query, set the QUERY attribute on the ABL DATA-SOURCE.
@@ -265,7 +272,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         define variable oDSQuery as DataSourceQuery no-undo.
         
         /* we know we want to deal with a handle */
-        hBuffer = ConvertTargetToHandle().
+        hBuffer = TargetBuffer.
         hBeforeBuffer = hBuffer:before-buffer.
         
         create query hBeforeQry.
@@ -501,7 +508,8 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         return hTarget.
     end method.
     
-    method protected void FilterQueryPerRequest(input poQueryDefinition as IQueryDefinition,
+    method protected void FilterQueryPerRequest(input poAction as ServiceMessageActionEnum,
+                                                input poQuery as DataSourceQuery,
                                                 input poRequest as ITableRequest,
                                                 input poDAO as IDataAccess):
         define variable iLoop as integer no-undo.
@@ -511,20 +519,23 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         define variable oJoin as QueryJoin no-undo.
         define variable oSort as QuerySort no-undo.
         define variable oElements as Object extent no-undo.
-        define variable oDefinition as IQueryDefinition no-undo.
+        define variable oQueryDefinition as IQueryDefinition no-undo.
         define variable cResolvedBuffer as character no-undo.
+        define variable hDataSourceBuffer as handle no-undo.
         
         oElements = cast(poRequest, IQueryDefinition):GetQueryElements().
         iMax = extent(oElements).
+        oQueryDefinition =  poQuery:Definition.
         
         do iLoop = 1 to iMax:
             case oElements[iLoop]:GetClass():
                 when Class:GetClass('OpenEdge.Core.System.QueryBuffer') then
                 do:
                     oBuffer = cast(oElements[iLoop], QueryBuffer).
-                    poQueryDefinition:AddBuffer(
-                        poDAO:ResolveTableName(oBuffer:Name),
-                        poDAO:ResolveTableName(oBuffer:TableName),
+                    hDataSourceBuffer = poQuery:GetTableHandle(poDAO:ResolveTableName(oBuffer:Name)).
+                    oQueryDefinition:AddBuffer(
+                        hDataSourceBuffer:name,
+                        hDataSourceBuffer:table,
                         oBuffer:QueryType,
                         oBuffer:LockMode).
                 end.
@@ -532,8 +543,8 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                 when Class:GetClass('OpenEdge.Core.System.QueryFilter') then
                 do:
                     oFilter = cast(oElements[iLoop], QueryFilter).
-                    cResolvedBuffer = poDAO:ResolveTableName(oFilter:BufferName). 
-                    poQueryDefinition:AddFilter(
+                    cResolvedBuffer = poQuery:GetTableHandle(poDAO:ResolveTableName(oFilter:BufferName)):name.
+                    oQueryDefinition:AddFilter(
                         cResolvedBuffer,
                         poDAO:ResolveFieldName(oFilter:BufferName, oFilter:FieldName),
                         oFilter:Operator,
@@ -545,8 +556,9 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                 when Class:GetClass('OpenEdge.Core.System.QueryJoin') then
                 do:
                     oJoin = cast(oElements[iLoop], QueryJoin).
-                    poQueryDefinition:AddJoin(
-                        poDAO:ResolveTableName(oJoin:BufferName),
+                    cResolvedBuffer = poQuery:GetTableHandle(poDAO:ResolveTableName(oJoin:BufferName)):name.
+                    oQueryDefinition:AddJoin(
+                        cResolvedBuffer,
                         poDAO:ResolveFieldName(oJoin:BufferName, oJoin:FieldName),
                         oJoin:Operator,
                         poDAO:ResolveTableName(oJoin:JoinBufferName),
@@ -554,11 +566,12 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                         oJoin:JoinType).
                 end.
 
-                when Class:GetClass('OpenEdge.Core.System.QuerySort') then                
+                when Class:GetClass('OpenEdge.Core.System.QuerySort') then
                 do:
                     oSort = cast(oElements[iLoop], QuerySort).
-                    poQueryDefinition:AddSort(
-                        poDAO:ResolveTableName(oSort:BufferName),
+                    cResolvedBuffer = poQuery:GetTableHandle(poDAO:ResolveTableName(oSort:BufferName)):name.
+                    oQueryDefinition:AddSort(
+                        cResolvedBuffer,
                         poDAO:ResolveFieldName(oSort:BufferName, oSort:FieldName),
                         oSort:Direction).
                 end.
@@ -566,42 +579,68 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         end.
     end method.
     
-    /** Adds filtering by tenant to for a given action. 
+    /** Adds filtering by tenant to the current datasource for an action. This is done per
+        request, and not just once, since the user may vary per request, and we have no idea
+        of this Datasource object's lifespan.
         
         @param ServiceMessageActionEnum The current request's action type. */
     method override protected void AddTenantFilter(input poAction as ServiceMessageActionEnum):                              
-        define variable oDSQuery as IQuery no-undo.
+        define variable oDSQuery as DataSourceQuery no-undo.
         define variable oFilter as QueryFilter no-undo.
         define variable hField as handle no-undo.
-        
-        oDSQuery = cast(ABLDataSources:Get(poAction), IQuery).
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable hBuffer as handle no-undo.
         
         /* always try to filter by tenant */
         if SecurityManager:IsManagedSession then
-            /* no-error since this field may not exist */
-            hField = PrimaryTable:buffer-field(TenantFilterFieldName) no-error.
-        
-        if valid-handle(hField) then
-            oFilter = new QueryFilter(
-                            PrimaryTable:Name,
-                            TenantFilterFieldName,
-                            OperatorEnum:IsEqual,
-                            cast(SecurityManager:CurrentUserContext:TenantId:Get(new String(PrimaryTable:dbname)), String),
-                            DataTypeEnum:LongChar,
-                            JoinEnum:And).
-        
-        if valid-object(oFilter) then
-            oDSQuery:Definition:AddFilter(oFilter).
+        do:
+            oDSQuery = cast(ABLDataSources:Get(poAction), DataSourceQuery).
+            iMax = oDSQuery:ABLDataSource:num-source-buffers.
+            do iLoop = 1 to iMax:
+                assign hField = ?
+                       oFilter = ?
+                       hBuffer = oDSQuery:ABLDataSource:get-source-buffer(iLoop).
+                
+                /* no-error since this field may not exist */
+                hField = hBuffer:buffer-field(TenantFilterFieldName) no-error.
+                error-status:error = no.
+                
+                message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
+                hBuffer:name 'has tenant = ' valid-handle(hField) 
+                
+                view-as alert-box error title '[PJ DEBUG]'.
+                
+                if valid-handle(hField) then
+                    oFilter = new QueryFilter(
+                                    hBuffer:name,
+                                    TenantFilterFieldName,
+                                    OperatorEnum:IsEqual,
+                                    cast(SecurityManager:CurrentUserContext:TenantId:Get(new String(hBuffer:dbname)), String),
+                                    DataTypeEnum:LongChar,
+                                    JoinEnum:And).
+                if valid-object(oFilter) then
+                    oDSQuery:Definition:AddFilter(oFilter).
+            end.
+        end.    /* managed session */
     end method.
     
     method override protected void CreateDataStore():
         define variable hABLDataSource as handle no-undo.
         define variable oDSQuery as IQuery no-undo.
-    
+        define variable hBuffer as handle no-undo.
+        
         if not ABLDataSources:ContainsKey(ServiceMessageActionEnum:FetchData) then
         do:
             create data-source hABLDataSource.
-            hABLDataSource:add-source-buffer(PrimaryTable, PrimaryTable:keys).
+            /* Create a buffer with a unique name, since we don't know where this DataSource will be used,
+               nor how. So to aviod error 12298 we give the buffer a unique name */
+            create buffer hBuffer for table PrimaryTable 
+                buffer-name substitute('ds_&1_&2_&3',
+                             string(hABLDataSource),
+                             string(int(ServiceMessageActionEnum:FetchData)),
+                             PrimaryTable:name).
+            hABLDataSource:add-source-buffer(hBuffer, hBuffer:keys).
             
             ABLDataSources:Put(ServiceMessageActionEnum:FetchData, 
                                new DataSourceQuery(hABLDataSource)).
@@ -611,7 +650,14 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         if not ABLDataSources:ContainsKey(ServiceMessageActionEnum:SaveData) then
         do:
             create data-source hABLDataSource.
-            hABLDataSource:add-source-buffer(PrimaryTable, PrimaryTable:keys).
+            /* Create a buffer with a unique name, since we don't know where this DataSource will be used,
+               nor how. So to aviod error 12298 we give the buffer a unique name */
+            create buffer hBuffer for table PrimaryTable 
+                buffer-name substitute('ds_&1_&2_&3',
+                             string(hABLDataSource),
+                             string(int(ServiceMessageActionEnum:SaveData)),
+                             PrimaryTable:name).
+            hABLDataSource:add-source-buffer(hBuffer, hBuffer:keys).
             
             ABLDataSources:Put(ServiceMessageActionEnum:SaveData, 
                                new DataSourceQuery(hABLDataSource)).
@@ -638,7 +684,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         
         hABLDataSource = cast(ABLDataSources:Get(poServiceMessageAction), DataSourceQuery):ABLDataSource. 
         hABLDataSource:prefer-dataset = true.
-        ConvertTargetToHandle():attach-data-source(hABLDataSource).
+        TargetBuffer:attach-data-source(hABLDataSource).
         
         AttachedActions:Add(poServiceMessageAction).
     end method.
@@ -646,7 +692,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
     method override protected void DetachDataStoreFromTarget(input poServiceMessageAction as ServiceMessageActionEnum):
         if AttachedActions:Contains(poServiceMessageAction) then
         do:
-            ConvertTargetToHandle():detach-data-source().
+            TargetBuffer:detach-data-source().
             AttachedActions:Remove(poServiceMessageAction). 
         end.
     end method.
