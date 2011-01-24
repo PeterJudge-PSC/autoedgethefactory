@@ -1,13 +1,13 @@
-/** ----------------------------------------------------------------------
-    File        : OpenEdge/CommonInfrastructure/service_userlogin.p
+/** ------------------------------------------------------------------------
+    File        : OpenEdge/CommonInfrastructure/service_interface_validatesession.p
     Purpose     : 
 
     Syntax      :
 
     Description : 
 
-    Author(s)   : pjudge
-    Created     : Thu Dec 16 09:17:18 EST 2010
+    @author pjudge
+    Created     : Fri Jan 14 13:04:44 EST 2011
     Notes       :
   ----------------------------------------------------------------------*/
 {routinelevel.i}
@@ -19,6 +19,8 @@ using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
 using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.ObjectOutputStream.
 
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
@@ -27,30 +29,33 @@ using Progress.Lang.AppError.
 using Progress.Lang.Error.
 
 /** -- params, defs -- **/
-define input  parameter pcUserName as character no-undo.
-define input  parameter pcUserDomain as character no-undo.
-define input  parameter pcPassword as character no-undo.
-define output parameter pcUserContextId as longchar no-undo.
+define input-output parameter pmUserContext as memptr no-undo.
 
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
+define variable oInput as ObjectInputStream no-undo.
 define variable oContext as IUserContext no-undo.
-
-/** -- validate defs -- **/
-Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
-Assert:ArgumentNotNullOrEmpty(pcUserDomain, 'User Domain').
-Assert:ArgumentNotNullOrEmpty(pcPassword, 'User Password').
+define variable oOutput as ObjectOutputStream no-undo.
 
 /** -- main -- **/
-oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(CommonServiceManager:ServiceManagerType), IServiceManager).
+oInput = new ObjectInputStream().
+oInput:Read(pmUserContext).
+oContext = cast(oInput:ReadObject(), IUserContext).
 
+Assert:ArgumentNotNull(oContext, 'User Context').
+
+oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(CommonServiceManager:ServiceManagerType), IServiceManager).
 oSecMgr = cast(oServiceMgr:StartService(CommonSecurityManager:SecurityManagerType), ISecurityManager).
 
-/* log in and establish tenancy, user context */
-oContext = oSecMgr:UserLogin(pcUserName, pcUserDomain, pcPassword).
-pcUserContextId = oContext:ContextId.
+/* log out and establish tenancy, user context */
+oSecMgr:ValidateSession(oContext).
 
-Assert:ArgumentNotNullOrEmpty(pcUserContextId, 'User Context ID').
+/* The validation may have added a payload so we need to pass back the */
+oContext = oSecMgr:GetPendingContext().
+
+oOutput = new ObjectOutputStream().
+oOutput:WriteObject(oContext).
+oOutput:Write(output pmUserContext).
 
 error-status:error = no.
 return.

@@ -1,5 +1,5 @@
 /** ----------------------------------------------------------------------
-    File        : OpenEdge/CommonInfrastructure/service_userlogin.p
+    File        : OpenEdge/CommonInfrastructure/service_interface_userlogin.p
     Purpose     : 
 
     Syntax      :
@@ -19,6 +19,7 @@ using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
 using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.Util.ObjectOutputStream.
 
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
@@ -30,16 +31,17 @@ using Progress.Lang.Error.
 define input  parameter pcUserName as character no-undo.
 define input  parameter pcUserDomain as character no-undo.
 define input  parameter pcPassword as character no-undo.
-define output parameter pcUserContextId as longchar no-undo.
+define output parameter pmUserContext as memptr no-undo.
 
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
 define variable oContext as IUserContext no-undo.
+define variable oOutput as ObjectOutputStream no-undo.
 
 /** -- validate defs -- **/
 Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
 Assert:ArgumentNotNullOrEmpty(pcUserDomain, 'User Domain').
-Assert:ArgumentNotNullOrEmpty(pcPassword, 'User Password').
+Assert:ArgumentNotNullOrEmpty(pcPassword, 'Password').
 
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(CommonServiceManager:ServiceManagerType), IServiceManager).
@@ -48,9 +50,21 @@ oSecMgr = cast(oServiceMgr:StartService(CommonSecurityManager:SecurityManagerTyp
 
 /* log in and establish tenancy, user context */
 oContext = oSecMgr:UserLogin(pcUserName, pcUserDomain, pcPassword).
-pcUserContextId = oContext:ContextId.
 
-Assert:ArgumentNotNullOrEmpty(pcUserContextId, 'User Context ID').
+    def var okeys as Progress.Lang.Object extent.
+    def var ovals as Progress.Lang.Object extent.
+
+okeys = oSecMgr:CurrentUserContext:TenantId:KeySet:ToArray().
+ovals = oSecMgr:CurrentUserContext:TenantId:Values:ToArray().
+
+message '>>>>>>> oSecMgr:CurrentUserContext:UserName' oSecMgr:CurrentUserContext:UserName. 
+message '>>>>>>> okeys[1]' okeys[1]. 
+message '>>>>>>> ovals[1]' ovals[1]. 
+
+
+oOutput = new ObjectOutputStream().
+oOutput:WriteObject(oContext).
+oOutput:Write(output pmUserContext).
 
 error-status:error = no.
 return.

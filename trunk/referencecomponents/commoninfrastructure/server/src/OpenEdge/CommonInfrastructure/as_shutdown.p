@@ -10,9 +10,9 @@
     Created     : Fri Jun 04 13:57:59 EDT 2010
     Notes       :
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 /** -- main -- **/
-run OpenEdge/CommonInfrastructure/Common/stop_session.p.
+run OpenEdge/CommonInfrastructure/stop_session.p.
 
 /* eof */

@@ -7,13 +7,14 @@
     Created     : Thu Mar 18 11:54:05 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.UserContext.
 using OpenEdge.CommonInfrastructure.ISecurityManager.
 using OpenEdge.CommonInfrastructure.SecurityManager.
 using OpenEdge.CommonInfrastructure.CommonSecurityManager.
+using OpenEdge.CommonInfrastructure.AuthenticationError.
 using OpenEdge.CommonInfrastructure.IServiceManager.
 using OpenEdge.CommonInfrastructure.IComponentInfo. 
 using OpenEdge.CommonInfrastructure.ITenantManager.
@@ -45,15 +46,30 @@ class OpenEdge.CommonInfrastructure.SecurityManager abstract inherits CommonSecu
         super(poServiceManager, poComponentInfo).
     end constructor.
     
+    /** Validates that the passed context is valid and that the session can be established.
+        
+        @param IUserContext The passed-in user context. */
     method public override void ValidateSession(input poContext as IUserContext):
+        define variable oStoredContext as IUserContext no-undo.
+        
         /* do the validation, whatever that might entail */
+        oStoredContext = RetrieveContextFromStore(poContext:ContextId).
+        
+        if not oStoredContext:Equals(poContext) then
+            undo, throw new AuthenticationError(
+                    'User context',
+                    substitute('passed context does not match stored context (Contextx ID = &1)', poContext:ContextId)).
         
         CurrentUserContext = poContext.
     end method.
     
-    method override public IUserContext ValidateSession(input pcContextId as longchar):
-        define variable oUC as IUserContext no-undo.
+    /** Retrieves the context for a given ID from the context store. 
         
+        @param longchar A context ID
+        @return IUserContext The user context object associated with that ID */
+    method protected IUserContext RetrieveContextFromStore (input pcContextId as longchar):
+        define variable oUC as IUserContext no-undo.
+
         /* always read from "datastore" aka disk in our case */
         oUC =  ReadSerializedContext(pcContextId).
         
@@ -61,6 +77,12 @@ class OpenEdge.CommonInfrastructure.SecurityManager abstract inherits CommonSecu
            undo, throw new InvalidValueSpecifiedError(
                             'user context',
                             substitute('context id &1', pcContextId)).
+        return oUC.
+    end method.
+    
+    method override public IUserContext ValidateSession(input pcContextId as longchar):
+        
+        ValidateSession(RetrieveContextFromStore(pcContextId)).
         
         /* HappyPlace! */
         return CurrentUserContext.
@@ -69,16 +91,15 @@ class OpenEdge.CommonInfrastructure.SecurityManager abstract inherits CommonSecu
     method override public void EndSession(input poContext as IUserContext):
         /* write out the context values */
         WriteSerializedContext(poContext).
-        CurrentUserContext = ?.
     end method.
     
-    method override public IUserContext GetClientContext(input pcContextId as longchar):
+    method override public IUserContext GetUserContext(input pcContextId as longchar):
        return ValidateSession(pcContextId).
     end method.
     
     method abstract protected void ValidateCredentials(input pcUserName as character,
-                                              input pcUserDomain as character,
-                                              input pcPassword as character).
+                                                       input pcUserDomain as character,
+                                                       input pcPassword as character).
     
     method override public IUserContext UserLogin(input pcUserName as character,
                                                   input pcUserDomain as character,
@@ -93,6 +114,7 @@ class OpenEdge.CommonInfrastructure.SecurityManager abstract inherits CommonSecu
         oUC:EstablishTenancy(TenantManager).
         
         WriteSerializedContext(oUC).
+        ValidateSession(oUC).
         
         return oUC.
     end method.

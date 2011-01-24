@@ -1,13 +1,13 @@
-/** ----------------------------------------------------------------------
-    File        : OpenEdge/CommonInfrastructure/service_userlogin.p
+/** ------------------------------------------------------------------------
+    File        : OpenEdge/CommonInfrastructure/service_validatesession.p
     Purpose     : 
 
     Syntax      :
 
     Description : 
 
-    Author(s)   : pjudge
-    Created     : Thu Dec 16 09:17:18 EST 2010
+    @author pjudge
+    Created     : Fri Jan 14 13:04:44 EST 2011
     Notes       :
   ----------------------------------------------------------------------*/
 {routinelevel.i}
@@ -19,6 +19,8 @@ using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
 using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.ObjectOutputStream.
 
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
@@ -27,30 +29,19 @@ using Progress.Lang.AppError.
 using Progress.Lang.Error.
 
 /** -- params, defs -- **/
-define input  parameter pcUserName as character no-undo.
-define input  parameter pcUserDomain as character no-undo.
-define input  parameter pcPassword as character no-undo.
-define output parameter pcUserContextId as longchar no-undo.
+define input  parameter pcContextId as longchar no-undo.
 
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
-define variable oContext as IUserContext no-undo.
-
-/** -- validate defs -- **/
-Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
-Assert:ArgumentNotNullOrEmpty(pcUserDomain, 'User Domain').
-Assert:ArgumentNotNullOrEmpty(pcPassword, 'User Password').
 
 /** -- main -- **/
-oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(CommonServiceManager:ServiceManagerType), IServiceManager).
+Assert:ArgumentNotNullOrEmpty(pcContextId, 'User Context ID').
 
+oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(CommonServiceManager:ServiceManagerType), IServiceManager).
 oSecMgr = cast(oServiceMgr:StartService(CommonSecurityManager:SecurityManagerType), ISecurityManager).
 
-/* log in and establish tenancy, user context */
-oContext = oSecMgr:UserLogin(pcUserName, pcUserDomain, pcPassword).
-pcUserContextId = oContext:ContextId.
-
-Assert:ArgumentNotNullOrEmpty(pcUserContextId, 'User Context ID').
+/* log out and establish tenancy, user context */
+oSecMgr:ValidateSession(pcContextId).
 
 error-status:error = no.
 return.
