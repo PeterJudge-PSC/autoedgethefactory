@@ -1,6 +1,6 @@
 /** ------------------------------------------------------------------------
-    File        : simple_async_response.p
-    Purpose     : (Async) response procedure for StandardServiceAdapter calls.
+    File        : OpenEdge/CommonInfrastructure/service_managed_async_response.p
+    Purpose     : (Async) response procedure for ServiceAdapter calls.
     Syntax      :
 
     Description : 
@@ -9,7 +9,7 @@
     Created     : Fri Oct 29 15:15:39 EDT 2010
     Notes       :
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
@@ -23,6 +23,7 @@ using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.ISecurityManager.
 using OpenEdge.CommonInfrastructure.CommonSecurityManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
+using OpenEdge.CommonInfrastructure.ServiceAdapter.
 
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Lang.ABLSession.
@@ -48,14 +49,12 @@ procedure EventProcedure_FetchData:
     define variable mTemp as memptr no-undo.
     define variable oInput as ObjectInputStream no-undo.    
     define variable oResponse as IFetchResponse extent no-undo.
-    define variable oContext as IUserContext no-undo.
         
     assign iMax = extent(pmResponse)
            extent(oResponse) = iMax.
     
-    oInput = new ObjectInputStream().
     do iLoop = 1 to iMax:
-        oInput:Reset().
+        oInput = new ObjectInputStream().
         oInput:Read(pmResponse[iLoop]).
         oResponse[iLoop] = cast(oInput:ReadObject(), IFetchResponse).
         
@@ -65,11 +64,7 @@ procedure EventProcedure_FetchData:
     end.
     
     /* Set context in to ContextManager from the data received from the server call. */
-    oInput:Reset().
-    oInput:Read(pmUserContext).
-    oContext = cast(oInput:ReadObject(), IUserContext).
-    
-    moSecMgr:ValidateSession(oContext).
+    moSecMgr:ValidateSession(ServiceAdapter:DeserializeContext(pmUserContext)).
     
     moSMM:ExecuteResponse(cast(oResponse, IServiceResponse)).
     
@@ -82,7 +77,6 @@ procedure EventProcedure_SaveData:
     define input parameter phRequestDataset as handle extent no-undo.
     define input parameter pmResponse as memptr extent no-undo.
     define input parameter pmUserContext as memptr no-undo.
-    define variable oContext as IUserContext no-undo.
     
     define variable oResponse as ISaveResponse  extent no-undo.
     define variable iLoop as integer no-undo.
@@ -107,11 +101,7 @@ procedure EventProcedure_SaveData:
     end.
     
     /* Set context in to ContextManager from the data received from the server call. */
-    oInput:Reset().
-    oInput:Read(pmUserContext).
-    oContext = cast(oInput:ReadObject(), IUserContext).
-    
-    moSecMgr:ValidateSession(oContext).
+    moSecMgr:ValidateSession(ServiceAdapter:DeserializeContext(pmUserContext)).
     
     moSMM:ExecuteResponse(cast(oResponse, IServiceResponse)).
     

@@ -7,7 +7,7 @@
     Created     : Tue Jan 04 13:25:00 EST 2011
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
@@ -22,6 +22,7 @@ using OpenEdge.CommonInfrastructure.IServiceManager.
 using OpenEdge.CommonInfrastructure.IComponentInfo.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
+using OpenEdge.Core.System.InvalidCallError.
 using OpenEdge.Core.System.InvalidValueSpecifiedError.
 
 class OpenEdge.CommonInfrastructure.SecurityManager inherits CommonSecurityManager: 
@@ -43,10 +44,9 @@ class OpenEdge.CommonInfrastructure.SecurityManager inherits CommonSecurityManag
         oSMM = cast(ServiceManager:StartService(CommonServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
         
         oRequest[1] = new SecurityManagerRequest('SecurityManager.UserLogin', ServiceMessageActionEnum:UserLogin).
-        assign oRequest[1]:UserName = pcUserDomain
+        assign oRequest[1]:UserName = pcUserName
                oRequest[1]:UserDomain = pcUserDomain
                oRequest[1]:UserPassword = pcPassword.
-        
         oResponse = cast(oSMM:ExecuteRequest(cast(oRequest, IServiceRequest)), SecurityManagerResponse).
         
         if cast(oResponse[1], IServiceResponse):HasError then
@@ -56,40 +56,71 @@ class OpenEdge.CommonInfrastructure.SecurityManager inherits CommonSecurityManag
         
         return CurrentUserContext.
     end method.
-
-    method override public void ValidateSession(input poContext as IUserContext):
-        this-object:CurrentUserContext = poContext.
-    end method.
-
-    method override public IUserContext ValidateSession(input pcContextId as longchar):
-        
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
-
-    end method.
-
-    method override public void EndSession( input poContext as IUserContext):
-        
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
-
-    end method.
     
-    method override public void UserLogout( input poContext as OpenEdge.CommonInfrastructure.IUserContext ):
+    method override public void ValidateSession(input poContext as IUserContext):
         define variable oResponse as SecurityManagerResponse extent no-undo.
         define variable oRequest as SecurityManagerRequest extent 1 no-undo.
         define variable oSMM as IServiceMessageManager no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable cErrorText as character no-undo.
+        
+        this-object:CurrentUserContext = poContext.
+        
+        oSMM = cast(ServiceManager:StartService(CommonServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
+        
+        oRequest[1] = new SecurityManagerRequest('SecurityManager.ValidateSession', ServiceMessageActionEnum:ValidateSession).
+        oRequest[1]:ContextId = poContext:ContextId.
+        oRequest[1]:UserContext = GetPendingContext().
+        
+        oResponse = cast(oSMM:ExecuteRequest(cast(oRequest, IServiceRequest)), SecurityManagerResponse).
+        
+        if cast(oResponse[1], IServiceResponse):HasError then
+            undo, throw new InvalidValueSpecifiedError('user context', ': ' + string(cast(oResponse[1], IServiceResponse):ErrorText)).
+        
+        /* update the credentials with the response */
+        this-object:CurrentUserContext = oResponse[1]:UserContext.
+    end method.
+    
+    method override public IUserContext ValidateSession(input pcContextId as longchar):
+        ValidateSession(GetUserContext(pcContextId)).
+        
+        return this-object:CurrentUserContext. 
+    end method.
+    
+    method override public void EndSession( input poContext as IUserContext):
+        /* theoretically, we could write out some client-side stuff and persist as a cookie of sorts.
+           left as an exercise to the reader. */
+    end method.
+    
+    method override public void UserLogout(input poContext as IUserContext):
+        define variable oResponse as SecurityManagerResponse extent no-undo.
+        define variable oRequest as SecurityManagerRequest extent 1 no-undo.
+        define variable oSMM as IServiceMessageManager no-undo.
+        
+        this-object:CurrentUserContext = poContext.
         
         /* We can use different service names for login and logout; both will resolve to the same service provider.
            This is used for illustrative purposes. See OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule 
            for more details */
         oSMM = cast(ServiceManager:StartService(CommonServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
         
-        oRequest[1] = new SecurityManagerRequest(CommonServiceMessageManager:ServiceMessageManagerType:TypeName, ServiceMessageActionEnum:UserLogout).
+        oRequest[1] = new SecurityManagerRequest(CommonServiceMessageManager:ServiceMessageManagerType:TypeName,
+                                                 ServiceMessageActionEnum:UserLogout).
         oRequest[1]:ContextId = poContext:ContextId.
+        oRequest[1]:UserContext = GetPendingContext().
         
+        /* make the call */
         oResponse = cast(oSMM:ExecuteRequest(cast(oRequest, IServiceRequest)), SecurityManagerResponse).
         
         if cast(oResponse[1], IServiceResponse):HasError then
             undo, throw new InvalidValueSpecifiedError('logout', ': ' + string(cast(oResponse[1], IServiceResponse):ErrorText)).
-    end method.    
+        
+        /* On the client, a successful logout does end the session (not necessarily true on server) */
+        EndSession(oResponse[1]:UserContext).
+        
+        /* user doesn't live here no more */
+        this-object:CurrentUserContext = ?.
+    end method.
     
 end class.

@@ -9,7 +9,7 @@
                     and so the OnClientSession() binding is probably not strictly necessary.
                     However, it's useful to have.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.CommonSecurityManager.
 
@@ -19,9 +19,9 @@ using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using Progress.Lang.Class.
 
-class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherits InjectionModule: 
+class OpenEdge.CommonInfrastructure.InjectABL.ClientModule inherits InjectionModule: 
     
-    constructor public CommonInfrastructureModule():
+    constructor public ClientModule():
         super().
     end constructor.
     
@@ -41,7 +41,7 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
             :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ManagerScope'),
                      ManagerScopeEnum:ServiceManager)
-            :OnClientSession().
+            :OnThinClientSession().
              
         /* We can either bind the whole manager as a service, or we can bind the individual services.
            We have an example of both here. */
@@ -49,14 +49,14 @@ class OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule inherit
         oBindingSyntax
             :To('OpenEdge.CommonInfrastructure.SecurityManagerServiceAdapter')
             :Named(CommonSecurityManager:SecurityManagerType:TypeName)
-            :OnClientSession()
+            :OnThinClientSession()
             :WithPropertyValue('Service', CommonSecurityManager:SecurityManagerType:TypeName).
         
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider').
         oBindingSyntax
             :To('OpenEdge.CommonInfrastructure.SecurityManagerServiceAdapter')
             :Named('SecurityManager.UserLogin')
-            :OnClientSession()
+            :OnThinClientSession()
             :WithPropertyValue('Service', 'SecurityManager.UserLogin').
     
     end method.
