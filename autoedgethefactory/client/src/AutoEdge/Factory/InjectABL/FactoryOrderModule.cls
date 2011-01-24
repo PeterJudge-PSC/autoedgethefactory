@@ -7,7 +7,7 @@
     Created     : Wed Dec 01 16:15:19 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
@@ -34,8 +34,17 @@ class AutoEdge.Factory.InjectABL.FactoryOrderModule inherits InjectionModule:
         oBindingSyntax = Bind(IServiceProviderType).
         oBindingSyntax
             :Named('Order')
-            :To('OpenEdge.CommonInfrastructure.ServiceMessage.StandardServiceAdapter')
-            :OnClientSession().
+            :To('AutoEdge.Factory.Common.StandardAppServerServiceAdapter')
+            :OnThinClientSession().
+
+        /* Bind as a service adapter. the server-side bindings will translate this into a IServiceProvider
+           object capable of doing something useful. */
+        oBindingSyntax = Bind(IServiceProviderType).
+        oBindingSyntax
+            :Named('VehicleOptions')
+            :To('AutoEdge.Factory.Common.StandardAppServerServiceAdapter')
+            :OnThinClientSession().
+
     end method.
     
     method protected void LoadUI():
@@ -45,7 +54,7 @@ class AutoEdge.Factory.InjectABL.FactoryOrderModule inherits InjectionModule:
         oBindingSyntax = Bind(Class:GetClass('AutoEdge.Factory.Order.PresentationLayer.ITaskListManager')).
         oBindingSyntax
             :To('AutoEdge.Factory.Order.PresentationLayer.DealerReview')
-            :OnClientSession().
+            :OnThinClientSession().
     end method.
     
     method override public void Load(  ):

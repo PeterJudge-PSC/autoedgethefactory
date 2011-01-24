@@ -11,7 +11,7 @@
 using Progress.Lang.*.
 using Progress.Windows.Form.
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class AutoEdge.Factory.Order.PresentationLayer.TaskListForm inherits Form: 
     
