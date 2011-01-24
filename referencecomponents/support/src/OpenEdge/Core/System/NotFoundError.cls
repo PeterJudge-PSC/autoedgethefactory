@@ -7,7 +7,7 @@
     Created     : Mon Feb 22 12:56:33 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.NotFoundError.
@@ -38,10 +38,4 @@ class OpenEdge.Core.System.NotFoundError inherits ApplicationError:
         this-object:ErrorText = '&1 not found in &2'.
     end constructor.
     
-    constructor public NotFoundError():
-        define variable oUnknown as Error no-undo.
-        
-        this-object(oUnknown).     
-    end constructor.
- 
 end class.

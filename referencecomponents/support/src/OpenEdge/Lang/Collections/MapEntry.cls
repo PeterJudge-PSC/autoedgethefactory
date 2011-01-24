@@ -14,7 +14,7 @@ using Progress.Lang.Object.
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.IMapEntry.
 
-routine-level on error undo, throw.
+{routinelevel.i}
  
 class OpenEdge.Lang.Collections.MapEntry implements IMapEntry: 
     define protected property OwningMap as IMap no-undo get. set.

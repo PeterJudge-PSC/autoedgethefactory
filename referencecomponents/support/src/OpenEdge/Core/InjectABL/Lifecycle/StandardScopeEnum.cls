@@ -7,7 +7,7 @@
     Created     : Fri Jun 04 13:50:10 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Lang.EnumMember.

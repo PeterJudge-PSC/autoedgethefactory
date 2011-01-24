@@ -7,7 +7,7 @@
     Created     : Thu Mar 11 11:35:55 EST 2010
     Notes       : * Taken fromA BL documentation
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.DateTimeAddIntervalEnum.
 using OpenEdge.Lang.EnumMember.

@@ -9,7 +9,7 @@
                   be encapsulated. This is left as an exercise for the
                   reader :) 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.QueryFilter.
@@ -645,7 +645,7 @@ class OpenEdge.Core.System.Query use-widget-pool
         this-object:Close().
         
         Definition = cast(BaseDefinition:Clone(), IQueryDefinition).
-        Prepare().
+/*        Prepare().*/
     end method.
     
     /** Sets the base query definition to the current query definition. */
@@ -702,7 +702,6 @@ class OpenEdge.Core.System.Query use-widget-pool
                                                             output oQueryTypes,
                                                             output oLockModes).
             do iExtent = 1 to extent(cBuffers):
-                
                 hBuffer = GetQueryBuffer(cTables[iExtent], cBuffers[iExtent]).
                 
                 if iExtent eq 1 then

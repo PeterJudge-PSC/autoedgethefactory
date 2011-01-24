@@ -1,3 +1,4 @@
+@deprecated(version="0.0").
 /** ------------------------------------------------------------------------
     File        : UITypeEnum
     Purpose     : Lists the supported UI types  
@@ -8,7 +9,7 @@
     Notes       : * This class is not final since implementers could have their
                     own names for UI types.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.UITypeEnum.
 using OpenEdge.Lang.EnumMember.
@@ -23,17 +24,11 @@ class OpenEdge.Core.System.UITypeEnum inherits EnumMember:
     /** RIA/Web UI */
     define static public property RiaGui as UITypeEnum no-undo get. private set.
     
-    /** The current UI type. Settable since this may change at app startup */
-    define static public property Current as UITypeEnum no-undo get. set.
-    
     constructor static UITypeEnum():
         assign UITypeEnum:Chui = new UITypeEnum('Chui')
                UITypeEnum:AblGui = new UITypeEnum('AblGui')
                UITypeEnum:DotNetGui = new UITypeEnum('DotNetGui')
                UITypeEnum:RiaGui = new UITypeEnum('RiaGui').
-               
-               @todo(task="implement", action="update calculation of current ui type").
-               UITypeEnum:Current = UITypeEnum:DotNetGui.
     end constructor.
     
     constructor public UITypeEnum ( input pcName as character ):

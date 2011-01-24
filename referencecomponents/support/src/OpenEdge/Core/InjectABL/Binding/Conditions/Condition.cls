@@ -7,7 +7,7 @@
     Created     : Mon Mar 08 15:22:04 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
@@ -24,6 +24,10 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
     define static private property ConditionResolverType as class Class no-undo get. set.
     
     define private variable moValue as Object no-undo.
+
+    /* general condition types, to avoid having a SessionName and UIType etc. */
+    define static public property Name as ICondition no-undo get. private set.
+    define static public property Type as ICondition no-undo get. private set.
     
     /* Operators */
     define static public property And as ICondition no-undo get. private set.
@@ -33,7 +37,7 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
     define static public property When as ICondition no-undo get. private set.
     define static public property Is as ICondition no-undo get. private set.
     define static public property Not as ICondition no-undo get. private set.    
-    
+
     constructor static Condition():
         define variable oType as class Class no-undo.
         
@@ -45,6 +49,9 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.Condition implements ICondition
                Condition:Is = new Condition('is')
                Condition:When = new Condition('when')
                Condition:Not = new Condition('not')
+
+               Condition:Name = new Condition('Name')
+               Condition:Type = new Condition('Type')
                .
     end constructor.
     

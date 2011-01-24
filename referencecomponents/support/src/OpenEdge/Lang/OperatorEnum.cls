@@ -7,7 +7,7 @@
     Created     : Thu Mar 12 15:05:08 EDT 2009
     Notes       : * IsEqual property should be 'Equals' but compiler barfs. 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.EnumMember.

@@ -8,7 +8,7 @@
     Notes       : 
   ----------------------------------------------------------------------*/
 
-routine-level on error undo, throw.
+{routinelevel.i}
 using Progress.Lang.Object.
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IListIterator.

@@ -7,7 +7,7 @@
     Created     : Tue Jul 07 16:56:09 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.DoesNotExistError.

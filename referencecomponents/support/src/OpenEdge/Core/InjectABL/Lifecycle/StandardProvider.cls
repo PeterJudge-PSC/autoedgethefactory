@@ -12,7 +12,7 @@
                     which is what we would do if we could determine the callee
                     signatures in advance. 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
@@ -266,6 +266,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.StandardProvider implements IProvider:
                                       oValue).
             end.
         end.    /* objects*/
+        
         
         /** 'transform' any ABL errors into an ApplicationError. */
         catch eSysErr as SysError:

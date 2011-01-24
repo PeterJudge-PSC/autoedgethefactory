@@ -7,13 +7,11 @@
     Created     : Mon Mar 08 11:50:07 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
-using OpenEdge.Core.InjectABL.Binding.Conditions.ConnectionCondition.
-using OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.IKernel.
@@ -37,37 +35,28 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder implements ICo
             BindingCondition:Push(Condition:Or).
             return this-object. 
         end get.
-    
-    define public property Connection as IConditionSyntax no-undo
+
+/*
+    define public property Is as IConditionSyntax no-undo
         get():
-            BindingCondition:Push(ConnectionCondition:CurrentConnection).
-            return this-object.
-        end get.
-    
-    define public property Session as IConditionSyntax no-undo
-        get():
-            BindingCondition:Push(new SessionTypeCondition(ABLSession:Instance:Name)).
-            return this-object.
-        end get.
-    
-    define public property Name as IConditionSyntax no-undo 
-        get():
+            BindingCondition:Push(Condition:Is).
             return this-object. 
         end get.
-    
-    define public property UIType as IConditionSyntax no-undo
+        
+    define public property Not as IConditionSyntax no-undo
         get():
-            BindingCondition:Push(UITypeCondition:Current).
-            return this-object.
+            BindingCondition:Push(Condition:Not).
+            return this-object. 
         end get.
+*/
     
-    constructor public ConditionBuilder(poBindingCondition as ObjectStack):
+    constructor public ConditionBuilder(input poBindingCondition as ObjectStack):
         BindingCondition = poBindingCondition.
         BindingCondition:Push(Condition:And).
     end constructor.
     
-    constructor public ConditionBuilder(poBinding as IBinding):
-        Assert:ArgumentNotNull(poBinding, "binding").
+    constructor public ConditionBuilder(input poBinding as IBinding):
+        Assert:ArgumentNotNull(poBinding, "Binding").
         
         /* Guesstimate at default depth. */
         BindingCondition = new ObjectStack(10).
@@ -78,28 +67,18 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder implements ICo
         BindingCondition:Push(Condition:When).
     end constructor.
     
-    method public IConditionSyntax First(poCondition as ICondition):
-        BindingCondition:Push(poCondition).
-        return this-object.
-    end method.
-
-    method public IConditionSyntax Last(poCondition as ICondition):
+    method public IConditionSyntax Condition(input poCondition as ICondition).
         BindingCondition:Push(poCondition).
         return this-object.
     end method.
     
-    method public IConditionSyntax Unique(poCondition as ICondition):
-        BindingCondition:Push(poCondition).
-        return this-object.
-    end method.
-    
-    method public IConditionSyntax Is(poCondition as ICondition):
+    method public IConditionSyntax Is(input poCondition as ICondition):
         BindingCondition:Push(Condition:Is).
         BindingCondition:Push(poCondition).
         return this-object.
     end method.
     
-    method public IConditionSyntax Not(poCondition as ICondition):
+    method public IConditionSyntax Not(input poCondition as ICondition):
         BindingCondition:Push(Condition:Not).
         BindingCondition:Push(poCondition).
         return this-object.

@@ -7,7 +7,7 @@
     Created     : Thu Mar 19 15:16:47 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.InvalidValueSpecifiedError.
 using OpenEdge.Core.System.BufferNotAvailableError.

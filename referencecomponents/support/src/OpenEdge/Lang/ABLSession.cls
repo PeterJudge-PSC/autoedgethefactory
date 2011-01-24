@@ -11,7 +11,7 @@
                   * Discover handle- and object- references for given names
                   * Resolves weak references
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Collections.IMap.

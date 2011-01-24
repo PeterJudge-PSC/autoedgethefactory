@@ -7,7 +7,7 @@
     Created     : Mon Apr 19 14:39:18 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using Progress.Lang.Class.
 

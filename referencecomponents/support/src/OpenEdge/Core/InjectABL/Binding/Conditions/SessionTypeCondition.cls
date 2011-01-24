@@ -9,7 +9,7 @@
                     have our own ConditionResolver, since there may be 
                     some special treatment
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionResolver.
@@ -21,10 +21,20 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition inherits Condition:
+    
+    /* ThinClient, Server, FatClient used for RHS, to compare to the 'Condition:Type' condition */
+    define static public property ThinClient as SessionTypeCondition no-undo get. private set. 
+    define static public property Server     as SessionTypeCondition no-undo get. private set.
+    define static public property FatClient  as SessionTypeCondition no-undo get. private set.
+    
     define static private property ConditionResolverType as class Class no-undo get. set.
     
     constructor static SessionTypeCondition():
-          SessionTypeCondition:ConditionResolverType = Class:GetClass('OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeConditionResolver').
+        assign SessionTypeCondition:ThinClient = new SessionTypeCondition('ThinClient')
+               SessionTypeCondition:Server = new SessionTypeCondition('Server')
+               SessionTypeCondition:FatClient = new SessionTypeCondition('FatClient')
+               
+               SessionTypeCondition:ConditionResolverType = Class:GetClass('OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeConditionResolver').
     end constructor.
     
     constructor public SessionTypeCondition (input pcValue as character):

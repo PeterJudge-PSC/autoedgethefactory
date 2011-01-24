@@ -1,19 +1,23 @@
 /**------------------------------------------------------------------------
     File        : StandardBindingResolver
-    Purpose     : 
+    Purpose     : Returns all bindings for (typically) a service that meet
+                  service, name and condition requirements. More than one
+                  binding may be returned. The decision of which binding to
+                  use is done by the InjectABL Kernel.
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Tue Mar 09 09:02:30 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.IBindingResolver.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
+using OpenEdge.Core.System.NotFoundError.
 
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.IList.
@@ -74,8 +78,13 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
         define variable oIterator as IIterator no-undo.
         define variable oBinding as IBinding no-undo.
         
-        assign oResolvedBindings = new List()
-               oServiceBindings = cast(poBindings:Get(poService), IList)
+        oServiceBindings = cast(poBindings:Get(poService), IList).
+        if not valid-object(oServiceBindings) then
+            undo, throw new NotFoundError(
+                    substitute('Service &1', poService:TypeName),
+                    'kernel bindings').
+
+        assign oResolvedBindings = new List().
                oIterator = oServiceBindings:Iterator().
         
         do while oIterator:HasNext():
@@ -139,8 +148,11 @@ class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindin
                     assign oLHS = oCondition
                            oClauseOperator = cast(oFIFOConditions:Pop(), ICondition) 
                            oRHS = cast(oFIFOConditions:Pop(), ICondition)
-                           /* Use LHS for resolver. The resolver can check the RHS if it chooses, for type compatability */            
-                           lSubconditionMet = oLHS:GetResolver():EvaluateClause(oLHS, oClauseOperator, oRHS).
+                           /* Use RHS for resolver, since the RHS is more likely to be more specialised:
+                              the LHS might be 'Name' and the RHS refer to a session type or ui type.
+                              
+                              The resolver can check the LHS if it chooses to, for type compatability */            
+                           lSubconditionMet = oRHS:GetResolver():EvaluateClause(oLHS, oClauseOperator, oRHS).
             end case.
             
             /* if need be, do the comparison */

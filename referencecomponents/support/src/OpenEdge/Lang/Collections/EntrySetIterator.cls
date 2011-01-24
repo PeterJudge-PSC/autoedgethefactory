@@ -15,7 +15,7 @@ using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.Iterator.
 using OpenEdge.Lang.Collections.MapEntry.
  
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class OpenEdge.Lang.Collections.EntrySetIterator inherits Iterator: 
     define protected property OwningMap as IMap no-undo get. set. 

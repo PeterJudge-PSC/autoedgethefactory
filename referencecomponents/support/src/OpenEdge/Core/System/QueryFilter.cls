@@ -7,7 +7,7 @@
     Created     : Fri Dec 10 10:16:46 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.QueryFilter.
 using OpenEdge.Core.Util.IExternalizable.

@@ -7,7 +7,7 @@
     Created     : Tue Mar 02 12:56:53 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.BindingRoot.
 using OpenEdge.Core.InjectABL.Binding.IBindingRoot.
@@ -325,10 +325,14 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         define variable oBindings as IList no-undo.
         define variable oBinding as IBinding no-undo.
         
-        oBindings = GetBindings(poService, pcName) no-error.
+        oBindings = GetBindings(poService, pcName).
         
         if oBindings:IsEmpty() then
             oBinding = CreateDefaultBinding(poService).
+        else
+        /* if there's only one matching binding, use that one. Ahem. */
+        if oBindings:Size eq 1 then
+            oBinding = cast(oBindings:Get(1), IBinding).
         else
             /* Always use the first matching binding, since we assume that the bindings
                are added in PROPATH order, and that the PROPATH is ordered in importance 
@@ -405,7 +409,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         
         oBuilder = Bind(poService).
         oBuilder:ToSelf().
-        
+                
         return oBinding.
     end method. 
     

@@ -10,7 +10,7 @@
                   * The Stack temp-table could probably be dynamic, and have a single value field that
                     is dynamically constructed, but stacks need to be lightweight at runtime (IMO anyway). 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.Collections.Stack.
 using OpenEdge.Lang.Collections.StackError.

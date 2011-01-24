@@ -7,7 +7,7 @@
     Created     : Fri Mar 20 13:57:05 EDT 2009
     Notes       : * Taken from ABL documentation
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.CompareStrengthEnum.
 using OpenEdge.Lang.EnumMember.

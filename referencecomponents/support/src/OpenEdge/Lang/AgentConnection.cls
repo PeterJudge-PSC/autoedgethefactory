@@ -10,7 +10,7 @@
                     procedures.
                   * Note that this is meaninless for StateFree AppServers.
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.AgentConnection.
 using OpenEdge.Lang.Collections.IMap.

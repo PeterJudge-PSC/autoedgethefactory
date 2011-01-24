@@ -7,7 +7,7 @@
     Created     : Tue Mar 02 14:51:10 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
@@ -16,6 +16,7 @@ using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
+using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ConditionBuilder.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeCondition.
@@ -24,7 +25,6 @@ using OpenEdge.Core.InjectABL.Binding.Conditions.UITypeCondition.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 
-using OpenEdge.Core.System.ConnectionTypeEnum.
 using OpenEdge.Lang.SessionClientTypeEnum.
 using OpenEdge.Lang.RoutineTypeEnum.
 using OpenEdge.Lang.DataTypeEnum.
@@ -544,58 +544,46 @@ class OpenEdge.Core.InjectABL.Binding.BindingBuilder implements IBindingSyntax:
         return oConditionBuilder.
     end method.
     
-    method public IBindingSyntax OnClientSession():
+    /** Binding is applicable to a client session. This is typically a GUI or thin-client of some sort */
+    method public IBindingSyntax OnThinClientSession():
         define variable oConditionSyntax as IConditionSyntax no-undo.
         
         oConditionSyntax = this-object:When().
-        oConditionSyntax:Session:Is(new SessionTypeCondition(SessionClientTypeEnum:ABLClient))
-                        :Or
-                        :Session:Is(new SessionTypeCondition(SessionClientTypeEnum:WebClient)).
-        
+        oConditionSyntax:Condition(Condition:Type):Is(SessionTypeCondition:ThinClient).
+
         return this-object.
     end method.
-    
+
+    /** Binding applicable to a server session. This is any headless backend - appserver, webserver etc */
     method public IBindingSyntax OnServerSession():
         define variable oConditionSyntax as IConditionSyntax no-undo.
         
         oConditionSyntax = this-object:When().
-        oConditionSyntax:Session:Is(new SessionTypeCondition(SessionClientTypeEnum:AppServer))
-                        :Or
-                        :Session:Is(new SessionTypeCondition(SessionClientTypeEnum:WebSpeed)).
-        
-        return this-object.
-    end method.
-    
-    method public IBindingSyntax OnSession(input pcSessionName as character):
-        define variable oConditionSyntax as IConditionSyntax no-undo.
-        
-        oConditionSyntax = this-object:When().
-        oConditionSyntax:Session:Is(new SessionTypeCondition(pcSessionName)).
-        
-        return this-object.
-    end method.
-    
-    /*
-    method public IBindingSyntax ConnectedToAppServer(input pcAppServerName as character):
-        define variable oConditionSyntax as IConditionSyntax no-undo.
-        
-        oConditionSyntax = this-object:When().
-        oConditionSyntax:Connection
-        
-        Session:Is(new SessionTypeCondition(SessionClientTypeEnum:AppServer))
-                        :Or
-                        :Session:Is(new SessionTypeCondition(SessionClientTypeEnum:WebSpeed)).
-        
-        return this-object.
-    end method.
-    
-    method public IBindingSyntax ConnectedToDatabase(input pcDbName as character):
-    end method.
-    
-    method public IBindingSyntax ConnectedTo(input poConnectionType as ConnectionTypeEnum, input pcConnectionName as character):
-    end method.
-    */
+        oConditionSyntax:Condition(Condition:Type):Is(SessionTypeCondition:Server).
 
+        return this-object.
+    end method.
+
+    /** Binding is applicable to a complete client/server session. Typically a development environment, or fat client */
+    method public IBindingSyntax OnFatClientSession():
+        define variable oConditionSyntax as IConditionSyntax no-undo.
+        
+        oConditionSyntax = this-object:When().
+        oConditionSyntax:Condition(Condition:Type):Is(SessionTypeCondition:FatClient).
+
+        return this-object.
+    end method.
+    
+    /** Indicates that the binding is valid for a session as identified by an application-specific code/name */
+    method public IBindingSyntax OnNamedSession(input pcSessionCode as character).
+        define variable oConditionSyntax as IConditionSyntax no-undo.
+        
+        oConditionSyntax = this-object:When().
+        oConditionSyntax:Condition(Condition:Name):Is(new SessionTypeCondition(pcSessionCode)).
+        
+        return this-object.
+    end method.
+    
     method public IBindingSyntax Named(pcName as character):
         Binding:Name = pcName.
         return this-object.

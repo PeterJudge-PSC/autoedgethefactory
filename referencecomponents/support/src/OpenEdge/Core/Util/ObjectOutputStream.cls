@@ -9,7 +9,7 @@
                  * For the protocol definition, see
                  https://wiki.progress.com/display/OEBP/Object+Serialization+Protocol     
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.System.ObjectStreamConstants.
@@ -29,14 +29,14 @@ using Progress.Lang.Object.
 
 class OpenEdge.Core.Util.ObjectOutputStream:
     
-    define private variable miCursor       as integer               no-undo.
-    define private variable mrStreamBuffer as raw                   no-undo.
-    define private variable moTopLevel     as Object                no-undo.
-    define private variable moTypeStack    as ObjectStack           no-undo.
+    define private variable miCursor              as integer           no-undo.
+    define private variable mrStreamBuffer        as raw               no-undo.
+    define private variable moTopLevel            as Object            no-undo.
+    define private variable moTypeStack           as ObjectStack       no-undo.
     
-    define private variable moWriteObjParam         as ParameterList         no-undo.
-    define private variable moObjectOutputError as ObjectOutputError no-undo.
-    define private variable mlStreamHeaderWritten as logical no-undo.
+    define private variable moWriteObjParam       as ParameterList     no-undo.
+    define private variable moObjectOutputError   as ObjectOutputError no-undo.
+    define private variable mlStreamHeaderWritten as logical           no-undo.
     
     define private temp-table StreamReference no-undo
         field ReferenceType as integer  /* ObjectStreamConstants:REFTYPE_ */
@@ -331,10 +331,10 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteObjectArray(pIn as Object extent):        
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
-        
+
         iMax = extent(pIn).
         if iMax eq ? then
             WriteByte(ObjectStreamConstants:TC_NULL).
@@ -342,7 +342,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         do:
             WriteByte(ObjectStreamConstants:TC_ARRAY).        
             WriteByte(iMax).
-            do iLoop = 1 to extent(iMax):
+            do iLoop = 1 to iMax:
                 WriteObject(pIn[iLoop]).
             end.
             WriteByte(ObjectStreamConstants:TC_ENDBLOCKDATA).
@@ -370,7 +370,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         
     method public void WriteCharArray(pIn as character extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -395,7 +395,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteLongcharArray(pIn as longchar extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -427,7 +427,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteIntArray(pIn as integer extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -458,7 +458,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
             
     method public void WriteInt64Array(pIn as int64 extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -495,7 +495,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteDecimalArray(pIn as dec extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
 
         ValidateStream().
         
@@ -526,7 +526,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         
     method public void WriteDateArray(pIn as date extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -559,7 +559,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteDateTimeArray(pIn as datetime extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -593,7 +593,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteDateTimeTzArray(pIn as datetime-tz extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
     
@@ -624,7 +624,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteLogicalArray(pIn as log extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -649,7 +649,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteRowidArray(pIn as rowid extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -674,7 +674,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteRecidArray(pIn as recid extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         
@@ -999,7 +999,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
     
     method public void WriteHandleArray(pIn as handle extent):
         define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
+        define variable iMax  as integer no-undo.
         
         ValidateStream().
         

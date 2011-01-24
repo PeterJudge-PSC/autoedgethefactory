@@ -7,7 +7,7 @@
     Created     : Tue Apr 07 10:27:16 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.QueryTypeEnum.
 using OpenEdge.Lang.EnumMember.

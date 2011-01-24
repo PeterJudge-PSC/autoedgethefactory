@@ -9,7 +9,7 @@
                     have our own ConditionResolver, since there may be 
                     some special treatment
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.Conditions.ConnectionCondition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionResolver.

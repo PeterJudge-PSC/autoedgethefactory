@@ -7,7 +7,7 @@
     Created     : Wed Sep 02 14:50:19 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.EventArgs.
 using OpenEdge.Core.System.QueryElementEnum.

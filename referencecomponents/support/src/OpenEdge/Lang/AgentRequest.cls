@@ -9,7 +9,7 @@
     Notes       : * The instance's lifespan is managed by as AppServer activate/deactivate
                     procedures.
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.AgentRequest.
 using OpenEdge.Lang.Collections.Map.
