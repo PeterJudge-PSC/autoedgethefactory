@@ -7,8 +7,9 @@
     Created     : Thu Feb 11 20:09:22 EST 2010
     Notes       :  
   --------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
+using OpenEdge.DataSource.DataSource.
 using OpenEdge.DataSource.IDataSource.
 using OpenEdge.DataAccess.IDataAccess.
 using OpenEdge.DataSource.DataSourceEventArgs.
@@ -45,6 +46,8 @@ using Progress.Lang.Class.
 
 class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
         implements IDataSource:
+    
+    define static public property IDataSourceType as class Class no-undo get. private set.
     
     /** The data transport type for this message. These may differ for request and response. */
     define protected property DataTargetFormat as DataFormatEnum no-undo get. private set.
@@ -83,6 +86,10 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
     define public event BeforeSave            signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event AfterSave             signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event AfterSaveTransaction  signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    
+    constructor static DataSource():
+        DataSource:IDataSourceType = Class:GetClass('OpenEdge.DataSource.IDataSource').
+    end constructor.
     
     constructor public DataSource(input poComponentInfo as IComponentInfo):
         super(input poComponentInfo).

@@ -7,10 +7,11 @@
     Created     : Tue Aug 24 15:04:40 EDT 2010
     Notes       : 
   --------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.DataAccess.IDataAccess.
 using OpenEdge.DataSource.IDataSource.
+using OpenEdge.DataSource.DataSource.
 
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
@@ -65,14 +66,14 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     define private variable moCurrentRequestDataSources as ICollection no-undo.
     
     constructor public StandardDataAccess():
-        this-object(new TypedMap(String:Type, Class:GetClass('OpenEdge.DataSource.IDataSource'))).
+        this-object(new TypedMap(String:Type, DataSource:IDataSourceType)).
     end constructor.
     
     constructor public StandardDataAccess(input poDataSources as IMap):
         super().
         
         assign DataSources = poDataSources
-               moCurrentRequestDataSources = new TypedCollection(Class:GetClass('OpenEdge.DataSource.IDataSource')).
+               moCurrentRequestDataSources = new TypedCollection(DataSource:IDataSourceType).
     end constructor.
     
     /** Helper method for adding DataSource objects from InjectABL. It's also perfectly legitimate to
@@ -215,7 +216,7 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
             /* no tableRequests = all tables */
             if valid-object(oTableRequest) then
             do:
-                oDataSource = cast(DataSources:Get(new String(ResolveTableName(oTableRequest:TableName))), IDataSource).
+                oDataSource = cast(DataSources:Get(new String(oTableRequest:TableName)), IDataSource).
                 if valid-object(oDataSource) then
                 do:
                     moCurrentRequestDataSources:Add(oDataSource).
@@ -233,18 +234,18 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         
         /* Get data into this dataset */
         if lHasAttachedDataSources then
+        do:
             FetchData().
+            RemoveAllCallbacks(DatasetHandle, cast(moCurrentRequest, IServiceMessage):ActionType).
+        end.
     end method.
     
     /** Fetch/retrieve data from the datasource, and populate the business entity with 
         it. */
     method protected void FetchData():
         /* This could be a call to the individual datasources to populate their data.
-            cast(moCurrentRequestDataSources:Get(1), IDataSource):PerformFetch().
-         */
+            cast(moCurrentRequestDataSources:Get(1), IDataSource):PerformFetch(). */
         DatasetHandle:fill().
-        
-        RemoveAllCallbacks(DatasetHandle, cast(moCurrentRequest, IServiceMessage):ActionType).
     end method.
     
     /** Removes all the callbacks on a dataset and its buffers, for a given action. 
