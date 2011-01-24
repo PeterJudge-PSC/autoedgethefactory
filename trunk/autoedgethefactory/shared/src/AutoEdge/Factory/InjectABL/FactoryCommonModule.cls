@@ -7,7 +7,7 @@
     Created     : Wed Dec 01 16:15:19 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.InjectABL.ManagerScopeEnum.
 
@@ -29,8 +29,8 @@ class AutoEdge.Factory.InjectABL.FactoryCommonModule inherits InjectionModule:
         /* savvion parameters */
         oBindingSyntax = Bind('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters').
         oBindingSyntax
-            :To('AutoEdge.Factory.Common.SavvionParameters').
-        
+            :To('AutoEdge.Factory.EnterpriseServices.SavvionParameters').
+
     end method.
     
 end class.
