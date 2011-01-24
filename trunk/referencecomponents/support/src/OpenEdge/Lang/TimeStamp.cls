@@ -11,7 +11,7 @@
                     primitive value means that we don't have to distinguish between
                     primitives and types, which makes the code more readable.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.TimeStamp.
 using OpenEdge.Lang.DataTypeEnum.

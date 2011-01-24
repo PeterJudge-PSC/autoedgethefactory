@@ -7,7 +7,7 @@
     Created     : Fri Mar 05 08:14:13 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleStrategyCollection.

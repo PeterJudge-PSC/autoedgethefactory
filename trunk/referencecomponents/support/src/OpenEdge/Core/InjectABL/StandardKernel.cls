@@ -7,7 +7,7 @@
     Created     : Wed Mar 03 11:23:20 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Core.InjectABL.KernelBase.

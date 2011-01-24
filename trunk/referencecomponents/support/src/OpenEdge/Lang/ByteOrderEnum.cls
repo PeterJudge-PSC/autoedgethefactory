@@ -7,7 +7,7 @@
     Created     : Mon Dec 21 09:40:59 EST 2009
     Notes       : * Taken from ABL documentation
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.EnumMember.
@@ -31,7 +31,6 @@ class OpenEdge.Lang.ByteOrderEnum final inherits EnumMember:
         super (input piValue, input pcName).
     end constructor.
     
-    @todo(task="this make sense?").
     method static public ByteOrderEnum EnumFromString(pcByteOrder as char):
         define variable oMember as ByteOrderEnum no-undo.
         

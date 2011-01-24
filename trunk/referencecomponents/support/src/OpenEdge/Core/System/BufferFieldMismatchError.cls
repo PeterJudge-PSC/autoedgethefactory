@@ -7,7 +7,7 @@
     Created     : Wed Jul 08 10:39:12 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.BufferFieldMismatchError.
 using OpenEdge.Core.System.ApplicationError.

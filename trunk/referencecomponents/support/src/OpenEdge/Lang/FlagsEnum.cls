@@ -11,7 +11,7 @@
                     in a single value. OpenEdge.PresentationLayer.Common.ActionStateEnum 
                     contains an example of their use.
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.EnumMember.
 using Progress.Lang.AppError.

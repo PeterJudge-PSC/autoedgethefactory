@@ -1,3 +1,4 @@
+@deprecated(version="0.0"). 
 /*------------------------------------------------------------------------
     File        : LoginData
     Purpose     : 
@@ -8,7 +9,7 @@
     Notes       : * This is a sample LoginData: ILoginData could have 
                     anything in it, really. 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.*.
 

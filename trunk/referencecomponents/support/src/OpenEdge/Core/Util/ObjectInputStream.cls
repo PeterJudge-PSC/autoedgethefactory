@@ -11,7 +11,7 @@
                   * For the protocol definition, see 
                     https://wiki.progress.com/display/OEBP/Object+Serialization+Protocol
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Core.System.ObjectStreamConstants.
@@ -379,21 +379,30 @@ class OpenEdge.Core.Util.ObjectInputStream:
     end method.
     
     method public Object extent ReadObjectArray():
-        def var oObj as Object extent no-undo.
         def var iExtent as int no-undo.
         def var iLoop as int no-undo.
-        def var iVal as int no-undo.
+        def var oObj as Object extent no-undo.
         
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ARRAY).
-        
-        iExtent = ReadByte().
-        extent(oObj ) = iExtent.
-        do iLoop = 1 to iExtent:
-            oObj[iLoop] = ReadObject().
-        end.
-        
-        ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).
-        
+        case ReadByte():
+            when ObjectStreamConstants:TC_NULL then
+                . /* do nothing */
+            when ObjectStreamConstants:TC_ARRAY then
+            do:
+                iExtent = ReadByte().
+                extent(oObj) = iExtent.
+                do iLoop = 1 to iExtent:
+                    oObj[iLoop] = ReadObject().
+                end.
+                
+                ValidateByte(ReadByte(), ObjectStreamConstants:TC_ENDBLOCKDATA).                    
+            end.
+            otherwise
+                ThrowError(ObjectInputError:BYTE,
+                               ObjectStreamConstants:ToString(ObjectStreamConstants:TC_NULL)
+                               + ' or ' +  ObjectStreamConstants:ToString(ObjectStreamConstants:TC_ARRAY),
+                               miCursor - ObjectStreamConstants:SIZE_BYTE).
+        end case.
+                
         return oObj.
     end method.
     
@@ -1112,7 +1121,7 @@ class OpenEdge.Core.Util.ObjectInputStream:
         define variable iLoop as integer no-undo.
         
         ValidateByte(ReadByte(), ObjectStreamConstants:TC_BLOCKDATA).
-                
+
         iMax = ReadInt().
         do iLoop = 1 to iMax:
             phBuffer:buffer-create().
@@ -1359,13 +1368,14 @@ class OpenEdge.Core.Util.ObjectInputStream:
     end method.
     
     method protected void AddWarning(pcType as char, pcParam1 as char, piPosition as int ):
+        @todo(task="implement").
+        /*
         message
             pcType skip
             pcParam1 skip
             piPosition
         view-as alert-box warning.
-        
-        @todo(task="implement").
+        */
     end method.
     
     method protected void ThrowError(pcType as char, pcParam1 as char, piPosition as int ):

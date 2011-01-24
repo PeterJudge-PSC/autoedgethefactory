@@ -8,7 +8,7 @@
     Notes       : * Is IExternalizable because its derived TableRequest is
                     potentially passed across the wire. 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.QueryBuffer.
 using OpenEdge.Core.System.QueryFilter.
@@ -94,6 +94,9 @@ class OpenEdge.Core.System.QueryDefinition
         field Order as int
         index idx1 as primary unique BufferName FieldName.
 
+    /** single space for building query strings. Note the init value must be at least one space */
+    define private variable mcSpacer as character no-undo init ' '.
+    
     method public void AddFilter (pcBufferName as character,
                                   pcFieldName as character,
                                   poOperator as OperatorEnum,
@@ -660,32 +663,35 @@ class OpenEdge.Core.System.QueryDefinition
                    cJoin = GetJoin(cQueryBufferList, cBufferName)
                    cFilter = GetFilter(cBufferName)
                    
-                   cSortBy = cSortBy + ' ' 
-                           + GetSort(cBufferName)
+                   cSortBy = cSortBy + mcSpacer + GetSort(cBufferName)
                    
                    /* Note: where string broken up for readability. */
-                   cWhere = cWhere + ' ' 
-                          + cast(lbBuffer.QueryType,EnumMember):ToString() + ' ' 
+                   cWhere = cWhere + mcSpacer 
+                          + cast(lbBuffer.QueryType,EnumMember):ToString() + mcSpacer 
                           + lbBuffer.BufferName.
            
             
             if cJoin ne '' then
             do:
-                cWhere = cWhere + ' where ' + cJoin.
+                cWhere = cWhere             + mcSpacer 
+                        + 'where'           + mcSpacer 
+                        + '(' + cJoin + ') '.
                 if cFilter ne '' then
-                    cWhere = cWhere + JoinEnum:And:ToString() + ' (' + cFilter + ') '.
+                    cWhere = cWhere                     + mcSpacer 
+                           + JoinEnum:And:ToString()    + mcSpacer 
+                           + '(' + cFilter + ') '.
             end.
             else
             if cFilter ne '' then
-                cWhere = cWhere + ' where ' + cFilter.
+                cWhere = cWhere + mcSpacer + 'where' + mcSpacer + cFilter.
             
             /* lock status and terminate */
-            cWhere = cWhere
-                   + ' ' + cast(lbBuffer.LockMode,EnumMember):ToString() + ' '
+            cWhere = cWhere + mcSpacer 
+                   + cast(lbBuffer.LockMode,EnumMember):ToString() + mcSpacer
                    + (if iExtent ne extent(pcBuffers) then ', ' else '').
         end.
         
-        return cWhere + ' ' + cSortBy.
+        return cWhere + mcSpacer + cSortBy.
     end method.
 
 /** SORT CRITERIA **/
@@ -812,7 +818,7 @@ class OpenEdge.Core.System.QueryDefinition
         iMax = extent(cBuffers).
         
         do iLoop = 1 to iMax:
-            cSortBy = cSortBy + ' ' + GetSort(cBuffers[iLoop]).
+            cSortBy = cSortBy + mcSpacer + GetSort(cBuffers[iLoop]).
         end.
         
         return cSortBy.
@@ -833,7 +839,7 @@ class OpenEdge.Core.System.QueryDefinition
                  by lbSort.Order:
             assign oSortDirection = cast(lbSort.Direction, EnumMember)
                    cSortBy = cSortBy + ' by '
-                         + lbSort.BufferName + '.' + lbSort.FieldName + ' ' 
+                         + lbSort.BufferName + '.' + lbSort.FieldName + mcSpacer 
                          + (if oSortDirection:Equals(SortDirectionEnum:Ascending) then '' 
                             else oSortDirection:ToString() ).
         end.
@@ -911,27 +917,27 @@ class OpenEdge.Core.System.QueryDefinition
         
         @param character The buffer name 
         @return longchar The where-clause-compatible string. */    
-    method public longchar GetFilter(pcBufferName as character):
+    method public longchar GetFilter(input pcBufferName as character):
         define variable cWhereClause as longchar no-undo.
         define variable cValue as character no-undo.
         
         define buffer lbFilter for ttFilter.
         
         for each lbFilter where lbFilter.BufferName = pcBufferName:
-            if cWhereClause <> ' ' then
-                cWhereClause = cWhereClause + ' '
-                              + cast(lbFilter.JoinType, EnumMember):ToString() + ' '.
+            if cWhereClause <> '' then
+                cWhereClause = cWhereClause                                     + mcSpacer
+                              + cast(lbFilter.JoinType, EnumMember):ToString()  + mcSpacer.
             
             cValue = string(cast(lbFilter.FieldValue, String):Value).
             if cast(lbFilter.FieldType, DataTypeEnum):Equals(DataTypeEnum:Rowid) then
-                cWhereClause = cWhereClause + ' '
-                             + 'rowid(' + quoter(lbFilter.BufferName) + ')' 
-                             + cast(lbFilter.Operator, EnumMember):ToString() + ' '
+                cWhereClause = cWhereClause                                     + mcSpacer
+                             + 'rowid(' + quoter(lbFilter.BufferName) + ')'     + mcSpacer 
+                             + cast(lbFilter.Operator, EnumMember):ToString()   + mcSpacer
                              + 'to-rowid(' + quoter(cValue) + ')'.
             else
-                cWhereClause = cWhereClause + ' '
-                             + lbFilter.BufferName + '.' + lbFilter.FieldName + ' ' 
-                             + cast(lbFilter.Operator, EnumMember):ToString() + ' '
+                cWhereClause = cWhereClause                                     + mcSpacer
+                             + lbFilter.BufferName + '.' + lbFilter.FieldName   + mcSpacer 
+                             + cast(lbFilter.Operator, EnumMember):ToString()   + mcSpacer
                              + quoter(cValue).
         end.
         
@@ -1100,11 +1106,11 @@ class OpenEdge.Core.System.QueryDefinition
             do:
                       
                 if cWhereClause <> '' then
-                    cWhereClause = cWhereClause + ' '
-                                  + cast(lbJoin.JoinType, EnumMember):ToString() + ' '.
+                    cWhereClause = cWhereClause + mcSpacer
+                                  + cast(lbJoin.JoinType, EnumMember):ToString() + mcSpacer.
                 cWhereClause = cWhereClause
-                             + lbJoin.BufferName + '.' + lbJoin.FieldName + ' ' 
-                             + cast(lbJoin.Operator, EnumMember):ToString() + ' '
+                             + lbJoin.BufferName + '.' + lbJoin.FieldName + mcSpacer 
+                             + cast(lbJoin.Operator, EnumMember):ToString() + mcSpacer
                              + lbJoin.JoinBufferName + '.' + lbJoin.JoinFieldName.
             end.
         end.

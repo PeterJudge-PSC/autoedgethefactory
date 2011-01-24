@@ -7,7 +7,7 @@
     Created     : Wed Mar 10 10:43:01 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.Collections.TypedCollection.
 using OpenEdge.Lang.Collections.Collection.

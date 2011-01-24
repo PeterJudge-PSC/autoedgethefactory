@@ -12,7 +12,6 @@ using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 
-using OpenEdge.Core.System.ConnectionTypeEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
@@ -52,12 +51,14 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingSyntax:
     method public IBindingSyntax InScope(input poScopeCallback as class Class, input poScope as StandardScopeEnum).
     
     @IBindingOnSyntax.
-    /** General */
-    method public IBindingSyntax OnClientSession().
+    /** Binding is applicable to a client session. This is typically a GUI or thin-client of some sort */
+    method public IBindingSyntax OnThinClientSession().
+    /** Binding applicable to a server session. This is any headless backend - appserver, webserver etc */
     method public IBindingSyntax OnServerSession().
-    
-    /** Indicates that the binding is valid for a session as identified by an application-specific code */
-    method public IBindingSyntax OnSession(input pcSessionCode as character).
+    /** Binding is applicable to a complete client/server session. Typically a development environment, or fat client */
+    method public IBindingSyntax OnFatClientSession().
+    /** Indicates that the binding is valid for a session as identified by an application-specific code/name */
+    method public IBindingSyntax OnNamedSession(input pcSessionCode as character).
     
     /*
     @IBindingConnectedToSyntax.

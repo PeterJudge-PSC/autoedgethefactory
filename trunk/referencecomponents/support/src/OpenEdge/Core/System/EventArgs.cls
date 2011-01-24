@@ -12,7 +12,7 @@
                     requirement for that to happen. although outside of 
                     'empty' this is a somewhat useless class :)
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.EventArgs.
 

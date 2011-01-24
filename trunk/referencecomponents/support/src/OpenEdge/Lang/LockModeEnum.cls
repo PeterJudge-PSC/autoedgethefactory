@@ -7,7 +7,7 @@
     Created     : Fri Mar 20 11:56:34 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.LockModeEnum.
 using OpenEdge.Lang.EnumMember.

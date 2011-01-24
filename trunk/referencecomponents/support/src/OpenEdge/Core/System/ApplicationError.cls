@@ -7,7 +7,7 @@
     Created     : Mon Mar 09 10:37:02 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Core.Util.ObjectOutputStream.
@@ -15,7 +15,10 @@ using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.ErrorSeverityEnum.
 
+using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.IOModeEnum.
 using OpenEdge.Lang.FlagsEnum.
+using Progress.Lang.ParameterList.
 using Progress.Lang.AppError.
 using Progress.Lang.Object.
 using Progress.Lang.Class.
@@ -152,11 +155,18 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     end method.
          
     method public override Object Clone():
+        define variable oParams as ParameterList no-undo.
         define variable oClone as ApplicationError no-undo.
         define variable oClass as class Class no-undo. 
-        define variable iLoop  as integer no-undo. 
+        define variable iLoop  as integer no-undo.
+        
         oClass = this-object:GetClass().
-        oClone = cast(oClass:New(), ApplicationError).
+        oParams = new ParameterList(1).
+        oParams:SetParameter(1,
+                             substitute(DataTypeEnum:Class:ToString(), 'Progress.Lang.Error'),
+                             IOModeEnum:Input:ToString(),
+                             this-object:InnerError).
+        oClone = cast(oClass:New(oParams), ApplicationError).
         do iLoop = 1 to NumMessages:
             oClone:AddMessage(GetMessage(iLoop), iLoop).
         end.
@@ -166,15 +176,30 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     end method.
 
     method public void WriteObject(input poStream as ObjectOutputStream):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
-
+        iMax = NumMessages.
+        poStream:WriteInt(iMax).
+        do iLoop = 1 to iMax:
+            poStream:WriteLongchar(GetMessage(iLoop)).
+        end.
+                        
+        poStream:WriteInt(this-object:Severity).
+        poStream:WriteObject(InnerError).
     end method.
 
     method public void ReadObject(input poStream as ObjectInputStream):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
         
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
-
+        iMax = poStream:ReadInt().
+        do iLoop = 1 to iMax:
+            this-object:AddMessage(string(poStream:ReadLongchar()), iLoop).
+        end.
+        
+        this-object:Severity = poStream:ReadInt().
+        InnerError = cast(poStream:ReadObject(), Error).
     end method.
     
 end class.

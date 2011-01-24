@@ -11,7 +11,7 @@
                   * The individual procedures here are as documented in the
                     ABL documentation set. 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.XML.SaxReader.
 using OpenEdge.Lang.SerializationModeEnum.

@@ -15,7 +15,7 @@
                  - no empty constructor, specialised for IMap 
 ----------------------------------------------------------------------------------------------*/
 
-routine-level on error undo, throw.
+{routinelevel.i}
 using Progress.Lang.Object.
 
 using OpenEdge.Lang.Collections.ICollection.
@@ -134,7 +134,11 @@ class OpenEdge.Lang.Collections.ValueCollection implements ICollection:
     method public Object extent ToArray():
         define variable i as integer no-undo.
         define variable oObjArray as Object extent no-undo.
-        define variable iterator as IIterator no-undo.    
+        define variable iterator as IIterator no-undo.
+        
+        if Size eq 0 then
+            return oObjArray.
+            
         extent(oObjarray) = Size.
         iterator = Iterator(). 
         do while iterator:hasNext():

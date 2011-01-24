@@ -14,7 +14,7 @@
                  - no empty constructor, specialised for IMap 
   ----------------------------------------------------------------------*/
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using Progress.Lang.Object.
 using OpenEdge.Lang.Collections.ICollection.

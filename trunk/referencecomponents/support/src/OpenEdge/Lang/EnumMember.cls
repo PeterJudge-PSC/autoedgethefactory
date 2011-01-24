@@ -10,7 +10,7 @@
                     need for it.
                  * Value takes precedence over name, when both are specified.
   --------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.EnumMember.
 using Progress.Lang.Class.

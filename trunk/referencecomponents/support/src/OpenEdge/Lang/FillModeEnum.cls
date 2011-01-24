@@ -7,7 +7,7 @@
     Created     : Thu Mar 12 15:07:13 EDT 2009
     Notes       : * Based on the ABL documentation 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.FillModeEnum.
 using OpenEdge.Lang.EnumMember.

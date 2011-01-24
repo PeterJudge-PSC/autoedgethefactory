@@ -7,7 +7,7 @@
     Created     : Wed Mar 03 14:37:17 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScope.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.

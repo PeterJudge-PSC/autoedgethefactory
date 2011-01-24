@@ -7,7 +7,7 @@
     Created     : Mon Nov 22 12:06:12 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.ApplicationError.
 using Progress.Lang.Error.

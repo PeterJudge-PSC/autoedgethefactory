@@ -8,7 +8,7 @@
     Created     : Sun Apr 11 01:35:13 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
  
 using Progress.Lang.Object.
 using Progress.Lang.AppError.

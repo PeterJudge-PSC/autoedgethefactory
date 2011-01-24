@@ -11,7 +11,7 @@
 using Progress.Lang.*.
 using OpenEdge.Lang.Collections.IList.
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class OpenEdge.Lang.Collections.CharacterList /*implements IList*/: 
     define variable mList as character no-undo.

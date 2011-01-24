@@ -7,7 +7,7 @@
     Created     : Tue Jan 05 13:50:43 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.Collections.IntegerStack.
 using OpenEdge.Lang.Collections.Stack.

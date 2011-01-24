@@ -7,7 +7,7 @@
     Created     : Tue Nov 23 09:02:49 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.XML.SaxWriterDataTypeEnum.
 using OpenEdge.Lang.EnumMember.

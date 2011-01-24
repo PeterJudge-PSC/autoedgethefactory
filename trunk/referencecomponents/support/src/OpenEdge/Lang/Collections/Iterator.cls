@@ -9,7 +9,7 @@
     Notes       : 
   ----------------------------------------------------------------------*/
 
-routine-level on error undo, throw.
+{routinelevel.i}
 using Progress.Lang.Object.
 using Progress.Lang.*.
 
