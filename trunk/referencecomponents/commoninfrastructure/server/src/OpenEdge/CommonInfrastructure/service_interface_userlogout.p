@@ -18,8 +18,10 @@ using OpenEdge.CommonInfrastructure.IServiceManager.
 using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.IObjectInput.
+using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
@@ -32,8 +34,8 @@ define input-output parameter pmUserContext as memptr no-undo.
 
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
-define variable oInput as ObjectInputStream no-undo.
-define variable oOutput as ObjectOutputStream no-undo.
+define variable oInput as IObjectInput no-undo.
+define variable oOutput as IObjectOutput no-undo.
 define variable oContext as IUserContext no-undo.
 
 /** -- main -- **/
