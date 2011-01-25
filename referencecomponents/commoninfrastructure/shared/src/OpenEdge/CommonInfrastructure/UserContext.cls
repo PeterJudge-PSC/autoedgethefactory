@@ -13,8 +13,8 @@ using OpenEdge.CommonInfrastructure.ITenantManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
 using OpenEdge.Core.Util.IExternalizable.
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IMap.
@@ -79,7 +79,7 @@ class OpenEdge.CommonInfrastructure.UserContext
         TenantId = poTenantManager:GetTenantId(TenantName).
     end method.
     
-    method public void WriteObject(input poStream as ObjectOutputStream):
+    method public void WriteObject(input poStream as IObjectOutput):
         poStream:WriteChar(UserName).
         poStream:WriteChar(UserDomain).
         poStream:WriteLongChar(ContextId).
@@ -89,7 +89,7 @@ class OpenEdge.CommonInfrastructure.UserContext
         poStream:WriteObjectArray(TenantId:Values:ToArray()).
     end method.
     
-    method public void ReadObject(input poStream as ObjectInputStream):
+    method public void ReadObject(input poStream as IObjectInput):
         UserName = poStream:ReadChar().
         UserDomain = poStream:ReadChar().
         ContextId = poStream:ReadLongChar().

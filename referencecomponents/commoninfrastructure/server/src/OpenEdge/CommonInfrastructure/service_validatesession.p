@@ -19,8 +19,8 @@ using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
 using OpenEdge.Core.System.ApplicationError.
-using OpenEdge.Core.Util.ObjectInputStream.
-using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.IObjectInput.
+using OpenEdge.Core.Util.IObjectOutput.
 
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.

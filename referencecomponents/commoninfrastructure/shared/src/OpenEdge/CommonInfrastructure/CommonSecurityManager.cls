@@ -20,7 +20,9 @@ using OpenEdge.CommonInfrastructure.ITenantManager.
 using OpenEdge.CommonInfrastructure.Service.
 using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
 
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.System.InvalidValueSpecifiedError.
 using OpenEdge.Core.System.InvalidActionError.
@@ -151,7 +153,7 @@ class OpenEdge.CommonInfrastructure.CommonSecurityManager abstract inherits Serv
     
     /** Read and write allows us to turn context into a kind of cookie, if we so desire. */
     method protected IUserContext ReadSerializedContext(input pcContextId as longchar):
-        define variable oOIS as ObjectInputStream no-undo.
+        define variable oOIS as IObjectInput no-undo.
         define variable oUC as IUserContext no-undo.
         define variable cFilename as character no-undo.
         
@@ -167,7 +169,7 @@ class OpenEdge.CommonInfrastructure.CommonSecurityManager abstract inherits Serv
     end method.
     
     method protected void WriteSerializedContext(input poUserContext as IUserContext):
-        define variable oOOS as ObjectOutputStream no-undo.
+        define variable oOOS as IObjectOutput no-undo.
         define variable oUC as IUserContext no-undo.
         define variable cFilename as character no-undo.
         

@@ -19,6 +19,7 @@ using OpenEdge.CommonInfrastructure.CommonServiceManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
 using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
 
 using OpenEdge.Lang.ABLSession.
@@ -36,7 +37,7 @@ define output parameter pmUserContext as memptr no-undo.
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
 define variable oContext as IUserContext no-undo.
-define variable oOutput as ObjectOutputStream no-undo.
+define variable oOutput as IObjectOutput no-undo.
 
 /** -- validate defs -- **/
 Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').

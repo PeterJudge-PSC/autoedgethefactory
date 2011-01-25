@@ -25,7 +25,9 @@ using OpenEdge.CommonInfrastructure.IConnectionManager.
 using OpenEdge.CommonInfrastructure.CommonConnectionManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
 
 using OpenEdge.Lang.ABLSession.
@@ -108,7 +110,7 @@ class OpenEdge.CommonInfrastructure.ServiceAdapter abstract
         @return IUserContext The reconstituted object.  */
     method static public IUserContext DeserializeContext(input pmUserContext as memptr):
         define variable oContext as IUserContext no-undo.
-        define variable oInput as ObjectInputStream no-undo.
+        define variable oInput as IObjectInput no-undo.
         
         oInput = new ObjectInputStream().
         oInput:Read(pmUserContext).
@@ -127,7 +129,7 @@ class OpenEdge.CommonInfrastructure.ServiceAdapter abstract
         @param memptr The serialised user-context   */
     method static public memptr SerializeContext(input poUserContext as IUserContext):
         define variable mContext as memptr no-undo.
-        define variable oOutput as ObjectOutputStream no-undo.
+        define variable oOutput as IObjectOutput no-undo.
         
         oOutput = new ObjectOutputStream().
         oOutput:WriteObject(poUserContext).

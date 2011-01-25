@@ -20,8 +20,8 @@ using OpenEdge.CommonInfrastructure.IComponentInfo.
 using OpenEdge.CommonInfrastructure.ITenantManager.
 using OpenEdge.CommonInfrastructure.Service.
 
-using OpenEdge.Core.Util.ObjectInputStream.
-using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.IObjectInput.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.System.InvalidValueSpecifiedError.
 using OpenEdge.Core.System.InvalidActionError.
 

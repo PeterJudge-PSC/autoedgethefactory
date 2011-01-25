@@ -19,8 +19,8 @@ using OpenEdge.CommonInfrastructure.ServiceMessage.SecurityManagerResponse.
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.ConnectionTypeEnum.
 
-using OpenEdge.Core.Util.ObjectInputStream.
-using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.IObjectInput.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.System.UnsupportedOperationError.
 using OpenEdge.Core.System.InvalidCallError.
 using OpenEdge.Lang.ByteOrderEnum.

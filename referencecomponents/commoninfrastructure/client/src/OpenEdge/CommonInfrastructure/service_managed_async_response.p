@@ -25,6 +25,7 @@ using OpenEdge.CommonInfrastructure.CommonSecurityManager.
 using OpenEdge.CommonInfrastructure.IUserContext.
 using OpenEdge.CommonInfrastructure.ServiceAdapter.
 
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Lang.ABLSession.
 using Progress.Lang.Class.
@@ -47,7 +48,7 @@ procedure EventProcedure_FetchData:
     define variable iLoop as integer no-undo.
     define variable iMax as integer no-undo.
     define variable mTemp as memptr no-undo.
-    define variable oInput as ObjectInputStream no-undo.    
+    define variable oInput as IObjectInput no-undo.    
     define variable oResponse as IFetchResponse extent no-undo.
         
     assign iMax = extent(pmResponse)
@@ -83,7 +84,7 @@ procedure EventProcedure_SaveData:
     define variable iMax as integer no-undo.
     define variable mTemp as memptr no-undo.
     define variable mRequest as memptr extent no-undo.
-    define variable oInput as ObjectInputStream no-undo.
+    define variable oInput as IObjectInput no-undo.
     define variable hDataset as handle no-undo.
     
     assign iMax = extent(pmResponse)
