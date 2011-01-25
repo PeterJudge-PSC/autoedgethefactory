@@ -21,8 +21,9 @@ using OpenEdge.Core.System.QueryDefinitionOperationEnum.
 using OpenEdge.Core.System.QueryElementEnum.
 
 using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectInput.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.Collection.
@@ -515,7 +516,6 @@ class OpenEdge.Core.System.QueryDefinition
         define variable lEquals as logical no-undo.
         define variable cThis as longchar no-undo.
         define variable cThat as longchar no-undo.
-        define variable oOOS as ObjectOutputStream no-undo.
         
         if not valid-object(poQuery) then
             lEquals = false.            
@@ -539,8 +539,8 @@ class OpenEdge.Core.System.QueryDefinition
     end method.
     
     method public char GetMD5():
-        define variable oOOS as ObjectOutputStream no-undo.        
-        def var mStream as memptr.
+        define variable oOOS as IObjectOutput no-undo.
+        define variable mStream as memptr no-undo.
         
         oOOS = new ObjectOutputStream().
         oOOS:WriteObject(this-object).
@@ -559,7 +559,7 @@ class OpenEdge.Core.System.QueryDefinition
                 new QueryDefinitionEventArgs(QueryElementEnum:Join, QueryDefinitionOperationEnum:Create)).
     end method.
     
-    method public void WriteObject(po as ObjectOutputStream):
+    method public void WriteObject(input po as IObjectOutput):
         po:WriteEnum(QueryBlockType).
         
         po:WriteTable(buffer ttBuffer:handle).
@@ -568,7 +568,7 @@ class OpenEdge.Core.System.QueryDefinition
         po:WriteTable(buffer ttSort:handle).
     end method.
     
-    method public void ReadObject(po as ObjectInputStream):
+    method public void ReadObject(input po as IObjectInput):
         QueryBlockType = cast(po:ReadEnum(), QueryBlockTypeEnum).
         
         po:ReadTable(table ttBuffer by-reference).

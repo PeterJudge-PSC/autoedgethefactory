@@ -14,8 +14,8 @@
 {routinelevel.i}
 
 using OpenEdge.Core.Util.IExternalizable.
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
 
 /* Don't have a USING for this class, so that we can avoid conflicts with the STRING() ABL keyword/function
 using OpenEdge.Lang.String.*/
@@ -73,11 +73,11 @@ class OpenEdge.Lang.String
     end method.
     
 /** IExternalizable **/
-    method public void WriteObject(po as ObjectOutputStream):
+    method public void WriteObject(input po as IObjectOutput):
         po:WriteLongChar(this-object:Value).
     end method.
     
-    method public void ReadObject(po as ObjectInputStream):
+    method public void ReadObject(input po as IObjectInput):
         this-object:Value = po:ReadLongChar().
     end method.
 

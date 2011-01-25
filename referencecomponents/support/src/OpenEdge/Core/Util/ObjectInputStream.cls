@@ -13,6 +13,7 @@
   ---------------------------------------------------------------------- */
 {routinelevel.i}
 
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Core.System.ObjectStreamConstants.
 using OpenEdge.Core.System.ObjectInputError.
@@ -28,7 +29,9 @@ using Progress.Lang.Error.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-class OpenEdge.Core.Util.ObjectInputStream:
+class OpenEdge.Core.Util.ObjectInputStream
+        implements IObjectInput:
+    
     define private variable mmStreamMptr as memptr no-undo.
     define private variable miCursor as integer no-undo.
     define private variable miDepth as integer  no-undo.
@@ -78,6 +81,7 @@ class OpenEdge.Core.Util.ObjectInputStream:
                                     this-object).
     end method.
     
+    /** Resets/reinitialises the input */      
     method public void Reset():
         this-object:Clear().
         Initialize().
@@ -899,9 +903,6 @@ class OpenEdge.Core.Util.ObjectInputStream:
         return rVal.
     end method.
     
-    /**
-        @param dataset-handle-phOut could be called by-reference  
-     **/
     method public void ReadDataset(input-output dataset-handle phOut):
         define variable iLoop as integer no-undo.
         define variable iMax  as integer no-undo.

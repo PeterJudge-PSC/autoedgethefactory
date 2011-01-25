@@ -11,8 +11,8 @@
 
 using OpenEdge.Core.System.QuerySort.
 using OpenEdge.Core.Util.IExternalizable.
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Lang.SortDirectionEnum .
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Object.
@@ -56,13 +56,13 @@ class OpenEdge.Core.System.QuerySort
         return lEquals.
     end method.
     
-    method public void WriteObject( input poStream as ObjectOutputStream):
+    method public void WriteObject( input poStream as IObjectOutput):
         poStream:WriteChar(BufferName).
         poStream:WriteChar(FieldName).
         poStream:WriteEnum(Direction).
     end method.
 
-    method public void ReadObject( input poStream as ObjectInputStream ):
+    method public void ReadObject( input poStream as IObjectInput ):
         assign BufferName= poStream:ReadChar()
                FieldName = poStream:ReadChar()
                Direction =  cast(poStream:ReadEnum(), SortDirectionEnum).

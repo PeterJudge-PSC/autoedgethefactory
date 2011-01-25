@@ -11,6 +11,7 @@
   ----------------------------------------------------------------------*/
 {routinelevel.i}
 
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.System.ObjectStreamConstants.
 using OpenEdge.Core.System.ObjectOutputError.
@@ -27,7 +28,8 @@ using Progress.Lang.Error.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-class OpenEdge.Core.Util.ObjectOutputStream:
+class OpenEdge.Core.Util.ObjectOutputStream
+            implements IObjectOutput:
     
     define private variable miCursor              as integer           no-undo.
     define private variable mrStreamBuffer        as raw               no-undo.
@@ -66,6 +68,7 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         mlStreamHeaderWritten = false.
     end method.
     
+    /** Resets/reinitialises the output */
     method public void Reset():
         this-object:Clear().
         Initialize().
@@ -100,7 +103,10 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         mlStreamHeaderWritten = true.
     end method.
     
-    method public raw Write(pcFileName as char):
+    /**  Writes the serialized output to the specified file 
+         
+         @param character The name of a file to write the output into. */    
+    method public void Write(pcFileName as char):
         define variable mStream as memptr no-undo.
 
         this-object:Write(output mStream).
@@ -112,6 +118,9 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         end finally.
     end method.
     
+    /**  Writes the serialized output to a memptr
+         
+         @param memptr The memprt into which to write the output. */    
     method public void Write(output pmStream as memptr):
         set-byte-order(pmStream) = ByteOrderEnum:BigEndian:Value.
         set-size(pmStream) = miCursor.
@@ -123,7 +132,10 @@ class OpenEdge.Core.Util.ObjectOutputStream:
         end finally.
     end method.
     
-    method public raw Write(output pcStream as longchar):
+    /**  Writes the serialized output to a CLOB
+         
+         @param longchar The CLOB into which to write the output. */            
+    method public void Write(output pcStream as longchar):
         define variable mStream as memptr no-undo.
         
         this-object:Write(output mStream).

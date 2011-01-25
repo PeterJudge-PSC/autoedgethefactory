@@ -9,8 +9,8 @@
   ----------------------------------------------------------------------*/
 {routinelevel.i}
 
-using OpenEdge.Core.Util.ObjectInputStream.
-using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.IObjectInput.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.ErrorSeverityEnum.
@@ -175,7 +175,7 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
         return oClone.
     end method.
 
-    method public void WriteObject(input poStream as ObjectOutputStream):
+    method public void WriteObject(input poStream as IObjectOutput):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         
@@ -189,7 +189,7 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
         poStream:WriteObject(InnerError).
     end method.
 
-    method public void ReadObject(input poStream as ObjectInputStream):
+    method public void ReadObject(input poStream as IObjectInput):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         
