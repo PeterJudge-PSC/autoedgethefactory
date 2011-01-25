@@ -7,20 +7,20 @@
     Created     : Wed Nov 25 12:42:41 EST 2009
     Notes       : 
   ---------------------------------------------------------------------- */
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.IExternalizable.
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
 
 interface OpenEdge.Core.Util.IExternalizable:   /* inherits ISerializable */
 
     /** Serialization method for an object.
-    
-        @param ObjectOutputStream The stream object that's performing the serialization */   
-    method public void WriteObject(input poStream as ObjectOutputStream).
+        
+        @param IObjectOutput The object that's performing the serialization */   
+    method public void WriteObject(input poStream as IObjectOutput).
     
     /** Deserialization method for an object.
         
-        @param ObjectInputStream The stream object that's performing the deserialization */
-    method public void ReadObject(input poStream as ObjectInputStream).
+        @param IObjectInput The object that's performing the deserialization */
+    method public void ReadObject(input poStream as IObjectInput).
     
 end interface.

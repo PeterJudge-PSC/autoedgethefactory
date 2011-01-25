@@ -9,8 +9,8 @@
   ----------------------------------------------------------------------*/
 {routinelevel.i}
 
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Lang.QueryBlockTypeEnum.
 using OpenEdge.Lang.EnumMember.
 

@@ -11,8 +11,8 @@
 
 using OpenEdge.Core.System.QueryJoin.
 using OpenEdge.Core.Util.IExternalizable.
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.OperatorEnum.
@@ -69,7 +69,7 @@ class OpenEdge.Core.System.QueryJoin
         return lEquals.
     end method.
     
-    method public void WriteObject( input poStream as ObjectOutputStream):
+    method public void WriteObject( input poStream as IObjectOutput):
         poStream:WriteChar(BufferName).
         poStream:WriteChar(FieldName).
         poStream:WriteEnum(Operator).
@@ -78,7 +78,7 @@ class OpenEdge.Core.System.QueryJoin
         poStream:WriteEnum(JoinType).
     end method.
 
-    method public void ReadObject( input poStream as ObjectInputStream ):
+    method public void ReadObject( input poStream as IObjectInput ):
         assign BufferName = poStream:ReadChar()
                FieldName = poStream:ReadChar()
                Operator = cast(poStream:ReadEnum(), OperatorEnum)

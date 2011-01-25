@@ -11,8 +11,8 @@
 
 using OpenEdge.Core.System.QueryBuffer.
 using OpenEdge.Core.Util.IExternalizable.
-using OpenEdge.Core.Util.ObjectOutputStream.
-using OpenEdge.Core.Util.ObjectInputStream.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Lang.LockModeEnum.
 using OpenEdge.Lang.QueryTypeEnum.
 using OpenEdge.Lang.Assert.
@@ -68,14 +68,14 @@ class OpenEdge.Core.System.QueryBuffer
         return lEquals.
     end method.
     
-    method public void WriteObject( input poStream as ObjectOutputStream):
+    method public void WriteObject( input poStream as IObjectOutput):
         poStream:WriteChar(this-object:Name).
         poStream:WriteChar(TableName).
         poStream:WriteEnum(QueryType).
         poStream:WriteEnum(LockMode).
     end method.
 
-    method public void ReadObject( input poStream as ObjectInputStream ):
+    method public void ReadObject( input poStream as IObjectInput):
         assign this-object:Name = poStream:ReadChar()
                TableName = poStream:ReadChar()
                QueryType = cast(poStream:ReadEnum(), QueryTypeEnum)
