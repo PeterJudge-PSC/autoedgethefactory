@@ -36,7 +36,9 @@ using OpenEdge.CommonInfrastructure.CommonSecurityManager.
 using OpenEdge.CommonInfrastructure.IConnectionManager.
 using OpenEdge.CommonInfrastructure.CommonConnectionManager.
 using OpenEdge.CommonInfrastructure.ConnectionTypeEnum.
+using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
+using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
 
 using OpenEdge.Lang.ByteOrderEnum.
@@ -46,8 +48,10 @@ using Progress.Lang.Class.
 using Progress.Lang.AppError.
 
 class AutoEdge.Factory.Common.StandardAppServerServiceAdapter inherits ServiceAdapter:
+    define public property AppServerName as character no-undo get. set.
     
     define private variable mcCallbackProcedureName as character no-undo initial 'OpenEdge/CommonInfrastructure/service_managed_async_response.p'.
+    
     
     constructor public StandardAppServerServiceAdapter(input pcService as character):
         super(pcService).
@@ -127,7 +131,7 @@ class AutoEdge.Factory.Common.StandardAppServerServiceAdapter inherits ServiceAd
         define variable mResponse as memptr extent no-undo.
         define variable mUserContext as memptr no-undo.
         define variable hResponseDataset as handle extent no-undo.
-        define variable oOutput as ObjectOutputStream no-undo.
+        define variable oOutput as IObjectOutput no-undo.
         
         set-byte-order(mTemp) = ByteOrderEnum:BigEndian:Value.
         assign iMax = extent(poRequest)
@@ -167,8 +171,8 @@ class AutoEdge.Factory.Common.StandardAppServerServiceAdapter inherits ServiceAd
         define variable mResponse as memptr extent no-undo.
         define variable mUserContext as memptr no-undo.
         define variable hResponseDataset as handle extent no-undo.
-        define variable oOutput as ObjectOutputStream no-undo.
-        define variable oInput as ObjectInputStream no-undo.
+        define variable oOutput as IObjectOutput no-undo.
+        define variable oInput as IObjectInput no-undo.
         define variable oResponse as IFetchResponse extent no-undo.
         
         assign iMax = extent(poRequest)
@@ -229,8 +233,8 @@ class AutoEdge.Factory.Common.StandardAppServerServiceAdapter inherits ServiceAd
         define variable mResponse as memptr extent no-undo.
         define variable mUserContext as memptr no-undo.
         define variable hRequestDataset as handle extent no-undo.
-        define variable oOutput as ObjectOutputStream no-undo.
-        define variable oInput as ObjectInputStream  no-undo.
+        define variable oOutput as IObjectOutput no-undo.
+        define variable oInput as IObjectInput no-undo.
         define variable hDataset as handle no-undo.
         
         set-byte-order(mTemp) = ByteOrderEnum:BigEndian:Value.
@@ -276,8 +280,8 @@ class AutoEdge.Factory.Common.StandardAppServerServiceAdapter inherits ServiceAd
         define variable mResponse as memptr extent no-undo.
         define variable mUserContext as memptr no-undo.
         define variable hRequestDataset as handle extent no-undo.
-        define variable oOutput as ObjectOutputStream no-undo.
-        define variable oInput as ObjectInputStream  no-undo.
+        define variable oOutput as IObjectOutput no-undo.
+        define variable oInput as IObjectInput no-undo.
         define variable hDataset as handle no-undo.
         
         set-byte-order(mTemp) = ByteOrderEnum:BigEndian:Value.
