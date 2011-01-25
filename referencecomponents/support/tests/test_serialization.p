@@ -9,8 +9,8 @@ def var m1 as memptr.
 def var os1 as Object.
 def var os3 as Object.
 
-def var oos as ObjectOutputStream.
-def var ois as ObjectInputStream.
+def var oos as IObjectOutput.
+def var ois as IObjectInput.
 
 os1 = new S3().
 /*os1:Init().*/

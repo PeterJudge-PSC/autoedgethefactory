@@ -59,7 +59,7 @@ class OpenEdge.Test.S1
         create tt.
     end method. 
         
-    method public void WriteObject(po as ObjectOutputStream ):
+    method public void WriteObject(po as IObjectOutput ):
         po:WriteInt(SomeVar).
         po:WriteHandle(SomeHdl).
         po:WriteObject(MyS0).
@@ -71,7 +71,7 @@ class OpenEdge.Test.S1
         po:WriteTable(buffer tt:handle).
     end method.
     
-    method public void ReadObject(po as ObjectInputStream ):
+    method public void ReadObject(po as IObjectInput):
        SomeVar = po:ReadInt().
        SomeHdl = po:ReadHandle().
        MyS0 = cast(po:ReadObject(), S0).
