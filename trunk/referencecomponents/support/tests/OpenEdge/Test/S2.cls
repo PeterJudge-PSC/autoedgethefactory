@@ -11,7 +11,7 @@
 using OpenEdge.Test.*.
 using Progress.Lang.*.
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class OpenEdge.Test.S2 :
 

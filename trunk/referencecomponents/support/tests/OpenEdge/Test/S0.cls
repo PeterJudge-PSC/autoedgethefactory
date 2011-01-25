@@ -7,7 +7,7 @@
     Created     : Fri Nov 20 10:44:33 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Core.System.*.
 using OpenEdge.Core.Util.*.
@@ -16,14 +16,14 @@ using Progress.Lang.*.
 class OpenEdge.Test.S0 implements ISerializable: 
 
     
-    method public void ReadObject( input po as ObjectInputStream ):
+    method public void ReadObject( input po as IObjectInput ):
 
     end method.
 
 
  
     
-    method public void WriteObject( input po as ObjectOutputStream ):
+    method public void WriteObject( input po as IObjectOutput ):
 
     end method.
 
