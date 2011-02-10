@@ -124,10 +124,14 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
     end method.
     
     /** Deactivates and releases the specified instance from the cache.
-        @param instance The instance to release.
-        @return true if the instance was found and released. otherwise false.
-     */
+    
+        @param Object The instance to release.
+        @return logical True if the instance was found and released; otherwise false. */
     method public logical Release(poInstance as Object):
+        /* When releasing this object, make sure we let go of anything
+           scoped to this instance. */
+        this-object:Clear(poInstance).
+        
         return Forget(poInstance).
     end method.
     

@@ -38,6 +38,9 @@ class OpenEdge.Lang.Collections.Collection inherits AbstractTTCollection:
         define variable lContains as logical no-undo.
         define buffer lbCollection for ttCollection.
         
+        if not valid-object(checkObject) then
+            return false.
+        
         /* try by-reference first */
         lContains = can-find(lbCollection where lbCollection.ObjectRef = checkObject). 
         for each lbCollection while lContains = false:

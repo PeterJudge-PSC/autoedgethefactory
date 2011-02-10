@@ -14,6 +14,7 @@
 {routinelevel.i}
 
 using OpenEdge.Lang.TimeStamp.
+using OpenEdge.Lang.DateTimeAddIntervalEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using Progress.Lang.Object.
 

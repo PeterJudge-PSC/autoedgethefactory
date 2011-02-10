@@ -30,6 +30,14 @@ class OpenEdge.Core.System.QueryJoin
     define public property JoinFieldName as character no-undo get. set.
     define public property JoinType as JoinEnum no-undo get. set.
     
+    /** Indicates that the JoinBuffer is an external (to this definition anyway)
+        join. This may be the case in queries used on ProDataSets' Data-sources,
+        where the where string is generated between a DB table and a temp-table in the
+        PDS. The query in that case doesn't know about the temp-table 
+    @todo(task="refactor", action="create DatasourceQueryDef?").     
+    define public property JoinBufferIsExternal as logical no-undo get. set.
+        */
+    
     constructor public QueryJoin(input pcBufferName as character,
                                  input pcFieldName as character,
                                  input poOperator as OperatorEnum,

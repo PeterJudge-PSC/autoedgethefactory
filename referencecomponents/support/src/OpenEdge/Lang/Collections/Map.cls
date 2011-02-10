@@ -79,6 +79,9 @@ class OpenEdge.Lang.Collections.Map implements IMap:
         define variable lContainsKey as logical no-undo.
         define buffer lbMap for ttMap.
         
+        if not valid-object(poKey) then
+            return false.
+        
         /* try by-reference first */
         lContainsKey = can-find(lbMap where lbMap.KeyRef = poKey). 
         for each lbMap while lContainsKey = false:
@@ -91,6 +94,9 @@ class OpenEdge.Lang.Collections.Map implements IMap:
     method public logical ContainsValue(poValue as Object):
         define variable lContainsValue as logical no-undo.
         define buffer lbMap for ttMap.
+        
+        if not valid-object(poValue) then
+            return false.
         
         /* try by-reference first */
         lContainsValue = can-find(lbMap where lbMap.ValueRef = poValue). 
@@ -106,6 +112,7 @@ class OpenEdge.Lang.Collections.Map implements IMap:
         define buffer btMap for ttMap.
         define variable oMap as IMap no-undo.
         define variable oValue as Object no-undo.
+        
         if super:Equals(o) then 
             return true.
         if type-of(o,IMap) then
@@ -138,6 +145,9 @@ class OpenEdge.Lang.Collections.Map implements IMap:
     method public Object Get(poKey as Object):
         define variable oValue as Object no-undo.
         define buffer lbMap for ttMap.
+       
+        if not valid-object(poKey) then
+            return oValue.
         
         find lbMap where lbMap.KeyRef = poKey no-error.
         if avail lbMap then
@@ -207,7 +217,7 @@ class OpenEdge.Lang.Collections.Map implements IMap:
         
         /* try by-reference first */
         find ttMap where ttMap.KeyRef = poKey no-error.
-        if not available ttMap then        
+        if not available ttMap and valid-object(poKey) then
         for each lbMap while not available ttMap:
             if lbMap.KeyRef:Equals(poKey) then
                 find ttMap where rowid(ttMap) = rowid(lbMap) no-error.

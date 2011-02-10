@@ -160,7 +160,7 @@ class OpenEdge.Lang.Assert:
         @param character The name of the handle/variable being checked. */
     method public static void ArgumentNotNull(input phArgument as handle, input pcName as character):
         if not valid-handle(phArgument) then
-            undo, throw new AppError(substitute('&1 cannot be null', pcName)).        
+            undo, throw new AppError(substitute('&1 cannot be null', pcName)).
     end method.
 
     /** Asserts that a handle is valid and of a particular datatype

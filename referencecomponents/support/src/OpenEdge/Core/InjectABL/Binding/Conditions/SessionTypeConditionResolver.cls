@@ -24,7 +24,7 @@ class OpenEdge.Core.InjectABL.Binding.Conditions.SessionTypeConditionResolver im
     
     /** Evaluates the provided conditions. 
         
-        @param ICondition The left-hand side argument for the clause
+        @param ICondition The left-hand side argument for the clauseRdatas
         @param ICondition The clause operator
         @param ICondition The right-hand side argument for the clause
         @return logical Whether the clause resolves to true or false.  */

@@ -56,6 +56,13 @@ class OpenEdge.Core.System.QueryDefinition
         end get.
         set.
 
+    /** Indicates whether the query can join to tables outside of this query definition. This may
+        happen in some cases; for instance when dealing with DataSourceQuery objects which are used
+        for DATA-SOURCE queries for ProDataSets.
+        
+        An external join is assumed to apply only to the 2nd (JoinBuffer) buffer in the QueryJoin. */        
+    define public property AllowExternalJoins as logical no-undo initial false get. set.
+    
     /* Only ever set by AddBuffer(). */
     define public property NumBuffers as integer no-undo get. protected set.
     
@@ -448,7 +455,7 @@ class OpenEdge.Core.System.QueryDefinition
     constructor public QueryDefinition():
         super ().
     end constructor.
-
+    
     /** Create a join between 2 buffers in this definition.
     
         @param QueryJoin Parameters for the join. */    
@@ -561,6 +568,7 @@ class OpenEdge.Core.System.QueryDefinition
     
     method public void WriteObject(input po as IObjectOutput):
         po:WriteEnum(QueryBlockType).
+        po:WriteLogical(AllowExternalJoins).
         
         po:WriteTable(buffer ttBuffer:handle).
         po:WriteTable(buffer ttFilter:handle).
@@ -570,6 +578,7 @@ class OpenEdge.Core.System.QueryDefinition
     
     method public void ReadObject(input po as IObjectInput):
         QueryBlockType = cast(po:ReadEnum(), QueryBlockTypeEnum).
+        AllowExternalJoins = po:ReadLogical().
         
         po:ReadTable(table ttBuffer by-reference).
         po:ReadTable(table ttFilter by-reference).
@@ -588,6 +597,7 @@ class OpenEdge.Core.System.QueryDefinition
         
         oClone = cast(this-object:GetClass():New(), IQueryDefinition).
         oClone:QueryBlockType = this-object:QueryBlockType.
+        oClone:AllowExternalJoins = this-object:AllowExternalJoins.
         
         oBuffer = this-object:GetQueryBuffers().
         iMax = extent(oBuffer).
@@ -641,7 +651,7 @@ class OpenEdge.Core.System.QueryDefinition
         @param character[] An array of buffer names for which 
                return a where clause that filters and joins between all
                buffers.
-        @return longchar The query clause string. */        
+        @return longchar The query clause string. */
     method public longchar GetQueryString(pcBuffers as character extent):
         define variable cTables as character extent no-undo.
         define variable iExtent as integer no-undo.
@@ -667,7 +677,7 @@ class OpenEdge.Core.System.QueryDefinition
                    
                    /* Note: where string broken up for readability. */
                    cWhere = cWhere + mcSpacer 
-                          + cast(lbBuffer.QueryType,EnumMember):ToString() + mcSpacer 
+                          + cast(lbBuffer.QueryType, EnumMember):ToString() + mcSpacer 
                           + lbBuffer.BufferName.
            
             
@@ -1093,18 +1103,16 @@ class OpenEdge.Core.System.QueryDefinition
     end method.
         
     method protected longchar GetJoin(pcBuffersInQuery as character, pcBufferName as character):
-        define variable cWhereClause as character no-undo.
+        define variable cWhereClause as longchar no-undo.
         define variable iExtent as integer no-undo.
         define buffer lbJoin for ttJoin.
-           
+        
         for each lbJoin where 
                  lbJoin.BufferName = pcBufferName or
                  lbJoin.JoinBufferName = pcBufferName:
-            
-            if can-do(pcBuffersInQuery, lbJoin.BufferName) and 
-               can-do(pcBuffersInQuery, lbJoin.JoinBufferName) then
+            if lookup(lbJoin.BufferName, pcBuffersInQuery) gt 0 and 
+               (AllowExternalJoins or lookup(lbJoin.JoinBufferName, pcBuffersInQuery) gt 0) then
             do:
-                      
                 if cWhereClause <> '' then
                     cWhereClause = cWhereClause + mcSpacer
                                   + cast(lbJoin.JoinType, EnumMember):ToString() + mcSpacer.
