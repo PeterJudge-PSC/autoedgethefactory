@@ -1,0 +1,25 @@
+<map version="1.3">
+  <param name="PLUGIN.1.NAME" type="java.lang.String" value="Velocity Template"/>
+  <param name="SUBJECT.VARS" type="java.lang.Object" value="instanceName"/>
+  <param name="PROPERTY.allow.null.bcc" type="java.lang.String" value="true"/>
+  <param name="PLUGIN.1.MIME" type="java.lang.String" value="text/plain"/>
+  <param name="PLUGIN.1.IN.vehModel" type="java.lang.Object" value="@VehicleModel"/>
+  <param name="AUTH_PASSWORD" type="java.lang.String" value=""/>
+  <param name="CC" type="java.lang.Object" value=""/>
+  <param name="PLUGIN.1.CONF" type="java.lang.String" value="user%2CinstanceName%2Cbrand%2Cyear%2CvehModel%2Cengine%0AHello+%24%7Buser%7D%2C%0A%0AYour+order%2C+%24%7BinstanceName%7D+has+been+submitted+for+review.%0AHere+is+your+Vehicle+order+summary%3A%0A%0ABrand%3A+%24%7Bbrand%7D%0AYear%3A+%24%7Byear%7D%0AModel%3A+%24%7BvehModel%7D%0AEngine%3A+%24%7Bengine%7D%0A%0A%0A"/>
+  <param name="PLUGIN.1.IN.user" type="java.lang.Object" value="@Customer"/>
+  <param name="PLUGIN.1.IN.instanceName" type="java.lang.Object" value="@@PROCESSNAME"/>
+  <param name="PLUGIN.1.IN.brand" type="java.lang.Object" value="@VehicleBrand"/>
+  <param name="SENDER" type="java.lang.String" value="kamyar.sadeghi@gmail.com"/>
+  <param name="PLUGIN.1.IN.engine" type="java.lang.Object" value="@VehicleEngine"/>
+  <param name="SUBJECT.VAR.instanceName" type="java.lang.Object" value="@@PROCESSNAME"/>
+  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="localhost"/>
+  <param name="BCC" type="java.lang.Object" value=""/>
+  <param name="SUBJECT" type="java.lang.Object" value="order {$instanceName} has been submitted"/>
+  <param name="AUTH_USER" type="java.lang.String" value=""/>
+  <param name="RECIPIENTS" type="java.lang.Object" value="kamyar.sadeghi@gmail.com, kamyar.jambor@gmail.com"/>
+  <param name="PROPERTY.mail.transport.protocol" type="java.lang.String" value="smtp"/>
+  <param name="PLUGIN.1.IN.year" type="java.lang.Object" value="@VehicleYear"/>
+  <param name="PROPERTY.allow.null.cc" type="java.lang.String" value="true"/>
+  <param name="PART_COUNT" type="java.lang.Integer" value="1"/>
+</map>

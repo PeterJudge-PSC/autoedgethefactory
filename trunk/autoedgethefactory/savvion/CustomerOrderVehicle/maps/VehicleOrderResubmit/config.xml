@@ -1,0 +1,31 @@
+<configform synchronous="true" version="1.3">
+    <block title="Message" label="emailadapter:config.label.0" hidden="false">
+        <param name="SENDER" access="I" label="emailadapter:config.label.3" type="java.lang.String" value="" mandatory="true"/>
+        <param name="RECIPIENTS" access="I" label="emailadapter:config.label.4" type="java.lang.Object" value="" mandatory="true"/>
+        <param name="CC" access="I" label="emailadapter:config.label.5" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="BCC" access="I" label="emailadapter:config.label.6" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="SUBJECT" access="PRESET" label="emailadapter:config.label.9" type="java.lang.Object" value="Your vehicle order needs to be reviewed" mandatory="true"/>
+        <param name="PART_COUNT" access="HIDDEN" label="emailadapter:config.label.12" type="java.lang.Integer" value="1" mandatory="true"/>
+    </block>
+    <block title="Part 1: Velocity Template" label="emailadapter:config.label.1:1:Velocity Template" hidden="false">
+        <param name="PLUGIN.1.NAME" access="HIDDEN" label="Plugin name" type="java.lang.String" value="Velocity Template"/>
+        <param name="PLUGIN.1.CONF" access="HIDDEN" label="Plugin configuration" type="java.lang.String" value="user%2COrderNum%2CrejectionReason%2Cbrand%2CvehModel%2Cvehextcolor%2Cvehintcolor%2CdealerName%0AHello+%24%7Buser%7D%2C%0A%0AYour+order%2C+%24%7BOrderNum%7D+Needs+to+be+reviewed.%0A%0AReason%3A+%24%7BrejectionReason%7D%0A%0AHere+is+your+Vehicle+order+summary%3A%0ABrand%3A+%24%7Bbrand%7D%0AModel%3A+%24%7BvehModel%7D%0A%0AExterior+Color%3A+%24%7Bvehextcolor%7D%0AInterior+color%3A+%24%7Bvehintcolor%7D%0A%0ARegards%2C%0A%24%7BdealerName%7D%0A"/>
+        <param name="PLUGIN.1.MIME" access="HIDDEN" label="Mime type" type="java.lang.String" value="text/plain"/>
+        <param name="PLUGIN.1.IN.user" access="I" label="fileadapter:plugin.velocity.label.4:user" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="PLUGIN.1.IN.OrderNum" access="I" label="fileadapter:plugin.velocity.label.4:OrderNum" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="PLUGIN.1.IN.rejectionReason" access="I" label="fileadapter:plugin.velocity.label.4:rejectionReason" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="PLUGIN.1.IN.brand" access="I" label="fileadapter:plugin.velocity.label.4:brand" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="PLUGIN.1.IN.vehModel" access="I" label="fileadapter:plugin.velocity.label.4:vehModel" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="PLUGIN.1.IN.vehextcolor" access="I" label="fileadapter:plugin.velocity.label.4:vehextcolor" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="PLUGIN.1.IN.vehintcolor" access="I" label="fileadapter:plugin.velocity.label.4:vehintcolor" type="java.lang.Object" value="" mandatory="false"/>
+        <param name="PLUGIN.1.IN.dealerName" access="I" label="fileadapter:plugin.velocity.label.4:dealerName" type="java.lang.Object" value="" mandatory="false"/>
+    </block>
+    <block title="Configuration" label="emailadapter:config.label.2" hidden="false">
+        <param name="PROPERTY.allow.null.cc" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="true"/>
+        <param name="PROPERTY.allow.null.bcc" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="true"/>
+        <param name="PROPERTY.mail.transport.protocol" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="smtp"/>
+        <param name="PROPERTY.mail.smtp.host" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="localhost"/>
+        <param name="AUTH_USER" access="HIDDEN" label="emailadapter:config.label.7" type="java.lang.String" value="" mandatory="false"/>
+        <param name="AUTH_PASSWORD" access="HIDDEN" label="emailadapter:config.label.8" type="java.lang.String" value="" mandatory="false"/>
+    </block>
+</configform>

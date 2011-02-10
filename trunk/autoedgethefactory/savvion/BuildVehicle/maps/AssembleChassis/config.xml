@@ -1,0 +1,483 @@
+<configform synchronous="true" version="1.3">
+    <block title="Inputs" label="wsadapter:Config.label.inputs" hidden="false">
+        <param name="SESSION_TOKEN_SUPPORT" access="HIDDEN" label="SESSION_TOKEN_SUPPORT" type="java.lang.String" value="false"/>
+        <param name="WSCONFIG" access="HIDDEN" label="WSCONFIG" type="java.lang.String">
+<java version="1.6.0_05" class="java.beans.XMLDecoder"> 
+ <object class="com.savvion.sbm.adapters.webservice.WSConfig"> 
+  <void property="callInfo"> 
+   <object class="com.savvion.sbm.adapters.webservice.WSCallInfo"> 
+    <void property="encodingType"> 
+     <string>LITERAL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="operationInfo"> 
+   <object class="com.savvion.sbm.adapters.webservice.OperationInfo"> 
+    <void property="QName"> 
+     <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+      <void property="localPart"> 
+       <string>PerformWorkstep</string> 
+      </void> 
+      <void property="namesSpace"> 
+       <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="XMLPluginConfig"> 
+     <string>&lt;config&gt;
+  &lt;version&gt;2&lt;/version&gt;
+  &lt;template&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&#13;
+    &lt;PerformWorkstepResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;&#13;
+        &lt;result/&gt;&#13;
+        &lt;pcBuildStatus/&gt;&#13;
+    &lt;/PerformWorkstepResponse&gt;&#13;
+&lt;/soapenv:Body&gt;
+  &lt;/template&gt;
+  &lt;fields&gt;
+    &lt;field name=&quot;responseStatus&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus:text()&quot;/&gt;
+  &lt;/fields&gt;
+  &lt;namespaceaware&gt;true&lt;/namespaceaware&gt;
+  &lt;namespacemap&gt;
+    &lt;map name=&quot;ns1&quot; value=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;/&gt;
+    &lt;map name=&quot;soapenv&quot; value=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;/&gt;
+  &lt;/namespacemap&gt;
+&lt;/config&gt;
+</string> 
+    </void> 
+    <void property="XMLPluginOutputParameters"> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.file.Parameter"> 
+       <void property="description"> 
+        <string>responseStatus</string> 
+       </void> 
+       <void property="name"> 
+        <string>responseStatus</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="inputParam"> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>pcOrderId</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.String</string> 
+       </void> 
+       <void property="label"> 
+        <string>pcOrderId</string> 
+       </void> 
+       <void property="mode"> 
+        <int>1</int> 
+       </void> 
+       <void property="name"> 
+        <string>pcOrderId</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>pcOrderId.0_0</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>string</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>pcContextId</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.String</string> 
+       </void> 
+       <void property="label"> 
+        <string>pcContextId</string> 
+       </void> 
+       <void property="mode"> 
+        <int>1</int> 
+       </void> 
+       <void property="name"> 
+        <string>pcContextId</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>pcContextId.1_0</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>string</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>pcProcessInstanceName</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.String</string> 
+       </void> 
+       <void property="label"> 
+        <string>pcProcessInstanceName</string> 
+       </void> 
+       <void property="mode"> 
+        <int>1</int> 
+       </void> 
+       <void property="name"> 
+        <string>pcProcessInstanceName</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>pcProcessInstanceName.2_0</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>string</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>piProcessInstanceId</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.Long</string> 
+       </void> 
+       <void property="label"> 
+        <string>piProcessInstanceId</string> 
+       </void> 
+       <void property="mode"> 
+        <int>1</int> 
+       </void> 
+       <void property="name"> 
+        <string>piProcessInstanceId</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>piProcessInstanceId.3_0</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>long</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>pcWorkstepName</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.String</string> 
+       </void> 
+       <void property="label"> 
+        <string>pcWorkstepName</string> 
+       </void> 
+       <void property="mode"> 
+        <int>1</int> 
+       </void> 
+       <void property="name"> 
+        <string>pcWorkstepName</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>pcWorkstepName.4_0</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>string</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="isAllPrimitive"> 
+     <boolean>true</boolean> 
+    </void> 
+    <void property="isWrapped"> 
+     <boolean>true</boolean> 
+    </void> 
+    <void property="isXmlOutput"> 
+     <boolean>true</boolean> 
+    </void> 
+    <void property="outputParam"> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>result</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.String</string> 
+       </void> 
+       <void property="label"> 
+        <string>result</string> 
+       </void> 
+       <void property="mode"> 
+        <int>2</int> 
+       </void> 
+       <void property="name"> 
+        <string>result</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>result.5_0</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;PerformWorkstepResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcBuildStatus/&gt;
+    &lt;/PerformWorkstepResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>string</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>pcBuildStatus</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.String</string> 
+       </void> 
+       <void property="label"> 
+        <string>pcBuildStatus</string> 
+       </void> 
+       <void property="mode"> 
+        <int>2</int> 
+       </void> 
+       <void property="name"> 
+        <string>pcBuildStatus</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>pcBuildStatus.5_1</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;PerformWorkstepResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcBuildStatus/&gt;
+    &lt;/PerformWorkstepResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>string</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="style"> 
+     <string>document</string> 
+    </void> 
+    <void property="use"> 
+     <string>literal</string> 
+    </void> 
+    <void property="useXMLPlugin"> 
+     <boolean>true</boolean> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="otherSecConfigFile"> 
+   <string></string> 
+  </void> 
+  <void property="password"> 
+   <string></string> 
+  </void> 
+  <void property="portInfo"> 
+   <object class="com.savvion.sbm.adapters.webservice.PortInfo"> 
+    <void property="QName"> 
+     <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+      <void property="localPart"> 
+       <string>AutoEdgeTheFactoryWebServicesObj</string> 
+      </void> 
+      <void property="namesSpace"> 
+       <string>urn:factory-autoedge-com</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="description"> 
+     <string></string> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="runtimeSecurityType"> 
+   <int>0</int> 
+  </void> 
+  <void property="samlTokenConfigFile"> 
+   <string></string> 
+  </void> 
+  <void property="serviceInfo"> 
+   <object class="com.savvion.sbm.adapters.webservice.ServiceInfo"> 
+    <void property="QName"> 
+     <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+      <void property="localPart"> 
+       <string>AutoEdgeTheFactoryWebServicesService</string> 
+      </void> 
+      <void property="namesSpace"> 
+       <string>urn:factory-autoedge-com</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="description"> 
+     <string>AutoEdgeTheFactoryWebServicesService</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="soapActionURI"> 
+   <string></string> 
+  </void> 
+  <void property="targetEndpointAddress"> 
+   <string>http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1</string> 
+  </void> 
+  <void property="targetNameSpace"> 
+   <string>urn:factory-autoedge-com</string> 
+  </void> 
+  <void property="userName"> 
+   <string></string> 
+  </void> 
+  <void property="userNameTokenConfigFile"> 
+   <string></string> 
+  </void> 
+  <void property="wsdlPassword"> 
+   <string></string> 
+  </void> 
+  <void property="wsdlUrl"> 
+   <string>http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+  </void> 
+  <void property="wsdlUserName"> 
+   <string></string> 
+  </void> 
+ </object> 
+</java> 
+</param>
+        <param name="IN.pcOrderId.0_0" access="I" label="pcOrderId" type="java.lang.String" value="" mandatory="true"/>
+        <param name="IN.pcContextId.1_0" access="I" label="pcContextId" type="java.lang.String" value="" mandatory="true"/>
+        <param name="IN.pcProcessInstanceName.2_0" access="I" label="pcProcessInstanceName" type="java.lang.String" value="" mandatory="true"/>
+        <param name="IN.piProcessInstanceId.3_0" access="I" label="piProcessInstanceId" type="java.lang.Long" value="" mandatory="true"/>
+        <param name="IN.pcWorkstepName.4_0" access="I" label="pcWorkstepName" type="java.lang.String" value="" mandatory="true"/>
+    </block>
+    <block title="Outputs" label="wsadapter:Config.label.outputs" hidden="false">
+        <param name="OUT.responseStatus" access="O" label="responseStatus" type="java.lang.String" value="" mandatory="false"/>
+    </block>
+    <block title="Advanced" label="wsadapter:Config.label.advanced" hidden="false">
+        <param name="TARGET_EPA" access="I" label="wsadapter:Config.label.targetEndpointAddress" type="java.lang.String" value=""/>
+    </block>
+</configform>

@@ -1,0 +1,18 @@
+<configform synchronous="true" version="1.3">
+    <block title="configuration" label="configuration" hidden="false">
+        <param name="runtime.server.alias" access="PRESET" label="configurator.runtime.server.alias" type="java.lang.String" value="SonicBroker"/>
+        <param name="configuration.server.domain" access="CONFIG_ONLY" label="configurator.server.domain" type="java.lang.String" value="Domain1"/>
+        <param name="configuration.server.URL" access="CONFIG_ONLY" label="configurator.server.url" type="java.lang.String" value="tcp://localhost:2506"/>
+        <param name="configuration.server.user" access="CONFIG_ONLY" label="configurator.server.user" type="java.lang.String" value="Administrator"/>
+        <param name="configuration.server.password" access="CONFIG_ONLY" label="configurator.server.password" type="java.lang.String" value=""/>
+        <param name="invocation.object.type" access="PRESET" label="configurator.invocation.object.type" type="java.lang.String" value="process"/>
+        <param name="invocation.object.name" access="PRESET" label="configurator.invocation.object.name" type="java.lang.String" value=""/>
+        <param name="invocation.message.delivery.option" access="PRESET" label="configurator.invocation.message.delivery.option" type="java.lang.String" value="PERSISTENT"/>
+        <param name="invocation.wait.for.reply" access="PRESET" label="configurator.reply.waitforreply" type="java.lang.Boolean" value="false"/>
+        <param name="request.message.type" access="PRESET" label="input.message.type" type="java.lang.String" value="Message"/>
+        <param name="request.message.property.names" access="PRESET" label="input.message.property.names" type="java.util.List" value=""/>
+        <param name="request.message.property.types" access="PRESET" label="input.message.property.types" type="java.util.Map" value=""/>
+    </block>
+    <block title="Request Message / Properties" label="Request Message / Properties" hidden="false">
+    </block>
+</configform>

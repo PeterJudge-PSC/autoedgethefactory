@@ -1,0 +1,19 @@
+<map version="1.3">
+  <param name="PROPERTY.mail.transport.protocol" type="java.lang.String" value="smtp"/>
+  <param name="SUBJECT" type="java.lang.Object" value="Vehicle order rejection"/>
+  <param name="PLUGIN.1.MIME" type="java.lang.String" value="text/plain"/>
+  <param name="PLUGIN.1.NAME" type="java.lang.String" value="Velocity Template"/>
+  <param name="BCC" type="java.lang.Object" value=""/>
+  <param name="PLUGIN.1.IN.user" type="java.lang.Object" value="@userid"/>
+  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="localhost"/>
+  <param name="PART_COUNT" type="java.lang.Integer" value="1"/>
+  <param name="AUTH_USER" type="java.lang.String" value=""/>
+  <param name="PROPERTY.allow.null.cc" type="java.lang.String" value="true"/>
+  <param name="SENDER" type="java.lang.String" value="@DealerEmail"/>
+  <param name="PLUGIN.1.IN.OrderNum" type="java.lang.Object" value="@OrderNum"/>
+  <param name="RECIPIENTS" type="java.lang.Object" value="@CustomerEmail"/>
+  <param name="PLUGIN.1.CONF" type="java.lang.String" value="user%2COrderNum%0AHello+%24%7Buser%7D%2C%0A%0AYour+order%2C+%24%7BOrderNum%7D+has+been+rejected+due+to+bad+credit.%0A%0A%0A"/>
+  <param name="CC" type="java.lang.Object" value=""/>
+  <param name="AUTH_PASSWORD" type="java.lang.String" value=""/>
+  <param name="PROPERTY.allow.null.bcc" type="java.lang.String" value="true"/>
+</map>
