@@ -9,7 +9,7 @@
   ---------------------------------------------------------------------- */
 {routinelevel.i}
 
-using OpenEdge.CommonInfrastructure.InjectABL.ServerModule.
+using OpenEdge.CommonInfrastructure.Server.InjectABL.ServerModule.
 using OpenEdge.Core.InjectABL.IKernel.
 
 /** -- defs  -- **/
