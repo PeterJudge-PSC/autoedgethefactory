@@ -1,0 +1,28 @@
+<map version="1.1">
+  <param name="sql0.advanced" type="java.lang.String" value="true"/>
+  <param name="sql0.sql" type="java.lang.String" value="select distinct model from demo.vehicles where brand = ? and year = ?"/>
+  <param name="sql0.in0.name" type="java.lang.String" value="1"/>
+  <param name="sql0.in0.var" type="java.lang.String" value="brand"/>
+  <param name="sql0.condition" type="java.lang.String" value=""/>
+  <param name="sql0.noprepared" type="java.lang.String" value="false"/>
+  <param name="sql0.name" type="java.lang.String" value="vehicleModels"/>
+  <param name="var.models.default" type="java.lang.String" value=""/>
+  <param name="sql0.in1.name" type="java.lang.String" value="2"/>
+  <param name="sql0.in0.type" type="java.lang.String" value="String"/>
+  <param name="brand" type="java.lang.String" value="@VehicleBrand"/>
+  <param name="sql0.column.count" type="java.lang.Integer" value="0"/>
+  <param name="sql0.out.count" type="java.lang.Integer" value="1"/>
+  <param name="sql0.type" type="java.lang.String" value="select"/>
+  <param name="sql0.in1.type" type="java.lang.String" value="String"/>
+  <param name="year" type="java.lang.String" value="@VehicleYear"/>
+  <param name="sql0.advancedsql" type="java.lang.String" value="select distinct model from demo.vehicles where brand = @brand and year = @year"/>
+  <param name="sql0.db" type="java.lang.String" value="sbmdb"/>
+  <param name="sql0.out.maptype" type="java.lang.String" value="CL"/>
+  <param name="sql0.out0.name" type="java.lang.String" value="MODEL"/>
+  <param name="sql0.in1.var" type="java.lang.String" value="year"/>
+  <param name="sql0.out0.var" type="java.lang.String" value="models"/>
+  <param name="sql0.in.count" type="java.lang.Integer" value="2"/>
+  <param name="sql0.table.count" type="java.lang.Integer" value="0"/>
+  <param name="sql.count" type="java.lang.Integer" value="1"/>
+  <param name="sql0.out0.type" type="java.lang.String" value="VARCHAR2"/>
+</map>

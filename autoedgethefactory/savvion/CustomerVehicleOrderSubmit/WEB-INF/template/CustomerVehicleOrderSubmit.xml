@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Process SYSTEM "../../common/processtemplates/processTemplate.dtd">
+<Process name="CustomerVehicleOrderSubmit" type="BIZSOLO">
+  <Description>The presentation flow for a customer ordering a vehicle.</Description>
+  <Application name="CustomerVehicleOrderSubmit"/>
+  <Category level="0"/>
+  <Category level="1"/>
+  <Group/>
+  <Manager/>
+  <EstimatedDuration/>
+  <TimeCreated>1292337683613</TimeCreated>
+  <Author>pjudge</Author>
+  <Version/>
+  <Attributes>
+    <Attribute name="ProcessType" required="false">
+      <Label>Process Type</Label>
+      <Description>Type of the process</Description>
+      <Value>BusinessProcess</Value>
+    </Attribute>
+    <Attribute name="Objective" required="false">
+      <Label>Objective</Label>
+      <Description>Objective for developing this process model. E.g. Objective is to automate order processing</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Goal" required="false">
+      <Label>Goal</Label>
+      <Description>The goal of this process model. E.g. Goal is to reduce order processing cost by 10%</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="OrganizationalUnit" required="false">
+      <Label>Organizational Unit</Label>
+      <Description>The organizational unit that owns this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Influencers" required="false">
+      <Label>Influencers</Label>
+      <Description>People who have influenced development of this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Risks" required="false">
+      <Label>Risks</Label>
+      <Description>Risks associated with this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Rewards" required="false">
+      <Label>Rewards</Label>
+      <Description>Potential rewards on investment for this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Executable" required="false">
+      <Label>Executable</Label>
+      <Description>Can the Process  Ever be made executable?</Description>
+      <Value>Yes</Value>
+    </Attribute>
+  </Attributes>
+  <AtomicWS height="36" name="Start" width="36" worktime="false" x="24" y="60">
+    <AtomicType>START</AtomicType>
+    <PerformingApp>Start.jsp</PerformingApp>
+    <Priority>medium</Priority>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="ExitPage" width="108" worktime="false" x="312" y="648">
+    <Label>Exit Page</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">ExitPage.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="LoginUser" width="108" worktime="false" x="624" y="48">
+    <Label>Login User</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">LoginUser.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>password</Datainput>
+    <Datainput>userid</Datainput>
+    <Dataoutput>password</Dataoutput>
+    <Dataoutput>userid</Dataoutput>
+    <Format editable="true" input="password" label="Password:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Password:</Label>
+    </Format>
+    <Format editable="true" input="userid" label="Userid:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Userid:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="PreOrderLoginUser" width="108" worktime="false" x="456" y="336">
+    <Label>Login User</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">LoginUser.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>password</Datainput>
+    <Datainput>userid</Datainput>
+    <Dataoutput>password</Dataoutput>
+    <Dataoutput>userid</Dataoutput>
+    <Format editable="true" input="password" label="Password:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Password:</Label>
+    </Format>
+    <Format editable="true" input="userid" label="Userid:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Userid:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="ReviewSelection" width="108" worktime="false" x="336" y="528">
+    <Label>Review Selection</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">ReviewSelection.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>DealerId</Datainput>
+    <Datainput>DealerEmail</Datainput>
+    <Datainput>CustomerEmail</Datainput>
+    <Datainput>DealerName</Datainput>
+    <Datainput>InteriorAccessories</Datainput>
+    <Datainput>InteriorTrimColour</Datainput>
+    <Datainput>InteriorSeatMaterial</Datainput>
+    <Datainput>ExteriorMoonroof</Datainput>
+    <Datainput>ExteriorWheels</Datainput>
+    <Datainput>ExteriorColour</Datainput>
+    <Datainput>SelectedVehicleModel</Datainput>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Dataoutput>DealerId</Dataoutput>
+    <Dataoutput>DealerEmail</Dataoutput>
+    <Dataoutput>CustomerEmail</Dataoutput>
+    <Dataoutput>DealerName</Dataoutput>
+    <Format editable="true" input="DealerId" label="Dealer Id:" length="20" password="false" required="true" size="20" type="text">
+      <Label>Dealer Id:</Label>
+    </Format>
+    <Format editable="true" input="DealerEmail" label="Dealer email" length="20" password="false" required="true" size="20" type="text">
+      <Label>Dealer email</Label>
+    </Format>
+    <Format editable="true" input="CustomerEmail" label="Custmoer Email:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Custmoer Email:</Label>
+    </Format>
+    <Format editable="true" input="DealerName" label="Dealer Name:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Dealer Name:</Label>
+    </Format>
+    <Format editable="false" input="InteriorAccessories" label="Interior accessories" length="20" password="false" required="false" size="20" type="text">
+      <Label>Interior accessories</Label>
+    </Format>
+    <Format editable="false" input="InteriorTrimColour" label="Interior trim colour" length="20" password="false" required="false" size="20" type="text">
+      <Label>Interior trim colour</Label>
+    </Format>
+    <Format editable="false" input="InteriorSeatMaterial" label="Interior Seat Material:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Interior Seat Material:</Label>
+    </Format>
+    <Format editable="false" input="ExteriorMoonroof" label="Exterior moonroof" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior moonroof</Label>
+    </Format>
+    <Format editable="false" input="ExteriorWheels" label="Exterior wheels" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior wheels</Label>
+    </Format>
+    <Format editable="false" input="ExteriorColour" label="Exterior colour" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior colour</Label>
+    </Format>
+    <Format editable="false" input="SelectedVehicleModel" label="Selected vehicle model" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected vehicle model</Label>
+    </Format>
+    <Format editable="false" input="SelectedVehicleBrand" label="Selected vehicle brand" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected vehicle brand</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="SelectBrand" width="108" worktime="false" x="144" y="48">
+    <Label>Select Vehicle Brand</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">SelectBrand.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <PostFunction type="java:function">System.out.println(bean.getPropString("VehicleYear"));</PostFunction>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Dataoutput>SelectedVehicleBrand</Dataoutput>
+    <Format editable="true" input="SelectedVehicleBrand" label="Vehicle Brand:" length="20" password="false" required="true" size="20" type="text">
+      <Label>Vehicle Brand:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="SelectModel" width="108" worktime="false" x="144" y="336">
+    <Label>Select Model</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">SelectModel.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>SelectedVehicleModel</Datainput>
+    <Dataoutput>SelectedVehicleModel</Dataoutput>
+    <Format editable="false" input="SelectedVehicleBrand" label="Selected vehicle brand" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected vehicle brand</Label>
+    </Format>
+    <Format editable="true" input="SelectedVehicleModel" label="Vehicle Model:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Vehicle Model:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="SpecifyOrder" width="108" worktime="false" x="336" y="48">
+    <Label>Specify Order</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">SpecifyOrder.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <PostFunction type="java:function">System.out.println(bean.getPropString("userid"));</PostFunction>
+    <Datainput>OrderNum</Datainput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Format editable="true" input="OrderNum" label="Order Num:" required="false" type="field">
+      <Label>Order Num:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="selectVehicleOptions" width="108" worktime="false" x="144" y="528">
+    <Label>Select Vehicle Options</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">selectVehicleOptions.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>ExteriorMoonroof</Datainput>
+    <Datainput>ExteriorWheels</Datainput>
+    <Datainput>ExteriorColour</Datainput>
+    <Datainput>InteriorAccessories</Datainput>
+    <Datainput>InteriorTrimColour</Datainput>
+    <Datainput>InteriorSeatMaterial</Datainput>
+    <Dataoutput>ExteriorMoonroof</Dataoutput>
+    <Dataoutput>ExteriorWheels</Dataoutput>
+    <Dataoutput>ExteriorColour</Dataoutput>
+    <Dataoutput>InteriorAccessories</Dataoutput>
+    <Dataoutput>InteriorTrimColour</Dataoutput>
+    <Dataoutput>InteriorSeatMaterial</Dataoutput>
+    <Format editable="true" input="ExteriorMoonroof" label="Exterior Moonroof:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior Moonroof:</Label>
+    </Format>
+    <Format editable="true" input="ExteriorWheels" label="Exterior Wheels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior Wheels:</Label>
+    </Format>
+    <Format editable="true" input="ExteriorColour" label="Exterior Colour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior Colour:</Label>
+    </Format>
+    <Format editable="true" input="InteriorAccessories" label="Selected Interior Accessories:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Interior Accessories:</Label>
+    </Format>
+    <Format editable="true" input="InteriorTrimColour" label="Interior Trim Colour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Interior Trim Colour:</Label>
+    </Format>
+    <Format editable="true" input="InteriorSeatMaterial" label="Selected Interior Seat Material:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Interior Seat Material:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="36" name="End" width="36" worktime="false" x="480" y="660">
+    <AtomicType>END</AtomicType>
+    <Priority>medium</Priority>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <ExternalWS height="60" name="ApplicationUserLogin" width="108" x="768" y="48">
+    <Label>Perform Login</Label>
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <Datainput>password</Datainput>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Datainput>userid</Datainput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>CustomerEmail</Dataoutput>
+    <Dataoutput>CustomerId</Dataoutput>
+    <Dataoutput>CustomerCreditLimit</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="PreOrderApplicationUserLogin" width="108" x="624" y="336">
+    <Label>Perform Login</Label>
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <Datainput>password</Datainput>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Datainput>userid</Datainput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>CustomerEmail</Dataoutput>
+    <Dataoutput>CustomerId</Dataoutput>
+    <Dataoutput>CustomerCreditLimit</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS generate="false" height="60" name="createOrder" width="108" x="144" y="648">
+    <Label>Create Order</Label>
+    <Performer generate="false">com.savvion.BizSolo.beans.PAKCreatePI</Performer>
+    <PerformBy>commit</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <Datainput>BIZSITE_USER@BIZSITE_USER</Datainput>
+    <Datainput>PT_NAME@PT_NAME</Datainput>
+    <Datainput>BIZSITE_PASSWORD@BIZSITE_PASSWORD</Datainput>
+    <Datainput>SelectedVehicleBrand@VehicleBrand</Datainput>
+    <Datainput>SelectedVehicleModel@VehicleModel</Datainput>
+    <Datainput>userid@userid</Datainput>
+    <Datainput>DealerName@DealerName</Datainput>
+    <Datainput>InteriorTrimColour@InteriorTrimColour</Datainput>
+    <Datainput>InteriorSeatMaterial@InteriorSeatMaterial</Datainput>
+    <Datainput>InteriorAccessories@InteriorAccessories</Datainput>
+    <Datainput>ExteriorWheels@ExteriorWheels</Datainput>
+    <Datainput>ExteriorMoonroof@ExteriorMoonroof</Datainput>
+    <Datainput>ExteriorColour@ExteriorColour</Datainput>
+    <Datainput>CustomerEmail@CustomerEmail</Datainput>
+    <Datainput>OrderChannel@OrderChannel</Datainput>
+    <Datainput>DealerEmail@DealerEmail</Datainput>
+    <Datainput>DealerId@DealerId</Datainput>
+    <Datainput>CustomerId@CustomerId</Datainput>
+    <Datainput>CustomerCreditLimit@CreditLimit</Datainput>
+    <Datainput>OrderNum@OrderNum</Datainput>
+    <Dataoutput>error@error</Dataoutput>
+    <Dataoutput>CustomerId@CustomerId</Dataoutput>
+    <Dataoutput>CustomerCreditLimit@CreditLimit</Dataoutput>
+    <Dataoutput>OrderNum@OrderNum</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="wsBrandDetails" width="108" x="144" y="180">
+    <Label>Get Brand Details</Label>
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="AutoEdgeTheFactory_WebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>medium</Priority>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Dataoutput>VehicleModelsCompact</Dataoutput>
+    <Dataoutput>VehicleModelsSUV</Dataoutput>
+    <Dataoutput>VehicleModelsPremium</Dataoutput>
+    <Dataoutput>InteriorTrimColour</Dataoutput>
+    <Dataoutput>ExteriorMoonroof</Dataoutput>
+    <Dataoutput>ExteriorColour</Dataoutput>
+    <Dataoutput>VehicleModelsTruck</Dataoutput>
+    <Dataoutput>InteriorAccessories</Dataoutput>
+    <Dataoutput>DealerList</Dataoutput>
+    <Dataoutput>InteriorSeatMaterial</Dataoutput>
+    <Dataoutput>ExteriorWheels</Dataoutput>
+    <Dataoutput>VehicleModelsSedan</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ConnectorWS height="60" name="Copy of Decision 3" width="60" x="792" y="336">
+    <ConnectorType>DECISIONSPLIT</ConnectorType>
+  </ConnectorWS>
+  <ConnectorWS height="60" name="Decision 1" width="60" x="480" y="528">
+    <ConnectorType>DECISIONSPLIT</ConnectorType>
+  </ConnectorWS>
+  <ConnectorWS height="60" name="Decision 2" width="60" x="480" y="48">
+    <ConnectorType>DECISIONSPLIT</ConnectorType>
+  </ConnectorWS>
+  <ConnectorWS height="60" name="Decision 3" width="60" x="648" y="180">
+    <ConnectorType>DECISIONSPLIT</ConnectorType>
+  </ConnectorWS>
+  <ConnectorWS height="60" name="Or 1" width="60" x="648" y="528">
+    <ConnectorType>ORJOIN</ConnectorType>
+  </ConnectorWS>
+  <ConnectorWS height="60" name="Or 2" width="60" x="480" y="180">
+    <ConnectorType>ORJOIN</ConnectorType>
+  </ConnectorWS>
+  <Link Name="UserLoggedIn" default="false" type="CONDITION" x="-1" y="4">
+    <Source cp="1">Decision 1</Source>
+    <Point x="540.0" y="558.0"/>
+    <Point x="648.0" y="558.0"/>
+    <Target cp="3">Or 1</Target>
+    <Condition type="java">ContextId!=null<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0NvbnRleHRJZH08L3BhcmFtZXRlcj4KICAgICAgICAgIDxw&#13;
+YXJhbWV0ZXIgbmFtZT0ib3BlcmF0b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxz&#13;
+ZSIgZmlsdGVyPSIiPlN0cmluZ0lzTm90TnVsbDwvcGFyYW1ldGVyPgogICAgICAgICAgPHBhcmFt&#13;
+ZXRlciBuYW1lPSJzZWNvbmRPcGVyYW5kIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxzZSIg&#13;
+ZmlsdGVyPSIiPiR7bnVsbH08L3BhcmFtZXRlcj4KICAgICAgICA8L3BhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgPHByZXNlbnRhdGlvbj4KCiAgICAgICAgPC9wcmVzZW50YXRpb24+CiAgICAgICAgPGNvZGU+&#13;
+CkNvbnRleHRJZCE9bnVsbAogICAgICAgIDwvY29kZT4KICAgICAgICA8am9pbk5leHQ+QU5EPC9q&#13;
+b2luTmV4dD4KICAgICAgPC9leHByZXNzaW9uPgogICAgPC9jb25maWd1cmF0aW9uPgogIDwvZXhw&#13;
+cmVzc2lvbnM+CjwvY29uZGl0aW9uPgo=</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="UserNotLoggedInForOrder" default="true" type="CONDITION" x="-3" y="-49">
+    <Source cp="0">Decision 1</Source>
+    <Point x="510.0" y="528.0"/>
+    <Point x="510.0" y="396.0"/>
+    <Target cp="2">PreOrderLoginUser</Target>
+  </Link>
+  <Link Name="Connection 20" default="true">
+    <Source cp="1">createOrder</Source>
+    <Point x="252.0" y="678.0"/>
+    <Point x="312.0" y="678.0"/>
+    <Target cp="3">ExitPage</Target>
+  </Link>
+  <Link Name="linkCreateOrder" default="true">
+    <Label>Done</Label>
+    <Source cp="1">ReviewSelection</Source>
+    <Point x="444.0" y="558.0"/>
+    <Point x="480.0" y="558.0"/>
+    <Target cp="3">Decision 1</Target>
+  </Link>
+  <Link Name="Connection 28" default="true">
+    <Source cp="2">wsBrandDetails</Source>
+    <Point x="198.0" y="240.0"/>
+    <Point x="198.0" y="336.0"/>
+    <Target cp="0">SelectModel</Target>
+  </Link>
+  <Link Name="LoginFailure" default="true" type="CONDITION">
+    <Label>Retry Login</Label>
+    <Source cp="0">Decision 3</Source>
+    <Point x="678.0" y="180.0"/>
+    <Point x="678.0" y="108.0"/>
+    <Target cp="2">LoginUser</Target>
+  </Link>
+  <Link Name="Connection 18" default="true">
+    <Label>Continue</Label>
+    <Source cp="1">SpecifyOrder</Source>
+    <Point x="444.0" y="78.0"/>
+    <Point x="480.0" y="78.0"/>
+    <Target cp="3">Decision 2</Target>
+  </Link>
+  <Link Name="SelectModel" default="true">
+    <Label>Continue</Label>
+    <Source cp="1">SelectBrand</Source>
+    <Point x="252.0" y="78.0"/>
+    <Point x="336.0" y="78.0"/>
+    <Target cp="3">SpecifyOrder</Target>
+  </Link>
+  <Link Name="Connection 1" default="true">
+    <Source cp="1">Start</Source>
+    <Point x="60.0" y="78.0"/>
+    <Point x="144.0" y="78.0"/>
+    <Target cp="3">SelectBrand</Target>
+  </Link>
+  <Link Name="Registered" default="true">
+    <Label>Login</Label>
+    <Source cp="1">LoginUser</Source>
+    <Point x="732.0" y="78.0"/>
+    <Point x="768.0" y="78.0"/>
+    <Target cp="3">ApplicationUserLogin</Target>
+  </Link>
+  <Link Name="linkSelectOptions" default="true">
+    <Label>Select Options and Accessories</Label>
+    <Source cp="2">SelectModel</Source>
+    <Point x="198.0" y="396.0"/>
+    <Point x="198.0" y="528.0"/>
+    <Target cp="0">selectVehicleOptions</Target>
+  </Link>
+  <Link Name="linkOptionsReviewSelection" default="true">
+    <Label>Review and Complete Order</Label>
+    <Source cp="1">selectVehicleOptions</Source>
+    <Point x="252.0" y="558.0"/>
+    <Point x="336.0" y="558.0"/>
+    <Target cp="3">ReviewSelection</Target>
+  </Link>
+  <Link Name="Connection 16" default="true">
+    <Source cp="1">ExitPage</Source>
+    <Point x="420.0" y="678.0"/>
+    <Point x="480.0" y="678.0"/>
+    <Target cp="3">End</Target>
+  </Link>
+  <Link Name="Connection 19" default="true">
+    <Source cp="3">Or 2</Source>
+    <Point x="480.0" y="210.0"/>
+    <Point x="252.0" y="210.0"/>
+    <Target cp="1">wsBrandDetails</Target>
+  </Link>
+  <Link Name="Existing Order" default="false" type="CONDITION">
+    <Source cp="1">Decision 2</Source>
+    <Point x="540.0" y="78.0"/>
+    <Point x="624.0" y="78.0"/>
+    <Target cp="3">LoginUser</Target>
+    <Condition type="java">OrderNum&gt;0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke09yZGVyTnVtfTwvcGFyYW1ldGVyPgogICAgICAgICAgPHBh&#13;
+cmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZhbHNl&#13;
+IiBmaWx0ZXI9IiI+TnVtYmVySXNHcmVhdGVyVGhhbjwvcGFyYW1ldGVyPgogICAgICAgICAgPHBh&#13;
+cmFtZXRlciBuYW1lPSJzZWNvbmRPcGVyYW5kIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxz&#13;
+ZSIgZmlsdGVyPSIiPjA8L3BhcmFtZXRlcj4KICAgICAgICA8L3BhcmFtZXRlcnM+CiAgICAgICAg&#13;
+PHByZXNlbnRhdGlvbj4KCiAgICAgICAgPC9wcmVzZW50YXRpb24+CiAgICAgICAgPGNvZGU+Ck9y&#13;
+ZGVyTnVtJmd0OzAKICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5l&#13;
+eHQ+CiAgICAgIDwvZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Np&#13;
+b25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="NewOrder" default="true" type="CONDITION">
+    <Source cp="2">Decision 2</Source>
+    <Point x="510.0" y="108.0"/>
+    <Point x="510.0" y="180.0"/>
+    <Target cp="0">Or 2</Target>
+  </Link>
+  <Link Name="ExistingOrderUserLoginSuccess" default="false" type="CONDITION" x="70" y="46">
+    <Source cp="3">Decision 3</Source>
+    <Point x="648.0" y="210.0"/>
+    <Point x="540.0" y="210.0"/>
+    <Target cp="1">Or 2</Target>
+    <Condition type="java">ContextId!=null<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0NvbnRleHRJZH08L3BhcmFtZXRlcj4KICAgICAgICAgIDxw&#13;
+YXJhbWV0ZXIgbmFtZT0ib3BlcmF0b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxz&#13;
+ZSIgZmlsdGVyPSIiPlN0cmluZ0lzTm90TnVsbDwvcGFyYW1ldGVyPgogICAgICAgICAgPHBhcmFt&#13;
+ZXRlciBuYW1lPSJzZWNvbmRPcGVyYW5kIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxzZSIg&#13;
+ZmlsdGVyPSIiPiR7bnVsbH08L3BhcmFtZXRlcj4KICAgICAgICA8L3BhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgPHByZXNlbnRhdGlvbj4KCiAgICAgICAgPC9wcmVzZW50YXRpb24+CiAgICAgICAgPGNvZGU+&#13;
+CkNvbnRleHRJZCE9bnVsbAogICAgICAgIDwvY29kZT4KICAgICAgICA8am9pbk5leHQ+QU5EPC9q&#13;
+b2luTmV4dD4KICAgICAgPC9leHByZXNzaW9uPgogICAgPC9jb25maWd1cmF0aW9uPgogIDwvZXhw&#13;
+cmVzc2lvbnM+CjwvY29uZGl0aW9uPgo=</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="Connection 25" default="true">
+    <Source cp="2">Or 1</Source>
+    <Point x="678.0" y="588.0"/>
+    <Point x="678.0" y="628.0"/>
+    <Point x="124.0" y="628.0"/>
+    <Point x="124.0" y="663.0"/>
+    <Point x="144.0" y="663.0"/>
+    <Target cp="11">createOrder</Target>
+  </Link>
+  <Link Name="Copy of Registered" default="true">
+    <Label>Login</Label>
+    <Source cp="1">PreOrderLoginUser</Source>
+    <Point x="564.0" y="366.0"/>
+    <Point x="624.0" y="366.0"/>
+    <Target cp="3">PreOrderApplicationUserLogin</Target>
+  </Link>
+  <Link Name="Connection 32" default="true">
+    <Source cp="9">ApplicationUserLogin</Source>
+    <Point x="795.0" y="108.0"/>
+    <Point x="795.0" y="210.0"/>
+    <Point x="708.0" y="210.0"/>
+    <Target cp="1">Decision 3</Target>
+  </Link>
+  <Link Name="Connection 33" default="true">
+    <Source cp="1">PreOrderApplicationUserLogin</Source>
+    <Point x="732.0" y="366.0"/>
+    <Point x="792.0" y="366.0"/>
+    <Target cp="3">Copy of Decision 3</Target>
+  </Link>
+  <Link Name="Connection 34" default="false" type="CONDITION">
+    <Source cp="2">Copy of Decision 3</Source>
+    <Point x="822.0" y="396.0"/>
+    <Point x="822.0" y="508.0"/>
+    <Point x="678.0" y="508.0"/>
+    <Point x="678.0" y="528.0"/>
+    <Target cp="0">Or 1</Target>
+    <Condition type="java">ContextId!=null<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0NvbnRleHRJZH08L3BhcmFtZXRlcj4KICAgICAgICAgIDxw&#13;
+YXJhbWV0ZXIgbmFtZT0ib3BlcmF0b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxz&#13;
+ZSIgZmlsdGVyPSIiPlN0cmluZ0lzTm90TnVsbDwvcGFyYW1ldGVyPgogICAgICAgICAgPHBhcmFt&#13;
+ZXRlciBuYW1lPSJzZWNvbmRPcGVyYW5kIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxzZSIg&#13;
+ZmlsdGVyPSIiPiR7bnVsbH08L3BhcmFtZXRlcj4KICAgICAgICA8L3BhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgPHByZXNlbnRhdGlvbj4KCiAgICAgICAgPC9wcmVzZW50YXRpb24+CiAgICAgICAgPGNvZGU+&#13;
+CkNvbnRleHRJZCE9bnVsbAogICAgICAgIDwvY29kZT4KICAgICAgICA8am9pbk5leHQ+QU5EPC9q&#13;
+b2luTmV4dD4KICAgICAgPC9leHByZXNzaW9uPgogICAgPC9jb25maWd1cmF0aW9uPgogIDwvZXhw&#13;
+cmVzc2lvbnM+CjwvY29uZGl0aW9uPgo=</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="Connection 35" default="true" type="CONDITION">
+    <Source cp="0">Copy of Decision 3</Source>
+    <Point x="822.0" y="336.0"/>
+    <Point x="822.0" y="296.0"/>
+    <Point x="510.0" y="296.0"/>
+    <Point x="510.0" y="336.0"/>
+    <Target cp="0">PreOrderLoginUser</Target>
+  </Link>
+  <Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING">
+    <Label>ContextId:</Label>
+    <Description>AETF User Context ID </Description>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="ContextId:" length="0" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="DealerList" category="AETF_Order" name="DealerList" type="LIST">
+    <Label>DealerList:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="DealerList:" required="false" type="list">
+      <Label>DealerList:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Dataslot Name="DealerId" category="User" name="DealerId" type="STRING">
+    <Label>DealerId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="DealerId:" length="20" password="false" required="false" size="20" type="text">
+      <Label>DealerId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="ExteriorWheels" category="User" name="ExteriorWheels" type="STRING">
+    <Label>ExteriorWheels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="ExteriorWheels:" required="false" type="textarea" width="20">
+      <Label>ExteriorWheels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="ExteriorMoonroof" category="User" name="ExteriorMoonroof" type="STRING">
+    <Label>ExteriorMoonroof:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="ExteriorMoonroof:" required="false" type="textarea" width="20">
+      <Label>ExteriorMoonroof:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="ExteriorColour" category="User" name="ExteriorColour" type="STRING">
+    <Label>ExteriorColour:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="ExteriorColour:" required="false" type="textarea" width="20">
+      <Label>ExteriorColour:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="InteriorAccessories" category="User" name="InteriorAccessories" type="STRING">
+    <Label>InteriorAccessories:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="InteriorAccessories:" required="false" type="textarea" width="20">
+      <Label>InteriorAccessories:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="InteriorTrimColour" category="User" name="InteriorTrimColour" type="STRING">
+    <Label>InteriorTrimColour:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="InteriorTrimColour:" required="false" type="textarea" width="20">
+      <Label>InteriorTrimColour:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="InteriorSeatMaterial" category="User" name="InteriorSeatMaterial" type="STRING">
+    <Label>InteriorSeatMaterial:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="InteriorSeatMaterial:" required="false" type="textarea" width="20">
+      <Label>InteriorSeatMaterial:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="DealerName" category="User" name="DealerName" type="STRING">
+    <Label>DealerName:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="DealerName:" required="false" type="textarea" width="120">
+      <Label>DealerName:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="VehicleModelsPremium" category="User" name="VehicleModelsPremium" type="LIST">
+    <Label>VehicleModelsPremium:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="VehicleModelsPremium:" required="false" type="list">
+      <Label>VehicleModelsPremium:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Dataslot Name="VehicleModelsSedan" category="User" name="VehicleModelsSedan" type="LIST">
+    <Label>VehicleModelsSedan:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="VehicleModelsSedan:" required="false" type="list">
+      <Label>VehicleModelsSedan:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Dataslot Name="VehicleModelsTruck" category="User" name="VehicleModelsTruck" type="LIST">
+    <Label>VehicleModelsTruck:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="VehicleModelsTruck:" required="false" type="list">
+      <Label>VehicleModelsTruck:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Dataslot Name="VehicleModelsSUV" category="User" name="VehicleModelsSUV" type="LIST">
+    <Label>VehicleModelsSUV:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="VehicleModelsSUV:" required="false" type="list">
+      <Label>VehicleModelsSUV:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Dataslot Name="VehicleModelsCompact" category="User" name="VehicleModelsCompact" type="LIST">
+    <Label>VehicleModelsCompact:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="VehicleModelsCompact:" required="false" type="list">
+      <Label>VehicleModelsCompact:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Dataslot Name="SelectedVehicleModel" category="User" name="SelectedVehicleModel" type="STRING">
+    <Label>SelectedVehicleModel:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedVehicleModel:" length="0" password="false" required="false" size="20" type="text">
+      <Label>SelectedVehicleModel:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="SelectedVehicleBrand" category="User" name="SelectedVehicleBrand" type="STRING">
+    <Label>SelectedVehicleBrand:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedVehicleBrand:" length="0" password="false" required="true" size="20" type="text">
+      <Label>SelectedVehicleBrand:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="error" category="User" name="error" type="STRING">
+    <Label>error:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="error:" length="20" password="false" required="false" size="20" type="text">
+      <Label>error:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="PT_NAME" category="User" name="PT_NAME" type="STRING">
+    <Label>PT_NAME:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>CustomerOrderVehicle</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="PT_NAME:" length="20" password="false" required="false" size="20" type="text">
+      <Label>PT_NAME:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="PAK_URL" category="User" name="PAK_URL" type="STRING">
+    <Label>PAK_URL:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>//localhost/PAKServer</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="PAK_URL:" length="20" password="false" required="false" size="20" type="text">
+      <Label>PAK_URL:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="BIZSITE_USER" category="User" name="BIZSITE_USER" type="STRING">
+    <Label>BIZSITE_USER:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>sbm</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="BIZSITE_USER:" length="20" password="false" required="false" size="20" type="text">
+      <Label>BIZSITE_USER:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="BIZSITE_PASSWORD" category="User" name="BIZSITE_PASSWORD" type="STRING">
+    <Label>BIZSITE_PASSWORD:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>sbm</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="BIZSITE_PASSWORD:" length="20" password="false" required="false" size="20" type="text">
+      <Label>BIZSITE_PASSWORD:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="orderid" category="User" name="orderid" type="NUMBER">
+    <Label>orderid:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="orderid:" required="false" type="field">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="password" category="User" name="password" type="STRING">
+    <Label>password:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="password:" length="20" password="false" required="false" size="20" type="text">
+      <Label>password:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="userid" category="User" name="userid" type="STRING">
+    <Label>userid:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="userid:" length="20" password="false" required="false" size="20" type="text">
+      <Label>userid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="CustomerEmail" category="User" name="CustomerEmail" type="STRING">
+    <Label>CustomerEmail:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerEmail:" length="20" password="false" required="true" size="20" type="text">
+      <Label>CustomerEmail:</Label>
+      <Validation>
+        <ValidationType>email|bok</ValidationType>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="DealerEmail" category="User" name="DealerEmail" type="STRING">
+    <Label>DealerEmail:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="DealerEmail:" length="20" password="false" required="false" size="20" type="text">
+      <Label>DealerEmail:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="AutoEdgeWebServiceEndpoint" category="User" name="AutoEdgeWebServiceEndpoint" type="STRING">
+    <Label>AutoEdgeWebService:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>http://localhost:9090/wsa/wsa1</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="AutoEdgeWebService:" length="20" password="false" required="false" size="20" type="text">
+      <Label>AutoEdgeWebService:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="OrderChannel" category="User" name="OrderChannel" type="STRING">
+    <Label>OrderChannel:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>WEB</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="OrderChannel:" length="20" password="false" required="false" size="20" type="text">
+      <Label>OrderChannel:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="OrderNum" category="AETF_Order" name="OrderNum" type="NUMBER">
+    <Label>OrderNum:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="CustomerId" category="AETF_Order" name="CustomerId" type="STRING">
+    <Label>CustomerId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerId:" length="20" password="false" required="false" size="20" type="text">
+      <Label>CustomerId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="CustomerCreditLimit" category="AETF_Order" name="CustomerCreditLimit" type="NUMBER">
+    <Label>CustomerCreditLimit:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerCreditLimit:" required="false" type="field">
+      <Label>CustomerCreditLimit:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Notes>
+    <Note color="255,255,153" connectTo="wsBrandDetails" height="240" shape="sticky" width="84" x="24" y="144">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1296135180102" version="7.0SP1"&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF_Order" name="OrderNum" type="NUMBER"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderChannel" category="User" name="OrderChannel" type="STRING"&gt;&#13;
+    &lt;Label&gt;OrderChannel:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;WEB&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="OrderChannel:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderChannel:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="User" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
+    &lt;Label&gt;AutoEdgeWebService:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="AutoEdgeWebService:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;AutoEdgeWebService:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerEmail" category="User" name="DealerEmail" type="STRING"&gt;&#13;
+    &lt;Label&gt;DealerEmail:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="DealerEmail:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;DealerEmail:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerEmail" category="User" name="CustomerEmail" type="STRING"&gt;&#13;
+    &lt;Label&gt;CustomerEmail:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerEmail:" length="20" password="false" required="true" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CustomerEmail:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType&gt;email|bok&lt;/ValidationType&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="userid" category="User" name="userid" type="STRING"&gt;&#13;
+    &lt;Label&gt;userid:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="userid:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;userid:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="password" category="User" name="password" type="STRING"&gt;&#13;
+    &lt;Label&gt;password:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="password:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;password:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="orderid" category="User" name="orderid" type="NUMBER"&gt;&#13;
+    &lt;Label&gt;orderid:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="orderid:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;orderid:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BIZSITE_PASSWORD" category="User" name="BIZSITE_PASSWORD" type="STRING"&gt;&#13;
+    &lt;Label&gt;BIZSITE_PASSWORD:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;sbm&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="BIZSITE_PASSWORD:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BIZSITE_PASSWORD:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BIZSITE_USER" category="User" name="BIZSITE_USER" type="STRING"&gt;&#13;
+    &lt;Label&gt;BIZSITE_USER:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;sbm&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="BIZSITE_USER:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BIZSITE_USER:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PAK_URL" category="User" name="PAK_URL" type="STRING"&gt;&#13;
+    &lt;Label&gt;PAK_URL:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;//localhost/PAKServer&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="PAK_URL:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PAK_URL:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PT_NAME" category="User" name="PT_NAME" type="STRING"&gt;&#13;
+    &lt;Label&gt;PT_NAME:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;CustomerOrderVehicle&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="PT_NAME:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PT_NAME:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="error" category="User" name="error" type="STRING"&gt;&#13;
+    &lt;Label&gt;error:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="error:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;error:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedVehicleBrand" category="User" name="SelectedVehicleBrand" type="STRING"&gt;&#13;
+    &lt;Label&gt;SelectedVehicleBrand:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedVehicleBrand:" length="0" password="false" required="true" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedVehicleBrand:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedVehicleModel" category="User" name="SelectedVehicleModel" type="STRING"&gt;&#13;
+    &lt;Label&gt;SelectedVehicleModel:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedVehicleModel:" length="0" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedVehicleModel:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleModelsCompact" category="User" name="VehicleModelsCompact" type="LIST"&gt;&#13;
+    &lt;Label&gt;VehicleModelsCompact:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="VehicleModelsCompact:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;VehicleModelsCompact:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleModelsSUV" category="User" name="VehicleModelsSUV" type="LIST"&gt;&#13;
+    &lt;Label&gt;VehicleModelsSUV:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="VehicleModelsSUV:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;VehicleModelsSUV:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleModelsTruck" category="User" name="VehicleModelsTruck" type="LIST"&gt;&#13;
+    &lt;Label&gt;VehicleModelsTruck:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="VehicleModelsTruck:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;VehicleModelsTruck:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleModelsSedan" category="User" name="VehicleModelsSedan" type="LIST"&gt;&#13;
+    &lt;Label&gt;VehicleModelsSedan:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="VehicleModelsSedan:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;VehicleModelsSedan:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleModelsPremium" category="User" name="VehicleModelsPremium" type="LIST"&gt;&#13;
+    &lt;Label&gt;VehicleModelsPremium:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="VehicleModelsPremium:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;VehicleModelsPremium:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerName" category="User" name="DealerName" type="STRING"&gt;&#13;
+    &lt;Label&gt;DealerName:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="DealerName:" required="false" type="textarea" width="120"&gt;&#13;
+      &lt;Label&gt;DealerName:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorSeatMaterial" category="User" name="InteriorSeatMaterial" type="STRING"&gt;&#13;
+    &lt;Label&gt;InteriorSeatMaterial:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorSeatMaterial:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorSeatMaterial:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorTrimColour" category="User" name="InteriorTrimColour" type="STRING"&gt;&#13;
+    &lt;Label&gt;InteriorTrimColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorTrimColour:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorTrimColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorAccessories" category="User" name="InteriorAccessories" type="STRING"&gt;&#13;
+    &lt;Label&gt;InteriorAccessories:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorAccessories:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorAccessories:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorColour" category="User" name="ExteriorColour" type="STRING"&gt;&#13;
+    &lt;Label&gt;ExteriorColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorColour:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorMoonroof" category="User" name="ExteriorMoonroof" type="STRING"&gt;&#13;
+    &lt;Label&gt;ExteriorMoonroof:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorMoonroof:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorMoonroof:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorWheels" category="User" name="ExteriorWheels" type="STRING"&gt;&#13;
+    &lt;Label&gt;ExteriorWheels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorWheels:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorWheels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerId" category="User" name="DealerId" type="STRING"&gt;&#13;
+    &lt;Label&gt;DealerId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="DealerId:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;DealerId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerList" category="AETF_Order" name="DealerList" type="LIST"&gt;&#13;
+    &lt;Label&gt;DealerList:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="DealerList:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;DealerList:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" length="0" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;&#13;
+    &lt;font color="#000000"&gt;Query Dealer database to retrieve models matching brand and year.&lt;/font&gt;&#13;
+    &lt;br clear="all"/&gt;&#13;
+&lt;br clear="all"/&gt;&#13;
+&lt;font color="#000000"&gt;Retrieve vehicle information based on order number&lt;/font&gt;&#13;
+  &lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
+  </Notes>
+  <History>
+    <Deployed as="CustomerVehicleOrderSubmit" by="sbm" on="1296438086610" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Sun Jan 30 20:41:26 EST 2011</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1281991868810" to="http://184.72.251.33:18793/sbm/deployment">Mon Aug 16 16:51:08 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1281982124566" to="http://184.72.251.33:18793/sbm/deployment">Mon Aug 16 14:08:44 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1281972426190" to="http://184.72.251.33:18793/sbm/deployment">Mon Aug 16 11:27:06 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1281560758336" to="http://184.72.251.33:18793/sbm/deployment">Wed Aug 11 17:05:58 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1281108237142" to="http://184.72.251.33:18793/sbm/deployment">Fri Aug 06 11:23:57 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280954793624" to="http://184.72.251.33:18793/sbm/deployment">Wed Aug 04 16:46:33 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280867474861" to="http://184.72.251.33:18793/sbm/deployment">Tue Aug 03 16:31:14 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280772265624" to="http://184.72.251.33:18793/sbm/deployment">Mon Aug 02 14:04:25 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280415268275" to="http://184.72.251.33:18793/sbm/deployment">Thu Jul 29 10:54:28 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280264985431" to="http://184.72.251.33:18793/sbm/deployment">Tue Jul 27 17:09:45 EDT 2010</Deployed>
+    <CheckedIn as="OrderSubmitAndTrack_REL" by="sbm" on="1279069986270" to="http://184.72.251.33:18793/sbm/services">Tue Jul 13 21:13:06 EDT 2010</CheckedIn>
+    <Deployed as="OrderSubmitAndTrack" by="ebms" on="1279059402430" to="http://localhost:18793/sbm/deployment">Tue Jul 13 18:16:42 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack" by="sbm" on="1279058934432" to="http://184.72.251.33:18793/sbm/deployment">Tue Jul 13 18:08:54 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack" by="ebms" on="1278980308597" to="http://localhost:18793/sbm/deployment">Mon Jul 12 20:18:28 EDT 2010</Deployed>
+    <CheckedIn as="OrderSubmitAndTrack" by="sbm" on="1278834834822" to="http://184.72.251.33:18793/sbm/services">Sun Jul 11 03:53:54 EDT 2010</CheckedIn>
+    <Deployed as="OrderSubmitAndTrack" by="ebms" on="1278811065464" to="http://localhost:18793/sbm/deployment">Sat Jul 10 21:17:45 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack" by="ebms" on="1278722431199" to="http://localhost:18793/sbm/deployment">Fri Jul 09 20:40:31 EDT 2010</Deployed>
+    <Created as="OrderSubmitAndTrack" by="kjambor" on="1278719730132">Fri Jul 09 19:55:30 EDT 2010</Created>
+    <CheckedIn as="OrderSubmitAndTrack" by="sbm" on="1278722033446" to="http://184.72.251.33:18793/sbm/services">Fri Jul 09 20:33:53 EDT 2010</CheckedIn>
+    <CheckedIn as="OrderSubmitAndTrack" by="sbm" on="1278789044179" to="http://184.72.251.33:18793/sbm/services">Sat Jul 10 15:10:44 EDT 2010</CheckedIn>
+    <CheckedIn as="OrderSubmitAndTrack" by="sbm" on="1278838969993" to="http://184.72.251.33:18793/sbm/services">Sun Jul 11 05:02:49 EDT 2010</CheckedIn>
+    <Deployed as="OrderSubmitAndTrack" by="sbm" on="1278980232853" to="http://184.72.251.33:18793/sbm/deployment">Mon Jul 12 20:17:12 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack" by="sbm" on="1279058685122" to="http://184.72.251.33:18793/sbm/deployment">Tue Jul 13 18:04:45 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack" by="sbm" on="1279059352309" to="http://184.72.251.33:18793/sbm/deployment">Tue Jul 13 18:15:52 EDT 2010</Deployed>
+    <CheckedIn as="OrderSubmitAndTrack_REL" by="sbm" on="1279068152810" to="http://184.72.251.33:18793/sbm/services">Tue Jul 13 20:42:32 EDT 2010</CheckedIn>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1279242685764" to="http://184.72.251.33:18793/sbm/deployment">Thu Jul 15 21:11:25 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280265208682" to="http://184.72.251.33:18793/sbm/deployment">Tue Jul 27 17:13:28 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280415332010" to="http://184.72.251.33:18793/sbm/deployment">Thu Jul 29 10:55:32 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1280955933253" to="http://184.72.251.33:18793/sbm/deployment">Wed Aug 04 17:05:33 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1281016595929" to="http://184.72.251.33:18793/sbm/deployment">Thu Aug 05 09:56:35 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V2" by="sbm" on="1281028015818" to="http://184.72.251.33:18793/sbm/deployment">Thu Aug 05 13:06:55 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1281639167799" to="http://184.72.251.33:18793/sbm/deployment">Thu Aug 12 14:52:47 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1281714506817" to="http://184.72.251.33:18793/sbm/deployment">Fri Aug 13 11:48:26 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1281993677298" to="http://184.72.251.33:18793/sbm/deployment">Mon Aug 16 17:21:17 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1282004052612" to="http://184.72.251.33:18793/sbm/deployment">Mon Aug 16 20:14:12 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1282004764308" to="http://184.72.251.33:18793/sbm/deployment">Mon Aug 16 20:26:04 EDT 2010</Deployed>
+    <Deployed as="OrderSubmitAndTrack_REL_V3" by="sbm" on="1284401853991" to="http://184.73.156.209:18793/sbm/deployment">Mon Sep 13 14:17:33 EDT 2010</Deployed>
+  </History>
+  <Repository committer="sbm" model="OrderSubmitAndTrack_REL" time="1279069986270" url="http://184.72.251.33:18793/sbm/services" version="1.1"/>
+</Process>

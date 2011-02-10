@@ -1,0 +1,11 @@
+#Sun Dec 12 15:17:13 EST 2010
+adapter-class=com.savvion.sbm.adapters.webservice.WebServiceAdapter
+map-configurator=com.savvion.sbm.adapters.framework.GroupMapConfigurator
+adapter-configurator=com.savvion.sbm.adapters.webservice.WebServiceAdapterConfiguratorDialog
+AdapterName=GenericWebServiceAdapter
+log-level=10
+runtime-mapper=com.savvion.sbm.adapters.framework.GroupMapper
+AdapterCategory=WebServiceAdapters
+icon=server_client_exchange.png
+instance=true
+adaplet=true
