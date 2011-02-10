@@ -18,7 +18,7 @@ using OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 
-class OpenEdge.BusinessComponent.Workflow.BizLogicWorkFlow inherits WorkFlowDecorator
+class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkFlow inherits WorkFlowDecorator
         implements IBizLogicWorkFlow:
     
     /* The Savvion Session ID */
