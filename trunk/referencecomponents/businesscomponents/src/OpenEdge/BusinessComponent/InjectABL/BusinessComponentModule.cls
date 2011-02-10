@@ -38,13 +38,13 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
         /* do this one per type, for readability and possibly performance too */
         assign BusinessEntityServiceInterfaceType = Class:GetClass('OpenEdge.BusinessComponent.Entity.ServiceInterface')
                IDataAccessType = Class:GetClass('OpenEdge.DataAccess.IDataAccess')
-               IServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider')
+               IServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider')
                IWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.IWorkStep')
                WorkStepServiceInterfaceType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.WorkStepServiceInterface')
                BizLogicWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep')
                IBizLogicServerParametersType = Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters')
-               InjectABLServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
-               InjectABLComponentProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.InjectABL.ComponentProvider').
+               InjectABLServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ServiceProvider')
+               InjectABLComponentProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ComponentProvider').
     end constructor.
 
     /** BUSINESS WORKFLOWS **/
@@ -113,6 +113,7 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
     end method.
 
     /* Workstep binding to service interface, workstep */
+    @todo(task="refactor", action="move to Ent Svcs").
     method protected void BindWorkStep(input pcBindingName as character,
                                        input pcConcreteType as character,
                                        input plIsBizLogicStep as logical  ): 

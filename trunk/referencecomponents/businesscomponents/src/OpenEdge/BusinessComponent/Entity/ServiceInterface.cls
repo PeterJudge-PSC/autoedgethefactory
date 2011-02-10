@@ -13,31 +13,54 @@
 using OpenEdge.BusinessComponent.Entity.IBusinessEntity.
 using OpenEdge.BusinessComponent.Entity.BusinessEntityDecorator.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.IServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Service.
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceManager.
+using OpenEdge.CommonInfrastructure.Common.Service.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using OpenEdge.Core.System.ArgumentError.
-
+using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 
 class OpenEdge.BusinessComponent.Entity.ServiceInterface inherits BusinessEntityDecorator
-        implements IServiceProvider: 
+        implements IServiceProvider:
     
     /** The service for which this provider is currently servicing a request. */
     define public property Service as character no-undo get. set.
+
+    /** Stores a reference to the session's Service Manager */
+    define protected property ServiceManager as IServiceManager no-undo
+        get():
+            if not valid-object(ServiceManager) then
+                ServiceManager = cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType)
+                                    , IServiceManager).
+            return ServiceManager.
+        end get.
+        private set.
+
+    /** The ServiceMessageManager is used plentifully; we keep it as a property so that
+        we can get it whenever needed, without fuss. */
+    define protected property ServiceMessageManager as IServiceMessageManager no-undo
+        get():
+            if not valid-object(ServiceMessageManager) then
+                ServiceMessageManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ServiceMessageManager:IServiceMessageManagerType)
+                                            , IServiceMessageManager).
+            return ServiceMessageManager.
+        end get.
+        private set.
     
     constructor public ServiceInterface(input poBusinessEntity as IBusinessEntity):
         super (input poBusinessEntity).
@@ -75,6 +98,8 @@ class OpenEdge.BusinessComponent.Entity.ServiceInterface inherits BusinessEntity
                                         , IServiceResponse).
             end case.
         end.
+        
+        ServiceMessageManager:ExecuteResponse(oResponse).
     end method.
     
     method public IServiceResponse extent ExecuteSyncRequest(input poRequest as IServiceRequest extent):

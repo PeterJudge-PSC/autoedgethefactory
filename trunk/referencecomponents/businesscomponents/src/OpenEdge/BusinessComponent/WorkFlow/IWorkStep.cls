@@ -7,8 +7,8 @@
     Created     : Thu Dec 02 10:33:58 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse.
 
 interface OpenEdge.BusinessComponent.WorkFlow.IWorkStep:
     

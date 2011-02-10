@@ -11,17 +11,17 @@
   ---------------------------------------------------------------------- */
 {routinelevel.i}
 
-using OpenEdge.BusinessComponent.WorkFlow.IWorkFlow.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowResponse.
+using OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowResponse.
 
 using OpenEdge.Lang.Assert.
 
 class OpenEdge.BusinessComponent.WorkFlow.WorkFlowDecorator abstract
-        implements IWorkFlow:
+        implements IBusinessWorkFlow:
     
     /** The workflow being decorated. Could be a 'real' workflow, or another decorator. */
-    define protected property DecoratedWorkFlow as IWorkFlow no-undo get. private set.
+    define protected property DecoratedWorkFlow as IBusinessWorkFlow no-undo get. private set.
 
     define public property Name as longchar no-undo
        get():
@@ -31,7 +31,7 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkFlowDecorator abstract
            DecoratedWorkFlow:Name.
        end set. 
     
-    constructor public WorkFlowDecorator(input poWorkFlow as IWorkFlow):
+    constructor public WorkFlowDecorator(input poWorkFlow as IBusinessWorkFlow):
         Assert:ArgumentNotNull(poWorkFlow, 'WorkFlow').
         DecoratedWorkFlow = poWorkFlow.
     end constructor.

@@ -9,17 +9,17 @@
   ---------------------------------------------------------------------- */
 {routinelevel.i}
 
-using OpenEdge.BusinessComponent.WorkFlow.IWorkFlow.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
+using OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.Service.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.Service.
 
 using OpenEdge.Core.System.ApplicationError.
 
@@ -29,8 +29,8 @@ using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 
-class OpenEdge.BusinessComponent.WorkFlow.WorkFlow abstract inherits Service 
-        implements IWorkFlow:
+class OpenEdge.BusinessComponent.WorkFlow.BusinessWorkFlow abstract inherits Service 
+        implements IBusinessWorkFlow:
     
     /** (optional) The workflow name. */
     define public property Name as longchar no-undo
@@ -45,22 +45,22 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkFlow abstract inherits Service
         guarantee of that, so we use a map to be safe. */
     define protected property ServiceResponses as IMap no-undo get. private set.
 
-    constructor public WorkFlow(input poServiceManager as IServiceManager,
-                                input poComponentInfo as IComponentInfo,
-                                input pcFlowName as longchar):
+    constructor public BusinessWorkFlow(input poServiceManager as IServiceManager,
+                                        input poComponentInfo as IComponentInfo,
+                                        input pcFlowName as longchar):
         this-object(poServiceManager, poComponentInfo).
         
         Assert:ArgumentNotNullOrEmpty(pcFlowName, 'WorkFlow name').
         this-object:Name = pcFlowName.                                    
     end constructor.
         
-    constructor public WorkFlow(input poServiceManager as IServiceManager,
-                                input poComponentInfo as IComponentInfo):
+    constructor public BusinessWorkFlow(input poServiceManager as IServiceManager,
+                                        input poComponentInfo as IComponentInfo):
         super(poServiceManager, poComponentInfo).
         
         assign ServiceResponses = new TypedMap(
                                       String:Type, 
-                                      Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse')).
+                                      Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse')).
     end constructor.
     
     method abstract public void PerformFlow().

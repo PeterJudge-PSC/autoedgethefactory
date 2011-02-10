@@ -20,11 +20,11 @@ using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.
 using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
 using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse.
 
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class. 
@@ -136,9 +136,9 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract inherits Wor
 /*        ConnectBizLogicService().*/
     end method.
 
-    method override public void PerformStep( input poRequest as OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest ):
+    method override public void PerformStep( input poRequest as OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest ):
         Assert:ArgumentNotType(poRequest,
-                               Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.BizLogicWorkFlowRequest')).
+                               Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.BizLogicWorkFlowRequest')).
         
         super:PerformStep(input poRequest).
     end method.
