@@ -13,7 +13,7 @@
 
 /* ***************************  Definitions  ************************** */
 
-/*routine-level on error undo, throw.*/
+{routinelevel.i}
 
 /* ********************  Preprocessor Definitions  ******************** */
 function getRandom returns character (input cValueList as character):
@@ -53,7 +53,7 @@ cFirstNamesFemale = "Mary|Linda|Barbara|Susan|Margaret|Lisa|Nancy|Betty|Helen|Do
 cSalutationsMale = "Mr.|Mr.|Mr.|Mr.|Mr.|Mr.|Dr.".
 cSalutationsFemale = "Ms.|Miss|Ms.|Miss|Ms.|Miss|Dr.".
 cNotes = "Some note|Another note|No note|||||".
-cEmailAddress = "@aol.com|@mail.com|@progress.com|@company.com".
+cEmailAddress = "@aol.com|@mail.com|@progress.com|@company.com|@example.com|@domain.org".
 
 open query qryAddresses preselect each AddressDetail.
 iNumAddresses = query qryAddresses:num-results - 1.
@@ -93,22 +93,60 @@ do iLoop = 1 to iMax:
     
     reposition qryAddresses to row random(0, iNumAddresses).
     get next qryAddresses no-lock.
+
+    run AddCustomerAddress(
+            'billing',
+            Customer.TenantId,
+            Customer.CustomerId,
+            AddressDetail.AddressDetailId).
+                    
+    run AddCustomerContact(
+            'email-home',
+            Customer.TenantId, 
+            Customer.CustomerId,
+            entry(1, Customer.Name, ' ') + getRandom(cEmailAddress)).
     
-    run addBillingAddress(Customer.CustomerId, AddressDetail.AddressDetailId).        
+    run AddCustomerContact(
+            'phone-mobile',
+            Customer.TenantId, 
+            Customer.CustomerId,
+            substitute('&1-555-&2',
+                       random(201, 979),
+                       random(1000, 9999))).
+
 end.
 
-procedure AddBillingAddress:
+procedure AddCustomerContact:
+    define input parameter pcContactType as character no-undo.
+    define input parameter pcTenantId as longchar no-undo.
+    define input parameter pcCustomerId as character no-undo.
+    define input parameter pcContactDetail as character no-undo.
+    
+    create ContactDetail.
+    assign ContactDetail.ContactDetailId = guid(generate-uuid)
+           ContactDetail.Detail = pcContactDetail.
+    find ContactType where ContactType.Name = pcContactType  no-lock.
+           
+    create CustomerContact.
+    assign CustomerContact.ContactDetailId = ContactDetail.ContactDetailId
+           CustomerContact.CustomerId = pcCustomerId
+           CustomerContact.TenantId = pcTenantId
+           CustomerContact.ContactType = ContactType.Name.
+end procedure.
+
+procedure AddCustomerAddress:
+    define input parameter pcAddressType as character no-undo.
+    define input parameter pcTenantId as longchar no-undo.
     define input parameter pcCustomerId as character no-undo.
     define input parameter pcAddressDetailId as character no-undo.
     
+    find AddressType where  AddressType.AddressType eq pcAddressType no-lock.
     
-    find AddressType where  AddressType.AddressType eq 'billing' no-lock.
-    
-    create AddressXref.
-    assign AddressXref.AddressDetailId = pcAddressDetailId
-           AddressXref.AddressType = AddressType.AddressType
-           AddressXref.ParentId = pcCustomerId
-           AddressXref.TenantId = Tenant.TenantId.
+    create CustomerAddress.
+    assign CustomerAddress.AddressDetailId = pcAddressDetailId
+           CustomerAddress.AddressType = AddressType.AddressType
+           CustomerAddress.CustomerId = pcCustomerId
+           CustomerAddress.TenantId = pcTenantId.
 end procedure.    
 
 

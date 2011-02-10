@@ -13,7 +13,7 @@
 
 /* ***************************  Definitions  ************************** */
 
-/*routine-level on error undo, throw.*/
+{routinelevel.i}
 
 /* ********************  Definitions  ******************** */
 define variable iLoop as integer no-undo.
@@ -31,10 +31,10 @@ function getRandom returns character (input cValueList as character):
         else return cValueList .
 end function .
 
-cStreets = 'Smith|Main|Shawsheen|Yellow Brick|High|Loopy|Apple Blossom|Long|Shore|Pine|Oak|Park'.
+cStreets = 'Smith|Main|Shawsheen|Yellow Brick|High|Loopy|Apple Blossom|Long|Shore|Pine|Oak|Park|Barnyard'.
 cStreetTypes = 'Ave|Str|Rd|Terrace|Lane|Rt|Ct'.
-cCities = 'Nashua|Bedford|Burlington|Boston|Manchester|Springfield|Milford|Danbury|Shrewsbury|Abbotdale'.
-cPostCodes = '03060|01730|02155|90210|10010|32329|90210'.
+cCities = 'Nashua|Bedford|Burlington|Boston|Manchester|Springfield|Milford|Danbury|Shrewsbury|Abbotdale|Malden'.
+cPostCodes = '03060|01730|02155|90210|10010|32329|90210|02020'.
 
 
 /* ***************************  Main Block  *************************** */
@@ -53,7 +53,10 @@ procedure createTypes:
 
     create AddressType.
     assign AddressType.AddressType = 'home'.
-        
+
+    create AddressType.
+    assign AddressType.AddressType = 'street'.
+    
 end procedure.
 
 procedure createDetail:

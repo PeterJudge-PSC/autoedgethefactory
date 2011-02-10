@@ -53,19 +53,9 @@ function getRandom returns character (input cValueList as character):
         else return cValueList .
 end function .
 
-function getRandomID returns character (input cValueList as character):
-    define variable iEntries as integer    no-undo.
-    iEntries = num-entries (cValueList, chr(1)) .
-    if iEntries > 1 
-        then return entry ((random (1, iEntries)), cValueList, chr(1)) .
-        else return cValueList .
-end function .
-
 /* ***************************  Main Block  *************************** */
 
-dataset dsVehicles:read-xml('file', search('setup/data/vehicles.xml'), FillModeEnum:Empty:ToString(), ?, ?).
-
-dataset dsVehicles:write-json('file', session:temp-dir + 'cars.json').
+dataset dsVehicles:read-xml('file', search('data/vehicles.xml'), FillModeEnum:Empty:ToString(), ?, ?).
 
 run load_vehicle_items.
 
@@ -157,7 +147,7 @@ procedure associate_generic:
               no-lock:
         
         /* xml should contain engine and fuel combos */
-        if can-do('engine,fuel', lbttItem.ItemTypeName) then
+        if lookup(lbttItem.ItemTypeName, 'engine,fuel') gt 0 then
             next.
         
         create ItemOption.
@@ -172,8 +162,8 @@ procedure load_ItemType:
     define variable iMax as integer no-undo.
     define variable cTypes as character no-undo.
     
-    cTypes = 'Vehicle|Engine|Fuel|Wheels|Trim-Material|Trim-Colour|Ext-Colour|Moonroof|Accessories'.
-    cTypes = replace(cTypes, 'Vehicle', 'Convertible|Coupe|Sedan|SUV|Crossover|Truck|Commercial'). 
+    cTypes = 'Engine|Fuel|Wheels|Trim-Material|Trim-Colour|Ext-Colour|Moonroof|Accessories|'
+           + 'Vehicle-Convertible|Vehicle-Coupe|Vehicle-Sedan|Vehicle-SUV|Vehicle-Crossover|Vehicle-Truck|Vehicle-Commercial|Vehicle-Compact'. 
     
     iMax = num-entries(cTypes, '|').    
     do iLoop = 1 to iMax:

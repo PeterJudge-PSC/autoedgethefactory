@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="AutoEdgeTheFactoryWebServices" targetNamespace="urn:factory-autoedge-com" xmlns:tns="urn:factory-autoedge-com" xmlns:S2="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:prodata="urn:schemas-progress-com:xml-prodata:0001" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:S1="urn:soap-fault:details" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:documentation>Author=PSC, EncodingType=DOC_LITERAL, Proxygen_Product=Progress Version 10.2B</wsdl:documentation>
+  <wsdl:types>
+<schema elementFormDefault="unqualified" targetNamespace="urn:soap-fault:details" xmlns="http://www.w3.org/2001/XMLSchema"><element name="FaultDetail"><complexType><sequence><element name="errorMessage" type="xsd:string"/><element name="requestID" type="xsd:string"/></sequence></complexType></element></schema>
+<schema elementFormDefault="qualified" targetNamespace="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices" xmlns="http://www.w3.org/2001/XMLSchema"><complexType name="DataSetHandleParam"><annotation><documentation>This is the schema definition for an OpenEdge dynamic ProDataSet parameter.  The first element in this sequence must be a w3c XML Schema document describing the definition of the ProDataSet.  The second element contains the serialized data.</documentation></annotation><sequence><any maxOccurs="2" minOccurs="2"/></sequence></complexType><element name="ListBrandData"><complexType><sequence><element name="pcBrand" nillable="true" type="xsd:string"/><element name="piOrderNum" nillable="true" type="xsd:int"/><element name="pcUserContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="ListBrandDataResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcDealerNameList" nillable="true" type="xsd:string"/><element name="pcCompactModels" nillable="true" type="xsd:string"/><element name="pcTruckModels" nillable="true" type="xsd:string"/><element name="pcSuvModels" nillable="true" type="xsd:string"/><element name="pcConvertibleModels" nillable="true" type="xsd:string"/><element name="pcSedanModels" nillable="true" type="xsd:string"/><element name="pcInteriorTrimMaterial" nillable="true" type="xsd:string"/><element name="pcInteriorTrimColour" nillable="true" type="xsd:string"/><element name="pcInteriorAccessories" nillable="true" type="xsd:string"/><element name="pcExteriorColour" nillable="true" type="xsd:string"/><element name="pcMoonroof" nillable="true" type="xsd:string"/><element name="pcWheels" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="CaptureVehicleOrder"><complexType><sequence><element name="piOrderNumber" nillable="true" type="xsd:int"/><element name="plOrderApproved" nillable="true" type="xsd:boolean"/><element name="pcCustomerName" nillable="true" type="xsd:string"/><element name="pcCustomerEmail" nillable="true" type="xsd:string"/><element name="pcBrand" nillable="true" type="xsd:string"/><element name="pcDealer" nillable="true" type="xsd:string"/><element name="pcModel" nillable="true" type="xsd:string"/><element name="pcInteriorTrimMaterial" nillable="true" type="xsd:string"/><element name="pcInteriorTrimColour" nillable="true" type="xsd:string"/><element name="pcInteriorAccessories" nillable="true" type="xsd:string"/><element name="pcExteriorColour" nillable="true" type="xsd:string"/><element name="pcMoonroof" nillable="true" type="xsd:string"/><element name="pcWheels" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="CaptureVehicleOrderResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcOrderId" nillable="true" type="xsd:string"/><element name="pdOrderAmount" nillable="true" type="xsd:decimal"/></sequence></complexType></element><element name="service_listorderstatus"><complexType><sequence><element name="pcContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="service_listorderstatusResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="phOrders" nillable="true" type="S2:DataSetHandleParam"/></sequence></complexType></element></schema>
+  </wsdl:types>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_service_listorderstatus">
+    <wsdl:part name="parameters" element="S2:service_listorderstatus"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListBrandData">
+    <wsdl:part name="parameters" element="S2:ListBrandData"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_CaptureVehicleOrder">
+    <wsdl:part name="parameters" element="S2:CaptureVehicleOrder"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListBrandDataResponse">
+    <wsdl:part name="parameters" element="S2:ListBrandDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_service_listorderstatusResponse">
+    <wsdl:part name="parameters" element="S2:service_listorderstatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_CaptureVehicleOrderResponse">
+    <wsdl:part name="parameters" element="S2:CaptureVehicleOrderResponse"/>
+  </wsdl:message>
+  <wsdl:message name="FaultDetailMessage">
+    <wsdl:part name="FaultDetail" element="S1:FaultDetail"/>
+  </wsdl:message>
+  <wsdl:portType name="AutoEdgeTheFactoryWebServicesObj">
+    <wsdl:operation name="ListBrandData">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_ListBrandData"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_ListBrandDataResponse"/>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CaptureVehicleOrder">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_CaptureVehicleOrder"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_CaptureVehicleOrderResponse"/>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="service_listorderstatus">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_service_listorderstatus"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_service_listorderstatusResponse"/>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AutoEdgeTheFactoryWebServicesObj" type="tns:AutoEdgeTheFactoryWebServicesObj">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ListBrandData">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault">
+        <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CaptureVehicleOrder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault">
+        <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="service_listorderstatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault">
+        <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AutoEdgeTheFactoryWebServicesService">
+    <wsdl:port name="AutoEdgeTheFactoryWebServicesObj" binding="tns:AutoEdgeTheFactoryWebServicesObj">
+<wsdl:documentation></wsdl:documentation>
+      <soap:address location="http://www.tempuri.org/wsa/wsa1"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
