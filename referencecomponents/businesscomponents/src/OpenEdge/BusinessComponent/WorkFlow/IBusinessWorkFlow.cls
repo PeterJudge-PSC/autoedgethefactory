@@ -8,10 +8,10 @@
     Notes       : 
   ---------------------------------------------------------------------- */
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkflowResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowResponse.
 
-interface OpenEdge.BusinessComponent.WorkFlow.IWorkFlow:
+interface OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow:
     /** (optional) The workflow name. */
     define public property Name as longchar no-undo get. set.
     

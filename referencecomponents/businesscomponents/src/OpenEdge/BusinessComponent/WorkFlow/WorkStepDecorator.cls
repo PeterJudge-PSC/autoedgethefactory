@@ -13,8 +13,8 @@
 
 using OpenEdge.BusinessComponent.WorkFlow.IWorkStep.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse.
 
 using OpenEdge.Lang.Assert.
 

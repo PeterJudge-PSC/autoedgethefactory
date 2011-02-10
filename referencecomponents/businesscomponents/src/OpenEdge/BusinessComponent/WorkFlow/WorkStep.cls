@@ -11,16 +11,16 @@
 
 using OpenEdge.BusinessComponent.WorkFlow.IWorkStep.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.WorkstepResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider.
-using OpenEdge.CommonInfrastructure.Service.
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.WorkstepResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider.
+using OpenEdge.CommonInfrastructure.Common.Service.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.InvocationError.
@@ -45,7 +45,7 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStep abstract inherits Service
         
         WorkstepResponses = new TypedMap(
                                       String:Type, 
-                                      Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.IWorkstepResponse')).
+                                      Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse')).
     end constructor.
     
     destructor public WorkStep():

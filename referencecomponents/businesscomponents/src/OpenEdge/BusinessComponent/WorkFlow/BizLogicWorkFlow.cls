@@ -13,10 +13,10 @@
 using OpenEdge.EnterpriseServices.BizLogic.IBizLogicWorkFlow.
 using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.
 using OpenEdge.BusinessComponent.WorkFlow.WorkFlowDecorator.
-using OpenEdge.BusinessComponent.WorkFlow.IWorkFlow.
+using OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 
 class OpenEdge.BusinessComponent.Workflow.BizLogicWorkFlow inherits WorkFlowDecorator
         implements IBizLogicWorkFlow:
@@ -29,7 +29,7 @@ class OpenEdge.BusinessComponent.Workflow.BizLogicWorkFlow inherits WorkFlowDeco
 
     define public property ServerParameter as IBizLogicServerParameters no-undo get. set. 
 
-    constructor public BizLogicWorkFlow(input poWorkFlow as IWorkFlow):
+    constructor public BizLogicWorkFlow(input poWorkFlow as IBusinessWorkFlow):
         super(input poWorkFlow).
     end constructor.
     

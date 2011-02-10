@@ -9,12 +9,13 @@
   ---------------------------------------------------------------------- */
 using OpenEdge.DataAccess.IDataAccess.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
 
 interface OpenEdge.BusinessComponent.Entity.IBusinessEntity:
+    
     /** The DataAccess object for this entity.
         The SetDataAccess method is a workaround for the lack of dynamic
         property invocation in the ABL.     */
@@ -22,10 +23,12 @@ interface OpenEdge.BusinessComponent.Entity.IBusinessEntity:
     method public void SetDataAccess (input poDataAccess as IDataAccess).
     
     /** Retrieve data according to the request, and
+        
         @param IFetchRequest parameter for the request (query, batch/page, etc) */
     method public void FetchData(input poRequest as IFetchRequest).   
     
     /** Response complement method for FetchData above.
+        
         @param character The message id for the request/response
         @return IFetchResponse */
     method public IFetchResponse GetData(input pcMessageId as longchar).
