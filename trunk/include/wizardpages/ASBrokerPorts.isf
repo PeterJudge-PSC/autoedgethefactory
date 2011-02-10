@@ -1,0 +1,51 @@
+object WizardForm: TISCustomForm
+  Left = 0
+  Top = 0
+  Width = 413
+  Height = 237
+  object lblASAutoEdgeFactory: TLabel
+    Left = 16
+    Top = 28
+    Width = 106
+    Height = 13
+    Caption = 'AutoEdge|TheFactory'
+  end
+  object lblMinPort: TLabel
+    Left = 16
+    Top = 60
+    Width = 76
+    Height = 13
+    Caption = 'Agents Min Port'
+  end
+  object lblMaxPort: TLabel
+    Left = 16
+    Top = 92
+    Width = 80
+    Height = 13
+    Caption = 'Agents Max Port'
+  end
+  object txtASAutoEdgeFactory: TEdit
+    Left = 168
+    Top = 24
+    Width = 65
+    Height = 21
+    TabOrder = 0
+    Text = '7101'
+  end
+  object txtMinPort: TEdit
+    Left = 168
+    Top = 56
+    Width = 65
+    Height = 21
+    TabOrder = 1
+    Text = '2200'
+  end
+  object txtMaxPort: TEdit
+    Left = 168
+    Top = 88
+    Width = 65
+    Height = 21
+    TabOrder = 2
+    Text = '2400'
+  end
+end

@@ -1,0 +1,26 @@
+Thank you for installing the OpenEdge Application Example, AutoEdge|TheFactory v1.0.0.
+
+** There are a some additional steps to complete the installation based on the
+** features you will be running. Please refer to the Installation and Release 
+** Notes for further instructions.
+
+The command files are stored in the <install_dir>\autoedgethefactory\client\cfg and <install_dir>\autoedgethefactory\server\cfg folders, depending on the installation options selected.
+
+Source-code or API documentation is available from the <install_dir>\autodox2-index.html page in a web browser.
+
+Overviews and design documentation is available at the Progress Communities AutoEdge|TheFactory project page, at http://communities.progress.com/pcom/community/psdn/openedge/architecture/autoedgethefactory , which is a part of the Architecture, SaaS & Cloud Computing community on Progress Communities.
+
+
+Post-installation actions:
+--------------------------- 
+ o Install and deploy the AutoEdge|TheFactory WebServices from <install_dir>\autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsm
+
+ o Import the Savvion processes from <install_dir>\autoedgethefactory\savvion into a Savvion workspace using BPM Studio. To view the main workflow, open the CustomerOrderVehicle/processtemplates/CustomerOrderVehicle.spt file in BPM Studio or Process Modeller. 
+ 
+    o Before deploying the processes, check the folling:
+      - Make sure that the "AutoEdgeWebServiceEndpoint" dataslot points to the correct portnumber/server for your Savvion server.
+      - Make sure that the values of the BIZSITE_PASSWORD and BIZSITE_USER are correct for your server.      
+    o Deploy the 3 processes to your Savvion Business Manager server. 
+ 
+ o Make sure that the parameters to connect to the Savvion server in the AutoEdge.Factory.EnterpriseServices.SavvionParameters class in  <install_dir>\autoedgethefactory\shared\src\are correct (both host and user/password).
+ 
