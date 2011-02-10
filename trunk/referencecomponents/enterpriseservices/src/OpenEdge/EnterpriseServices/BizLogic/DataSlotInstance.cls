@@ -120,4 +120,3 @@ class OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance inherits SavvionType
     end method.
     
 end class.
-
