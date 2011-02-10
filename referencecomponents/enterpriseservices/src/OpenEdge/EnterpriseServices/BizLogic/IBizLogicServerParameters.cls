@@ -9,7 +9,12 @@
   ---------------------------------------------------------------------- */
 using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.
 
-interface OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters:  
+interface OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters:
+    /** (optional) Human-friendly name for the server. Typically defaults to the hostname 
+        The SetServerName method is a workaround for the lack of dynamic
+        property invocation in the ABL.     */
+    define public property ServerName as character no-undo get. set.
+    method public void SetServerName (input pcServerName as character).
     
     /** (optional) Protocol for connecting to the Savvion SBM Server (http/https). Typically HTTP */
     define public property Protocol as character no-undo get. set.
@@ -30,6 +35,9 @@ interface OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters:
         This is so because we don't want to expose the password in clear
         text to anyone who asks for it. */
     define public property Password as character no-undo set.
+    
+    /** Returns the encoded password, for external use. */
+    define public property EncodedPassword as character no-undo get.
     
     /** Connects to the BizLogic server with the username/password stored in this object.
         Since we don't expose the password publically, we need to take the BizLogic API

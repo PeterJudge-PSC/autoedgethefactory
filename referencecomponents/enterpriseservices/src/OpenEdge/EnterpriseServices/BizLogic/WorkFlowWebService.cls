@@ -29,6 +29,7 @@ using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
 using OpenEdge.Core.XML.WebServiceProtocol.
 using OpenEdge.Core.XML.SaxWriter.
 
+using OpenEdge.Lang.Assert.
 using Progress.Lang.Object.
 using Progress.Lang.Class.
 
@@ -71,6 +72,8 @@ class OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService inherits WebServic
     end method.
     
     method public void Disconnect(input pcSessionId as longchar):
+        Assert:ArgumentNotNullOrEmpty(pcSessionId, 'Session Id').
+        
         ConnectService().
         
         run disconnect in ConnectPortType(mcPortType) (input pcSessionId).
@@ -78,7 +81,7 @@ class OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService inherits WebServic
         finally:
             DisconnectPortType().
             DisconnectService().
-        end finally.        
+        end finally.
     end method.
             
     method public character GetStatus().
