@@ -13,7 +13,7 @@
 
 using OpenEdge.DataSource.DataSourceEventEnum.
 using OpenEdge.Lang.DataTypeEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.DataFormatEnum.
 using OpenEdge.Core.System.EventArgs.
 
 class OpenEdge.DataSource.DataSourceEventArgs inherits EventArgs:

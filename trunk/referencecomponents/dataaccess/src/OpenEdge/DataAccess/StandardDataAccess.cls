@@ -13,22 +13,23 @@ using OpenEdge.DataAccess.IDataAccess.
 using OpenEdge.DataSource.IDataSource.
 using OpenEdge.DataSource.DataSource.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.FetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.SaveResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SaveResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.DataFormatEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
@@ -53,6 +54,8 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         implements IDataAccess:
     
     define protected property DatasetHandle as handle no-undo get. set.
+    
+    define protected property FetchAllTables as logical no-undo get. set.
     
     /** A map of the IDataSource objects that this DataAccess objects knows about. */
     define public property DataSources as IMap no-undo get. private set.
@@ -188,8 +191,6 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         define variable oTableRequest as ITableRequest no-undo.
         define variable oDataSource as IDataSource no-undo.
         define variable oServiceMessage as IServiceMessage no-undo. 
-        define variable lAllTables as logical no-undo.
-        define variable lHasAttachedDataSources as logical no-undo.
         
         oServiceMessage = cast(poRequest, IServiceMessage).
         oServiceMessage:GetMessageData(output DatasetHandle).
@@ -203,46 +204,45 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         moCurrentRequestDataSources:Clear().
         
         assign iMax = DatasetHandle:num-buffers
-               lAllTables = poRequest:TableRequests:IsEmpty()
-               lHasAttachedDataSources = false.
-               
+               FetchAllTables = poRequest:TableRequests:IsEmpty().
+        
         do iLoop = 1 to iMax:
             hBuffer = DatasetHandle:get-buffer-handle(iLoop).
             
             oTableRequest = poRequest:TableRequests:Get(hBuffer:name).
-            if not valid-object(oTableRequest) and lAllTables then
+            if not valid-object(oTableRequest) and FetchAllTables then
                 oTableRequest = CreateDefaultTableRequest(hBuffer:name).
             
-            /* no tableRequests = all tables */
-            if valid-object(oTableRequest) then
+            if valid-object(oTableRequest) and
+               not oTableRequest:TableRequestType:Equals(TableRequestTypeEnum:None) then
             do:
                 oDataSource = cast(DataSources:Get(new String(oTableRequest:TableName)), IDataSource).
                 if valid-object(oDataSource) then
                 do:
                     moCurrentRequestDataSources:Add(oDataSource).
                     
-                    oDataSource:FillMode = FillModeEnum:Append.
+                    /* why append? */
+                    /*oDataSource:FillMode = FillModeEnum:Append.*/
                     oDataSource:SetDataTarget(hBuffer).
                     oDataSource:Prepare(oServiceMessage:ActionType,
                                         oTableRequest,
                                         this-object).
                     AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType).
-                    lHasAttachedDataSources = true.
                 end.
             end.
         end.
         
         /* Get data into this dataset */
-        if lHasAttachedDataSources then
+        if moCurrentRequestDataSources:Size gt 0 then
         do:
-            FetchData().
+            PerformFetch().
             RemoveAllCallbacks(DatasetHandle, cast(moCurrentRequest, IServiceMessage):ActionType).
         end.
     end method.
     
     /** Fetch/retrieve data from the datasource, and populate the business entity with 
         it. */
-    method protected void FetchData():
+    method protected void PerformFetch():
         /* This could be a call to the individual datasources to populate their data.
             cast(moCurrentRequestDataSources:Get(1), IDataSource):PerformFetch(). */
         DatasetHandle:fill().

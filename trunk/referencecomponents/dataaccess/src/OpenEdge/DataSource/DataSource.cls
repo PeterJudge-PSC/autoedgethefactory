@@ -15,18 +15,18 @@ using OpenEdge.DataAccess.IDataAccess.
 using OpenEdge.DataSource.DataSourceEventArgs.
 using OpenEdge.DataSource.DataSourceEventEnum.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.DataFormatEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.ITenantManager.
-using OpenEdge.CommonInfrastructure.Component.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ITenantManager.
+using OpenEdge.CommonInfrastructure.Common.Component.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.IQueryDefinition.
@@ -73,7 +73,14 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
     define public property PageSize as integer no-undo get. set.
     
     /** The fill mode for the data fetch (merge etc). */
-    define public property FillMode as FillModeEnum no-undo get. set.
+    define public property FillMode as FillModeEnum no-undo
+        get():
+            if not valid-object(FillMode) then
+                FillMode = FillModeEnum:Default.
+            
+            return FillMode.
+        end get.
+        set.
     
     /* DataSource Fetch/Fill events */
     define public event BeforeFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
@@ -133,6 +140,14 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
     method abstract protected void DetachDataStoreFromTarget(input poAction as ServiceMessageActionEnum).
     
     /** Prepare with query, batchsize and more.
+    
+        Very important note: If the datasource query is modified, the order of operations for 
+                making sure the query is correct and works is
+                (1) ASSIGN the data-source query handle to the customised query,
+                (2) ATTACH the datasource, and
+                (3) PREPARE the custom query. 
+                
+                You also need to manually/explicity add the parent join phrase.
         
         @param ServiceMessageActionEnum The action that we're preparing the datasource for. 
                We may have different actions based on whether this is a Fetch or a Save.
@@ -151,8 +166,9 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
                CurrentDAO = poDAO
                CurrentActionType = poAction.
         
-        /* Now attach the physical data store to the data target */
+        /* Now attach the physical data store to the data target 
         AttachDataStoreToTarget(poAction).
+        */
         
         /* filter by tenant */
         AddTenantFilter(poAction).

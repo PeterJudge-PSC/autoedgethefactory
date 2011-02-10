@@ -16,21 +16,22 @@ using OpenEdge.DataSource.DataSourceEventArgs.
 using OpenEdge.DataSource.DataSourceEventEnum.
 using OpenEdge.DataSource.DataSourceQuery.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.ISecurityManager.
-using OpenEdge.CommonInfrastructure.CommonSecurityManager.
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.CommonServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.DataFormatEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableContext.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.SecurityManager.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.QueryBuffer.
@@ -71,8 +72,10 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
     define protected property SecurityManager as ISecurityManager no-undo
         get():
             if not valid-object(SecurityManager) then
-                SecurityManager = cast(cast(ABLSession:Instance:SessionProperties:Get(CommonServiceManager:ServiceManagerType), IServiceManager)
-                                        :StartService(CommonSecurityManager:SecurityManagerType), ISecurityManager).
+                SecurityManager = cast(cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType)
+                                        , IServiceManager)
+                                        :StartService(OpenEdge.CommonInfrastructure.Common.SecurityManager:ISecurityManagerType)
+                                    , ISecurityManager).
             return SecurityManager.
         end get.
         set.
@@ -97,15 +100,26 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         end get.
     
     /** The ABL DATA-SOURCE handles being used */
-    define protected property ABLDataSources  as IMap no-undo get. set.
-    define protected property AttachedActions as ICollection no-undo get. set.
+    define protected property ABLDataSources  as IMap no-undo
+        get():
+            if not valid-object(ABLDataSources) then
+                ABLDataSources = new Map().
+            return ABLDataSources.
+        end get.
+        set.
+    
+    define protected property AttachedActions as ICollection no-undo
+        get():
+            if not valid-object(AttachedActions) then
+                AttachedActions = new Collection().
+            return AttachedActions.
+        end get.
+        set.
 
     constructor public StandardDataSource(input poComponentInfo as IComponentInfo):
         super (input poComponentInfo).
 
-        assign ABLDataSources = new Map()
-               AttachedActions = new Collection()
-               TenantFilterFieldName = 'TenantId'.
+        TenantFilterFieldName = 'TenantId'.
     end constructor.
     
     /** Prepare with query, batchsize and more.
@@ -119,40 +133,46 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
     method override public void Prepare(input poAction as ServiceMessageActionEnum,
                                         input poRequest as ITableRequest,
                                         input poDAO as IDataAccess):
+        
         super:Prepare(poAction, poRequest, poDAO).
         
         case poAction:
-            when ServiceMessageActionEnum:FetchData then PrepareFetchData(poRequest, poDAO).
-            when ServiceMessageActionEnum:SaveData then PrepareSaveData(poRequest, poDAO).
+            when ServiceMessageActionEnum:FetchData then PrepareFetchData(poAction, poRequest, poDAO).
+            when ServiceMessageActionEnum:SaveData then PrepareSaveData(poAction, poRequest, poDAO).
         end case.
+        
     end method.
     
     /** Specific handling for FetchData requests.
         
         @param ITableRequest The current request
         @param IDataAccess The data access object making the request */
-    method protected void PrepareFetchData(input poRequest as ITableRequest,
+    method protected void PrepareFetchData(input poAction as ServiceMessageActionEnum,
+                                           input poRequest as ITableRequest,
                                            input poDAO as IDataAccess):
         define variable cWhereClause as character no-undo.
-        define variable hABLDataSource as handle no-undo.
         define variable oDSQuery as IQuery no-undo.
         
         /* We want to add any extra filter/paging etc data from the request to the base query */
-        oDSQuery = cast(ABLDataSources:Get(ServiceMessageActionEnum:FetchData), IQuery).
+        oDSQuery = cast(ABLDataSources:Get(poAction), IQuery).
         
-        FilterQueryPerRequest(ServiceMessageActionEnum:FetchData, cast(oDSQuery, DataSourceQuery), poRequest, poDAO).
-        oDSQuery:Prepare().
-        
+        FilterQueryPerRequest(poAction, cast(oDSQuery, DataSourceQuery), poRequest, poDAO).
+
         /* If there is more than one buffer in the query, set the QUERY attribute on the ABL DATA-SOURCE.
            If not, we'll set the FILL-WHERE-STRING if applicable. In all likelihood, we will have some form
-           of filtering in 10.,2B at any rate, because of multi-tenancy having to be enforced in the application
+           of filtering in 10.2B at any rate, because of multi-tenancy having to be enforced in the application
            (ie here) */
         if oDSQuery:Definition:NumBuffers gt 1 then
+        do:
             cast(oDSQuery, DataSourceQuery):ABLDataSource:query = oDSQuery:QueryHandle.
+            AttachDataStoreToTarget(poAction).
+            cast(oDSQuery, DataSourceQuery):Prepare(poAction).
+        end.            
         else
         do:
-            cWhereClause = oDSQuery:Definition:GetFilter(poDAO:ResolveTableName(poRequest:TableName)).
+            AttachDataStoreToTarget(poAction).
             
+            cWhereClause = oDSQuery:Definition:GetFilter(poDAO:ResolveTableName(poRequest:TableName)).
             if cWhereClause ne '' then
                 cast(oDSQuery, DataSourceQuery):ABLDataSource:fill-where-string = ' where ' + cWhereClause.
         end.
@@ -164,18 +184,22 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         
         @param ITableRequest The current request
         @param IDataAccess The data access object making the request */
-    method protected void PrepareSaveData(input poRequest as ITableRequest,
+    method protected void PrepareSaveData(input poAction as ServiceMessageActionEnum,
+                                          input poRequest as ITableRequest,
                                           input poDAO as IDataAccess):
         define variable oDSQuery as IQuery no-undo.
-        
-        oDSQuery = cast(ABLDataSources:Get(ServiceMessageActionEnum:SaveData), IQuery).
+
+        oDSQuery = cast(ABLDataSources:Get(poAction), IQuery).
         
         /* If there is more than one buffer in the query, set the QUERY attribute on the ABL DATA-SOURCE.
            If not, we'll set the SAVE-WHERE-STRING if applicable. In all likelihood, we will have some form
            of filtering in 10.,2B at any rate, because of multi-tenancy having to be enforced in the application
            (ie here) */ 
         if oDSQuery:Definition:NumBuffers gt 1 then
+        do:
             cast(oDSQuery, DataSourceQuery):ABLDataSource:query = oDSQuery:QueryHandle.
+            AttachDataStoreToTarget(poAction).
+        end.
     end method.
     
     /** Perform fetch: populate the previously-passed buffer from the
@@ -366,11 +390,6 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
             /* The key filters have a &1 as a field value, for just this purpose. */
             cWhereString = cWhereString + substitute(oFilter:ToString(), cFieldValue).
         end.
-        
-        message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
-        cWhereString
-        
-        view-as alert-box error title '[PJ DEBUG]'.
         
         return cWhereString.
     end method.
@@ -606,11 +625,6 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                 hField = hBuffer:buffer-field(TenantFilterFieldName) no-error.
                 error-status:error = no.
                 
-                message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
-                hBuffer:name 'has tenant = ' valid-handle(hField) 
-                
-                view-as alert-box error title '[PJ DEBUG]'.
-                
                 if valid-handle(hField) then
                     oFilter = new QueryFilter(
                                     hBuffer:name,
@@ -636,10 +650,10 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
             /* Create a buffer with a unique name, since we don't know where this DataSource will be used,
                nor how. So to aviod error 12298 we give the buffer a unique name */
             create buffer hBuffer for table PrimaryTable 
-                buffer-name substitute('ds_&1_&2_&3',
+                buffer-name substitute('&1_&2-&3',
+                             PrimaryTable:name,
                              string(hABLDataSource),
-                             string(int(ServiceMessageActionEnum:FetchData)),
-                             PrimaryTable:name).
+                             string(int(ServiceMessageActionEnum:FetchData))).
             hABLDataSource:add-source-buffer(hBuffer, hBuffer:keys).
             
             ABLDataSources:Put(ServiceMessageActionEnum:FetchData, 
@@ -653,10 +667,10 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
             /* Create a buffer with a unique name, since we don't know where this DataSource will be used,
                nor how. So to aviod error 12298 we give the buffer a unique name */
             create buffer hBuffer for table PrimaryTable 
-                buffer-name substitute('ds_&1_&2_&3',
+                buffer-name substitute('&1_&2-&3',
+                             PrimaryTable:name,
                              string(hABLDataSource),
-                             string(int(ServiceMessageActionEnum:SaveData)),
-                             PrimaryTable:name).
+                             string(int(ServiceMessageActionEnum:FetchData))).
             hABLDataSource:add-source-buffer(hBuffer, hBuffer:keys).
             
             ABLDataSources:Put(ServiceMessageActionEnum:SaveData, 
@@ -681,8 +695,11 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
     
     method override protected void AttachDataStoreToTarget(input poServiceMessageAction as ServiceMessageActionEnum):
         define variable hABLDataSource as handle no-undo.
+        define variable oDSQuery as DataSourceQuery no-undo.
         
-        hABLDataSource = cast(ABLDataSources:Get(poServiceMessageAction), DataSourceQuery):ABLDataSource. 
+        oDSQuery = cast(ABLDataSources:Get(poServiceMessageAction), DataSourceQuery). 
+        hABLDataSource = oDSQuery:ABLDataSource.
+        
         hABLDataSource:prefer-dataset = true.
         TargetBuffer:attach-data-source(hABLDataSource).
         

@@ -13,10 +13,10 @@
   ---------------------------------------------------------------------- */
 using OpenEdge.DataSource.IDataSource.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
 
 using OpenEdge.Lang.Collections.IMap.
 
