@@ -17,15 +17,15 @@ using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
-using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
 
 using OpenEdge.Core.System.EventArgs.
 using OpenEdge.Core.System.IQueryDefinition.

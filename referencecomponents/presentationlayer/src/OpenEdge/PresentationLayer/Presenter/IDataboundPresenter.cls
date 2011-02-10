@@ -17,11 +17,11 @@ using OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs.
 using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
 using OpenEdge.PresentationLayer.Common.DataFetchEventArgs.
 
-using OpenEdge.CommonInfrastructure.UpdateActionEnum.
-using OpenEdge.CommonInfrastructure.IComponentCollection.
-using OpenEdge.CommonInfrastructure.IComponent.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.Common.IComponentCollection.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.Core.System.EventArgs.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Lang.FindTypeEnum.

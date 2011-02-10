@@ -19,30 +19,30 @@ using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
-using OpenEdge.CommonInfrastructure.ServiceTypeEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableContext.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.FetchRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.TableRequestTypeEnum.
+using OpenEdge.CommonInfrastructure.Client.ServiceTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableContext.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IMessageConsumer.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
 
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.IComponentInfo. 
-using OpenEdge.CommonInfrastructure.Service.
-using OpenEdge.CommonInfrastructure.IComponent.
-using OpenEdge.CommonInfrastructure.IServiceMessageManager.
-using OpenEdge.CommonInfrastructure.CommonServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo. 
+using OpenEdge.CommonInfrastructure.Common.Service.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
 
 using OpenEdge.Core.System.ITableOwner.
 using OpenEdge.Core.System.IQueryDefinition.
@@ -77,8 +77,8 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
     define protected property ServiceMessageManager as IServiceMessageManager no-undo
         get():
             if not valid-object(ServiceMessageManager) then
-                ServiceMessageManager = cast(ServiceManager:GetService(CommonServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
-            
+                ServiceMessageManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ServiceMessageManager:IServiceMessageManagerType)
+                                          , IServiceMessageManager).
             return ServiceMessageManager.
         end get.
         private set.
@@ -265,7 +265,7 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
         super:CreateComponent().
         
         TableContexts = new TypedMap(String:Type,
-                                     Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ITableContext')).
+                                     Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext')).
         
         ModelQueries = new IModelQueryCollection().
     end method.

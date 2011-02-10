@@ -30,23 +30,23 @@ using OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs.
 using OpenEdge.PresentationLayer.Common.UndoActionEventArgs.
 using OpenEdge.PresentationLayer.Common.DataFetchEventArgs.
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceMessage.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IMessageConsumer.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageConsumerCollection.
 
-using OpenEdge.CommonInfrastructure.IServiceMessageManager.
-using OpenEdge.CommonInfrastructure.CommonServiceMessageManager. 
-using OpenEdge.CommonInfrastructure.UpdateActionEnum.
-using OpenEdge.CommonInfrastructure.UpdateActionEnum.
-using OpenEdge.CommonInfrastructure.IServiceCollection.
-using OpenEdge.CommonInfrastructure.IComponent.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.ComponentInfo.
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IMessageConsumer.
+using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager. 
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.ComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IMessageConsumer.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.EventArgs.
@@ -80,7 +80,8 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
     define protected property ServiceMessageManager as IServiceMessageManager no-undo
         get():
             if not valid-object(ServiceMessageManager) then
-                ServiceMessageManager = cast(ServiceManager:GetService(CommonServiceMessageManager:ServiceMessageManagerType), IServiceMessageManager).
+                ServiceMessageManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ServiceMessageManager:IServiceMessageManagerType)
+                                          , IServiceMessageManager).
             
             return ServiceMessageManager.
         end get.
@@ -111,7 +112,7 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
         Models = new IServiceCollection().        
         ServiceRequests = new TypedMap(
                               String:Type, 
-                              Class:GetClass('OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageConsumerCollection')).
+                              Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageConsumerCollection')).
     end method.
     
     /** Add a Model to the Presenter.

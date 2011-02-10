@@ -14,8 +14,8 @@ using OpenEdge.PresentationLayer.View.IContainedView.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
-using OpenEdge.CommonInfrastructure.IComponentInfo.   
-using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.   
+using OpenEdge.CommonInfrastructure.Common.IComponent.
 
 using OpenEdge.Lang.ABLSession.
 using Progress.Lang.Class.

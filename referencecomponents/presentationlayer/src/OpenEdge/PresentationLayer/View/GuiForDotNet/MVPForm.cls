@@ -22,9 +22,9 @@ using OpenEdge.PresentationLayer.View.EventLoopModeEnum.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
  
-using OpenEdge.CommonInfrastructure.IComponent.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 using System.Windows.Forms.Control.
 using System.Windows.Forms.FormClosingEventArgs.

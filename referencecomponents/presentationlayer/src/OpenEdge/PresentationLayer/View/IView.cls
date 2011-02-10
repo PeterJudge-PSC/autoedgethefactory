@@ -8,7 +8,7 @@
     Notes       : 
   ----------------------------------------------------------------------*/
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.                                
 
 using Progress.Lang.Class.

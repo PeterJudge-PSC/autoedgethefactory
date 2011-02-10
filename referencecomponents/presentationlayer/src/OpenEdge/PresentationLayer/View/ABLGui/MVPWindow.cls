@@ -20,9 +20,9 @@ using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
 using OpenEdge.PresentationLayer.Common.DialogResultEnum.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 
-using OpenEdge.CommonInfrastructure.IComponent.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.Core.System.InvalidActionError.
  
 using Progress.Lang.Object.
@@ -45,11 +45,11 @@ class OpenEdge.PresentationLayer.View.ABLGui.MVPWindow abstract
                 dynamic-function('setPresenter' in WindowHandle, poPresenter).
         end set.
 
-    define public property ComponentInfo as OpenEdge.CommonInfrastructure.IComponentInfo no-undo 
+    define public property ComponentInfo as OpenEdge.CommonInfrastructure.Common.IComponentInfo no-undo 
     get():
         undo, throw new Progress.Lang.AppError("Property getter for ComponentInfo has not been implemented").
     end get.
-    private set(input arg as OpenEdge.CommonInfrastructure.IComponentInfo):
+    private set(input arg as OpenEdge.CommonInfrastructure.Common.IComponentInfo):
         undo, throw new Progress.Lang.AppError("Property setter for ComponentInfo has not been implemented").        
     end set.
      
