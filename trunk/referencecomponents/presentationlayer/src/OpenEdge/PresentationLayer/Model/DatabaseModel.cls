@@ -10,8 +10,8 @@
 {routinelevel.i}
 
 using OpenEdge.PresentationLayer.Model.Model.
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
  
 class OpenEdge.PresentationLayer.Model.DatabaseModel  abstract 
         inherits Model:

@@ -9,7 +9,7 @@
  ----------------------------------------------------------------------*/
 {routinelevel.i}
 
-using OpenEdge.CommonInfrastructure.UpdateActionEnum.  
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.  
 using OpenEdge.PresentationLayer.Presenter.DataboundPresenter.
 using OpenEdge.PresentationLayer.Presenter.IDataboundPresenter.
 using OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter.
@@ -21,9 +21,9 @@ using OpenEdge.PresentationLayer.Common.ISelectToolbarAction.
 using OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs.
 using OpenEdge.PresentationLayer.Common.UpdatePanelEventArgs.
 
-using OpenEdge.CommonInfrastructure.IComponent.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 
 using OpenEdge.Core.System.IQuery.
 using OpenEdge.Lang.EnumMember.

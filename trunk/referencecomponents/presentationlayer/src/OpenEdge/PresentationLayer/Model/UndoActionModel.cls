@@ -10,8 +10,8 @@
 {routinelevel.i}
 
 using OpenEdge.PresentationLayer.Model.DatasetModel.
-using OpenEdge.CommonInfrastructure.IServiceManager.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using Progress.Lang.Object.
 
 class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
@@ -20,7 +20,7 @@ class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
         field QueryName as character
         field BufferName as character 
         field ModelService as Object    /* IComponentInfo */
-        field UndoActionType as Object /* OpenEdge.CommonInfrastructure.UpdateActionEnum:EnumMember */
+        field UndoActionType as Object /* OpenEdge.CommonInfrastructure.Common.UpdateActionEnum:EnumMember */
         field Order as integer
         index idx1 as primary unique ModelService QueryName BufferName Order
         .

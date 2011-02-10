@@ -15,7 +15,7 @@ using OpenEdge.PresentationLayer.Model.IModel.
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
 
-using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.ITableOwner.

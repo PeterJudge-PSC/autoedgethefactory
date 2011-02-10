@@ -13,7 +13,7 @@
 
 using OpenEdge.PresentationLayer.Common.ModelErrorEventArgs.
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 
 using OpenEdge.Core.System.EventArgs.
 using OpenEdge.Lang.Assert.

@@ -9,8 +9,8 @@
   ---------------------------------------------------------------------- */
 {routinelevel.i}
 
-using OpenEdge.CommonInfrastructure.UpdateActionEnum.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.Core.System.EventArgs.
 using Progress.Lang.Class.
 

@@ -9,7 +9,7 @@
   ----------------------------------------------------------------------*/
 {routinelevel.i}
 
-using OpenEdge.CommonInfrastructure.InjectABL.ManagerScope.
+using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope.
 using OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 using OpenEdge.Core.InjectABL.Binding.Conditions.IConditionSyntax.
@@ -30,7 +30,7 @@ class OpenEdge.PresentationLayer.InjectABL.PresentationLayerModule inherits Inje
         oBindingSyntax = Bind('OpenEdge.PresentationLayer.Presenter.INavigationPanelPresenter').
         oBindingSyntax:To('OpenEdge.PresentationLayer.Presenter.NavigationPanelPresenter')
             :InTransientScope()
-            :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
+            :Using('OpenEdge.CommonInfrastructure.Common.InjectABL.ServiceProvider')
             .
         
         oBindingSyntax = Bind('OpenEdge.PresentationLayer.View.INavigationPanel').
@@ -43,7 +43,7 @@ class OpenEdge.PresentationLayer.InjectABL.PresentationLayerModule inherits Inje
         oBindingSyntax = Bind('OpenEdge.PresentationLayer.Presenter.IUpdatePanelPresenter').
         oBindingSyntax:To('OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter')
             :InTransientScope()
-            :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
+            :Using('OpenEdge.CommonInfrastructure.Common.InjectABL.ServiceProvider')
             :WithMethodValue('AddModel',
                              Class:GetClass('OpenEdge.PresentationLayer.Model.UndoActionModel'),
                              Class:GetClass('Progress.Lang.Class'))
@@ -59,7 +59,7 @@ class OpenEdge.PresentationLayer.InjectABL.PresentationLayerModule inherits Inje
         oBindingSyntax = Bind('OpenEdge.PresentationLayer.Model.UndoActionModel').
         oBindingSyntax:ToSelf()
             :InTransientScope()
-            :Using('OpenEdge.CommonInfrastructure.InjectABL.ServiceProvider')
+            :Using('OpenEdge.CommonInfrastructure.Common.InjectABL.ServiceProvider')
 /*            :WithPropertyValue('ServiceName','OpenEdge.BusinessComponent.Entity.IBusinessEntity')*/
             .
     end method.

@@ -12,7 +12,7 @@
 
 using OpenEdge.PresentationLayer.Common.ModelActionEnum .
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.
-using OpenEdge.CommonInfrastructure.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using Progress.Lang.Class.
 
 

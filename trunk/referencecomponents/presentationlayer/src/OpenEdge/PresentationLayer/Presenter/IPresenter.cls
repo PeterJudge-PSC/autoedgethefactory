@@ -15,10 +15,10 @@ using OpenEdge.PresentationLayer.View.IContainedView.
 using OpenEdge.PresentationLayer.Common.DialogResultEnum.
 using OpenEdge.PresentationLayer.Common.CloseReasonEnum.
 
-using OpenEdge.CommonInfrastructure.IComponentInfo.
-using OpenEdge.CommonInfrastructure.IServiceCollection.
-using OpenEdge.CommonInfrastructure.Component.
-using OpenEdge.CommonInfrastructure.IService.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+using OpenEdge.CommonInfrastructure.Common.IServiceCollection.
+using OpenEdge.CommonInfrastructure.Common.Component.
+using OpenEdge.CommonInfrastructure.Common.IService.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
