@@ -11,10 +11,10 @@ using OpenEdge.DataSource.IDataSource.
 using OpenEdge.DataSource.DataSourceEventArgs.
 using OpenEdge.DataAccess.IDataAccess.  
 
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableRequest.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ITableResponse.
-using OpenEdge.CommonInfrastructure.ServiceMessage.DataFormatEnum.
-using OpenEdge.CommonInfrastructure.ServiceMessage.ServiceMessageActionEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.DataFormatEnum.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Lang.DataTypeEnum.
