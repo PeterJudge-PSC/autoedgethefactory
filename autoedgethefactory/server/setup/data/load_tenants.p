@@ -12,7 +12,7 @@
   ----------------------------------------------------------------------*/
 
 /* ***************************  Definitions  ************************** */
-/*routine-level on error undo, throw.*/
+{routinelevel.i}
 
 define buffer lbParent for Tenant.
 
@@ -22,7 +22,7 @@ define variable cBrand as character no-undo.
 define variable iLoop as integer no-undo.
 define variable iMax as integer no-undo.
 
-cTenants = 'genericmotors|h2omotors|hinda|toyola|h2omotors:scubaroo|h2omotors:fjord|genericmotors:potomoc|genericmotors:chery'.
+cTenants = 'motorgroupeast:genericmotors|motorgroupeast:h2omotors|motorgroupeast:hinda|motorgroupeast:toyola|h2omotors:scubaroo|h2omotors:fjord|genericmotors:potomoc|genericmotors:chery'.
 
 find first Locale no-lock.
 

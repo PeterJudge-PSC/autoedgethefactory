@@ -9,7 +9,7 @@
 <propathentry env="all" kind="folder" path="\Support\bin"/>
 <propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\src"/>
 <propathentry env="all" kind="folder" path="\Presentation Layer\src"/>
-<propathentry env="all" kind="folder" path="\Common Infrastructure Server\src"/>
+<propathentry env="all" kind="folder" path="\Enterprise Services\src"/>
 <propathentry env="all" kind="folder" path="\Common Infrastructure Client\src"/>
 <propathentry env="all" kind="folder" path="\Common Infrastructure Shared\src"/>
 <propathentry env="all" kind="folder" path="\Support\src"/>

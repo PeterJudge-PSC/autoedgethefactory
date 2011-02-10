@@ -9,13 +9,13 @@
   ---------------------------------------------------------------------- */
 {routinelevel.i}
 
-using AutoEdge.Factory.InjectABL.FactoryCommonModule.
+using AutoEdge.Factory.Common.InjectABL.CommonModule.
 using OpenEdge.Core.InjectABL.IKernel.
 
 /** -- defs  -- **/
 define input parameter poKernel as IKernel no-undo.
 
 /** -- main -- **/
-poKernel:Load(new FactoryCommonModule()).
+poKernel:Load(new CommonModule()).
 
 /** -- eof -- **/

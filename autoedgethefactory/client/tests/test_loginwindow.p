@@ -11,12 +11,12 @@
     Notes       :
   ----------------------------------------------------------------------*/
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
-using OpenEdge.CommonInfrastructure.IServiceManager. 
-using OpenEdge.CommonInfrastructure.IService.
-using OpenEdge.CommonInfrastructure.IComponent.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager. 
+using OpenEdge.CommonInfrastructure.Common.IService.
+using OpenEdge.CommonInfrastructure.Common.IComponent.
  
-using OpenEdge.CommonInfrastructure.InjectABL.CommonInfrastructureModule.
-using OpenEdge.CommonInfrastructure.InjectABL.ComponentKernel.
+using OpenEdge.CommonInfrastructure.Common.InjectABL.CommonInfrastructureModule.
+using OpenEdge.CommonInfrastructure.Common.InjectABL.ComponentKernel.
 using OpenEdge.Core.InjectABL.IKernel.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.  
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameterCollection.
@@ -37,7 +37,7 @@ oModules:Add(new CommonInfrastructureModule()).
 /*oModules:Add(new TestPresenterModule()).*/
 oInjectABLKernel = new ComponentKernel(oModules).
 
-oServiceManager = cast(oInjectABLKernel:Get('OpenEdge.CommonInfrastructure.IServiceManager')
+oServiceManager = cast(oInjectABLKernel:Get('OpenEdge.CommonInfrastructure.Common.IServiceManager')
                     , IServiceManager).
 
 oLoginWindow = cast(oServiceManager:StartService(Class:GetClass('OpenEdge.CommonInfrastructure.IApplicationLogin'))

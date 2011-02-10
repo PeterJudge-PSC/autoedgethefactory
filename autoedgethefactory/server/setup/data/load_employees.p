@@ -13,7 +13,7 @@
 
 /* ***************************  Definitions  ************************** */
 
-/*routine-level on error undo, throw.*/
+{routinelevel.i}
 
 /* ********************  Preprocessor Definitions  ******************** */
 function getRandom returns character (input cValueList as character):
@@ -33,6 +33,7 @@ define variable iNumDepts as integer no-undo.
 define query qryTenant for Tenant scrolling.
 define query qryAddresses for AddressDetail scrolling.
 define query qryDepartment for Department scrolling.
+define query qryDealer for Dealer scrolling.
 
 open query qryAddresses preselect each AddressDetail.
 iNumAddresses = query qryAddresses:num-results - 1.
@@ -45,57 +46,63 @@ run loadDepartments.
 open query qryDepartment preselect each Department where Department.ParentDepartmentId = '' no-lock.
 iNumDepts = query qryDepartment:num-results - 1.
 
-
 run loadEmployees.
 
 procedure loadEmployees:
-define variable iLoop as integer no-undo.
-define variable iMax as integer no-undo.
-define variable cLastNames as character no-undo.
-define variable cMiddleNames as character no-undo.
-define variable cFirstNamesMale as character no-undo.
-define variable cFirstNamesFemale as character no-undo.
-define variable cSalutationsMale as character no-undo.
-define variable cSalutationsFemale as character no-undo.
-define variable cNotes as character no-undo.
-define variable cEmailAddress as character no-undo.
-
-iMax = 20.
-
-cLastNames = "Miller|Anderson|Higgins|Gant|Jones|Smith|Johnson|Moore|Taylor|Jackson|Harris|Martin|Garcia|Martinez|Robinson|Lewis|Lee|Walker|Baker|Nelson|Carter|Roberts|Tuner|Parker|Evans|Collins|Stewart|Murphy|Cooper|Richardson|Cox|Howard|Geller|Bing|Ward|Torres|Peterson|Gray|Ramirez|James|Watson|Brooks|Kelly|Sanders|Price|Bennet|Wood|Barnes|Ross|Henderson|Coleman|Jenkins|Perry|Powell|Long|Patterson|Hughes|Flores|Washington|Butler|Simmons|Foster|Gonzales|Alexander|Hayes|Myers|Ford|Hamilton|Graham|Sullivan|Wallace|Woods|West|Jordan|Reynolds|Marshall|Freeman|Wells|Webbs|Simpson|Stevens|Tucker|Porter|Hunter|Hicks|Crawford|Kennedy|Burns|Shaw|Holmes|Robertson|Hunt|Black|Palmer|Rose|Spencer|Pierce|Wagner".
-cMiddleNames = "A.|B.|M.|N.|L.||".
-cFirstNamesMale = "John|Robert|Mike|David|Richard|Thomas|Chris|Paul|Mark|Donald|Steve|Anthony|Larry|Frank|Scott|Eric|Greg|Patrick|Peter|Carl|Arthur|Joe|Jack|Justin|Keith".
-cFirstNamesFemale = "Mary|Linda|Barbara|Susan|Margaret|Lisa|Nancy|Betty|Helen|Donna|Carol|Laura|Sarah|Jessica|Melissa|Brenda|Amy|Rebecca|Martha|Amanda|Janet|Ann|Joyce|Diane|Alice|Julie|Heather|Evelyn|Kelly".
-cSalutationsMale = "Mr.|Mr.|Mr.|Mr.|Mr.|Mr.|Dr.".
-cSalutationsFemale = "Ms.|Miss|Ms.|Miss|Ms.|Miss|Dr.".
-cNotes = "Some note|Another note|No note|||||".
-cEmailAddress = "@aol.com|@mail.com|@progress.com|@company.com".
-
-do iLoop = 1 to iMax:
-    reposition qryTenant to row random(0, iNumTenants).
-    get next qryTenant no-lock.
-
-    reposition qryDepartment to row random(0, iNumDepts).
-    get next qryDepartment no-lock.
-
-    create Employee.
-    assign Employee.Birthdate = date(random(1,12), random(1,28), random(1950, 1980))
-           Employee.DepartmentId = Department.DepartmentId
-           Employee.EmployeeId = guid(generate-uuid)
-           Employee.EmpNum = iLoop + 100
-           Employee.FirstName = (if iLoop mod 2 eq 0 then getRandom(cFirstNamesFemale) else getRandom(cFirstNamesMale))  
-           Employee.LastName = getRandom(cLastNames)
-           Employee.Position = Department.Name
-           Employee.SickDaysLeft = random(0, 12)
-           Employee.StartDate = date(random(1,12), random(1,28), random(2005, 2010))
-           Employee.TenantId = Tenant.TenantId
-           Employee.VacationDaysLeft = random(0, 43)
-           .
-    reposition qryAddresses to row random(0, iNumAddresses).
-    get next qryAddresses no-lock.
-           
-    run AddHomeAddress(Employee.EmployeeId, Employee.TenantId, AddressDetail.AddressDetailId).        
-end.
+    define variable iLoop as integer no-undo.
+    define variable iMax as integer no-undo.
+    define variable cLastNames as character no-undo.
+    define variable cMiddleNames as character no-undo.
+    define variable cFirstNamesMale as character no-undo.
+    define variable cFirstNamesFemale as character no-undo.
+    define variable cSalutationsMale as character no-undo.
+    define variable cSalutationsFemale as character no-undo.
+    define variable cNotes as character no-undo.
+    define variable cEmailAddress as character no-undo.
+    
+    iMax = 50.
+    
+    cLastNames = "Miller|Anderson|Higgins|Gant|Jones|Smith|Johnson|Moore|Taylor|Jackson|Harris|Martin|Garcia|Martinez|Robinson|Lewis|Lee|Walker|Baker|Nelson|Carter|Roberts|Tuner|Parker|Evans|Collins|Stewart|Murphy|Cooper|Richardson|Cox|Howard|Geller|Bing|Ward|Torres|Peterson|Gray|Ramirez|James|Watson|Brooks|Kelly|Sanders|Price|Bennet|Wood|Barnes|Ross|Henderson|Coleman|Jenkins|Perry|Powell|Long|Patterson|Hughes|Flores|Washington|Butler|Simmons|Foster|Gonzales|Alexander|Hayes|Myers|Ford|Hamilton|Graham|Sullivan|Wallace|Woods|West|Jordan|Reynolds|Marshall|Freeman|Wells|Webbs|Simpson|Stevens|Tucker|Porter|Hunter|Hicks|Crawford|Kennedy|Burns|Shaw|Holmes|Robertson|Hunt|Black|Palmer|Rose|Spencer|Pierce|Wagner".
+    cMiddleNames = "A.|B.|M.|N.|L.||".
+    cFirstNamesMale = "John|Robert|Mike|David|Richard|Thomas|Chris|Paul|Mark|Donald|Steve|Anthony|Larry|Frank|Scott|Eric|Greg|Patrick|Peter|Carl|Arthur|Joe|Jack|Justin|Keith".
+    cFirstNamesFemale = "Mary|Linda|Barbara|Susan|Margaret|Lisa|Nancy|Betty|Helen|Donna|Carol|Laura|Sarah|Jessica|Melissa|Brenda|Amy|Rebecca|Martha|Amanda|Janet|Ann|Joyce|Diane|Alice|Julie|Heather|Evelyn|Kelly".
+    cSalutationsMale = "Mr.|Mr.|Mr.|Mr.|Mr.|Mr.|Dr.".
+    cSalutationsFemale = "Ms.|Miss|Ms.|Miss|Ms.|Miss|Dr.".
+    cNotes = "Some note|Another note|No note|||||".
+    cEmailAddress = "@aol.com|@mail.com|@progress.com|@company.com".
+    
+    do iLoop = 1 to iMax:
+        reposition qryTenant to row random(0, iNumTenants).
+        get next qryTenant no-lock.
+    
+        reposition qryDepartment to row random(0, iNumDepts).
+        get next qryDepartment no-lock.
+        
+        open query qryDealer preselect each Dealer where Dealer.TenantId = Tenant.TenantId no-lock.
+        reposition qryDealer to row random(0, query qryDealer:num-results - 1).
+        get next qryDealer no-lock.
+                
+        create Employee.
+        assign Employee.Birthdate = date(random(1,12), random(1,28), random(1950, 1980))
+               Employee.DepartmentId = Department.DepartmentId
+               Employee.EmployeeId = guid(generate-uuid)
+               Employee.EmpNum = iLoop + 100
+               Employee.FirstName = (if iLoop mod 2 eq 0 then getRandom(cFirstNamesFemale) else getRandom(cFirstNamesMale))  
+               Employee.LastName = getRandom(cLastNames)
+               Employee.Position = Department.Name
+               Employee.SickDaysLeft = random(0, 12)
+               Employee.StartDate = date(random(1,12), random(1,28), random(2005, 2010))
+               Employee.TenantId = Tenant.TenantId
+               Employee.VacationDaysLeft = random(0, 43)
+               Employee.DealerId = Dealer.DealerId
+               .
+        close query qryDealer.
+        
+        reposition qryAddresses to row random(0, iNumAddresses).
+        get next qryAddresses no-lock.
+               
+        run AddHomeAddress(Employee.EmployeeId, Employee.TenantId, AddressDetail.AddressDetailId).        
+    end.
 end procedure.
 
 procedure AddHomeAddress:
@@ -120,8 +127,8 @@ procedure loadDepartments:
     define variable cCode as character no-undo.
     
     define buffer lbDept for Department.
-        
-    cNames = 'admin|field|admin:finance|field:sales|admin:hr|field:support'.
+    
+    cNames = 'admin|field|admin:finance|field:sales|admin:hr|field:support|factory'.
     iMax = num-entries(cNames, '|').
     
     for each Tenant no-lock:
@@ -147,6 +154,3 @@ procedure loadDepartments:
         end.
     end.
 end procedure.
-
-
-

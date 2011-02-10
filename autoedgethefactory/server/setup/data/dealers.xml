@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dealers>
+    <brand name="Hinda">
+        <dealer code="dealer01">
+            <name>Stiller Motors Inc. (Dealer #1)</name>
+            <Address1>14 Oak Park</Address1>
+            <Address2/>
+            <City>Bedford</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@stillerinc.com</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>01730</ZIP>
+            <State>MA</State>
+            <Phone>781-555-4444</Phone>
+        </dealer>
+    </brand>
+    <brand name="Toyola">
+        <dealer code="dealer01">
+            <name>Stiller Motors Inc. (Dealer #1)</name>
+            <Address1>14 Oak Park</Address1>
+            <Address2/>
+            <City>Bedford</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@stillerinc.com</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>01730</ZIP>
+            <State>MA</State>
+            <Phone>781-555-4444</Phone>
+        </dealer>
+    </brand>
+    <brand name="Chery">
+        <dealer code="dealer02">
+            <name>Roth Brothers Corp. (Dealer #2)</name>
+            <Address1>14 Summer Street</Address1>
+            <Address2/>
+            <City>Waltham</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@rothcars.com</SalesEmail>
+            <Fax>781-555-5678</Fax>
+            <Mobile/>
+            <ZIP>02452</ZIP>
+            <State>MA</State>
+            <Phone>781-544-3333</Phone>
+        </dealer>
+    </brand>
+    <brand name="Potomoc">
+        <dealer code="dealer02">
+            <name>Roth Brothers Corp. (Dealer #2)</name>
+            <Address1>14 Summer Street</Address1>
+            <Address2/>
+            <City>Waltham</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@rothcars.com</SalesEmail>
+            <Fax>781-555-5678</Fax>
+            <Mobile/>
+            <ZIP>02452</ZIP>
+            <State>MA</State>
+            <Phone>781-544-3333</Phone>
+        </dealer>
+    </brand>
+    <brand name="Fjord">
+        <dealer code="dealer03">
+            <name>Merriweather, Field &amp; Snowe (Dealer #3)</name>
+            <Address1>27 Industrial Park Road</Address1>
+            <Address2/>
+            <City>Malden</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@merriweatherfieldsnowe.com</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>02020</ZIP>
+            <State>MA</State>
+            <Phone>781-555-0001</Phone>
+        </dealer>
+    </brand>
+    <brand name="Scubaroo">
+        <dealer code="dealer03">
+            <name>Merriweather, Field &amp; Snowe (Dealer #3)</name>
+            <Address1>27 Industrial Park Road</Address1>
+            <Address2/>
+            <City>Malden</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@merriweatherfieldsnowe.com</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>02020</ZIP>
+            <State>MA</State>
+            <Phone>781-555-0001</Phone>
+        </dealer>
+    </brand>
+    <brand name="motorgroupeast">
+        <dealer code="HQ">
+            <name>AutoEdge HQ</name>
+            <Address1>Suite 42, Ninety-third Floor, One Verylarge Tower</Address1>
+            <Address2>1010 Tenth Ave</Address2>
+            <City>Boston</City>
+            <Country>USA</Country>
+            <SalesEmail>info@motorgroupeast.com</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <ZIP>02002</ZIP>
+            <State>MA</State>
+            <Phone>781-555-0001</Phone>            
+        </dealer>
+    </brand>
+</dealers>

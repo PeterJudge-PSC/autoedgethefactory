@@ -13,7 +13,7 @@
 
 /* ***************************  Definitions  ************************** */
 
-/*routine-level on error undo, throw.*/
+{routinelevel.i}
 
 /* ********************  Preprocessor Definitions  ******************** */
 function GetAddressId returns character 
@@ -89,17 +89,17 @@ do iloop = 1 to iMax:
     do:
         find StatusDetail where StatusDetail.Code = 'order-build-complete' no-lock.
         dorder = today - 3.
-    END.
+    end.
     else if iLoop < 66 then 
     do:
         find StatusDetail where StatusDetail.Code = 'order-build-start' no-lock.
         dOrder = (today - 2) .
-    END.
+    end.
     else 
     do:
         find StatusDetail where StatusDetail.Code = 'order-new' no-lock.
             dOrder = (today - 1).
-    END.
+    end.
 
     assign Order.OrderDate = dOrder
            Order.StatusId = StatusDetail.StatusDetailId
