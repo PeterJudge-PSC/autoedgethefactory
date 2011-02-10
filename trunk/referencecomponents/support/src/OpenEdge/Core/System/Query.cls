@@ -23,9 +23,11 @@ using OpenEdge.Core.System.InvalidValueSpecifiedError.
 using OpenEdge.Core.System.UnsupportedOperationError.
 
 using OpenEdge.Core.System.EventArgs.
+using OpenEdge.Core.System.QueryElementEnum.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.Collection.
+using OpenEdge.Lang.FlagsEnum.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.DataTypeEnum.
@@ -143,7 +145,17 @@ class OpenEdge.Core.System.Query use-widget-pool
             return oRowPosition.
         end get.
     
-    define protected property BuildQuery as logical no-undo get. set.       
+    /** Contains the query elements changed since the last time the query was built. */
+    define protected property QueryElementsChanged as integer no-undo get. set.
+    
+    define protected property BuildQuery as logical no-undo
+        get.
+        set(input plBuildQuery as logical):            
+            if plBuildQuery eq false then
+                QueryElementsChanged = 0.
+            
+            BuildQuery = plBuildQuery.
+        end set.
 
     /** 
         allows us to pass in an existing query def and use this class as a helper for repos, row key etc. 
@@ -174,6 +186,7 @@ class OpenEdge.Core.System.Query use-widget-pool
                 
         /* Obviously, we'll need to build the query at some point. */
         BuildQuery = true.
+        QueryElementsChanged = QueryElementsChanged + QueryElementEnum:Buffer:Value.
     end constructor.
     
     constructor public Query(input poTableOwner as ITableOwner,
@@ -618,11 +631,14 @@ class OpenEdge.Core.System.Query use-widget-pool
            
            This is a shortcut, since BuildQuery checks for this
            sort of thing. */
-        if poArgs:Element eq QueryElementEnum:Buffer and
+        if poArgs:Element:Equals(QueryElementEnum:Buffer) and
            not valid-object(TableOwner) then
             BuildQuery = false.
         else
+        do:
             BuildQuery = true.
+            QueryElementsChanged = QueryElementsChanged + poArgs:Element:Value.  
+        end.
     end.
     
     method protected void DeleteQuery():
@@ -657,12 +673,26 @@ class OpenEdge.Core.System.Query use-widget-pool
         Prepare(QueryHandle).
     end method.
     
-    method protected void Prepare(input phQuery as handle):        
+    method protected void Prepare(input phQuery as handle):
         /* Always prepare this query. */
         BuildQuery = true.
         BuildQuery(phQuery).
-                
-        phQuery:query-prepare(string(this-object:Definition:GetQueryString())).
+        
+        phQuery:query-prepare(string(this-object:Definition:GetQueryString())).                                      
+    end method.
+    
+    method protected void RemoveQueryBuffers(input phQuery as handle):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        
+        iMax = phQuery:num-buffers. 
+        
+        /* Clean up after ourselves. Note that this only removes the
+           named buffer used for the query, and not the underlying buffer
+           itself. */
+        do iLoop = 1 to iMax:
+            delete object phQuery:get-buffer-handle(iLoop).
+        end.
     end method.
     
     /** Construct and prepare a query based on the current query definition.
@@ -687,15 +717,14 @@ class OpenEdge.Core.System.Query use-widget-pool
            handle as a name (and probably does, in fact) so we don't want to mess 
            with that.
            
-           Don't touch the buffers if we aren't able to create them via a TableOwner. */
-        if valid-object(TableOwner) then
+           Don't touch the buffers if we aren't able to create them via a TableOwner.
+           
+           If any of the buffers in the definition have changed, remove all the buffers 
+           and re-create. */
+        if valid-object(TableOwner) and 
+           FlagsEnum:IsA(QueryElementsChanged, QueryElementEnum:Buffer) then
         do:
-            /* Clean up after ourselves. Note that this only removes the
-               named buffer used for the query, and not the underlying buffer
-               itself. */
-            do iExtent = 1 to phQuery:num-buffers:
-                delete object phQuery:get-buffer-handle(iExtent) no-error.
-            end.
+            RemoveQueryBuffers(phQuery).
             
             /* And now add the new buffer(s) */
             cBuffers = this-object:Definition:GetBufferList(output cTables,
@@ -703,6 +732,8 @@ class OpenEdge.Core.System.Query use-widget-pool
                                                             output oLockModes).
             do iExtent = 1 to extent(cBuffers):
                 hBuffer = GetQueryBuffer(cTables[iExtent], cBuffers[iExtent]).
+                
+                Assert:ArgumentNotNull(hBuffer, 'Buffer Handle for ' + cBuffers[iExtent]).
                 
                 if iExtent eq 1 then
                     phQuery:set-buffers(hBuffer).

@@ -30,11 +30,22 @@ class OpenEdge.Lang.Collections.Set inherits AbstractTTCollection implements ISe
     constructor public Set (copyset as ISet):
         super (cast(copyset,ICollection),temp-table ttSet:handle,"objectref").        
     end constructor.    
-       
-    method public override logical Contains(obj as Object):        
-        return can-find(first ttSet where ttSet.ObjectRef = obj).
+
+    method public override logical Contains( checkObject as Object):
+        define variable lContains as logical no-undo.
+        
+        if not valid-object(checkObject) then
+            return false.
+        
+        /* try by-reference first */
+        lContains = can-find(first ttSet where ttSet.ObjectRef = checkObject). 
+        for each ttSet while lContains = false:
+            lContains = ttSet.ObjectRef:Equals(checkObject).
+        end.
+        
+        return lContains.
     end method.
-    
+       
     method protected override void FindBufferUseObject (obj as Object):
         find ttSet where ttSet.objectref = obj no-error.
     end.

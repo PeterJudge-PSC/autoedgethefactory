@@ -23,8 +23,7 @@ class OpenEdge.Lang.FlagsEnum abstract inherits EnumMember:
         @param piValueSum Contains the value that is being checked to determine whether
         it contains a particular flag.
         @param poCheckEnum The flag being checked for inclusion.
-        @return Whether the value includes the specified member
-      */
+        @return Whether the value includes the specified member     */
     method static public logical IsA (piValueSum as int, poCheckEnum as EnumMember):
         define variable iPos as integer no-undo.
         define variable iVal as integer no-undo.

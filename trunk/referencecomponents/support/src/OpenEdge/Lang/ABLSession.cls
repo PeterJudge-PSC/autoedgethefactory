@@ -30,7 +30,8 @@ class OpenEdge.Lang.ABLSession:
         same every time; this gives us the opportunity to identify this session across all time and space */
     define public property Id as character no-undo get. private set.
     
-    /** A collection of user-defined properties */
+    /** A collection of user-defined properties. These
+        can be any key/value set of objects. */
     define public property SessionProperties as IMap no-undo get. private set.
     
     /** An optional session type identifier. Defaults to SESSION:CLIENT-TYPE, but we have

@@ -1,6 +1,6 @@
 /** ------------------------------------------------------------------------
     File        : IQueryDefinition
-    Purpose     : INterface for query definition: the decomposed parts of a query. 
+    Purpose     : Interface for query definition: the decomposed parts of a query. 
     Syntax      : 
     Description : 
     @author pjudge
@@ -35,6 +35,13 @@ interface OpenEdge.Core.System.IQueryDefinition:
                            
     define public property QueryBlockType as QueryBlockTypeEnum no-undo get. set.
     define public property NumBuffers as integer no-undo get.
+    
+    /** Indicates whether the query can join to tables outside of this query definition. This may
+        happen in some cases; for instance when dealing with DataSourceQuery objects which are used
+        for DATA-SOURCE queries for ProDataSets.
+        
+        An external join is assumed to apply only to the 2nd (JoinBuffer) buffer in the QueryJoin. */        
+    define public property AllowExternalJoins as logical no-undo get. set.
     
     /* Old-school */
     method public void ClearAll().

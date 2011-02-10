@@ -10,9 +10,9 @@
 
 /* ********************  Preprocessor Definitions  ******************** */
 &if defined(USE-ROUTINE-LEVEL) eq 0 &then
-    &global-define USE-ROUTINE-LEVEL true
+    &global-define USE-ROUTINE-LEVEL false
 &endif 
 
-&if "{&USE-ROUTINE-LEVEL}" eq "true" &then
+&if logical("{&USE-ROUTINE-LEVEL}") eq true &then
 routine-level on error undo, throw.
 &endif 

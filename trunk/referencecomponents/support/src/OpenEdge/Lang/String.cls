@@ -40,7 +40,7 @@ class OpenEdge.Lang.String
     constructor public String():
         super().        
     end constructor.
-    
+
     constructor public String(pcString as longchar):
         super().
         this-object:Value = pcString.
@@ -107,6 +107,23 @@ class OpenEdge.Lang.String
         end. 
         
         return cArray.
+    end method.
+    
+    method static public longchar Join(input poValue as OpenEdge.Lang.String extent,
+                                       input pcDelimiter as character):
+        define variable cJoinedString as longchar no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        
+        iMax = extent(poValue).
+        do iLoop = 1 to iMax:
+            if iLoop eq 1 then
+                cJoinedString = poValue[iLoop]:Value.
+            else
+                cJoinedString = cJoinedString + pcDelimiter + poValue[iLoop]:Value.
+        end.
+        
+        return cJoinedString.
     end method.
     
     method public handle ToHandle():
