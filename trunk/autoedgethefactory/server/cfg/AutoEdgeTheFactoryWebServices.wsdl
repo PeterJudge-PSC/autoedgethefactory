@@ -1,50 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="AutoEdgeTheFactoryWebServices" targetNamespace="urn:factory-autoedge-com" xmlns:tns="urn:factory-autoedge-com" xmlns:S2="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:prodata="urn:schemas-progress-com:xml-prodata:0001" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:S1="urn:soap-fault:details" xmlns="http://schemas.xmlsoap.org/wsdl/">
-<wsdl:documentation>Author=PSC, EncodingType=DOC_LITERAL, Proxygen_Product=Progress Version 10.2B</wsdl:documentation>
+<wsdl:documentation>Author=OpenEdge Best Practises, EncodingType=DOC_LITERAL, Proxygen_Product=Progress Version 10.2B</wsdl:documentation>
   <wsdl:types>
 <schema elementFormDefault="unqualified" targetNamespace="urn:soap-fault:details" xmlns="http://www.w3.org/2001/XMLSchema"><element name="FaultDetail"><complexType><sequence><element name="errorMessage" type="xsd:string"/><element name="requestID" type="xsd:string"/></sequence></complexType></element></schema>
-<schema elementFormDefault="qualified" targetNamespace="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices" xmlns="http://www.w3.org/2001/XMLSchema"><complexType name="DataSetHandleParam"><annotation><documentation>This is the schema definition for an OpenEdge dynamic ProDataSet parameter.  The first element in this sequence must be a w3c XML Schema document describing the definition of the ProDataSet.  The second element contains the serialized data.</documentation></annotation><sequence><any maxOccurs="2" minOccurs="2"/></sequence></complexType><element name="ListBrandData"><complexType><sequence><element name="pcBrand" nillable="true" type="xsd:string"/><element name="piOrderNum" nillable="true" type="xsd:int"/><element name="pcUserContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="ListBrandDataResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcDealerNameList" nillable="true" type="xsd:string"/><element name="pcCompactModels" nillable="true" type="xsd:string"/><element name="pcTruckModels" nillable="true" type="xsd:string"/><element name="pcSuvModels" nillable="true" type="xsd:string"/><element name="pcConvertibleModels" nillable="true" type="xsd:string"/><element name="pcSedanModels" nillable="true" type="xsd:string"/><element name="pcInteriorTrimMaterial" nillable="true" type="xsd:string"/><element name="pcInteriorTrimColour" nillable="true" type="xsd:string"/><element name="pcInteriorAccessories" nillable="true" type="xsd:string"/><element name="pcExteriorColour" nillable="true" type="xsd:string"/><element name="pcMoonroof" nillable="true" type="xsd:string"/><element name="pcWheels" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="CaptureVehicleOrder"><complexType><sequence><element name="piOrderNumber" nillable="true" type="xsd:int"/><element name="plOrderApproved" nillable="true" type="xsd:boolean"/><element name="pcCustomerName" nillable="true" type="xsd:string"/><element name="pcCustomerEmail" nillable="true" type="xsd:string"/><element name="pcBrand" nillable="true" type="xsd:string"/><element name="pcDealer" nillable="true" type="xsd:string"/><element name="pcModel" nillable="true" type="xsd:string"/><element name="pcInteriorTrimMaterial" nillable="true" type="xsd:string"/><element name="pcInteriorTrimColour" nillable="true" type="xsd:string"/><element name="pcInteriorAccessories" nillable="true" type="xsd:string"/><element name="pcExteriorColour" nillable="true" type="xsd:string"/><element name="pcMoonroof" nillable="true" type="xsd:string"/><element name="pcWheels" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="CaptureVehicleOrderResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcOrderId" nillable="true" type="xsd:string"/><element name="pdOrderAmount" nillable="true" type="xsd:decimal"/></sequence></complexType></element><element name="service_listorderstatus"><complexType><sequence><element name="pcContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="service_listorderstatusResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="phOrders" nillable="true" type="S2:DataSetHandleParam"/></sequence></complexType></element></schema>
+<schema elementFormDefault="qualified" targetNamespace="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices" xmlns="http://www.w3.org/2001/XMLSchema"><complexType name="DataSetHandleParam"><annotation><documentation>This is the schema definition for an OpenEdge dynamic ProDataSet parameter.  The first element in this sequence must be a w3c XML Schema document describing the definition of the ProDataSet.  The second element contains the serialized data.</documentation></annotation><sequence><any maxOccurs="2" minOccurs="2"/></sequence></complexType><complexType name="ListVehicleOrder_ttOrderRow"><sequence><element name="OrderId" nillable="true" type="xsd:string"/><element name="OrderApproved" nillable="true" type="xsd:boolean"/><element name="VehicleOnHand" nillable="true" type="xsd:boolean"/><element name="CustomerName" nillable="true" type="xsd:string"/><element name="CustomerEmail" nillable="true" type="xsd:string"/><element name="Brand" nillable="true" type="xsd:string"/><element name="DealerId" nillable="true" type="xsd:string"/><element name="Model" nillable="true" type="xsd:string"/><element name="InteriorTrimMaterial" nillable="true" type="xsd:string"/><element name="InteriorTrimColour" nillable="true" type="xsd:string"/><element name="InteriorAccessories" nillable="true" type="xsd:string"/><element name="ExteriorColour" nillable="true" type="xsd:string"/><element name="Moonroof" nillable="true" type="xsd:string"/><element name="Wheels" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ListVehicleOrder_ttOrderParam"><sequence><element maxOccurs="unbounded" minOccurs="0" name="ttOrderRow" type="S2:ListVehicleOrder_ttOrderRow"/></sequence></complexType><element name="PerformWorkstep"><complexType><sequence><element name="pcWorkFlowName" nillable="true" type="xsd:string"/><element name="pcWorkstepName" nillable="true" type="xsd:string"/><element name="pcOrderId" nillable="true" type="xsd:string"/><element name="pcUserContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="PerformWorkstepResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcBuildStatus" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="CustomerLogin"><complexType><sequence><element name="pcBrand" nillable="true" type="xsd:string"/><element name="pcUserName" nillable="true" type="xsd:string"/><element name="pcPassword" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="CustomerLoginResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcUserContextId" nillable="true" type="xsd:string"/><element name="pcCustomerId" nillable="true" type="xsd:string"/><element name="pcCustomerEmail" nillable="true" type="xsd:string"/><element name="pdCreditLimit" nillable="true" type="xsd:decimal"/></sequence></complexType></element><element name="ListBrandData"><complexType><sequence><element name="pcBrand" nillable="true" type="xsd:string"/><element name="piOrderNum" nillable="true" type="xsd:int"/><element name="pcUserContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="ListBrandDataResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcDealerNameList" nillable="true" type="xsd:string"/><element name="pcCompactModels" nillable="true" type="xsd:string"/><element name="pcTruckModels" nillable="true" type="xsd:string"/><element name="pcSuvModels" nillable="true" type="xsd:string"/><element name="pcConvertibleModels" nillable="true" type="xsd:string"/><element name="pcSedanModels" nillable="true" type="xsd:string"/><element name="pcInteriorTrimMaterial" nillable="true" type="xsd:string"/><element name="pcInteriorTrimColour" nillable="true" type="xsd:string"/><element name="pcInteriorAccessories" nillable="true" type="xsd:string"/><element name="pcExteriorColour" nillable="true" type="xsd:string"/><element name="pcMoonroof" nillable="true" type="xsd:string"/><element name="pcWheels" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="ListVehicleOrder"><complexType><sequence><element name="piOrderNum" nillable="true" type="xsd:long"/><element name="pcUserContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="ListVehicleOrderResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="ttOrder" nillable="true" type="S2:ListVehicleOrder_ttOrderParam"/></sequence></complexType></element><element name="LIstVehicleOrderStatus"><complexType><sequence><element name="pcContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="LIstVehicleOrderStatusResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="phOrders" nillable="true" type="S2:DataSetHandleParam"/></sequence></complexType></element><element name="UserLogin"><complexType><sequence><element name="pcUserName" nillable="true" type="xsd:string"/><element name="pcUserDomain" nillable="true" type="xsd:string"/><element name="pcPassword" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="UserLoginResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="pcUserContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="UserLogout"><complexType><sequence><element name="pcContextId" nillable="true" type="xsd:string"/></sequence></complexType></element><element name="UserLogoutResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/></sequence></complexType></element></schema>
   </wsdl:types>
-  <wsdl:message name="AutoEdgeTheFactoryWebServices_service_listorderstatus">
-    <wsdl:part name="parameters" element="S2:service_listorderstatus"/>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_PerformWorkstepResponse">
+    <wsdl:part name="parameters" element="S2:PerformWorkstepResponse"/>
   </wsdl:message>
-  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListBrandData">
-    <wsdl:part name="parameters" element="S2:ListBrandData"/>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListVehicleOrder">
+    <wsdl:part name="parameters" element="S2:ListVehicleOrder"/>
   </wsdl:message>
-  <wsdl:message name="AutoEdgeTheFactoryWebServices_CaptureVehicleOrder">
-    <wsdl:part name="parameters" element="S2:CaptureVehicleOrder"/>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_LIstVehicleOrderStatus">
+    <wsdl:part name="parameters" element="S2:LIstVehicleOrderStatus"/>
   </wsdl:message>
-  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListBrandDataResponse">
-    <wsdl:part name="parameters" element="S2:ListBrandDataResponse"/>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_CustomerLoginResponse">
+    <wsdl:part name="parameters" element="S2:CustomerLoginResponse"/>
   </wsdl:message>
-  <wsdl:message name="AutoEdgeTheFactoryWebServices_service_listorderstatusResponse">
-    <wsdl:part name="parameters" element="S2:service_listorderstatusResponse"/>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_UserLoginResponse">
+    <wsdl:part name="parameters" element="S2:UserLoginResponse"/>
   </wsdl:message>
-  <wsdl:message name="AutoEdgeTheFactoryWebServices_CaptureVehicleOrderResponse">
-    <wsdl:part name="parameters" element="S2:CaptureVehicleOrderResponse"/>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_CustomerLogin">
+    <wsdl:part name="parameters" element="S2:CustomerLogin"/>
   </wsdl:message>
   <wsdl:message name="FaultDetailMessage">
     <wsdl:part name="FaultDetail" element="S1:FaultDetail"/>
   </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_UserLogin">
+    <wsdl:part name="parameters" element="S2:UserLogin"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListBrandData">
+    <wsdl:part name="parameters" element="S2:ListBrandData"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListVehicleOrderResponse">
+    <wsdl:part name="parameters" element="S2:ListVehicleOrderResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_PerformWorkstep">
+    <wsdl:part name="parameters" element="S2:PerformWorkstep"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_UserLogout">
+    <wsdl:part name="parameters" element="S2:UserLogout"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_ListBrandDataResponse">
+    <wsdl:part name="parameters" element="S2:ListBrandDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_UserLogoutResponse">
+    <wsdl:part name="parameters" element="S2:UserLogoutResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AutoEdgeTheFactoryWebServices_LIstVehicleOrderStatusResponse">
+    <wsdl:part name="parameters" element="S2:LIstVehicleOrderStatusResponse"/>
+  </wsdl:message>
   <wsdl:portType name="AutoEdgeTheFactoryWebServicesObj">
+    <wsdl:operation name="PerformWorkstep">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_PerformWorkstep"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_PerformWorkstepResponse"/>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerLogin">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_CustomerLogin"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_CustomerLoginResponse"/>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
     <wsdl:operation name="ListBrandData">
       <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_ListBrandData"/>
       <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_ListBrandDataResponse"/>
       <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
     </wsdl:operation>
-    <wsdl:operation name="CaptureVehicleOrder">
-      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_CaptureVehicleOrder"/>
-      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_CaptureVehicleOrderResponse"/>
+    <wsdl:operation name="ListVehicleOrder">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_ListVehicleOrder"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_ListVehicleOrderResponse"/>
       <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
     </wsdl:operation>
-    <wsdl:operation name="service_listorderstatus">
-      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_service_listorderstatus"/>
-      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_service_listorderstatusResponse"/>
+    <wsdl:operation name="LIstVehicleOrderStatus">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_LIstVehicleOrderStatus"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_LIstVehicleOrderStatusResponse"/>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_UserLogin"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_UserLoginResponse"/>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogout">
+      <wsdl:input message="tns:AutoEdgeTheFactoryWebServices_UserLogout"/>
+      <wsdl:output message="tns:AutoEdgeTheFactoryWebServices_UserLogoutResponse"/>
       <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault" message="tns:FaultDetailMessage"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="AutoEdgeTheFactoryWebServicesObj" type="tns:AutoEdgeTheFactoryWebServicesObj">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="PerformWorkstep">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault">
+        <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerLogin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault">
+        <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="ListBrandData">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
@@ -57,7 +125,7 @@
         <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="CaptureVehicleOrder">
+    <wsdl:operation name="ListVehicleOrder">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
@@ -69,7 +137,31 @@
         <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="service_listorderstatus">
+    <wsdl:operation name="LIstVehicleOrderStatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault">
+        <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AutoEdgeTheFactoryWebServicesFault">
+        <soap:fault name="AutoEdgeTheFactoryWebServicesFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogout">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
