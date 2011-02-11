@@ -8,7 +8,7 @@
         <PXGVersion>03</PXGVersion>
       </PGVersion>
       <PGGenInfo isSessionFree="true">
-        <Author>PSC</Author>
+        <Author>OpenEdge Best Practises</Author>
         <VersionString>1.0</VersionString>
         <VersionNumber>1</VersionNumber>
         <Package></Package>
@@ -73,8 +73,112 @@
       <IsTTResultSet>true</IsTTResultSet>
       <WriteDatasetBeforeImage>false</WriteDatasetBeforeImage>
       <Procedure isPersistent="false" useFullName="false">
+        <Name>service_performworkstep</Name>
+        <ProcPath>AutoEdge\Factory\Server\Build\BusinessComponents\</ProcPath>
+        <ProPath>c:\devarea\projects\oebp\autoedgethefactory\server\bin\</ProPath>
+        <ProcExt>p</ProcExt>
+        <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+          <Name>PerformWorkstep</Name>
+          <HelpString></HelpString>
+          <ReturnValue allowUnknown="true" ordinal="0" writeXmlBeforeImage="false">
+            <Name>result</Name>
+            <OrigName>result</OrigName>
+            <Type>1</Type>
+            <Mode>0</Mode>
+          </ReturnValue>
+          <Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+            <Name>pcWorkFlowName</Name>
+            <OrigName>pcWorkFlowName</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
+            <Name>pcWorkstepName</Name>
+            <OrigName>pcWorkstepName</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
+            <Name>pcOrderId</Name>
+            <OrigName>pcOrderId</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+            <Name>pcUserContextId</Name>
+            <OrigName>pcUserContextId</OrigName>
+            <Type>39</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="5" writeXmlBeforeImage="false">
+            <Name>pcBuildStatus</Name>
+            <OrigName>pcBuildStatus</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+        </ProcDetail>
+      </Procedure>
+      <Procedure isPersistent="false" useFullName="false">
+        <Name>service_customerlogin</Name>
+        <ProcPath>AutoEdge\Factory\Server\Common\CommonInfrastructure\</ProcPath>
+        <ProPath>c:\devarea\projects\oebp\autoedgethefactory\server\bin\</ProPath>
+        <ProcExt>p</ProcExt>
+        <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+          <Name>CustomerLogin</Name>
+          <HelpString></HelpString>
+          <ReturnValue allowUnknown="true" ordinal="0" writeXmlBeforeImage="false">
+            <Name>result</Name>
+            <OrigName>result</OrigName>
+            <Type>1</Type>
+            <Mode>0</Mode>
+          </ReturnValue>
+          <Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+            <Name>pcBrand</Name>
+            <OrigName>pcBrand</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
+            <Name>pcUserName</Name>
+            <OrigName>pcUserName</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
+            <Name>pcPassword</Name>
+            <OrigName>pcPassword</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+            <Name>pcUserContextId</Name>
+            <OrigName>pcUserContextId</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="5" writeXmlBeforeImage="false">
+            <Name>pcCustomerId</Name>
+            <OrigName>pcCustomerId</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="6" writeXmlBeforeImage="false">
+            <Name>pcCustomerEmail</Name>
+            <OrigName>pcCustomerEmail</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="7" writeXmlBeforeImage="false">
+            <Name>pdCreditLimit</Name>
+            <OrigName>pdCreditLimit</OrigName>
+            <Type>5</Type>
+            <Mode>2</Mode>
+          </Parameter>
+        </ProcDetail>
+      </Procedure>
+      <Procedure isPersistent="false" useFullName="false">
         <Name>service_branddata</Name>
-        <ProcPath>AutoEdge\Factory\Order\BusinessComponent\</ProcPath>
+        <ProcPath>AutoEdge\Factory\Server\Order\BusinessComponent\</ProcPath>
         <ProPath>c:\devarea\projects\oebp\autoedgethefactory\server\bin\</ProPath>
         <ProcExt>p</ProcExt>
         <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
@@ -179,12 +283,12 @@
         </ProcDetail>
       </Procedure>
       <Procedure isPersistent="false" useFullName="false">
-        <Name>service_captureorder</Name>
-        <ProcPath>AutoEdge\Factory\Order\BusinessComponent\</ProcPath>
+        <Name>service_listorder</Name>
+        <ProcPath>AutoEdge\Factory\Server\Order\BusinessComponent\</ProcPath>
         <ProPath>c:\devarea\projects\oebp\autoedgethefactory\server\bin\</ProPath>
         <ProcExt>p</ProcExt>
         <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
-          <Name>CaptureVehicleOrder</Name>
+          <Name>ListVehicleOrder</Name>
           <HelpString></HelpString>
           <ReturnValue allowUnknown="true" ordinal="0" writeXmlBeforeImage="false">
             <Name>result</Name>
@@ -193,104 +297,131 @@
             <Mode>0</Mode>
           </ReturnValue>
           <Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
-            <Name>piOrderNumber</Name>
-            <OrigName>piOrderNumber</OrigName>
-            <Type>4</Type>
+            <Name>piOrderNum</Name>
+            <OrigName>piOrderNum</OrigName>
+            <Type>41</Type>
             <Mode>1</Mode>
           </Parameter>
           <Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
-            <Name>plOrderApproved</Name>
-            <OrigName>plOrderApproved</OrigName>
-            <Type>3</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
-            <Name>pcCustomerName</Name>
-            <OrigName>pcCustomerName</OrigName>
+            <Name>pcUserContextId</Name>
+            <OrigName>pcUserContextId</OrigName>
             <Type>1</Type>
             <Mode>1</Mode>
           </Parameter>
-          <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
-            <Name>pcCustomerEmail</Name>
-            <OrigName>pcCustomerEmail</OrigName>
-            <Type>1</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="5" writeXmlBeforeImage="false">
-            <Name>pcBrand</Name>
-            <OrigName>pcBrand</OrigName>
-            <Type>1</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="6" writeXmlBeforeImage="false">
-            <Name>pcDealer</Name>
-            <OrigName>pcDealer</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="7" writeXmlBeforeImage="false">
-            <Name>pcModel</Name>
-            <OrigName>pcModel</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="8" writeXmlBeforeImage="false">
-            <Name>pcInteriorTrimMaterial</Name>
-            <OrigName>pcInteriorTrimMaterial</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="9" writeXmlBeforeImage="false">
-            <Name>pcInteriorTrimColour</Name>
-            <OrigName>pcInteriorTrimColour</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="10" writeXmlBeforeImage="false">
-            <Name>pcInteriorAccessories</Name>
-            <OrigName>pcInteriorAccessories</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="11" writeXmlBeforeImage="false">
-            <Name>pcExteriorColour</Name>
-            <OrigName>pcExteriorColour</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="12" writeXmlBeforeImage="false">
-            <Name>pcMoonroof</Name>
-            <OrigName>pcMoonroof</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="13" writeXmlBeforeImage="false">
-            <Name>pcWheels</Name>
-            <OrigName>pcWheels</OrigName>
-            <Type>39</Type>
-            <Mode>1</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="14" writeXmlBeforeImage="false">
-            <Name>pcOrderId</Name>
-            <OrigName>pcOrderId</OrigName>
-            <Type>1</Type>
+          <Parameter allowUnknown="false" ordinal="3" writeXmlBeforeImage="false">
+            <Name>ttOrder</Name>
+            <OrigName>ttOrder</OrigName>
+            <Type>15</Type>
             <Mode>2</Mode>
-          </Parameter>
-          <Parameter allowUnknown="true" ordinal="15" writeXmlBeforeImage="false">
-            <Name>pdOrderAmount</Name>
-            <OrigName>pdOrderAmount</OrigName>
-            <Type>5</Type>
-            <Mode>2</Mode>
+            <NamespaceUri xsi:nil="true"/>
+            <MetaData>
+              <FieldName>OrderId</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>OrderApproved</FieldName>
+              <Type>3</Type>
+              <Extent>0</Extent>
+              <TypeName>logical</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>VehicleOnHand</FieldName>
+              <Type>3</Type>
+              <Extent>0</Extent>
+              <TypeName>logical</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>CustomerName</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>CustomerEmail</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>Brand</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>DealerId</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>Model</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>InteriorTrimMaterial</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>InteriorTrimColour</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>InteriorAccessories</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>ExteriorColour</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>Moonroof</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
+            <MetaData>
+              <FieldName>Wheels</FieldName>
+              <Type>1</Type>
+              <Extent>0</Extent>
+              <TypeName>character</TypeName>
+              <XmlNodeType>0</XmlNodeType>
+            </MetaData>
           </Parameter>
         </ProcDetail>
       </Procedure>
       <Procedure isPersistent="false" useFullName="false">
         <Name>service_listorderstatus</Name>
-        <ProcPath>AutoEdge\Factory\Order\BusinessComponent\</ProcPath>
+        <ProcPath>AutoEdge\Factory\Server\Order\BusinessComponent\</ProcPath>
         <ProPath>c:\devarea\projects\oebp\autoedgethefactory\server\bin\</ProPath>
         <ProcExt>p</ProcExt>
-        <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="false" usesTTMappingDefault="false" IsTTResultSet="false" usesBeforeImageDefault="true">
-          <Name>service_listorderstatus</Name>
+        <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="false" IsTTResultSet="false" usesBeforeImageDefault="true">
+          <Name>LIstVehicleOrderStatus</Name>
           <HelpString></HelpString>
           <ReturnValue allowUnknown="true" ordinal="0" writeXmlBeforeImage="false">
             <Name>result</Name>
@@ -309,6 +440,68 @@
             <OrigName>phOrders</OrigName>
             <Type>37</Type>
             <Mode>2</Mode>
+          </Parameter>
+        </ProcDetail>
+      </Procedure>
+      <Procedure isPersistent="false" useFullName="false">
+        <Name>service_userlogin</Name>
+        <ProcPath>OpenEdge\CommonInfrastructure\Server\</ProcPath>
+        <ProPath>c:\devarea\projects\OEBP\referencecomponents\commoninfrastructure\server\bin\</ProPath>
+        <ProcExt>p</ProcExt>
+        <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="false" usesBeforeImageDefault="true">
+          <Name>UserLogin</Name>
+          <HelpString></HelpString>
+          <ReturnValue allowUnknown="true" ordinal="0" writeXmlBeforeImage="false">
+            <Name>result</Name>
+            <OrigName>result</OrigName>
+            <Type>1</Type>
+            <Mode>0</Mode>
+          </ReturnValue>
+          <Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+            <Name>pcUserName</Name>
+            <OrigName>pcUserName</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
+            <Name>pcUserDomain</Name>
+            <OrigName>pcUserDomain</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
+            <Name>pcPassword</Name>
+            <OrigName>pcPassword</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+            <Name>pcUserContextId</Name>
+            <OrigName>pcUserContextId</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+        </ProcDetail>
+      </Procedure>
+      <Procedure isPersistent="false" useFullName="false">
+        <Name>service_userlogout</Name>
+        <ProcPath>OpenEdge\CommonInfrastructure\Server\</ProcPath>
+        <ProPath>c:\devarea\projects\OEBP\referencecomponents\commoninfrastructure\server\bin\</ProPath>
+        <ProcExt>p</ProcExt>
+        <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+          <Name>UserLogout</Name>
+          <HelpString></HelpString>
+          <ReturnValue allowUnknown="true" ordinal="0" writeXmlBeforeImage="false">
+            <Name>result</Name>
+            <OrigName>result</OrigName>
+            <Type>1</Type>
+            <Mode>0</Mode>
+          </ReturnValue>
+          <Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+            <Name>pcContextId</Name>
+            <OrigName>pcContextId</OrigName>
+            <Type>39</Type>
+            <Mode>1</Mode>
           </Parameter>
         </ProcDetail>
       </Procedure>

@@ -43,6 +43,16 @@ define variable oSecMgr as ISecurityManager no-undo.
 define variable oContext as IUserContext no-undo.
 define variable cUserDomain as character no-undo.
 
+/** Dummy return for modelling purposes (Savvion lets us make a test call to a WebService). */
+if pcUserName eq 'Savvion::Test' then
+do:
+    assign pcUserContextId = 'pcUserContextId'
+           pcCustomerId = 'pcCustomerId '
+           pcCustomerEmail = 'pcCustomerEmail '
+           pdCreditLimit = -1.
+    return.
+end.
+
 /** -- validate defs -- **/
 Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
 Assert:ArgumentNotNullOrEmpty(pcBrand, 'Brand').

@@ -27,7 +27,7 @@ using Progress.Windows.Form.
 using Progress.Lang.Object.
 using Progress.Lang.Class.
 
-/** -- defs  -- **/  
+/** -- defs  -- **/
 define variable oTasks as Object no-undo.
 define variable oServiceManager as IServiceManager no-undo.
 
