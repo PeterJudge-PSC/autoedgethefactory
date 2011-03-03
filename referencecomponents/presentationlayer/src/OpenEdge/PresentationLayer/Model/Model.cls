@@ -743,13 +743,24 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
                could be built on the ModelQuery. without anything here we're just going to do
                a FOR EACH <tablename> */
         end.
-        
         return oTR.
     end method.
     
-    method protected void UpdateTableContextFromRequest(input poRequest as ITableRequest):
-        @todo(task="implement", action="").
-        undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+    method protected void UpdateTableContextFromResponse(input poResponse as ITableResponse):
+        define variable oModelTC as ITableContext no-undo.
+        
+        oModelTC = cast(TableContexts:Get(new String(poResponse:TableName)), ITableContext).
+        
+        /* use context as-is from response */
+        if not valid-object(oModelTC) then
+            assign oModelTC = cast(TableContexts:Put(new String(poResponse:TableName), poResponse:TableContext), ITableContext)
+                   oModelTC:TableHandle = GetBufferHandle(poResponse:TableName).
+        else
+            assign oModelTC:NumRemainingPages = poResponse:TableContext:NumRemainingPages
+                   oModelTC:NextPosition = poResponse:TableContext:NextPosition
+                   oModelTC:PrevPosition = poResponse:TableContext:PrevPosition.
+        
+        oModelTC:LastUpdateAt = now.
     end method.
     
     /** Fetches data necessary to satisfy all queries in the Model.
