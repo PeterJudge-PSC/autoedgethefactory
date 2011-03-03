@@ -74,11 +74,14 @@ interface OpenEdge.CommonInfrastructure.Common.ISecurityManager:
                                          input pcUserDomain as character,
                                          input pcPassword as character).
     
+    /** Logs the current user out of the application. */
+    method public void UserLogout().
+
     /** Logs a user out of the application.
         
         @param IUserContext The (validated) user context object for the given credentials. */
     method public void UserLogout(input poContext as IUserContext).
-
+    
     /** Logs a user out of the application.
         
         @param longchar The user context ID. */

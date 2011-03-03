@@ -52,17 +52,6 @@ oSecMgr = cast(oServiceMgr:StartService(SecurityManager:ISecurityManagerType), I
 /* log in and establish tenancy, user context */
 oContext = oSecMgr:UserLogin(pcUserName, pcUserDomain, pcPassword).
 
-    def var okeys as Progress.Lang.Object extent.
-    def var ovals as Progress.Lang.Object extent.
-
-okeys = oSecMgr:CurrentUserContext:TenantId:KeySet:ToArray().
-ovals = oSecMgr:CurrentUserContext:TenantId:Values:ToArray().
-
-message '>>>>>>> oSecMgr:CurrentUserContext:UserName' oSecMgr:CurrentUserContext:UserName. 
-message '>>>>>>> okeys[1]' okeys[1]. 
-message '>>>>>>> ovals[1]' ovals[1]. 
-
-
 oOutput = new ObjectOutputStream().
 oOutput:WriteObject(oContext).
 oOutput:Write(output pmUserContext).

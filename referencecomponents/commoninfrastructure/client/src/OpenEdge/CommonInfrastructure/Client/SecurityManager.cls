@@ -98,26 +98,29 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
         define variable oRequest as SecurityManagerRequest extent 1 no-undo.
         define variable oSMM as IServiceMessageManager no-undo.
         
-        this-object:CurrentUserContext = poContext.
-        
-        /* We can use different service names for login and logout; both will resolve to the same service provider.
-           This is used for illustrative purposes. See OpenEdge.CommonInfrastructure.Common.InjectABL.CommonInfrastructureModule 
-           for more details */
-        oSMM = cast(ServiceManager:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
-        
-        oRequest[1] = new SecurityManagerRequest(ServiceMessageManager:IServiceMessageManagerType:TypeName,
-                                                 ServiceMessageActionEnum:UserLogout).
-        oRequest[1]:ContextId = poContext:ContextId.
-        oRequest[1]:UserContext = GetPendingContext().
-        
-        /* make the call */
-        oResponse = cast(oSMM:ExecuteRequest(cast(oRequest, IServiceRequest)), SecurityManagerResponse).
-        
-        if cast(oResponse[1], IServiceResponse):HasError then
-            undo, throw new InvalidValueSpecifiedError('logout', ': ' + string(cast(oResponse[1], IServiceResponse):ErrorText)).
-        
-        /* On the client, a successful logout does end the session (not necessarily true on server) */
-        EndSession(oResponse[1]:UserContext).
+        if valid-object(poContext) then
+        do:        
+            this-object:CurrentUserContext = poContext.
+            
+            /* We can use different service names for login and logout; both will resolve to the same service provider.
+               This is used for illustrative purposes. See OpenEdge.CommonInfrastructure.Common.InjectABL.CommonInfrastructureModule 
+               for more details */
+            oSMM = cast(ServiceManager:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
+            
+            oRequest[1] = new SecurityManagerRequest(SecurityManager:ISecurityManagerType:TypeName,
+                                                     ServiceMessageActionEnum:UserLogout).
+            oRequest[1]:ContextId = poContext:ContextId.
+            oRequest[1]:UserContext = GetPendingContext().
+            
+            /* make the call */
+            oResponse = cast(oSMM:ExecuteRequest(cast(oRequest, IServiceRequest)), SecurityManagerResponse).
+            
+            if cast(oResponse[1], IServiceResponse):HasError then
+                undo, throw new InvalidValueSpecifiedError('logout', ': ' + string(cast(oResponse[1], IServiceResponse):ErrorText)).
+            
+            /* On the client, a successful logout does end the session (not necessarily true on server) */
+            EndSession(oResponse[1]:UserContext).
+        end.
         
         /* user doesn't live here no more */
         this-object:CurrentUserContext = ?.

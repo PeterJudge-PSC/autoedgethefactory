@@ -107,16 +107,32 @@ class OpenEdge.CommonInfrastructure.Common.UserContext
     end method.
     
     method public void ReadObject(input poStream as IObjectInput):
-        UserName = poStream:ReadChar().
-        UserDomain = poStream:ReadChar().
-        ContextId = poStream:ReadLongChar().
-        TenantName = poStream:ReadChar().
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable oKeys as Object extent no-undo.
+        define variable oValues as Object extent no-undo.
         
-        cast(TenantId:KeySet, ICollection):AddArray(poStream:ReadObjectArray()).
-        TenantId:Values:AddArray(poStream:ReadObjectArray()).
+        assign UserName = poStream:ReadChar()
+               UserDomain = poStream:ReadChar()
+               ContextId = poStream:ReadLongChar()
+               TenantName = poStream:ReadChar()
+               
+               oKeys = poStream:ReadObjectArray()
+               oValues = poStream:ReadObjectArray()
+               iMax = extent(oKeys).
         
-        cast(UserProperties:KeySet, ICollection):AddArray(poStream:ReadObjectArray()).
-        UserProperties:Values:AddArray(poStream:ReadObjectArray()).
+        do iloop = 1 to iMax:
+            TenantId:Put(oKeys[iLoop], oValues[iLoop]).
+        end.
+        
+        assign extent(oKeys) = ?
+               oKeys = poStream:ReadObjectArray()
+               extent(oValues) = ?
+               oValues = poStream:ReadObjectArray()
+               iMax = extent(oKeys).
+        do iloop = 1 to iMax:
+            UserProperties:Put(oKeys[iLoop], oValues[iLoop]).
+        end.
     end method.
     
 	method override public logical Equals(input p0 as Object ):
