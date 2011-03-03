@@ -78,17 +78,16 @@ run OpenEdge/CommonInfrastructure/Server/as_startup.p (SessionClientTypeEnum:App
 /*run test_customerlogin.*/
 /*run test_userlogin.*/
 
-run test_getbranddata ('fjord').
-/*run test_captureorder.*/
+/*run test_getbranddata ('fjord').*/
+run test_captureorder.
 
 procedure test_captureorder:
     define VARIABLE piOrderNumber as integer no-undo.
-    
-    define VARIABLE plOrderApproved as logical no-undo.
-    define VARIABLE pcCustomerName as character no-undo.
-    define VARIABLE pcCustomerEmail as character no-undo.
     define VARIABLE pcBrand as character no-undo.
-    define VARIABLE pcDealer as longchar no-undo.
+    define VARIABLE pcDealerId as longchar no-undo.
+    define VARIABLE pcCustomerId as character no-undo.
+    define VARIABLE plOrderApproved as logical no-undo.
+    define variable pcInstructions as longchar no-undo.
     define VARIABLE pcModel as longchar no-undo.
     define VARIABLE pcInteriorTrimMaterial as longchar no-undo.
     define VARIABLE pcInteriorTrimColour as longchar no-undo.
@@ -97,27 +96,47 @@ procedure test_captureorder:
     define VARIABLE pcMoonroof as longchar no-undo.
     define VARIABLE pcWheels as longchar no-undo.
     
+    
     define variable pcOrderId as character no-undo.
     define variable pdOrderAmount as decimal no-undo.    
     
-    piOrderNumber = 0002.
+    piOrderNumber = 7.
+    pcBrand = 'fjord'.
+    pcDealerId = 'dealer03'.
+    pcCustomerId = '8e1f00c4-ec87-119b-e011-c50e4ed40b4c'.
+    pcCustomerId = '10'.
+    plOrderApproved = true.
+    pcInstructions = 'extra instructions'.
+    pcmodel = '[~{"label":"FJ-200","value":"fd16dc03-8bcb-9bb8-e011-b02411c531fa","selected":false~},~{"label":"FJ-100","value":"fd16dc03-8bcb-9bb8-e011-b024cd2831fa","selected":true~}]'.    
+    pcInteriorTrimMaterial = 'fd16dc03-8bcb-9bb8-e011-b024aeda30fa'.
+    pcInteriorTrimColour = 'fd16dc03-8bcb-9bb8-e011-b024bc0131fa'.
+    pcInteriorAccessories = '[fd16dc03-8bcb-9bb8-e011-b024be0131fa, fd16dc03-8bcb-9bb8-e011-b024c00131fa]'.
+    pcMoonroof = 'fd16dc03-8bcb-9bb8-e011-b0249eb330fa'.
+    pcWheels = 'fd16dc03-8bcb-9bb8-e011-b0249db330fa'.
     
     run AutoEdge/Factory/Server/Order/BusinessComponent/service_captureorder.p (
                 input piOrderNumber,
-                input plOrderApproved,
-                input pcCustomerName,
-                input pcCustomerEmail ,
-                input pcBrand ,
-                input pcDealer ,
-                input pcModel ,
-                input pcInteriorTrimMaterial ,
-                input pcInteriorTrimColour ,
-                input pcInteriorAccessories ,
-                input pcExteriorColour ,
-                input pcMoonroof ,
-                input pcWheels ,
+                input pcBrand,
+/*                input pcUserContextId,*/
+                
+                input pcDealerId ,
+                input pcCustomerId, 
+                input plOrderApproved ,
+                input pcInstructions, 
+                input pcModel,
+                input pcInteriorTrimMaterial, 
+                input pcInteriorTrimColour, 
+                input pcInteriorAccessories, 
+                input pcExteriorColour, 
+                input pcMoonroof,
+                input pcWheels, 
                 output pcOrderId ,
-                output pdOrderAmount ).
+                output pdOrderAmount). 
+                
+    message
+    pcOrderId skip
+    pdOrderAmount
+    view-as alert-box error title '[PJ DEBUG]'.                
     
 end procedure.
 

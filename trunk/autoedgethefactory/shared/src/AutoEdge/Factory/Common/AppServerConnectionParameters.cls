@@ -21,4 +21,4 @@ class AutoEdge.Factory.Common.AppServerConnectionParameters inherits AppServerCo
         return '-AppService asAutoEdgeTheFactory -sessionModel session-free '.
 	end method.
 	
-end class.
+end class. 

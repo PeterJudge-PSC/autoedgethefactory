@@ -1,5 +1,4 @@
- 
- /*------------------------------------------------------------------------
+/*------------------------------------------------------------------------
     File        : OrderListForm
     Purpose     : 
     Syntax      : 
@@ -8,26 +7,57 @@
     Created     : Thu Dec 16 11:33:05 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
+{routinelevel.i}
 
-using Progress.Lang.*.
 using Progress.Windows.Form.
 
-{routinelevel.i}
+using OpenEdge.CommonInfrastructure.Common.IUserContext.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ServiceManager.
+using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.SecurityManager.
+using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum.
+
+using OpenEdge.Lang.String.
+using OpenEdge.Lang.ABLSession.
+
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits Form: 
     
     define private variable bsOrders as Progress.Data.BindingSource no-undo.
     define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable uxOrders as Infragistics.Win.UltraWinGrid.UltraGrid no-undo.
-    define private variable mcContextId as longchar no-undo. 
+
+    define private variable mhOrders as handle no-undo. 
+
+    /** (mandatory) The session's service manager. Used to determine the ServiceMessageManager and 
+        other managers for callbacks, context and more. */
+    define protected property SvcMgr as IServiceManager no-undo
+        get():
+            if not valid-object(SvcMgr) then
+                SvcMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType), IServiceManager).
+            
+            return SvcMgr.
+        end get.
+        private set.
+        
+    /** The ConnectionManager is used plentifully; we keep it as a property so that
+        we can get it whenever needed, without fuss. */
+    define protected property ConnMgr as IConnectionManager no-undo
+        get():
+            if not valid-object(ConnMgr) then
+                ConnMgr = cast(SvcMgr:GetService(ConnectionManager:IConnectionManagerType) , IConnectionManager).
+            return ConnMgr.
+        end get.
+        private set.
         
     constructor public OrderListForm (  ):
         super().
         InitializeComponent().
         
-        run OpenEdge/CommonInfrastructure/Server/service_interface_userlogin.p ('usah', 'p@ssword', output mcContextId).
-         
-        ShowOrders().
+        InitData().
         
         catch e as Progress.Lang.Error:
             undo, throw e.
@@ -47,77 +77,152 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         define variable tableDesc1 as Progress.Data.TableDesc no-undo.
         tableDesc1 = new Progress.Data.TableDesc("eOrder").
         @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable tableDesc2 as Progress.Data.TableDesc no-undo.
+        tableDesc2 = new Progress.Data.TableDesc("eOrderLine").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable tableDesc3 as Progress.Data.TableDesc no-undo.
+        tableDesc3 = new Progress.Data.TableDesc("eItem").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable tableDesc4 as Progress.Data.TableDesc no-undo.
+        tableDesc4 = new Progress.Data.TableDesc("eFinishedItem").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable tableDesc5 as Progress.Data.TableDesc no-undo.
+        tableDesc5 = new Progress.Data.TableDesc("eComponentItem").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance21 as Infragistics.Win.Appearance no-undo.
         appearance21 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraGridBand1 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
         ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("eOrder", -1).
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn109 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn109 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("BillingAddressId").
+        define variable ultraGridColumn5 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn5 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CustomerName").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn110 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn110 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Carrier").
+        define variable ultraGridColumn6 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CustomerNum").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn111 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn111 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Creditcard").
+        define variable ultraGridColumn7 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CustomerPO").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn112 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn112 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CustomerId").
+        define variable ultraGridColumn24 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderAmount").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn113 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn113 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CustomerName").
+        define variable ultraGridColumn9 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("EnteredDate").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn114 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn114 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CustomerPO").
+        define variable ultraGridColumn10 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FromEmail").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn115 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn115 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("EmailDate").
+        define variable ultraGridColumn25 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("SalesrepCode").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn116 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn116 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("EnteredDate").
+        define variable ultraGridColumn26 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("DealerCode").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn117 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn117 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FromEmail").
+        define variable ultraGridColumn47 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn47 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("eOrderLine").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn118 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn118 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Instructions").
+        define variable ultraGridColumn11 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Instructions").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn119 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn119 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("InventoryTransId").
+        define variable ultraGridColumn14 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderDate").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn120 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn120 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("InvoiceId").
+        define variable ultraGridColumn15 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn15 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderId").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn121 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn121 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderDate").
+        define variable ultraGridColumn16 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn16 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderNum").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn122 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn122 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderId").
+        define variable ultraGridColumn22 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderStatus").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn123 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn123 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderNum").
+        define variable ultraGridBand2 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
+        ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("eOrderLine", 0).
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn124 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn124 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PromiseDate").
+        define variable ultraGridColumn27 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderId").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn125 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn125 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("SalesrepId").
+        define variable ultraGridColumn28 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LineNum").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn126 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn126 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ShipDate").
+        define variable ultraGridColumn29 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn29 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Price").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn127 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn127 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ShippingAddressId").
+        define variable ultraGridColumn30 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn30 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Quantity").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn128 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn128 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("StatusId").
+        define variable ultraGridColumn31 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn31 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Discount").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn129 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn129 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderStatus").
+        define variable ultraGridColumn32 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn32 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ItemId").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn130 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn130 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Terms").
+        define variable ultraGridColumn33 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn33 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("OrderLineStatus").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn34 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn34 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FinishedItemId").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn35 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn35 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("eItem").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn48 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("eFinishedItem").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridBand3 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
+        ultraGridBand3 = new Infragistics.Win.UltraWinGrid.UltraGridBand("eItem", 1).
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn36 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn36 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ItemId").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn37 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn37 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ItemNum").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn38 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn38 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ItemName").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn39 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn39 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ItemType").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn40 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn40 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Description").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn41 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn41 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Price").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridBand4 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
+        ultraGridBand4 = new Infragistics.Win.UltraWinGrid.UltraGridBand("eFinishedItem", 1).
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn42 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn42 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FinishedItemId").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn43 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn43 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ItemId").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn44 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn44 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("StatusDate").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn45 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn45 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FinishedItemStatus").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn46 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn46 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ExternalId").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn49 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("eComponentItem").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridBand5 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
+        ultraGridBand5 = new Infragistics.Win.UltraWinGrid.UltraGridBand("eComponentItem", 3).
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn50 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ItemId").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn51 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn51 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FinishedItemId").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraGridColumn52 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn52 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Quantity").
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance22 as Infragistics.Win.Appearance no-undo.
         appearance22 = new Infragistics.Win.Appearance().
@@ -165,32 +270,74 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
         define variable arrayvar0 as "Progress.Data.TableDesc[]" no-undo.
         arrayvar0 = new "Progress.Data.TableDesc[]"(0).
-        tableDesc1:ChildTables = arrayvar0.
+        tableDesc3:ChildTables = arrayvar0.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar1 as Progress.Data.ColumnPropDesc extent 22 no-undo.
-        arrayvar1[1] = new Progress.Data.ColumnPropDesc("BillingAddressId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[2] = new Progress.Data.ColumnPropDesc("Carrier", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[3] = new Progress.Data.ColumnPropDesc("Creditcard", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[4] = new Progress.Data.ColumnPropDesc("CustomerId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[5] = new Progress.Data.ColumnPropDesc("CustomerName", "Customer Name", Progress.Data.DataType:CHARACTER).
-        arrayvar1[6] = new Progress.Data.ColumnPropDesc("CustomerPO", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[7] = new Progress.Data.ColumnPropDesc("EmailDate", "", Progress.Data.DataType:DATETIME_TZ).
-        arrayvar1[8] = new Progress.Data.ColumnPropDesc("EnteredDate", "", Progress.Data.DataType:DATETIME).
-        arrayvar1[9] = new Progress.Data.ColumnPropDesc("FromEmail", "", Progress.Data.DataType:LOGICAL).
-        arrayvar1[10] = new Progress.Data.ColumnPropDesc("Instructions", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[11] = new Progress.Data.ColumnPropDesc("InventoryTransId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[12] = new Progress.Data.ColumnPropDesc("InvoiceId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[13] = new Progress.Data.ColumnPropDesc("OrderDate", "", Progress.Data.DataType:DATE).
-        arrayvar1[14] = new Progress.Data.ColumnPropDesc("OrderId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[15] = new Progress.Data.ColumnPropDesc("OrderNum", "", Progress.Data.DataType:INTEGER).
-        arrayvar1[16] = new Progress.Data.ColumnPropDesc("PromiseDate", "", Progress.Data.DataType:DATE).
-        arrayvar1[17] = new Progress.Data.ColumnPropDesc("SalesrepId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[18] = new Progress.Data.ColumnPropDesc("ShipDate", "", Progress.Data.DataType:DATE).
-        arrayvar1[19] = new Progress.Data.ColumnPropDesc("ShippingAddressId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[20] = new Progress.Data.ColumnPropDesc("StatusId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[21] = new Progress.Data.ColumnPropDesc("OrderStatus", "", Progress.Data.DataType:CHARACTER).
-        arrayvar1[22] = new Progress.Data.ColumnPropDesc("Terms", "", Progress.Data.DataType:CHARACTER).
-        tableDesc1:Columns = arrayvar1.
+        define variable arrayvar1 as Progress.Data.ColumnPropDesc extent 6 no-undo.
+        arrayvar1[1] = new Progress.Data.ColumnPropDesc("ItemId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar1[2] = new Progress.Data.ColumnPropDesc("ItemNum", "", Progress.Data.DataType:INTEGER).
+        arrayvar1[3] = new Progress.Data.ColumnPropDesc("ItemName", "", Progress.Data.DataType:CHARACTER).
+        arrayvar1[4] = new Progress.Data.ColumnPropDesc("ItemType", "", Progress.Data.DataType:CHARACTER).
+        arrayvar1[5] = new Progress.Data.ColumnPropDesc("Description", "", Progress.Data.DataType:CHARACTER).
+        arrayvar1[6] = new Progress.Data.ColumnPropDesc("Price", "", Progress.Data.DataType:DECIMAL).
+        tableDesc3:Columns = arrayvar1.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar2 as "Progress.Data.TableDesc[]" no-undo.
+        arrayvar2 = new "Progress.Data.TableDesc[]"(0).
+        tableDesc5:ChildTables = arrayvar2.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar3 as Progress.Data.ColumnPropDesc extent 3 no-undo.
+        arrayvar3[1] = new Progress.Data.ColumnPropDesc("ItemId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar3[2] = new Progress.Data.ColumnPropDesc("FinishedItemId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar3[3] = new Progress.Data.ColumnPropDesc("Quantity", "", Progress.Data.DataType:DECIMAL).
+        tableDesc5:Columns = arrayvar3.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar4 as Progress.Data.TableDesc extent 1 no-undo.
+        arrayvar4[1] = tableDesc5.
+        tableDesc4:ChildTables = arrayvar4.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar5 as Progress.Data.ColumnPropDesc extent 5 no-undo.
+        arrayvar5[1] = new Progress.Data.ColumnPropDesc("FinishedItemId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar5[2] = new Progress.Data.ColumnPropDesc("ItemId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar5[3] = new Progress.Data.ColumnPropDesc("StatusDate", "", Progress.Data.DataType:DATETIME_TZ).
+        arrayvar5[4] = new Progress.Data.ColumnPropDesc("FinishedItemStatus", "", Progress.Data.DataType:CHARACTER).
+        arrayvar5[5] = new Progress.Data.ColumnPropDesc("ExternalId", "", Progress.Data.DataType:CHARACTER).
+        tableDesc4:Columns = arrayvar5.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar6 as Progress.Data.TableDesc extent 2 no-undo.
+        arrayvar6[1] = tableDesc3.
+        arrayvar6[2] = tableDesc4.
+        tableDesc2:ChildTables = arrayvar6.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar7 as Progress.Data.ColumnPropDesc extent 8 no-undo.
+        arrayvar7[1] = new Progress.Data.ColumnPropDesc("OrderId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar7[2] = new Progress.Data.ColumnPropDesc("LineNum", "", Progress.Data.DataType:INTEGER).
+        arrayvar7[3] = new Progress.Data.ColumnPropDesc("Price", "", Progress.Data.DataType:DECIMAL).
+        arrayvar7[4] = new Progress.Data.ColumnPropDesc("Quantity", "", Progress.Data.DataType:INTEGER).
+        arrayvar7[5] = new Progress.Data.ColumnPropDesc("Discount", "", Progress.Data.DataType:INTEGER).
+        arrayvar7[6] = new Progress.Data.ColumnPropDesc("ItemId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar7[7] = new Progress.Data.ColumnPropDesc("OrderLineStatus", "", Progress.Data.DataType:CHARACTER).
+        arrayvar7[8] = new Progress.Data.ColumnPropDesc("FinishedItemId", "", Progress.Data.DataType:CHARACTER).
+        tableDesc2:Columns = arrayvar7.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar8 as Progress.Data.TableDesc extent 1 no-undo.
+        arrayvar8[1] = tableDesc2.
+        tableDesc1:ChildTables = arrayvar8.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar9 as Progress.Data.ColumnPropDesc extent 13 no-undo.
+        arrayvar9[1] = new Progress.Data.ColumnPropDesc("OrderNum", "", Progress.Data.DataType:INTEGER).
+        arrayvar9[2] = new Progress.Data.ColumnPropDesc("OrderId", "", Progress.Data.DataType:CHARACTER).
+        arrayvar9[3] = new Progress.Data.ColumnPropDesc("OrderDate", "", Progress.Data.DataType:DATE).
+        arrayvar9[4] = new Progress.Data.ColumnPropDesc("EnteredDate", "", Progress.Data.DataType:DATETIME_TZ).
+        arrayvar9[5] = new Progress.Data.ColumnPropDesc("FromEmail", "", Progress.Data.DataType:LOGICAL).
+        arrayvar9[6] = new Progress.Data.ColumnPropDesc("CustomerNum", "", Progress.Data.DataType:INTEGER).
+        arrayvar9[7] = new Progress.Data.ColumnPropDesc("CustomerName", "", Progress.Data.DataType:CHARACTER).
+        arrayvar9[8] = new Progress.Data.ColumnPropDesc("CustomerPO", "", Progress.Data.DataType:CHARACTER).
+        arrayvar9[9] = new Progress.Data.ColumnPropDesc("OrderAmount", "", Progress.Data.DataType:DECIMAL).
+        arrayvar9[10] = new Progress.Data.ColumnPropDesc("OrderStatus", "", Progress.Data.DataType:CHARACTER).
+        arrayvar9[11] = new Progress.Data.ColumnPropDesc("Instructions", "", Progress.Data.DataType:CHARACTER).
+        arrayvar9[12] = new Progress.Data.ColumnPropDesc("SalesrepCode", "", Progress.Data.DataType:CHARACTER).
+        arrayvar9[13] = new Progress.Data.ColumnPropDesc("DealerCode", "", Progress.Data.DataType:CHARACTER).
+        tableDesc1:Columns = arrayvar9.
         this-object:bsOrders:TableSchema = tableDesc1.
         /*  */
         /* uxOrders */
@@ -199,165 +346,151 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         appearance21:BackColor = System.Drawing.SystemColors:Window.
         appearance21:BorderColor = System.Drawing.SystemColors:InactiveCaption.
         this-object:uxOrders:DisplayLayout:Appearance = appearance21.
-        ultraGridColumn109:Header:VisiblePosition = 0.
-        ultraGridColumn109:Hidden = true.
-        ultraGridColumn109:RowLayoutColumnInfo:OriginX = 0.
-        ultraGridColumn109:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn109:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn109:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn110:Header:VisiblePosition = 1.
-        ultraGridColumn110:Hidden = true.
-        ultraGridColumn110:RowLayoutColumnInfo:OriginX = 5.
-        ultraGridColumn110:RowLayoutColumnInfo:OriginY = 6.
-        ultraGridColumn110:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn110:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn111:Header:VisiblePosition = 2.
-        ultraGridColumn111:Hidden = true.
-        ultraGridColumn111:RowLayoutColumnInfo:OriginX = 10.
-        ultraGridColumn111:RowLayoutColumnInfo:OriginY = 2.
-        ultraGridColumn111:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn111:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn112:Header:VisiblePosition = 3.
-        ultraGridColumn112:Hidden = true.
-        ultraGridColumn112:RowLayoutColumnInfo:OriginX = 3.
-        ultraGridColumn112:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn112:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(276, 0).
-        ultraGridColumn112:RowLayoutColumnInfo:SpanX = 5.
-        ultraGridColumn112:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn113:Header:VisiblePosition = 4.
-        ultraGridColumn113:RowLayoutColumnInfo:OriginX = 4.
-        ultraGridColumn113:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn113:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(283, 0).
-        ultraGridColumn113:RowLayoutColumnInfo:SpanX = 4.
-        ultraGridColumn113:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn114:Header:VisiblePosition = 5.
-        ultraGridColumn114:Hidden = true.
-        ultraGridColumn114:RowLayoutColumnInfo:OriginX = 15.
-        ultraGridColumn114:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn114:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn114:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn115:Header:VisiblePosition = 6.
-        ultraGridColumn115:Hidden = true.
-        ultraGridColumn115:RowLayoutColumnInfo:OriginX = 17.
-        ultraGridColumn115:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn115:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn115:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn116:Header:VisiblePosition = 7.
-        ultraGridColumn116:RowLayoutColumnInfo:OriginX = 2.
-        ultraGridColumn116:RowLayoutColumnInfo:OriginY = 2.
-        ultraGridColumn116:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn116:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn117:Header:VisiblePosition = 8.
-        ultraGridColumn117:Hidden = true.
-        ultraGridColumn117:RowLayoutColumnInfo:OriginX = 10.
-        ultraGridColumn117:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn117:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(89, 0).
-        ultraGridColumn117:RowLayoutColumnInfo:SpanX = 3.
-        ultraGridColumn117:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn118:Header:VisiblePosition = 9.
-        ultraGridColumn118:RowLayoutColumnInfo:OriginX = 0.
-        ultraGridColumn118:RowLayoutColumnInfo:OriginY = 4.
-        ultraGridColumn118:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(468, 0).
-        ultraGridColumn118:RowLayoutColumnInfo:SpanX = 10.
-        ultraGridColumn118:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn119:Header:VisiblePosition = 10.
-        ultraGridColumn119:Hidden = true.
-        ultraGridColumn119:RowLayoutColumnInfo:OriginX = 19.
-        ultraGridColumn119:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn119:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn119:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn120:Header:VisiblePosition = 11.
-        ultraGridColumn120:Hidden = true.
-        ultraGridColumn120:RowLayoutColumnInfo:OriginX = 21.
-        ultraGridColumn120:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn120:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn120:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn121:Header:VisiblePosition = 12.
-        ultraGridColumn121:RowLayoutColumnInfo:OriginX = 4.
-        ultraGridColumn121:RowLayoutColumnInfo:OriginY = 2.
-        ultraGridColumn121:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(194, 0).
-        ultraGridColumn121:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn121:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn122:Header:VisiblePosition = 13.
-        ultraGridColumn122:Hidden = true.
-        ultraGridColumn122:RowLayoutColumnInfo:OriginX = 25.
-        ultraGridColumn122:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn122:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn122:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn123:Header:VisiblePosition = 14.
-        ultraGridColumn123:RowLayoutColumnInfo:OriginX = 1.
-        ultraGridColumn123:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn123:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(186, 0).
-        ultraGridColumn123:RowLayoutColumnInfo:SpanX = 3.
-        ultraGridColumn123:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn124:Header:VisiblePosition = 15.
-        ultraGridColumn124:RowLayoutColumnInfo:OriginX = 6.
-        ultraGridColumn124:RowLayoutColumnInfo:OriginY = 2.
-        ultraGridColumn124:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn124:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn125:Header:VisiblePosition = 16.
-        ultraGridColumn125:Hidden = true.
-        ultraGridColumn125:RowLayoutColumnInfo:OriginX = 13.
-        ultraGridColumn125:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn125:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn125:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn126:Header:VisiblePosition = 17.
-        ultraGridColumn126:RowLayoutColumnInfo:OriginX = 8.
-        ultraGridColumn126:RowLayoutColumnInfo:OriginY = 2.
-        ultraGridColumn126:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn126:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn127:Header:VisiblePosition = 18.
-        ultraGridColumn127:Hidden = true.
-        ultraGridColumn127:RowLayoutColumnInfo:OriginX = 29.
-        ultraGridColumn127:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn127:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn127:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn128:Header:VisiblePosition = 19.
-        ultraGridColumn128:Hidden = true.
-        ultraGridColumn128:RowLayoutColumnInfo:OriginX = 27.
-        ultraGridColumn128:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn128:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn128:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn129:Header:VisiblePosition = 20.
-        ultraGridColumn129:RowLayoutColumnInfo:OriginX = 8.
-        ultraGridColumn129:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn129:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(184, 0).
-        ultraGridColumn129:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn129:RowLayoutColumnInfo:SpanY = 2.
-        ultraGridColumn130:Header:VisiblePosition = 21.
-        ultraGridColumn130:Hidden = true.
-        ultraGridColumn130:RowLayoutColumnInfo:OriginX = 23.
-        ultraGridColumn130:RowLayoutColumnInfo:OriginY = 0.
-        ultraGridColumn130:RowLayoutColumnInfo:SpanX = 2.
-        ultraGridColumn130:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn5:Header:VisiblePosition = 0.
+        ultraGridColumn5:RowLayoutColumnInfo:OriginX = 4.
+        ultraGridColumn5:RowLayoutColumnInfo:OriginY = 0.
+        ultraGridColumn5:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(283, 0).
+        ultraGridColumn5:RowLayoutColumnInfo:SpanX = 4.
+        ultraGridColumn5:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn6:Header:VisiblePosition = 1.
+        ultraGridColumn7:Header:VisiblePosition = 2.
+        ultraGridColumn7:Hidden = true.
+        ultraGridColumn7:RowLayoutColumnInfo:OriginX = 15.
+        ultraGridColumn7:RowLayoutColumnInfo:OriginY = 0.
+        ultraGridColumn7:RowLayoutColumnInfo:SpanX = 2.
+        ultraGridColumn7:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn24:Header:VisiblePosition = 3.
+        ultraGridColumn9:Header:VisiblePosition = 4.
+        ultraGridColumn9:RowLayoutColumnInfo:OriginX = 2.
+        ultraGridColumn9:RowLayoutColumnInfo:OriginY = 2.
+        ultraGridColumn9:RowLayoutColumnInfo:SpanX = 2.
+        ultraGridColumn9:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn10:Header:VisiblePosition = 5.
+        ultraGridColumn10:Hidden = true.
+        ultraGridColumn10:RowLayoutColumnInfo:OriginX = 10.
+        ultraGridColumn10:RowLayoutColumnInfo:OriginY = 0.
+        ultraGridColumn10:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(89, 0).
+        ultraGridColumn10:RowLayoutColumnInfo:SpanX = 3.
+        ultraGridColumn10:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn25:Header:VisiblePosition = 6.
+        ultraGridColumn26:Header:VisiblePosition = 7.
+        ultraGridColumn47:Header:VisiblePosition = 13.
+        ultraGridColumn11:Header:VisiblePosition = 8.
+        ultraGridColumn11:RowLayoutColumnInfo:OriginX = 0.
+        ultraGridColumn11:RowLayoutColumnInfo:OriginY = 4.
+        ultraGridColumn11:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(468, 0).
+        ultraGridColumn11:RowLayoutColumnInfo:SpanX = 10.
+        ultraGridColumn11:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn14:Header:VisiblePosition = 9.
+        ultraGridColumn14:RowLayoutColumnInfo:OriginX = 4.
+        ultraGridColumn14:RowLayoutColumnInfo:OriginY = 2.
+        ultraGridColumn14:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(194, 0).
+        ultraGridColumn14:RowLayoutColumnInfo:SpanX = 2.
+        ultraGridColumn14:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn15:Header:VisiblePosition = 10.
+        ultraGridColumn15:Hidden = true.
+        ultraGridColumn15:RowLayoutColumnInfo:OriginX = 25.
+        ultraGridColumn15:RowLayoutColumnInfo:OriginY = 0.
+        ultraGridColumn15:RowLayoutColumnInfo:SpanX = 2.
+        ultraGridColumn15:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn16:Header:VisiblePosition = 11.
+        ultraGridColumn16:RowLayoutColumnInfo:OriginX = 1.
+        ultraGridColumn16:RowLayoutColumnInfo:OriginY = 0.
+        ultraGridColumn16:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(186, 0).
+        ultraGridColumn16:RowLayoutColumnInfo:SpanX = 3.
+        ultraGridColumn16:RowLayoutColumnInfo:SpanY = 2.
+        ultraGridColumn22:Header:VisiblePosition = 12.
+        ultraGridColumn22:RowLayoutColumnInfo:OriginX = 8.
+        ultraGridColumn22:RowLayoutColumnInfo:OriginY = 0.
+        ultraGridColumn22:RowLayoutColumnInfo:PreferredCellSize = new System.Drawing.Size(184, 0).
+        ultraGridColumn22:RowLayoutColumnInfo:SpanX = 2.
+        ultraGridColumn22:RowLayoutColumnInfo:SpanY = 2.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar2 as System.Object extent 22 no-undo.
-        arrayvar2[1] = ultraGridColumn109.
-        arrayvar2[2] = ultraGridColumn110.
-        arrayvar2[3] = ultraGridColumn111.
-        arrayvar2[4] = ultraGridColumn112.
-        arrayvar2[5] = ultraGridColumn113.
-        arrayvar2[6] = ultraGridColumn114.
-        arrayvar2[7] = ultraGridColumn115.
-        arrayvar2[8] = ultraGridColumn116.
-        arrayvar2[9] = ultraGridColumn117.
-        arrayvar2[10] = ultraGridColumn118.
-        arrayvar2[11] = ultraGridColumn119.
-        arrayvar2[12] = ultraGridColumn120.
-        arrayvar2[13] = ultraGridColumn121.
-        arrayvar2[14] = ultraGridColumn122.
-        arrayvar2[15] = ultraGridColumn123.
-        arrayvar2[16] = ultraGridColumn124.
-        arrayvar2[17] = ultraGridColumn125.
-        arrayvar2[18] = ultraGridColumn126.
-        arrayvar2[19] = ultraGridColumn127.
-        arrayvar2[20] = ultraGridColumn128.
-        arrayvar2[21] = ultraGridColumn129.
-        arrayvar2[22] = ultraGridColumn130.
-        ultraGridBand1:Columns:AddRange(arrayvar2).
+        define variable arrayvar10 as System.Object extent 14 no-undo.
+        arrayvar10[1] = ultraGridColumn5.
+        arrayvar10[2] = ultraGridColumn6.
+        arrayvar10[3] = ultraGridColumn7.
+        arrayvar10[4] = ultraGridColumn24.
+        arrayvar10[5] = ultraGridColumn9.
+        arrayvar10[6] = ultraGridColumn10.
+        arrayvar10[7] = ultraGridColumn25.
+        arrayvar10[8] = ultraGridColumn26.
+        arrayvar10[9] = ultraGridColumn47.
+        arrayvar10[10] = ultraGridColumn11.
+        arrayvar10[11] = ultraGridColumn14.
+        arrayvar10[12] = ultraGridColumn15.
+        arrayvar10[13] = ultraGridColumn16.
+        arrayvar10[14] = ultraGridColumn22.
+        ultraGridBand1:Columns:AddRange(arrayvar10).
         ultraGridBand1:RowLayoutLabelPosition = Infragistics.Win.UltraWinGrid.LabelPosition:Top.
         ultraGridBand1:RowLayoutStyle = Infragistics.Win.UltraWinGrid.RowLayoutStyle:GroupLayout.
+        ultraGridColumn27:Header:VisiblePosition = 0.
+        ultraGridColumn28:Header:VisiblePosition = 1.
+        ultraGridColumn29:Header:VisiblePosition = 2.
+        ultraGridColumn30:Header:VisiblePosition = 3.
+        ultraGridColumn31:Header:VisiblePosition = 4.
+        ultraGridColumn32:Header:VisiblePosition = 5.
+        ultraGridColumn33:Header:VisiblePosition = 6.
+        ultraGridColumn34:Header:VisiblePosition = 7.
+        ultraGridColumn35:Header:VisiblePosition = 8.
+        ultraGridColumn48:Header:VisiblePosition = 9.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar11 as System.Object extent 10 no-undo.
+        arrayvar11[1] = ultraGridColumn27.
+        arrayvar11[2] = ultraGridColumn28.
+        arrayvar11[3] = ultraGridColumn29.
+        arrayvar11[4] = ultraGridColumn30.
+        arrayvar11[5] = ultraGridColumn31.
+        arrayvar11[6] = ultraGridColumn32.
+        arrayvar11[7] = ultraGridColumn33.
+        arrayvar11[8] = ultraGridColumn34.
+        arrayvar11[9] = ultraGridColumn35.
+        arrayvar11[10] = ultraGridColumn48.
+        ultraGridBand2:Columns:AddRange(arrayvar11).
+        ultraGridColumn36:Header:VisiblePosition = 0.
+        ultraGridColumn37:Header:VisiblePosition = 1.
+        ultraGridColumn38:Header:VisiblePosition = 2.
+        ultraGridColumn39:Header:VisiblePosition = 3.
+        ultraGridColumn40:Header:VisiblePosition = 4.
+        ultraGridColumn41:Header:VisiblePosition = 5.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar12 as System.Object extent 6 no-undo.
+        arrayvar12[1] = ultraGridColumn36.
+        arrayvar12[2] = ultraGridColumn37.
+        arrayvar12[3] = ultraGridColumn38.
+        arrayvar12[4] = ultraGridColumn39.
+        arrayvar12[5] = ultraGridColumn40.
+        arrayvar12[6] = ultraGridColumn41.
+        ultraGridBand3:Columns:AddRange(arrayvar12).
+        ultraGridColumn42:Header:VisiblePosition = 0.
+        ultraGridColumn43:Header:VisiblePosition = 1.
+        ultraGridColumn44:Header:VisiblePosition = 2.
+        ultraGridColumn45:Header:VisiblePosition = 3.
+        ultraGridColumn46:Header:VisiblePosition = 4.
+        ultraGridColumn49:Header:VisiblePosition = 5.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar13 as System.Object extent 6 no-undo.
+        arrayvar13[1] = ultraGridColumn42.
+        arrayvar13[2] = ultraGridColumn43.
+        arrayvar13[3] = ultraGridColumn44.
+        arrayvar13[4] = ultraGridColumn45.
+        arrayvar13[5] = ultraGridColumn46.
+        arrayvar13[6] = ultraGridColumn49.
+        ultraGridBand4:Columns:AddRange(arrayvar13).
+        ultraGridColumn50:Header:VisiblePosition = 0.
+        ultraGridColumn51:Header:VisiblePosition = 1.
+        ultraGridColumn52:Header:VisiblePosition = 2.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar14 as System.Object extent 3 no-undo.
+        arrayvar14[1] = ultraGridColumn50.
+        arrayvar14[2] = ultraGridColumn51.
+        arrayvar14[3] = ultraGridColumn52.
+        ultraGridBand5:Columns:AddRange(arrayvar14).
         this-object:uxOrders:DisplayLayout:BandsSerializer:Add(ultraGridBand1).
+        this-object:uxOrders:DisplayLayout:BandsSerializer:Add(ultraGridBand2).
+        this-object:uxOrders:DisplayLayout:BandsSerializer:Add(ultraGridBand3).
+        this-object:uxOrders:DisplayLayout:BandsSerializer:Add(ultraGridBand4).
+        this-object:uxOrders:DisplayLayout:BandsSerializer:Add(ultraGridBand5).
         this-object:uxOrders:DisplayLayout:BorderStyle = Infragistics.Win.UIElementBorderStyle:Solid.
         this-object:uxOrders:DisplayLayout:CaptionVisible = Infragistics.Win.DefaultableBoolean:False.
         appearance22:BackColor = System.Drawing.SystemColors:ActiveBorder.
@@ -437,14 +570,30 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         end.
     end destructor.
 
-    method protected void ShowOrders():
-        define variable hOrders as handle no-undo.
+    method protected void InitData():
+        define variable oUC as IUserContext no-undo.
+        define variable cDealerCode as character no-undo.
+        define variable oPropertyValue as String no-undo.
         
-        run AutoEdge/Factory/Order/BusinessComponents/service_listorderstatus.p (mcContextId , output dataset-handle hOrders) no-error.
-        if error-status:error then
-            undo, throw new AppError(return-value).
+        oUC = cast(SvcMgr:StartService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext.
         
-        bsOrders:handle = hOrders.
-    end method.
+        oPropertyValue = cast(oUC:UserProperties:Get(new String('Dealer.Code')), String).
+        if valid-object(oPropertyValue) then
+           cDealerCode = oPropertyValue:Value.
+           
+        message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
+        
+        cDealerCode skip
+        
+        view-as alert-box error title '[PJ DEBUG]'.           
+        
+        run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p
+               on ConnMgr:GetConnectionHandle(ConnectionTypeEnum:AppServer, 'AutoEdgeTheFactory') 
+                    (input cDealerCode,
+                     input oUC:ContextId,
+                     output dataset-handle mhOrders).
+        
+        bsOrders:handle = mhOrders.                     
+    end method.    
 
 end class.

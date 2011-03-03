@@ -9,6 +9,8 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using System.Drawing.Color.
+using System.Drawing.Point.
 using AutoEdge.Factory.Client.Order.PresentationLayer.DisapprovalReasonPanel.
 using AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask.
 using AutoEdge.Factory.Client.Common.PresentationLayer.LightboxForm.
@@ -28,6 +30,7 @@ using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
 using OpenEdge.Core.System.NotFoundError.
 using OpenEdge.Lang.String.
@@ -35,6 +38,7 @@ using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Windows.Form.
+using Progress.Util.TypeHelper.
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inherits Form: 
 	
@@ -64,23 +68,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
     define private variable uxOrderDetail as Infragistics.Win.Misc.UltraGroupBox no-undo.
     define private variable uxOrderNumber as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
     define private variable uxWheels as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
-
-    define private temp-table ttOrder no-undo
-        field OrderId as character
-        field OrderApproved as logical
-        field VehicleOnHand as logical
-        field CustomerName as character
-        field CustomerEmail as character
-        field Brand as character
-        field DealerId as character
-        field Model as character
-        field InteriorTrimMaterial as character
-        field InteriorTrimColour as character
-        field InteriorAccessories as character
-        field ExteriorColour as character
-        field Moonroof as character
-        field Wheels as character
-        .
 
     define public property TaskListManager as ITaskListManager no-undo get. private set.
     define public property CurrentTask as CurrentTask no-undo get. private set.
@@ -119,6 +106,8 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
             return ConnectionManager.
         end get.
         private set.
+        
+    define private variable mhOrders as handle no-undo.        
     
     constructor public CustomerOrderDetail(input poTaskListManager as ITaskListManager,
                                            input poCurrentTask as CurrentTask):
@@ -129,7 +118,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         
         assign TaskListManager = poTaskListManager
                CurrentTask = poCurrentTask.
-               
+        
         TaskListManager:SetTaskDataSlots(CurrentTask).
 
         InitData().
@@ -387,7 +376,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         /* imageList1 */
         /*  */
         this-object:imageList1:ImageStream = cast(resources:GetObject("imageList1.ImageStream"), System.Windows.Forms.ImageListStreamer).
-        this-object:imageList1:TransparentColor = System.Drawing.Color:Transparent.
+        this-object:imageList1:TransparentColor = Color:Transparent.
         this-object:imageList1:Images:SetKeyName(0, "Knob Valid Green.png").
         this-object:imageList1:Images:SetKeyName(1, "Knob Remove Red.png").
         this-object:imageList1:Images:SetKeyName(2, "Knob Snapback.png").
@@ -504,53 +493,95 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
 	end method.
 	
 	method protected void InitData():
-	    run AutoEdge/Factory/Order/BusinessComponent/service_listorder.p
-	           on ConnectionManager:GetConnectionHandle(ConnectionTypeEnum:AppServer, 'AutoEdgeTheFactory') 
-                    (input CurrentTask:WorkItem:ProcessInstanceId,
-                     input cast(ServiceManager:StartService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext,
-                     output table ttOrder).
+	    define variable oUC as IUserContext no-undo.
+        define variable cDealerCode as character no-undo.
+        define variable oPropertyValue as String no-undo.
         
-	    define query qryOrder for ttOrder scrolling.
+	    oUC = cast(ServiceManager:StartService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext.
+        
+        oPropertyValue = cast(oUC:UserProperties:Get(new String('Dealer.Code')), String).
+        if valid-object(oPropertyValue) then
+	       cDealerCode = oPropertyValue:Value.
+	    
+	    run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p
+	           on ConnectionManager:GetConnectionHandle(ConnectionTypeEnum:AppServer, 'AutoEdgeTheFactory') 
+                    (input cDealerCode,
+                     input oUC:ContextId,
+                     output dataset-handle mhOrders).
     end method.
-    
+        
     method protected void InitUI():
         define variable cValue as character no-undo.
         define variable cDTZ as datetime  no-undo.
         define variable cDateFormat as character no-undo.
+        define variable hOrderBuffer as handle no-undo.
+        define variable hOLineBuffer as handle no-undo.
+        define variable hFinishedItemBuffer as handle no-undo.
+        define variable hItemBuffer as handle no-undo.
+        define variable hComponentItemBuffer as handle no-undo.
+        define variable hQuery as handle no-undo.
         
         cDateFormat = session:date-format.
         /* needed to convert ISO dates into ABL datetime-tz */
         session:date-format = 'ymd'.
 
         assign cValue = cast(CurrentTask:DataSlots:Get(new String('CustomerOrderDate')), DataSlotInstance):value
-               cDTZ = datetime(cValue) 
-               uxOrderDate:DateTime = cDTZ.
+               cDTZ = datetime(cValue)
+               uxOrderDate:DateTime = cDTZ
+               
+               hOrderBuffer = mhOrders:get-buffer-handle('eOrder')
+               hOLineBuffer = mhOrders:get-buffer-handle('eOrderLine').
+               hFinishedItemBuffer = mhOrders:get-buffer-handle('eFinishedItem').
+               hComponentItemBuffer = mhOrders:get-buffer-handle('eComponentItem').
+               hItemBuffer = mhOrders:get-buffer-handle('eItem').
+               .
         
-        find first ttOrder no-error.
-        if available ttOrder then
+        hOrderBuffer:find-first(' where eOrder.OrderNum = ' + quoter(CurrentTask:WorkItem:ProcessInstanceId) ) no-error.
+        if hOrderBuffer:available then
         do:
-            assign uxBrand:Text = ttOrder.Brand
-                   uxCustomerName:Text = ttOrder.CustomerName
-                   uxModel:Text = ttOrder.Model
-                   uxExtColour:Text = ttOrder.ExteriorColour
-                   uxInStock:Checked = ttOrder.VehicleOnHand
-                   uxMoonroof:Text = ttOrder.Moonroof
-                   uxAccessories:Text = ttOrder.InteriorAccessories
-                   uxWheels:Text = ttOrder.Wheels
-                   .
+            hOLineBuffer:find-first(' where eOrderLine.LineNum = 1 and eOrderLine.OrderId = ' + quoter(hOrderBuffer::OrderId)) no-error.  
+            hFinishedItemBuffer:find-first(' where eFinishedItem.FinishedItemId = ' + quoter(hOLineBuffer::FinishedItemId)) no-error.
+            hItemBuffer:find-first(' where eItem.ItemId = ' + quoter(hFinishedItemBuffer::ItemId)) no-error.
             
-            if System.Enum:IsDefined(Progress.Util.TypeHelper:GetType('System.Drawing.KnownColor'), ttOrder.InteriorTrimColour) then
-                uxIntTrimColour:Color = System.Drawing.Color:FromName(ttOrder.InteriorTrimColour).
-            else
-                uxIntTrimColour:Color = System.Drawing.Color:Empty.
+            assign uxBrand:Text = hOrderBuffer::Brand
+                   uxCustomerName:Text = hOrderBuffer::CustomerName
+                   uxModel:Text = hItemBuffer::ItemName.
             
-            if System.Enum:IsDefined(Progress.Util.TypeHelper:GetType('System.Drawing.KnownColor'), ttOrder.ExteriorColour) then
-                uxExtColour:Color = System.Drawing.Color:FromName(ttOrder.ExteriorColour).
-            else
-                uxExtColour:Color = System.Drawing.Color:Empty.
+            create query hQuery.
+            hQuery:set-buffers(hComponentItemBuffer, hItemBuffer).
+            hQuery:query-prepare(' for each eComponentItem where eComponentItem.FinishedItemId = ' + hFinishedItemBuffer::FinishedItemId
+                                + ', each eItem where eItem.ItemId = eComponentItem.ItemId ').
+            hQuery:query-open().
             
-            uxOrderNumber:Text = ttOrder.OrderId.
-            this-object:Text = 'Order - ' + ttOrder.OrderId.
+            hQuery:get-first().
+            do while hComponentItemBuffer:available:
+                case string(hItemBuffer::ItemType):
+                    when 'wheels' then uxWheels:Text = hItemBuffer::ItemName.
+                    when 'ext-colour' then 
+                    do:
+                        uxExtColour:Text = hItemBuffer::ItemName.
+                        if System.Enum:IsDefined(TypeHelper:GetType('System.Drawing.KnownColor'), hItemBuffer::ItemName) then
+                            uxExtColour:Color = Color:FromName(hItemBuffer::ItemName).
+                        else
+                            uxExtColour:Color = Color:Empty.
+                    end.    /* ext-colour */
+                    when 'moonroof' then uxMoonroof:Text = hItemBuffer::ItemName.
+                    when 'accessories' then uxAccessories:Text = uxAccessories:Text + ', ' + hItemBuffer::ItemName. 
+                    when 'trim-colour' then
+                    do:
+                        if System.Enum:IsDefined(TypeHelper:GetType('System.Drawing.KnownColor'), hItemBuffer::ItemName) then
+                            uxIntTrimColour:Color = Color:FromName(hItemBuffer::ItemName).
+                        else
+                            uxIntTrimColour:Color = Color:Empty.
+                    end.
+                end case.
+                hQuery:get-next().
+            end.
+            hQuery:query-close().
+            delete object hQuery.
+            
+            uxOrderNumber:Text = hOrderBuffer::OrderId.
+            this-object:Text = 'Order - ' + hOrderBuffer::OrderId.
         end.
         else
         do:
@@ -584,7 +615,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         oFrame[1] = new DisapprovalReasonPanel(this-object).
         
         /* position where we want it on *this* form */
-        oFrame[1]:Location = new System.Drawing.Point(
+        oFrame[1]:Location = new Point(
             int((this-object:Size:Width / 2) - (oFrame[1]:Size:Width / 2 )),
             int((this-object:Size:Height / 2) - (oFrame[1]:Size:Height / 2 ) )).
         

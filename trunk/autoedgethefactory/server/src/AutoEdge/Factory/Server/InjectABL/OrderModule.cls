@@ -27,17 +27,37 @@ class AutoEdge.Factory.Server.InjectABL.OrderModule inherits BusinessComponentMo
         define variable cDSName as character extent no-undo.
         define variable cConcreteDS as character extent no-undo.
         define variable cDataSourceKey as character extent no-undo.
-                        
-        /* Order vehicle */
-        assign extent(cDSName) = 1
-               extent(cConcreteDS) = 1
-               extent(cDataSourceKey) = 1
+        
+        /* General order */
+        assign extent(cDSName) = ?
+               extent(cConcreteDS) = ?
+               extent(cDataSourceKey) = ?
+        
+               extent(cDSName) = 5
+               extent(cConcreteDS) = extent(cDSName)
+               extent(cDataSourceKey) = extent(cDSName)
                
                cDSName[1] = 'OrderDataSource'
                cConcreteDS[1] = 'AutoEdge.Factory.Server.Order.BusinessComponent.OrderTableDS'
                cDataSourceKey[1] = 'eOrder'
+               
+               cDSName[2] = 'ComponentItemsDataSource'
+               cDataSourceKey[2] = 'eComponentItem'
+               cConcreteDS[2] = 'AutoEdge.Factory.Server.Order.BusinessComponent.ComponentItemTableDS'
+               
+               cDSName[3] = 'OrderLineDataSource'
+               cDataSourceKey[3] = 'eOrderLine'
+               cConcreteDS[3] = 'AutoEdge.Factory.Server.Order.BusinessComponent.OrderLineTableDS'
+               
+               cDSName[4] = 'FinishedItemDataSource'
+               cDataSourceKey[4] = 'eFinishedItem'
+               cConcreteDS[4] = 'AutoEdge.Factory.Server.Order.BusinessComponent.FinishedItemTableDS'
+
+               cDSName[5] = 'ItemDataSource'
+               cDataSourceKey[5] = 'eItem'
+               cConcreteDS[5] = 'AutoEdge.Factory.Server.Order.BusinessComponent.ItemTableDS'
                .
-        
+
         BindBusinessEntity(
             'Order', 'AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity',
             'OrderDA', 'AutoEdge.Factory.Server.Order.BusinessComponent.OrderDA',
@@ -69,7 +89,6 @@ class AutoEdge.Factory.Server.InjectABL.OrderModule inherits BusinessComponentMo
             'VehicleOptions', 'AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsEntity',
             'VehicleOptionsDA', 'AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsDA',
             cDSName, cDataSourceKey, cConcreteDS).
-
     end method.
     
     method override public void Load(  ):

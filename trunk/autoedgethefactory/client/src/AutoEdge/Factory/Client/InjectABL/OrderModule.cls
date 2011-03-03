@@ -34,7 +34,15 @@ class AutoEdge.Factory.Client.InjectABL.OrderModule inherits InjectionModule:
         oBindingSyntax = Bind(IServiceProviderType).
         oBindingSyntax
             :Named('Order')
-            :To('AutoEdge.Factory.Client.Common.StandardAppServerServiceAdapter')
+            :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
+            :OnThinClientSession().
+
+        /* Bind as a service adapter. the server-side bindings will translate this into a IServiceProvider
+           object capable of doing something useful. */
+        oBindingSyntax = Bind(IServiceProviderType).
+        oBindingSyntax
+            :Named('OrderCapture')
+            :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
             :OnThinClientSession().
 
         /* Bind as a service adapter. the server-side bindings will translate this into a IServiceProvider
@@ -42,7 +50,7 @@ class AutoEdge.Factory.Client.InjectABL.OrderModule inherits InjectionModule:
         oBindingSyntax = Bind(IServiceProviderType).
         oBindingSyntax
             :Named('VehicleOptions')
-            :To('AutoEdge.Factory.Client.Common.StandardAppServerServiceAdapter')
+            :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
             :OnThinClientSession().
 
     end method.

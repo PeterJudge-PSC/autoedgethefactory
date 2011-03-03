@@ -65,7 +65,6 @@ assign
     .
 
 
-
 create statusdetail.
 assign 
     statusdetail.statusdetailid = guid(generate-uuid)
@@ -73,6 +72,19 @@ assign
     statusdetail.description    = 'Order Submitted'
     .
 
+create statusdetail.
+assign 
+    statusdetail.statusdetailid = guid(generate-uuid)
+    statusdetail.code           = 'ORDER-REJECTED'
+    statusdetail.description    = 'Order Rejected'
+    .
+
+create statusdetail.
+assign 
+    statusdetail.statusdetailid = guid(generate-uuid)
+    statusdetail.code           = 'ORDER-APPROVED'
+    statusdetail.description    = 'Order Approved'
+    .
 
 create statusdetail.
 assign 
