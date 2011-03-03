@@ -1,6 +1,5 @@
 <map version="1.3">
-  <param name="IN.pcUserContextId.3_0" type="java.lang.String" value="@ContextId"/>
-  <param name="IN.pcWorkstepName.1_0" type="java.lang.String" value="@@WORKSTEPNAME"/>
+  <param name="IN.pcUserName.0_0" type="java.lang.String" value="@FactoryUsers"/>
   <param name="WSCONFIG" type="java.lang.String">
 <java class="java.beans.XMLDecoder" version="1.6.0_20"> 
  <object class="com.savvion.sbm.adapters.webservice.WSConfig"> 
@@ -16,7 +15,7 @@
     <void property="QName"> 
      <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
       <void property="localPart"> 
-       <string>PerformWorkstep</string> 
+       <string>UserLogin</string> 
       </void> 
       <void property="namesSpace"> 
        <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
@@ -26,11 +25,21 @@
     <void property="XMLPluginConfig"> 
      <string>&lt;config&gt;
   &lt;version&gt;2&lt;/version&gt;
+  &lt;template&gt;
+&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;&#13;
+    &lt;UserLoginResponse xmlns="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices"&gt;&#13;
+        &lt;result/&gt;&#13;
+        &lt;pcUserContextId&gt;c8380ba0-72a0-00be-e011-5f39deaa05b5&lt;/pcUserContextId&gt;&#13;
+    &lt;/UserLoginResponse&gt;&#13;
+&lt;/soapenv:Body&gt;
+  &lt;/template&gt;
   &lt;fields&gt;
-    &lt;field name="responseStatus" type="String" xpath="/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus/text()"/&gt;
+    &lt;field name="responseContextId" type="String" xpath="/soapenv:Body/ns1:UserLoginResponse/ns1:pcUserContextId/text()"/&gt;
   &lt;/fields&gt;
   &lt;namespaceaware&gt;true&lt;/namespaceaware&gt;
   &lt;namespacemap&gt;
+    &lt;map name="ns1" value="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices"/&gt;
+    &lt;map name="soapenv" value="http://schemas.xmlsoap.org/soap/envelope/"/&gt;
   &lt;/namespacemap&gt;
 &lt;/config&gt;
 </string> 
@@ -39,10 +48,10 @@
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseStatus</string> 
+        <string>responseContextId</string> 
        </void> 
        <void property="name"> 
-        <string>responseStatus</string> 
+        <string>responseContextId</string> 
        </void> 
       </object> 
      </void> 
@@ -119,7 +128,7 @@
        <void property="QName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
          <void property="localPart"> 
-          <string>pcWorkFlowName</string> 
+          <string>pcUserName</string> 
          </void> 
          <void property="namesSpace"> 
           <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
@@ -133,16 +142,19 @@
         <string>java.lang.String</string> 
        </void> 
        <void property="label"> 
-        <string>pcWorkFlowName</string> 
+        <string>pcUserName</string> 
        </void> 
        <void property="mode"> 
         <int>1</int> 
        </void> 
        <void property="name"> 
-        <string>pcWorkFlowName</string> 
+        <string>pcUserName</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcWorkFlowName.0_0</string> 
+        <string>pcUserName.0_0</string> 
+       </void> 
+       <void property="value"> 
+        <string>factory</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -161,7 +173,7 @@
        <void property="QName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
          <void property="localPart"> 
-          <string>pcWorkstepName</string> 
+          <string>pcUserDomain</string> 
          </void> 
          <void property="namesSpace"> 
           <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
@@ -175,16 +187,19 @@
         <string>java.lang.String</string> 
        </void> 
        <void property="label"> 
-        <string>pcWorkstepName</string> 
+        <string>pcUserDomain</string> 
        </void> 
        <void property="mode"> 
         <int>1</int> 
        </void> 
        <void property="name"> 
-        <string>pcWorkstepName</string> 
+        <string>pcUserDomain</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcWorkstepName.1_0</string> 
+        <string>pcUserDomain.1_0</string> 
+       </void> 
+       <void property="value"> 
+        <string>factory.fjord</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -203,7 +218,7 @@
        <void property="QName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
          <void property="localPart"> 
-          <string>pcOrderId</string> 
+          <string>pcPassword</string> 
          </void> 
          <void property="namesSpace"> 
           <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
@@ -217,58 +232,19 @@
         <string>java.lang.String</string> 
        </void> 
        <void property="label"> 
-        <string>pcOrderId</string> 
+        <string>pcPassword</string> 
        </void> 
        <void property="mode"> 
         <int>1</int> 
        </void> 
        <void property="name"> 
-        <string>pcOrderId</string> 
+        <string>pcPassword</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcOrderId.2_0</string> 
+        <string>pcPassword.2_0</string> 
        </void> 
-       <void property="xmlQName"> 
-        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
-         <void property="localPart"> 
-          <string>string</string> 
-         </void> 
-         <void property="namesSpace"> 
-          <string>http://www.w3.org/2001/XMLSchema</string> 
-         </void> 
-        </object> 
-       </void> 
-      </object> 
-     </void> 
-     <void method="add"> 
-      <object class="com.savvion.sbm.adapters.webservice.Param"> 
-       <void property="QName"> 
-        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
-         <void property="localPart"> 
-          <string>pcUserContextId</string> 
-         </void> 
-         <void property="namesSpace"> 
-          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
-         </void> 
-        </object> 
-       </void> 
-       <void property="isOmittable"> 
-        <boolean>false</boolean> 
-       </void> 
-       <void property="javaClassName"> 
-        <string>java.lang.String</string> 
-       </void> 
-       <void property="label"> 
-        <string>pcUserContextId</string> 
-       </void> 
-       <void property="mode"> 
-        <int>1</int> 
-       </void> 
-       <void property="name"> 
-        <string>pcUserContextId</string> 
-       </void> 
-       <void property="uniqueIdentifier"> 
-        <string>pcUserContextId.3_0</string> 
+       <void property="value"> 
+        <string>factory</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -318,7 +294,7 @@
         <string>result</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>result.4_0</string> 
+        <string>result.3_0</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -337,7 +313,7 @@
        <void property="QName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
          <void property="localPart"> 
-          <string>pcBuildStatus</string> 
+          <string>pcUserContextId</string> 
          </void> 
          <void property="namesSpace"> 
           <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
@@ -351,16 +327,16 @@
         <string>java.lang.String</string> 
        </void> 
        <void property="label"> 
-        <string>pcBuildStatus</string> 
+        <string>pcUserContextId</string> 
        </void> 
        <void property="mode"> 
         <int>2</int> 
        </void> 
        <void property="name"> 
-        <string>pcBuildStatus</string> 
+        <string>pcUserContextId</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcBuildStatus.4_1</string> 
+        <string>pcUserContextId.3_1</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -458,8 +434,8 @@
   </void> 
  </object> 
 </java>
-  </param>  <param name="IN.pcOrderId.2_0" type="java.lang.String" value="@OrderId"/>
+  </param>  <param name="IN.pcPassword.2_0" type="java.lang.String" value="@password"/>
   <param name="SESSION_TOKEN_SUPPORT" type="java.lang.String" value="false"/>
-  <param name="IN.pcWorkFlowName.0_0" type="java.lang.String" value="@@PROCESS_TEMPLATE_NAME"/>
   <param name="TARGET_EPA" type="java.lang.String" value="@AutoEdgeWebServiceEndpoint"/>
+  <param name="IN.pcUserDomain.1_0" type="java.lang.String" value="@FactoryDomain"/>
 </map>

@@ -9,9 +9,9 @@
   <Group/>
   <Manager>@CREATOR</Manager>
   <EstimatedDuration>1d</EstimatedDuration>
-  <TimeCreated>1292337598164</TimeCreated>
+  <TimeCreated>1297706120627</TimeCreated>
   <Author>pjudge</Author>
-  <Version>2</Version>
+  <Version>3</Version>
   <Attributes>
     <Attribute name="ProcessType" required="true">
       <Label>Process Type</Label>
@@ -68,22 +68,33 @@
   <AtomicWS height="36" name="Start" width="36" worktime="false" x="60" y="36">
     <AtomicType>START</AtomicType>
     <Priority>medium</Priority>
-    <PostFunction type="java:function">// We want to use the piid without the process name etc&#13;
-long myPIID = jst.getProcessInstanceID();&#13;
-jst.putDataSlot("PIID", Long.toString(myPIID));&#13;
-&#13;
-// the ordernum is the piid (for now anyway)&#13;
-jst.putDataSlot("OrderNum", Long.toString(myPIID));&#13;
-&#13;
-// also use the ordernum as order id (v.temp)&#13;
-jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
-</PostFunction>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>VehicleBrand</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="VehicleBrand" label="SelectedVehicleBrand:" password="false" required="true" size="20" type="text">
+      <Label>SelectedVehicleBrand:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
   </AtomicWS>
-  <AtomicWS height="60" name="CompleteAssembleBody" width="168" worktime="false" x="456" y="204">
+  <AtomicWS height="60" name="CompleteAssembleBody" width="168" worktime="false" x="384" y="324">
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
+    <Performer>factory</Performer>
     <PerformBy>ANY</PerformBy>
     <PerformingApp type="JSP">CompleteAssembleBody.jsp</PerformingApp>
     <Collaboration>
@@ -93,17 +104,33 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
-    <Datainput>VehicleBuildComplete</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>VehicleBuildComplete</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
     <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
       <Label>BuildStatus:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" input="VehicleBuildComplete" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -113,9 +140,9 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="CompleteAssembleChassis" width="168" worktime="false" x="456" y="108">
+  <AtomicWS height="60" name="CompleteAssembleChassis" width="168" worktime="false" x="384" y="228">
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
+    <Performer>factory</Performer>
     <PerformBy>ANY</PerformBy>
     <PerformingApp type="JSP">CompleteAssembleChassis.jsp</PerformingApp>
     <Collaboration>
@@ -124,18 +151,34 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>ContextId</Datainput>
     <Datainput>BuildStatus</Datainput>
-    <Datainput>VehicleBuildComplete</Datainput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
     <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>VehicleBuildComplete</Dataoutput>
-    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
-      <Label>BuildStatus:</Label>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" input="VehicleBuildComplete" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -145,10 +188,10 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="CompleteAssembleInterior" width="168" worktime="false" x="456" y="396">
+  <AtomicWS height="60" name="CompleteAssembleInterior" width="168" worktime="false" x="384" y="516">
     <Label>CompleteAssembleInterior</Label>
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
+    <Performer>factory</Performer>
     <PerformBy>ANY</PerformBy>
     <PerformingApp type="JSP">CompleteAssembleInterior.jsp</PerformingApp>
     <Collaboration>
@@ -158,17 +201,33 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
-    <Datainput>VehicleBuildComplete</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>VehicleBuildComplete</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
     <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
       <Label>BuildStatus:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" input="VehicleBuildComplete" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -178,10 +237,10 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="CompleteCompleteVehicleBuild" width="168" worktime="false" x="456" y="600">
+  <AtomicWS height="60" name="CompleteCompleteVehicleBuild" width="168" worktime="false" x="384" y="720">
     <Label>CompleteCompleteVehicleBuild</Label>
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
+    <Performer>factory</Performer>
     <PerformBy>ANY</PerformBy>
     <PerformingApp type="JSP">CompleteCompleteVehicleBuild.jsp</PerformingApp>
     <Collaboration>
@@ -191,17 +250,33 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
-    <Datainput>VehicleBuildComplete</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>VehicleBuildComplete</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
     <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
       <Label>BuildStatus:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" input="VehicleBuildComplete" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -211,10 +286,10 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="CompleteMateAssembledComponents" width="168" worktime="false" x="456" y="492">
+  <AtomicWS height="60" name="CompleteMateAssembledComponents" width="168" worktime="false" x="384" y="612">
     <Label>CompleteMateAssembledComponents</Label>
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
+    <Performer>factory</Performer>
     <PerformBy>ANY</PerformBy>
     <PerformingApp type="JSP">CompleteMateAssembledComponents.jsp</PerformingApp>
     <Collaboration>
@@ -224,17 +299,33 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
-    <Datainput>VehicleBuildComplete</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>VehicleBuildComplete</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
     <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
       <Label>BuildStatus:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" input="VehicleBuildComplete" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -244,10 +335,10 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="CompletePaintVehicle" width="168" worktime="false" x="456" y="300">
+  <AtomicWS height="60" name="CompletePaintVehicle" width="168" worktime="false" x="384" y="420">
     <Label>CompletePaintVehicle</Label>
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
+    <Performer>factory</Performer>
     <PerformBy>ANY</PerformBy>
     <PerformingApp type="JSP">CompletePaintVehicle.jsp</PerformingApp>
     <Collaboration>
@@ -257,17 +348,33 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
-    <Datainput>VehicleBuildComplete</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>VehicleBuildComplete</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
     <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
       <Label>BuildStatus:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" input="VehicleBuildComplete" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -277,9 +384,9 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="CompleteProcessComponents" width="168" worktime="false" x="456" y="24">
+  <AtomicWS height="60" name="CompleteProcessComponents" width="168" worktime="false" x="384" y="144">
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
+    <Performer>factory</Performer>
     <PerformBy>ANY</PerformBy>
     <PerformingApp type="JSP">CompleteProcessComponents.jsp</PerformingApp>
     <Collaboration>
@@ -289,17 +396,33 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
-    <Datainput>VehicleBuildComplete</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>ContextId</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>VehicleBuildComplete</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
     <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
       <Label>BuildStatus:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" input="VehicleBuildComplete" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -309,10 +432,9 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="ProcessBuildError" width="108" worktime="false" x="924" y="300">
+  <AtomicWS height="60" name="ProcessBuildError" width="108" worktime="false" x="780" y="420">
     <AtomicType>ACTIVITY</AtomicType>
-    <Performer>@FactoryUsers</Performer>
-    <PerformBy>ANY</PerformBy>
+    <Performer>@CREATOR</Performer>
     <PerformingApp type="JSP">ProcessBuildError.jsp</PerformingApp>
     <Collaboration>
       <CollabFunction enabled="true" type="Reassign"/>
@@ -320,39 +442,70 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
+    <Datainput>OrderId</Datainput>
+    <Datainput>BuildStatus</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>WorkStepError</Datainput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="WorkStepError" label="WorkStepError:" password="false" required="false" size="20" type="text">
+      <Label>WorkStepError:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="36" name="End 1" width="36" worktime="false" x="1176" y="312">
-    <AtomicType>END</AtomicType>
-    <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
-    <RollbackPoint>FALSE</RollbackPoint>
-    <Simulation distribution="ct" scenario="(default)">
-      <Duration value="7200">2h</Duration>
-    </Simulation>
-  </AtomicWS>
-  <AtomicWS height="36" name="end" width="36" worktime="false" x="516" y="744">
+  <AtomicWS height="36" name="end" width="36" worktime="false" x="288" y="984">
     <AtomicType>END</AtomicType>
     <Priority>medium</Priority>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
   </AtomicWS>
-  <ExternalWS height="60" name="AssembleBody" width="108" x="180" y="204">
+  <ExternalWS height="60" name="AssembleBody" width="108" x="108" y="324">
     <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <Datainput>ContextId</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
-    <Datainput>OrderId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
-    <Datainput>PIID</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
     <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
@@ -360,19 +513,19 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
-  <ExternalWS height="60" name="AssembleChassis" width="108" x="180" y="108">
+  <ExternalWS height="60" name="AssembleChassis" width="108" x="108" y="228">
     <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <Datainput>ContextId</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
-    <Datainput>OrderId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
-    <Datainput>PIID</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
     <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
@@ -380,19 +533,19 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
-  <ExternalWS height="60" name="AssembleInterior" width="108" x="180" y="396">
+  <ExternalWS height="60" name="AssembleInterior" width="108" x="108" y="516">
     <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <Datainput>ContextId</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
-    <Datainput>OrderId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
-    <Datainput>PIID</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
     <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
@@ -400,19 +553,19 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
-  <ExternalWS height="60" name="CompleteVehicleBuild" width="108" x="180" y="600">
+  <ExternalWS height="60" name="CompleteVehicleBuild" width="108" x="108" y="720">
     <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <Datainput>ContextId</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
-    <Datainput>OrderId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
-    <Datainput>PIID</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
     <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
@@ -420,59 +573,15 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
-  <ExternalWS height="60" name="MateAssembledComponents" width="108" x="180" y="492">
-    <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
-    <PerformBy>execute</PerformBy>
-    <ClosedConnection>TRUE</ClosedConnection>
-    <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
-    <Datainput>ContextId</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
-    <Datainput>OrderId</Datainput>
-    <Datainput>@WORKSTEPNAME</Datainput>
-    <Datainput>PIID</Datainput>
-    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
-    <Dataoutput>BuildStatus</Dataoutput>
-    <RollbackPoint>FALSE</RollbackPoint>
-    <Simulation distribution="ct" scenario="(default)">
-      <Duration value="7200">2h</Duration>
-    </Simulation>
-    <InlineExecution>FALSE</InlineExecution>
-    <AdapterType>process</AdapterType>
-  </ExternalWS>
-  <ExternalWS height="60" name="PaintVehicle" width="108" x="180" y="300">
-    <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
-    <PerformBy>execute</PerformBy>
-    <ClosedConnection>TRUE</ClosedConnection>
-    <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
-    <Datainput>ContextId</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
-    <Datainput>OrderId</Datainput>
-    <Datainput>@WORKSTEPNAME</Datainput>
-    <Datainput>PIID</Datainput>
-    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
-    <Dataoutput>BuildStatus</Dataoutput>
-    <RollbackPoint>FALSE</RollbackPoint>
-    <Simulation distribution="ct" scenario="(default)">
-      <Duration value="7200">2h</Duration>
-    </Simulation>
-    <InlineExecution>FALSE</InlineExecution>
-    <AdapterType>process</AdapterType>
-  </ExternalWS>
-  <ExternalWS height="60" name="ProcessComponents" width="108" x="180" y="24">
+  <ExternalWS height="60" name="Factory Logout" width="108" x="252" y="840">
     <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <Datainput>ContextId</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
-    <Datainput>OrderId</Datainput>
-    <Datainput>@WORKSTEPNAME</Datainput>
-    <Datainput>PIID</Datainput>
     <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
-    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
@@ -480,44 +589,137 @@ jst.putDataSlot("OrderId", Long.toString(myPIID));&#13;
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
+  <ExternalWS height="60" name="FactoryLogin" width="108" x="252" y="24">
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <PreFunction type="java:function">// Construct a domain from the selected brand&#13;
+//java.lang.String userDomain = new java.lang.String('factory.');&#13;
+//userDomain.Append(jst.getDataSlotValue("SelectedVehicleBrand"));&#13;
+&#13;
+java.lang.String userDomain = "factory".concat(jst.getDataSlotValue("VehicleBrand"));&#13;
+&#13;
+jst.putDataSlot("FactoryDomain", userDomain);</PreFunction>
+    <Datainput>FactoryUsers</Datainput>
+    <Datainput>password</Datainput>
+    <Datainput>FactoryDomain</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="MateAssembledComponents" width="108" x="108" y="612">
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <Datainput>ContextId</Datainput>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="PaintVehicle" width="108" x="108" y="420">
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="AETF_BuildStep">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <Datainput>ContextId</Datainput>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="ProcessComponents" width="108" x="108" y="144">
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <Datainput>ContextId</Datainput>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <Link Name="Connection 42" default="true">
+    <Label>Connection 42</Label>
+    <Source cp="2">Factory Logout</Source>
+    <Point x="306.0" y="900.0"/>
+    <Point x="306.0" y="984.0"/>
+    <Target cp="0">end</Target>
+  </Link>
   <Link Name="Connection 2" default="true">
     <Label>Connection 2</Label>
     <Source cp="1">ProcessComponents</Source>
-    <Point x="288.0" y="54.0"/>
-    <Point x="456.0" y="54.0"/>
+    <Point x="216.0" y="174.0"/>
+    <Point x="384.0" y="174.0"/>
     <Target cp="3">CompleteProcessComponents</Target>
   </Link>
   <Link Name="Connection 1" default="true">
     <Label>Connection 1</Label>
     <Source cp="1">Start</Source>
     <Point x="96.0" y="54.0"/>
-    <Point x="180.0" y="54.0"/>
-    <Target cp="3">ProcessComponents</Target>
+    <Point x="252.0" y="54.0"/>
+    <Target cp="3">FactoryLogin</Target>
   </Link>
   <Link Name="Connection 20" default="true" x="5" y="-10">
     <Label>Connection 20</Label>
     <Source cp="2">CompleteProcessComponents</Source>
-    <Point x="540.0" y="84.0"/>
-    <Point x="540.0" y="104.0"/>
-    <Point x="160.0" y="104.0"/>
-    <Point x="160.0" y="123.0"/>
-    <Point x="180.0" y="123.0"/>
+    <Point x="468.0" y="204.0"/>
+    <Point x="468.0" y="224.0"/>
+    <Point x="88.0" y="224.0"/>
+    <Point x="88.0" y="243.0"/>
+    <Point x="108.0" y="243.0"/>
     <Target cp="11">AssembleChassis</Target>
   </Link>
   <Link Name="Connection 3" default="true">
     <Label>Connection 3</Label>
     <Source cp="1">AssembleChassis</Source>
-    <Point x="288.0" y="138.0"/>
-    <Point x="456.0" y="138.0"/>
+    <Point x="216.0" y="258.0"/>
+    <Point x="384.0" y="258.0"/>
     <Target cp="3">CompleteAssembleChassis</Target>
   </Link>
   <Link Name="CompleteCompleteVehicleBuildErr" default="false">
     <Label>CompleteCompleteVehicleBuildErr</Label>
     <Source cp="6">CompleteCompleteVehicleBuild</Source>
-    <Point x="624.0" y="615.0"/>
-    <Point x="839.0" y="615.0"/>
-    <Point x="839.0" y="330.0"/>
-    <Point x="924.0" y="330.0"/>
+    <Point x="552.0" y="735.0"/>
+    <Point x="760.0" y="735.0"/>
+    <Point x="760.0" y="450.0"/>
+    <Point x="780.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
     <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
 c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
@@ -539,10 +741,10 @@ dGlvbj4K</ConditionXMLEncoded>
   <Link Name="CompleteMateComponentsError" default="false">
     <Label>CompleteMateComponentsError</Label>
     <Source cp="6">CompleteMateAssembledComponents</Source>
-    <Point x="624.0" y="507.0"/>
-    <Point x="839.0" y="507.0"/>
-    <Point x="839.0" y="330.0"/>
-    <Point x="924.0" y="330.0"/>
+    <Point x="552.0" y="627.0"/>
+    <Point x="760.0" y="627.0"/>
+    <Point x="760.0" y="450.0"/>
+    <Point x="780.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
     <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
 c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
@@ -564,10 +766,10 @@ dGlvbj4K</ConditionXMLEncoded>
   <Link Name="CompleteAssembleInteriorError" default="false">
     <Label>CompleteAssembleInterior</Label>
     <Source cp="6">CompleteAssembleInterior</Source>
-    <Point x="624.0" y="411.0"/>
-    <Point x="839.0" y="411.0"/>
-    <Point x="839.0" y="330.0"/>
-    <Point x="924.0" y="330.0"/>
+    <Point x="552.0" y="531.0"/>
+    <Point x="760.0" y="531.0"/>
+    <Point x="760.0" y="450.0"/>
+    <Point x="780.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
     <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
 c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
@@ -589,8 +791,8 @@ dGlvbj4K</ConditionXMLEncoded>
   <Link Name="CompletePaintVehicleError" default="false">
     <Label>CompletePaintVehicleError</Label>
     <Source cp="1">CompletePaintVehicle</Source>
-    <Point x="624.0" y="330.0"/>
-    <Point x="924.0" y="330.0"/>
+    <Point x="552.0" y="450.0"/>
+    <Point x="780.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
     <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
 c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
@@ -612,10 +814,10 @@ dGlvbj4K</ConditionXMLEncoded>
   <Link Name="CompleteAssembleBodyError" default="false">
     <Label>CompleteAssembleBodyError</Label>
     <Source cp="7">CompleteAssembleBody</Source>
-    <Point x="624.0" y="249.0"/>
-    <Point x="838.0" y="249.0"/>
-    <Point x="838.0" y="330.0"/>
-    <Point x="924.0" y="330.0"/>
+    <Point x="552.0" y="369.0"/>
+    <Point x="760.0" y="369.0"/>
+    <Point x="760.0" y="450.0"/>
+    <Point x="780.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
     <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
 c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
@@ -637,10 +839,10 @@ dGlvbj4K</ConditionXMLEncoded>
   <Link Name="CompleteAssembleChassisError" default="false">
     <Label>CompleteAssembleChassisError</Label>
     <Source cp="7">CompleteAssembleChassis</Source>
-    <Point x="624.0" y="153.0"/>
-    <Point x="838.0" y="153.0"/>
-    <Point x="838.0" y="330.0"/>
-    <Point x="924.0" y="330.0"/>
+    <Point x="552.0" y="273.0"/>
+    <Point x="760.0" y="273.0"/>
+    <Point x="760.0" y="450.0"/>
+    <Point x="780.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
     <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
 c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
@@ -662,10 +864,10 @@ dGlvbj4K</ConditionXMLEncoded>
   <Link Name="CompleteProcessComponentsError" default="false">
     <Label>CompleteProcessComponentsError</Label>
     <Source cp="7">CompleteProcessComponents</Source>
-    <Point x="624.0" y="69.0"/>
-    <Point x="839.0" y="69.0"/>
-    <Point x="839.0" y="330.0"/>
-    <Point x="924.0" y="330.0"/>
+    <Point x="552.0" y="189.0"/>
+    <Point x="760.0" y="189.0"/>
+    <Point x="760.0" y="450.0"/>
+    <Point x="780.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
     <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
 c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
@@ -686,130 +888,133 @@ dGlvbj4K</ConditionXMLEncoded>
   </Link>
   <Link Name="Connection 31" default="true">
     <Label>Connection 31</Label>
-    <Source cp="1">ProcessBuildError</Source>
-    <Point x="1032.0" y="330.0"/>
-    <Point x="1176.0" y="330.0"/>
-    <Target cp="3">End 1</Target>
+    <Source cp="2">ProcessBuildError</Source>
+    <Point x="834.0" y="480.0"/>
+    <Point x="834.0" y="870.0"/>
+    <Point x="360.0" y="870.0"/>
+    <Target cp="1">Factory Logout</Target>
   </Link>
   <Link Name="Connection 26" default="true">
     <Label>Connection 26</Label>
-    <Source cp="9">CompleteCompleteVehicleBuild</Source>
-    <Point x="498.0" y="660.0"/>
-    <Point x="498.0" y="753.0"/>
-    <Point x="516.0" y="753.0"/>
-    <Target cp="11">end</Target>
+    <Source cp="2">CompleteCompleteVehicleBuild</Source>
+    <Point x="468.0" y="780.0"/>
+    <Point x="468.0" y="820.0"/>
+    <Point x="306.0" y="820.0"/>
+    <Point x="306.0" y="840.0"/>
+    <Target cp="0">Factory Logout</Target>
   </Link>
   <Link Name="Connection 25" default="true">
     <Label>Connection 25</Label>
     <Source cp="2">CompleteAssembleInterior</Source>
-    <Point x="540.0" y="456.0"/>
-    <Point x="540.0" y="476.0"/>
-    <Point x="160.0" y="476.0"/>
-    <Point x="160.0" y="507.0"/>
-    <Point x="180.0" y="507.0"/>
+    <Point x="468.0" y="576.0"/>
+    <Point x="468.0" y="596.0"/>
+    <Point x="88.0" y="596.0"/>
+    <Point x="88.0" y="627.0"/>
+    <Point x="108.0" y="627.0"/>
     <Target cp="11">MateAssembledComponents</Target>
   </Link>
   <Link Name="Connection 24" default="true">
     <Label>Connection 24</Label>
     <Source cp="2">CompletePaintVehicle</Source>
-    <Point x="540.0" y="360.0"/>
-    <Point x="540.0" y="380.0"/>
-    <Point x="160.0" y="380.0"/>
-    <Point x="160.0" y="411.0"/>
-    <Point x="180.0" y="411.0"/>
+    <Point x="468.0" y="480.0"/>
+    <Point x="468.0" y="500.0"/>
+    <Point x="88.0" y="500.0"/>
+    <Point x="88.0" y="531.0"/>
+    <Point x="108.0" y="531.0"/>
     <Target cp="11">AssembleInterior</Target>
   </Link>
   <Link Name="Connection 23" default="true">
     <Label>Connection 23</Label>
     <Source cp="1">MateAssembledComponents</Source>
-    <Point x="288.0" y="522.0"/>
-    <Point x="456.0" y="522.0"/>
+    <Point x="216.0" y="642.0"/>
+    <Point x="384.0" y="642.0"/>
     <Target cp="3">CompleteMateAssembledComponents</Target>
   </Link>
   <Link Name="Connection 22" default="true">
     <Label>Connection 22</Label>
     <Source cp="1">AssembleBody</Source>
-    <Point x="288.0" y="234.0"/>
-    <Point x="456.0" y="234.0"/>
+    <Point x="216.0" y="354.0"/>
+    <Point x="384.0" y="354.0"/>
     <Target cp="3">CompleteAssembleBody</Target>
   </Link>
   <Link Name="Connection 21" default="true">
     <Label>Connection 21</Label>
     <Source cp="2">CompleteAssembleChassis</Source>
-    <Point x="540.0" y="168.0"/>
-    <Point x="540.0" y="188.0"/>
-    <Point x="160.0" y="188.0"/>
-    <Point x="160.0" y="220.0"/>
-    <Point x="180.0" y="220.0"/>
+    <Point x="468.0" y="288.0"/>
+    <Point x="468.0" y="308.0"/>
+    <Point x="88.0" y="308.0"/>
+    <Point x="88.0" y="339.0"/>
+    <Point x="108.0" y="339.0"/>
     <Target cp="11">AssembleBody</Target>
   </Link>
   <Link Name="Connection 19" default="true">
     <Label>Connection 19</Label>
     <Source cp="1">CompleteVehicleBuild</Source>
-    <Point x="288.0" y="630.0"/>
-    <Point x="456.0" y="630.0"/>
+    <Point x="216.0" y="750.0"/>
+    <Point x="384.0" y="750.0"/>
     <Target cp="3">CompleteCompleteVehicleBuild</Target>
   </Link>
   <Link Name="Connection 7" default="true">
     <Label>Connection 7</Label>
     <Source cp="2">CompleteMateAssembledComponents</Source>
-    <Point x="540.0" y="552.0"/>
-    <Point x="540.0" y="580.0"/>
-    <Point x="160.0" y="580.0"/>
-    <Point x="160.0" y="616.0"/>
-    <Point x="180.0" y="616.0"/>
+    <Point x="468.0" y="672.0"/>
+    <Point x="468.0" y="700.0"/>
+    <Point x="88.0" y="700.0"/>
+    <Point x="88.0" y="735.0"/>
+    <Point x="108.0" y="735.0"/>
     <Target cp="11">CompleteVehicleBuild</Target>
   </Link>
   <Link Name="Connection 6" default="true">
     <Label>Connection 6</Label>
     <Source cp="1">AssembleInterior</Source>
-    <Point x="288.0" y="426.0"/>
-    <Point x="456.0" y="426.0"/>
+    <Point x="216.0" y="546.0"/>
+    <Point x="384.0" y="546.0"/>
     <Target cp="3">CompleteAssembleInterior</Target>
   </Link>
   <Link Name="Connection 5" default="true">
     <Label>Connection 5</Label>
     <Source cp="1">PaintVehicle</Source>
-    <Point x="288.0" y="330.0"/>
-    <Point x="456.0" y="330.0"/>
+    <Point x="216.0" y="450.0"/>
+    <Point x="384.0" y="450.0"/>
     <Target cp="3">CompletePaintVehicle</Target>
   </Link>
   <Link Name="Connection 4" default="true">
     <Label>Connection 4</Label>
     <Source cp="2">CompleteAssembleBody</Source>
-    <Point x="540.0" y="264.0"/>
-    <Point x="540.0" y="284.0"/>
-    <Point x="160.0" y="284.0"/>
-    <Point x="160.0" y="315.0"/>
-    <Point x="180.0" y="315.0"/>
+    <Point x="468.0" y="384.0"/>
+    <Point x="468.0" y="404.0"/>
+    <Point x="88.0" y="404.0"/>
+    <Point x="88.0" y="435.0"/>
+    <Point x="108.0" y="435.0"/>
     <Target cp="11">PaintVehicle</Target>
   </Link>
-  <Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING">
-    <Label>FactoryUsers:</Label>
-    <DataType>STRING</DataType>
-    <DataValue>factory</DataValue>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text">
-      <Label>FactoryUsers:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING">
-    <Label>PIID:</Label>
-    <Description>Savvion ProcessInstanceId</Description>
+  <Link Name="Connection 40" default="true">
+    <Label>Connection 40</Label>
+    <Source cp="2">FactoryLogin</Source>
+    <Point x="306.0" y="84.0"/>
+    <Point x="306.0" y="104.0"/>
+    <Point x="88.0" y="104.0"/>
+    <Point x="88.0" y="174.0"/>
+    <Point x="108.0" y="174.0"/>
+    <Target cp="3">ProcessComponents</Target>
+  </Link>
+  <Dataslot Name="error" category="VehicleOrder" name="error" type="STRING">
+    <Label>error:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
-    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="error:" password="false" required="false" size="20" type="text">
+      <Label>error:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="OrderId" category="VehicleOrder" name="OrderId" type="STRING">
+    <Label>orderid:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>false</MultiLine>
     <BizManageAccessFlag>true</BizManageAccessFlag>
@@ -817,15 +1022,15 @@ dGlvbj4K</ConditionXMLEncoded>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="PIID:" password="false" required="false" size="20" type="text">
-      <Label>PIID:</Label>
+    <Format editable="true" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage size="256" type="CHAR"/>
+    <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
-  <Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING">
+  <Dataslot Name="WorkStepError" category="VehicleOrder" name="WorkStepError" type="STRING">
     <Label>WorkStepError:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
@@ -845,9 +1050,42 @@ dGlvbj4K</ConditionXMLEncoded>
     </Format>
     <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
-  <Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING">
+  <Dataslot Name="OrderNum" category="VehicleOrder" name="OrderNum" type="NUMBER">
+    <Label>OrderNum:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="FactoryUsers" category="VehicleOrder" name="FactoryUsers" type="STRING">
+    <Label>FactoryUsers:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>factory</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text">
+      <Label>FactoryUsers:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="ContextId" category="VehicleOrder" name="ContextId" type="STRING">
     <Label>ContextId:</Label>
-    <Description>AETF User Context ID </Description>
     <DataType>STRING</DataType>
     <DataValue/>
     <DataSize>2000</DataSize>
@@ -866,27 +1104,7 @@ dGlvbj4K</ConditionXMLEncoded>
     </Format>
     <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
-  <Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING">
-    <Label>OrderId:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>2000</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text">
-      <Label>OrderId:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="2000" type="VARCHAR"/>
-  </Dataslot>
-  <Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING">
+  <Dataslot Name="BuildStatus" category="VehicleOrder" name="BuildStatus" type="STRING">
     <Label>BuildStatus:</Label>
     <Description>The status of the build step</Description>
     <DataType>STRING</DataType>
@@ -907,10 +1125,22 @@ dGlvbj4K</ConditionXMLEncoded>
     </Format>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
-  <Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING">
-    <Label>AutoEdgeWebServiceEndpoint:</Label>
+  <Dataslot Name="AutoEdgeWebServiceEndpoint" category="VehicleOrder" name="AutoEdgeWebServiceEndpoint" type="STRING">
+    <Label>AutoEdgeWebService:</Label>
     <DataType>STRING</DataType>
     <DataValue>http://localhost:9090/wsa/wsa1</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="AutoEdgeWebService:" password="false" required="false" size="20" type="text">
+      <Label>AutoEdgeWebService:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="VehicleBrand" category="VehicleOrder" name="VehicleBrand" type="STRING">
+    <Label>SelectedVehicleBrand:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
     <DataSize>256</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>false</MultiLine>
@@ -919,18 +1149,18 @@ dGlvbj4K</ConditionXMLEncoded>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="AutoEdgeWebServiceEndpoint:" password="false" required="false" size="20" type="text">
-      <Label>AutoEdgeWebServiceEndpoint:</Label>
+    <Format editable="true" label="SelectedVehicleBrand:" password="false" required="true" size="20" type="text">
+      <Label>SelectedVehicleBrand:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
-  <Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN">
-    <Label>VehicleBuildComplete:</Label>
-    <DataType>BOOLEAN</DataType>
-    <DataValue>false</DataValue>
+  <Dataslot Name="password" category="VehicleOrder" name="password" type="STRING">
+    <Label>password:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>factory</DataValue>
     <DataSize>256</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>false</MultiLine>
@@ -939,19 +1169,18 @@ dGlvbj4K</ConditionXMLEncoded>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
+    <Format editable="true" label="password:" password="false" required="false" size="20" type="text">
+      <Label>password:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
-  <Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER">
-    <Label>OrderNum:</Label>
-    <Description>The Order number for this order.</Description>
-    <DataType>LONG</DataType>
-    <DataValue>0</DataValue>
+  <Dataslot Name="ManufacturingUser" category="VehicleOrder" name="ManufacturingUser" type="STRING">
+    <Label>ManufacturingUser:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>factory</DataValue>
     <DataSize>256</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>false</MultiLine>
@@ -960,16 +1189,36 @@ dGlvbj4K</ConditionXMLEncoded>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="OrderNum:" required="false" type="field">
-      <Label>OrderNum:</Label>
+    <Format editable="true" label="ManufacturingUser:" password="false" required="false" size="20" type="text">
+      <Label>ManufacturingUser:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage type="LONG"/>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="FactoryDomain" category="VehicleOrder" name="FactoryDomain" type="STRING">
+    <Label>FactoryDomain:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="FactoryDomain:" password="false" required="false" size="20" type="text">
+      <Label>FactoryDomain:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
   </Dataslot>
   <Notes>
-    <Note color="255,255,153" connectTo="ProcessBuildError" height="120" shape="annotation" width="348" x="1116" y="540">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+    <Note color="255,255,153" connectTo="ProcessBuildError" height="204" shape="annotation" width="132" x="912" y="540">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
 &lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
 &lt;Form tstamp="1295534106662" version="7.0SP1"&gt;&#13;
   &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
@@ -1171,7 +1420,7 @@ dGlvbj4K</ConditionXMLEncoded>
   &lt;/body&gt;&#13;
 &lt;/Form&gt;&#13;
 </Note>
-    <Note color="255,255,153" height="84" shape="sticky" width="252" x="696" y="684">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+    <Note color="255,255,153" height="84" shape="sticky" width="252" x="420" y="912">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
 &lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
 &lt;Form tstamp="1295533767862" version="7.0SP1"&gt;&#13;
   &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
@@ -1368,7 +1617,7 @@ dGlvbj4K</ConditionXMLEncoded>
   &lt;/body&gt;&#13;
 &lt;/Form&gt;&#13;
 </Note>
-    <Note color="255,255,255" height="96" shape="annotation" width="312" x="996" y="48">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+    <Note color="255,255,255" height="96" shape="annotation" width="312" x="456" y="24">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
 &lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
 &lt;Form tstamp="1295533759491" version="7.0SP1"&gt;&#13;
   &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
@@ -1567,21 +1816,19 @@ dGlvbj4K</ConditionXMLEncoded>
 </Note>
   </Notes>
   <History>
-    <Deployed as="BuildVehicle" by="sbm" on="1292524986089" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Thu Dec 16 13:43:06 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292357597650" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 15:13:17 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292357569022" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 15:12:49 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292357391320" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 15:09:51 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292357301449" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 15:08:21 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292357088718" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 15:04:48 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292356914837" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 15:01:54 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292356774400" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 14:59:34 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292356327353" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 14:52:07 EST 2010</Deployed>
-    <Created as="BuildVehicle" by="pjudge" from="VehicleBuild" on="1292337598164">Tue Dec 14 09:39:58 EST 2010</Created>
-    <Deployed as="BuildVehicle" by="sbm" on="1292337918830" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 09:45:18 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292342878533" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 11:07:58 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1292426851621" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Wed Dec 15 10:27:31 EST 2010</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1296347556617" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Sat Jan 29 19:32:36 EST 2011</Deployed>
-    <Deployed as="BuildVehicle" by="sbm" on="1296438035633" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Sun Jan 30 20:40:35 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297957646893" to="http://localhost:18793/sbm/deployment">Thu Feb 17 10:47:26 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297954847112" to="http://localhost:18793/sbm/deployment">Thu Feb 17 10:00:47 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297954809362" to="http://localhost:18793/sbm/deployment">Thu Feb 17 10:00:09 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297954577533" to="http://localhost:18793/sbm/deployment">Thu Feb 17 09:56:17 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297954365502" to="http://localhost:18793/sbm/deployment">Thu Feb 17 09:52:45 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297894821158" to="http://localhost:18793/sbm/deployment">Wed Feb 16 17:20:21 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297894353205" to="http://localhost:18793/sbm/deployment">Wed Feb 16 17:12:33 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297873478158" to="http://localhost:18793/sbm/deployment">Wed Feb 16 11:24:38 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297788837143" to="http://localhost:18793/sbm/deployment">Tue Feb 15 11:53:57 EST 2011</Deployed>
+    <Created as="BuildVehicle" by="pjudge" from="BuildVehicle" on="1297706120627">Mon Feb 14 12:55:20 EST 2011</Created>
+    <Deployed as="BuildVehicle" by="ebms" on="1297706280533" to="http://localhost:18793/sbm/deployment">Mon Feb 14 12:58:00 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297789487752" to="http://localhost:18793/sbm/deployment">Tue Feb 15 12:04:47 EST 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1297888809377" to="http://localhost:18793/sbm/deployment">Wed Feb 16 15:40:09 EST 2011</Deployed>
   </History>
   <Repository/>
 </Process>
