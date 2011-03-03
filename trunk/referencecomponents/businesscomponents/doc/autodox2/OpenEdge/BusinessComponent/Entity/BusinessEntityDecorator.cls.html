@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>IBusinessEntity</title>
+    <title>BusinessEntityDecorator</title>
     <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
   </head>
   <body>
@@ -36,9 +36,9 @@
     <hr />
     <h2>
       <font size='-1'>OpenEdge\BusinessComponent\Entity</font>
-      <br />INTERFACE IBusinessEntity
+      <br />CLASS BusinessEntityDecorator
     </h2>
-    <p>INTERFACE OpenEdge.BusinessComponent.Entity.IBusinessEntity </p>
+    <p>CLASS OpenEdge.BusinessComponent.Entity.BusinessEntityDecorator abstract IMPLEMENTS <a href="../../../OpenEdge/BusinessComponent/Entity/IBusinessEntity.cls.html" title="OpenEdge.BusinessComponent.Entity.IBusinessEntity" target="classFrame">IBusinessEntity</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -63,7 +63,21 @@
           <b>
             <a href='#property.DataAccess'>DataAccess</a>
           </b> PUBLIC GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The DataAccess object for this entity.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/BusinessComponent/Entity/IBusinessEntity.cls.html" title="OpenEdge.BusinessComponent.Entity.IBusinessEntity" target="classFrame">IBusinessEntity</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.DecoratedBusinessEntity'>DecoratedBusinessEntity</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -78,6 +92,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.businesscomponent.entity.ibusinessentity)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/BusinessComponent/Entity/IBusinessEntity.cls.html" title="OpenEdge.BusinessComponent.Entity.IBusinessEntity" target="classFrame">IBusinessEntity</a> poBusinessEntity)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>VOID</code>
         </font>
       </td>
@@ -86,7 +114,7 @@
           <b>
             <a href='#fetchdata(openedge.commoninfrastructure.common.servicemessage.ifetchrequest)'> FetchData</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve data according to the request, and
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -100,7 +128,7 @@
           <b>
             <a href='#fetchschema(openedge.commoninfrastructure.common.servicemessage.ifetchrequest)'> FetchSchema</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defines the entity in terms of the schema that the underlying prodataset or
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -114,7 +142,7 @@
           <b>
             <a href='#getdata(longchar)'> GetData</a>
           </b>(LONGCHAR pcMessageId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Response complement method for FetchData above.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -128,7 +156,7 @@
           <b>
             <a href='#savedata(openedge.commoninfrastructure.common.servicemessage.isaverequest)'> SaveData</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commit the data to the DataSource(s) through the DataAccess object.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -158,8 +186,15 @@
     <h3>DataAccess</h3>
     <code><a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> PUBLIC GET SET </code>
     <dl>
-      <dd>The DataAccess object for this entity. <p> </dd>
-      <dd>The SetDataAccess method is a workaround for the lack of dynamic property invocation in the ABL. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.DecoratedBusinessEntity'><!-- --></a>
+    <h3>DecoratedBusinessEntity</h3>
+    <code><a href="../../../OpenEdge/BusinessComponent/Entity/IBusinessEntity.cls.html" title="OpenEdge.BusinessComponent.Entity.IBusinessEntity" target="classFrame">IBusinessEntity</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -172,20 +207,25 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='(openedge.businesscomponent.entity.ibusinessentity)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/BusinessComponent/Entity/IBusinessEntity.cls.html" title="OpenEdge.BusinessComponent.Entity.IBusinessEntity" target="classFrame">IBusinessEntity</a> poBusinessEntity)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='fetchdata(openedge.commoninfrastructure.common.servicemessage.ifetchrequest)'><!-- --></a>
     <h3>FetchData</h3>
     <code>PUBLIC  VOID
       <b>FetchData</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
     </code>
     <dl>
-      <dd>Retrieve data according to the request, and <p> </dd>
       <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>IFetchRequest - parameter for the request (query, batch/page, etc)<br/></dd>
-        </dl>
+        <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
@@ -195,19 +235,8 @@
       <b>FetchSchema</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
     </code>
     <dl>
-      <dd>Defines the entity in terms of the schema that the underlying prodataset or <p> </dd>
-      <dd>temp-tables will have. This is useful for example for binding UI before any data is requested. </dd>
       <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>IFetchRequest - The request object for the entity definition.<br/></dd>
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>IFetchResponse</dd>
-        </dl>
+        <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
@@ -217,18 +246,8 @@
       <b>GetData</b>(LONGCHAR pcMessageId)
     </code>
     <dl>
-      <dd>Response complement method for FetchData above. <p> </dd>
       <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>character - The message id for the request/response<br/></dd>
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>IFetchResponse</dd>
-        </dl>
+        <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
@@ -238,18 +257,8 @@
       <b>SaveData</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
     </code>
     <dl>
-      <dd>Commit the data to the DataSource(s) through the DataAccess object. <p> </dd>
       <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>ISaveRequest - The Save request parameter object for this request.<br/></dd>
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>ISaveReponse A save request parameter object.</dd>
-        </dl>
+        <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
