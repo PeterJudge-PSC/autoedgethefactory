@@ -1,0 +1,1896 @@
+<html>
+  <head>
+    <title>WorkFlowWebService</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\EnterpriseServices\BizLogic</font>
+      <br />CLASS WorkFlowWebService
+    </h2>
+    <p>CLASS OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService INHERITS <a href="../../../OpenEdge/Core/XML/WebServiceProtocol.cls.html" title="OpenEdge.Core.XML.WebServiceProtocol" target="classFrame">WebServiceProtocol</a> IMPLEMENTS <a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicAPI.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcHost)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#assignworkitem(longchar,character,character)'> AssignWorkItem</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, CHARACTER pcPerformer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#assignworkitemfromwiid(longchar,int64,character)'> AssignWorkItemFromWiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#completeworkitem(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'> CompleteWorkItem</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#completeworkitemfromwiid(longchar,int64,openedge.enterpriseservices.bizlogic.dataslotinstance)'> CompleteWorkItemFromWiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#connect(character,character)'> Connect</a>
+          </b>(CHARACTER pcUser, CHARACTER pcPassword)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createprocessinstance(longchar,character,character,character,openedge.enterpriseservices.bizlogic.dataslottemplate)'> CreateProcessInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcProcessInstanceNamePrefix, CHARACTER pcPriority, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a> poDataSlotTemplate)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#disconnect(longchar)'> Disconnect</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#endsoapmessage(character,character)'> EndSoapMessage</a>
+          </b>(CHARACTER pcElementName, CHARACTER pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getassignedworkitemlist(longchar)'> GetAssignedWorkItemList</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getavailableworkitemlist(longchar)'> GetAvailableWorkItemList</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstance(longchar,character)'> GetProcessInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstancedataslot(longchar,character,character)'> GetProcessInstanceDataSlot</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcDataslotName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstancedataslotfrompiid(longchar,int64,character)'> GetProcessInstanceDataSlotFromPiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId, CHARACTER pcDataslotName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstancedataslots(longchar,character)'> GetProcessInstanceDataSlots</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstancefromid(longchar,int64)'> GetProcessInstanceFromID</a>
+          </b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstancelist(longchar)'> GetProcessInstanceList</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepInstance" target="classFrame">WorkStepInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstanceworksteps(longchar,character)'> GetProcessInstanceWorkSteps</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate" target="classFrame">ProcessTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplate(longchar,character)'> GetProcessTemplate</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplateappname(longchar,character)'> GetProcessTemplateAppName</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplatedataslot(longchar,character,character)'> GetProcessTemplateDataSlot</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcDataslotName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplatedataslots(longchar,character)'> GetProcessTemplateDataSlots</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate" target="classFrame">ProcessTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplatefromid(longchar,int64)'> GetProcessTemplateFromID</a>
+          </b>(LONGCHAR pcSessionId, INT64 piProcessTemplateId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INT64</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplateid(longchar,character)'> GetProcessTemplateID</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplatenamefromprocessid(longchar,int64)'> GetProcessTemplateNameFromProcessID</a>
+          </b>(LONGCHAR pcSessionId, INT64 piProcessTemplateId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplatenamefromprocessinstance(longchar,character)'> GetProcessTemplateNameFromProcessInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplateversions(longchar,character)'> GetProcessTemplateVersions</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcApplicationName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepTemplate" target="classFrame">WorkStepTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplateworksteps(longchar,character)'> GetProcessTemplateWorkSteps</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LONGCHAR</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplatexml(longchar,character)'> GetProcessTemplateXML</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getproxyassignedworkitemlist(longchar)'> GetProxyAssignedWorkItemList</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getproxyavailableworkitemlist(longchar)'> GetProxyAvailableWorkItemList</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepTemplate" target="classFrame">WorkStepTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getstartworksteptemplate(longchar,character)'> GetStartWorkStepTemplate</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getstatus()'> GetStatus</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getsuspendedworkitemlist(longchar)'> GetSuspendedWorkItemList</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate" target="classFrame">ProcessTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getuserauthorizedprocesstemplatelist(longchar)'> GetUserAuthorizedProcessTemplateList</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getuserauthorizedprocesstemplatenames(longchar)'> GetUserAuthorizedProcessTemplateNames</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkitem(longchar,character)'> GetWorkItem</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkitemdataslots(longchar,character)'> GetWorkItemDataSlots</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkitemdataslotsfromwiid(longchar,int64)'> GetWorkItemDataSlotsFromWiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piWorkstepInstanceId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkitemfromid(longchar,int64)'> GetWorkItemFromID</a>
+          </b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepInstance" target="classFrame">WorkStepInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkstepinstance(longchar,character,character)'> GetWorkStepInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkstepinstancedataslots(longchar,character,character)'> GetWorkStepInstanceDataSlots</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkstepInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkstepinstancedataslotsfrompiid(longchar,int64,character)'> GetWorkStepInstanceDataSlotsFromPiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId, CHARACTER pcWorkstepInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepInstance" target="classFrame">WorkStepInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkstepinstancefrompiid(longchar,int64,character)'> GetWorkStepInstanceFromPiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepTemplate" target="classFrame">WorkStepTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworksteptemplate(longchar,character,character)'> GetWorkStepTemplate</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworksteptemplatedataslots(longchar,character,character)'> GetWorkStepTemplateDataSlots</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworksteptemplatedataslotsfromptid(longchar,int64,character)'> GetWorkStepTemplateDataSlotsFromPtid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piProcessTemplateId, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#initializesaxwriter()'> InitializeSaxWriter</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#isprocesstemplateexist(longchar,character)'> IsProcessTemplateExist</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#issessionvalid(longchar)'> IsSessionValid</a>
+          </b>(LONGCHAR pcSessionId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#makeavailableworkitem(longchar,character,character)'> MakeAvailableWorkItem</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, CHARACTER pcPerformers)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#makeavailableworkitemfromwiid(longchar,int64,character)'> MakeAvailableWorkItemFromWiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, CHARACTER pcPerformers)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#reassignworkitem(longchar,character,character)'> ReassignWorkItem</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, CHARACTER pcPerformer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#reassignworkitemfromwiid(longchar,int64,character)'> ReassignWorkItemFromWiid</a>
+          </b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#removeprocesstemplate(longchar,character)'> RemoveProcessTemplate</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resetsaxwriter()'> ResetSaxWriter</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resumeprocessinstance(longchar,character)'> ResumeProcessInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resumeworkitem(longchar,character)'> ResumeWorkItem</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resumeworkstepinstance(longchar,character,character)'> ResumeWorkStepInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setprocessinstancedataslotsvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'> SetProcessInstanceDataSlotsValue</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setprocessinstancedataslotvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'> SetProcessInstanceDataSlotValue</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setprocessinstanceduedate(longchar,character,datetime-tz)'> SetProcessInstanceDueDate</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, DATETIME-TZ ptDueDate)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setprocessinstancepriority(longchar,character,character)'> SetProcessInstancePriority</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcPriority)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setprocesstemplatedataslotsvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslottemplate)'> SetProcessTemplateDataSlotsValue</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a> poDataSlotTemplate)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setprocesstemplatedataslotvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslottemplate)'> SetProcessTemplateDataSlotValue</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a> poDataSlotTemplate)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setworkitemdataslotsvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'> SetWorkItemDataSlotsValue</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setworkitemdataslotvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'> SetWorkItemDataSlotValue</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LONGCHAR</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#soapmessagetolongchar()'> SoapMessageToLongchar</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts the current soap message to LONGCHAR for use as an operation.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#startsoapmessage(character,character)'> StartSoapMessage</a>
+          </b>(CHARACTER pcElementName, CHARACTER pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#suspendprocessinstance(longchar,character)'> SuspendProcessInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#suspendworkitem(longchar,character)'> SuspendWorkItem</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#suspendworkstepinstance(longchar,character,character)'> SuspendWorkStepInstance</a>
+          </b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeelement(character,longchar,character)'> WriteElement</a>
+          </b>(CHARACTER pcElementName, LONGCHAR pcValue, CHARACTER pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcHost)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='assignworkitem(longchar,character,character)'><!-- --></a>
+    <h3>AssignWorkItem</h3>
+    <code>PUBLIC  VOID
+      <b>AssignWorkItem</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, CHARACTER pcPerformer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='assignworkitemfromwiid(longchar,int64,character)'><!-- --></a>
+    <h3>AssignWorkItemFromWiid</h3>
+    <code>PUBLIC  VOID
+      <b>AssignWorkItemFromWiid</b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='completeworkitem(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'><!-- --></a>
+    <h3>CompleteWorkItem</h3>
+    <code>PUBLIC  VOID
+      <b>CompleteWorkItem</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='completeworkitemfromwiid(longchar,int64,openedge.enterpriseservices.bizlogic.dataslotinstance)'><!-- --></a>
+    <h3>CompleteWorkItemFromWiid</h3>
+    <code>PUBLIC  VOID
+      <b>CompleteWorkItemFromWiid</b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='connect(character,character)'><!-- --></a>
+    <h3>Connect</h3>
+    <code>PUBLIC  CHARACTER
+      <b>Connect</b>(CHARACTER pcUser, CHARACTER pcPassword)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createprocessinstance(longchar,character,character,character,openedge.enterpriseservices.bizlogic.dataslottemplate)'><!-- --></a>
+    <h3>CreateProcessInstance</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a>
+      <b>CreateProcessInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcProcessInstanceNamePrefix, CHARACTER pcPriority, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a> poDataSlotTemplate)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='disconnect(longchar)'><!-- --></a>
+    <h3>Disconnect</h3>
+    <code>PUBLIC  VOID
+      <b>Disconnect</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='endsoapmessage(character,character)'><!-- --></a>
+    <h3>EndSoapMessage</h3>
+    <code>PROTECTED  VOID
+      <b>EndSoapMessage</b>(CHARACTER pcElementName, CHARACTER pcNamespace)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getassignedworkitemlist(longchar)'><!-- --></a>
+    <h3>GetAssignedWorkItemList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetAssignedWorkItemList</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getavailableworkitemlist(longchar)'><!-- --></a>
+    <h3>GetAvailableWorkItemList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetAvailableWorkItemList</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocessinstance(longchar,character)'><!-- --></a>
+    <h3>GetProcessInstance</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a>
+      <b>GetProcessInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocessinstancedataslot(longchar,character,character)'><!-- --></a>
+    <h3>GetProcessInstanceDataSlot</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a>
+      <b>GetProcessInstanceDataSlot</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcDataslotName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocessinstancedataslotfrompiid(longchar,int64,character)'><!-- --></a>
+    <h3>GetProcessInstanceDataSlotFromPiid</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a>
+      <b>GetProcessInstanceDataSlotFromPiid</b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId, CHARACTER pcDataslotName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocessinstancedataslots(longchar,character)'><!-- --></a>
+    <h3>GetProcessInstanceDataSlots</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a>
+      <b>GetProcessInstanceDataSlots</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocessinstancefromid(longchar,int64)'><!-- --></a>
+    <h3>GetProcessInstanceFromID</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a>
+      <b>GetProcessInstanceFromID</b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocessinstancelist(longchar)'><!-- --></a>
+    <h3>GetProcessInstanceList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessInstance" target="classFrame">ProcessInstance</a>
+      <b>GetProcessInstanceList</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocessinstanceworksteps(longchar,character)'><!-- --></a>
+    <h3>GetProcessInstanceWorkSteps</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepInstance" target="classFrame">WorkStepInstance</a>
+      <b>GetProcessInstanceWorkSteps</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplate(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplate</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate" target="classFrame">ProcessTemplate</a>
+      <b>GetProcessTemplate</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplateappname(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplateAppName</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetProcessTemplateAppName</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplatedataslot(longchar,character,character)'><!-- --></a>
+    <h3>GetProcessTemplateDataSlot</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a>
+      <b>GetProcessTemplateDataSlot</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcDataslotName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplatedataslots(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplateDataSlots</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a>
+      <b>GetProcessTemplateDataSlots</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplatefromid(longchar,int64)'><!-- --></a>
+    <h3>GetProcessTemplateFromID</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate" target="classFrame">ProcessTemplate</a>
+      <b>GetProcessTemplateFromID</b>(LONGCHAR pcSessionId, INT64 piProcessTemplateId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplateid(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplateID</h3>
+    <code>PUBLIC  INT64
+      <b>GetProcessTemplateID</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplatenamefromprocessid(longchar,int64)'><!-- --></a>
+    <h3>GetProcessTemplateNameFromProcessID</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetProcessTemplateNameFromProcessID</b>(LONGCHAR pcSessionId, INT64 piProcessTemplateId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplatenamefromprocessinstance(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplateNameFromProcessInstance</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetProcessTemplateNameFromProcessInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplateversions(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplateVersions</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetProcessTemplateVersions</b>(LONGCHAR pcSessionId, CHARACTER pcApplicationName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplateworksteps(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplateWorkSteps</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepTemplate" target="classFrame">WorkStepTemplate</a>
+      <b>GetProcessTemplateWorkSteps</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getprocesstemplatexml(longchar,character)'><!-- --></a>
+    <h3>GetProcessTemplateXML</h3>
+    <code>PUBLIC  LONGCHAR
+      <b>GetProcessTemplateXML</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getproxyassignedworkitemlist(longchar)'><!-- --></a>
+    <h3>GetProxyAssignedWorkItemList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetProxyAssignedWorkItemList</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getproxyavailableworkitemlist(longchar)'><!-- --></a>
+    <h3>GetProxyAvailableWorkItemList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetProxyAvailableWorkItemList</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getstartworksteptemplate(longchar,character)'><!-- --></a>
+    <h3>GetStartWorkStepTemplate</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepTemplate" target="classFrame">WorkStepTemplate</a>
+      <b>GetStartWorkStepTemplate</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getstatus()'><!-- --></a>
+    <h3>GetStatus</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetStatus</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getsuspendedworkitemlist(longchar)'><!-- --></a>
+    <h3>GetSuspendedWorkItemList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetSuspendedWorkItemList</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getuserauthorizedprocesstemplatelist(longchar)'><!-- --></a>
+    <h3>GetUserAuthorizedProcessTemplateList</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/ProcessTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate" target="classFrame">ProcessTemplate</a>
+      <b>GetUserAuthorizedProcessTemplateList</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getuserauthorizedprocesstemplatenames(longchar)'><!-- --></a>
+    <h3>GetUserAuthorizedProcessTemplateNames</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetUserAuthorizedProcessTemplateNames</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkitem(longchar,character)'><!-- --></a>
+    <h3>GetWorkItem</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetWorkItem</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkitemdataslots(longchar,character)'><!-- --></a>
+    <h3>GetWorkItemDataSlots</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a>
+      <b>GetWorkItemDataSlots</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkitemdataslotsfromwiid(longchar,int64)'><!-- --></a>
+    <h3>GetWorkItemDataSlotsFromWiid</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a>
+      <b>GetWorkItemDataSlotsFromWiid</b>(LONGCHAR pcSessionId, INT64 piWorkstepInstanceId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkitemfromid(longchar,int64)'><!-- --></a>
+    <h3>GetWorkItemFromID</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkItem.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetWorkItemFromID</b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkstepinstance(longchar,character,character)'><!-- --></a>
+    <h3>GetWorkStepInstance</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepInstance" target="classFrame">WorkStepInstance</a>
+      <b>GetWorkStepInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkstepinstancedataslots(longchar,character,character)'><!-- --></a>
+    <h3>GetWorkStepInstanceDataSlots</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a>
+      <b>GetWorkStepInstanceDataSlots</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkstepInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkstepinstancedataslotsfrompiid(longchar,int64,character)'><!-- --></a>
+    <h3>GetWorkStepInstanceDataSlotsFromPiid</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a>
+      <b>GetWorkStepInstanceDataSlotsFromPiid</b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId, CHARACTER pcWorkstepInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworkstepinstancefrompiid(longchar,int64,character)'><!-- --></a>
+    <h3>GetWorkStepInstanceFromPiid</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepInstance" target="classFrame">WorkStepInstance</a>
+      <b>GetWorkStepInstanceFromPiid</b>(LONGCHAR pcSessionId, INT64 piProcessInstanceId, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworksteptemplate(longchar,character,character)'><!-- --></a>
+    <h3>GetWorkStepTemplate</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/WorkStepTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.WorkStepTemplate" target="classFrame">WorkStepTemplate</a>
+      <b>GetWorkStepTemplate</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworksteptemplatedataslots(longchar,character,character)'><!-- --></a>
+    <h3>GetWorkStepTemplateDataSlots</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a>
+      <b>GetWorkStepTemplateDataSlots</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getworksteptemplatedataslotsfromptid(longchar,int64,character)'><!-- --></a>
+    <h3>GetWorkStepTemplateDataSlotsFromPtid</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a>
+      <b>GetWorkStepTemplateDataSlotsFromPtid</b>(LONGCHAR pcSessionId, INT64 piProcessTemplateId, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='initializesaxwriter()'><!-- --></a>
+    <h3>InitializeSaxWriter</h3>
+    <code>PROTECTED  VOID
+      <b>InitializeSaxWriter</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='isprocesstemplateexist(longchar,character)'><!-- --></a>
+    <h3>IsProcessTemplateExist</h3>
+    <code>PUBLIC  LOGICAL
+      <b>IsProcessTemplateExist</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='issessionvalid(longchar)'><!-- --></a>
+    <h3>IsSessionValid</h3>
+    <code>PUBLIC  LOGICAL
+      <b>IsSessionValid</b>(LONGCHAR pcSessionId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='makeavailableworkitem(longchar,character,character)'><!-- --></a>
+    <h3>MakeAvailableWorkItem</h3>
+    <code>PUBLIC  VOID
+      <b>MakeAvailableWorkItem</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, CHARACTER pcPerformers)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='makeavailableworkitemfromwiid(longchar,int64,character)'><!-- --></a>
+    <h3>MakeAvailableWorkItemFromWiid</h3>
+    <code>PUBLIC  VOID
+      <b>MakeAvailableWorkItemFromWiid</b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, CHARACTER pcPerformers)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='reassignworkitem(longchar,character,character)'><!-- --></a>
+    <h3>ReassignWorkItem</h3>
+    <code>PUBLIC  VOID
+      <b>ReassignWorkItem</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, CHARACTER pcPerformer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='reassignworkitemfromwiid(longchar,int64,character)'><!-- --></a>
+    <h3>ReassignWorkItemFromWiid</h3>
+    <code>PUBLIC  VOID
+      <b>ReassignWorkItemFromWiid</b>(LONGCHAR pcSessionId, INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='removeprocesstemplate(longchar,character)'><!-- --></a>
+    <h3>RemoveProcessTemplate</h3>
+    <code>PUBLIC  VOID
+      <b>RemoveProcessTemplate</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resetsaxwriter()'><!-- --></a>
+    <h3>ResetSaxWriter</h3>
+    <code>PROTECTED  VOID
+      <b>ResetSaxWriter</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resumeprocessinstance(longchar,character)'><!-- --></a>
+    <h3>ResumeProcessInstance</h3>
+    <code>PUBLIC  VOID
+      <b>ResumeProcessInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resumeworkitem(longchar,character)'><!-- --></a>
+    <h3>ResumeWorkItem</h3>
+    <code>PUBLIC  VOID
+      <b>ResumeWorkItem</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resumeworkstepinstance(longchar,character,character)'><!-- --></a>
+    <h3>ResumeWorkStepInstance</h3>
+    <code>PUBLIC  VOID
+      <b>ResumeWorkStepInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setprocessinstancedataslotsvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'><!-- --></a>
+    <h3>SetProcessInstanceDataSlotsValue</h3>
+    <code>PUBLIC  VOID
+      <b>SetProcessInstanceDataSlotsValue</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setprocessinstancedataslotvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'><!-- --></a>
+    <h3>SetProcessInstanceDataSlotValue</h3>
+    <code>PUBLIC  VOID
+      <b>SetProcessInstanceDataSlotValue</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setprocessinstanceduedate(longchar,character,datetime-tz)'><!-- --></a>
+    <h3>SetProcessInstanceDueDate</h3>
+    <code>PUBLIC  VOID
+      <b>SetProcessInstanceDueDate</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, DATETIME-TZ ptDueDate)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setprocessinstancepriority(longchar,character,character)'><!-- --></a>
+    <h3>SetProcessInstancePriority</h3>
+    <code>PUBLIC  VOID
+      <b>SetProcessInstancePriority</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcPriority)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setprocesstemplatedataslotsvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslottemplate)'><!-- --></a>
+    <h3>SetProcessTemplateDataSlotsValue</h3>
+    <code>PUBLIC  VOID
+      <b>SetProcessTemplateDataSlotsValue</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a> poDataSlotTemplate)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setprocesstemplatedataslotvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslottemplate)'><!-- --></a>
+    <h3>SetProcessTemplateDataSlotValue</h3>
+    <code>PUBLIC  VOID
+      <b>SetProcessTemplateDataSlotValue</b>(LONGCHAR pcSessionId, CHARACTER pcProcessTemplateName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotTemplate.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotTemplate" target="classFrame">DataSlotTemplate</a> poDataSlotTemplate)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setworkitemdataslotsvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'><!-- --></a>
+    <h3>SetWorkItemDataSlotsValue</h3>
+    <code>PUBLIC  VOID
+      <b>SetWorkItemDataSlotsValue</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setworkitemdataslotvalue(longchar,character,openedge.enterpriseservices.bizlogic.dataslotinstance)'><!-- --></a>
+    <h3>SetWorkItemDataSlotValue</h3>
+    <code>PUBLIC  VOID
+      <b>SetWorkItemDataSlotValue</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='soapmessagetolongchar()'><!-- --></a>
+    <h3>SoapMessageToLongchar</h3>
+    <code>PROTECTED  LONGCHAR
+      <b>SoapMessageToLongchar</b>()
+    </code>
+    <dl>
+      <dd>Converts the current soap message to LONGCHAR for use as an operation. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>longchar The current SOAP message.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='startsoapmessage(character,character)'><!-- --></a>
+    <h3>StartSoapMessage</h3>
+    <code>PROTECTED  VOID
+      <b>StartSoapMessage</b>(CHARACTER pcElementName, CHARACTER pcNamespace)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='suspendprocessinstance(longchar,character)'><!-- --></a>
+    <h3>SuspendProcessInstance</h3>
+    <code>PUBLIC  VOID
+      <b>SuspendProcessInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='suspendworkitem(longchar,character)'><!-- --></a>
+    <h3>SuspendWorkItem</h3>
+    <code>PUBLIC  VOID
+      <b>SuspendWorkItem</b>(LONGCHAR pcSessionId, CHARACTER pcWorkItemName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='suspendworkstepinstance(longchar,character,character)'><!-- --></a>
+    <h3>SuspendWorkStepInstance</h3>
+    <code>PUBLIC  VOID
+      <b>SuspendWorkStepInstance</b>(LONGCHAR pcSessionId, CHARACTER pcProcessInstanceName, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeelement(character,longchar,character)'><!-- --></a>
+    <h3>WriteElement</h3>
+    <code>PROTECTED  VOID
+      <b>WriteElement</b>(CHARACTER pcElementName, LONGCHAR pcValue, CHARACTER pcNamespace)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

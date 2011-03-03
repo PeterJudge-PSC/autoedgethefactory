@@ -1,0 +1,335 @@
+<html>
+  <head>
+    <title>BizLogicServerParameters</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\EnterpriseServices\BizLogic</font>
+      <br />CLASS BizLogicServerParameters
+    </h2>
+    <p>CLASS OpenEdge.EnterpriseServices.BizLogic.BizLogicServerParameters IMPLEMENTS <a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.EncodedPassword'>EncodedPassword</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Host'>Host</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) Hostname or IP address of the Savvion SBM Server
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Password'>Password</a>
+          </b> PUBLIC PRIVATE GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password for a user on the Savvion SBM Server.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Port'>Port</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Optional) Port of the Savvion SBM Server; typically defauls to 18793
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Protocol'>Protocol</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(optional) Protocol for connecting to the Savvion SBM Server (http/https). Typically HTTP
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ServerName'>ServerName</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(optional) Human-friendly name for the server. Typically defaults to the hostname
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.UserName'>UserName</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) Username for a user on the Savvion SBM Server
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character,character,character,character)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcServerName, CHARACTER pcHost, CHARACTER pcUser, CHARACTER pcPassword)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LONGCHAR</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#connect(openedge.enterpriseservices.bizlogic.ibizlogicapi)'> Connect</a>
+          </b>(<a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicAPI.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> poBizLogicAPI)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connects to the BizLogic server with the username/password stored in this object.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setservername(character)'> SetServerName</a>
+          </b>(CHARACTER pcServerName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.EncodedPassword'><!-- --></a>
+    <h3>EncodedPassword</h3>
+    <code>CHARACTER PUBLIC GET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Host'><!-- --></a>
+    <h3>Host</h3>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>(mandatory) Hostname or IP address of the Savvion SBM Server <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Password'><!-- --></a>
+    <h3>Password</h3>
+    <code>CHARACTER PUBLIC PRIVATE GET SET </code>
+    <dl>
+      <dd>Password for a user on the Savvion SBM Server. <p> </dd>
+      <dd>The password is settable only; alternatively, the constructor/ implementation of the parameter object maintains the value. This is so because we don't want to expose the password in clear text to anyone who asks for it. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Port'><!-- --></a>
+    <h3>Port</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>(Optional) Port of the Savvion SBM Server; typically defauls to 18793 <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Protocol'><!-- --></a>
+    <h3>Protocol</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>(optional) Protocol for connecting to the Savvion SBM Server (http/https). Typically HTTP <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ServerName'><!-- --></a>
+    <h3>ServerName</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>(optional) Human-friendly name for the server. Typically defaults to the hostname <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.UserName'><!-- --></a>
+    <h3>UserName</h3>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>(mandatory) Username for a user on the Savvion SBM Server <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(character,character,character,character)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcServerName, CHARACTER pcHost, CHARACTER pcUser, CHARACTER pcPassword)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='connect(openedge.enterpriseservices.bizlogic.ibizlogicapi)'><!-- --></a>
+    <h3>Connect</h3>
+    <code>PUBLIC  LONGCHAR
+      <b>Connect</b>(<a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicAPI.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> poBizLogicAPI)
+    </code>
+    <dl>
+      <dd>Connects to the BizLogic server with the username/password stored in this object. <p> </dd>
+      <dd>Since we don't expose the password publically, we need to take the BizLogic API as a parameter. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IBizLogicAPI - An instance of the BizLogic Api to connect to.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>longchar The session ID for the session.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setservername(character)'><!-- --></a>
+    <h3>SetServerName</h3>
+    <code>PUBLIC  VOID
+      <b>SetServerName</b>(CHARACTER pcServerName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
