@@ -1,0 +1,243 @@
+<html>
+  <head>
+    <title>ITableContext</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\Common\ServiceMessage</font>
+      <br />INTERFACE ITableContext
+    </h2>
+    <p>INTERFACE OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext </p>
+    <dl>
+      <dd>------------------------------------------------------------------------ <p> </dd>
+      <dd>File        : ITableContext Purpose     : Interface for table context Syntax      : Description : </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Author:</b>
+          </dt>
+          <dd>hdanielsCreated     : Tue Feb 09 18:28:13 EST 2010 Notes       : ---------------------------------------------------------------------- </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>DATETIME-TZ</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.LastUpdateAt'>LastUpdateAt</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The last time that a request was serviced (ie on response) for the table
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.NextPosition'>NextPosition</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Context info/key for where to start appending next page
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.NumRemainingPages'>NumRemainingPages</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of remaining pages to retrieve. If this is zero, then
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PageSize'>PageSize</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Num rows in resultset (on server if paging). If this is set to -1,
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PrevPosition'>PrevPosition</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context info/key for where to start appending next page
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableHandle'>TableHandle</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The buffer/table handle corresponding to the tableName
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableName'>TableName</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected set - not changeable - provide with constructor
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.LastUpdateAt'><!-- --></a>
+    <h3>LastUpdateAt</h3>
+    <code>DATETIME-TZ PUBLIC GET SET </code>
+    <dl>
+      <dd>The last time that a request was serviced (ie on response) for the table <p> </dd>
+      <dd>to be updated (either fetched or saved). </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NextPosition'><!-- --></a>
+    <h3>NextPosition</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>Context info/key for where to start appending next page <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NumRemainingPages'><!-- --></a>
+    <h3>NumRemainingPages</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>The number of remaining pages to retrieve. If this is zero, then <p> </dd>
+      <dd>all data has been retrieved. If it is negative, then we haven't yet retrieved any pages and don't know how many there are. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PageSize'><!-- --></a>
+    <h3>PageSize</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>Num rows in resultset (on server if paging). If this is set to -1, <p> </dd>
+      <dd>all data is retrieved </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PrevPosition'><!-- --></a>
+    <h3>PrevPosition</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>context info/key for where to start appending next page <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableHandle'><!-- --></a>
+    <h3>TableHandle</h3>
+    <code>HANDLE PUBLIC GET SET </code>
+    <dl>
+      <dd>The buffer/table handle corresponding to the tableName <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableName'><!-- --></a>
+    <h3>TableName</h3>
+    <code>CHARACTER PUBLIC GET </code>
+    <dl>
+      <dd>protected set - not changeable - provide with constructor <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

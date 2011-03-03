@@ -149,6 +149,11 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
     method public void UserLogout(input pcContextId as longchar):
         UserLogout(GetUserContext(pcContextId)).
     end method.
+
+    /** Logs the current user out of the application. */
+    method public void UserLogout():
+        UserLogout(CurrentUserContext).
+    end method.    
     
     /** Read and write allows us to turn context into a kind of cookie, if we so desire. */
     method protected IUserContext ReadSerializedContext(input pcContextId as longchar):

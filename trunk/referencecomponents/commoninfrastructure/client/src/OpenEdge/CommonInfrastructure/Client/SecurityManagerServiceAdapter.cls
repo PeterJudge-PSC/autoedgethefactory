@@ -84,7 +84,7 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherit
             
             set-byte-order(mUserContext) = ByteOrderEnum:BigEndian:Value.
             
-            run OpenEdge/CommonInfrastructure/service_interface_userlogin.p on GetServiceLocation()
+            run OpenEdge/CommonInfrastructure/Server/service_interface_userlogin.p on GetServiceLocation()
                     ( input poRequest[iLoop]:UserName,
                       input poRequest[iLoop]:UserDomain,
                       input poRequest[iLoop]:UserPassword,
@@ -113,9 +113,10 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherit
         
         do iLoop = 1 to iMax on error undo, next:
             oResponse[iLoop] = new SecurityManagerResponse(poRequest[iLoop]).
+            set-byte-order(mUserContext) = ByteOrderEnum:BigEndian:Value.
             mUserContext = ServiceAdapter:SerializeContext(poRequest[iLoop]:UserContext).
             
-            run OpenEdge/CommonInfrastructure/service_interface_userlogout.p on GetServiceLocation()
+            run OpenEdge/CommonInfrastructure/Server/service_interface_userlogout.p on GetServiceLocation()
                     (input-output mUserContext).
             
             oResponse[iLoop]:UserContext = ServiceAdapter:DeserializeContext(mUserContext).
@@ -142,7 +143,7 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherit
             oResponse[iLoop] = new SecurityManagerResponse(poRequest[iLoop]).
             mUserContext = ServiceAdapter:SerializeContext(poRequest[iLoop]:UserContext).
             
-            run OpenEdge/CommonInfrastructure/service_interface_validatesession.p on GetServiceLocation()
+            run OpenEdge/CommonInfrastructure/Server/service_interface_validatesession.p on GetServiceLocation()
                     (input-output mUserContext).
             
             oResponse[iLoop]:UserContext = ServiceAdapter:DeserializeContext(mUserContext).
