@@ -3,7 +3,7 @@
 <head><META http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector" %>
+<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector,java.util.Locale" %>
 <%@ page errorPage="/BizSolo/common/jsp/error.jsp" %>
 <%@ taglib uri="/BizSolo/common/tlds/bizsolo.tld" prefix="bizsolo" %>
 <%@ taglib uri="/bpmportal/tld/bpmportal.tld" prefix="sbm" %>
@@ -19,6 +19,7 @@
 <% pageContext.setAttribute( "contextPath", request.getContextPath()+"/"); %>
 
 <title>SpecifyOrder</title>
+<%boolean isStandaloneBS = (bizManage == null || bizManage.getName() == null || "".equals(bizManage.getName()) || bizManage.getLocale() == null);Locale myLocale = (!isStandaloneBS) ? bizManage.getLocale() : request.getLocale();%>
 <!-- Javascript -->
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/initControls.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/customValidation.js"></script>
@@ -32,19 +33,18 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.config.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-enUS.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-en.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-<%=myLocale.getLanguage() %>.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup-<%=myLocale.getLanguage() %>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>dwr/interface/adapterDWR.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/utilities/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/container-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/connection/connection-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/resize-beta-min.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/animation/animation-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/json/json-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/logger/logger-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/spry/checkboxvalidation/SpryValidationCheckbox.js"></script>
@@ -63,7 +63,6 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/LoggerDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/ResizableDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidget.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormPanel.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidgetHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
@@ -148,15 +147,14 @@
 //-->
 </script>
 
-<link rel="stylesheet" type="text/css" href="css/www.csszengarden.com zengarden-sample.css">
 <bizsolo:link rel="stylesheet"></bizsolo:link>
 
 <sbm:setLocale value="<%= bizManage.getLocale() %>"></sbm:setLocale>
 <% try{ %><sbm:setBundle scope="page" basename="CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit"></sbm:setBundle><% } catch(Exception e){}%>
-</head>
-<body class="apbody yui-skin-sam" onUnload="pwr.removePakBizSoloBeanFromCache('<%=session.getId()%>', onSuccess);" onLoad="setCheckBoxStyleForIE();hideControls();beforeInitControls();initControls();initTabs();sbm.utils.onDOMReady();onLoad();">
+<bizsolo:getApplicationResources baseName="CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit"/></head>
+<body class="apbody yui-skin-sam" onUnload="pwr.removePakBizSoloBeanFromCache('<%=session.getId()%>', onSuccess);" onLoad="setCheckBoxStyleForIE();hideControls();beforeInitControls();initControls();initTabs();sbm.utils.onDOMReady();">
 <form method="post" name="form" onsubmit="return sbm.utils.onFormSubmit();">
-<div id="northDiv"></div><% /* Workaround, activityName will disappear in the future */ %>
+<div id="northDiv"><bizsolo:xsrf/></div><% /* Workaround, activityName will disappear in the future */ %>
 <% String activityName = bean.getPropString("workitemName"); %>
 <div id="resultDiv">
 <div style='visibility:hidden;display:none' class='vBoxClass' name='errors' id='errors'></div>
@@ -167,16 +165,13 @@
     
       
     
-    <div align="center">
-
+    <div align="center" id="">
       <img border="0" id="aetf_logo" width="400" height="69" src="images/aetf_logo.png">
       <br clear="all">
 <br clear="all">
-<fieldset id="fsOrderId">
-
-        <legend>Order ID</legend>
-        <div align="center">
-
+<fieldset name="fsOrderId">
+        <legend><sbm:message key="SpecifyOrder.fieldset.fsOrderId.label"></sbm:message></legend>
+        <div align="center" id="">
           <font color="#008080" face="Segoe UI" size="4">
             <i>Please enter an existing order number to recall that order's details, or leave blank for a new order.</i>
           </font>
@@ -184,9 +179,7 @@
 <sfe:widget name="sbm.textfield" id="TextField1" args="{'type':'text', 'size':32, 'maxlength':5, 'readonly':false, 'disabled':false, 'validationType':'integer', 'validation':{'validateOn':['blur'], 'isRequired':false, 'useCharacterMasking':false, 'minValue':'0', 'maxValue':'9999'}, 'textfieldRequiredMsg':'Invalid Entry', 'toolTip':'Existing order id', 'tabOrder':'0'}" />
 
         </div>
-
       </fieldset>
-
       
 
 </div>
@@ -210,7 +203,6 @@
 </div>
 
     </div>
-
   
                     <div id="resizablepanel" style="display:none">
                         <div class="hd">Alert Dialog</div>
@@ -253,15 +245,17 @@ var allWidgets = [{widget:'TextField1', bound:'true', editable:'true', type:'sbm
 var businessObjects = [];
 var formWidgetHandler;
 sbm.utils.onDOMReady = function() {
-
-YAHOO.util.Event.onDOMReady(function(){formWidgetHandler = new FormWidgetHandler(allWidgets);});
-}
+YAHOO.util.Event.onDOMReady(function(){
+formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:');CustomerVehicleOrderSubmit',adapletCache:{'user':'' }});
+onLoad();
+ });
+ }
 Ext.onReady(function(){
 
 });
          var viewport = new Bm.util.BmViewport('');
 sbm.utils.onFormSubmit = function() {
-         if(allWidgets.length > 0 && !formWidgetHandler.validateWidgets()) return false;
+         if(!formWidgetHandler.validateWidgets()) return false;
         try{
              if(!userValidationJavascipt()) return false;
              if(!sbm.utils.beforeFormSubmit('box+label')) return false;

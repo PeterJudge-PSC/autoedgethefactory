@@ -1,4 +1,4 @@
-#Fri Jul 30 10:10:09 EDT 2010
+#Thu Feb 17 14:45:08 EST 2011
 adapter-class=com.savvion.sbm.adapters.webservice.WebServiceAdapter
 map-configurator=com.savvion.sbm.adapters.framework.GroupMapConfigurator
 adapter-configurator=com.savvion.sbm.adapters.webservice.WebServiceAdapterConfiguratorDialog

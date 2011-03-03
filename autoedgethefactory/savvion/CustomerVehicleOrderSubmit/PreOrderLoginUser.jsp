@@ -14,11 +14,11 @@
   <jsp:useBean id="bean" class="com.savvion.BizSolo.beans.Bean" scope="session"></jsp:useBean>
   <jsp:useBean id="factoryBean" class="com.savvion.BizSolo.beans.EPFactoryBean" scope="session"></jsp:useBean>
   <jsp:useBean id="bizSite" class="com.savvion.sbm.bpmportal.bizsite.api.BizSiteBean" scope="session"></jsp:useBean>
-<%! String _PageName = "SelectVehicleOptions"; %>
+<%! String _PageName = "PreOrderLoginUser"; %>
 <%! String __webAppName = "CustomerVehicleOrderSubmit"; %>
 <% pageContext.setAttribute( "contextPath", request.getContextPath()+"/"); %>
 
-<title>SelectVehicleOptions</title>
+<title>PreOrderLoginUser</title>
 <%boolean isStandaloneBS = (bizManage == null || bizManage.getName() == null || "".equals(bizManage.getName()) || bizManage.getLocale() == null);Locale myLocale = (!isStandaloneBS) ? bizManage.getLocale() : request.getLocale();%>
 <!-- Javascript -->
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/initControls.js"></script>
@@ -158,92 +158,61 @@
 <% String activityName = bean.getPropString("workitemName"); %>
 <div id="resultDiv">
 <div style='visibility:hidden;display:none' class='vBoxClass' name='errors' id='errors'></div>
-<input name="crtPage" type="hidden" value="SelectVehicleOptions"><input name="crtApp" type="hidden" value="CustomerVehicleOrderSubmit"><input name="activityMode" type="hidden" value="procReq"><input type="hidden" name="nextPage" value="Start.jsp">
+<input name="crtPage" type="hidden" value="PreOrderLoginUser"><input name="crtApp" type="hidden" value="CustomerVehicleOrderSubmit"><input name="activityMode" type="hidden" value="procReq"><input type="hidden" name="nextPage" value="Start.jsp">
 <input name="_yahoo_flow_button" type="hidden" value=''>
 <!-- Content --> 
 
     <div align="center" id="">
-      <img border="0" id="imgAETFLogo" width="400" height="69" src="images/aetf_logo.png">
+      <img border="0" id="aetf_logo" width="400" height="69" src="images/aetf_logo.png" tabindex="0">
+    </div>
+    <div align="left" id="">
       <br clear="all">
-<fieldset name="fsOptions">
-        <legend><sbm:message key="SelectVehicleOptions.fieldset.fsOptions.label"></sbm:message></legend>
+<br clear="all">
+<fieldset name="fsWelcome">
+        <legend><sbm:message key="PreOrderLoginUser.fieldset.fsWelcome.label"></sbm:message></legend>
         <div align="center" id="">
-          <font color="#008000" face="Segoe UI" size="4">
-            <i>Please customise your vehicle by selecting additional options and accessories</i>
+          <font color="#008080" face="Segoe UI" size="4">
+            <i>Please login or register to complete your order.</i>
+          </font>
+          <font color="#008080" face="Segoe UI" size="3">
+            <i>.</i>
           </font>
         </div>
         <div align="left" id="">
           <br clear="all">
-<div class="SbmTabSection" id="tabbedPane1">
-<div style=""><div class="x-hide-display" id="tabbedPane1_Seat">
+<table align="center" cellpadding="0" cellspacing="0" class="(default)" id="table1" width="40%">
+            <tbody>
+              <tr>
+                <td class="(default)" width="35%" rowspan="1" colspan="1" valign="top">
+                  <div align="right" id="">
+                    <font color="#808080" face="Segoe UI" size="3">Login Name:</font>
+                  </div>
+                </td>
+                <td class="(default)" width="32" rowspan="1" colspan="1" valign="top">
+                  <sfe:widget name="sbm.textfield" id="txtUserName" args="{'type':'Text', 'size':32, 'maxlength':32, 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'1'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/textfield/onChange", function(args){if(args.widgetId=='txtUserName'){txtUserName_onChange(args);}});
 
-              <br clear="all">
-<table align="left" cellpadding="0" cellspacing="0" class="(default)" id="table1" width="100%">
-                <tbody>
-                  <tr>
-                    <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
-                      <fieldset name="Material">
-                        <legend><sbm:message key="SelectVehicleOptions.fieldset.Material.label"></sbm:message></legend>
-                        <sfe:widget name="sbm.radio" id="rsSeatMaterial" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+-->
+</script>
+                </td>
+              </tr>
+              <tr>
+                <td class="(default)" width="35%" rowspan="1" colspan="1" valign="top">
+                  <div align="right" id="">
+                    <font color="#808080" face="Segoe UI" size="3">Password:</font>
+                  </div>
+                </td>
+                <td class="(default)" width="32" rowspan="1" colspan="1" valign="top">
+                  <sfe:widget name="sbm.textfield" id="txtPassword" args="{'type':'Password', 'size':32, 'maxlength':32, 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'2'}" />
 
-                      </fieldset>
-                    </td>
-                    <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
-                      <fieldset name="Interior">
-                        <legend><sbm:message key="SelectVehicleOptions.fieldset.Interior.label"></sbm:message></legend>
-                        <sfe:widget name="sbm.radio" id="rsInteriorColour" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-
-                      </fieldset>
-                    </td>
-                    <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
-                      <fieldset name="fsAccessories">
-                        <legend><sbm:message key="SelectVehicleOptions.fieldset.fsAccessories.label"></sbm:message></legend>
-                        <div align="center" id="">
-                          <sfe:widget name="sbm.list" id="listAccessories" args="{'size':5, 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion List widget.', 'tabOrder':'0'}" />
-
-                        </div>
-                      </fieldset>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <br clear="all">
-</div>
-<div class="x-hide-display" id="tabbedPane1_Color">
-
-              <table align="left" cellpadding="0" cellspacing="0" class="(default)" id="table2" width="100%">
-                <tbody>
-                  <tr>
-                    <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
-                      <fieldset name="Exterior">
-                        <legend><sbm:message key="SelectVehicleOptions.fieldset.Exterior.label"></sbm:message></legend>
-                        <sfe:widget name="sbm.radio" id="rsExteriorColour" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-
-                      </fieldset>
-                    </td>
-                    <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
-                      <fieldset name="fSWheels">
-                        <legend><sbm:message key="SelectVehicleOptions.fieldset.fSWheels.label"></sbm:message></legend>
-                        <sfe:widget name="sbm.radio" id="rsWheels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-
-                      </fieldset>
-                    </td>
-                    <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
-                      <fieldset name="fieldSet1">
-                        <legend><sbm:message key="SelectVehicleOptions.fieldset.fieldSet1.label"></sbm:message></legend>
-                        <sfe:widget name="sbm.radio" id="rsMoonroof" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-
-                      </fieldset>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <br clear="all">
-</div>
-</div>
-</div>
-
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <div align="center" id=""></div>
       </fieldset>
       
 
@@ -257,7 +226,7 @@
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td class="ApBtnSpace">
-<input type="submit" name="SB_Name" id="btn-complete" class="ApScrnButton" onMouseOver="this.className='ApScrnButtonHover';" onMouseOut="this.className='ApScrnButton';" onClick="clickedButton=this.name;this.onsubmit = new Function('return false');" value="<bizsolo:getLabel name='linkOptionsReviewSelection' type='LINK'/>"></td>
+<input type="submit" name="SB_Name" id="btn-complete" class="ApScrnButton" onMouseOver="this.className='ApScrnButtonHover';" onMouseOut="this.className='ApScrnButton';" onClick="clickedButton=this.name;this.onsubmit = new Function('return false');" value="<bizsolo:getLabel name='Copy of Registered' type='LINK'/>"></td>
 <td class="ApBtnSpace">
 <input type="button" name="bizsite_reset" id="btn-reset" class="ApScrnButton" onMouseOver="this.className='ApScrnButtonHover';" onMouseOut="this.className='ApScrnButton';" onClick="sbm.utils.reset()" value="<bizsolo:getLabel name='RESET_LABEL' type='RESOURCE'/>"></td>
 </tr>
@@ -267,9 +236,7 @@
 </table>
 </div>
 
-      <br clear="all">
-<br clear="all">
-</div>
+    </div>
   
                     <div id="resizablepanel" style="display:none">
                         <div class="hd">Alert Dialog</div>
@@ -296,17 +263,19 @@ function userValidationJavascipt() {
 <sbm:dataSources appName="CustomerVehicleOrderSubmit" appType="bizsolo">
 </sbm:dataSources>
 <script language="JavaScript">
-<!---->
+<!--
+    
+function txtUserName_onChange(eventContext) {
+}
+
+
+  -->
 </script>
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
 <!--
-var allWidgets = [{widget:'rsSeatMaterial', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedSeatMaterial', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsInteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedTrimColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'listAccessories', bound:'true', editable:'true', type:'sbm.list', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedAccessories', dataSlotType:'LIST'}, dsType:'STRING', service:'false'},
-{widget:'rsExteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExtColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsWheels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedWheels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsMoonroof', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedMoonroof', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
+var allWidgets = [{widget:'txtUserName', bound:'true', editable:'true', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'userid', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'userid', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'txtPassword', bound:'true', editable:'true', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'password', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'password', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
 ];
 var businessObjects = [];
 var formWidgetHandler;
@@ -316,22 +285,6 @@ formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:'CustomerVehic
  });
  }
 Ext.onReady(function(){
-var tabs = new Ext.TabPanel({
-    id:'tabbedPane1_tabpanel',
-    renderTo:'tabbedPane1',
-    activeTab: 0,
-    cls:'auto-width-tab-strip',
-    frame:true,
-    plain:true,
-    defaults:{autoHeight: true},
-    items:[{    contentEl:'tabbedPane1_Seat',title:'Interior Options'
-                     
-                     }
-                     ,
-{    contentEl:'tabbedPane1_Color',title:'Exterior Options'
-                     
-                     }
-                      ]});
 
 });
          var viewport = new Bm.util.BmViewport('');

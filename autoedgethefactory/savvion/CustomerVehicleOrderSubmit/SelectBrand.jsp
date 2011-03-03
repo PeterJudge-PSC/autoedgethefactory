@@ -3,7 +3,7 @@
 <head><META http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector" %>
+<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector,java.util.Locale" %>
 <%@ page errorPage="/BizSolo/common/jsp/error.jsp" %>
 <%@ taglib uri="/BizSolo/common/tlds/bizsolo.tld" prefix="bizsolo" %>
 <%@ taglib uri="/bpmportal/tld/bpmportal.tld" prefix="sbm" %>
@@ -19,6 +19,7 @@
 <% pageContext.setAttribute( "contextPath", request.getContextPath()+"/"); %>
 
 <title>SelectBrand</title>
+<%boolean isStandaloneBS = (bizManage == null || bizManage.getName() == null || "".equals(bizManage.getName()) || bizManage.getLocale() == null);Locale myLocale = (!isStandaloneBS) ? bizManage.getLocale() : request.getLocale();%>
 <!-- Javascript -->
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/initControls.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/customValidation.js"></script>
@@ -32,19 +33,18 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.config.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-enUS.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-en.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-<%=myLocale.getLanguage() %>.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup-<%=myLocale.getLanguage() %>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>dwr/interface/adapterDWR.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/utilities/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/container-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/connection/connection-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/resize-beta-min.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/animation/animation-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/json/json-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/logger/logger-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/spry/checkboxvalidation/SpryValidationCheckbox.js"></script>
@@ -63,7 +63,6 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/LoggerDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/ResizableDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidget.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormPanel.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidgetHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
@@ -148,15 +147,14 @@
 //-->
 </script>
 
-<link rel="stylesheet" type="text/css" href="css/www.csszengarden.com zengarden-sample.css">
 <bizsolo:link rel="stylesheet"></bizsolo:link>
 
 <sbm:setLocale value="<%= bizManage.getLocale() %>"></sbm:setLocale>
 <% try{ %><sbm:setBundle scope="page" basename="CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit"></sbm:setBundle><% } catch(Exception e){}%>
-</head>
-<body class="apbody yui-skin-sam" onUnload="pwr.removePakBizSoloBeanFromCache('<%=session.getId()%>', onSuccess);" onLoad="setCheckBoxStyleForIE();hideControls();beforeInitControls();initControls();initTabs();sbm.utils.onDOMReady();form_onLoad();">
+<bizsolo:getApplicationResources baseName="CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit"/></head>
+<body class="apbody yui-skin-sam" onUnload="pwr.removePakBizSoloBeanFromCache('<%=session.getId()%>', onSuccess);" onLoad="setCheckBoxStyleForIE();hideControls();beforeInitControls();initControls();initTabs();sbm.utils.onDOMReady();">
 <form method="post" name="form" onsubmit="return sbm.utils.onFormSubmit();">
-<div id="northDiv"></div><% /* Workaround, activityName will disappear in the future */ %>
+<div id="northDiv"><bizsolo:xsrf/></div><% /* Workaround, activityName will disappear in the future */ %>
 <% String activityName = bean.getPropString("workitemName"); %>
 <div id="resultDiv">
 <div style='visibility:hidden;display:none' class='vBoxClass' name='errors' id='errors'></div>
@@ -167,15 +165,12 @@
     
       
     
-    <div align="center">
-
+    <div align="center" id="">
       <img border="0" id="imgAETFLogo" width="400" height="69" src="images/aetf_logo.png">
       <br clear="all">
-<fieldset id="fsBrand">
-
-        <legend>Brand Selection</legend>
-        <div align="center">
-
+<fieldset name="fsBrand">
+        <legend><sbm:message key="SelectBrand.fieldset.fsBrand.label"></sbm:message></legend>
+        <div align="center" id="">
           <font color="#008000" face="Segoe UI" size="4">
             <i>Please select one of our brands.</i>
           </font>
@@ -188,56 +183,51 @@
             <tbody>
               <tr>
                 <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
-                  <div align="center">
-
+                  <div align="center" id="">
                     <img border="0" id="imgCheryLogoBw" width="132" height="85" onMouseDown="imgCheryLogo_onMouseDown();" src="images/chery_logo_bw.png">
                     <img border="0" id="imgCheryLogo" width="132" height="85" onMouseDown="imgCheryLogo_onMouseDown();" src="images/chery_logo.png">
                   </div>
-
                 </td>
                 <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
-                  <div align="center">
-
+                  <div align="center" id="">
                     <img border="0" id="imgHindaLogoBw" width="125" height="63" onMouseDown="imgHindaLogo_onMouseDown();" src="images/hinda_logo_bw.png">
                     <img border="0" id="imgHindaLogo" width="125" height="63" onMouseDown="imgHindaLogo_onMouseDown();" src="images/hinda_logo.png">
                   </div>
-
                 </td>
                 <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
-                  <div align="center">
-
+                  <div align="center" id="">
                     <img border="0" id="imgToyolaLogo" width="103" height="98" onMouseDown="imgToyolaLogo_onMouseDown();" src="images/toyola_logo.png">
                     <img border="0" id="imgToyolaLogoBw" width="103" height="98" onMouseDown="imgToyolaLogo_onMouseDown();" src="images/toyola_logo_bw.png">
                   </div>
-
                 </td>
               </tr>
               <tr>
                 <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
-                  <img border="0" id="imgPotomocLogoBw" width="123" height="110" onMouseDown="imgPotomocLogo_onMouseDown();" src="images/potomoc_logo_bw.png">
-                  <img border="0" id="imgPotomocLogo" width="123" height="110" onMouseDown="imgPotomocLogo_onMouseDown();" src="images/potomoc_logo.png">
+                  <div align="center" id="">
+                    <img border="0" id="imgPotomocLogoBw" width="123" height="110" onMouseDown="imgPotomocLogo_onMouseDown();" src="images/potomoc_logo_bw.png">
+                    <img border="0" id="imgPotomocLogo" width="123" height="110" onMouseDown="imgPotomocLogo_onMouseDown();" src="images/potomoc_logo.png">
+                  </div>
                 </td>
                 <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
-                  <br clear="all">
-<img border="0" id="imgFjordLogo" width="168" height="63" onMouseDown="imgFjordLogo_onMouseDown();" src="images/fjord_logo.png">
-                  <img border="0" id="imgFjordLogoBw" width="168" height="63" src="images/fjord_logo_bw.png">
+                  <div align="center" id="">
+                    <img border="0" id="imgFjordLogo" width="168" height="63" onMouseDown="imgFjordLogo_onMouseDown();" src="images/fjord_logo.png">
+                    <img border="0" id="imgFjordLogoBw" width="168" height="63" onMouseDown="imgFjordLogo_onMouseDown();" src="images/fjord_logo_bw.png">
+                  </div>
                 </td>
                 <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
-                  <img border="0" id="imgScubarooLogo" width="165" height="49" onMouseDown="imgScubarooLogo_onMouseDown();" src="images/scubaroo_logo.png">
-                  <img border="0" id="imgScubarooLogoBw" width="165" height="49" src="images/scubaroo_logo_bw.png">
+                  <div align="center" id="">
+                    <img border="0" id="imgScubarooLogo" width="165" height="49" onMouseDown="imgScubarooLogo_onMouseDown();" src="images/scubaroo_logo.png">
+                    <img border="0" id="imgScubarooLogoBw" width="165" height="49" onMouseDown="imgScubarooLogo_onMouseDown();" src="images/scubaroo_logo_bw.png">
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
           <br clear="all">
 </div>
-
       </fieldset>
-
     </div>
-
-    <div align="left">
-
+    <div align="left" id="">
       
 
 </div>
@@ -261,9 +251,8 @@
 </div>
 
       <input class="ApInptTxt" type="text" id="txtBrand" name="SelectedVehicleBrand" size="30" maxlength="256" value="<bizsolo:value name='SelectedVehicleBrand'/>" alt="blank">
-    <div style="display:none" id="txtBrandError"><div><font color="red"><span class="error" id="txtBrandErrorMsg"></span><a href="#" onclick="txtBrandErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
+<script>addHiddenControls("txtBrand");</script>    <div style="display:none" id="txtBrandError"><div><font color="red"><span class="error" id="txtBrandErrorMsg"></span><a href="#" onclick="txtBrandErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
     </div>
-
   
                     <div id="resizablepanel" style="display:none">
                         <div class="hd">Alert Dialog</div>
@@ -317,16 +306,16 @@ function imgFjordLogo_onMouseDown(eventContext) {
 sbm.util.setValue('txtBrand', 'Fjord'); 
 // highlight selected brand, de-emphasise others
 sbm.util.hide('imgCheryLogo');
-sbm.util.show('imgCheryLogoBw');
 sbm.util.hide('imgHindaLogo');
-sbm.util.show('imgHindaLogoBw');
-sbm.util.show('imgPotomocLogo');
-sbm.util.hide('imgPotomocLogoBw');
+sbm.util.hide('imgPotomocLogo');
 sbm.util.hide('imgToyolaLogo');
-sbm.util.show('imgToyolaLogoBw');
-sbm.util.show('imgFjordLogo');
 sbm.util.hide('imgFjordLogoBw');
 sbm.util.hide('imgScubarooLogo');
+sbm.util.show('imgFjordLogo');
+sbm.util.show('imgCheryLogoBw');
+sbm.util.show('imgHindaLogoBw');
+sbm.util.show('imgPotomocLogoBw');
+sbm.util.show('imgToyolaLogoBw');
 sbm.util.show('imgScubarooLogoBw');;
 }
 }
@@ -364,8 +353,8 @@ sbm.util.hide('imgCheryLogoBw');
 sbm.util.hide('imgHindaLogoBw');
 sbm.util.hide('imgPotomocLogoBw');
 sbm.util.hide('imgToyolaLogoBw');
-sbm.util.show('imgScubarooLogoBw');
-sbm.util.show('imgFjordLogoBw');;
+sbm.util.hide('imgScubarooLogoBw');
+sbm.util.hide('imgFjordLogoBw');;
 }
 sbm.util.hide("txtBrand");
 if (sbm.utils.compareConstant("txtBrand", "==", "Chery"))
@@ -468,49 +457,17 @@ var allWidgets = [];
 var businessObjects = [];
 var formWidgetHandler;
 sbm.utils.onDOMReady = function() {
-{
-// highlight all brands
-sbm.util.hide('imgCheryLogoBw');
-sbm.util.hide('imgHindaLogoBw');
-sbm.util.hide('imgPotomocLogoBw');
-sbm.util.hide('imgToyolaLogoBw');
-sbm.util.show('imgScubarooLogoBw');
-sbm.util.show('imgFjordLogoBw');;
-}
-&& sbm.util.hide("txtBrand");
-&& if (sbm.utils.compareConstant("txtBrand", "==", "Chery")) 
-&& {
-imgCheryLogo_onMouseDown();;
-}
-&& if (sbm.utils.compareConstant("txtBrand", "==", "Hinda")) 
-&& {
-imgHindaLogo_onMouseDown();;
-}
-&& if (sbm.utils.compareConstant("txtBrand", "==", "Potomoc")) 
-&& {
-imgPotomocLogo_onMouseDown();;
-}
-&& if (sbm.utils.compareConstant("txtBrand", "==", "Toyola")) 
-&& {
-imgToyolaLogo_onMouseDown();;
-}
-&& if (sbm.utils.compareConstant("txtBrand", "==", "Fjord")) 
-&& {
-imgFjordLogo_onMouseDown();;
-}
-&& if (sbm.utils.compareConstant("txtBrand", "==", "Scubaroo")) 
-&& {
-imgScubarooLogo_onMouseDown();;
-}
-
-YAHOO.util.Event.onDOMReady(function(){formWidgetHandler = new FormWidgetHandler(allWidgets);});
-}
+YAHOO.util.Event.onDOMReady(function(){
+formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:');CustomerVehicleOrderSubmit',adapletCache:{'user':'' }});
+form_onLoad();
+ });
+ }
 Ext.onReady(function(){
 
 });
          var viewport = new Bm.util.BmViewport('');
 sbm.utils.onFormSubmit = function() {
-         if(allWidgets.length > 0 && !formWidgetHandler.validateWidgets()) return false;
+         if(!formWidgetHandler.validateWidgets()) return false;
         try{
              if(!userValidationJavascipt()) return false;
              if(!sbm.utils.beforeFormSubmit('box+label')) return false;

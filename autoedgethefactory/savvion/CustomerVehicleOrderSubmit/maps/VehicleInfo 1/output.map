@@ -1,9 +1,0 @@
-<map version="1.1">
-  <param name="InteriorSeatMaterial" type="java.lang.String" value="@vehicleseat"/>
-  <param name="SelectedVehicleBrand" type="java.lang.String" value="@vehbrand"/>
-  <param name="InteriorAccessories" type="java.lang.String" value="@vehaccopt"/>
-  <param name="InteriorTrimColour" type="java.lang.String" value="@vehinterior"/>
-  <param name="ExteriorWheels" type="java.lang.String" value="@vehwheelopt"/>
-  <param name="SelectedVehicleModel" type="java.lang.String" value="@vehmodel"/>
-  <param name="ExteriorColour" type="java.lang.String" value="@vehexterior"/>
-</map>
