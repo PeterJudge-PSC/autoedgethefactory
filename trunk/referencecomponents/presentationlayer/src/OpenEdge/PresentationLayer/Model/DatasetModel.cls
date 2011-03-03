@@ -363,8 +363,12 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
             if oTR:HasError then
                 OnDataFetchError(ExtractTableErrors(oTR)).
             else
+            do:
                 assign iExtent = iExtent + 1
                        cTables[iExtent] = oTR:TableName.
+                /* update the model's table context from the response */
+                UpdateTableContextFromResponse(oTR).                       
+            end.                       
         end.
         
         DisableDatasetForUpdate(MasterDataset).

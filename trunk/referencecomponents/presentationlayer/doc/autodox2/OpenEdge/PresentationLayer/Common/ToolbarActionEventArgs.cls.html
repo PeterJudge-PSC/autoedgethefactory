@@ -1,0 +1,350 @@
+<html>
+  <head>
+    <title>ToolbarActionEventArgs</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\PresentationLayer\Common</font>
+      <br />CLASS ToolbarActionEventArgs
+    </h2>
+    <p>CLASS OpenEdge.PresentationLayer.Common.ToolbarActionEventArgs INHERITS <a href="../../../OpenEdge/Core/System/EventArgs.cls.html" title="OpenEdge.Core.System.EventArgs" target="classFrame">EventArgs</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ActionKey'>ActionKey</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ActionTarget'>ActionTarget</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/PresentationLayer/Common/ToolbarActionTypeEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum" target="classFrame">ToolbarActionTypeEnum</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ActionType'>ActionType</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character,openedge.presentationlayer.common.toolbaractiontypeenum)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcKey, <a href="../../../OpenEdge/PresentationLayer/Common/ToolbarActionTypeEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum" target="classFrame">ToolbarActionTypeEnum</a> poType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getargumentvalue(character,OUTPUT_openedge.lang.datatypeenum)'> GetArgumentValue</a>
+          </b>(CHARACTER pcArgName, OUTPUT <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getargvalue(character,OUTPUT_character)'> GetArgValue</a>
+          </b>(CHARACTER pcArgName, OUTPUT CHARACTER pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getargvalue(character,OUTPUT_decimal)'> GetArgValue</a>
+          </b>(CHARACTER pcArgName, OUTPUT DECIMAL pdValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getargvalue(character,OUTPUT_integer)'> GetArgValue</a>
+          </b>(CHARACTER pcArgName, OUTPUT INTEGER piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getargvalue(character,OUTPUT_logical)'> GetArgValue</a>
+          </b>(CHARACTER pcArgName, OUTPUT LOGICAL plValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setargvalue(character,character,openedge.lang.datatypeenum)'> SetArgValue</a>
+          </b>(CHARACTER pcArgName, CHARACTER pcArgValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poArgType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.ActionKey'><!-- --></a>
+    <h3>ActionKey</h3>
+    <code>CHARACTER PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ActionTarget'><!-- --></a>
+    <h3>ActionTarget</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ActionType'><!-- --></a>
+    <h3>ActionType</h3>
+    <code><a href="../../../OpenEdge/PresentationLayer/Common/ToolbarActionTypeEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum" target="classFrame">ToolbarActionTypeEnum</a> PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code> 
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(character,openedge.presentationlayer.common.toolbaractiontypeenum)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code> 
+      <b>CONSTRUCTOR</b>(CHARACTER pcKey, <a href="../../../OpenEdge/PresentationLayer/Common/ToolbarActionTypeEnum.cls.html" title="OpenEdge.PresentationLayer.Common.ToolbarActionTypeEnum" target="classFrame">ToolbarActionTypeEnum</a> poType)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getargumentvalue(character,OUTPUT_openedge.lang.datatypeenum)'><!-- --></a>
+    <h3>GetArgumentValue</h3>
+    <code>PUBLIC  CHARACTER
+      <b>GetArgumentValue</b>(CHARACTER pcArgName, OUTPUT <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poType)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getargvalue(character,OUTPUT_character)'><!-- --></a>
+    <h3>GetArgValue</h3>
+    <code>PUBLIC  VOID
+      <b>GetArgValue</b>(CHARACTER pcArgName, OUTPUT CHARACTER pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getargvalue(character,OUTPUT_decimal)'><!-- --></a>
+    <h3>GetArgValue</h3>
+    <code>PUBLIC  VOID
+      <b>GetArgValue</b>(CHARACTER pcArgName, OUTPUT DECIMAL pdValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getargvalue(character,OUTPUT_integer)'><!-- --></a>
+    <h3>GetArgValue</h3>
+    <code>PUBLIC  VOID
+      <b>GetArgValue</b>(CHARACTER pcArgName, OUTPUT INTEGER piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getargvalue(character,OUTPUT_logical)'><!-- --></a>
+    <h3>GetArgValue</h3>
+    <code>PUBLIC  VOID
+      <b>GetArgValue</b>(CHARACTER pcArgName, OUTPUT LOGICAL plValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setargvalue(character,character,openedge.lang.datatypeenum)'><!-- --></a>
+    <h3>SetArgValue</h3>
+    <code>PUBLIC  VOID
+      <b>SetArgValue</b>(CHARACTER pcArgName, CHARACTER pcArgValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poArgType)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
