@@ -18,11 +18,6 @@ class OpenEdge.Core.System.ValueNotSpecifiedError inherits ApplicationError:
     define override protected property ErrorText as longchar no-undo get. set.
     define override protected property ErrorTitle as character no-undo get. set.
     
-    constructor public ValueNotSpecifiedError ():
-        define variable oUnknown as Error no-undo.
-        this-object(oUnknown).
-    end constructor.
-    
     constructor public ValueNotSpecifiedError (poErr as Error):
         super(poErr).
         ErrorText = 'No &1 specified for &2'.

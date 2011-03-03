@@ -12,7 +12,7 @@
 using Progress.Lang.*.
 using OpenEdge.Test.Samurai.
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class OPenEdge.Test.ClientSamurai inherits Samurai: 
         

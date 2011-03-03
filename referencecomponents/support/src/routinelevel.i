@@ -13,6 +13,6 @@
     &global-define USE-ROUTINE-LEVEL false
 &endif 
 
-&if logical("{&USE-ROUTINE-LEVEL}") eq true &then
+&if "{&USE-ROUTINE-LEVEL}" eq "true" &then
 routine-level on error undo, throw.
 &endif 

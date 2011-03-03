@@ -12,7 +12,7 @@
 using Progress.Lang.*.
 using OpenEdge.Test.TwoPropObj.
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class OpenEdge.Test.MapKey inherits TwoPropObj: 
 

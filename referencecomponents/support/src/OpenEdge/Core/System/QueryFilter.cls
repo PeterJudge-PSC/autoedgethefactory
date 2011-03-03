@@ -35,21 +35,22 @@ class OpenEdge.Core.System.QueryFilter
     constructor public QueryFilter(input pcBufferName as character,
                                    input pcFieldName as character,
                                    input poOperator as OperatorEnum,
-                                   input pcFieldValue as String,
+                                   input poFieldValue as String,
                                    input poFieldType as DataTypeEnum,
                                    input poJoinType as JoinEnum):
         
         Assert:ArgumentNotNullOrEmpty(pcBufferName, 'Buffer Name').
         Assert:ArgumentNotNullOrEmpty(pcFieldName, 'Field Name').
         Assert:ArgumentNotNull(poOperator, 'Operator').
+        /* field value can be null, but the string object not so  */
+        Assert:ArgumentNotNull(poFieldValue, 'Field value object').
         Assert:ArgumentNotNull(poJoinType, 'Join type').
         Assert:ArgumentNotNull(poFieldType, 'Field datatype').
-        /* field value can be null */
         
         assign BufferName = pcBufferName
                FieldName = pcFieldName
                Operator = poOperator
-               FieldValue = pcFieldValue
+               FieldValue = poFieldValue
                FieldType = poFieldType
                JoinType = poJoinType.
     end constructor.
@@ -102,7 +103,7 @@ class OpenEdge.Core.System.QueryFilter
                          + 'rowid(' + quoter(BufferName) + ')' 
                          + Operator:ToString() + ' '
                          + 'to-rowid(' + quoter(cValue) + ')'.
-        else                         
+        else
         if FieldType:Equals(DataTypeEnum:Handle) then
             cWhereClause = cWhereClause 
                          + BufferName + '.' + FieldName + ' ' 

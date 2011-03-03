@@ -7,7 +7,7 @@
     Created     : Tue Mar 02 13:21:45 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Test.Samurai.
 

@@ -1,0 +1,258 @@
+<html>
+  <head>
+    <title>ILifecycleContext</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL\Lifecycle</font>
+      <br />INTERFACE ILifecycleContext
+    </h2>
+    <p>INTERFACE OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Arguments'>Arguments</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the arguments for the constructor/methods/etc that were passed to manipulate the activation process. *
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Binding'>Binding</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the binding. *
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Kernel'>Kernel</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the kernel that is driving the activation. *
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/IPipeline.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.IPipeline" target="classFrame">IPipeline</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Pipeline'>Pipeline</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets or sets the pipeline component. *
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/IProvider.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.IProvider" target="classFrame">IProvider</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprovider()'> GetProvider</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the provider that should be used to create the instance for this context.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getscope()'> GetScope</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the scope for the context that "owns" the instance activated therein.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resolve()'> Resolve</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolves this instance for this context.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Arguments'><!-- --></a>
+    <h3>Arguments</h3>
+    <code><a href="../../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> PUBLIC GET </code>
+    <dl>
+      <dd>Gets the arguments for the constructor/methods/etc that were passed to manipulate the activation process. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Binding'><!-- --></a>
+    <h3>Binding</h3>
+    <code><a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> PUBLIC GET </code>
+    <dl>
+      <dd>Gets the binding. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Kernel'><!-- --></a>
+    <h3>Kernel</h3>
+    <code><a href="../../../../OpenEdge/Core/InjectABL/IKernel.cls.html" title="OpenEdge.Core.InjectABL.IKernel" target="classFrame">IKernel</a> PUBLIC GET </code>
+    <dl>
+      <dd>Gets the kernel that is driving the activation. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Pipeline'><!-- --></a>
+    <h3>Pipeline</h3>
+    <code><a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/IPipeline.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.IPipeline" target="classFrame">IPipeline</a> PUBLIC GET </code>
+    <dl>
+      <dd>Gets or sets the pipeline component. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='getprovider()'><!-- --></a>
+    <h3>GetProvider</h3>
+    <code>PUBLIC  <a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/IProvider.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.IProvider" target="classFrame">IProvider</a>
+      <b>GetProvider</b>()
+    </code>
+    <dl>
+      <dd>Gets the provider that should be used to create the instance for this context. <p> </dd>
+      <dd><returns>The provider that should be used.</returns> * </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getscope()'><!-- --></a>
+    <h3>GetScope</h3>
+    <code>PUBLIC  <a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>GetScope</b>()
+    </code>
+    <dl>
+      <dd>Gets the scope for the context that "owns" the instance activated therein. <p> </dd>
+      <dd><returns>The object that acts as the scope.</returns> * </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resolve()'><!-- --></a>
+    <h3>Resolve</h3>
+    <code>PUBLIC  <a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Resolve</b>()
+    </code>
+    <dl>
+      <dd>Resolves this instance for this context. <p> </dd>
+      <dd><returns>The resolved instance.</returns> * </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

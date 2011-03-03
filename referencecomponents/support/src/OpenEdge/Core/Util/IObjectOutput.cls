@@ -40,7 +40,7 @@ interface OpenEdge.Core.Util.IObjectOutput:
     
     method public void WriteObject(input poValue as Object).
     method public void WriteObjectArray(input poValue as Object extent).
-
+    
     method public void WriteEnum(input poMember as EnumMember).
 
     method public void WriteChar(input pcValue as character).
