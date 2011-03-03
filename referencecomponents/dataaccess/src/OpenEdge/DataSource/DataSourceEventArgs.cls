@@ -26,7 +26,7 @@ class OpenEdge.DataSource.DataSourceEventArgs inherits EventArgs:
     
     /** Handle of the buffer/dataset being operated on, and to which the even applies. */
     define public property DataTarget as longchar no-undo get. set.
-         
+    
     /** The event that caused this argument to be fired. */    
     define public property DataSourceEvent as DataSourceEventEnum no-undo get. private set.
     
