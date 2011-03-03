@@ -5,7 +5,7 @@
     Description : 
     @author hdaniels
     Created     : Wed Feb 10 01:30:45 EST 2010
-    Notes       : 
+    Notes       : * A DataSource can only service one message/request at a time
   ---------------------------------------------------------------------- */
 using OpenEdge.DataSource.IDataSource.
 using OpenEdge.DataSource.DataSourceEventArgs.
@@ -98,7 +98,7 @@ interface OpenEdge.DataSource.IDataSource:
         The caller needs to call GetData() afterwards if they want 
         any additional information about the fetch call (stuff that's
         in ITableContext). */
-    method public void FetchData().
+    method public void FetchData().    
     
     /** Retrieves the results of a fetch */
     method public ITableResponse GetData().

@@ -1,0 +1,851 @@
+<html>
+  <head>
+    <title>StandardDataSource</title>
+    <link rel='stylesheet' type='text/css' href='../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\DataSource</font>
+      <br />CLASS StandardDataSource
+    </h2>
+    <p>CLASS OpenEdge.DataSource.StandardDataSource abstract USE-WIDGET-POOL INHERITS <a href="../../OpenEdge/DataSource/DataSource.cls.html" title="OpenEdge.DataSource.DataSource" target="classFrame">DataSource</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ABLDataSources'>ABLDataSources</a>
+          </b> PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ABL DATA-SOURCE handles being used
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.AttachedActions'>AttachedActions</a>
+          </b> PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PrimaryTable'>PrimaryTable</a>
+          </b> abstract GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The primary DB table that this IDataSource reads and writes to and from. There
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../OpenEdge/CommonInfrastructure/Common/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.ISecurityManager" target="classFrame">ISecurityManager</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.SecurityManager'>SecurityManager</a>
+          </b> PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TargetBuffer'>TargetBuffer</a>
+          </b> PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The standard datasource populates buffers; this property makes it easier to access those
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TenantFilterFieldName'>TenantFilterFieldName</a>
+          </b> PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The default field name in the schmema used to apply a tenant filter. By default,
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addrow(handle,integer,openedge.datasource.datasourcequery,handle)'> AddRow</a>
+          </b>(HANDLE phABLDatasource, INTEGER piBufferIndex, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDataSourceQuery, HANDLE phSourceBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a row to the DB.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addtenantfilter(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'> AddTenantFilter</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds filtering by tenant to the current datasource for an action. This is done per
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#attachdatastoretotarget(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'> AttachDataStoreToTarget</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#buildbufferkeyclause(character,openedge.datasource.datasourcequery,handle)'> BuildBufferKeyClause</a>
+          </b>(CHARACTER pcDatasourceBufferName, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDSQuery, HANDLE phSourceBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a where clause for saving a record to the database.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#cleardatatarget()'> ClearDataTarget</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#converttargettohandle()'> ConvertTargetToHandle</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createdatastore()'> CreateDataStore</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#deletedatastore()'> DeleteDataStore</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#deleterow(handle,integer,openedge.datasource.datasourcequery,handle)'> DeleteRow</a>
+          </b>(HANDLE phABLDatasource, INTEGER piBufferIndex, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDataSourceQuery, HANDLE phSourceBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes a DB row.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#detachdatastorefromtarget(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'> DetachDataStoreFromTarget</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#fetchdata()'> FetchData</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perform fetch: populate the previously-passed buffer from the
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#filterqueryperrequest(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.datasource.datasourcequery,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'> FilterQueryPerRequest</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poQuery, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getdata()'> GetData</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called on completion of a data fetch request, typically by the data access object.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#onbeforerowfill(character,handle,handle)'> OnBeforeRowFill</a>
+          </b>(CHARACTER pcRowKey, HANDLE phSourceBuffer, HANDLE phTargetBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#prepare(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'> Prepare</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepare with query, batchsize and more.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#preparefetchdata(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'> PrepareFetchData</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific handling for FetchData requests.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#preparesavedata(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'> PrepareSaveData</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific handling for SaveData requests.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#savedata()'> SaveData</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves all records in the buffer argument to the physical data store. This
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#savesinglerow(openedge.commoninfrastructure.common.servicemessage.itableresponse,handle,openedge.datasource.datasourcequery,character)'> SaveSingleRow</a>
+          </b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a> poTableResponse, HANDLE phSourceBuffer, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDSQuery, CHARACTER pcSourceRowKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save data for the current row to the database.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setdatatarget(longchar,openedge.commoninfrastructure.common.servicemessage.dataformatenum,openedge.lang.datatypeenum)'> SetDataTarget</a>
+          </b>(LONGCHAR pcData, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poDataTargetFormat, <a href="../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poDataTargetType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Override to ensure that we only allow handles - buffers or datasets - as data types here.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#updaterow(handle,integer,openedge.datasource.datasourcequery,handle)'> UpdateRow</a>
+          </b>(HANDLE phABLDatasource, INTEGER piBufferIndex, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDataSourceQuery, HANDLE phSourceBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modifies a DB row
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.ABLDataSources'><!-- --></a>
+    <h3>ABLDataSources</h3>
+    <code><a href="../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> PROTECTED GET SET </code>
+    <dl>
+      <dd>The ABL DATA-SOURCE handles being used <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.AttachedActions'><!-- --></a>
+    <h3>AttachedActions</h3>
+    <code><a href="../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> PROTECTED GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PrimaryTable'><!-- --></a>
+    <h3>PrimaryTable</h3>
+    <code>HANDLE abstract GET SET </code>
+    <dl>
+      <dd>The primary DB table that this IDataSource reads and writes to and from. There <p> </dd>
+      <dd>might be more than one source buffer for the ABL DATA-SOURCE, but this one is this IDataSource object's reason for existence (basically). </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.SecurityManager'><!-- --></a>
+    <h3>SecurityManager</h3>
+    <code><a href="../../OpenEdge/CommonInfrastructure/Common/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.ISecurityManager" target="classFrame">ISecurityManager</a> PROTECTED GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TargetBuffer'><!-- --></a>
+    <h3>TargetBuffer</h3>
+    <code>HANDLE PROTECTED GET SET </code>
+    <dl>
+      <dd>The standard datasource populates buffers; this property makes it easier to access those <p> </dd>
+      <dd>buffers. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TenantFilterFieldName'><!-- --></a>
+    <h3>TenantFilterFieldName</h3>
+    <code>CHARACTER PROTECTED GET SET </code>
+    <dl>
+      <dd>The default field name in the schmema used to apply a tenant filter. By default, <p> </dd>
+      <dd>this is used with the Primary table; subsidiary tables should join off the primary table's values, although there's no requirement for that (ie they could also build their own tenant filters, in slightly different ways if needed). The defaults should suffice for most cases. I think. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addrow(handle,integer,openedge.datasource.datasourcequery,handle)'><!-- --></a>
+    <h3>AddRow</h3>
+    <code>PROTECTED  VOID
+      <b>AddRow</b>(HANDLE phABLDatasource, INTEGER piBufferIndex, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDataSourceQuery, HANDLE phSourceBuffer)
+    </code>
+    <dl>
+      <dd>Adds a row to the DB. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The source (typically before-image) buffer handle.<br/>integer - The current buffer index (in the DATA-SOURCE)<br/>DataSourceQuery - The query used for this operation<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='addtenantfilter(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>AddTenantFilter</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>AddTenantFilter</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction)
+    </code>
+    <dl>
+      <dd>Adds filtering by tenant to the current datasource for an action. This is done per <p> </dd>
+      <dd>request, and not just once, since the user may vary per request, and we have no idea of this Datasource object's lifespan. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ServiceMessageActionEnum - The current request's action type.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='attachdatastoretotarget(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>AttachDataStoreToTarget</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>AttachDataStoreToTarget</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='buildbufferkeyclause(character,openedge.datasource.datasourcequery,handle)'><!-- --></a>
+    <h3>BuildBufferKeyClause</h3>
+    <code>PROTECTED  CHARACTER
+      <b>BuildBufferKeyClause</b>(CHARACTER pcDatasourceBufferName, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDSQuery, HANDLE phSourceBuffer)
+    </code>
+    <dl>
+      <dd>Constructs a where clause for saving a record to the database. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>integer - The ordinal position of the buffer in the datasource. Usually (?) 1.<br/>character - The source buffer's keys.<br/>handle - The source/prodataset before buffer<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>character A WHERE clause for the datasource buffer</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='cleardatatarget()'><!-- --></a>
+    <h3>ClearDataTarget</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>ClearDataTarget</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='converttargettohandle()'><!-- --></a>
+    <h3>ConvertTargetToHandle</h3>
+    <code>PROTECTED  HANDLE
+      <b>ConvertTargetToHandle</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createdatastore()'><!-- --></a>
+    <h3>CreateDataStore</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>CreateDataStore</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='deletedatastore()'><!-- --></a>
+    <h3>DeleteDataStore</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>DeleteDataStore</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='deleterow(handle,integer,openedge.datasource.datasourcequery,handle)'><!-- --></a>
+    <h3>DeleteRow</h3>
+    <code>PROTECTED  VOID
+      <b>DeleteRow</b>(HANDLE phABLDatasource, INTEGER piBufferIndex, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDataSourceQuery, HANDLE phSourceBuffer)
+    </code>
+    <dl>
+      <dd>Deletes a DB row. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The source (typically before-image) buffer handle.<br/>integer - The current buffer index (in the DATA-SOURCE)<br/>DataSourceQuery - The query used for this operation<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='detachdatastorefromtarget(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>DetachDataStoreFromTarget</h3>
+    <code>OVERRIDE PROTECTED  VOID
+      <b>DetachDataStoreFromTarget</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='fetchdata()'><!-- --></a>
+    <h3>FetchData</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>FetchData</b>()
+    </code>
+    <dl>
+      <dd>Perform fetch: populate the previously-passed buffer from the <p> </dd>
+      <dd>physical data store. The caller needs to call GetData() afterwards if they want any additional information about the fetch call (stuff that's in ITableContext). Note: - this method will not be called when Datasets are involved, since the FILL() method will probably be called instead. The code below is for illustrative purposes. - there are no events (before-fill etc) fired since this code doesn't use prodataset; we should therefor create our own events and fire them if we so desire. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='filterqueryperrequest(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.datasource.datasourcequery,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'><!-- --></a>
+    <h3>FilterQueryPerRequest</h3>
+    <code>PROTECTED  VOID
+      <b>FilterQueryPerRequest</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poQuery, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdata()'><!-- --></a>
+    <h3>GetData</h3>
+    <code>OVERRIDE PUBLIC  <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a>
+      <b>GetData</b>()
+    </code>
+    <dl>
+      <dd>Called on completion of a data fetch request, typically by the data access object. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>ITableContext - the context for the request (num records, position etc).</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='onbeforerowfill(character,handle,handle)'><!-- --></a>
+    <h3>OnBeforeRowFill</h3>
+    <code>PROTECTED  VOID
+      <b>OnBeforeRowFill</b>(CHARACTER pcRowKey, HANDLE phSourceBuffer, HANDLE phTargetBuffer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='prepare(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'><!-- --></a>
+    <h3>Prepare</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>Prepare</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+    </code>
+    <dl>
+      <dd>Prepare with query, batchsize and more. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ServiceMessageActionEnum - The action that we're preparing the datasource for.We may have different actions based on whether this is a Fetch or a Save. <br/>ITableRequest - Parameters for the fetch (query modifications, page size etc).<br/>IDataAccess - The DataAccess object making this request. The DAO can be used toresolve table- or field name mappings (from the Business Entity names to the Data Source names. <br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='preparefetchdata(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'><!-- --></a>
+    <h3>PrepareFetchData</h3>
+    <code>PROTECTED  VOID
+      <b>PrepareFetchData</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+    </code>
+    <dl>
+      <dd>Specific handling for FetchData requests. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ITableRequest - The current request<br/>IDataAccess - The data access object making the request<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='preparesavedata(openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum,openedge.commoninfrastructure.common.servicemessage.itablerequest,openedge.dataaccess.idataaccess)'><!-- --></a>
+    <h3>PrepareSaveData</h3>
+    <code>PROTECTED  VOID
+      <b>PrepareSaveData</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poAction, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest" target="classFrame">ITableRequest</a> poRequest, <a href="../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
+    </code>
+    <dl>
+      <dd>Specific handling for SaveData requests. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ITableRequest - The current request<br/>IDataAccess - The data access object making the request<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='savedata()'><!-- --></a>
+    <h3>SaveData</h3>
+    <code>OVERRIDE PUBLIC  <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a>
+      <b>SaveData</b>()
+    </code>
+    <dl>
+      <dd>Saves all records in the buffer argument to the physical data store. This <p> </dd>
+      <dd>buffer comes from the DataAccess object. This SaveData() call saves all records for a given table/buffer. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>ITableResponse The response to the save operation.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='savesinglerow(openedge.commoninfrastructure.common.servicemessage.itableresponse,handle,openedge.datasource.datasourcequery,character)'><!-- --></a>
+    <h3>SaveSingleRow</h3>
+    <code>PROTECTED  VOID
+      <b>SaveSingleRow</b>(<a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse" target="classFrame">ITableResponse</a> poTableResponse, HANDLE phSourceBuffer, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDSQuery, CHARACTER pcSourceRowKey)
+    </code>
+    <dl>
+      <dd>Save data for the current row to the database. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ITableResponse - The table response object for this save request. Used in case of errors.<br/>handle - The buffer containing the date being saved (the source buffer).This is usually the before-image buffer from the Business Entity. <br/>DataSourceQuery - The query used to find the actual for the ABL Data-source<br/>character - The key field values for the source buffer above. We don't derive these fromthe source buffer since if it is indeed the BEFORE-BUFFER, the keys are the ROWID used to get to the AFTER-BUFFER, and NOT the keys on the actual Business Entity buffer. <br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setdatatarget(longchar,openedge.commoninfrastructure.common.servicemessage.dataformatenum,openedge.lang.datatypeenum)'><!-- --></a>
+    <h3>SetDataTarget</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>SetDataTarget</b>(LONGCHAR pcData, <a href="../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/DataFormatEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.DataFormatEnum" target="classFrame">DataFormatEnum</a> poDataTargetFormat, <a href="../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poDataTargetType)
+    </code>
+    <dl>
+      <dd>Override to ensure that we only allow handles - buffers or datasets - as data types here. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='updaterow(handle,integer,openedge.datasource.datasourcequery,handle)'><!-- --></a>
+    <h3>UpdateRow</h3>
+    <code>PROTECTED  VOID
+      <b>UpdateRow</b>(HANDLE phABLDatasource, INTEGER piBufferIndex, <a href="../../OpenEdge/DataSource/DataSourceQuery.cls.html" title="OpenEdge.DataSource.DataSourceQuery" target="classFrame">DataSourceQuery</a> poDataSourceQuery, HANDLE phSourceBuffer)
+    </code>
+    <dl>
+      <dd>Modifies a DB row <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The source (typically before-image) buffer handle.<br/>integer - The current buffer index (in the DATA-SOURCE)<br/>DataSourceQuery - The query used for this operation<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

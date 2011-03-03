@@ -11,6 +11,7 @@
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 
+using OpenEdge.Core.System.QueryElementEnum.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
 using OpenEdge.Core.System.QueryFilter.
@@ -37,7 +38,7 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         
         A case can be made for an OE.DataSource.ABLDatasource that contains
         the DataSourceQuery and a HANDLE property (ie not held here). */
-    define public property ABLDataSource as handle no-undo get. private set.
+    define public property ABLDataSource as handle no-undo get. set.
     
     /** A collection of QueryFilter objects that act as tokens for the key fields
         in the datasource buffers.
@@ -50,55 +51,86 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
                 SourceKeyFilters  = new Map().
             return SourceKeyFilters.
         end get.
-        set.
+        private set.
 
-    constructor public DataSourceQuery(input phDataSource as handle):
+    /** A collection of QueryFilter objects that indicate the tenant filters in the datasource buffers.
+        
+        These filters are used when saving rows, where the values are used to identify the 
+        DB rows uniquely. */
+    define public property TenantFilters as IMap no-undo
+        get():
+            if not valid-object(TenantFilters) then
+                TenantFilters = new Map().
+            return TenantFilters.
+        end get.
+        private set.
+    
+    constructor public DataSourceQuery():
         super().
+        
+        TableOwner = this-object.
+    end constructor.
+    
+    constructor public DataSourceQuery(input phDataSource as handle):
+        this-object().
         
         Assert:ArgumentNotNull(phDataSource, 'ABL Data-Source').
         
         assign ABLDataSource = phDataSource
-               TableOwner = this-object
-               Definition = ParseDataSource().
+               Definition = new QueryDefinition()
+               /* don't try to build a query until we have a definition */
+               BuildQuery = false.
+    end constructor.
     
+    method public void Initialize():
+        /* We need a datasource for this object */
+        Assert:ArgumentNotNull(ABLDataSource, 'ABL Data-Source').
+        
+        ParseDataSource().
+        
         /* fix (as in finalise or baseline, not as in repair) the definition */
         Rebase().
         
         /* Always prepare this query. */
+        QueryElementsChanged = QueryElementsChanged + QueryElementEnum:Buffer:Value.        
         BuildQuery = true.
         BuildQuery(QueryHandle).
-    end constructor.
+    end method.
     
-    method protected IQueryDefinition ParseDataSource():
-        define variable oQD as IQueryDefinition no-undo.
+    method protected void ParseDataSource():
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         define variable hBuffer as handle no-undo.
-
-        assign oQD = new QueryDefinition()
-               iMax = ABLDataSource:num-source-buffers.
         
-        do iLoop = 1 to iMax:
+        assign iMax = ABLDataSource:num-source-buffers
+               hBuffer = ABLDataSource:get-source-buffer(1).
+        
+        /* top-level buffer */               
+        Definition:AddBuffer(hBuffer:name,
+                             hBuffer:table,
+                             QueryTypeEnum:Each,
+                             LockModeEnum:NoLock).
+        AddKeyFilters(hBuffer, ABLDataSource:keys(iLoop)).
+        
+        /* DataSource queries are effectively FIND FIRST's after the top-level buffer */
+        do iLoop = 2 to iMax:
             hBuffer = ABLDataSource:get-source-buffer(iLoop).
-            /* DataSource queries are effectively FIND FIRST's after the top-level buffer */
-            case iLoop:
-                when 1 then
-                    oQD:AddBuffer(hBuffer:name,
-                                  hBuffer:table,
-                                  QueryTypeEnum:Each,
-                                  LockModeEnum:NoLock).
-                otherwise
-                    oQD:AddBuffer(hBuffer:name,
-                                  hBuffer:table,
-                                  QueryTypeEnum:First,
-                                  LockModeEnum:NoLock).
-            end case.
-            
+            Definition:AddBuffer(hBuffer:name,
+                                 hBuffer:table,
+                                 QueryTypeEnum:First,
+                                 LockModeEnum:NoLock).
             AddKeyFilters(hBuffer, ABLDataSource:keys(iLoop)).
         end.
-        
-        return oQD.
     end method.
+    
+    method public void AddTenantFilter(input poFilter as QueryFilter):
+        Definition:AddFilter(poFilter).
+        TenantFilters:Put(new String(poFilter:BufferName), poFilter).
+    end.
+    
+    method public void RemoveTenantFilter(input pcBufferName as character):
+        TenantFilters:Remove(new String(pcBufferName)).
+    end.
     
     /** Creates and stores query filters for the datasource buffers' keys. */
     method protected void AddKeyFilters(input phBuffer as handle, 
@@ -132,12 +164,24 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         SourceKeyFilters:Put(new String(phBuffer:name), oFilters).
     end method.
     
+    
     method override protected handle GetQueryBuffer(input pcTableName as character,
                                                     input pcBufferName as character):
-        return GetTableHandle(pcTableName).                                                        
+        define variable hBuffer as handle no-undo.
+        
+        /* First check the buffer name, then the table name. We should always be able to
+           find a handle by buffer name, byt just in case we can't, we check the table too.
+           
+           We start with the buffer because we can have multiple buffers on one table in
+           a single query. */    
+        hBuffer = GetBufferBuffer(pcBufferName).
+        if not valid-handle(hBuffer) then
+            hBuffer = GetTableBuffer(pcTableName).
+        
+        return hBuffer.
     end method.
 
-    /* ITableOwner implementation */        
+    /* ITableOwner implementation */
     method public handle GetTableHandle(input pcTableName as character):
         return GetTableBuffer(pcTableName).
     end method.
@@ -162,6 +206,26 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         return hBuffer.
     end method.
 
+    method protected handle GetBufferBuffer(input pcBufferName as character):
+        define variable hBuffer as handle no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        
+        /* We could use a temp-table for storing the table-name/buffer-name/handle values,
+           but that would probably be overkill, given that the number of DB buffers per ABL
+           data-source is (I assume) small, and so the loop is probably cheaper all round. */                
+        iMax = ABLDataSource:num-source-buffers.
+        hBuffer = ABLDataSource:get-source-buffer(1).
+        do iLoop = 2 to iMax while hBuffer:name ne pcBufferName:
+            hBuffer = ABLDataSource:get-source-buffer(iLoop).
+        end.
+        
+        if hBuffer:name ne pcBufferName then
+            hBuffer = ?.
+        
+        return hBuffer.
+    end method.
+
     method override public character GetBufferTableName(input pcBufferName as character):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
@@ -181,7 +245,7 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         
         return hBuffer:table.
     end method.
-
+    
 	method public void Prepare(input poAction as ServiceMessageActionEnum):
 	    define variable cWhereString as longchar no-undo.
         define variable iLoop as integer no-undo.
@@ -230,5 +294,4 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         
         this-object:Prepare().
 	end method.
-
-end class.
+	end class.

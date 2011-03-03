@@ -47,6 +47,7 @@ using Progress.Lang.Class.
 class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
         implements IDataSource:
     
+    /** Type used for InjectABL binding */
     define static public property IDataSourceType as class Class no-undo get. private set.
     
     /** The data transport type for this message. These may differ for request and response. */
@@ -59,20 +60,24 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
     define protected property LongCharDataTarget as longchar no-undo get. private set.    
     define protected property ObjectDataTarget as Object   no-undo get. private set.
     
-    /** The table request object that's currently being processed. */
+    /** The table request object that's currently being processed. 
     define protected property CurrentTableRequest as ITableRequest no-undo get. set.
+    */
+    
+    /** The table response object that's currently being processed. */
+    define protected property CurrentTableResponse as ITableResponse no-undo get. set.
     
     /** The DataAccess object making the current request. */
     define protected property CurrentDAO as IDataAccess no-undo get. set.
-
-    /** The type of request currently underway making the current request. */
+    
+    /** The type of request currently underway making the current request. */ 
     define protected property CurrentActionType as ServiceMessageActionEnum no-undo get. set.
     
     /** The default Page or batch size for this datasource. Can be overridden
         by the page size on the table request. */
     define public property PageSize as integer no-undo get. set.
     
-    /** The fill mode for the data fetch (merge etc). */
+    /** The default fill mode for the data fetch (merge etc) for this datasource. */
     define public property FillMode as FillModeEnum no-undo
         get():
             if not valid-object(FillMode) then
@@ -89,10 +94,10 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
     define public event AfterFill signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
     /* DataSource Save/Commit events */
-    define public event BeforeSaveTransaction signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event BeforeSave            signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
-    define public event AfterSave             signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event BeforeSaveTransaction signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     define public event AfterSaveTransaction  signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
+    define public event AfterSave             signature void(input poSender as IDataSource, input poEventArgs as DataSourceEventArgs).
     
     constructor static DataSource():
         DataSource:IDataSourceType = Class:GetClass('OpenEdge.DataSource.IDataSource').
@@ -129,9 +134,9 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
             <code>
             DATA-SOURCE srcCar:HANDLE:prefer-dataset = TRUE.
             hBuffer:ATTACH-DATA-SOURCE(DATA-SOURCE srcCar:HANDLE,"").
-            </code>        
-    
-        @param ServiceMessageActionEnum The action being performed (fetch/save).    */
+            </code>
+        
+        @param ServiceMessageActionEnum The action being performed (fetch/save). */
     method abstract protected void AttachDataStoreToTarget(input poAction as ServiceMessageActionEnum).
     
     /** Detaches the datastore from the datatarget
@@ -162,13 +167,9 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
         Assert:ArgumentNotNull(poRequest, 'Table Request').
         Assert:ArgumentNotNull(poDAO, 'Data Access Object').
         
-        assign CurrentTableRequest = poRequest
-               CurrentDAO = poDAO
+        assign CurrentDAO = poDAO
+               CurrentTableResponse = new TableResponse(poRequest:TableName)
                CurrentActionType = poAction.
-        
-        /* Now attach the physical data store to the data target 
-        AttachDataStoreToTarget(poAction).
-        */
         
         /* filter by tenant */
         AddTenantFilter(poAction).
@@ -253,12 +254,12 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
     method abstract public void FetchData().
     
     /** Called on completion of a data fetch request, typically by the data access object.
-        @return ITableContext - the context for the request (num records, position etc). */
+        @return ITableResponse The response to the fetch operation. */
     method abstract public ITableResponse GetData().
     
     /** Saves all records in the buffer argument to the physical data store. This
         buffer comes from the DataAccess object.
-    
+        
         @return ITableResponse The response to the save operation. */
     method abstract public ITableResponse SaveData().
     

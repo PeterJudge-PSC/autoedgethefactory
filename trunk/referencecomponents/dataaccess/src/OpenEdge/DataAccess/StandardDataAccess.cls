@@ -33,6 +33,9 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
 
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Core.System.QueryDefinition.
+using OpenEdge.Core.System.QueryFilter.
+using OpenEdge.Core.System.QueryJoin.
+using OpenEdge.Core.System.QuerySort.
 using OpenEdge.Core.System.InvalidValueSpecifiedError.
 
 using OpenEdge.Lang.Collections.ICollection.
@@ -53,8 +56,10 @@ using Progress.Lang.Class.
 class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         implements IDataAccess:
     
+    /** */
     define protected property DatasetHandle as handle no-undo get. set.
     
+    /** */
     define protected property FetchAllTables as logical no-undo get. set.
     
     /** A map of the IDataSource objects that this DataAccess objects knows about. */
@@ -76,7 +81,8 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         super().
         
         assign DataSources = poDataSources
-               moCurrentRequestDataSources = new TypedCollection(DataSource:IDataSourceType).
+               moCurrentRequestDataSources = new TypedCollection(DataSource:IDataSourceType)
+               FetchAllTables = false.
     end constructor.
     
     /** Helper method for adding DataSource objects from InjectABL. It's also perfectly legitimate to
@@ -87,7 +93,7 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     method public void AddDataSource(input pcName as character, input poDataSource as IDataSource).
         DataSources:Put(new String(pcName), poDataSource).
     end method.
-
+    
     /** Response complement method for FetchData above.
         
         @param character The message id for the request/response
@@ -136,19 +142,18 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         cast(poRequest, IServiceMessage):GetMessageData(output DatasetHandle).
         
         AddDatasetCallbacks(DatasetHandle,
-                            /* Should be Save or something similar. You'd expect. */
+                            /* Should be SaveData or something similar. You'd expect. */
                             cast(poRequest, IServiceMessage):ActionType).
         
         /* only loop through the tables that actually have changed data. */
         iMax = extent(poRequest:TableNames).
         do iLoop = 1 to iMax:
-            hBuffer = DatasetHandle:get-buffer-handle(poRequest:TableNames[iLoop]).
-            
-            oDataSource = cast(DataSources:Get(new String(ResolveTableName(hBuffer:name)))
+            oDataSource = cast(DataSources:Get(new String(poRequest:TableNames[iLoop]))
                             , IDataSource).
             if valid-object(oDataSource) then
             do:
-                AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType).
+                hBuffer = DatasetHandle:get-buffer-handle(poRequest:TableNames[iLoop]).
+                AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType, oDataSource).
                 
                 /* Saves for all data in the data target (buffer in this case). 
                    hBuffer is the after-table. */
@@ -203,9 +208,22 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         /* Clean out just to be sure.*/
         moCurrentRequestDataSources:Clear().
         
-        assign iMax = DatasetHandle:num-buffers
-               FetchAllTables = poRequest:TableRequests:IsEmpty().
+        /* If a top-level buffer has a TableRequestType of 'All', then
+           fetch all of the tables according to the relations. */
+        iMax = DatasetHandle:num-top-buffers.
+        do iLoop = 1 to iMax while not FetchAllTables:
+            oTableRequest = poRequest:TableRequests:Get(Datasethandle:get-top-buffer(iLoop):name).
+            if valid-object(oTableRequest) then
+                FetchAllTables = oTableRequest:TableRequestType:Equals(TableRequestTypeENum:All).
+        end.
         
+        /* If there are no individual table requests, and we're not already getting all tables,
+           get 'em all. This somewhat a-typical, since we'll usually filter the fetch request 
+           for at least one table (a/the top-level buffer) in the ProDataSet */
+        if not FetchAllTables then
+            FetchAllTables = poRequest:TableRequests:IsEmpty().
+        
+        iMax = DatasetHandle:num-buffers.
         do iLoop = 1 to iMax:
             hBuffer = DatasetHandle:get-buffer-handle(iLoop).
             
@@ -221,16 +239,14 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                 do:
                     moCurrentRequestDataSources:Add(oDataSource).
                     
-                    /* why append? */
-                    /*oDataSource:FillMode = FillModeEnum:Append.*/
                     oDataSource:SetDataTarget(hBuffer).
                     oDataSource:Prepare(oServiceMessage:ActionType,
                                         oTableRequest,
                                         this-object).
-                    AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType).
+                    AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType, oDataSource).
                 end.
-            end.
-        end.
+            end.    /* valid tablerequest */
+        end.    /* buffer loop */
         
         /* Get data into this dataset */
         if moCurrentRequestDataSources:Size gt 0 then
@@ -241,11 +257,20 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     end method.
     
     /** Fetch/retrieve data from the datasource, and populate the business entity with 
-        it. */
+        it. */ 
     method protected void PerformFetch():
-        /* This could be a call to the individual datasources to populate their data.
-            cast(moCurrentRequestDataSources:Get(1), IDataSource):PerformFetch(). */
-        DatasetHandle:fill().
+        define variable oIterator as IIterator no-undo.
+        
+        /* If we want to get all tables, */
+        if FetchAllTables then
+            DatasetHandle:fill().
+        else
+        do:
+            oIterator = moCurrentRequestDataSources:Iterator().
+            do while oIterator:HasNext(): 
+                cast(oIterator:Next(), IDataSource):FetchData().
+            end.
+        end.
     end method.
     
     /** Removes all the callbacks on a dataset and its buffers, for a given action. 
@@ -267,13 +292,13 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
     end method.
     
     /** Add ABL callbacks to a buffer handle for an action.
-    
+        
         @param handle The buffer on which to attach the callback
         @param ServiceMessageActionEnum The action being performed.
-        
-        @return Logical value indicating whether there are any callbacks set for the buffer */
-    method protected logical AddBufferCallbacks(input phBuffer as handle,
-                                                input poServiceMessageAction as ServiceMessageActionEnum):
+        @param IDataSource The datasource used to operate on the buffer/handle */
+    method protected void AddBufferCallbacks(input phBuffer as handle,
+                                             input poServiceMessageAction as ServiceMessageActionEnum,
+                                             input poDataSource as IDataSource):
             /* Example below */
             case poServiceMessageAction:
                 when ServiceMessageActionEnum:FetchData then
@@ -319,30 +344,98 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                                                  input poServiceMessageAction as ServiceMessageActionEnum):
     end method.
     
-    /** Resolves a table name from the Business Entity into a physical table name in the
-        DataSource. The values passed in here are usually taken from the ITableRequest that's
-        part of the IServiceRequest.
-        
-        This method is typically called from a DataSource.
-        
-        @param character A table name in the business entity
-        @return character The table name in the datasource. */
-    method public character ResolveTableName (input pcBETable as character):
-        return pcBETable.
-    end method.
-    
     /** Resolves a field name from the Business Entity into a physical field name in the
         DataSource. The values passed in here are usually taken from the ITableRequest that's
         part of the IServiceRequest.
         
-        This method is typically called from a DataSource.
-        
-        @param character A table name in the business entity
+        @param character A table name in the business entity (not resolved)
         @param character A field name in the business entity
-        @return character The field name in the datasource. */
-    method public character ResolveFieldName (input pcBETable as character, input pcBEField as character):
-        return pcBEField.
+        @return character[] The [db.][table.]field name in the datasource. If the array has an extent
+                of 1, then it's a field in the input table; if 2 then in the same Db.
+                [1] = FieldName
+                [2] = TableName
+                [3] = DB Name               */
+    method public character extent ResolveFieldName (input pcSourceTable as character, input pcSourceField as character):        
+        define variable cFieldName as character extent 2 no-undo.
+        
+        assign cFieldName[1] = pcSourceField
+               cFieldName[2] = pcSourceTable.
+        
+        return cFieldName.
     end method.
+    
+    /** Resolves a query filter on the data access/entity ("eTable.Field = 'someValue' ") to a filter on the 
+        DB/datasource ("Table.Field = 'someValue'). This is typically for more complex transformations than
+        just a simple field and/or table name mappes: for example, where one filter in the entity maps to
+        multiple filters in the DB.
+        
+        @param QueryFilter The source/business entity filter to transform. 
+        @return QueryFilter[] The filter clause(s) on the DB query that the source filter resolves to */
+    method public QueryFilter extent ResolveFilter(input poSourceFilter as QueryFilter):
+        define variable oResolvedFilter as QueryFilter extent 1 no-undo.
+        define variable cResolvedFieldName as character extent no-undo.
+        
+        /* Resolve any mapping between DB and ProDataSet*/
+        cResolvedFieldName = ResolveFieldName(poSourceFilter:BufferName, poSourceFilter:FieldName).
+        /* [PJ] eOrder.OrderStatus -> StatusDetail.Code */
+        /* [PJ] eOrder.OrderNum -> Order.OrderNum */
+        
+        /* Use handle:NAME since the table name is what's returned in from ResolveFieldName() */
+        oResolvedFilter[1] = new QueryFilter(
+                                    cResolvedFieldName[2],
+                                    cResolvedFieldName[1],
+                                    poSourceFilter:Operator,
+                                    poSourceFilter:FieldValue,
+                                    poSourceFilter:FieldType,
+                                    poSourceFilter:JoinType).
+        
+        return oResolvedFilter.
+    end method.
+
+    /** Resolves a query Join on the data access/entity ("eTable.Field = eTable2.Field") to a Join on the 
+        DB/datasource ("Table.Field = dbTable2.Field"). This is typically for more complex transformations than
+        just a simple field and/or table name mappes: for example, where one Join in the entity maps to
+        multiple Joins in the DB.
+        
+        @param QueryJoin The source/business entity Join to transform.
+        @return QueryJoin[] The Join clause(s) on the DB query that the source Join resolves to */
+    method public QueryJoin extent ResolveJoin(input poSourceJoin as QueryJoin).
+        define variable oResolvedJoin as QueryJoin extent 1 no-undo.
+        define variable cResolvedFieldName as character extent no-undo.
+        define variable cResolvedJoinFieldName as character extent no-undo.
+        
+        /* Resolve any mapping between DB and ProDataSet*/
+        cResolvedFieldName = ResolveFieldName(poSourceJoin:BufferName, poSourceJoin:FieldName).
+        cResolvedJoinFieldName = ResolveFieldName(poSourceJoin:JoinBufferName, poSourceJoin:JoinFieldName).
+        
+        oResolvedJoin[1] = new QueryJoin(
+                                cResolvedFieldName[2],
+                                cResolvedFieldName[1],
+                                poSourceJoin:Operator,
+                                cResolvedJoinFieldName[2],
+                                cResolvedJoinFieldName[1],
+                                poSourceJoin:JoinType).
+        
+        return oResolvedJoin.
+    end method.
+    
+    /** Resolves a query sort on the data access/entity ("by eTable.Field ") to a sort on the 
+        DB/datasource ("By Table.Field"). This is typically for more complex transformations than
+        just a simple field and/or table name mappings
+        
+        @param QuerySort The source/business entity sort to transform.
+        @return QuerySort[] The sort clause(s) on the DB query that the source sort resolves to */
+    method public QuerySort extent ResolveSort(input poSourceSort as QuerySort).
+        define variable oResolvedSort as QuerySort extent 1 no-undo.
+        define variable cResolvedFieldName as character extent no-undo.
+        
+        oResolvedSort[1] = new QuerySort(
+                                cResolvedFieldName[2],
+                                cResolvedFieldName[1],
+                                poSourceSort:Direction).
+        
+        return oResolvedSort.
+    end method.      
     
     method protected ITableRequest CreateDefaultTableRequest(input pcBufferName as character):
         return new TableRequest(pcBufferName).
