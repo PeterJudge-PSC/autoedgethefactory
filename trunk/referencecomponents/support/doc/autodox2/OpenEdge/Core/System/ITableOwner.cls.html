@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>ITableOwner</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\System</font>
+      <br />INTERFACE ITableOwner
+    </h2>
+    <p>INTERFACE OpenEdge.Core.System.ITableOwner </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#gettablehandle(character)'> GetTableHandle</a>
+          </b>(CHARACTER pcTableName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;know how to interpret the name. The name passed in is the name
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='gettablehandle(character)'><!-- --></a>
+    <h3>GetTableHandle</h3>
+    <code>PUBLIC  HANDLE
+      <b>GetTableHandle</b>(CHARACTER pcTableName)
+    </code>
+    <dl>
+      <dd>know how to interpret the name. The name passed in is the name <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - A table or buffer name. The implementer willthat the query will use together with its IQueryDefinition. <br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>A buffer handle corresponding to the requested name.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

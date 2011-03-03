@@ -11,7 +11,7 @@
     Notes       : * this test MUST be run with -nogc, otherwise the performance
                     test will fail miserably.
   ----------------------------------------------------------------------*/
-routine-level on error undo, throw.
+{routinelevel.i}
 
 using OpenEdge.Lang.ABLSession.
 using Progress.Lang.AppError.

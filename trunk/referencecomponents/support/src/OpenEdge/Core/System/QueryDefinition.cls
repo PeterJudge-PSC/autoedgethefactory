@@ -72,6 +72,7 @@ class OpenEdge.Core.System.QueryDefinition
         field TableName as character 
         field QueryType as Object   /* OpenEdge.Lang.QueryTypeEnum */
         field LockMode as Object    /* OpenEdge.Lang.LockModeEnum */
+        /* field JoinMode as Object    OpenEdge.Lang.BufferJoinModeEnum */
         index idx1 as unique BufferName
         index idx2 as primary unique Order.
     
@@ -297,12 +298,21 @@ class OpenEdge.Core.System.QueryDefinition
         
         @param QueryBuffer The buffer being removed */
     method public void RemoveBuffer(input poQueryBuffer as QueryBuffer):
+        RemoveBuffer(poQueryBuffer:Name).
+    end method.
+    
+    /** Removes a buffer and related records. Note that only one
+        QueryDefinitionChanged event first, for the buffer. The 
+        child records are simply removed.
+        
+        @param character The buffer being removed */        
+    method public void RemoveBuffer(input pcBufferName as character):
         define buffer lbBuffer for ttBuffer.
         define buffer lbJoin for ttJoin.
         define buffer lbFilter for ttFilter.
         define buffer lbSort for ttSort.
         
-        find lbBuffer where lbBuffer.BufferName = poQueryBuffer:Name no-error.
+        find lbBuffer where lbBuffer.BufferName = pcBufferName no-error.
         if available lbBuffer then
         do:
             for each lbFilter where lbFilter.BufferName = lbBuffer.BufferName:

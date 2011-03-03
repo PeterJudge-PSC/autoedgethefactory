@@ -36,6 +36,16 @@ interface OpenEdge.Core.System.IQueryDefinition:
     define public property QueryBlockType as QueryBlockTypeEnum no-undo get. set.
     define public property NumBuffers as integer no-undo get.
     
+    @todo(task="refactor", action="make oo-ish").
+    /*
+    /* buffers are ordered, keyed on nameIList or IMap?  */
+    define public property Buffers as IList no-undo get. private set.
+    define public property Joins as ICollection no-undo get. private set.
+    define public property Filters as ICollection no-undo get. private set.
+    /* sorting is ordered */
+    define public property Sorts as IList no-undo get. private set.
+    */
+    
     /** Indicates whether the query can join to tables outside of this query definition. This may
         happen in some cases; for instance when dealing with DataSourceQuery objects which are used
         for DATA-SOURCE queries for ProDataSets.
@@ -61,6 +71,8 @@ interface OpenEdge.Core.System.IQueryDefinition:
                                  input poLockMode as LockModeEnum).
     
     method public void AddBuffer(input poQueryBuffer as QueryBuffer).
+    
+    method public void RemoveBuffer(input pcBuffer as character).
     method public void RemoveBuffer(input poQueryBuffer as QueryBuffer).
     
     /* IQuery will use these methods when constructing an ABL query */

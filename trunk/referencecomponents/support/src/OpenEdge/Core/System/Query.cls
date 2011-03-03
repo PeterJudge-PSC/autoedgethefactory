@@ -94,7 +94,8 @@ class OpenEdge.Core.System.Query use-widget-pool
     /* Query only has one this-object:Definition associated with it. Once it's created, we can
        manipulate to our hearts' content, but the object instance stays the same. */
     define public property Definition as IQueryDefinition no-undo get. protected set.
-    
+
+@todo(task="implement", action="basedefinition as stack?").    
     /* This is the base or initial definition used to create this query. It's 
        a copy of the QueryDef passed in to the ctor, and should not be changed. */
     define protected property BaseDefinition as IQueryDefinition no-undo get. set.
@@ -127,7 +128,8 @@ class OpenEdge.Core.System.Query use-widget-pool
         get():
             define variable oRowPosition as RowPositionEnum no-undo.
                 
-            if not QueryHandle:is-open or
+            if not valid-handle(QueryHandle) or 
+               not QueryHandle:is-open or
                QueryHandle:current-result-row eq 0 then
                 oRowPosition = RowPositionEnum:None.
             else
@@ -150,40 +152,16 @@ class OpenEdge.Core.System.Query use-widget-pool
     
     define protected property BuildQuery as logical no-undo
         get.
-        set(input plBuildQuery as logical):            
+        set(input plBuildQuery as logical):
             if plBuildQuery eq false then
                 QueryElementsChanged = 0.
             
             BuildQuery = plBuildQuery.
         end set.
 
-    /** 
-        allows us to pass in an existing query def and use this class as a helper for repos, row key etc. 
-    define protected property FromExternal as logical no-undo get. private set.
-      
-    constructor public Query(input phQuery as handle):
-        Assert:ArgumentNotNull(phQuery, 'Query handle').
-        
-        assign QueryHandle = phQuery
-               FromExternal = false
-               BuildQuery = true.
-    end constructor.
-      */
-    
-    method protected IQueryDefinition ExtractDefinitionFromQuery(input phQuery as handle):
-        define variable oQueryDef as IQueryDefinition no-undo.
-        
-        define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
-        define variable cBufferName as character no-undo.
-        define variable cFieldName as character no-undo.
-        
-        return oQueryDef. 
-    end method.
-    
     constructor protected Query():
         create query QueryHandle.
-                
+        
         /* Obviously, we'll need to build the query at some point. */
         BuildQuery = true.
         QueryElementsChanged = QueryElementsChanged + QueryElementEnum:Buffer:Value.
@@ -275,7 +253,7 @@ class OpenEdge.Core.System.Query use-widget-pool
         @return logical Returns true if the query successfully repositioned to the
                 row specified by the rowid array.   */
     method static public logical Reposition (input phQuery as handle,
-                                             input prRecord as rowid extent):
+                                                 input prRecord as rowid extent):
         define variable lOk as logical no-undo.
                                                      
         if prRecord[1] ne ? then
@@ -378,6 +356,8 @@ class OpenEdge.Core.System.Query use-widget-pool
         define variable iLoop as integer no-undo.
         define variable cKeys as character no-undo.
         define variable iMax as integer no-undo.
+        /** single space for building query strings. Note the init value must be at least one space */
+        define variable cSpacer as character no-undo init ' '.
         
         if not phBuffer:available then
             return ?.
@@ -388,10 +368,11 @@ class OpenEdge.Core.System.Query use-widget-pool
         
         iMax = num-entries(cKeys).
         do iLoop = 1 to iMax:
-            cKeyWhere = cKeyWhere
-                      + (if iLoop eq 1 then 'where ' else ' and ')
-                      + phBuffer:name + '.' + entry(iLoop, cKeys)
-                      + OperatorEnum:IsEqual:ToString() + quoter(phBuffer:buffer-field(entry(iLoop, cKeys)):buffer-value).
+            cKeyWhere = cKeyWhere + cSpacer
+                      + (if iLoop eq 1 then 'where ' else ' and ') + cSpacer
+                      + phBuffer:name + '.' + entry(iLoop, cKeys) + cSpacer
+                      + OperatorEnum:IsEqual:ToString() + cSpacer 
+                      + quoter(phBuffer:buffer-field(entry(iLoop, cKeys)):buffer-value).
         end.    /* key fields */
         
         return cKeyWhere.
@@ -637,7 +618,7 @@ class OpenEdge.Core.System.Query use-widget-pool
         else
         do:
             BuildQuery = true.
-            QueryElementsChanged = QueryElementsChanged + poArgs:Element:Value.  
+            QueryElementsChanged = QueryElementsChanged + poArgs:Element:Value.
         end.
     end.
     
@@ -674,11 +655,16 @@ class OpenEdge.Core.System.Query use-widget-pool
     end method.
     
     method protected void Prepare(input phQuery as handle):
+        /* keep separate variable for debugging */
+        define variable cPrepareString as character no-undo.
+        
         /* Always prepare this query. */
         BuildQuery = true.
         BuildQuery(phQuery).
         
-        phQuery:query-prepare(string(this-object:Definition:GetQueryString())).                                      
+        cPrepareString = this-object:Definition:GetQueryString().
+        
+        phQuery:query-prepare(cPrepareString).                                      
     end method.
     
     method protected void RemoveQueryBuffers(input phQuery as handle):

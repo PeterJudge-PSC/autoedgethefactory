@@ -11,7 +11,7 @@
 using Progress.Lang.*.
 using OpenEdge.Test.*.
 
-routine-level on error undo, throw.
+{routinelevel.i}
 
 class OpenEdge.Test.Shuriken implements IWeapon:
     

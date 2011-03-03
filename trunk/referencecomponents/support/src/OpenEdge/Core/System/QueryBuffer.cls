@@ -13,6 +13,8 @@ using OpenEdge.Core.System.QueryBuffer.
 using OpenEdge.Core.Util.IExternalizable.
 using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.IObjectInput.
+
+using OpenEdge.Lang.BufferJoinModeEnum.
 using OpenEdge.Lang.LockModeEnum.
 using OpenEdge.Lang.QueryTypeEnum.
 using OpenEdge.Lang.Assert.
@@ -25,6 +27,7 @@ class OpenEdge.Core.System.QueryBuffer
     define public property TableName as character no-undo get. set.
     define public property QueryType as QueryTypeEnum no-undo get. set.
     define public property LockMode as LockModeEnum no-undo get. set.
+/*    define public property JoinMode as BufferJoinModeEnum no-undo get. set.*/
     
     @todo(task="implement", action="implement collection of sorts, filters, and joins ").
     
@@ -49,9 +52,12 @@ class OpenEdge.Core.System.QueryBuffer
     
     constructor public QueryBuffer(input pcName as character,
                                    input pcTableName as character):
-        this-object(pcName, pcTableName, QueryTypeEnum:Default, LockModeEnum:Default).                               
+        this-object(pcName,
+                    pcTableName,
+                    QueryTypeEnum:Default,
+                    LockModeEnum:Default).                                      
     end constructor.
-
+    
     method override public logical Equals(input p0 as Object):
         define variable lEquals as logical no-undo.
         define variable oQB as QueryBuffer no-undo.
@@ -61,7 +67,7 @@ class OpenEdge.Core.System.QueryBuffer
         if not lEquals and type-of(p0, QueryBuffer) then
             assign oQB = cast(p0, QueryBuffer)
                    lEquals = oQB:Name eq this-object:Name
-                         and oQB:TableName eq this-object:TableName                     
+                         and oQB:TableName eq this-object:TableName
                          and oQB:QueryType:Equals(this-object:QueryType)
                          and oQB:LockMode:Equals(this-object:LockMode).
         
@@ -79,7 +85,8 @@ class OpenEdge.Core.System.QueryBuffer
         assign this-object:Name = poStream:ReadChar()
                TableName = poStream:ReadChar()
                QueryType = cast(poStream:ReadEnum(), QueryTypeEnum)
-               LockMode =  cast(poStream:ReadEnum(), LockModeEnum).
+               LockMode =  cast(poStream:ReadEnum(), LockModeEnum)
+               .
     end method.
     
 end class.
