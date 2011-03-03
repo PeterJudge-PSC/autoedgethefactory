@@ -72,7 +72,7 @@ Assert:ArgumentNotNull(oContext, 'User Context').
 
 assign pcUserContextId = oContext:ContextId
        pcCustomerEmail = cast(oContext:UserProperties:Get(new String('PrimaryEmailAddress')), String):Value
-       pcCustomerId = cast(oContext:UserProperties:Get(new String('CustomerId')), String):Value
+       pcCustomerId = cast(oContext:UserProperties:Get(new String('CustNum')), String):Value
        pdCreditLimit = decimal(cast(oContext:UserProperties:Get(new String('CreditLimit')), String):Value)
        .
        

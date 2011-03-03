@@ -12,8 +12,8 @@
   ----------------------------------------------------------------------*/
 
 /* ***************************  Definitions  ************************** */
-
 {routinelevel.i}
+
 
 /* ********************  Preprocessor Definitions  ******************** */
 function getRandom returns character (input cValueList as character):
@@ -37,14 +37,12 @@ define variable cSalutationsFemale as character no-undo.
 define variable cNotes as character no-undo.
 define variable cEmailAddress as character no-undo.
 
-define variable iNumTenants as integer no-undo.
 define variable iNumAddresses as integer no-undo.
-define buffer lbChildTenant for Tenant.
+define buffer childTenant for Tenant.
 
-define query qryTenant for Tenant scrolling.
 define query qryAddresses for AddressDetail scrolling.
 
-iMax = 100.
+iMax = 10.
 
 cLastNames = "Miller|Anderson|Higgins|Gant|Jones|Smith|Johnson|Moore|Taylor|Jackson|Harris|Martin|Garcia|Martinez|Robinson|Lewis|Lee|Walker|Baker|Nelson|Carter|Roberts|Tuner|Parker|Evans|Collins|Stewart|Murphy|Cooper|Richardson|Cox|Howard|Geller|Bing|Ward|Torres|Peterson|Gray|Ramirez|James|Watson|Brooks|Kelly|Sanders|Price|Bennet|Wood|Barnes|Ross|Henderson|Coleman|Jenkins|Perry|Powell|Long|Patterson|Hughes|Flores|Washington|Butler|Simmons|Foster|Gonzales|Alexander|Hayes|Myers|Ford|Hamilton|Graham|Sullivan|Wallace|Woods|West|Jordan|Reynolds|Marshall|Freeman|Wells|Webbs|Simpson|Stevens|Tucker|Porter|Hunter|Hicks|Crawford|Kennedy|Burns|Shaw|Holmes|Robertson|Hunt|Black|Palmer|Rose|Spencer|Pierce|Wagner".
 cMiddleNames = "A.|B.|M.|N.|L.||".
@@ -58,62 +56,56 @@ cEmailAddress = "@aol.com|@mail.com|@progress.com|@company.com|@example.com|@dom
 open query qryAddresses preselect each AddressDetail.
 iNumAddresses = query qryAddresses:num-results - 1.
 
-open query qryTenant preselect each Tenant no-lock.
-iNumTenants = query qryTenant:num-results - 1.
-
-do iLoop = 1 to iMax:
-    GET-TENANT:
-    do while true:
-        reposition qryTenant to row random(0, iNumTenants).
-        get next qryTenant no-lock.
-        
-        if can-find(first lbChildTenant where lbChildTenant.ParentTenantId eq Tenant.TenantId) then
-            next GET-TENANT.
+for each Tenant:
+    
+    /* only want customers of brands */
+    if Tenant.ParentTenantId eq '' then next.    
+    if can-find(first childTenant where childTenant.ParentTenantId = Tenant.TenantId) then next.    
+    
+    do iLoop = 1 to iMax:   
+        create Customer.
+        assign iLoop = iLoop + 1 
+               Customer.CustNum = iLoop
+               Customer.Balance = random(0, 25000)
+               Customer.Comments = getRandom(cNotes)
+               Customer.CreditLimit = random(0, 25000)
+               Customer.CustomerId = guid(generate-uuid)
+               Customer.Discount = random(0, 11)
+               Customer.Language = 'EN-US'
+               Customer.PrimaryLocaleId = Tenant.LocaleId
+               Customer.SalesrepId = ''
+               Customer.TenantId = Tenant.TenantId
+               Customer.Terms = ''.
+            
+        if iLoop mod 2 eq 0 then        
+            Customer.Name = getRandom(cFirstNamesFemale) + ' ' + getRandom(cMiddleNames) + ' ' + getRandom(cLastNames).
         else
-            leave GET-TENANT.
-    end.
-                
-    create Customer.
-    assign Customer.CustNum = iLoop
-           Customer.Balance = random(0, 25000)
-           Customer.Comments = getRandom(cNotes)
-           Customer.CreditLimit = random(0, 25000)
-           Customer.CustomerId = guid(generate-uuid)
-           Customer.Discount = random(0, 11)
-           Customer.Language = 'EN-US'
-           Customer.PrimaryLocaleId = Tenant.LocaleId
-           Customer.SalesrepId = ''
-           Customer.TenantId = Tenant.TenantId
-           Customer.Terms = ''.
+            Customer.Name = getRandom(cFirstNamesMale) + ' ' + getRandom(cMiddleNames) + ' ' + getRandom(cLastNames).
         
-    if iLoop mod 2 eq 0 then        
-        Customer.Name = getRandom(cFirstNamesFemale) + ' ' + getRandom(cMiddleNames) + ' ' + getRandom(cLastNames).
-    else
-        Customer.Name = getRandom(cFirstNamesMale) + ' ' + getRandom(cMiddleNames) + ' ' + getRandom(cLastNames).
+        reposition qryAddresses to row random(0, iNumAddresses).
+        get next qryAddresses no-lock.
     
-    reposition qryAddresses to row random(0, iNumAddresses).
-    get next qryAddresses no-lock.
-
-    run AddCustomerAddress(
-            'billing',
-            Customer.TenantId,
-            Customer.CustomerId,
-            AddressDetail.AddressDetailId).
-                    
-    run AddCustomerContact(
-            'email-home',
-            Customer.TenantId, 
-            Customer.CustomerId,
-            entry(1, Customer.Name, ' ') + getRandom(cEmailAddress)).
+        run AddCustomerAddress(
+                'billing',
+                Customer.TenantId,
+                Customer.CustomerId,
+                AddressDetail.AddressDetailId).
+                        
+        run AddCustomerContact(
+                'email-home',
+                Customer.TenantId, 
+                Customer.CustomerId,
+                entry(1, Customer.Name, ' ') + getRandom(cEmailAddress)).
+        
+        run AddCustomerContact(
+                'phone-mobile',
+                Customer.TenantId, 
+                Customer.CustomerId,
+                substitute('&1-555-&2',
+                           random(201, 979),
+                           random(1000, 9999))).
     
-    run AddCustomerContact(
-            'phone-mobile',
-            Customer.TenantId, 
-            Customer.CustomerId,
-            substitute('&1-555-&2',
-                       random(201, 979),
-                       random(1000, 9999))).
-
+    end.
 end.
 
 procedure AddCustomerContact:

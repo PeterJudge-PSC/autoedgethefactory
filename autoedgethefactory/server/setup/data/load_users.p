@@ -10,7 +10,7 @@
     Created     : Wed Dec 15 09:19:48 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 define variable cLoginName as character no-undo.
 define variable cDomain as character no-undo.
@@ -22,16 +22,13 @@ define buffer lbUser for ApplicationUser.
 
 for each Customer no-lock,
     first Tenant where Tenant.TenantId = Customer.TenantId no-lock:
-
+    
     cDomain  = 'customer.' + Tenant.Name.         
     cLoginName = entry(1, Customer.Name, ' ').
     
     if can-find(lbUser where lbUser.LoginDomain = cDomain and lbUser.LoginName = cLoginName) then
-        cLoginName = string(Customer.CustNum).
-
-    if can-find(lbUser where lbUser.LoginDomain = cDomain and lbUser.LoginName = cLoginName) then
-        cLoginName = Tenant.Name + '.' + string(Customer.CustNum).
-                    
+        cLoginName = cLoginName + substitute('-&1-&2', Customer.CustNum, Tenant.Name).
+    
     create ApplicationUser.
     assign ApplicationUser.ApplicationUserId = guid(generate-uuid)
            ApplicationUser.CustomerId = Customer.CustomerId
@@ -46,13 +43,16 @@ for each Customer no-lock,
 end.
 
 for each Employee no-lock,
+    first Department where Employee.DepartmentId = Department.DepartmentId no-lock,
     first Tenant where Tenant.TenantId = Employee.TenantId no-lock:
-                
-    cDomain  = 'employee.' + Tenant.Name.         
+
+    cDomain  = substitute('&1.employee.&2',
+                      Department.Name,
+                      Tenant.Name).
     cLoginName = Employee.FirstName + '.' + Employee.LastName.
     
     if can-find(lbUser where lbUser.LoginDomain = cDomain and lbUser.LoginName = cLoginName) then
-        cLoginName = string(Employee.EmpNum).
+        cLoginName = cLoginName + substitute('-&1-&2', Employee.EmpNum, Tenant.Name).    
     
     create ApplicationUser.
     assign ApplicationUser.ApplicationUserId = guid(generate-uuid)

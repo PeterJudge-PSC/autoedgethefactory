@@ -16,8 +16,8 @@ class AutoEdge.Factory.Common.EnterpriseServices.SavvionParameters inherits BizL
     constructor public SavvionParameters():
         super('AutoEdgeTheFactory-Default',
               '127.0.0.1',
-              'ebms',
-              'ebms').
+              'sales',
+              'sales').
     end constructor.
     
 end class.
