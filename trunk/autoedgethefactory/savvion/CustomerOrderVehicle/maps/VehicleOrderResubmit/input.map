@@ -12,7 +12,7 @@
   <param name="PLUGIN.1.IN.brand" type="java.lang.Object" value="@VehicleBrand"/>
   <param name="SENDER" type="java.lang.String" value="@DealerEmail"/>
   <param name="PLUGIN.1.IN.vehextcolor" type="java.lang.Object" value="@ExteriorColour"/>
-  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="localhost"/>
+  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="pubsmtp.progress.com"/>
   <param name="PLUGIN.1.IN.vehintcolor" type="java.lang.Object" value="@InteriorTrimColour"/>
   <param name="BCC" type="java.lang.Object" value=""/>
   <param name="SUBJECT" type="java.lang.Object" value="Your vehicle order needs to be reviewed"/>

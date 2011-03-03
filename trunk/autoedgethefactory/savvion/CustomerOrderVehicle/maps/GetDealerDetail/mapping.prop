@@ -1,8 +1,8 @@
-#Fri Jul 30 11:36:55 EDT 2010
+#Wed Feb 16 14:55:06 EST 2011
 adapter-class=com.savvion.sbm.adapters.webservice.WebServiceAdapter
 map-configurator=com.savvion.sbm.adapters.framework.GroupMapConfigurator
 adapter-configurator=com.savvion.sbm.adapters.webservice.WebServiceAdapterConfiguratorDialog
-AdapterName=AutoEdgeTheFactory_WebServiceAdapter
+AdapterName=GenericWebServiceAdapter
 log-level=10
 runtime-mapper=com.savvion.sbm.adapters.framework.GroupMapper
 AdapterCategory=WebServiceAdapters

@@ -1,0 +1,9 @@
+<map version="1.3">
+  <param name="DealerName" type="java.lang.String" value="@OUT.responseDealerName"/>
+  <param name="DealerInfoEmail" type="java.lang.String" value="@OUT.responseInfoEmail"/>
+  <param name="error" type="java.lang.String" value="@FAULT.SoapFaultXML"/>
+  <param name="DealerId" type="java.lang.String" value="@OUT.responseDealerId"/>
+  <param name="DealerSalesEmail" type="java.lang.String" value="@OUT.responseSalesEmail"/>
+  <param name="DealerPhoneNumber" type="java.lang.String" value="@OUT.responsePhoneNumber"/>
+  <param name="DealerStreetAddress" type="java.lang.String" value="@OUT.responseStreetAddress"/>
+</map>
