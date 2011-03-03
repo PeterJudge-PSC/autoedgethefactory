@@ -3,7 +3,7 @@
 <head><META http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector" %>
+<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector,java.util.Locale" %>
 <%@ page errorPage="/BizSolo/common/jsp/error.jsp" %>
 <%@ taglib uri="/BizSolo/common/tlds/bizsolo.tld" prefix="bizsolo" %>
 <%@ taglib uri="/bpmportal/tld/bpmportal.tld" prefix="sbm" %>
@@ -17,9 +17,9 @@
 <%! String _PageName = "SelectModel"; %>
 <%! String __webAppName = "CustomerVehicleOrderSubmit"; %>
 <% pageContext.setAttribute( "contextPath", request.getContextPath()+"/"); %>
-<%! java.util.Vector myVector; %>
 
 <title>SelectModel</title>
+<%boolean isStandaloneBS = (bizManage == null || bizManage.getName() == null || "".equals(bizManage.getName()) || bizManage.getLocale() == null);Locale myLocale = (!isStandaloneBS) ? bizManage.getLocale() : request.getLocale();%>
 <!-- Javascript -->
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/initControls.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/customValidation.js"></script>
@@ -33,19 +33,18 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.config.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-enUS.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-en.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-<%=myLocale.getLanguage() %>.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup-<%=myLocale.getLanguage() %>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>dwr/interface/adapterDWR.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/utilities/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/container-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/connection/connection-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/resize-beta-min.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/animation/animation-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/json/json-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/logger/logger-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/spry/checkboxvalidation/SpryValidationCheckbox.js"></script>
@@ -64,7 +63,6 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/LoggerDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/ResizableDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidget.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormPanel.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidgetHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
@@ -153,10 +151,10 @@
 
 <sbm:setLocale value="<%= bizManage.getLocale() %>"></sbm:setLocale>
 <% try{ %><sbm:setBundle scope="page" basename="CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit"></sbm:setBundle><% } catch(Exception e){}%>
-</head>
+<bizsolo:getApplicationResources baseName="CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit"/></head>
 <body class="ApBody yui-skin-sam" onUnload="pwr.removePakBizSoloBeanFromCache('<%=session.getId()%>', onSuccess);" onLoad="setCheckBoxStyleForIE();hideControls();beforeInitControls();initControls();initTabs();sbm.utils.onDOMReady();">
 <form method="post" name="form" onsubmit="return sbm.utils.onFormSubmit();">
-<div id="northDiv"></div><% /* Workaround, activityName will disappear in the future */ %>
+<div id="northDiv"><bizsolo:xsrf/></div><% /* Workaround, activityName will disappear in the future */ %>
 <% String activityName = bean.getPropString("workitemName"); %>
 <div id="resultDiv">
 <div style='visibility:hidden;display:none' class='vBoxClass' name='errors' id='errors'></div>
@@ -164,15 +162,15 @@
 <input name="_yahoo_flow_button" type="hidden" value=''>
 <!-- Content --> 
 
-    <div align="center">
-
+    
+      
+    
+    <div align="center" id="">
       <img border="0" id="aetf_logo" width="400" height="69" src="images/aetf_logo.png">
       <br clear="all">
-<fieldset id="fsModel">
-
-        <legend>Model Selection</legend>
-        <div align="center">
-
+<fieldset name="fsModel">
+        <legend><sbm:message key="SelectModel.fieldset.fsModel.label"></sbm:message></legend>
+        <div align="center" id="">
           <font color="#008000" face="Segoe UI" size="4">
             <b>
               <i>Welcome to </i>
@@ -196,17 +194,14 @@
             <i>Please select your model</i>
           </font>
         </div>
-
-        <div align="left">
-
+        <div align="left" id="">
           <br clear="all">
 <br clear="all">
 <table align="center" cellpadding="5" cellspacing="0" class="(default)" id="tblModels" width="550">
             <thead>
               <tr>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
-                  <div align="center">
-
+                  <div align="center" id="">
                     <img border="0" id="imgCompact" width="82" height="32" src="images/blue_coupe.gif">
                     <br clear="all">
 <font color="#0000ff" face="Segoe UI" size="3">
@@ -215,7 +210,6 @@
                       </b>
                     </font>
                   </div>
-
                 </th>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
                   <font color="#808080" face="Segoe UI" size="3">
@@ -225,8 +219,7 @@
                   </font>
                 </th>
                 <th class="(default)" rowspan="1" colspan="1">
-                  <div align="center">
-
+                  <div align="center" id="">
                     <img border="0" id="imgPremium" width="82" height="32" src="images/blue_convertible.gif">
                     <br clear="all">
 <font color="#0000ff" face="Segoe UI" size="3">
@@ -235,7 +228,6 @@
                       </b>
                     </font>
                   </div>
-
                 </th>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
                   <font color="#808080" face="Segoe UI" size="3">
@@ -247,40 +239,36 @@
               </tr>
               <tr>
                 <th class="(default)" colspan="2" width="137" rowspan="1">
-                  <div align="center">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="rsCompact" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='rsCompact'){rsCompact_onChange(args);}});
 
-                    <select size="5" id="listCompact" style="width:250px; height:75px; " onchange="listCompact_onChange();"><% myVector = (java.util.Vector)bean.getPropVector("VehicleModelsCompact");if(myVector!=null){pageContext.setAttribute("myVector", myVector);%>
-<c:forEach var="curr" items="${myVector}">
-            <option value="<c:out value='${curr}'/>"><c:out value="${curr}"></c:out></option>
-    </c:forEach>
-<%} %></select>
-
+-->
+</script>
                   </div>
-
                 </th>
                 <th class="(default)" colspan="2" rowspan="1">
-                  <div align="center">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="rsPremium" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='rsPremium'){rsPremium_onChange(args);}});
 
-                    <select size="5" id="listPremium" style="width:250px; height:75px; " onchange="listPremium_onChange();"><% myVector = (java.util.Vector)bean.getPropVector("VehicleModelsPremium");if(myVector!=null){pageContext.setAttribute("myVector", myVector);%>
-<c:forEach var="curr" items="${myVector}">
-            <option value="<c:out value='${curr}'/>"><c:out value="${curr}"></c:out></option>
-    </c:forEach>
-<%} %></select>
-
+-->
+</script>
                   </div>
-
                 </th>
               </tr>
               <tr>
-                <th class="(default)" width="137" rowspan="1" colspan="1"></th>
-                <th class="(default)" width="137" rowspan="1" colspan="1"></th>
-                <th class="(default)" rowspan="1" colspan="1"></th>
-                <th class="(default)" width="137" rowspan="1" colspan="1"></th>
+                <th class="(default)" colspan="4" width="137" rowspan="1">
+                  <div id="div2" name="div2"></div>
+                </th>
               </tr>
               <tr>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
-                  <div align="center">
-
+                  <div align="center" id="">
                     <br clear="all">
 <img border="0" id="imgSedan" width="82" height="32" src="images/blue_sedan.gif">
                     <br clear="all">
@@ -290,7 +278,6 @@
                       </b>
                     </font>
                   </div>
-
                 </th>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
                   <font color="#808080" face="Segoe UI" size="3">
@@ -300,8 +287,7 @@
                   </font>
                 </th>
                 <th class="(default)" rowspan="1" colspan="1">
-                  <div align="center">
-
+                  <div align="center" id="">
                     <br clear="all">
 <img border="0" id="imgSUV" width="82" height="32" src="images/blue_suv.gif">
                     <br clear="all">
@@ -311,7 +297,6 @@
                       </b>
                     </font>
                   </div>
-
                 </th>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
                   <font color="#808080" face="Segoe UI" size="3">
@@ -321,49 +306,41 @@
                   </font>
                 </th>
               </tr>
-            </thead>
-            <tbody>
               <tr>
-                <td class="(default)" colspan="2" width="137" rowspan="1" valign="top">
-                  <div align="center">
+                <th class="(default)" colspan="2" width="137" rowspan="1">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="rsSedan" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='rsSedan'){rsSedan_onChange(args);}});
 
-                    <select size="5" id="listSedan" style="width:250px; height:75px; " onchange="listSedan_onChange();"><% myVector = (java.util.Vector)bean.getPropVector("VehicleModelsSedan");if(myVector!=null){pageContext.setAttribute("myVector", myVector);%>
-<c:forEach var="curr" items="${myVector}">
-            <option value="<c:out value='${curr}'/>"><c:out value="${curr}"></c:out></option>
-    </c:forEach>
-<%} %></select>
-
+-->
+</script>
                   </div>
+                </th>
+                <th class="(default)" colspan="2" rowspan="1">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="rsSUV" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='rsSUV'){rsSUV_onChange(args);}});
 
-                </td>
-                <td class="(default)" colspan="2" rowspan="1" valign="top">
-                  <div align="center">
-
-                    <select size="5" id="listSUV" style="width:250px; height:75px; " onchange="listSUV_onChange();"><% myVector = (java.util.Vector)bean.getPropVector("VehicleModelsSUV");if(myVector!=null){pageContext.setAttribute("myVector", myVector);%>
-<c:forEach var="curr" items="${myVector}">
-            <option value="<c:out value='${curr}'/>"><c:out value="${curr}"></c:out></option>
-    </c:forEach>
-<%} %></select>
-
+-->
+</script>
                   </div>
-
-                </td>
+                </th>
               </tr>
               <tr>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
-                <td class="(default)" rowspan="1" colspan="1" valign="top"></td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
+                <th class="(default)" colspan="4" width="137" rowspan="1">
+                  <div id="div3" name="div3"></div>
+                </th>
               </tr>
               <tr>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top">
-                  <div align="center">
-</div>
-
-                </td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top">
-                  <div align="center">
-
+                <th class="(default)" width="137" rowspan="1" colspan="1">
+                  <div align="center" id=""></div>
+                </th>
+                <th class="(default)" width="137" rowspan="1" colspan="1">
+                  <div align="center" id="">
                     <img border="0" id="imgTruck" width="82" height="32" src="images/blue_truck.gif">
                     <br clear="all">
 <font color="#0000ff" face="Segoe UI" size="3">
@@ -372,43 +349,39 @@
                       </b>
                     </font>
                   </div>
-
-                </td>
-                <td class="(default)" rowspan="1" colspan="1" valign="top">
+                </th>
+                <th class="(default)" rowspan="1" colspan="1">
                   <font color="#808080" face="Segoe UI" size="3">
                     <b>
                       <i>Built to last, our trucks and vans won't be beat down.</i>
                     </b>
                   </font>
-                </td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
+                </th>
+                <th class="(default)" width="137" rowspan="1" colspan="1"></th>
               </tr>
+            </thead>
+            <tbody>
               <tr>
                 <td class="(default)" colspan="4" width="137" rowspan="1" valign="top">
-                  <div align="center">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="rsTruck" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='rsTruck'){rsTruck_onChange(args);}});
 
-                    <select size="5" id="listTruck" style="width:250px; height:75px; " onchange="listTruck_onChange();"><% myVector = (java.util.Vector)bean.getPropVector("VehicleModelsTruck");if(myVector!=null){pageContext.setAttribute("myVector", myVector);%>
-<c:forEach var="curr" items="${myVector}">
-            <option value="<c:out value='${curr}'/>"><c:out value="${curr}"></c:out></option>
-    </c:forEach>
-<%} %></select>
-
+-->
+</script>
                   </div>
-
                 </td>
               </tr>
             </tbody>
           </table>
           <br clear="all">
 </div>
-
       </fieldset>
+      <div id="div1" name="div1"></div>
+      <sfe:widget name="sbm.textfield" id="txtModel" args="{'type':'text', 'size':32, 'maxlength':1024, 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'0'}" />
 
-      <div id="div1" class="" style="">
-</div>
-
-      <input class="ApInptTxt" type="text" id="txtModel" name="SelectedVehicleModel" size="30" maxlength="256" value="<bizsolo:value name='SelectedVehicleModel'/>">
-<script>addHiddenControls("txtModel");</script>    <div style="display:none" id="txtModelError"><div><font color="red"><span class="error" id="txtModelErrorMsg"></span><a href="#" onclick="txtModelErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
       <br clear="all">
 
 
@@ -433,7 +406,6 @@
 </div>
 
     </div>
-
   
                     <div id="resizablepanel" style="display:none">
                         <div class="hd">Alert Dialog</div>
@@ -462,35 +434,24 @@ function userValidationJavascipt() {
 <script language="JavaScript">
 <!--
     
-function listPremium_onChange(eventContext) {
-sbm.util.setValue('txtModel',sbm.util.getValue('listPremium'));
+function rsSedan_onChange(eventContext) {
+sbm.widgets.setValue('txtModel',sbm.widgets.getValue('rsSedan'));
 {
-document.getElementById('listCompact').selectedIndex = -1;
-document.getElementById('listSedan').selectedIndex = -1;
-document.getElementById('listSUV').selectedIndex = -1;
-document.getElementById('listTruck').selectedIndex = -1;;
+document.getElementById('rsCompact').selectedIndex = -1;
+document.getElementById('rsTruck').selectedIndex = -1;
+document.getElementById('rsSUV').selectedIndex = -1;
+document.getElementById('rsPremium').selectedIndex = -1;;
 }
 }
 
 
-function listCompact_onChange(eventContext) {
-sbm.util.setValue('txtModel',sbm.util.getValue('listCompact'));
+function rsPremium_onChange(eventContext) {
+sbm.widgets.setValue('txtModel',sbm.widgets.getValue('rsPremium'));
 {
-document.getElementById('listPremium').selectedIndex = -1;
-document.getElementById('listSedan').selectedIndex = -1;
-document.getElementById('listSUV').selectedIndex = -1;
-document.getElementById('listTruck').selectedIndex = -1;;
-}
-}
-
-
-function listSUV_onChange(eventContext) {
-sbm.util.setValue('txtModel',sbm.util.getValue('listSUV'));
-{
-document.getElementById('listCompact').selectedIndex = -1;
-document.getElementById('listSedan').selectedIndex = -1;
-document.getElementById('listPremium').selectedIndex = -1;
-document.getElementById('listTruck').selectedIndex = -1;;
+document.getElementById('rsCompact').selectedIndex = -1;
+document.getElementById('rsSedan').selectedIndex = -1;
+document.getElementById('rsSUV').selectedIndex = -1;
+document.getElementById('rsTruck').selectedIndex = -1;;
 }
 }
 
@@ -499,24 +460,40 @@ function cbStyle_onChange(eventContext) {
 }
 
 
-function listSedan_onChange(eventContext) {
-sbm.util.setValue('txtModel',sbm.util.getValue('listSedan'));
+function Form_onLoad(eventContext) {
+sbm.widgets.hide("txtModel");
+}
+
+
+function rsSUV_onChange(eventContext) {
+sbm.widgets.setValue('txtModel',sbm.widgets.getValue('rsSUV'));
 {
-document.getElementById('listCompact').selectedIndex = -1;
-document.getElementById('listPremium').selectedIndex = -1;
-document.getElementById('listSUV').selectedIndex = -1;
-document.getElementById('listTruck').selectedIndex = -1;;
+document.getElementById('rsCompact').selectedIndex = -1;
+document.getElementById('rsSedan').selectedIndex = -1;
+document.getElementById('rsTruck').selectedIndex = -1;
+document.getElementById('rsPremium').selectedIndex = -1;;
 }
 }
 
 
-function listTruck_onChange(eventContext) {
-sbm.util.setValue('txtModel',sbm.util.getValue('listTruck'));
+function rsCompact_onChange(eventContext) {
+sbm.widgets.setValue('txtModel',sbm.widgets.getValue('rsCompact'));
 {
-document.getElementById('listCompact').selectedIndex = -1;
-document.getElementById('listSedan').selectedIndex = -1;
-document.getElementById('listSUV').selectedIndex = -1;
-document.getElementById('listPremium').selectedIndex = -1;;
+document.getElementById('rsTruck').selectedIndex = -1;
+document.getElementById('rsSedan').selectedIndex = -1;
+document.getElementById('rsSUV').selectedIndex = -1;
+document.getElementById('rsPremium').selectedIndex = -1;;
+}
+}
+
+
+function rsTruck_onChange(eventContext) {
+sbm.widgets.setValue('txtModel',sbm.widgets.getValue('rsTruck'));
+{
+document.getElementById('rsCompact').selectedIndex = -1;
+document.getElementById('rsSedan').selectedIndex = -1;
+document.getElementById('rsSUV').selectedIndex = -1;
+document.getElementById('rsPremium').selectedIndex = -1;;
 }
 }
 
@@ -526,18 +503,27 @@ document.getElementById('listPremium').selectedIndex = -1;;
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
 <!--
-var allWidgets = [];
+var allWidgets = [{widget:'rsCompact', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'VehicleModelsCompact', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'VehicleModelsCompact', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsPremium', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'VehicleModelsPremium', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'rsSedan', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'VehicleModelsSedan', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'VehicleModelsSedan', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsSUV', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'VehicleModelsSUV', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'VehicleModelsSUV', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsTruck', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'VehicleModelsTruck', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedDealerName', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'txtModel', bound:'true', editable:'true', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleModel', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedVehicleModel', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
+];
 var businessObjects = [];
 var formWidgetHandler;
 sbm.utils.onDOMReady = function() {
-YAHOO.util.Event.onDOMReady(function(){formWidgetHandler = new FormWidgetHandler(allWidgets);});
-}
+YAHOO.util.Event.onDOMReady(function(){
+formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:');CustomerVehicleOrderSubmit',adapletCache:{'user':'' }});
+Form_onLoad();
+ });
+ }
 Ext.onReady(function(){
 
 });
          var viewport = new Bm.util.BmViewport('');
 sbm.utils.onFormSubmit = function() {
-         if(allWidgets.length > 0 && !formWidgetHandler.validateWidgets()) return false;
+         if(!formWidgetHandler.validateWidgets()) return false;
         try{
              if(!userValidationJavascipt()) return false;
              if(!sbm.utils.beforeFormSubmit('box+label')) return false;

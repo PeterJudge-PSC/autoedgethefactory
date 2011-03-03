@@ -1,7 +1,0 @@
-<map version="1.3">
-  <param name="FILENAME" type="java.lang.String" value="grid.sjs"/>
-  <param name="PATHPREFIX" type="java.lang.String" value=""/>
-  <param name="MODE" type="java.lang.Integer" value="1"/>
-  <param name="PARAM.TEXT" type="java.lang.String" value="@dummysjs"/>
-  <param name="DATAFORMAT" type="java.lang.String" value="Text"/>
-</map>
