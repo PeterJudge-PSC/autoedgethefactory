@@ -8,7 +8,7 @@
   <Group/>
   <Manager>@CREATOR</Manager>
   <EstimatedDuration>1d</EstimatedDuration>
-  <TimeCreated>1292337437272</TimeCreated>
+  <TimeCreated>1297706074143</TimeCreated>
   <Author>pjudge</Author>
   <Version>1</Version>
   <Attributes>
@@ -150,6 +150,13 @@ Pgo=</AlertConditionXML>
     <Dataoutput>OrderChannel</Dataoutput>
     <Dataoutput>userid</Dataoutput>
     <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>CustomerCreditLimit</Dataoutput>
+    <Dataoutput>CustomerId</Dataoutput>
+    <Dataoutput>DealerSalesEmail</Dataoutput>
+    <Dataoutput>DealerId</Dataoutput>
+    <Dataoutput>SelectedVehicleModel</Dataoutput>
+    <Dataoutput>SelectedAccessories</Dataoutput>
+    <Dataoutput>VehicleBrand</Dataoutput>
     <Format editable="true" input="CustomerEmail" label="CustomerEmail:" password="false" required="true" size="20" type="text">
       <Label>CustomerEmail:</Label>
       <Validation>
@@ -168,7 +175,7 @@ Pgo=</AlertConditionXML>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" height="4" input="ExteriorMoonroof" label="ExteriorMoonroof:" required="false" type="textarea" width="20">
+    <Format editable="true" input="ExteriorMoonroof" label="ExteriorMoonroof:" password="false" required="false" size="20" type="text">
       <Label>ExteriorMoonroof:</Label>
       <Validation>
         <ValidationType/>
@@ -180,13 +187,13 @@ Pgo=</AlertConditionXML>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" height="4" input="InteriorAccessories" label="SelectedInteriorAccessories:" required="false" type="textarea" width="20">
-      <Label>SelectedInteriorAccessories:</Label>
+    <Format editable="true" input="InteriorAccessories" label="InteriorAccessories:" password="false" required="false" size="20" type="text">
+      <Label>InteriorAccessories:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Format editable="true" height="4" input="InteriorSeatMaterial" label="InteriorSeatMaterial:" required="false" type="textarea" width="20">
+    <Format editable="true" input="InteriorSeatMaterial" label="InteriorSeatMaterial:" password="false" required="false" size="20" type="text">
       <Label>InteriorSeatMaterial:</Label>
       <Validation>
         <ValidationType/>
@@ -212,6 +219,48 @@ Pgo=</AlertConditionXML>
     </Format>
     <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
       <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="CustomerCreditLimit" label="Customer Credit Limit" required="false" type="field">
+      <Label>Customer Credit Limit</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="CustomerId" label="CustomerId:" password="false" required="false" size="20" type="text">
+      <Label>CustomerId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="DealerSalesEmail" label="DealerSalesEmail:" password="false" required="false" size="20" type="text">
+      <Label>DealerSalesEmail:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="DealerId" label="DealerId:" password="false" required="false" size="20" type="text">
+      <Label>DealerId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="SelectedVehicleModel" label="SelectedVehicleModel:" password="false" required="false" size="20" type="text">
+      <Label>SelectedVehicleModel:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="SelectedAccessories" label="SelectedAccessories:" required="false" type="list">
+      <Label>SelectedAccessories:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="VehicleBrand" label="VehicleBrand:" password="false" required="false" size="20" type="text">
+      <Label>VehicleBrand:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -313,7 +362,7 @@ Pgo=</AlertConditionXML>
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="72" name="DealerReview" width="96" worktime="false" x="480" y="372">
+  <AtomicWS height="72" name="DealerReview" width="96" worktime="false" x="480" y="384">
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>@Salesperson</Performer>
     <PerformBy>ANY</PerformBy>
@@ -324,23 +373,16 @@ Pgo=</AlertConditionXML>
     <Duration value="7200">2h</Duration>
     <Priority>medium</Priority>
     <EmailSupport>FALSE</EmailSupport>
-    <PreFunction type="java:function">//set order phase to 'under review'</PreFunction>
     <Datainput>OrderApproved</Datainput>
     <Datainput>VehicleInStock</Datainput>
-    <Datainput>CustomerOrderDate</Datainput>
     <Datainput>OrderRejectionReason</Datainput>
     <Datainput>OrderId</Datainput>
     <Datainput>orderReviewed</Datainput>
-    <Datainput>userid</Datainput>
-    <Datainput>OrderNum</Datainput>
     <Dataoutput>OrderApproved</Dataoutput>
     <Dataoutput>VehicleInStock</Dataoutput>
-    <Dataoutput>CustomerOrderDate</Dataoutput>
     <Dataoutput>OrderRejectionReason</Dataoutput>
     <Dataoutput>OrderId</Dataoutput>
     <Dataoutput>orderReviewed</Dataoutput>
-    <Dataoutput>userid</Dataoutput>
-    <Dataoutput>OrderNum</Dataoutput>
     <Format editable="true" input="OrderApproved" label="OrderApproved:" type="boolean">
       <Label>OrderApproved:</Label>
       <Validation>
@@ -349,12 +391,6 @@ Pgo=</AlertConditionXML>
     </Format>
     <Format editable="true" input="VehicleInStock" label="VehicleInStock:" type="boolean">
       <Label>VehicleInStock:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Format editable="true" input="CustomerOrderDate" label="CustomerOrderDate:" required="false" type="date">
-      <Label>CustomerOrderDate:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -373,18 +409,6 @@ Pgo=</AlertConditionXML>
     </Format>
     <Format editable="true" input="orderReviewed" label="orderReviewed:" type="boolean">
       <Label>orderReviewed:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Format editable="true" input="userid" label="Customer Name:" password="false" required="false" size="125" type="text">
-      <Label>Customer Name:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
-      <Label>OrderNum:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -418,21 +442,79 @@ Pgo=</AlertConditionXML>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
   </AtomicWS>
-  <ExternalWS height="72" name="Dealer Notification" width="108" x="348" y="372">
+  <ExternalWS height="60" name="CaptureOrder" width="108" x="192" y="384">
+    <Label>OE Order Entry</Label>
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>medium</Priority>
+    <Datainput>SelectedAccessories</Datainput>
+    <Datainput>InteriorTrimColour</Datainput>
+    <Datainput>VehicleModel</Datainput>
+    <Datainput>ExteriorColour</Datainput>
+    <Datainput>CustomerId</Datainput>
+    <Datainput>OrderApproved</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>VehicleBrand</Datainput>
+    <Datainput>ExtraInstructions</Datainput>
+    <Datainput>DealerId</Datainput>
+    <Datainput>InteriorSeatMaterial</Datainput>
+    <Datainput>ExteriorWheels</Datainput>
+    <Datainput>ExteriorMoonroof</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Dataoutput>OrderAmount</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <OnCompletion>
+      <SendAlerts>
+        <SendAlert name="InsufficientCredit"/>
+      </SendAlerts>
+    </OnCompletion>
+    <Simulation distribution="ct" scenario="(default)"/>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="72" name="Dealer Notification" width="108" x="324" y="384">
     <Label>Dealer Notification</Label>
     <Performer category="EmailAdapters" generate="false" managed="true" name="VehicleOrderNotification">com.savvion.sbm.adapters.email.EmailAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Priority>medium</Priority>
-    <Datainput>userid</Datainput>
-    <Datainput>Salesperson</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
+    <Datainput>OrderNum</Datainput>
     <Datainput>VehicleModel</Datainput>
-    <Datainput>@PROCESSNAME</Datainput>
+    <Datainput>OrderNum</Datainput>
     <Datainput>VehicleBrand</Datainput>
-    <Datainput>DealerEmail</Datainput>
+    <Datainput>userid</Datainput>
+    <Datainput>DealerName</Datainput>
+    <Datainput>DealerSalesEmail</Datainput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="GetDealerDetail" width="108" x="24" y="144">
+    <Label>Get Dealer Details</Label>
+    <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>medium</Priority>
+    <Datainput>ContextId</Datainput>
+    <Datainput>VehicleBrand</Datainput>
+    <Datainput>DealerCode</Datainput>
+    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
+    <Dataoutput>DealerSalesEmail</Dataoutput>
+    <Dataoutput>DealerId</Dataoutput>
+    <Dataoutput>DealerInfoEmail</Dataoutput>
+    <Dataoutput>DealerStreetAddress</Dataoutput>
+    <Dataoutput>error</Dataoutput>
+    <Dataoutput>DealerPhoneNumber</Dataoutput>
+    <Dataoutput>DealerName</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
@@ -447,7 +529,7 @@ Pgo=</AlertConditionXML>
 jst.putDataSlot("VehicleASNFileName", asnFileName);</PreFunction>
     <Datainput>VehicleASNFileName</Datainput>
     <Datainput>VehicleASNExportLocation</Datainput>
-    <Datainput>VehicleASN</Datainput>
+    <Datainput>OrderNum</Datainput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
@@ -470,49 +552,20 @@ jst.putDataSlot("VehicleASNFileName", asnFileName);</PreFunction>
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
-  <ExternalWS height="60" name="VehInsertOrder 1" width="108" x="192" y="372">
-    <Label>OE Order Entry</Label>
-    <Performer category="WebServiceAdapters" generate="false" managed="true" name="GenericWebServiceAdapter">com.savvion.sbm.adapters.webservice.WebServiceAdapter</Performer>
-    <PerformBy>execute</PerformBy>
-    <ClosedConnection>TRUE</ClosedConnection>
-    <Priority>medium</Priority>
-    <Datainput>InteriorAccessories</Datainput>
-    <Datainput>InteriorTrimColour</Datainput>
-    <Datainput>VehicleBrand</Datainput>
-    <Datainput>VehicleModel</Datainput>
-    <Datainput>ExteriorColour</Datainput>
-    <Datainput>DealerId</Datainput>
-    <Datainput>OrderNum</Datainput>
-    <Datainput>CustomerEmail</Datainput>
-    <Datainput>userid</Datainput>
-    <Datainput>InteriorSeatMaterial</Datainput>
-    <Datainput>ExteriorWheels</Datainput>
-    <Datainput>OrderApproved</Datainput>
-    <Datainput>ExteriorMoonroof</Datainput>
-    <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
-    <Dataoutput>OrderAmount</Dataoutput>
-    <Dataoutput>OrderId</Dataoutput>
-    <RollbackPoint>FALSE</RollbackPoint>
-    <OnCompletion>
-      <SendAlerts>
-        <SendAlert name="InsufficientCredit"/>
-      </SendAlerts>
-    </OnCompletion>
-    <Simulation distribution="ct" scenario="(default)"/>
-    <InlineExecution>FALSE</InlineExecution>
-    <AdapterType>process</AdapterType>
-  </ExternalWS>
-  <ExternalWS height="60" name="VehicleOrderNotification" width="108" x="24" y="144">
+  <ExternalWS height="60" name="VehicleOrderNotification" width="108" x="24" y="252">
     <Label>Reciept notification to customer</Label>
     <Performer category="EmailAdapters" generate="false" managed="true" name="VehicleOrderNotification">com.savvion.sbm.adapters.email.EmailAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Priority>medium</Priority>
+    <PreFunction type="java:function">// The order number is the PIID (which is unique)&#13;
+jst.putDataSlot("OrderNum", jst.getProcessInstanceID());&#13;
+</PreFunction>
     <Datainput>VehicleModel</Datainput>
-    <Datainput>userid</Datainput>
+    <Datainput>CustomerName</Datainput>
     <Datainput>OrderNum</Datainput>
     <Datainput>VehicleBrand</Datainput>
-    <Datainput>DealerEmail</Datainput>
+    <Datainput>DealerSalesEmail</Datainput>
     <Datainput>DealerName</Datainput>
     <Datainput>CustomerEmail</Datainput>
     <RollbackPoint>FALSE</RollbackPoint>
@@ -546,28 +599,30 @@ jst.putDataSlot("VehicleASNFileName", asnFileName);</PreFunction>
     <SubProcess>BuildVehicle</SubProcess>
     <ClosedConnection>TRUE</ClosedConnection>
     <Priority>medium</Priority>
-    <PreFunction type="java:function">long myPiid = jst.getProcessInstanceID();&#13;
-jst.putDataSlot("piid", myPiid);&#13;
-&#13;
-//java.lang.String wsName = jst.getWorkstepName();&#13;
-//jst.sendEmail("bob@judge.co.za","workstepname", wsName);&#13;
-&#13;
-</PreFunction>
-    <Datainput>piid@setPiid</Datainput>
+    <Datainput>OrderId@OrderId</Datainput>
+    <Datainput>OrderNum@OrderNum</Datainput>
+    <Datainput>FactoryUsers@FactoryUsers</Datainput>
     <Datainput>AutoEdgeWebServiceEndpoint@AutoEdgeWebServiceEndpoint</Datainput>
-    <Dataoutput>VehicleBuildComplete@VehicleBuildComplete</Dataoutput>
+    <Datainput>VehicleBrand@VehicleBrand</Datainput>
     <Dataoutput>error@getError</Dataoutput>
-    <Dataoutput>AutoEdgeWebServiceEndpoint@AutoEdgeWebServiceEndpoint</Dataoutput>
+    <Dataoutput>VehicleBrand@VehicleBrand</Dataoutput>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
   </NestedWS>
-  <ConnectorWS height="36" name="Decision 1" width="36" x="660" y="384">
+  <ConnectorWS height="36" name="Decision 1" width="36" x="756" y="396">
     <ConnectorType>DECISIONSPLIT</ConnectorType>
   </ConnectorWS>
   <ConnectorWS height="60" name="Or 1" width="60" x="1056" y="396">
     <Label>Car In Stock</Label>
     <ConnectorType>ORJOIN</ConnectorType>
   </ConnectorWS>
+  <Link Name="Connection 21" default="true">
+    <Label>Connection 21</Label>
+    <Source cp="2">GetDealerDetail</Source>
+    <Point x="78.0" y="204.0"/>
+    <Point x="78.0" y="252.0"/>
+    <Target cp="0">VehicleOrderNotification</Target>
+  </Link>
   <Link Name="Connection 26" default="true">
     <Label>Connection 26</Label>
     <Source cp="1">Customer Handoff</Source>
@@ -584,20 +639,20 @@ jst.putDataSlot("piid", myPiid);&#13;
   </Link>
   <Link Name="Connection 34" default="true">
     <Label>Vehicle must be built</Label>
-    <Source cp="6">Decision 1</Source>
-    <Point x="690.0" y="396.0"/>
-    <Point x="700.0" y="396.0"/>
-    <Point x="700.0" y="306.0"/>
-    <Point x="720.0" y="306.0"/>
-    <Target cp="10">BuildVehicle</Target>
+    <Source cp="0">Decision 1</Source>
+    <Point x="774.0" y="396.0"/>
+    <Point x="774.0" y="344.0"/>
+    <Point x="780.0" y="344.0"/>
+    <Point x="780.0" y="324.0"/>
+    <Target cp="2">BuildVehicle</Target>
   </Link>
   <Link Name="Connection 32" default="true">
     <Label>Connection 32</Label>
     <Source cp="1">DealerReview</Source>
-    <Point x="576.0" y="408.0"/>
-    <Point x="640.0" y="408.0"/>
-    <Point x="640.0" y="402.0"/>
-    <Point x="660.0" y="402.0"/>
+    <Point x="576.0" y="420.0"/>
+    <Point x="736.0" y="420.0"/>
+    <Point x="736.0" y="414.0"/>
+    <Point x="756.0" y="414.0"/>
     <Target cp="3">Decision 1</Target>
   </Link>
   <Link Name="Connection 31" default="true">
@@ -611,7 +666,9 @@ jst.putDataSlot("piid", myPiid);&#13;
     <Label>Credit is bad</Label>
     <Source cp="5">CustomerCreditReview</Source>
     <Point x="105.0" y="528.0"/>
-    <Point x="105.0" y="224.0"/>
+    <Point x="105.0" y="338.0"/>
+    <Point x="247.0" y="338.0"/>
+    <Point x="247.0" y="224.0"/>
     <Point x="246.0" y="224.0"/>
     <Point x="246.0" y="204.0"/>
     <Target cp="2">Rejection notification</Target>
@@ -633,21 +690,21 @@ L2V4cHJlc3Npb25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
   </Link>
   <Link Name="Connection 27" default="true">
     <Label>Connection 27</Label>
-    <Source cp="6">CustomerCreditReview</Source>
-    <Point x="132.0" y="543.0"/>
-    <Point x="172.0" y="543.0"/>
-    <Point x="172.0" y="387.0"/>
-    <Point x="192.0" y="387.0"/>
-    <Target cp="11">VehInsertOrder 1</Target>
+    <Source cp="1">CustomerCreditReview</Source>
+    <Point x="132.0" y="558.0"/>
+    <Point x="172.0" y="558.0"/>
+    <Point x="172.0" y="414.0"/>
+    <Point x="192.0" y="414.0"/>
+    <Target cp="3">CaptureOrder</Target>
   </Link>
   <Link Name="Connection 15" default="true">
     <Label>Connection 15</Label>
     <Source cp="0">VehicleOrderResubmit</Source>
     <Point x="528.0" y="144.0"/>
     <Point x="528.0" y="92.0"/>
-    <Point x="531.0" y="92.0"/>
-    <Point x="531.0" y="72.0"/>
-    <Target cp="8">End 1</Target>
+    <Point x="522.0" y="92.0"/>
+    <Point x="522.0" y="72.0"/>
+    <Target cp="2">End 1</Target>
   </Link>
   <Link Name="Financing Approved" default="true">
     <Label>Approved</Label>
@@ -661,8 +718,8 @@ L2V4cHJlc3Npb25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
     <Label>Vehicle available</Label>
     <Description>The requested vehicle is in stock</Description>
     <Source cp="1">Decision 1</Source>
-    <Point x="696.0" y="402.0"/>
-    <Point x="1036.0" y="402.0"/>
+    <Point x="792.0" y="414.0"/>
+    <Point x="1036.0" y="414.0"/>
     <Point x="1036.0" y="426.0"/>
     <Point x="1056.0" y="426.0"/>
     <Target cp="3">Or 1</Target>
@@ -685,39 +742,39 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
   <Link Name="OrderNotApproved" default="false">
     <Label>Not Approved</Label>
     <Source cp="0">DealerReview</Source>
-    <Point x="528.0" y="372.0"/>
+    <Point x="528.0" y="384.0"/>
     <Point x="528.0" y="204.0"/>
     <Target cp="2">VehicleOrderResubmit</Target>
     <Condition type="java">!OrderApproved</Condition>
   </Link>
   <Link Name="Connection 23" default="true">
     <Label>Connection 23</Label>
-    <Source cp="7">ManufacturingComplete</Source>
-    <Point x="1032.0" y="306.0"/>
-    <Point x="1046.0" y="306.0"/>
-    <Point x="1046.0" y="416.0"/>
-    <Point x="1066.0" y="416.0"/>
-    <Target cp="11">Or 1</Target>
+    <Source cp="1">ManufacturingComplete</Source>
+    <Point x="1032.0" y="288.0"/>
+    <Point x="1086.0" y="288.0"/>
+    <Point x="1086.0" y="396.0"/>
+    <Target cp="0">Or 1</Target>
   </Link>
   <Link Name="Connection 16" default="true">
     <Label>Connection 16</Label>
-    <Source cp="6">VehInsertOrder 1</Source>
-    <Point x="300.0" y="387.0"/>
-    <Point x="300.0" y="390.0"/>
-    <Point x="348.0" y="390.0"/>
-    <Target cp="11">Dealer Notification</Target>
+    <Source cp="1">CaptureOrder</Source>
+    <Point x="300.0" y="414.0"/>
+    <Point x="320.0" y="414.0"/>
+    <Point x="320.0" y="420.0"/>
+    <Point x="324.0" y="420.0"/>
+    <Target cp="3">Dealer Notification</Target>
   </Link>
   <Link Name="Connection 17" default="true">
     <Label>Connection 17</Label>
     <Source cp="1">Dealer Notification</Source>
-    <Point x="456.0" y="408.0"/>
-    <Point x="480.0" y="408.0"/>
+    <Point x="432.0" y="420.0"/>
+    <Point x="480.0" y="420.0"/>
     <Target cp="3">DealerReview</Target>
   </Link>
   <Link Name="Connection 14" default="true">
     <Label>Connection 14</Label>
     <Source cp="2">VehicleOrderNotification</Source>
-    <Point x="78.0" y="204.0"/>
+    <Point x="78.0" y="312.0"/>
     <Point x="78.0" y="528.0"/>
     <Target cp="0">CustomerCreditReview</Target>
   </Link>
@@ -726,8 +783,202 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Source cp="2">Order Submission</Source>
     <Point x="78.0" y="84.0"/>
     <Point x="78.0" y="144.0"/>
-    <Target cp="0">VehicleOrderNotification</Target>
+    <Target cp="0">GetDealerDetail</Target>
   </Link>
+  <Dataslot Name="VehicleBuildComplete" category="VehicleOrder" name="VehicleBuildComplete" type="BOOLEAN">
+    <Label>VehicleBuildComplete:</Label>
+    <DataType>BOOLEAN</DataType>
+    <DataValue>false</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="VehicleBuildComplete:" type="boolean">
+      <Label>VehicleBuildComplete:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="DealerEmail" category="VehicleOrder" name="DealerEmail" type="STRING">
+    <Label>DealerEmail:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="DealerEmail:" password="false" required="false" size="20" type="text">
+      <Label>DealerEmail:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="SelectedAccessories" category="User" name="SelectedAccessories" type="LIST">
+    <Label>SelectedAccessories:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedAccessories:" required="false" type="list">
+      <Label>SelectedAccessories:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Dataslot Name="CustomerName" category="VehicleOrder" name="CustomerName" type="STRING">
+    <Label>CustomerName:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="CustomerName:" password="false" required="false" size="20" type="text">
+      <Label>CustomerName:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="ExtraInstructions" category="VehicleOrder" name="ExtraInstructions" type="STRING">
+    <Label>ExtraInstructions:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>true</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" height="4" label="ExtraInstructions:" required="false" type="textarea" width="20">
+      <Label>ExtraInstructions:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="WorkStepError" category="VehicleOrder" name="WorkStepError" type="STRING">
+    <Label>WorkStepError:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text">
+      <Label>WorkStepError:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="SelectedVehicleModel" category="VehicleOrder" name="SelectedVehicleModel" type="STRING">
+    <Label>SelectedVehicleModel:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="SelectedVehicleModel:" password="false" required="false" size="20" type="text">
+      <Label>SelectedVehicleModel:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="FactoryUsers" category="VehicleOrder" name="FactoryUsers" type="STRING">
+    <Label>FactoryUsers:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>factory</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text">
+      <Label>FactoryUsers:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="DealerList" category="VehicleOrder" name="DealerList" type="STRING">
+    <Label>DealerList:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="DealerList:" password="false" required="false" size="20" type="text">
+      <Label>DealerList:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="CustomerId" category="VehicleOrder" name="CustomerId" type="STRING">
+    <Label>CustomerId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerId:" password="false" required="false" size="20" type="text">
+      <Label>CustomerId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="BuildStatus" category="VehicleOrder" name="BuildStatus" type="STRING">
+    <Label>BuildStatus:</Label>
+    <Description>The status of the build step</Description>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
   <Dataslot Name="FinanceManagement" category="AETF_Ordering" name="FinanceManagement" type="STRING">
     <Label>FinanceManagement:</Label>
     <DataType>STRING</DataType>
@@ -868,26 +1119,6 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     </Format>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
-  <Dataslot Name="VehicleBuildComplete" category="AETF_Ordering" name="VehicleBuildComplete" type="BOOLEAN">
-    <Label>VehicleBuildComplete:</Label>
-    <DataType>BOOLEAN</DataType>
-    <DataValue>false</DataValue>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="VehicleBuildComplete:" type="boolean">
-      <Label>VehicleBuildComplete:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
   <Dataslot Name="orderReviewed" category="AETF_Ordering" name="orderReviewed" type="BOOLEAN">
     <Label>orderReviewed:</Label>
     <DataType>BOOLEAN</DataType>
@@ -922,46 +1153,6 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
     <Format editable="true" label="OrderRejectionReason:" password="false" required="false" size="20" type="text">
       <Label>OrderRejectionReason:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="K_ReviewNotif" category="AETF_Ordering" name="K_ReviewNotif" type="STRING">
-    <Label>K_ReviewNotif:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="K_ReviewNotif:" password="false" required="false" size="20" type="text">
-      <Label>K_ReviewNotif:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="K_OrderSubmissionConfirmation" category="AETF_Ordering" name="K_OrderSubmissionConfirmation" type="STRING">
-    <Label>K_OrderSubmissionConfirmation:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="K_OrderSubmissionConfirmation:" password="false" required="false" size="20" type="text">
-      <Label>K_OrderSubmissionConfirmation:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -1228,8 +1419,8 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     </Format>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
-  <Dataslot Name="DealerEmail" category="AETF_Ordering" name="DealerEmail" type="STRING">
-    <Label>DealerEmail:</Label>
+  <Dataslot Name="DealerSalesEmail" category="VehicleOrder" name="DealerSalesEmail" type="STRING">
+    <Label>DealerSalesEmail:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
     <DataSize>2000</DataSize>
@@ -1240,8 +1431,8 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="DealerEmail:" password="false" required="false" size="20" type="text">
-      <Label>DealerEmail:</Label>
+    <Format editable="true" label="DealerSalesEmail:" password="false" required="false" size="20" type="text">
+      <Label>DealerSalesEmail:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -1252,7 +1443,7 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Label>ExteriorColour:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
-    <DataSize>256</DataSize>
+    <DataSize>2000</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>true</MultiLine>
     <BizManageAccessFlag>true</BizManageAccessFlag>
@@ -1266,33 +1457,33 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage size="256" type="CHAR"/>
+    <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
   <Dataslot Name="ExteriorMoonroof" category="AETF_Ordering" name="ExteriorMoonroof" type="STRING">
     <Label>ExteriorMoonroof:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
-    <DataSize>256</DataSize>
+    <DataSize>2000</DataSize>
     <IsPublic>true</IsPublic>
-    <MultiLine>true</MultiLine>
+    <MultiLine>false</MultiLine>
     <BizManageAccessFlag>true</BizManageAccessFlag>
     <Access type="PUBLIC" value="true"/>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" height="4" label="ExteriorMoonroof:" required="false" type="textarea" width="20">
+    <Format editable="true" label="ExteriorMoonroof:" password="false" required="false" size="20" type="text">
       <Label>ExteriorMoonroof:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage size="256" type="CHAR"/>
+    <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
   <Dataslot Name="ExteriorWheels" category="AETF_Ordering" name="ExteriorWheels" type="STRING">
     <Label>ExteriorWheels:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
-    <DataSize>256</DataSize>
+    <DataSize>2000</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>true</MultiLine>
     <BizManageAccessFlag>true</BizManageAccessFlag>
@@ -1306,53 +1497,53 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage size="256" type="CHAR"/>
+    <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
   <Dataslot Name="InteriorAccessories" category="AETF_Ordering" name="InteriorAccessories" type="STRING">
-    <Label>SelectedInteriorAccessories:</Label>
+    <Label>InteriorAccessories:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
-    <DataSize>256</DataSize>
+    <DataSize>2000</DataSize>
     <IsPublic>true</IsPublic>
-    <MultiLine>true</MultiLine>
+    <MultiLine>false</MultiLine>
     <BizManageAccessFlag>true</BizManageAccessFlag>
     <Access type="PUBLIC" value="true"/>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" height="4" label="SelectedInteriorAccessories:" required="false" type="textarea" width="20">
-      <Label>SelectedInteriorAccessories:</Label>
+    <Format editable="true" label="InteriorAccessories:" password="false" required="false" size="20" type="text">
+      <Label>InteriorAccessories:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage size="256" type="CHAR"/>
+    <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
   <Dataslot Name="InteriorSeatMaterial" category="AETF_Ordering" name="InteriorSeatMaterial" type="STRING">
     <Label>InteriorSeatMaterial:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
-    <DataSize>256</DataSize>
+    <DataSize>2000</DataSize>
     <IsPublic>true</IsPublic>
-    <MultiLine>true</MultiLine>
+    <MultiLine>false</MultiLine>
     <BizManageAccessFlag>true</BizManageAccessFlag>
     <Access type="PUBLIC" value="true"/>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" height="4" label="InteriorSeatMaterial:" required="false" type="textarea" width="20">
+    <Format editable="true" label="InteriorSeatMaterial:" password="false" required="false" size="20" type="text">
       <Label>InteriorSeatMaterial:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage size="256" type="CHAR"/>
+    <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
   <Dataslot Name="InteriorTrimColour" category="AETF_Ordering" name="InteriorTrimColour" type="STRING">
     <Label>InteriorTrimColour:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
-    <DataSize>256</DataSize>
+    <DataSize>2000</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>true</MultiLine>
     <BizManageAccessFlag>true</BizManageAccessFlag>
@@ -1366,7 +1557,7 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
         <ValidationType/>
       </Validation>
     </Format>
-    <Storage size="256" type="CHAR"/>
+    <Storage size="2000" type="VARCHAR"/>
   </Dataslot>
   <Dataslot Name="OrderChannel" category="AETF_Ordering" name="OrderChannel" type="STRING">
     <Label>OrderChannel:</Label>
@@ -1388,7 +1579,7 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     </Format>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
-  <Dataslot Name="OrderId" category="AETF_Ordering" name="OrderId" type="STRING">
+  <Dataslot Name="OrderId" category="VehicleOrder" name="OrderId" type="STRING">
     <Label>orderid:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
@@ -1533,7 +1724,7 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
   <Dataslot Name="VehicleASNExportLocation" category="AETF_Ordering" name="VehicleASNExportLocation" type="STRING">
     <Label>ASNExportLocation:</Label>
     <DataType>STRING</DataType>
-    <DataValue>C:\work\apps\aetf\data\asn</DataValue>
+    <DataValue>C:\OpenEdgeAE\AutoEdge\Factory\autoedgethefactory\server\temp</DataValue>
     <DataSize>256</DataSize>
     <IsPublic>true</IsPublic>
     <MultiLine>false</MultiLine>
@@ -1564,26 +1755,6 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
     <Format editable="true" label="VehicleASNFileName:" password="false" required="false" size="20" type="text">
       <Label>VehicleASNFileName:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="BizLogicSID" category="AETF_Ordering" name="BizLogicSID" type="STRING">
-    <Label>BizLogicSID:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="BizLogicSID:" password="false" required="false" size="20" type="text">
-      <Label>BizLogicSID:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -1650,6 +1821,86 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
       </Validation>
     </Format>
     <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="DealerCode" category="VehicleOrder" name="DealerCode" type="STRING">
+    <Label>DealerCode:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="DealerCode:" password="false" required="false" size="20" type="text">
+      <Label>DealerCode:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="DealerInfoEmail" category="VehicleOrder" name="DealerInfoEmail" type="STRING">
+    <Label>DealerInfoEmail:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="DealerInfoEmail:" password="false" required="false" size="20" type="text">
+      <Label>DealerInfoEmail:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="DealerStreetAddress" category="VehicleOrder" name="DealerStreetAddress" type="STRING">
+    <Label>DealerStreetAddress:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="DealerStreetAddress:" password="false" required="false" size="20" type="text">
+      <Label>DealerStreetAddress:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="DealerPhoneNumber" category="VehicleOrder" name="DealerPhoneNumber" type="STRING">
+    <Label>DealerPhoneNumber:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="DealerPhoneNumber:" password="false" required="false" size="20" type="text">
+      <Label>DealerPhoneNumber:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
   </Dataslot>
   <Notes>
     <Note color="255,255,153" connectTo="Order Submission" height="72" shape="sticky" width="156" x="168" y="24">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
@@ -4710,7 +4961,7 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
   &lt;/body&gt;&#13;
 &lt;/Form&gt;&#13;
 </Note>
-    <Note color="255,255,153" connectTo="DealerReview" height="96" shape="sticky" width="300" x="300" y="516">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+    <Note color="255,255,153" connectTo="DealerReview" height="144" shape="sticky" width="204" x="504" y="480">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
 &lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
 &lt;Form tstamp="1277485941082" version="7.0SP1"&gt;&#13;
   &lt;Dataslot Name="CustomerCreditLimit" category="User" name="CustomerCreditLimit" type="STRING"&gt;&#13;
@@ -6617,12 +6868,29 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
 </Note>
   </Notes>
   <History>
-    <Deployed as="CustomerOrderVehicle" by="sbm" on="1292525532602" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Thu Dec 16 13:52:12 EST 2010</Deployed>
-    <Deployed as="CustomerOrderVehicle" by="sbm" on="1292524906778" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Thu Dec 16 13:41:46 EST 2010</Deployed>
-    <Deployed as="CustomerOrderVehicle" by="sbm" on="1292522210184" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Thu Dec 16 12:56:50 EST 2010</Deployed>
-    <Created as="CustomerOrderVehicle" by="pjudge" from="AE_TF_REL_V3" on="1292337437272">Tue Dec 14 09:37:17 EST 2010</Created>
-    <Deployed as="CustomerOrderVehicle" by="sbm" on="1292338002279" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Tue Dec 14 09:46:42 EST 2010</Deployed>
-    <Deployed as="CustomerOrderVehicle" by="sbm" on="1296438165241" to="http://ec2-50-16-84-39.compute-1.amazonaws.com:18793/sbm/deployment">Sun Jan 30 20:42:45 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297892165393" to="http://localhost:18793/sbm/deployment">Wed Feb 16 16:36:05 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297892026252" to="http://localhost:18793/sbm/deployment">Wed Feb 16 16:33:46 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297891839487" to="http://localhost:18793/sbm/deployment">Wed Feb 16 16:30:39 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297891262893" to="http://localhost:18793/sbm/deployment">Wed Feb 16 16:21:02 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297873510658" to="http://localhost:18793/sbm/deployment">Wed Feb 16 11:25:10 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297794061721" to="http://localhost:18793/sbm/deployment">Tue Feb 15 13:21:01 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297790081518" to="http://localhost:18793/sbm/deployment">Tue Feb 15 12:14:41 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297789706065" to="http://localhost:18793/sbm/deployment">Tue Feb 15 12:08:26 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297788959580" to="http://localhost:18793/sbm/deployment">Tue Feb 15 11:55:59 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297782640533" to="http://localhost:18793/sbm/deployment">Tue Feb 15 10:10:40 EST 2011</Deployed>
+    <Created as="CustomerOrderVehicle" by="pjudge" from="CustomerOrderVehicle" on="1297706074143">Mon Feb 14 12:54:34 EST 2011</Created>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297717328033" to="http://localhost:18793/sbm/deployment">Mon Feb 14 16:02:08 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297796733721" to="http://localhost:18793/sbm/deployment">Tue Feb 15 14:05:33 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297888470518" to="http://localhost:18793/sbm/deployment">Wed Feb 16 15:34:30 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297888918299" to="http://localhost:18793/sbm/deployment">Wed Feb 16 15:41:58 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297892629002" to="http://localhost:18793/sbm/deployment">Wed Feb 16 16:43:49 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297892940862" to="http://localhost:18793/sbm/deployment">Wed Feb 16 16:49:00 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297954726658" to="http://localhost:18793/sbm/deployment">Thu Feb 17 09:58:46 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297957598174" to="http://localhost:18793/sbm/deployment">Thu Feb 17 10:46:38 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297958426096" to="http://localhost:18793/sbm/deployment">Thu Feb 17 11:00:26 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297972347549" to="http://localhost:18793/sbm/deployment">Thu Feb 17 14:52:27 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297977133549" to="http://localhost:18793/sbm/deployment">Thu Feb 17 16:12:13 EST 2011</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1297977668940" to="http://localhost:18793/sbm/deployment">Thu Feb 17 16:21:08 EST 2011</Deployed>
   </History>
   <Repository committer="sbm" model="AE_TF_REL_V3" time="1281637430967" url="http://184.72.251.33:18793/sbm/services" version="1.0"/>
 </Process>

@@ -2,7 +2,7 @@
 <head><META http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector" %>
+<%@ page import="com.savvion.BizSolo.Server.*,com.savvion.BizSolo.beans.*,java.util.Vector,java.util.Locale" %>
 <%@ page errorPage="/BizSolo/common/jsp/error.jsp" %>
 <%@ taglib uri="/BizSolo/common/tlds/bizsolo.tld" prefix="bizsolo" %>
 <%@ taglib uri="/bpmportal/tld/bpmportal.tld" prefix="sbm" %>
@@ -17,7 +17,7 @@
 <%! String __webAppName = "CustomerOrderVehicle"; %>
 <% pageContext.setAttribute( "contextPath", request.getContextPath()+"/"); %>
 <bizsolo:if test='<%=_PageName.equals(request.getParameter("_PageName")) %>'>
-    <bizsolo:setDS name="Customer,VehicleBrand,VehicleModel,DeliveryPrepComplete,ProofOfInsurance,TitleTransfered"></bizsolo:setDS>
+    <bizsolo:setDS name="VehicleBrand,VehicleModel,DeliveryPrepComplete,ProofOfInsurance,TitleTransfered"></bizsolo:setDS>
     <bizsolo:choose>
 <bizsolo:when test='<%=request.getParameter("bizsite_reassignTask") !=null %>'>
       <bizsolo:initDS name="performer" param="bizsite_assigneeName" hexval="FALSE"></bizsolo:initDS>
@@ -38,7 +38,6 @@
 </bizsolo:if>
 <bizsolo:if test='<%= ! _PageName.equals(request.getParameter("_PageName")) %>'>
     <bizsolo:initApp mode="BizSite" name="CustomerOrderVehicle"></bizsolo:initApp>
-    <bizsolo:initDS name="Customer" type="STRING"></bizsolo:initDS>
     <bizsolo:initDS name="VehicleBrand" type="STRING"></bizsolo:initDS>
     <bizsolo:initDS name="VehicleModel" type="STRING"></bizsolo:initDS>
     <bizsolo:initDS name="DeliveryPrepComplete" type="BOOLEAN"></bizsolo:initDS>
@@ -48,6 +47,7 @@
 </bizsolo:if>
 
 <title>Customer Handoff</title>
+<%boolean isStandaloneBS = (bizManage == null || bizManage.getName() == null || "".equals(bizManage.getName()) || bizManage.getLocale() == null);Locale myLocale = (!isStandaloneBS) ? bizManage.getLocale() : request.getLocale();%>
 <!-- Javascript -->
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/initControls.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/customValidation.js"></script>
@@ -61,19 +61,18 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.config.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-enUS.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-en.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-<%=myLocale.getLanguage() %>.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar-setup-<%=myLocale.getLanguage() %>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>dwr/interface/adapterDWR.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/utilities/utilities.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/container-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/connection/connection-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/resize-beta-min.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/animation/animation-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/json/json-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/logger/logger-min.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/spry/checkboxvalidation/SpryValidationCheckbox.js"></script>
@@ -92,7 +91,6 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/LoggerDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/ResizableDialog.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidget.js"></script>
-<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormPanel.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/FormWidgetHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
@@ -181,10 +179,10 @@
 
 <sbm:setLocale value="<%= bizManage.getLocale() %>"></sbm:setLocale>
 <% try{ %><sbm:setBundle scope="page" basename="CustomerOrderVehicle/properties/CustomerOrderVehicle"></sbm:setBundle><% } catch(Exception e){}%>
-</head>
+<bizsolo:getApplicationResources baseName="CustomerOrderVehicle/properties/CustomerOrderVehicle"/></head>
 <body class="apbody yui-skin-sam" onUnload="pwr.removePakBizSoloBeanFromCache('<%=session.getId()%>', onSuccess);" onLoad="setCheckBoxStyleForIE();hideControls();beforeInitControls();initControls();initTabs();sbm.utils.onDOMReady();">
 <form method="post" name="form" onsubmit="return sbm.utils.onFormSubmit();">
-<div id="northDiv"></div><% /* Workaround, activityName will disappear in the future */ %>
+<div id="northDiv"><bizsolo:xsrf/></div><% /* Workaround, activityName will disappear in the future */ %>
 <% String activityName = bean.getPropString("workitemName"); %>
 <div id="resultDiv">
 <div style='visibility:hidden;display:none' class='vBoxClass' name='errors' id='errors'></div>
@@ -208,7 +206,7 @@
 </table>
 <table class="ApSegDataTbl" width="100%" cellspacing="1" cellpadding="4" border="0">
 <tr>
-<td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_INSTRUCTION_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData" colspan="5"><sbm:message key="workstep.Customer Handoff.instruction"></sbm:message></td>
+<td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_INSTRUCTION_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData" colspan="5"><sbm:message key="workstep.Customer Handoff.instruction" escapeLine="true"></sbm:message></td>
 </tr>
 <tr>
 <td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_PRIORITY_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData"><bizsolo:getDS name="bizsite_priority"></bizsolo:getDS></td>
@@ -223,19 +221,19 @@
 
     <br clear="all">
 <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="textField3"><sbm:message key="Customer"></sbm:message></Label>
+      <Label class="ApSegDataslotLabel" for="textField3"><sbm:message key="dataslot.Customer.label"></sbm:message></Label>
     </font>
     <input class="ApInptTxt" type="text" id="textField3" name="Customer" size="20" maxlength="256" disabled value="<bizsolo:value name='Customer'/>">
     <div style="display:none" id="textField3Error"><div><font color="red"><span class="error" id="textField3ErrorMsg"></span><a href="#" onclick="textField3ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
     <br clear="all">
 <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="textField1"><sbm:message key="VehicleBrand"></sbm:message></Label>
+      <Label class="ApSegDataslotLabel" for="textField1"><sbm:message key="dataslot.Customer Handoff.VehicleBrand.label"></sbm:message></Label>
     </font>
     <input class="ApInptTxt" type="text" id="textField1" name="VehicleBrand" size="20" maxlength="256" disabled value="<bizsolo:value name='VehicleBrand'/>">
     <div style="display:none" id="textField1Error"><div><font color="red"><span class="error" id="textField1ErrorMsg"></span><a href="#" onclick="textField1ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
     <br clear="all">
 <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="textField2"><sbm:message key="VehicleModel"></sbm:message></Label>
+      <Label class="ApSegDataslotLabel" for="textField2"><sbm:message key="dataslot.Customer Handoff.VehicleModel.label"></sbm:message></Label>
     </font>
     <input class="ApInptTxt" type="text" id="textField2" name="VehicleModel" size="20" maxlength="256" disabled value="<bizsolo:value name='VehicleModel'/>">
     <div style="display:none" id="textField2Error"><div><font color="red"><span class="error" id="textField2ErrorMsg"></span><a href="#" onclick="textField2ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
@@ -246,7 +244,7 @@
       
 
     <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="checkBox1"><sbm:message key="DeliveryPrepComplete"></sbm:message></Label>
+      <Label class="ApSegDataslotLabel" for="checkBox1"><sbm:message key="dataslot.DeliveryPrepComplete.label"></sbm:message></Label>
     </font>
     <br clear="all">
 <input type="checkbox" value="true" class="ApInptChkBox" name="ProofOfInsurance" id="checkBox4">
@@ -254,7 +252,7 @@
       
 
     <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="checkBox4"><sbm:message key="ProofOfInsurance"></sbm:message></Label>
+      <Label class="ApSegDataslotLabel" for="checkBox4"><sbm:message key="dataslot.ProofOfInsurance.label"></sbm:message></Label>
     </font>
     <br clear="all">
 <input type="checkbox" value="true" class="ApInptChkBox" name="TitleTransfered" id="checkBox5">
@@ -262,7 +260,7 @@
       
 
     <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="checkBox5"><sbm:message key="TitleTransfered"></sbm:message></Label>
+      <Label class="ApSegDataslotLabel" for="checkBox5"><sbm:message key="dataslot.TitleTransfered.label"></sbm:message></Label>
     </font>
     <br clear="all">
 <br clear="all">
@@ -328,14 +326,16 @@ var allWidgets = [];
 var businessObjects = [];
 var formWidgetHandler;
 sbm.utils.onDOMReady = function() {
-YAHOO.util.Event.onDOMReady(function(){formWidgetHandler = new FormWidgetHandler(allWidgets);});
-}
+YAHOO.util.Event.onDOMReady(function(){
+formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:'CustomerOrderVehicle',adapletCache:{'user':''}});
+ });
+ }
 Ext.onReady(function(){
 
 });
          var viewport = new Bm.util.BmViewport('');
 sbm.utils.onFormSubmit = function() {
-         if(allWidgets.length > 0 && !formWidgetHandler.validateWidgets()) return false;
+         if(!formWidgetHandler.validateWidgets()) return false;
         try{
              if(!userValidationJavascipt()) return false;
              if(!sbm.utils.beforeFormSubmit('box+label')) return false;

@@ -2,6 +2,40 @@
   <param name="FILENAME" type="java.lang.String" value="@VehicleASNFileName"/>
   <param name="PATHPREFIX" type="java.lang.String" value="@VehicleASNExportLocation"/>
   <param name="MODE" type="java.lang.Integer" value="1"/>
-  <param name="PARAM.TEXT" type="java.lang.String" value="@VehicleASN"/>
-  <param name="DATAFORMAT" type="java.lang.String" value="Text"/>
-</map>
+  <param name="DATAFORMAT" type="java.lang.String" value="XML"/>
+  <param name="PARAM.xmlOrderNum" type="java.lang.String" value="@OrderNum"/>
+  <param name="FORMATCONFIG" type="java.lang.String">
+<config>
+  <version>2</version>
+  <templatefile>C:\\devarea\\views\\pjudge_AUTOEDGE20\\vobs_autoedge\\autoedge\\dealer\\src\\sonicesb\\Sample Data\\vendor01-1car.xml</templatefile>
+  <template>
+<DOC856 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="sonicfs:///Resources/AutoEdge/xsd/vendorasn.xsd">
+  <Vendor>Vendor01</Vendor>
+  <Order>
+    <OrderNum>123</OrderNum>
+    <CustNum>1123</CustNum>
+    <ShipperID>XXSWED123</ShipperID>
+    <ShipDate>20061101</ShipDate>
+    <DeliverDate>20061107</DeliverDate>
+    <Unit>
+      <LineNo>1</LineNo>
+      <ID>113</ID>
+      <Make>Toyola</Make>
+      <Model>Crown</Model>
+      <Style>Sedan</Style>
+      <Color>Blue</Color>
+      <Engine>1.6</Engine>
+      <Fuel>Diesel</Fuel>
+      <VIN>uIUm2HjU7aEek8Y5crJA</VIN>
+    </Unit>
+  </Order>
+</DOC856>
+  </template>
+  <fields>
+    <field name="xmlOrderNum" type="String" xpath="/DOC856/Order/OrderNum/text()"/>
+  </fields>
+  <namespaceaware>true</namespaceaware>
+  <namespacemap>
+  </namespacemap>
+</config>
+  </param></map>

@@ -5,13 +5,13 @@
   <param name="PLUGIN.1.IN.vehModel" type="java.lang.Object" value="@VehicleModel"/>
   <param name="AUTH_PASSWORD" type="java.lang.String" value=""/>
   <param name="CC" type="java.lang.Object" value=""/>
-  <param name="PLUGIN.1.IN.customername" type="java.lang.Object" value="@userid"/>
+  <param name="PLUGIN.1.IN.customername" type="java.lang.Object" value="@CustomerName"/>
   <param name="PLUGIN.1.CONF" type="java.lang.String" value="customername%2CorderNum%2Cbrand%2CvehModel%2Cdealername%0AHello+%24%7Bcustomername%7D%2C%0A%0AYour+order+number++%24%7BorderNum%7D+has+been+submitted+for+review.%0A%0AHere+is+your+Vehicle+order+summary%3A%0A%09Brand%3A+%24%7Bbrand%7D%0A%09Model%3A+%24%7BvehModel%7D%0A%0AWe+will+contact+you+shortly+regarding+this+order.+Should+you+have+any+questions%2C+%0Aplease+contact+us+via+email.%0A%0ARegards%2C%0A%24%7Bdealername%7D%0A%0A%0A%0A"/>
   <param name="PLUGIN.1.IN.orderNum" type="java.lang.Object" value="@OrderNum"/>
   <param name="PLUGIN.1.IN.brand" type="java.lang.Object" value="@VehicleBrand"/>
-  <param name="SENDER" type="java.lang.String" value="@DealerEmail"/>
+  <param name="SENDER" type="java.lang.String" value="@DealerSalesEmail"/>
   <param name="PROPERTY.mail.smtp.port" type="java.lang.String" value="25"/>
-  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="localhost"/>
+  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="pubsmtp.progress.com"/>
   <param name="PLUGIN.1.IN.dealername" type="java.lang.Object" value="@DealerName"/>
   <param name="BCC" type="java.lang.Object" value=""/>
   <param name="SUBJECT" type="java.lang.Object" value="Your vehicle order has been submitted"/>

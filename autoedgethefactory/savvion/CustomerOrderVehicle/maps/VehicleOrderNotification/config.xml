@@ -22,7 +22,7 @@
         <param name="PROPERTY.allow.null.bcc" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="true"/>
         <param name="PROPERTY.mail.smtp.port" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="25"/>
         <param name="PROPERTY.mail.transport.protocol" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="smtp"/>
-        <param name="PROPERTY.mail.smtp.host" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="localhost"/>
+        <param name="PROPERTY.mail.smtp.host" access="HIDDEN" label="emailadapter:config.label.13" type="java.lang.String" value="pubsmtp.progress.com"/>
         <param name="AUTH_USER" access="HIDDEN" label="emailadapter:config.label.7" type="java.lang.String" value="" mandatory="false"/>
         <param name="AUTH_PASSWORD" access="HIDDEN" label="emailadapter:config.label.8" type="java.lang.String" value="" mandatory="false"/>
     </block>
