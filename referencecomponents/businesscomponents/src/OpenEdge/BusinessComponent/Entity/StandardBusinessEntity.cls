@@ -24,6 +24,7 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.Lang.CallbackNameEnum.
 
 class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits BusinessEntity:
+    @todo(task="implement", action="BE schema in XSD? PDS? ").
     
     define protected property DatasetHandle as handle no-undo
         get():
@@ -51,7 +52,6 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
     method override public void FetchData(poRequest as IFetchRequest):
         /* We assume new data appending requests would possibly need 
            direction to MERGE or APPEND in fill */
-
         cast(poRequest, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         super:FetchData(poRequest).                        

@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\BusinessComponent\Entity</font>
       <br />CLASS BusinessEntity
     </h2>
-    <p>CLASS OpenEdge.BusinessComponent.Entity.BusinessEntity abstract INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Common/Service.cls.html" title="OpenEdge.CommonInfrastructure.Common.Service" target="classFrame">Service</a> IMPLEMENTS <a href="../../../OpenEdge/BusinessComponent/Entity/IBusinessEntity.cls.html" title="OpenEdge.BusinessComponent.Entity.IBusinessEntity" target="classFrame">IBusinessEntity</a> , <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceProvider.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceProvider" target="classFrame">IServiceProvider</a> </p>
+    <p>CLASS OpenEdge.BusinessComponent.Entity.BusinessEntity abstract INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Common/Service.cls.html" title="OpenEdge.CommonInfrastructure.Common.Service" target="classFrame">Service</a> IMPLEMENTS <a href="../../../OpenEdge/BusinessComponent/Entity/IBusinessEntity.cls.html" title="OpenEdge.BusinessComponent.Entity.IBusinessEntity" target="classFrame">IBusinessEntity</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -69,29 +69,15 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>CHARACTER</code>
+          <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.Service'>Service</a>
-          </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) The service for which this service adapter is servicing a request.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.ServiceMessageManager'>ServiceMessageManager</a>
-          </b> PROTECTED GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ServicemessageManager is used plentifully; we keep it as a property so that
+            <a href='#property.IBusinessEntityType'>IBusinessEntityType</a>
+          </b> STATIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -103,6 +89,20 @@
 				<B>Method Summary</B></FONT></TH>
 				</TR>
 				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC </code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
@@ -126,8 +126,8 @@
       <td>
         <code>
           <b>
-            <a href='#(openedge.dataaccess.idataaccess,openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
-          </b>(<a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+            <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo,openedge.dataaccess.idataaccess)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo, <a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -140,78 +140,50 @@
       <td>
         <code>
           <b>
-            <a href='#executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> ExecuteRequest</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'> ExecuteSyncRequest</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+            <a href='#fetchdata(openedge.commoninfrastructure.common.servicemessage.ifetchrequest)'> FetchData</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>VOID</code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#fetchdata(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> FetchData</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
+            <a href='#fetchschema(openedge.commoninfrastructure.common.servicemessage.ifetchrequest)'> FetchSchema</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#fetchschema(openedge.commoninfrastructure.servicemessage.ifetchrequest)'> FetchSchema</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#getdata(longchar)'> GetData</a>
+          </b>(LONGCHAR pcMessageId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Response complement method for FetchData above.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#getdata()'> GetData</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#savedata(openedge.commoninfrastructure.servicemessage.isaverequest)'> SaveData</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
+            <a href='#savedata(openedge.commoninfrastructure.common.servicemessage.isaverequest)'> SaveData</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -247,22 +219,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='property.Service'><!-- --></a>
-    <h3>Service</h3>
-    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <a name='property.IBusinessEntityType'><!-- --></a>
+    <h3>IBusinessEntityType</h3>
+    <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> STATIC GET PRIVATE SET </code>
     <dl>
-      <dd>(mandatory) The service for which this service adapter is servicing a request. <p> </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.ServiceMessageManager'><!-- --></a>
-    <h3>ServiceMessageManager</h3>
-    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> PROTECTED GET PRIVATE SET </code>
-    <dl>
-      <dd>The ServicemessageManager is used plentifully; we keep it as a property so that <p> </dd>
-      <dd>we can get it whenever needed, without fuss. </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -275,6 +235,17 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>STATIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
@@ -286,10 +257,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='(openedge.dataaccess.idataaccess,openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo,openedge.dataaccess.idataaccess)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO, <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo, <a href="../../../OpenEdge/DataAccess/IDataAccess.cls.html" title="OpenEdge.DataAccess.IDataAccess" target="classFrame">IDataAccess</a> poDAO)
     </code>
     <dl>
       <dd>
@@ -297,72 +268,53 @@
       </dd>
     </dl>
     <hr />
-    <a name='executerequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
-    <h3>ExecuteRequest</h3>
+    <a name='fetchdata(openedge.commoninfrastructure.common.servicemessage.ifetchrequest)'><!-- --></a>
+    <h3>FetchData</h3>
     <code>PUBLIC  VOID
-      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
+      <b>FetchData</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
     </code>
     <dl>
-      <dd>Services a request. The service or adapter will call ExecuteResponse() in the ServiceMessageManager <p> </dd>
-      <dd>once it's done with the request. The object that implements this interface will call back to the ServiceMessageManager when it is done and it's ready with a response (IServiceResponse). </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='fetchschema(openedge.commoninfrastructure.common.servicemessage.ifetchrequest)'><!-- --></a>
+    <h3>FetchSchema</h3>
+    <code> <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
+      <b>FetchSchema</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getdata(longchar)'><!-- --></a>
+    <h3>GetData</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
+      <b>GetData</b>(LONGCHAR pcMessageId)
+    </code>
+    <dl>
+      <dd>Response complement method for FetchData above. <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>poRequest - The request to service.<br/>poServiceMessageManager - The message manager controlling this request.<br/></dd>
+          <dd>character - The message id for the request/response<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IFetchResponse</dd>
         </dl>
       </dd>
     </dl>
     <hr />
-    <a name='executesyncrequest(openedge.commoninfrastructure.servicemessage.iservicerequest)'><!-- --></a>
-    <h3>ExecuteSyncRequest</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a>
-      <b>ExecuteSyncRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequest)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='fetchdata(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
-    <h3>FetchData</h3>
-    <code>PUBLIC  VOID
-      <b>FetchData</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poRequest)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='fetchschema(openedge.commoninfrastructure.servicemessage.ifetchrequest)'><!-- --></a>
-    <h3>FetchSchema</h3>
-    <code> <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
-      <b>FetchSchema</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a> poDefineRequest)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getdata()'><!-- --></a>
-    <h3>GetData</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a>
-      <b>GetData</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='savedata(openedge.commoninfrastructure.servicemessage.isaverequest)'><!-- --></a>
+    <a name='savedata(openedge.commoninfrastructure.common.servicemessage.isaverequest)'><!-- --></a>
     <h3>SaveData</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a>
-      <b>SaveData</b>(<a href="../../../OpenEdge/CommonInfrastructure/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a>
+      <b>SaveData</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poChanges)
     </code>
     <dl>
       <dd>
