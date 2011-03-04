@@ -534,9 +534,11 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
                hFinishedItemBuffer = mhOrders:get-buffer-handle('eFinishedItem').
                hComponentItemBuffer = mhOrders:get-buffer-handle('eComponentItem').
                hItemBuffer = mhOrders:get-buffer-handle('eItem').
+               
+               cValue = cast(CurrentTask:DataSlots:Get(new String('OrderNum')), DataSlotInstance):value
                .
         
-        hOrderBuffer:find-first(' where eOrder.OrderNum = ' + quoter(CurrentTask:WorkItem:ProcessInstanceId) ) no-error.
+        hOrderBuffer:find-first(' where eOrder.OrderNum = ' + quoter(int(cValue)) ) no-error.
         if hOrderBuffer:available then
         do:
             hOLineBuffer:find-first(' where eOrderLine.LineNum = 1 and eOrderLine.OrderId = ' + quoter(hOrderBuffer::OrderId)) no-error.  
