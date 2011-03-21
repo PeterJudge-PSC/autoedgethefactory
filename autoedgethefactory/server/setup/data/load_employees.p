@@ -34,7 +34,6 @@ define variable cFirstNamesFemale as character no-undo.
 define variable cSalutationsMale as character no-undo.
 define variable cSalutationsFemale as character no-undo.
 define variable cNotes as character no-undo.
-define variable cEmailAddress as character no-undo.
 
 define variable iNumAddresses as integer no-undo.
 define variable iNumRegions as integer no-undo.
@@ -51,7 +50,6 @@ cFirstNamesFemale = "Mary|Linda|Barbara|Susan|Margaret|Lisa|Nancy|Betty|Helen|Do
 cSalutationsMale = "Mr.|Mr.|Mr.|Mr.|Mr.|Mr.|Dr.".
 cSalutationsFemale = "Ms.|Miss|Ms.|Miss|Ms.|Miss|Dr.".
 cNotes = "Some note|Another note|No note|||||".
-cEmailAddress = "@aol.com|@mail.com|@progress.com|@company.com".
 
 open query qryAddresses preselect each AddressDetail.
 iNumAddresses = max(query qryAddresses:num-results - 1, 1).
@@ -62,6 +60,7 @@ procedure loadSalesrep:
     define input parameter pcEmployeeId as character no-undo.
     define input parameter pcTenantId as character no-undo.
     define input parameter pcRepCode as character no-undo.
+    
     define variable cCode as character no-undo.
     define variable iCount as integer no-undo.
     
@@ -85,7 +84,7 @@ procedure loadSalesrep:
                    lbRep.TenantId eq pcTenantId
                    no-lock no-error.
     end.
-                
+    
     create Salesrep.
     assign Salesrep.EmployeeId = pcEmployeeId
            Salesrep.TenantId = pcTenantId
@@ -95,6 +94,36 @@ procedure loadSalesrep:
            Salesrep.Code = cCode
            Salesrep.SalesRegion = SalesRegion.Name
            .
+    
+end procedure.
+
+procedure AddContact:
+    define input parameter pcContactType as character no-undo.
+    define input parameter pcTenantId as character no-undo.
+    define input parameter pcParentId as character no-undo.
+    define input parameter pcContactDetail as character no-undo.
+    
+    define buffer ContactDetail for ContactDetail.
+    define buffer ContactType for ContactType.
+    define buffer ContactXref for ContactXref.
+    
+    find first ContactDetail where
+               ContactDetail.Detail eq pcContactDetail
+               no-lock no-error.
+    if not available ContactDetail then
+    do:
+        create ContactDetail.
+        assign ContactDetail.ContactDetailId = guid(generate-uuid)
+               ContactDetail.Detail = pcContactDetail.
+    end.
+    
+    find ContactType where ContactType.Name = pcContactType  no-lock.
+    
+    create ContactXref.
+    assign ContactXref.ContactDetailId = ContactDetail.ContactDetailId
+           ContactXref.ParentId = pcParentId
+           ContactXref.TenantId = pcTenantId
+           ContactXref.ContactType = ContactType.Name.
 end procedure.
     
 procedure loadEmployees:
@@ -105,6 +134,7 @@ procedure loadEmployees:
     
     define variable iLoop as integer no-undo.
     define variable iMax as integer no-undo.
+    define variable cDealerDomain as character no-undo.
     
     /* employees-per-departmnt */
     iMax = 5.
@@ -114,6 +144,11 @@ procedure loadEmployees:
         reposition qryDealer to row random(0, iNumDealers).
         get next qryDealer no-lock.
         
+        find ContactDetail where
+             ContactDetail.ContactDetailId = Dealer.SalesEmailContactId
+             no-lock.                        
+        cDealerDomain = entry(2, ContactDetail.Detail, '@').
+         
         create Employee.
         assign Employee.Birthdate = date(random(1,12), random(1,28), random(1950, 1980))
                Employee.DepartmentId = pcDeptId
@@ -139,6 +174,11 @@ procedure loadEmployees:
             run loadSalesrep(Employee.EmployeeId,
                              Employee.TenantId,
                              substring(Employee.FirstName, 1,1) + substring(Employee.LastName, 1,1)).
+        
+        run AddContact('email-work',
+                   Employee.TenantId,
+                   Employee.EmployeeId,
+                   (Employee.FirstName + '.' + Employee.LastName + '@' + cDealerDomain)).
     end.
 end procedure.
 

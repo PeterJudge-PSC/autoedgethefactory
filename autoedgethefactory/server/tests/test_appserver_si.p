@@ -79,7 +79,8 @@ run OpenEdge/CommonInfrastructure/Server/as_startup.p (SessionClientTypeEnum:App
 /*run test_userlogin.*/
 
 /*run test_getbranddata ('fjord').*/
-run test_captureorder.
+/*run test_captureorder.*/
+run test_dealerdetail.
 
 procedure test_captureorder:
     define VARIABLE piOrderNumber as integer no-undo.
@@ -202,6 +203,35 @@ procedure test_userlogin:
         end catch.
     end.
     
+end procedure.
+
+procedure test_dealerdetail:
+    define variable pcBrand as character no-undo.
+    define variable pcDealerCode as character no-undo.
+    define variable pcUserContextId as longchar no-undo.
+
+    define variable pcDealerId as longchar no-undo.
+    define variable pcName as character no-undo.
+    define variable pcSalesEmail as character no-undo.
+    define variable pcInfoEmail as character no-undo.
+    define variable pcStreetAddress as character no-undo.
+    define variable pcPhoneNumber as character no-undo.
+    define variable pcSalesReps as longchar no-undo.
+    
+    pcBrand =  'fjord'.
+    pcDealerCode = 'dealer03'.
+    pcUserContextId = '<NULL>'.
+    
+    run AutoEdge/Factory/Server/Order/BusinessComponent/service_dealer_detail.p
+        (pcBrand, pcDealerCode, pcUserContextId,
+        output pcDealerId,
+        output pcName,
+        output pcSalesEmail,
+        output pcInfoEmail,
+        output pcStreetAddress,
+        output pcPhoneNumber,
+        output pcSalesEmail).
+        
 end procedure.     
 
 procedure test_getbranddata:

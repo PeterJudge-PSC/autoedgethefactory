@@ -1,8 +1,8 @@
 # PF for Server
- -pf ../shared/cfg/shared.pf
+-pf ./autoedgethefactory/shared/cfg/shared.pf
  
  # DB connections can also be managed by the ConnectionManager
- -db ./db/aetf.db -ld aetf -H localhost -S 5000
- # -db ./db/autoedgethefactory.db -ld aetf 
- -T ./temp
+#-db ./db/aetf.db -ld aetf -H localhost -S 5000
+-db ./autoedgethefactory/server/db/aetf.db -ld aetf -H localhost -S 5000
+-T  ./autoedgethefactory/server/temp
  
