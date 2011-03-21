@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : OrderListForm
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Thu Dec 16 11:33:05 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 {routinelevel.i}
 
 using Progress.Windows.Form.
@@ -581,12 +581,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         if valid-object(oPropertyValue) then
            cDealerCode = oPropertyValue:Value.
            
-        message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
-        
-        cDealerCode skip
-        
-        view-as alert-box error title '[PJ DEBUG]'.           
-        
         run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p
                on ConnMgr:GetConnectionHandle(ConnectionTypeEnum:AppServer, 'AutoEdgeTheFactory') 
                     (input cDealerCode,

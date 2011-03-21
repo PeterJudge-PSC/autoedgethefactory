@@ -366,7 +366,7 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.DealerLoginPanel inherits
         this-object:uxPassword:Size = new System.Drawing.Size(242, 31).
         this-object:uxPassword:TabIndex = 40.
         ultraToolTipInfo2:ToolTipImage = Infragistics.Win.ToolTipImage:Info.
-        ultraToolTipInfo2:ToolTipTextFormatted = "<span style=~"font-style:italic;~">letmein </span>&edsp;is a good guess for most non-admin and -guest users; for other users try the username as password.".
+        ultraToolTipInfo2:ToolTipTextFormatted = "<span style=~"font-style:italic;~">letmein </span>&edsp;is a good guess for users.".
         ultraToolTipInfo2:ToolTipTextStyle = Infragistics.Win.ToolTipTextStyle:Formatted.
         ultraToolTipInfo2:ToolTipTitle = "Password Hints".
         this-object:ultraToolTipManager1:SetUltraToolTip(this-object:uxPassword, ultraToolTipInfo2).
