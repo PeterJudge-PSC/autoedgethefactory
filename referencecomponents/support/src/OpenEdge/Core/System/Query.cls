@@ -27,6 +27,8 @@ using OpenEdge.Core.System.QueryElementEnum.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.Collection.
+using OpenEdge.Lang.Collections.ObjectStack.
+
 using OpenEdge.Lang.FlagsEnum.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.JoinEnum.
@@ -95,10 +97,17 @@ class OpenEdge.Core.System.Query use-widget-pool
        manipulate to our hearts' content, but the object instance stays the same. */
     define public property Definition as IQueryDefinition no-undo get. protected set.
 
-@todo(task="implement", action="basedefinition as stack?").    
     /* This is the base or initial definition used to create this query. It's 
        a copy of the QueryDef passed in to the ctor, and should not be changed. */
-    define protected property BaseDefinition as IQueryDefinition no-undo get. set.
+/*    define protected property BaseDefinition as IQueryDefinition no-undo get. set.*/
+    define protected property BaseDefinition as ObjectStack no-undo
+        get():
+            if not valid-object(BaseDefinition) then
+                BaseDefinition = new ObjectStack().
+            
+            return BaseDefinition.
+        end get.
+        set.
     
     define public property NumRows as int no-undo
         get():
@@ -641,13 +650,13 @@ class OpenEdge.Core.System.Query use-widget-pool
     method public void Reset():
         this-object:Close().
         
-        Definition = cast(BaseDefinition:Clone(), IQueryDefinition).
+        Definition = cast(BaseDefinition:Pop(), IQueryDefinition). 
 /*        Prepare().*/
     end method.
     
     /** Sets the base query definition to the current query definition. */
     method public void Rebase():
-        BaseDefinition = cast(Definition:Clone(), IQueryDefinition).
+        BaseDefinition:Push(cast(Definition:Clone(), IQueryDefinition)).
     end method.
     
     method public void Prepare():
