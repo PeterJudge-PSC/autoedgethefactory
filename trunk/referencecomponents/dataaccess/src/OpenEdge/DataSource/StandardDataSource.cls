@@ -517,16 +517,19 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                 else
                 do:
                     OnAfterSave(cRowKey).
-                    
-                    /* make sure we commit the changes. */
-                    phSourceBuffer:buffer-release().
-                    
+                                        
                     if phSourceBuffer:error then
                         poTableResponse:ErrorText:Put(
                                 new String(cRowKey[1]),
                                 new String(phSourceBuffer:error-string)). 
                 end.                    
             end.    /* error */
+            finally:
+                /* always release the buffers being updated */
+                do iBufferIndex = 1 to iMax:
+                    hABLDataSource:get-source-buffer(iBufferIndex):buffer-release().
+                end.
+            end finally.
         end.    /* transaction */
         
         OnAfterSaveTransaction(cRowKey).
