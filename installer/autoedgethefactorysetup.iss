@@ -3,32 +3,32 @@
 
 [Setup]
 InternalCompressLevel=Max
-OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.0
+OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.3
 SolidCompression=true
-VersionInfoVersion=1.0.0
+VersionInfoVersion=1.0.3
 VersionInfoCompany=Progress Software Corp.
 VersionInfoDescription=OpenEdge AutoEdge|TheFactory Application Example Setup
 MinVersion=0,5.0.2195sp3
 AppCopyright=Copyright 2011 © Progress Software Corp.
 AppName=OpenEdge AutoEdge|TheFactory Application Example
-AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0
+AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.x
 InfoAfterFile=installer\include\InfoAfter.txt
 InfoBeforeFile=installer\include\InfoBefore.txt
 LicenseFile=installer\include\License.txt
 DefaultDirName={pf}\OpenEdgeAE\AutoEdge\Factory
 EnableDirDoesntExistWarning=true
 AllowUNCPath=false
-DefaultGroupName=OpenEdge Sample Application
+DefaultGroupName=OpenEdge Application Example
 DisableStartupPrompt=false
 AlwaysShowComponentsList=true
-ShowLanguageDialog=yes
+ShowLanguageDialog=auto
 SetupIconFile=installer\include\autoedge.ico
 AppID={{62CE4B50-E7A0-4279-9889-0D6EC3B80C0E}
-VersionInfoTextVersion=1.0.0
+VersionInfoTextVersion=1.0.3
 AppPublisher=Progress Software Corp.
 AppPublisherURL=http://www.progress.com
 AppSupportURL=http://support.progress.com
-AppVersion=1.0
+AppVersion=1.0.3
 UninstallDisplayName=OpenEdge AutoEdge|TheFactory Application Example
 ExtraDiskSpaceRequired=1000000
 AlwaysRestart=false
@@ -43,6 +43,8 @@ PrivilegesRequired=none
 ; Use relative paths?
 ;SourceDir=..
 SourceDir=C:\devarea\projects\OEBP
+WizardImageBackColor=$00400000
+AllowRootDirectory=true
 
 [Dirs]
 ; AETF
@@ -157,7 +159,7 @@ Source: autodox2-index.html; DestDir: {app}; Flags: ignoreversion uninsremoverea
 
 ;AETF
 ;client
-Source: autoedgethefactory\client\cfg\*.*; DestDir: {app}\autoedgethefactory\client\cfg; Excludes: .svn,*.r,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist;  Components: AETF_CLIENT; Tasks: 
+Source: autoedgethefactory\client\cfg\*.*; DestDir: {app}\autoedgethefactory\client\cfg; Excludes: .svn,*.r,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist; Components: AETF_CLIENT; 
 Source: autoedgethefactory\client\src\*.*; DestDir: {app}\autoedgethefactory\client\src; Excludes: .svn,*.r,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist;  Components: AETF_CLIENT; Tasks: 
 Source: autoedgethefactory\client\doc\*.*; DestDir: {app}\autoedgethefactory\client\doc; Excludes: .svn,*.r,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist; Components: AETF_CLIENT; Tasks: 
 Source: autoedgethefactory\client\tests\*.*; DestDir: {app}\autoedgethefactory\client\tests; Excludes: .svn,*.r,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist;  Components: AETF_CLIENT; Tasks: 
@@ -195,7 +197,7 @@ Source: autoedgethefactory\shared\.propath; DestDir: {app}\autoedgethefactory\sh
 Source: autoedgethefactory\shared\.project; DestDir: {app}\autoedgethefactory\shared; Excludes: .svn; Flags: ignoreversion uninsremovereadonly; Components: AETF_SERVER AETF_CLIENT
 
 ;Savvion
-Source: autoedgethefactory\savvion\*.*; DestDir: {app}\autoedgethefactory\savvion; Excludes: .svn; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER
+Source: autoedgethefactory\savvion\*.*; DestDir: {app}\autoedgethefactory\savvion; Excludes: ".svn, .metadata,*.com.savvion.studio"; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs; Components: "AETF_CLIENT AETF_SERVER"; 
 
 ;OERA - BusinessComponents
 Source: referencecomponents\businesscomponents\src\*.*; DestDir: {app}\referencecomponents\businesscomponents\src; Excludes: .svn,*.r,.*; Flags: uninsneveruninstall recursesubdirs createallsubdirs; Components: OERA_SERVER; Tasks: 
@@ -719,11 +721,11 @@ begin
 		{ Create the autoedge-hq-db.pf file }
 		FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\server.pf' );
 		SaveStringToFile( FileName,
-						  '# AutoEdge|TheFactory Database Connection' 	+ #13#10 +
+						  '# AutoEdge|TheFactory Database Connection' 	          + #13#10 +
 						  '-pf ./autoedgethefactory/shared/cfg/shared.pf' 				+ #13#10 +
 						  '-db ./autoedgethefactory/server/db/aetf.db -ld aetf'		+ #13#10 +
 						  '-T  ./autoedgethefactory/server/temp'									+ #13#10 +
-						  '# eof' 										+ #13#10,
+						  '# eof' 										                            + #13#10,
 						  false );
 
 		{ === StartDatabases.cmd === }
@@ -810,7 +812,7 @@ begin
 		SaveStringToFile( FileName,
 						  '# PF for AutoEdge|TheFactory Client session'             + #13#10 +
 						  '-pf  ./autoedgethefactory/shared/cfg/shared.pf ' 				+ #13#10 +
-						  '-T   ./autoedgethefactory/client/temp ' 									+ #13#10 +
+						  '-T   ./autoedgethefactory/client/temp ' 									+ #13#10 +						  
 						  '-assemblies ./autoedgethefactory/client '                + #13#10,
 						  false );
 						  
@@ -994,12 +996,14 @@ begin
 		SetIniString(Section, 'workDir', ExpandConstant( '{app}' ) + '\autoedgethefactory\server', FileName );
 		SetIniString(Section, 'wsaUrl', 'http://localhost:8080/wsa/wsa1', FileName );
 		
-		{ merge to installed properties file in DLC }
-		DoMergeProperties('update',
-						  'ubroker',
-						  ExpandConstant('{code:getDLCDirectory}\properties\ubroker.properties'),
-						  FileName,
-						  ExpandConstant('{app}\autoedgethefactory\server'));
+//   No wsa merge since we want to keep the original. probably. 
+//		{ merge to installed properties file in DLC }  
+//		DoMergeProperties('update',
+//						  'ubroker',
+//						  ExpandConstant('{code:getDLCDirectory}\properties\ubroker.properties'),
+//						  FileName,
+//						  ExpandConstant('{app}\autoedgethefactory\server'));						  						  
+
 	end;
 end;
 
@@ -1350,8 +1354,6 @@ begin
 end;
 
 [InnoIDE_Settings]
-LogFile=C:\devarea\projects\OEBP\installer\compile.log
+LogFile=C:\devarea\projects\OEBP\installer\output\compile.log
 LogFileOverwrite=true
-
-
 
