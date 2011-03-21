@@ -7,7 +7,7 @@
             <Address2/>
             <City>Bedford</City>
             <Country>USA</Country>
-            <SalesEmail>sales@stillerinc.com</SalesEmail>
+            <SalesEmail>sales@stillerinc.com.aetf</SalesEmail>
             <Fax>781-555-1234</Fax>
             <Mobile/>
             <ZIP>01730</ZIP>
@@ -22,7 +22,7 @@
             <Address2/>
             <City>Bedford</City>
             <Country>USA</Country>
-            <SalesEmail>sales@stillerinc.com</SalesEmail>
+            <SalesEmail>sales@stillerinc.com.aetf</SalesEmail>
             <Fax>781-555-1234</Fax>
             <Mobile/>
             <ZIP>01730</ZIP>
@@ -37,7 +37,7 @@
             <Address2/>
             <City>Waltham</City>
             <Country>USA</Country>
-            <SalesEmail>sales@rothcars.com</SalesEmail>
+            <SalesEmail>sales@rothcars.com.aetf</SalesEmail>
             <Fax>781-555-5678</Fax>
             <Mobile/>
             <ZIP>02452</ZIP>
@@ -52,7 +52,7 @@
             <Address2/>
             <City>Waltham</City>
             <Country>USA</Country>
-            <SalesEmail>sales@rothcars.com</SalesEmail>
+            <SalesEmail>sales@rothcars.com.aetf</SalesEmail>
             <Fax>781-555-5678</Fax>
             <Mobile/>
             <ZIP>02452</ZIP>
@@ -67,7 +67,7 @@
             <Address2/>
             <City>Malden</City>
             <Country>USA</Country>
-            <SalesEmail>sales@merriweatherfieldsnowe.com</SalesEmail>
+            <SalesEmail>sales@merriweatherfieldsnowe.com.aetf</SalesEmail>
             <Fax>781-555-1234</Fax>
             <Mobile/>
             <ZIP>02020</ZIP>
@@ -82,7 +82,7 @@
             <Address2/>
             <City>Malden</City>
             <Country>USA</Country>
-            <SalesEmail>sales@merriweatherfieldsnowe.com</SalesEmail>
+            <SalesEmail>sales@merriweatherfieldsnowe.com.aetf</SalesEmail>
             <Fax>781-555-1234</Fax>
             <Mobile/>
             <ZIP>02020</ZIP>
@@ -97,7 +97,7 @@
             <Address2>1010 Tenth Ave</Address2>
             <City>Boston</City>
             <Country>USA</Country>
-            <SalesEmail>info@motorgroupeast.com</SalesEmail>
+            <SalesEmail>info@motorgroupeast.com.aetf</SalesEmail>
             <Fax>781-555-1234</Fax>
             <ZIP>02002</ZIP>
             <State>MA</State>

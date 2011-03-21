@@ -56,19 +56,26 @@ function GetAddressId returns longchar (input pcLine1 as char,
 end function.   
 
 function GetContactId returns longchar (input pcDetail as char):
-    create ContactDetail.
-    assign ContactDetail.ContactDetailId = guid(generate-uuid)
-           ContactDetail.Detail = pcDetail.
+    find first ContactDetail where ContactDetail.Detail eq pcDetail no-lock no-error.
+    if not available ContactDetail then
+    do:
+        create ContactDetail.
+        assign ContactDetail.ContactDetailId = guid(generate-uuid)
+               ContactDetail.Detail = pcDetail.
+    end.
+        
     return ContactDetail.ContactDetailId.
 end function.
 
 procedure load_dealer:
+    define variable cDealerDomain as character no-undo.
+    
     for each ttBrand:
         find Tenant where Tenant.Name = ttBrand.TenantName no-lock.
         
         for each ttDealer where 
                  ttDealer.TenantName = ttBrand.TenantName:
-
+            cDealerDomain  = ''.
             create Dealer.
             assign Dealer.DealerId = guid(generate-uuid)
                    Dealer.Name = ttDealer.DealerName
@@ -88,9 +95,18 @@ procedure load_dealer:
                                          GetContactId(ttDealer.Fax),
                                          Dealer.DealerId,
                                          Dealer.TenantId).
-            if ttDealer.Mobile ne '' then                   
+            if ttDealer.Mobile ne '' then
                 run create_contact_xref ('phone-mobile', 
                                          GetContactId(ttDealer.Mobile),
+                                         Dealer.DealerId,
+                                         Dealer.TenantId).
+                
+            if num-entries(ttDealer.SalesEmail, '@') ge 2 then
+                cDealerDomain = entry(2, ttDealer.SalesEmail, '@').
+            if cDealerDomain ne '' then
+                /* admin email */
+                run create_contact_xref ('email-work', 
+                                         GetContactId('admin@' + cDealerDomain),
                                          Dealer.DealerId,
                                          Dealer.TenantId).
         end.
@@ -110,7 +126,6 @@ procedure create_contact_xref:
            ContactXref.ParentId = pcDealerId
            ContactXref.TenantId = pcTenantId
            ContactXref.ContactType = ContactType.Name
-            
            .
 end procedure.
 

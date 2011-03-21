@@ -34,9 +34,10 @@ define input  parameter pcUserName as character no-undo.
 define input  parameter pcPassword as character no-undo.
 
 define output parameter pcUserContextId as longchar no-undo.
-define output parameter pcCustomerId as longchar no-undo.
+define output parameter pcCustNum as longchar no-undo.
 define output parameter pcCustomerEmail as longchar no-undo.
 define output parameter pdCreditLimit as decimal no-undo.
+define output parameter pcCustomerName as character no-undo.
 
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
@@ -47,9 +48,10 @@ define variable cUserDomain as character no-undo.
 if pcUserName eq 'Savvion::Test' then
 do:
     assign pcUserContextId = 'pcUserContextId'
-           pcCustomerId = 'pcCustomerId '
-           pcCustomerEmail = 'pcCustomerEmail '
-           pdCreditLimit = -1.
+           pcCustNum = 'pcCustNum'
+           pcCustomerEmail = 'pcCustomerEmail'
+           pdCreditLimit = -1
+           pcCustomerName = 'pcCustomerName'.
     return.
 end.
 
@@ -72,10 +74,10 @@ Assert:ArgumentNotNull(oContext, 'User Context').
 
 assign pcUserContextId = oContext:ContextId
        pcCustomerEmail = cast(oContext:UserProperties:Get(new String('PrimaryEmailAddress')), String):Value
-       pcCustomerId = cast(oContext:UserProperties:Get(new String('CustNum')), String):Value
+       pcCustNum = cast(oContext:UserProperties:Get(new String('CustNum')), String):Value
        pdCreditLimit = decimal(cast(oContext:UserProperties:Get(new String('CreditLimit')), String):Value)
+       pcCustomerName = cast(oContext:UserProperties:Get(new String('Customer.Name')), String):Value
        .
-       
 error-status:error = no.
 return.
 

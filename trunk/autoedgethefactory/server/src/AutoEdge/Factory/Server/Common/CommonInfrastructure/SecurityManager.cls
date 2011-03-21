@@ -103,6 +103,7 @@ class AutoEdge.Factory.Server.Common.CommonInfrastructure.SecurityManager inheri
             oUC:UserProperties:Put(new String('CustomerId'), new String(lbCustomer.CustomerId)).
             oUC:UserProperties:Put(new String('CustNum'), new String(string(lbCustomer.CustNum))).
             oUC:UserProperties:Put(new String('CreditLimit'), new String(string(lbCustomer.CreditLimit))).
+            oUC:UserProperties:Put(new String('Customer.Name'), new String(string(lbCustomer.Name))).
             
             find lbContactType where lbContactType.Name = 'email-home' no-lock.
             find lbCustomerContact where

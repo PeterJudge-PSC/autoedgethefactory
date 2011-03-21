@@ -17,8 +17,11 @@ define variable cDomain as character no-undo.
 define variable iLoop as integer no-undo.
 define variable iMax as integer no-undo.
 define variable cTenantUsers as character no-undo.
+define variable cPassword as character no-undo.
 
 define buffer lbUser for ApplicationUser.
+
+cPassword = 'letmein'.
 
 for each Customer no-lock,
     first Tenant where Tenant.TenantId = Customer.TenantId no-lock:
@@ -36,7 +39,7 @@ for each Customer no-lock,
            ApplicationUser.LocaleId = Customer.PrimaryLocaleId
            ApplicationUser.LoginDomain = lc(cDomain)
            ApplicationUser.LoginName = lc(cLoginName)
-           ApplicationUser.Password = encode('letmein') 
+           ApplicationUser.Password = encode(cPassword) 
            ApplicationUser.SupplierId = ''
            ApplicationUser.TenantId = Customer.TenantId
            .
@@ -61,7 +64,7 @@ for each Employee no-lock,
            ApplicationUser.LocaleId = Tenant.LocaleId 
            ApplicationUser.LoginDomain = lc(cDomain)
            ApplicationUser.LoginName = lc(cLoginName)
-           ApplicationUser.Password = encode('letmein') 
+           ApplicationUser.Password = encode(cPassword) 
            ApplicationUser.SupplierId = ''
            ApplicationUser.TenantId = Employee.TenantId
            .
@@ -73,7 +76,7 @@ iMax = num-entries(cTenantUsers, '|').
 for each Tenant no-lock:
     do iLoop = 1 to iMax:
         cLoginName = entry(iLoop, cTenantUsers, '|').
-        cDomain  = cLoginName + '.' + Tenant.Name.         
+        cDomain  = cLoginName + '.' + Tenant.Name.
         
         create ApplicationUser.
         assign ApplicationUser.ApplicationUserId = guid(generate-uuid)
@@ -82,7 +85,7 @@ for each Tenant no-lock:
                ApplicationUser.LocaleId = Tenant.LocaleId
                ApplicationUser.LoginDomain = lc(cDomain)
                ApplicationUser.LoginName = lc(cLoginName)
-               ApplicationUser.Password = encode(cLoginName) 
+               ApplicationUser.Password = encode(cPassword) 
                ApplicationUser.SupplierId = ''
                ApplicationUser.TenantId = Tenant.TenantId
                .

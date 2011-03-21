@@ -5,8 +5,8 @@
       <PXGVersion>03</PXGVersion>
     </PGVersion>
     <PGGenInfo isSessionFree="true">
-      <Author>OpenEdge Best Practises</Author>
-      <VersionString>1.0</VersionString>
+      <Author>OpenEdge Best Practices</Author>
+      <VersionString>1.0.3</VersionString>
       <VersionNumber>1</VersionNumber>
       <Package />
       <Service>asAutoEdgeTheFactory</Service>
@@ -117,7 +117,7 @@
       <ProcPath>AutoEdge\Factory\Server\Common\CommonInfrastructure\</ProcPath>
       <ProPath>c:\devarea\projects\oebp\autoedgethefactory\server\bin\</ProPath>
       <ProcExt>p</ProcExt>
-      <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+      <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="false" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
         <Name>CustomerLogin</Name>
         <HelpString />
         <ODLHelpString />
@@ -142,7 +142,7 @@
           <Mode>2</Mode>
         </Parameter>
         <Parameter allowUnknown="true" ordinal="5" writeXmlBeforeImage="false">
-          <Name>pcCustomerId</Name>
+          <Name>pcCustNum</Name>
           <Type>39</Type>
           <Mode>2</Mode>
         </Parameter>
@@ -154,6 +154,57 @@
         <Parameter allowUnknown="true" ordinal="7" writeXmlBeforeImage="false">
           <Name>pdCreditLimit</Name>
           <Type>5</Type>
+          <Mode>2</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="8" writeXmlBeforeImage="false">
+          <Name>pcCustomerName</Name>
+          <Type>1</Type>
+          <Mode>2</Mode>
+        </Parameter>
+      </ProcDetail>
+    </Procedure>
+    <Procedure isPersistent="false" useFullName="false">
+      <Name>service_registercustomer</Name>
+      <ProcPath>AutoEdge\Factory\Server\Common\CommonInfrastructure\</ProcPath>
+      <ProPath>c:\devarea\projects\oebp\autoedgethefactory\server\bin\</ProPath>
+      <ProcExt>p</ProcExt>
+      <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="true" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+        <Name>RegisterCustomer</Name>
+        <HelpString />
+        <ODLHelpString />
+        <Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+          <Name>pcBrand</Name>
+          <Type>1</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
+          <Name>pcCustomerName</Name>
+          <Type>1</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
+          <Name>pcUserName</Name>
+          <Type>1</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+          <Name>pcPassword</Name>
+          <Type>1</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="5" writeXmlBeforeImage="false">
+          <Name>pcCustomerEmail</Name>
+          <Type>39</Type>
+          <Mode>1</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="6" writeXmlBeforeImage="false">
+          <Name>piCustNum</Name>
+          <Type>4</Type>
+          <Mode>2</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="7" writeXmlBeforeImage="false">
+          <Name>pcSalesRep</Name>
+          <Type>1</Type>
           <Mode>2</Mode>
         </Parameter>
       </ProcDetail>
@@ -173,17 +224,17 @@
           <Mode>1</Mode>
         </Parameter>
         <Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
-          <Name>piOrderNum</Name>
-          <Type>4</Type>
-          <Mode>1</Mode>
-        </Parameter>
-        <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
           <Name>pcUserContextId</Name>
           <Type>39</Type>
           <Mode>1</Mode>
         </Parameter>
-        <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+        <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
           <Name>pcDealerNameList</Name>
+          <Type>39</Type>
+          <Mode>2</Mode>
+        </Parameter>
+        <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+          <Name>pcDealerEmailList</Name>
           <Type>39</Type>
           <Mode>2</Mode>
         </Parameter>

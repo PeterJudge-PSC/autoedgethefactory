@@ -51,7 +51,7 @@ cFirstNamesFemale = "Mary|Linda|Barbara|Susan|Margaret|Lisa|Nancy|Betty|Helen|Do
 cSalutationsMale = "Mr.|Mr.|Mr.|Mr.|Mr.|Mr.|Dr.".
 cSalutationsFemale = "Ms.|Miss|Ms.|Miss|Ms.|Miss|Dr.".
 cNotes = "Some note|Another note|No note|||||".
-cEmailAddress = "@aol.com|@mail.com|@progress.com|@company.com|@example.com|@domain.org".
+cEmailAddress = "@hootmail.customer.aetf|@gleemail.customer.aetf|@wahoo.customer.aetf|@ayowl.customer.aetf".
 
 open query qryAddresses preselect each AddressDetail.
 iNumAddresses = query qryAddresses:num-results - 1.
@@ -76,7 +76,7 @@ for each Tenant:
                Customer.SalesrepId = ''
                Customer.TenantId = Tenant.TenantId
                Customer.Terms = ''.
-            
+        
         if iLoop mod 2 eq 0 then        
             Customer.Name = getRandom(cFirstNamesFemale) + ' ' + getRandom(cMiddleNames) + ' ' + getRandom(cLastNames).
         else
@@ -95,7 +95,7 @@ for each Tenant:
                 'email-home',
                 Customer.TenantId, 
                 Customer.CustomerId,
-                entry(1, Customer.Name, ' ') + getRandom(cEmailAddress)).
+                trim(entry(1, Customer.Name, ' ')) + getRandom(cEmailAddress)).
         
         run AddCustomerContact(
                 'phone-mobile',
@@ -113,11 +113,16 @@ procedure AddCustomerContact:
     define input parameter pcTenantId as longchar no-undo.
     define input parameter pcCustomerId as character no-undo.
     define input parameter pcContactDetail as character no-undo.
-    
-    create ContactDetail.
-    assign ContactDetail.ContactDetailId = guid(generate-uuid)
-           ContactDetail.Detail = pcContactDetail.
-    find ContactType where ContactType.Name = pcContactType  no-lock.
+
+    find first ContactDetail where ContactDetail.Detail eq pcContactDetail no-lock no-error.
+    if not available ContactDetail then
+    do:
+        create ContactDetail.
+        assign ContactDetail.ContactDetailId = guid(generate-uuid)
+               ContactDetail.Detail = pcContactDetail.
+    end.
+
+    find ContactType where ContactType.Name = pcContactType no-lock.
            
     create CustomerContact.
     assign CustomerContact.ContactDetailId = ContactDetail.ContactDetailId
