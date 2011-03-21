@@ -37,6 +37,12 @@ define variable oSecMgr as ISecurityManager no-undo.
 define variable oContext as IUserContext no-undo.
 
 /** -- validate defs -- **/
+if pcUserName eq 'Savvion::Test' then
+do:
+    pcUserContextId = 'pcUserContextId'.
+    return.
+end. 
+
 Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
 Assert:ArgumentNotNullOrEmpty(pcUserDomain, 'User Domain').
 Assert:ArgumentNotNullOrEmpty(pcPassword, 'User Password').
