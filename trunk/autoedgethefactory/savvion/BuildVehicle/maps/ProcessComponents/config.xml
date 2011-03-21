@@ -35,7 +35,7 @@
 &lt;/soapenv:Body&gt;
   &lt;/template&gt;
   &lt;fields&gt;
-    &lt;field name=&quot;responseStatus&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus/text()&quot;/&gt;
+    &lt;field name=&quot;responseBuildStatus&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus/text()&quot;/&gt;
   &lt;/fields&gt;
   &lt;namespaceaware&gt;true&lt;/namespaceaware&gt;
   &lt;namespacemap&gt;
@@ -49,10 +49,10 @@
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseStatus</string> 
+        <string>responseBuildStatus</string> 
        </void> 
        <void property="name"> 
-        <string>responseStatus</string> 
+        <string>responseBuildStatus</string> 
        </void> 
       </object> 
      </void> 
@@ -281,7 +281,7 @@
         <string>pcUserContextId.3_0</string> 
        </void> 
        <void property="value"> 
-        <string>Savvion::Test</string> 
+        <string>savvion::test</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -449,7 +449,7 @@
    <string></string> 
   </void> 
   <void property="targetEndpointAddress"> 
-   <string>http://SG-2K3BSE01:9090/wsa/wsa1</string> 
+   <string>http://localhost:8080/wsa/wsa1</string> 
   </void> 
   <void property="targetNameSpace"> 
    <string>urn:factory-autoedge-com</string> 
@@ -464,7 +464,7 @@
    <string></string> 
   </void> 
   <void property="wsdlUrl"> 
-   <string>http://localhost:9090/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+   <string>http://localhost:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
   </void> 
   <void property="wsdlUserName"> 
    <string></string> 
@@ -478,7 +478,7 @@
         <param name="IN.pcUserContextId.3_0" access="I" label="pcUserContextId" type="java.lang.String" value="" mandatory="true"/>
     </block>
     <block title="Outputs" label="wsadapter:Config.label.outputs" hidden="false">
-        <param name="OUT.responseStatus" access="O" label="responseStatus" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseBuildStatus" access="O" label="responseBuildStatus" type="java.lang.String" value="" mandatory="false"/>
     </block>
     <block title="Faults" label="wsadapter:Config.label.faults" hidden="false">
         <param name="FAULT.SoapFaultXML" access="O" label="SoapFaultXML" type="java.lang.String" value="" mandatory="true"/>

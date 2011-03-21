@@ -1,15 +1,14 @@
 <map version="1.3">
-  <param name="VehicleModelsSUV" type="java.lang.String" value="@OUT.responseSUV"/>
+  <param name="SUVModels" type="java.lang.String" value="@OUT.responseSUV"/>
   <param name="ExteriorWheels" type="java.lang.String" value="@OUT.responseWheels"/>
   <param name="InteriorTrimColour" type="java.lang.String" value="@OUT.responseTrimColour"/>
-  <param name="VehicleModelsPremium" type="java.lang.String" value="@OUT.responseConvertible"/>
-  <param name="VehicleModelsTruck" type="java.lang.String" value="@OUT.responseTruck"/>
-  <param name="error" type="java.lang.String" value="@FAULT.SoapFaultXML"/>
+  <param name="PremiumModels" type="java.lang.String" value="@OUT.responseConvertible"/>
+  <param name="TruckModels" type="java.lang.String" value="@OUT.responseTruck"/>
   <param name="InteriorAccessories" type="java.lang.String" value="@OUT.responseAccessories"/>
   <param name="ExteriorColour" type="java.lang.String" value="@OUT.responseExtColour"/>
-  <param name="BrandDealers" type="java.lang.String" value="@OUT.responseDealer"/>
-  <param name="VehicleModelsCompact" type="java.lang.String" value="@OUT.responseCompact"/>
+  <param name="DealerList" type="java.lang.String" value="@OUT.responseDealerNames"/>
+  <param name="SedanModels" type="java.lang.String" value="@OUT.responseSedan"/>
+  <param name="CompactModels" type="java.lang.String" value="@OUT.responseCompact"/>
   <param name="ExteriorMoonroof" type="java.lang.String" value="@OUT.responseMoonroof"/>
-  <param name="VehicleModelsSedan" type="java.lang.String" value="@OUT.responseSedan"/>
   <param name="InteriorSeatMaterial" type="java.lang.String" value="@OUT.responseTrimMaterial"/>
 </map>

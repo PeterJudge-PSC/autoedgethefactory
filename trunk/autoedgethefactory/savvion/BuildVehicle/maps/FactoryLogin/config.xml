@@ -30,7 +30,7 @@
 &lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&#13;
     &lt;UserLoginResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;&#13;
         &lt;result/&gt;&#13;
-        &lt;pcUserContextId&gt;c8380ba0-72a0-00be-e011-5f39deaa05b5&lt;/pcUserContextId&gt;&#13;
+        &lt;pcUserContextId&gt;pcUserContextId&lt;/pcUserContextId&gt;&#13;
     &lt;/UserLoginResponse&gt;&#13;
 &lt;/soapenv:Body&gt;
   &lt;/template&gt;
@@ -78,6 +78,31 @@
        </void> 
       </object> 
      </void> 
+    </void> 
+    <void property="faultXMLPluginConfig"> 
+     <string>&lt;config&gt;
+  &lt;version&gt;2&lt;/version&gt;
+  &lt;template&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;soapenv:Fault&gt;
+        &lt;faultcode&gt;SOAP-ENV:Server&lt;/faultcode&gt;
+        &lt;faultstring&gt;An error was detected while executing the Web Service request. (10893)&lt;/faultstring&gt;
+        &lt;detail&gt;
+            &lt;ns1:FaultDetail xmlns:ns1=&quot;urn:soap-fault:details&quot;&gt;
+                &lt;errorMessage&gt;Invalid handle.  Not initialized or points to a deleted object. (3135)&lt;/errorMessage&gt;
+                &lt;requestID&gt;454f8c3ff70d56f4:799af8f8:12ea5846de2:-7fff#28d&lt;/requestID&gt;
+            &lt;/ns1:FaultDetail&gt;
+        &lt;/detail&gt;
+    &lt;/soapenv:Fault&gt;
+&lt;/soapenv:Body&gt;
+  &lt;/template&gt;
+  &lt;fields&gt;
+  &lt;/fields&gt;
+  &lt;namespaceaware&gt;false&lt;/namespaceaware&gt;
+  &lt;namespacemap&gt;
+  &lt;/namespacemap&gt;
+&lt;/config&gt;
+</string> 
     </void> 
     <void property="faults"> 
      <void method="add"> 
@@ -155,7 +180,7 @@
         <string>pcUserName.0_0</string> 
        </void> 
        <void property="value"> 
-        <string>factory</string> 
+        <string>savvion::test</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -199,9 +224,6 @@
        <void property="uniqueIdentifier"> 
         <string>pcUserDomain.1_0</string> 
        </void> 
-       <void property="value"> 
-        <string>factory.fjord</string> 
-       </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
          <void property="localPart"> 
@@ -243,9 +265,6 @@
        </void> 
        <void property="uniqueIdentifier"> 
         <string>pcPassword.2_0</string> 
-       </void> 
-       <void property="value"> 
-        <string>factory</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -413,7 +432,7 @@
    <string></string> 
   </void> 
   <void property="targetEndpointAddress"> 
-   <string>http://SG-2K3BSE01:9090/wsa/wsa1</string> 
+   <string>http://localhost:8080/wsa/wsa1</string> 
   </void> 
   <void property="targetNameSpace"> 
    <string>urn:factory-autoedge-com</string> 
@@ -428,7 +447,7 @@
    <string></string> 
   </void> 
   <void property="wsdlUrl"> 
-   <string>http://localhost:9090/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+   <string>http://localhost:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
   </void> 
   <void property="wsdlUserName"> 
    <string></string> 

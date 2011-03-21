@@ -2,7 +2,7 @@
     <block title="Inputs" label="wsadapter:Config.label.inputs" hidden="false">
         <param name="SESSION_TOKEN_SUPPORT" access="HIDDEN" label="SESSION_TOKEN_SUPPORT" type="java.lang.String" value="false"/>
         <param name="WSCONFIG" access="HIDDEN" label="WSCONFIG" type="java.lang.String">
-<java version="1.6.0_20" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_05" class="java.beans.XMLDecoder"> 
  <object class="com.savvion.sbm.adapters.webservice.WSConfig"> 
   <void property="callInfo"> 
    <object class="com.savvion.sbm.adapters.webservice.WSCallInfo"> 
@@ -27,36 +27,34 @@
      <string>&lt;config&gt;
   &lt;version&gt;2&lt;/version&gt;
   &lt;template&gt;
-&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&#13;
-    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;&#13;
-        &lt;result/&gt;&#13;
-        &lt;pcDealerNameList&gt;pcDealerNameList&lt;/pcDealerNameList&gt;&#13;
-        &lt;pcDealerEmailList&gt;pcDealerEmailList&lt;/pcDealerEmailList&gt;&#13;
-        &lt;pcCompactModels&gt;pcCompactModels &lt;/pcCompactModels&gt;&#13;
-        &lt;pcTruckModels&gt;pcTruckModels &lt;/pcTruckModels&gt;&#13;
-        &lt;pcSuvModels&gt;pcSuvModels&lt;/pcSuvModels&gt;&#13;
-        &lt;pcConvertibleModels&gt;pcConvertibleModels&lt;/pcConvertibleModels&gt;&#13;
-        &lt;pcSedanModels&gt;pcSedanModels&lt;/pcSedanModels&gt;&#13;
-        &lt;pcInteriorTrimMaterial&gt;pcInteriorTrimMaterial&lt;/pcInteriorTrimMaterial&gt;&#13;
-        &lt;pcInteriorTrimColour&gt;pcInteriorTrimColour&lt;/pcInteriorTrimColour&gt;&#13;
-        &lt;pcInteriorAccessories&gt;pcInteriorAccessories&lt;/pcInteriorAccessories&gt;&#13;
-        &lt;pcExteriorColour&gt;pcExteriorColour&lt;/pcExteriorColour&gt;&#13;
-        &lt;pcMoonroof&gt;pcMoonroof&lt;/pcMoonroof&gt;&#13;
-        &lt;pcWheels&gt;pcWheels&lt;/pcWheels&gt;&#13;
-    &lt;/ListBrandDataResponse&gt;&#13;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
 &lt;/soapenv:Body&gt;
   &lt;/template&gt;
   &lt;fields&gt;
-    &lt;field name=&quot;responeDealerNames&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcDealerNameList/text()&quot;/&gt;
-    &lt;field name=&quot;responseDealerEmail&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcDealerEmailList/text()&quot;/&gt;
-    &lt;field name=&quot;responseCompact&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcCompactModels/text()&quot;/&gt;
-    &lt;field name=&quot;responseTruck&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcTruckModels/text()&quot;/&gt;
-    &lt;field name=&quot;responseConvertible&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcConvertibleModels/text()&quot;/&gt;
-    &lt;field name=&quot;responseSUV&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcSuvModels/text()&quot;/&gt;
-    &lt;field name=&quot;responseSedan&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcSedanModels/text()&quot;/&gt;
-    &lt;field name=&quot;responseTrimMaterial&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcInteriorTrimMaterial/text()&quot;/&gt;
-    &lt;field name=&quot;responseTrimColour&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcInteriorTrimColour/text()&quot;/&gt;
-    &lt;field name=&quot;responseAccessories&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcInteriorAccessories/text()&quot;/&gt;
+    &lt;field name=&quot;responseDealerList&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcDealerNameList/text()&quot;/&gt;
+    &lt;field name=&quot;responseTruckModels&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcTruckModels/text()&quot;/&gt;
+    &lt;field name=&quot;responseCompactModels&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcCompactModels/text()&quot;/&gt;
+    &lt;field name=&quot;responseSuvModels&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcSuvModels/text()&quot;/&gt;
+    &lt;field name=&quot;responseConvertibleModels&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcConvertibleModels/text()&quot;/&gt;
+    &lt;field name=&quot;responseSedanModels&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcSedanModels/text()&quot;/&gt;
+    &lt;field name=&quot;responseIntTrimMaterial&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcInteriorTrimMaterial/text()&quot;/&gt;
+    &lt;field name=&quot;responseIntColour&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcInteriorTrimColour/text()&quot;/&gt;
+    &lt;field name=&quot;responseIntAccessories&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcInteriorAccessories/text()&quot;/&gt;
     &lt;field name=&quot;responseExtColour&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcExteriorColour/text()&quot;/&gt;
     &lt;field name=&quot;responseMoonroof&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcMoonroof/text()&quot;/&gt;
     &lt;field name=&quot;responseWheels&quot; type=&quot;String&quot; xpath=&quot;/soapenv:Body/ns1:ListBrandDataResponse/ns1:pcWheels/text()&quot;/&gt;
@@ -73,100 +71,90 @@
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responeDealerNames</string> 
+        <string>responseDealerList</string> 
        </void> 
        <void property="name"> 
-        <string>responeDealerNames</string> 
+        <string>responseDealerList</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseDealerEmail</string> 
+        <string>responseTruckModels</string> 
        </void> 
        <void property="name"> 
-        <string>responseDealerEmail</string> 
+        <string>responseTruckModels</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseCompact</string> 
+        <string>responseCompactModels</string> 
        </void> 
        <void property="name"> 
-        <string>responseCompact</string> 
+        <string>responseCompactModels</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseTruck</string> 
+        <string>responseSuvModels</string> 
        </void> 
        <void property="name"> 
-        <string>responseTruck</string> 
+        <string>responseSuvModels</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseConvertible</string> 
+        <string>responseConvertibleModels</string> 
        </void> 
        <void property="name"> 
-        <string>responseConvertible</string> 
+        <string>responseConvertibleModels</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseSUV</string> 
+        <string>responseSedanModels</string> 
        </void> 
        <void property="name"> 
-        <string>responseSUV</string> 
+        <string>responseSedanModels</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseSedan</string> 
+        <string>responseIntTrimMaterial</string> 
        </void> 
        <void property="name"> 
-        <string>responseSedan</string> 
+        <string>responseIntTrimMaterial</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseTrimMaterial</string> 
+        <string>responseIntColour</string> 
        </void> 
        <void property="name"> 
-        <string>responseTrimMaterial</string> 
+        <string>responseIntColour</string> 
        </void> 
       </object> 
      </void> 
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseTrimColour</string> 
+        <string>responseIntAccessories</string> 
        </void> 
        <void property="name"> 
-        <string>responseTrimColour</string> 
-       </void> 
-      </object> 
-     </void> 
-     <void method="add"> 
-      <object class="com.savvion.sbm.adapters.file.Parameter"> 
-       <void property="description"> 
-        <string>responseAccessories</string> 
-       </void> 
-       <void property="name"> 
-        <string>responseAccessories</string> 
+        <string>responseIntAccessories</string> 
        </void> 
       </object> 
      </void> 
@@ -197,72 +185,6 @@
        </void> 
        <void property="name"> 
         <string>responseWheels</string> 
-       </void> 
-      </object> 
-     </void> 
-    </void> 
-    <void property="complexTypeMapping"> 
-     <void method="add"> 
-      <object id="ComplexTypeMappingInfo0" class="com.savvion.sbm.adapters.webservice.ComplexTypeMappingInfo"> 
-       <void property="QName"> 
-        <object id="QualifiedName0" class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
-         <void property="localPart"> 
-          <string>AutoEdgeTheFactoryWebServicesFault</string> 
-         </void> 
-         <void property="namesSpace"> 
-          <string>urn:factory-autoedge-com</string> 
-         </void> 
-        </object> 
-       </void> 
-       <void property="javaClassName"> 
-        <string>com.savvion.bo.FaultDetail</string> 
-       </void> 
-       <void property="mode"> 
-        <int>5</int> 
-       </void> 
-      </object> 
-     </void> 
-    </void> 
-    <void property="faults"> 
-     <void method="add"> 
-      <object class="com.savvion.sbm.adapters.webservice.Fault"> 
-       <void property="QName"> 
-        <object idref="QualifiedName0"/> 
-       </void> 
-       <void property="ctmi"> 
-        <object idref="ComplexTypeMappingInfo0"/> 
-       </void> 
-       <void property="idealQName"> 
-        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
-         <void property="localPart"> 
-          <string>FaultDetail</string> 
-         </void> 
-         <void property="namesSpace"> 
-          <string>urn:factory-autoedge-com</string> 
-         </void> 
-        </object> 
-       </void> 
-       <void property="javaClassName"> 
-        <string>com.savvion.bo.FaultDetail</string> 
-       </void> 
-       <void property="label"> 
-        <string>AutoEdgeTheFactoryWebServicesFault</string> 
-       </void> 
-       <void property="name"> 
-        <string>AutoEdgeTheFactoryWebServicesFault</string> 
-       </void> 
-       <void property="uniqueIdentifier"> 
-        <string>AutoEdgeTheFactoryWebServicesFault.0</string> 
-       </void> 
-       <void property="xmlQName"> 
-        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
-         <void property="localPart"> 
-          <string>FaultDetail</string> 
-         </void> 
-         <void property="namesSpace"> 
-          <string>urn:soap-fault:details</string> 
-         </void> 
-        </object> 
        </void> 
       </object> 
      </void> 
@@ -297,6 +219,9 @@
        </void> 
        <void property="uniqueIdentifier"> 
         <string>pcBrand.0_0</string> 
+       </void> 
+       <void property="value"> 
+        <string>scubaroo</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -339,6 +264,9 @@
        </void> 
        <void property="uniqueIdentifier"> 
         <string>piOrderNum.1_0</string> 
+       </void> 
+       <void property="value"> 
+        <string>0</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -383,7 +311,7 @@
         <string>pcUserContextId.2_0</string> 
        </void> 
        <void property="value"> 
-        <string>savvion::test</string> 
+        <string> </string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -397,6 +325,9 @@
        </void> 
       </object> 
      </void> 
+    </void> 
+    <void property="isAllPrimitive"> 
+     <boolean>true</boolean> 
     </void> 
     <void property="isWrapped"> 
      <boolean>true</boolean> 
@@ -434,6 +365,27 @@
        </void> 
        <void property="uniqueIdentifier"> 
         <string>result.3_0</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -477,47 +429,26 @@
        <void property="uniqueIdentifier"> 
         <string>pcDealerNameList.3_1</string> 
        </void> 
-       <void property="xmlQName"> 
-        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
-         <void property="localPart"> 
-          <string>string</string> 
-         </void> 
-         <void property="namesSpace"> 
-          <string>http://www.w3.org/2001/XMLSchema</string> 
-         </void> 
-        </object> 
-       </void> 
-      </object> 
-     </void> 
-     <void method="add"> 
-      <object class="com.savvion.sbm.adapters.webservice.Param"> 
-       <void property="QName"> 
-        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
-         <void property="localPart"> 
-          <string>pcDealerEmailList</string> 
-         </void> 
-         <void property="namesSpace"> 
-          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
-         </void> 
-        </object> 
-       </void> 
-       <void property="isOmittable"> 
-        <boolean>false</boolean> 
-       </void> 
-       <void property="javaClassName"> 
-        <string>java.lang.String</string> 
-       </void> 
-       <void property="label"> 
-        <string>pcDealerEmailList</string> 
-       </void> 
-       <void property="mode"> 
-        <int>2</int> 
-       </void> 
-       <void property="name"> 
-        <string>pcDealerEmailList</string> 
-       </void> 
-       <void property="uniqueIdentifier"> 
-        <string>pcDealerEmailList.3_2</string> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -559,7 +490,28 @@
         <string>pcCompactModels</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcCompactModels.3_3</string> 
+        <string>pcCompactModels.3_2</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -601,7 +553,28 @@
         <string>pcTruckModels</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcTruckModels.3_4</string> 
+        <string>pcTruckModels.3_3</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -643,7 +616,28 @@
         <string>pcSuvModels</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcSuvModels.3_5</string> 
+        <string>pcSuvModels.3_4</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -685,7 +679,28 @@
         <string>pcConvertibleModels</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcConvertibleModels.3_6</string> 
+        <string>pcConvertibleModels.3_5</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -727,7 +742,28 @@
         <string>pcSedanModels</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcSedanModels.3_7</string> 
+        <string>pcSedanModels.3_6</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -769,7 +805,28 @@
         <string>pcInteriorTrimMaterial</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcInteriorTrimMaterial.3_8</string> 
+        <string>pcInteriorTrimMaterial.3_7</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -811,7 +868,28 @@
         <string>pcInteriorTrimColour</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcInteriorTrimColour.3_9</string> 
+        <string>pcInteriorTrimColour.3_8</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -853,7 +931,28 @@
         <string>pcInteriorAccessories</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcInteriorAccessories.3_10</string> 
+        <string>pcInteriorAccessories.3_9</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -895,7 +994,28 @@
         <string>pcExteriorColour</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcExteriorColour.3_11</string> 
+        <string>pcExteriorColour.3_10</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -937,7 +1057,28 @@
         <string>pcMoonroof</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcMoonroof.3_12</string> 
+        <string>pcMoonroof.3_11</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -979,7 +1120,28 @@
         <string>pcWheels</string> 
        </void> 
        <void property="uniqueIdentifier"> 
-        <string>pcWheels.3_13</string> 
+        <string>pcWheels.3_12</string> 
+       </void> 
+       <void property="value"> 
+        <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Body xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;ListBrandDataResponse xmlns=&quot;urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices&quot;&gt;
+        &lt;result/&gt;
+        &lt;pcDealerNameList&gt;[ { &quot;selected&quot;:true,&quot;value&quot;: &quot; none  &quot;,&quot;label&quot;: &quot; Please select a dealer &quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;?&quot;,&quot;label&quot;: &quot;Stiller Motors Inc. (Dealer #1)&quot;}]&lt;/pcDealerNameList&gt;
+        &lt;pcCompactModels/&gt;
+        &lt;pcTruckModels/&gt;
+        &lt;pcSuvModels&gt;Lumberjack&lt;/pcSuvModels&gt;
+        &lt;pcConvertibleModels/&gt;
+        &lt;pcSedanModels/&gt;
+        &lt;pcInteriorTrimMaterial&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cede2efa&quot;,&quot;label&quot;: &quot;Plush-E-Comfort Microfiber&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024cfde2efa&quot;,&quot;label&quot;: &quot;Leather&quot;}]&lt;/pcInteriorTrimMaterial&gt;
+        &lt;pcInteriorTrimColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d0de2efa&quot;,&quot;label&quot;: &quot;Light Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d1de2efa&quot;,&quot;label&quot;: &quot;Dark Slate Gray&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024d2de2efa&quot;,&quot;label&quot;: &quot;Tan&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024df052ffa&quot;,&quot;label&quot;: &quot;Charcoal&quot;}]&lt;/pcInteriorTrimColour&gt;
+        &lt;pcInteriorAccessories&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e0052ffa&quot;,&quot;label&quot;: &quot;Never-lost Navigation System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e1052ffa&quot;,&quot;label&quot;: &quot;Banshee Premium Sound System&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024e2052ffa&quot;,&quot;label&quot;: &quot;Bluetooth&quot;}]&lt;/pcInteriorAccessories&gt;
+        &lt;pcExteriorColour&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ac902efa&quot;,&quot;label&quot;: &quot;White&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ad902efa&quot;,&quot;label&quot;: &quot;Light Steel Blue&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024ae902efa&quot;,&quot;label&quot;: &quot;Charcoal&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024af902efa&quot;,&quot;label&quot;: &quot;Dark Green&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b0902efa&quot;,&quot;label&quot;: &quot;Champagne&quot;}]&lt;/pcExteriorColour&gt;
+        &lt;pcMoonroof&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bfb72efa&quot;,&quot;label&quot;: &quot;No moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c0b72efa&quot;,&quot;label&quot;: &quot;Standard moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c1b72efa&quot;,&quot;label&quot;: &quot;Galaxy-View Moonroof&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024c2b72efa&quot;,&quot;label&quot;: &quot;Sunroof Only&quot;}]&lt;/pcMoonroof&gt;
+        &lt;pcWheels&gt;[{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024b1902efa&quot;,&quot;label&quot;: &quot;Standard 14&quot;&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024bdb72efa&quot;,&quot;label&quot;: &quot;20 inch low-profile alloy&quot;},{&quot;selected&quot;:false,&quot;value&quot;: &quot;fd16dc03-8bcb-9bb8-e011-b024beb72efa&quot;,&quot;label&quot;: &quot;All-terrain off-road&quot;}]&lt;/pcWheels&gt;
+    &lt;/ListBrandDataResponse&gt;
+&lt;/soapenv:Body&gt;
+</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -1055,7 +1217,7 @@
    <string></string> 
   </void> 
   <void property="targetEndpointAddress"> 
-   <string>http://SG-2K3BSE01:9090/wsa/wsa1</string> 
+   <string>http://localhost:8080/wsa/wsa1</string> 
   </void> 
   <void property="targetNameSpace"> 
    <string>urn:factory-autoedge-com</string> 
@@ -1070,7 +1232,7 @@
    <string></string> 
   </void> 
   <void property="wsdlUrl"> 
-   <string>http://localhost:9090/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+   <string>http://localhost:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
   </void> 
   <void property="wsdlUserName"> 
    <string></string> 
@@ -1083,22 +1245,18 @@
         <param name="IN.pcUserContextId.2_0" access="I" label="pcUserContextId" type="java.lang.String" value="" mandatory="true"/>
     </block>
     <block title="Outputs" label="wsadapter:Config.label.outputs" hidden="false">
-        <param name="OUT.responeDealerNames" access="O" label="responeDealerNames" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseDealerEmail" access="O" label="responseDealerEmail" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseCompact" access="O" label="responseCompact" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseTruck" access="O" label="responseTruck" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseConvertible" access="O" label="responseConvertible" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseSUV" access="O" label="responseSUV" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseSedan" access="O" label="responseSedan" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseTrimMaterial" access="O" label="responseTrimMaterial" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseTrimColour" access="O" label="responseTrimColour" type="java.lang.String" value="" mandatory="false"/>
-        <param name="OUT.responseAccessories" access="O" label="responseAccessories" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseDealerList" access="O" label="responseDealerList" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseTruckModels" access="O" label="responseTruckModels" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseCompactModels" access="O" label="responseCompactModels" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseSuvModels" access="O" label="responseSuvModels" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseConvertibleModels" access="O" label="responseConvertibleModels" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseSedanModels" access="O" label="responseSedanModels" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseIntTrimMaterial" access="O" label="responseIntTrimMaterial" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseIntColour" access="O" label="responseIntColour" type="java.lang.String" value="" mandatory="false"/>
+        <param name="OUT.responseIntAccessories" access="O" label="responseIntAccessories" type="java.lang.String" value="" mandatory="false"/>
         <param name="OUT.responseExtColour" access="O" label="responseExtColour" type="java.lang.String" value="" mandatory="false"/>
         <param name="OUT.responseMoonroof" access="O" label="responseMoonroof" type="java.lang.String" value="" mandatory="false"/>
         <param name="OUT.responseWheels" access="O" label="responseWheels" type="java.lang.String" value="" mandatory="false"/>
-    </block>
-    <block title="Faults" label="wsadapter:Config.label.faults" hidden="false">
-        <param name="FAULT.SoapFaultXML" access="O" label="SoapFaultXML" type="java.lang.String" value="" mandatory="true"/>
     </block>
     <block title="Advanced" label="wsadapter:Config.label.advanced" hidden="false">
         <param name="TARGET_EPA" access="I" label="wsadapter:Config.label.targetEndpointAddress" type="java.lang.String" value=""/>

@@ -182,19 +182,19 @@
 <table align="center" cellpadding="0" cellspacing="0" class="(default)" id="tblBrand" width="100%">
             <tbody>
               <tr>
-                <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
+                <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
                   <div align="center" id="">
                     <img border="0" id="imgCheryLogoBw" width="132" height="85" onMouseDown="imgCheryLogo_onMouseDown();" src="images/chery_logo_bw.png">
                     <img border="0" id="imgCheryLogo" width="132" height="85" onMouseDown="imgCheryLogo_onMouseDown();" src="images/chery_logo.png">
                   </div>
                 </td>
-                <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
+                <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
                   <div align="center" id="">
                     <img border="0" id="imgHindaLogoBw" width="125" height="63" onMouseDown="imgHindaLogo_onMouseDown();" src="images/hinda_logo_bw.png">
                     <img border="0" id="imgHindaLogo" width="125" height="63" onMouseDown="imgHindaLogo_onMouseDown();" src="images/hinda_logo.png">
                   </div>
                 </td>
-                <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
+                <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
                   <div align="center" id="">
                     <img border="0" id="imgToyolaLogo" width="103" height="98" onMouseDown="imgToyolaLogo_onMouseDown();" src="images/toyola_logo.png">
                     <img border="0" id="imgToyolaLogoBw" width="103" height="98" onMouseDown="imgToyolaLogo_onMouseDown();" src="images/toyola_logo_bw.png">
@@ -202,19 +202,19 @@
                 </td>
               </tr>
               <tr>
-                <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
+                <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
                   <div align="center" id="">
                     <img border="0" id="imgPotomocLogoBw" width="123" height="110" onMouseDown="imgPotomocLogo_onMouseDown();" src="images/potomoc_logo_bw.png">
                     <img border="0" id="imgPotomocLogo" width="123" height="110" onMouseDown="imgPotomocLogo_onMouseDown();" src="images/potomoc_logo.png">
                   </div>
                 </td>
-                <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
+                <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
                   <div align="center" id="">
                     <img border="0" id="imgFjordLogo" width="168" height="63" onMouseDown="imgFjordLogo_onMouseDown();" src="images/fjord_logo.png">
                     <img border="0" id="imgFjordLogoBw" width="168" height="63" onMouseDown="imgFjordLogo_onMouseDown();" src="images/fjord_logo_bw.png">
                   </div>
                 </td>
-                <td class="(default)" width="25%" rowspan="1" colspan="1" valign="top">
+                <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
                   <div align="center" id="">
                     <img border="0" id="imgScubarooLogo" width="165" height="49" onMouseDown="imgScubarooLogo_onMouseDown();" src="images/scubaroo_logo.png">
                     <img border="0" id="imgScubarooLogoBw" width="165" height="49" onMouseDown="imgScubarooLogo_onMouseDown();" src="images/scubaroo_logo_bw.png">
@@ -306,22 +306,25 @@ function imgFjordLogo_onMouseDown(eventContext) {
 sbm.util.setValue('txtBrand', 'Fjord'); 
 // highlight selected brand, de-emphasise others
 sbm.util.hide('imgCheryLogo');
+sbm.util.show('imgCheryLogoBw');
 sbm.util.hide('imgHindaLogo');
+sbm.util.show('imgHindaLogoBw');
 sbm.util.hide('imgPotomocLogo');
+sbm.util.show('imgPotomocLogoBw');
 sbm.util.hide('imgToyolaLogo');
+sbm.util.show('imgToyolaLogoBw');
+sbm.util.show('imgFjordLogo');
 sbm.util.hide('imgFjordLogoBw');
 sbm.util.hide('imgScubarooLogo');
-sbm.util.show('imgFjordLogo');
-sbm.util.show('imgCheryLogoBw');
-sbm.util.show('imgHindaLogoBw');
-sbm.util.show('imgPotomocLogoBw');
-sbm.util.show('imgToyolaLogoBw');
 sbm.util.show('imgScubarooLogoBw');;
 }
 }
 
 
 function imgTigerCars_onMouseDown(eventContext) {
+{
+;
+}
 }
 
 
@@ -356,7 +359,6 @@ sbm.util.hide('imgToyolaLogoBw');
 sbm.util.hide('imgScubarooLogoBw');
 sbm.util.hide('imgFjordLogoBw');;
 }
-sbm.util.hide("txtBrand");
 if (sbm.utils.compareConstant("txtBrand", "==", "Chery"))
 {
 imgCheryLogo_onMouseDown();;
@@ -381,6 +383,7 @@ if (sbm.utils.compareConstant("txtBrand", "==", "Scubaroo"))
 {
 imgScubarooLogo_onMouseDown();;
 }
+sbm.util.hide("txtBrand");
 }
 
 

@@ -1,8 +1,8 @@
-#Sun Dec 12 15:20:42 EST 2010
+#Tue Mar 15 13:47:43 EDT 2011
 adapter-class=com.savvion.sbm.adapters.webservice.WebServiceAdapter
 map-configurator=com.savvion.sbm.adapters.framework.GroupMapConfigurator
 adapter-configurator=com.savvion.sbm.adapters.webservice.WebServiceAdapterConfiguratorDialog
-AdapterName=AETF_BuildStep
+AdapterName=PerformBuldVehicleWorkstep
 log-level=10
 runtime-mapper=com.savvion.sbm.adapters.framework.GroupMapper
 AdapterCategory=WebServiceAdapters

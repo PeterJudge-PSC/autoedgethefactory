@@ -13,15 +13,15 @@
   <jsp:useBean id="bean" class="com.savvion.BizSolo.beans.Bean" scope="session"></jsp:useBean>
   <jsp:useBean id="factoryBean" class="com.savvion.BizSolo.beans.EPFactoryBean" scope="session"></jsp:useBean>
   <jsp:useBean id="bizSite" class="com.savvion.sbm.bpmportal.bizsite.api.BizSiteBean" scope="session"></jsp:useBean>
-<%! String _PageName = "Customer Handoff"; %>
+<%! String _PageName = "CustomerHandoff"; %>
 <%! String __webAppName = "CustomerOrderVehicle"; %>
 <% pageContext.setAttribute( "contextPath", request.getContextPath()+"/"); %>
 <bizsolo:if test='<%=_PageName.equals(request.getParameter("_PageName")) %>'>
-    <bizsolo:setDS name="VehicleBrand,VehicleModel,DeliveryPrepComplete,ProofOfInsurance,TitleTransfered"></bizsolo:setDS>
+    <bizsolo:setDS name="CustomerName,CustomerOrderDate,OrderNum,VehicleBrand,ModelName,DealerName,DeliveryPrepComplete,ProofOfInsurance,TitleTransfered"></bizsolo:setDS>
     <bizsolo:choose>
 <bizsolo:when test='<%=request.getParameter("bizsite_reassignTask") !=null %>'>
       <bizsolo:initDS name="performer" param="bizsite_assigneeName" hexval="FALSE"></bizsolo:initDS>
-      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKReassignWI" perfMethod="commit" mode="BizSite" dsi="VehicleModel,VehicleBrand" dso="TitleTransfered,ProofOfInsurance,DeliveryPrepComplete"></bizsolo:executeAction>
+      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKReassignWI" perfMethod="commit" mode="BizSite" dsi="DealerName,ModelName,VehicleBrand,OrderNum,CustomerOrderDate,CustomerName" dso="TitleTransfered,ProofOfInsurance,DeliveryPrepComplete"></bizsolo:executeAction>
 </bizsolo:when>
 <bizsolo:when test='<%=request.getParameter("bizsite_saveTask") !=null %>'>
       <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKUpdateDS" perfMethod="commit" mode="BizSite" dsi="TitleTransfered,ProofOfInsurance,DeliveryPrepComplete"></bizsolo:executeAction>
@@ -38,15 +38,19 @@
 </bizsolo:if>
 <bizsolo:if test='<%= ! _PageName.equals(request.getParameter("_PageName")) %>'>
     <bizsolo:initApp mode="BizSite" name="CustomerOrderVehicle"></bizsolo:initApp>
+    <bizsolo:initDS name="CustomerName" type="STRING"></bizsolo:initDS>
+    <bizsolo:initDS name="CustomerOrderDate" type="DATETIME"></bizsolo:initDS>
+    <bizsolo:initDS name="OrderNum" type="LONG"></bizsolo:initDS>
     <bizsolo:initDS name="VehicleBrand" type="STRING"></bizsolo:initDS>
-    <bizsolo:initDS name="VehicleModel" type="STRING"></bizsolo:initDS>
+    <bizsolo:initDS name="ModelName" type="STRING"></bizsolo:initDS>
+    <bizsolo:initDS name="DealerName" type="STRING"></bizsolo:initDS>
     <bizsolo:initDS name="DeliveryPrepComplete" type="BOOLEAN"></bizsolo:initDS>
     <bizsolo:initDS name="ProofOfInsurance" type="BOOLEAN"></bizsolo:initDS>
     <bizsolo:initDS name="TitleTransfered" type="BOOLEAN"></bizsolo:initDS>
-    <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKGetDS" perfMethod="commit" mode="BizSite" dso="TitleTransfered,ProofOfInsurance,DeliveryPrepComplete,VehicleModel,VehicleBrand"></bizsolo:executeAction>
+    <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKGetDS" perfMethod="commit" mode="BizSite" dso="TitleTransfered,ProofOfInsurance,DeliveryPrepComplete,DealerName,ModelName,VehicleBrand,OrderNum,CustomerOrderDate,CustomerName"></bizsolo:executeAction>
 </bizsolo:if>
 
-<title>Customer Handoff</title>
+<title>CustomerHandoff</title>
 <%boolean isStandaloneBS = (bizManage == null || bizManage.getName() == null || "".equals(bizManage.getName()) || bizManage.getLocale() == null);Locale myLocale = (!isStandaloneBS) ? bizManage.getLocale() : request.getLocale();%>
 <!-- Javascript -->
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/initControls.js"></script>
@@ -186,7 +190,7 @@
 <% String activityName = bean.getPropString("workitemName"); %>
 <div id="resultDiv">
 <div style='visibility:hidden;display:none' class='vBoxClass' name='errors' id='errors'></div>
-<input name="_PageName" type="hidden" value="Customer Handoff">
+<input name="_PageName" type="hidden" value="CustomerHandoff">
 <%if(bean.getPropString("workitemName") != null) {%><input name="_WorkitemName" type="hidden" value="<%= URLHexCoder.encode(bean.getPropString("workitemName")) %>"/><input name="_WorkitemId" type="hidden" value="<%= bean.getPropString("workitemId") %>"/><%}%>
 <input name="bizsite_pagetype" type="hidden" value="activity">
 <input name="_ProcessTemplateName" type="hidden" value='<%=bean.getPropString("ptName")%>'>
@@ -206,7 +210,7 @@
 </table>
 <table class="ApSegDataTbl" width="100%" cellspacing="1" cellpadding="4" border="0">
 <tr>
-<td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_INSTRUCTION_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData" colspan="5"><sbm:message key="workstep.Customer Handoff.instruction" escapeLine="true"></sbm:message></td>
+<td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_INSTRUCTION_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData" colspan="5"><sbm:message key="workstep.CustomerHandoff.instruction" escapeLine="true"></sbm:message></td>
 </tr>
 <tr>
 <td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_PRIORITY_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData"><bizsolo:getDS name="bizsite_priority"></bizsolo:getDS></td>
@@ -219,52 +223,98 @@
 </tr>
 </table>
 
-    <br clear="all">
-<font color="#000000">
-      <Label class="ApSegDataslotLabel" for="textField3"><sbm:message key="dataslot.Customer.label"></sbm:message></Label>
-    </font>
-    <input class="ApInptTxt" type="text" id="textField3" name="Customer" size="20" maxlength="256" disabled value="<bizsolo:value name='Customer'/>">
-    <div style="display:none" id="textField3Error"><div><font color="red"><span class="error" id="textField3ErrorMsg"></span><a href="#" onclick="textField3ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
-    <br clear="all">
-<font color="#000000">
-      <Label class="ApSegDataslotLabel" for="textField1"><sbm:message key="dataslot.Customer Handoff.VehicleBrand.label"></sbm:message></Label>
-    </font>
-    <input class="ApInptTxt" type="text" id="textField1" name="VehicleBrand" size="20" maxlength="256" disabled value="<bizsolo:value name='VehicleBrand'/>">
+    <table align="left" cellpadding="0" cellspacing="0" class="ApSegDataTbl" id="table1" width="100%">
+      <tbody>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="textField1"><sbm:message key="dataslot.CustomerName.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input class="ApInptTxt" type="text" id="textField1" name="CustomerName" size="60" maxlength="256" disabled value="<bizsolo:value name='CustomerName'/>">
     <div style="display:none" id="textField1Error"><div><font color="red"><span class="error" id="textField1ErrorMsg"></span><a href="#" onclick="textField1ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
-    <br clear="all">
-<font color="#000000">
-      <Label class="ApSegDataslotLabel" for="textField2"><sbm:message key="dataslot.Customer Handoff.VehicleModel.label"></sbm:message></Label>
-    </font>
-    <input class="ApInptTxt" type="text" id="textField2" name="VehicleModel" size="20" maxlength="256" disabled value="<bizsolo:value name='VehicleModel'/>">
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="CustomerOrderDate"><sbm:message key="dataslot.CustomerOrderDate.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <div style="display: inline;" id="dateTime1"><bizsolo:getDS type="date" name="CustomerOrderDate" wsName="CustomerHandoff" writePerm="false" size="20"></bizsolo:getDS></div>
+
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="textField2"><sbm:message key="dataslot.OrderNum.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input class="ApInptTxt" type="text" id="textField2" name="OrderNum" size="30" maxlength="256" disabled value="<bizsolo:value name='OrderNum'/>" alt="number|0|bok">
     <div style="display:none" id="textField2Error"><div><font color="red"><span class="error" id="textField2ErrorMsg"></span><a href="#" onclick="textField2ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
-    <br clear="all">
-<br clear="all">
-<input type="checkbox" value="true" class="ApInptChkBox" name="DeliveryPrepComplete" id="checkBox1">
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="textField3"><sbm:message key="dataslot.VehicleBrand.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input class="ApInptTxt" type="text" id="textField3" name="VehicleBrand" size="20" maxlength="256" disabled value="<bizsolo:value name='VehicleBrand'/>">
+    <div style="display:none" id="textField3Error"><div><font color="red"><span class="error" id="textField3ErrorMsg"></span><a href="#" onclick="textField3ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="textField4"><sbm:message key="dataslot.VehicleModel.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input class="ApInptTxt" type="text" id="textField4" name="ModelName" size="20" maxlength="256" disabled value="<bizsolo:value name='ModelName'/>">
+    <div style="display:none" id="textField4Error"><div><font color="red"><span class="error" id="textField4ErrorMsg"></span><a href="#" onclick="textField4ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="textField5"><sbm:message key="dataslot.DealerName.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input class="ApInptTxt" type="text" id="textField5" name="DealerName" size="60" maxlength="256" disabled value="<bizsolo:value name='DealerName'/>">
+    <div style="display:none" id="textField5Error"><div><font color="red"><span class="error" id="textField5ErrorMsg"></span><a href="#" onclick="textField5ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="checkBox1"><sbm:message key="dataslot.DeliveryPrepComplete.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input type="checkbox" value="true" class="ApInptChkBox" name="DeliveryPrepComplete" id="checkBox1">
 <script>addValue("DeliveryPrepComplete", '<bizsolo:value name="DeliveryPrepComplete"></bizsolo:value>');</script>
       
 
-    <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="checkBox1"><sbm:message key="dataslot.DeliveryPrepComplete.label"></sbm:message></Label>
-    </font>
-    <br clear="all">
-<input type="checkbox" value="true" class="ApInptChkBox" name="ProofOfInsurance" id="checkBox4">
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="checkBox2"><sbm:message key="dataslot.ProofOfInsurance.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input type="checkbox" value="true" class="ApInptChkBox" name="ProofOfInsurance" id="checkBox2">
 <script>addValue("ProofOfInsurance", '<bizsolo:value name="ProofOfInsurance"></bizsolo:value>');</script>
       
 
-    <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="checkBox4"><sbm:message key="dataslot.ProofOfInsurance.label"></sbm:message></Label>
-    </font>
-    <br clear="all">
-<input type="checkbox" value="true" class="ApInptChkBox" name="TitleTransfered" id="checkBox5">
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="checkBox3"><sbm:message key="dataslot.TitleTransfered.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input type="checkbox" value="true" class="ApInptChkBox" name="TitleTransfered" id="checkBox3">
 <script>addValue("TitleTransfered", '<bizsolo:value name="TitleTransfered"></bizsolo:value>');</script>
       
 
-    <font color="#000000">
-      <Label class="ApSegDataslotLabel" for="checkBox5"><sbm:message key="dataslot.TitleTransfered.label"></sbm:message></Label>
-    </font>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <br clear="all">
-<br clear="all">
-<br clear="all">
 
 
 </div>

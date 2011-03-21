@@ -1,22 +1,23 @@
 <map version="1.3">
   <param name="PLUGIN.1.NAME" type="java.lang.String" value="Velocity Template"/>
-  <param name="PLUGIN.1.IN.dealerName" type="java.lang.Object" value="@DealerName"/>
   <param name="PROPERTY.allow.null.bcc" type="java.lang.String" value="true"/>
   <param name="PLUGIN.1.MIME" type="java.lang.String" value="text/plain"/>
-  <param name="PLUGIN.1.IN.vehModel" type="java.lang.Object" value="@VehicleModel"/>
+  <param name="PLUGIN.1.IN.vehModel" type="java.lang.Object" value="@ModelName"/>
   <param name="AUTH_PASSWORD" type="java.lang.String" value=""/>
   <param name="CC" type="java.lang.Object" value=""/>
-  <param name="PLUGIN.1.CONF" type="java.lang.String" value="user%2COrderNum%2CrejectionReason%2Cbrand%2CvehModel%2Cvehextcolor%2Cvehintcolor%2CdealerName%0AHello+%24%7Buser%7D%2C%0A%0AYour+order%2C+%24%7BOrderNum%7D+Needs+to+be+reviewed.%0A%0AReason%3A+%24%7BrejectionReason%7D%0A%0AHere+is+your+Vehicle+order+summary%3A%0ABrand%3A+%24%7Bbrand%7D%0AModel%3A+%24%7BvehModel%7D%0A%0AExterior+Color%3A+%24%7Bvehextcolor%7D%0AInterior+color%3A+%24%7Bvehintcolor%7D%0A%0ARegards%2C%0A%24%7BdealerName%7D%0A"/>
-  <param name="PLUGIN.1.IN.user" type="java.lang.Object" value="@userid"/>
-  <param name="PLUGIN.1.IN.OrderNum" type="java.lang.Object" value="@OrderNum"/>
+  <param name="PLUGIN.1.IN.customername" type="java.lang.Object" value="@CustomerName"/>
+  <param name="PLUGIN.1.CONF" type="java.lang.String" value="customername%2Cdealeremail%2Cdealerphone%2CrejectionReason%2CorderNum%2Cbrand%2CvehModel%2Cdealername%0AHello+%24%7Bcustomername%7D%2C%0A%0AUnfortunately%2C+we+have+found+a+problem+with+your+order.+Please+contact+us+via+email+at+%24%7Bdealeremail%7D+or+call+us+at+%24%7Bdealerphone%7D%2C+or+submit+%0Aa+new+order+via+the+website.%0AReason%3A%0A++++%24%7BrejectionReason%7D%0A%0AHere+is+your+current+order+summary%3A%0A++++Order+number%3A+%24%7BorderNum%7D+%0A++++Brand%3A+%24%7Bbrand%7D%0A++++Model%3A+%24%7BvehModel%7D%0A%0A%0ARegards%2C%0A%24%7Bdealername%7D%0A"/>
+  <param name="PLUGIN.1.IN.orderNum" type="java.lang.Object" value="@OrderNum"/>
   <param name="PLUGIN.1.IN.brand" type="java.lang.Object" value="@VehicleBrand"/>
-  <param name="SENDER" type="java.lang.String" value="@DealerEmail"/>
-  <param name="PLUGIN.1.IN.vehextcolor" type="java.lang.Object" value="@ExteriorColour"/>
-  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="pubsmtp.progress.com"/>
-  <param name="PLUGIN.1.IN.vehintcolor" type="java.lang.Object" value="@InteriorTrimColour"/>
+  <param name="PLUGIN.1.IN.dealerphone" type="java.lang.Object" value="@DealerPhoneNumber"/>
+  <param name="SENDER" type="java.lang.String" value="@DealerSalesEmail"/>
+  <param name="PROPERTY.mail.smtp.port" type="java.lang.String" value="25"/>
+  <param name="PROPERTY.mail.smtp.host" type="java.lang.String" value="localhost"/>
+  <param name="PLUGIN.1.IN.dealername" type="java.lang.Object" value="@DealerName"/>
   <param name="BCC" type="java.lang.Object" value=""/>
-  <param name="SUBJECT" type="java.lang.Object" value="Your vehicle order needs to be reviewed"/>
+  <param name="SUBJECT" type="java.lang.Object" value="Order feedback"/>
   <param name="AUTH_USER" type="java.lang.String" value=""/>
+  <param name="PLUGIN.1.IN.dealeremail" type="java.lang.Object" value="@DealerSalesEmail"/>
   <param name="RECIPIENTS" type="java.lang.Object" value="@CustomerEmail"/>
   <param name="PROPERTY.mail.transport.protocol" type="java.lang.String" value="smtp"/>
   <param name="PLUGIN.1.IN.rejectionReason" type="java.lang.Object" value="@OrderRejectionReason"/>

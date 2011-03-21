@@ -1,16 +1,14 @@
 <map version="1.3">
-  <param name="VehicleModelsSUV" type="java.lang.String" value="@OUT.responseSUV"/>
+  <param name="VehicleModelsPremium" type="java.util.Vector" value="@OUT.responseConvertibleModels"/>
   <param name="ExteriorWheels" type="java.lang.String" value="@OUT.responseWheels"/>
-  <param name="InteriorTrimColour" type="java.lang.String" value="@OUT.responseTrimColour"/>
-  <param name="VehicleModelsPremium" type="java.lang.String" value="@OUT.responseConvertible"/>
-  <param name="VehicleModelsTruck" type="java.lang.String" value="@OUT.responseTruck"/>
-  <param name="DealerNameList" type="java.lang.String" value="@OUT.responeDealerNames"/>
-  <param name="error" type="java.lang.String" value="@FAULT.SoapFaultXML"/>
-  <param name="InteriorAccessories" type="java.lang.String" value="@OUT.responseAccessories"/>
-  <param name="DealerEmailList" type="java.lang.String" value="@OUT.responseDealerEmail"/>
+  <param name="VehicleModelsCompact" type="java.util.Vector" value="@OUT.responseCompactModels"/>
+  <param name="InteriorSeatMaterial" type="java.lang.String" value="@OUT.responseIntTrimMaterial"/>
+  <param name="InteriorTrimColour" type="java.lang.String" value="@OUT.responseIntColour"/>
+  <param name="VehicleModelsSUV" type="java.util.Vector" value="@OUT.responseSuvModels"/>
+  <param name="VehicleModelsSedan" type="java.util.Vector" value="@OUT.responseSedanModels"/>
   <param name="ExteriorColour" type="java.lang.String" value="@OUT.responseExtColour"/>
-  <param name="VehicleModelsCompact" type="java.lang.String" value="@OUT.responseCompact"/>
   <param name="ExteriorMoonroof" type="java.lang.String" value="@OUT.responseMoonroof"/>
-  <param name="VehicleModelsSedan" type="java.lang.String" value="@OUT.responseSedan"/>
-  <param name="InteriorSeatMaterial" type="java.lang.String" value="@OUT.responseTrimMaterial"/>
+  <param name="DealerList" type="java.util.Vector" value="@OUT.responseDealerList"/>
+  <param name="InteriorAccessories" type="java.lang.String" value="@OUT.responseIntAccessories"/>
+  <param name="VehicleModelsTruck" type="java.util.Vector" value="@OUT.responseTruckModels"/>
 </map>

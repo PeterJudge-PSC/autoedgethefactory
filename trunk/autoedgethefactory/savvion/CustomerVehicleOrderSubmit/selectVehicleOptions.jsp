@@ -147,6 +147,7 @@
 //-->
 </script>
 
+<link rel="stylesheet" type="text/css" href="css/www.csszengarden.com zengarden-sample.css">
 <bizsolo:link rel="stylesheet"></bizsolo:link>
 
 <sbm:setLocale value="<%= bizManage.getLocale() %>"></sbm:setLocale>
@@ -198,10 +199,8 @@
                     <td class="(default)" width="33%" rowspan="1" colspan="1" valign="top">
                       <fieldset name="fsAccessories">
                         <legend><sbm:message key="SelectVehicleOptions.fieldset.fsAccessories.label"></sbm:message></legend>
-                        <div align="center" id="">
-                          <sfe:widget name="sbm.list" id="listAccessories" args="{'size':5, 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion List widget.', 'tabOrder':'0'}" />
+                        <sfe:widget name="sbm.checkbox" id="cbInteriorAccessories" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
 
-                        </div>
                       </fieldset>
                     </td>
                   </tr>
@@ -267,9 +266,7 @@
 </table>
 </div>
 
-      <br clear="all">
-<br clear="all">
-</div>
+    </div>
   
                     <div id="resizablepanel" style="display:none">
                         <div class="hd">Alert Dialog</div>
@@ -301,12 +298,12 @@ function userValidationJavascipt() {
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
 <!--
-var allWidgets = [{widget:'rsSeatMaterial', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedSeatMaterial', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsInteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedTrimColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'listAccessories', bound:'true', editable:'true', type:'sbm.list', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedAccessories', dataSlotType:'LIST'}, dsType:'STRING', service:'false'},
-{widget:'rsExteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExtColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsWheels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedWheels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsMoonroof', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedMoonroof', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
+var allWidgets = [{widget:'rsSeatMaterial', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsInteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'cbInteriorAccessories', bound:'true', editable:'true', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'rsExteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsWheels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsMoonroof', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
 ];
 var businessObjects = [];
 var formWidgetHandler;

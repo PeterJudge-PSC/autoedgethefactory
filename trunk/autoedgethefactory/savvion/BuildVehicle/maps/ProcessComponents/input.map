@@ -35,7 +35,7 @@
 &lt;/soapenv:Body&gt;
   &lt;/template&gt;
   &lt;fields&gt;
-    &lt;field name="responseStatus" type="String" xpath="/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus/text()"/&gt;
+    &lt;field name="responseBuildStatus" type="String" xpath="/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus/text()"/&gt;
   &lt;/fields&gt;
   &lt;namespaceaware&gt;true&lt;/namespaceaware&gt;
   &lt;namespacemap&gt;
@@ -49,10 +49,10 @@
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseStatus</string> 
+        <string>responseBuildStatus</string> 
        </void> 
        <void property="name"> 
-        <string>responseStatus</string> 
+        <string>responseBuildStatus</string> 
        </void> 
       </object> 
      </void> 
@@ -281,7 +281,7 @@
         <string>pcUserContextId.3_0</string> 
        </void> 
        <void property="value"> 
-        <string>Savvion::Test</string> 
+        <string>savvion::test</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -449,7 +449,7 @@
    <string/> 
   </void> 
   <void property="targetEndpointAddress"> 
-   <string>http://SG-2K3BSE01:9090/wsa/wsa1</string> 
+   <string>http://localhost:8080/wsa/wsa1</string> 
   </void> 
   <void property="targetNameSpace"> 
    <string>urn:factory-autoedge-com</string> 
@@ -464,7 +464,7 @@
    <string/> 
   </void> 
   <void property="wsdlUrl"> 
-   <string>http://localhost:9090/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+   <string>http://localhost:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
   </void> 
   <void property="wsdlUserName"> 
    <string/> 

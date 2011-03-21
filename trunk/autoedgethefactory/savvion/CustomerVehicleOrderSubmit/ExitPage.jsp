@@ -164,14 +164,13 @@
 
     <div align="center" id="">
       <img border="0" id="imgLogo" width="400" height="69" src="images/aetf_logo.png">
-      <font color="#000000">'</font>
       <br clear="all">
 <br clear="all">
 <fieldset name="fieldSet1">
         <legend><sbm:message key="ExitPage.fieldset.fieldSet1.label"></sbm:message></legend>
         <div align="center" id="">
           <font color="#339966" face="Segoe UI" size="4">
-            <i>Thank you for your order. A dealer representative will contact you shortly with information on how to complete your order.</i>
+            <i>Thank you for your order. A dealer representative will contact you shortly with more information on how to complete your order.</i>
           </font>
         </div>
       </fieldset>

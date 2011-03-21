@@ -162,15 +162,12 @@
 <input name="_yahoo_flow_button" type="hidden" value=''>
 <!-- Content --> 
 
-    
-      
-    
     <div align="center" id="">
       <img border="0" id="imgAETFLogo" width="400" height="69" src="images/aetf_logo.png">
     </div>
     <div align="left" id="">
-      <fieldset name="fsReview">
-        <legend><sbm:message key="ReviewSelection.fieldset.fsReview.label"></sbm:message></legend>
+      <fieldset name="fsReview1">
+        <legend><sbm:message key="ReviewSelection.fieldset.fsReview1.label"></sbm:message></legend>
         <div align="center" id="">
           <font color="#008000" face="Segoe UI" size="4">
             <i>Please review your selections carefully. If you are satisfied with them, select a dealer, and complete the order. Otherwise use your browser's back button to change your selections.</i>
@@ -188,7 +185,7 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.textfield" id="txtSelectedBrand" args="{'type':'Label', 'size':32, 'maxlength':50, 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.textfield" id="TextField3" args="{'type':'Label', 'size':32, 'maxlength':50, 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.'}" />
 
                 </td>
               </tr>
@@ -200,7 +197,7 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.combobox" id="cbSelectedModel" args="{'size':20, 'readonly':true, 'disabled':true, 'cascade':false, 'level':0, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Combobox widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.textfield" id="TextField1" args="{'type':'Label', 'size':32, 'maxlength':50, 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -212,7 +209,7 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="cbExtColour" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.checkbox" id="cbExtColour" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
 
                 </td>
               </tr>
@@ -224,7 +221,7 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="cbSelectedWheels" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.checkbox" id="Checkbox1" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
 
                 </td>
               </tr>
@@ -236,7 +233,7 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="cbSelectedMoonroof" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.checkbox" id="Checkbox2" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
 
                 </td>
               </tr>
@@ -248,7 +245,7 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="cbSelectedSeatMaterial" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.checkbox" id="Checkbox3" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
 
                 </td>
               </tr>
@@ -260,7 +257,7 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="cbSelectedTrim" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.checkbox" id="Checkbox4" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
 
                 </td>
               </tr>
@@ -272,30 +269,22 @@
                 </td>
                 <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="cbSelectedAccessories" args="{'layout':'Vertical', 'readonly':false, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
+                  <sfe:widget name="sbm.checkbox" id="Checkbox5" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
 
                 </td>
               </tr>
             </tbody>
           </table>
-          <br clear="all">
-</div>
-      </fieldset>
-    </div>
-    <div align="center" id="">
-      <fieldset name="fsComplete">
-        <legend><sbm:message key="ReviewSelection.fieldset.fsComplete.label"></sbm:message></legend>
+        </div>
         <div align="center" id="">
-          <font color="#008000" face="Segoe UI" size="4">
+          <font color="#008000" face="Segoe UI" size="3">
             <i>Please select a dealer to arrange for the payment and collection of your new car, and confirm your email address in case we need to contact you.</i>
           </font>
           <br clear="all">
-<br clear="all">
-<font color="#808080" face="Segoe UI" size="3">Select your dealer </font>
-          <sfe:widget name="sbm.combobox" id="cbDealer" args="{'size':5, 'readonly':false, 'disabled':false, 'cascade':true, 'level':0, 'validationType':'none', 'validation':{}, 'toolTip':'', 'tabOrder':'0'}" />
+<sfe:widget name="sbm.combobox" id="cbDealer" args="{'size':150, 'readonly':false, 'disabled':false, 'cascade':false, 'level':0, 'validationType':'none', 'validation':{}, 'toolTip':'', 'tabOrder':'0'}" />
 
-          <br clear="all">
-</div>
+        </div>
+        <div align="left" id=""></div>
       </fieldset>
       
 
@@ -309,7 +298,7 @@
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td class="ApBtnSpace">
-<input type="submit" name="SB_Name" id="btn-complete" class="ApScrnButton" onMouseOver="this.className='ApScrnButtonHover';" onMouseOut="this.className='ApScrnButton';" onClick="clickedButton=this.name;this.onsubmit = new Function('return false');" value="<bizsolo:getLabel name='linkCreateOrder' type='LINK'/>"></td>
+<input type="submit" name="SB_Name" id="btn-complete" class="ApScrnButton" onMouseOver="this.className='ApScrnButtonHover';" onMouseOut="this.className='ApScrnButton';" onClick="clickedButton=this.name;this.onsubmit = new Function('return false');" value="<bizsolo:getLabel name='linkCustomerLogin' type='LINK'/>"></td>
 <td class="ApBtnSpace">
 <input type="button" name="bizsite_reset" id="btn-reset" class="ApScrnButton" onMouseOver="this.className='ApScrnButtonHover';" onMouseOut="this.className='ApScrnButton';" onClick="sbm.utils.reset()" value="<bizsolo:getLabel name='RESET_LABEL' type='RESOURCE'/>"></td>
 </tr>
@@ -319,8 +308,8 @@
 </table>
 </div>
 
-    </div>
-    <div align="left" id=""></div>
+      <br clear="all">
+</div>
   
                     <div id="resizablepanel" style="display:none">
                         <div class="hd">Alert Dialog</div>
@@ -349,7 +338,16 @@ function userValidationJavascipt() {
 <script language="JavaScript">
 <!--
     
-function Form_onLoad(eventContext) {
+function cbDealer_onChange(eventContext) {
+{
+var dlrId = sbm.util.getValue('cbDealer');
+sbm.util.setValue('txtDealerId', dlrId);
+switch (dlrId) {
+   case "dealer01": sbm.util.setValue('txtDealerEmail', 'info@stillerinc.com.aetf'); break;
+   case "dealer02": sbm.util.setValue('txtDealerEmail', 'info@rothcars.com.aetf'); break;
+   case "dealer03": sbm.util.setValue('txtDealerEmail', 'sales@merriweatherfieldsnowe.com.aetf'); break;   
+};
+}
 }
 
 
@@ -358,22 +356,21 @@ function Form_onLoad(eventContext) {
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
 <!--
-var allWidgets = [{widget:'txtSelectedBrand', bound:'true', editable:'false', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleBrand', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedVehicleBrand', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'cbSelectedModel', bound:'true', editable:'false', type:'sbm.combobox', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleModel', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbExtColour', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'SelectedExtColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbSelectedWheels', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'SelectedWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbSelectedMoonroof', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'SelectedMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbSelectedSeatMaterial', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'SelectedSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbSelectedTrim', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'SelectedTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbSelectedAccessories', bound:'true', editable:'true', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbDealer', bound:'true', editable:'true', type:'sbm.combobox', source: {type:'DATASLOT', dataSlotName:'DealerName', dataSlotType:''}, target:{type:'DATASLOT', dataSlotName:'DealerCode', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
+var allWidgets = [{widget:'TextField3', bound:'true', editable:'false', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleBrand', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedVehicleBrand', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'TextField1', bound:'true', editable:'false', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleModel', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ModelName', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'cbExtColour', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'Checkbox1', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'Checkbox2', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'Checkbox3', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'Checkbox4', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'Checkbox5', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
+{widget:'cbDealer', bound:'true', editable:'true', type:'sbm.combobox', source: {type:'DATASLOT', dataSlotName:'DealerList', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'DealerCode', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
 ];
 var businessObjects = [];
 var formWidgetHandler;
 sbm.utils.onDOMReady = function() {
 YAHOO.util.Event.onDOMReady(function(){
-formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:');CustomerVehicleOrderSubmit',adapletCache:{'user':'' }});
-Form_onLoad();
+formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:'CustomerVehicleOrderSubmit',adapletCache:{'user':''}});
  });
  }
 Ext.onReady(function(){
