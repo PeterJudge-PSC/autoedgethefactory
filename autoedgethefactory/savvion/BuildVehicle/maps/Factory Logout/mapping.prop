@@ -1,8 +1,8 @@
-#Wed Feb 16 08:52:24 EST 2011
+#Tue Mar 15 13:46:15 EDT 2011
 adapter-class=com.savvion.sbm.adapters.webservice.WebServiceAdapter
 map-configurator=com.savvion.sbm.adapters.framework.GroupMapConfigurator
 adapter-configurator=com.savvion.sbm.adapters.webservice.WebServiceAdapterConfiguratorDialog
-AdapterName=GenericWebServiceAdapter
+AdapterName=ApplicationUserLogout
 log-level=10
 runtime-mapper=com.savvion.sbm.adapters.framework.GroupMapper
 AdapterCategory=WebServiceAdapters

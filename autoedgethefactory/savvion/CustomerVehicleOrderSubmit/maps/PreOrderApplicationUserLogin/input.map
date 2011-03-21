@@ -575,7 +575,7 @@
    <string/> 
   </void> 
   <void property="targetEndpointAddress"> 
-   <string>http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1</string> 
+   <string>http://localhost:8080/wsa/wsa1</string> 
   </void> 
   <void property="targetNameSpace"> 
    <string>urn:factory-autoedge-com</string> 
@@ -590,7 +590,7 @@
    <string/> 
   </void> 
   <void property="wsdlUrl"> 
-   <string>http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+   <string>http://localhost:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
   </void> 
   <void property="wsdlUserName"> 
    <string/> 

@@ -26,11 +26,21 @@
     <void property="XMLPluginConfig"> 
      <string>&lt;config&gt;
   &lt;version&gt;2&lt;/version&gt;
+  &lt;template&gt;
+&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;&#13;
+    &lt;PerformWorkstepResponse xmlns="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices"&gt;&#13;
+        &lt;result/&gt;&#13;
+        &lt;pcBuildStatus&gt;pcBuildStatus&lt;/pcBuildStatus&gt;&#13;
+    &lt;/PerformWorkstepResponse&gt;&#13;
+&lt;/soapenv:Body&gt;
+  &lt;/template&gt;
   &lt;fields&gt;
-    &lt;field name="responseStatus" type="String" xpath="/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus/text()"/&gt;
+    &lt;field name="responseBuildStatus" type="String" xpath="/soapenv:Body/ns1:PerformWorkstepResponse/ns1:pcBuildStatus/text()"/&gt;
   &lt;/fields&gt;
   &lt;namespaceaware&gt;true&lt;/namespaceaware&gt;
   &lt;namespacemap&gt;
+    &lt;map name="ns1" value="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices"/&gt;
+    &lt;map name="soapenv" value="http://schemas.xmlsoap.org/soap/envelope/"/&gt;
   &lt;/namespacemap&gt;
 &lt;/config&gt;
 </string> 
@@ -39,10 +49,10 @@
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseStatus</string> 
+        <string>responseBuildStatus</string> 
        </void> 
        <void property="name"> 
-        <string>responseStatus</string> 
+        <string>responseBuildStatus</string> 
        </void> 
       </object> 
      </void> 
@@ -270,6 +280,9 @@
        <void property="uniqueIdentifier"> 
         <string>pcUserContextId.3_0</string> 
        </void> 
+       <void property="value"> 
+        <string>savvion::test</string> 
+       </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
          <void property="localPart"> 
@@ -436,7 +449,7 @@
    <string/> 
   </void> 
   <void property="targetEndpointAddress"> 
-   <string>http://SG-2K3BSE01:9090/wsa/wsa1</string> 
+   <string>http://localhost:8080/wsa/wsa1</string> 
   </void> 
   <void property="targetNameSpace"> 
    <string>urn:factory-autoedge-com</string> 
@@ -451,7 +464,7 @@
    <string/> 
   </void> 
   <void property="wsdlUrl"> 
-   <string>http://localhost:9090/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+   <string>http://localhost:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
   </void> 
   <void property="wsdlUserName"> 
    <string/> 

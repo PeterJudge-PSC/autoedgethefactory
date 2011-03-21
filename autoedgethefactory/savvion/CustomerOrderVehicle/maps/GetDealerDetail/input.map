@@ -25,25 +25,27 @@
      <string>&lt;config&gt;
   &lt;version&gt;2&lt;/version&gt;
   &lt;template&gt;
-&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-    &lt;GetDealerDetailResponse xmlns="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices"&gt;
-        &lt;result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/&gt;
-        &lt;pcDealerId&gt;98d78dfd-8be1-4894-e011-5129fb7fc485&lt;/pcDealerId&gt;
-        &lt;pcName&gt;Merriweather, Field &amp;amp; Snowe (Dealer #3)&lt;/pcName&gt;
-        &lt;pcSalesEmail&gt;sales@merriweatherfieldsnowe.com&lt;/pcSalesEmail&gt;
-        &lt;pcInfoEmail/&gt;
-        &lt;pcStreetAddress&gt;27 Industrial Park Road, , Malden, 02020 MA, &lt;/pcStreetAddress&gt;
-        &lt;pcPhoneNumber/&gt;
-    &lt;/GetDealerDetailResponse&gt;
+&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;&#13;
+    &lt;GetDealerDetailResponse xmlns="urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices"&gt;&#13;
+        &lt;result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/&gt;&#13;
+        &lt;pcDealerId&gt;pcDealerId&lt;/pcDealerId&gt;&#13;
+        &lt;pcName&gt;pcName&lt;/pcName&gt;&#13;
+        &lt;pcSalesEmail&gt;pcSalesEmail&lt;/pcSalesEmail&gt;&#13;
+        &lt;pcInfoEmail&gt;pcInfoEmail&lt;/pcInfoEmail&gt;&#13;
+        &lt;pcStreetAddress&gt;pcStreetAddress&lt;/pcStreetAddress&gt;&#13;
+        &lt;pcPhoneNumber&gt;pcPhoneNumber&lt;/pcPhoneNumber&gt;&#13;
+        &lt;pcSalesReps/&gt;&#13;
+    &lt;/GetDealerDetailResponse&gt;&#13;
 &lt;/soapenv:Body&gt;
   &lt;/template&gt;
   &lt;fields&gt;
     &lt;field name="responseDealerId" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcDealerId/text()"/&gt;
-    &lt;field name="responseDealerName" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcName/text()"/&gt;
+    &lt;field name="responseName" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcName/text()"/&gt;
     &lt;field name="responseSalesEmail" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcSalesEmail/text()"/&gt;
     &lt;field name="responseInfoEmail" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcInfoEmail/text()"/&gt;
     &lt;field name="responseStreetAddress" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcStreetAddress/text()"/&gt;
     &lt;field name="responsePhoneNumber" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcPhoneNumber/text()"/&gt;
+    &lt;field name="responseSalesReps" type="String" xpath="/soapenv:Body/ns1:GetDealerDetailResponse/ns1:pcSalesReps/text()"/&gt;
   &lt;/fields&gt;
   &lt;namespaceaware&gt;true&lt;/namespaceaware&gt;
   &lt;namespacemap&gt;
@@ -68,10 +70,10 @@
      <void method="add"> 
       <object class="com.savvion.sbm.adapters.file.Parameter"> 
        <void property="description"> 
-        <string>responseDealerName</string> 
+        <string>responseName</string> 
        </void> 
        <void property="name"> 
-        <string>responseDealerName</string> 
+        <string>responseName</string> 
        </void> 
       </object> 
      </void> 
@@ -112,6 +114,16 @@
        </void> 
        <void property="name"> 
         <string>responsePhoneNumber</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.file.Parameter"> 
+       <void property="description"> 
+        <string>responseSalesReps</string> 
+       </void> 
+       <void property="name"> 
+        <string>responseSalesReps</string> 
        </void> 
       </object> 
      </void> 
@@ -137,31 +149,6 @@
        </void> 
       </object> 
      </void> 
-    </void> 
-    <void property="faultXMLPluginConfig"> 
-     <string>&lt;config&gt;
-  &lt;version&gt;2&lt;/version&gt;
-  &lt;template&gt;
-&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-    &lt;soapenv:Fault&gt;
-        &lt;faultcode&gt;SOAP-ENV:Server&lt;/faultcode&gt;
-        &lt;faultstring&gt;An error was detected while executing the Web Service request. (10893)&lt;/faultstring&gt;
-        &lt;detail&gt;
-            &lt;ns1:FaultDetail xmlns:ns1="urn:soap-fault:details"&gt;
-                &lt;errorMessage&gt;Invalid handle.  Not initialized or points to a deleted object. (3135)&lt;/errorMessage&gt;
-                &lt;requestID&gt;581214dd4810c6fc:-1cd9bc64:12e24c75ee5:-7fff#269e&lt;/requestID&gt;
-            &lt;/ns1:FaultDetail&gt;
-        &lt;/detail&gt;
-    &lt;/soapenv:Fault&gt;
-&lt;/soapenv:Body&gt;
-  &lt;/template&gt;
-  &lt;fields&gt;
-  &lt;/fields&gt;
-  &lt;namespaceaware&gt;false&lt;/namespaceaware&gt;
-  &lt;namespacemap&gt;
-  &lt;/namespacemap&gt;
-&lt;/config&gt;
-</string> 
     </void> 
     <void property="faults"> 
      <void method="add"> 
@@ -280,9 +267,6 @@
        <void property="uniqueIdentifier"> 
         <string>pcDealerCode.1_0</string> 
        </void> 
-       <void property="value"> 
-        <string>dealer03</string> 
-       </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
          <void property="localPart"> 
@@ -324,6 +308,9 @@
        </void> 
        <void property="uniqueIdentifier"> 
         <string>pcUserContextId.2_0</string> 
+       </void> 
+       <void property="value"> 
+        <string>savvion::test</string> 
        </void> 
        <void property="xmlQName"> 
         <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
@@ -639,6 +626,48 @@
        </void> 
       </object> 
      </void> 
+     <void method="add"> 
+      <object class="com.savvion.sbm.adapters.webservice.Param"> 
+       <void property="QName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>pcSalesReps</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>urn:factory-autoedge-com:AutoEdgeTheFactoryWebServices</string> 
+         </void> 
+        </object> 
+       </void> 
+       <void property="isOmittable"> 
+        <boolean>false</boolean> 
+       </void> 
+       <void property="javaClassName"> 
+        <string>java.lang.String</string> 
+       </void> 
+       <void property="label"> 
+        <string>pcSalesReps</string> 
+       </void> 
+       <void property="mode"> 
+        <int>2</int> 
+       </void> 
+       <void property="name"> 
+        <string>pcSalesReps</string> 
+       </void> 
+       <void property="uniqueIdentifier"> 
+        <string>pcSalesReps.3_7</string> 
+       </void> 
+       <void property="xmlQName"> 
+        <object class="com.savvion.sbm.adapters.webservice.QualifiedName"> 
+         <void property="localPart"> 
+          <string>string</string> 
+         </void> 
+         <void property="namesSpace"> 
+          <string>http://www.w3.org/2001/XMLSchema</string> 
+         </void> 
+        </object> 
+       </void> 
+      </object> 
+     </void> 
     </void> 
     <void property="style"> 
      <string>document</string> 
@@ -701,7 +730,7 @@
    <string/> 
   </void> 
   <void property="targetEndpointAddress"> 
-   <string>http://SG-2K3BSE01:9090/wsa/wsa1</string> 
+   <string>http://localhost:8080/wsa/wsa1</string> 
   </void> 
   <void property="targetNameSpace"> 
    <string>urn:factory-autoedge-com</string> 
@@ -716,7 +745,7 @@
    <string/> 
   </void> 
   <void property="wsdlUrl"> 
-   <string>http://localhost:9090/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
+   <string>http://localhost:8080/wsa/wsa1/wsdl?targetURI=urn:factory-autoedge-com</string> 
   </void> 
   <void property="wsdlUserName"> 
    <string/> 

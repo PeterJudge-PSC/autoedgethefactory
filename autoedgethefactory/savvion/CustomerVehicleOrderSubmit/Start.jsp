@@ -21,8 +21,9 @@
 
 
 
-<%Vector SelectedAccessories=bean.getPropVector("SelectedAccessories");
-String SelectedDealerName=bean.getPropString("SelectedDealerName");
+<%String ContextId=bean.getPropString("ContextId");
+String SalesrepCode=bean.getPropString("SalesrepCode");
+String CustomerName=bean.getPropString("CustomerName");
 long CustomerCreditLimit=bean.getPropLong("CustomerCreditLimit");
 String CustomerId=bean.getPropString("CustomerId");
 long OrderNum=bean.getPropLong("OrderNum");
@@ -31,6 +32,7 @@ String AutoEdgeWebServiceEndpoint=bean.getPropString("AutoEdgeWebServiceEndpoint
 String CustomerEmail=bean.getPropString("CustomerEmail");
 String userid=bean.getPropString("userid");
 String password=bean.getPropString("password");
+long orderid=bean.getPropLong("orderid");
 String BIZSITE_PASSWORD=bean.getPropString("BIZSITE_PASSWORD");
 String BIZSITE_USER=bean.getPropString("BIZSITE_USER");
 String PAK_URL=bean.getPropString("PAK_URL");
@@ -38,11 +40,6 @@ String PT_NAME=bean.getPropString("PT_NAME");
 String error=bean.getPropString("error");
 String SelectedVehicleBrand=bean.getPropString("SelectedVehicleBrand");
 String SelectedVehicleModel=bean.getPropString("SelectedVehicleModel");
-String VehicleModelsCompact=bean.getPropString("VehicleModelsCompact");
-String VehicleModelsSUV=bean.getPropString("VehicleModelsSUV");
-String VehicleModelsTruck=bean.getPropString("VehicleModelsTruck");
-String VehicleModelsSedan=bean.getPropString("VehicleModelsSedan");
-String VehicleModelsPremium=bean.getPropString("VehicleModelsPremium");
 String InteriorSeatMaterial=bean.getPropString("InteriorSeatMaterial");
 String InteriorTrimColour=bean.getPropString("InteriorTrimColour");
 String InteriorAccessories=bean.getPropString("InteriorAccessories");
@@ -50,13 +47,13 @@ String ExteriorColour=bean.getPropString("ExteriorColour");
 String ExteriorMoonroof=bean.getPropString("ExteriorMoonroof");
 String ExteriorWheels=bean.getPropString("ExteriorWheels");
 String DealerCode=bean.getPropString("DealerCode");
-String ContextId=bean.getPropString("ContextId");
-String SelectedTrimColour=bean.getPropString("SelectedTrimColour");
-String SelectedSeatMaterial=bean.getPropString("SelectedSeatMaterial");
-String SelectedWheels=bean.getPropString("SelectedWheels");
-String SelectedMoonroof=bean.getPropString("SelectedMoonroof");
-String SelectedExtColour=bean.getPropString("SelectedExtColour");
-String BrandDealers=bean.getPropString("BrandDealers");
+String CompactModels=bean.getPropString("CompactModels");
+String SedanModels=bean.getPropString("SedanModels");
+String PremiumModels=bean.getPropString("PremiumModels");
+String SUVModels=bean.getPropString("SUVModels");
+String TruckModels=bean.getPropString("TruckModels");
+String DealerList=bean.getPropString("DealerList");
+String ModelName=bean.getPropString("ModelName");
 %>
 
 
@@ -80,34 +77,65 @@ String BrandDealers=bean.getPropString("BrandDealers");
 
 
 
-<bizsolo:ifCrtWS name="LoginUser" >
+<bizsolo:ifCrtWS name="LoginCustomer" >
 <bizsolo:choose >
 <bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
 <bizsolo:setDS name="password,userid"/><bizsolo:choose >
-<bizsolo:when test="<%=\"Login\".equals(request.getParameter(\"SB_Name\")) || \"73596745\".equals(request.getParameter(\"SB_Name\")) || \"Registered\".equals(request.getParameter(\"SB_Name\")) || \"123533986\".equals(request.getParameter(\"SB_Name\")) %>" >
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=ApplicationUserLogin" />
+<bizsolo:when test="<%=\"Register\".equals(request.getParameter(\"SB_Name\")) || \"-625569085\".equals(request.getParameter(\"SB_Name\")) || \"RegisterCustomer\".equals(request.getParameter(\"SB_Name\")) || \"-467598399\".equals(request.getParameter(\"SB_Name\")) %>" >
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=RegisterCustomer" />
+</bizsolo:when>
+</bizsolo:choose>
+<bizsolo:choose >
+<bizsolo:when test="<%=\"Login\".equals(request.getParameter(\"SB_Name\")) || \"73596745\".equals(request.getParameter(\"SB_Name\")) || \"ExistingCustomer\".equals(request.getParameter(\"SB_Name\")) || \"157131433\".equals(request.getParameter(\"SB_Name\")) %>" >
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=CustomerLogin" />
 </bizsolo:when>
 </bizsolo:choose>
 </bizsolo:when>
 <bizsolo:otherwise >
-<bizsolo:redirectURL page="LoginUser.jsp" />
+<bizsolo:redirectURL page="LoginCustomer.jsp" />
 </bizsolo:otherwise>
 </bizsolo:choose>
 </bizsolo:ifCrtWS>
 
 
 
-<bizsolo:ifCrtWS name="PreOrderLoginUser" >
+<bizsolo:ifCrtWS name="ModelSelection" >
 <bizsolo:choose >
 <bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
-<bizsolo:setDS name="userid,password"/><bizsolo:choose >
-<bizsolo:when test="<%=\"Login\".equals(request.getParameter(\"SB_Name\")) || \"73596745\".equals(request.getParameter(\"SB_Name\")) || \"Copy of Registered\".equals(request.getParameter(\"SB_Name\")) || \"-274729152\".equals(request.getParameter(\"SB_Name\")) %>" >
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=PreOrderApplicationUserLogin" />
+<bizsolo:setDS name="ModelName,SelectedVehicleModel,TruckModels,SUVModels,SedanModels,PremiumModels,CompactModels"/><bizsolo:choose >
+<bizsolo:when test="<%=\"Select Options and Accessories\".equals(request.getParameter(\"SB_Name\")) || \"-1057362527\".equals(request.getParameter(\"SB_Name\")) || \"linkSelectOptions\".equals(request.getParameter(\"SB_Name\")) || \"-1598202840\".equals(request.getParameter(\"SB_Name\")) %>" >
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=SelectVehicleOptions" />
 </bizsolo:when>
 </bizsolo:choose>
 </bizsolo:when>
 <bizsolo:otherwise >
-<bizsolo:redirectURL page="PreOrderLoginUser.jsp" />
+<bizsolo:redirectURL page="ModelSelection.jsp" />
+</bizsolo:otherwise>
+</bizsolo:choose>
+</bizsolo:ifCrtWS>
+
+
+
+<bizsolo:ifCrtWS name="RegisterCustomer" >
+<bizsolo:choose >
+<bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
+
+<bizsolo:choose >
+<bizsolo:when test="<%=\"Return To Login\".equals(request.getParameter(\"SB_Name\")) || \"-1962889644\".equals(request.getParameter(\"SB_Name\")) || \"ReturnToLogin\".equals(request.getParameter(\"SB_Name\")) || \"1389566526\".equals(request.getParameter(\"SB_Name\")) %>" >
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=LoginCustomer" />
+</bizsolo:when>
+</bizsolo:choose>
+<bizsolo:choose >
+<bizsolo:when test="<%=\"Continue\".equals(request.getParameter(\"SB_Name\")) || \"-502558521\".equals(request.getParameter(\"SB_Name\")) || \"PerformRegistration\".equals(request.getParameter(\"SB_Name\")) || \"1888477850\".equals(request.getParameter(\"SB_Name\")) %>" >
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=CustomerRegistration" />
+</bizsolo:when>
+</bizsolo:choose>
+</bizsolo:when>
+<bizsolo:otherwise >
+<% /* Workaround, tmpStr will disappear in the future */ %>
+<% String tmpStr = response.encodeURL("Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=RegisterCustomer&activityMode=procReq&SB_Name=-1962889644&nextPage=Start.jsp"); %>
+<bizsolo:initDS name="ReturnToLogin_target" value="<%= tmpStr %>" />
+<bizsolo:redirectURL page="RegisterCustomer.jsp" />
 </bizsolo:otherwise>
 </bizsolo:choose>
 </bizsolo:ifCrtWS>
@@ -117,9 +145,9 @@ String BrandDealers=bean.getPropString("BrandDealers");
 <bizsolo:ifCrtWS name="ReviewSelection" >
 <bizsolo:choose >
 <bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
-<bizsolo:setDS name="DealerCode,BrandDealers,InteriorAccessories"/><bizsolo:choose >
-<bizsolo:when test="<%=\"Done\".equals(request.getParameter(\"SB_Name\")) || \"2135970\".equals(request.getParameter(\"SB_Name\")) || \"linkCreateOrder\".equals(request.getParameter(\"SB_Name\")) || \"-2060367016\".equals(request.getParameter(\"SB_Name\")) %>" >
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=Decision_1" />
+<bizsolo:setDS name="DealerCode,DealerList"/><bizsolo:choose >
+<bizsolo:when test="<%=\"Login\".equals(request.getParameter(\"SB_Name\")) || \"73596745\".equals(request.getParameter(\"SB_Name\")) || \"linkCustomerLogin\".equals(request.getParameter(\"SB_Name\")) || \"1061453905\".equals(request.getParameter(\"SB_Name\")) %>" >
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=LoginCustomer" />
 </bizsolo:when>
 </bizsolo:choose>
 </bizsolo:when>
@@ -134,10 +162,9 @@ String BrandDealers=bean.getPropString("BrandDealers");
 <bizsolo:ifCrtWS name="SelectBrand" >
 <bizsolo:choose >
 <bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
-<bizsolo:setDS name="SelectedVehicleBrand"/><% System.out.println(bean.getPropString("VehicleYear"));%>
-<bizsolo:choose >
-<bizsolo:when test="<%=\"Continue\".equals(request.getParameter(\"SB_Name\")) || \"-502558521\".equals(request.getParameter(\"SB_Name\")) || \"SelectModel\".equals(request.getParameter(\"SB_Name\")) || \"1866546029\".equals(request.getParameter(\"SB_Name\")) %>" >
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=SpecifyOrder" />
+<bizsolo:setDS name="SelectedVehicleBrand"/><bizsolo:choose >
+<bizsolo:when test="<%=\"Select Model\".equals(request.getParameter(\"SB_Name\")) || \"708967173\".equals(request.getParameter(\"SB_Name\")) || \"SelectModel\".equals(request.getParameter(\"SB_Name\")) || \"1866546029\".equals(request.getParameter(\"SB_Name\")) %>" >
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=GetBrandDetails" />
 </bizsolo:when>
 </bizsolo:choose>
 </bizsolo:when>
@@ -149,27 +176,10 @@ String BrandDealers=bean.getPropString("BrandDealers");
 
 
 
-<bizsolo:ifCrtWS name="SelectModel" >
-<bizsolo:choose >
-<bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
-<bizsolo:setDS name="SelectedVehicleModel,SelectedDealerName,VehicleModelsTruck,VehicleModelsSUV,VehicleModelsSedan,VehicleModelsPremium,VehicleModelsCompact"/><bizsolo:choose >
-<bizsolo:when test="<%=\"Select Options and Accessories\".equals(request.getParameter(\"SB_Name\")) || \"-1057362527\".equals(request.getParameter(\"SB_Name\")) || \"linkSelectOptions\".equals(request.getParameter(\"SB_Name\")) || \"-1598202840\".equals(request.getParameter(\"SB_Name\")) %>" >
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=SelectVehicleOptions" />
-</bizsolo:when>
-</bizsolo:choose>
-</bizsolo:when>
-<bizsolo:otherwise >
-<bizsolo:redirectURL page="SelectModel.jsp" />
-</bizsolo:otherwise>
-</bizsolo:choose>
-</bizsolo:ifCrtWS>
-
-
-
 <bizsolo:ifCrtWS name="SelectVehicleOptions" >
 <bizsolo:choose >
 <bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
-<bizsolo:setDS name="InteriorSeatMaterial,SelectedSeatMaterial,InteriorTrimColour,SelectedTrimColour,InteriorAccessories,SelectedAccessories,ExteriorColour,SelectedExtColour,ExteriorWheels,SelectedWheels,ExteriorMoonroof,SelectedMoonroof"/><bizsolo:choose >
+<bizsolo:setDS name="ExteriorMoonroof,ExteriorWheels,ExteriorColour,InteriorAccessories,InteriorTrimColour,InteriorSeatMaterial"/><bizsolo:choose >
 <bizsolo:when test="<%=\"Review and Complete Order\".equals(request.getParameter(\"SB_Name\")) || \"-1494740808\".equals(request.getParameter(\"SB_Name\")) || \"linkOptionsReviewSelection\".equals(request.getParameter(\"SB_Name\")) || \"883196720\".equals(request.getParameter(\"SB_Name\")) %>" >
 <bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=ReviewSelection" />
 </bizsolo:when>
@@ -177,24 +187,6 @@ String BrandDealers=bean.getPropString("BrandDealers");
 </bizsolo:when>
 <bizsolo:otherwise >
 <bizsolo:redirectURL page="SelectVehicleOptions.jsp" />
-</bizsolo:otherwise>
-</bizsolo:choose>
-</bizsolo:ifCrtWS>
-
-
-
-<bizsolo:ifCrtWS name="SpecifyOrder" >
-<bizsolo:choose >
-<bizsolo:when test="<%=\"procReq\".equals(request.getParameter(\"activityMode\")) %>" >
-<bizsolo:setDS name="OrderNum"/><% System.out.println(bean.getPropString("userid"));%>
-<bizsolo:choose >
-<bizsolo:when test="<%=\"Continue\".equals(request.getParameter(\"SB_Name\")) || \"-502558521\".equals(request.getParameter(\"SB_Name\")) || \"Connection 18\".equals(request.getParameter(\"SB_Name\")) || \"285694601\".equals(request.getParameter(\"SB_Name\")) %>" >
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=Decision_2" />
-</bizsolo:when>
-</bizsolo:choose>
-</bizsolo:when>
-<bizsolo:otherwise >
-<bizsolo:redirectURL page="SpecifyOrder.jsp" />
 </bizsolo:otherwise>
 </bizsolo:choose>
 </bizsolo:ifCrtWS>
@@ -213,68 +205,52 @@ String BrandDealers=bean.getPropString("BrandDealers");
 
 
 
-<bizsolo:ifCrtWS name="ApplicationUserLogin" >
-<bizsolo:executeAction wsName="ApplicationUserLogin" epClassName="com.savvion.sbm.adapters.webservice.WebServiceAdapter" perfMethod="execute" dsi="password,SelectedVehicleBrand,AutoEdgeWebServiceEndpoint,userid" dso="ContextId,CustomerEmail,CustomerId,CustomerCreditLimit" />
+<bizsolo:ifCrtWS name="CustomerLogin" >
+<bizsolo:executeAction wsName="CustomerLogin" epClassName="com.savvion.sbm.adapters.webservice.WebServiceAdapter" perfMethod="execute" dsi="password,SelectedVehicleBrand,userid,AutoEdgeWebServiceEndpoint" dso="CustomerName,ContextId,CustomerEmail,CustomerId,CustomerCreditLimit" />
 <bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=Decision_3" />
 </bizsolo:ifCrtWS>
 
 
 
-<bizsolo:ifCrtWS name="GetBrandDetails" >
-<bizsolo:executeAction wsName="GetBrandDetails" epClassName="com.savvion.sbm.adapters.webservice.WebServiceAdapter" perfMethod="execute" dsi="OrderNum,ContextId,SelectedVehicleBrand,AutoEdgeWebServiceEndpoint" dso="VehicleModelsCompact,VehicleModelsSUV,VehicleModelsPremium,InteriorTrimColour,ExteriorMoonroof,BrandDealers,ExteriorColour,VehicleModelsTruck,error,InteriorAccessories,InteriorSeatMaterial,VehicleModelsSedan,ExteriorWheels" />
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=SelectModel" />
-</bizsolo:ifCrtWS>
-
-
-
-<bizsolo:ifCrtWS name="PreOrderApplicationUserLogin" >
-<bizsolo:executeAction wsName="PreOrderApplicationUserLogin" epClassName="com.savvion.sbm.adapters.webservice.WebServiceAdapter" perfMethod="execute" dsi="password,SelectedVehicleBrand,AutoEdgeWebServiceEndpoint,userid" dso="ContextId,CustomerEmail,CustomerId,CustomerCreditLimit" />
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=Copy_of_Decision_3" />
-</bizsolo:ifCrtWS>
-
-
-
-<bizsolo:ifCrtWS name="createOrder" >
-<bizsolo:executeAction wsName="createOrder" epClassName="com.savvion.BizSolo.beans.PAKCreatePI" perfMethod="commit" dsi="BIZSITE_USER@BIZSITE_USER,PT_NAME@PT_NAME,BIZSITE_PASSWORD@BIZSITE_PASSWORD,SelectedVehicleBrand@VehicleBrand,SelectedVehicleModel@VehicleModel,userid@CustomerName,CustomerEmail@CustomerEmail,OrderChannel@OrderChannel,CustomerId@CustomerId,CustomerCreditLimit@CustomerCreditLimit,SelectedExtColour@ExteriorColour,SelectedMoonroof@ExteriorMoonroof,SelectedSeatMaterial@InteriorSeatMaterial,SelectedTrimColour@InteriorTrimColour,SelectedWheels@ExteriorWheels,DealerCode@DealerCode,SelectedAccessories@SelectedAccessories" dso="error@error" />
+<bizsolo:ifCrtWS name="CustomerLogout" >
+<bizsolo:executeAction wsName="CustomerLogout" epClassName="com.savvion.sbm.adapters.webservice.WebServiceAdapter" perfMethod="execute" dsi="ContextId,AutoEdgeWebServiceEndpoint" dso="error" />
 <bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=ExitPage" />
 </bizsolo:ifCrtWS>
 
 
 
-<bizsolo:ifCrtWS name="Copy_of_Decision_3" >
-<bizsolo:if test="<%= ContextId!=null %>" >
-<bizsolo:redirectURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=createOrder" />
-</bizsolo:if>
-<% // executed  only when condition is not true %>
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=PreOrderLoginUser" />
+<bizsolo:ifCrtWS name="CustomerRegistration" >
+<bizsolo:executeAction wsName="CustomerRegistration" epClassName="com.savvion.sbm.adapters.webservice.WebServiceAdapter" perfMethod="execute" dsi="password,SelectedVehicleBrand,userid,CustomerName,CustomerEmail,AutoEdgeWebServiceEndpoint" dso="CustomerId,SalesrepCode" />
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=RegistrationConfirmation" />
 </bizsolo:ifCrtWS>
 
 
 
-<bizsolo:ifCrtWS name="Decision_1" >
-<bizsolo:if test="<%= ContextId!=null %>" >
-<bizsolo:redirectURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=createOrder" />
-</bizsolo:if>
-<% // executed  only when condition is not true %>
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=PreOrderLoginUser" />
+<bizsolo:ifCrtWS name="GetBrandDetails" >
+<bizsolo:executeAction wsName="GetBrandDetails" epClassName="com.savvion.sbm.adapters.webservice.WebServiceAdapter" perfMethod="execute" dsi="SelectedVehicleBrand,ContextId,AutoEdgeWebServiceEndpoint" dso="InteriorTrimColour,SUVModels,ExteriorMoonroof,SedanModels,PremiumModels,ExteriorColour,CompactModels,InteriorAccessories,DealerList,InteriorSeatMaterial,ExteriorWheels,TruckModels" />
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=ModelSelection" />
 </bizsolo:ifCrtWS>
 
 
 
-<bizsolo:ifCrtWS name="Decision_2" >
-<bizsolo:if test="<%= OrderNum>0 %>" >
-<bizsolo:redirectURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=LoginUser" />
-</bizsolo:if>
-<% // executed  only when condition is not true %>
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=GetBrandDetails" />
+<bizsolo:ifCrtWS name="RegistrationConfirmation" >
+<bizsolo:executeAction wsName="RegistrationConfirmation" epClassName="com.savvion.sbm.adapters.email.EmailAdapter" perfMethod="execute" dsi="SalesrepCode,CustomerEmail,password,CustomerName,SelectedVehicleBrand,CustomerEmail" />
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=CustomerLogin" />
+</bizsolo:ifCrtWS>
+
+
+
+<bizsolo:ifCrtWS name="createOrder" >
+<bizsolo:executeAction wsName="createOrder" epClassName="com.savvion.BizSolo.beans.PAKCreatePI" perfMethod="commit" dsi="BIZSITE_USER@bizsite_user,PT_NAME@ptName,BIZSITE_PASSWORD@bizsite_pass,SelectedVehicleBrand@VehicleBrand,SelectedVehicleModel@VehicleModel,CustomerCreditLimit@CustomerCreditLimit,CustomerEmail@CustomerEmail,CustomerId@CustomerId,CustomerName@CustomerName,DealerCode@DealerCode,ModelName@ModelName" dso="error@error,ModelName@ModelName" />
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=CustomerLogout" />
 </bizsolo:ifCrtWS>
 
 
 
 <bizsolo:ifCrtWS name="Decision_3" >
 <bizsolo:if test="<%= ContextId!=null %>" >
-<bizsolo:redirectURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=GetBrandDetails" />
+<bizsolo:redirectURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=createOrder" />
 </bizsolo:if>
 <% // executed  only when condition is not true %>
-<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=LoginUser" />
+<bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=LoginCustomer" />
 </bizsolo:ifCrtWS>
