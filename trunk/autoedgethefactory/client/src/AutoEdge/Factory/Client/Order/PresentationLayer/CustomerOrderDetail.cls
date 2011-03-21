@@ -512,6 +512,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         
     method protected void InitUI():
         define variable cValue as character no-undo.
+        define variable oDSI as DataSlotInstance no-undo.
         define variable cDTZ as datetime  no-undo.
         define variable cDateFormat as character no-undo.
         define variable hOrderBuffer as handle no-undo.
@@ -525,33 +526,32 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         /* needed to convert ISO dates into ABL datetime-tz */
         session:date-format = 'ymd'.
 
-        assign cValue = cast(CurrentTask:DataSlots:Get(new String('CustomerOrderDate')), DataSlotInstance):value
-               cDTZ = datetime(cValue)
-               uxOrderDate:DateTime = cDTZ
+        assign hOrderBuffer = mhOrders:get-buffer-handle('eOrder')
+               hOLineBuffer = mhOrders:get-buffer-handle('eOrderLine')
+               hFinishedItemBuffer = mhOrders:get-buffer-handle('eFinishedItem')
+               hComponentItemBuffer = mhOrders:get-buffer-handle('eComponentItem')
+               hItemBuffer = mhOrders:get-buffer-handle('eItem')               
                
-               hOrderBuffer = mhOrders:get-buffer-handle('eOrder')
-               hOLineBuffer = mhOrders:get-buffer-handle('eOrderLine').
-               hFinishedItemBuffer = mhOrders:get-buffer-handle('eFinishedItem').
-               hComponentItemBuffer = mhOrders:get-buffer-handle('eComponentItem').
-               hItemBuffer = mhOrders:get-buffer-handle('eItem').
-               
-               cValue = cast(CurrentTask:DataSlots:Get(new String('OrderNum')), DataSlotInstance):value
-               .
-        
-        hOrderBuffer:find-first(' where eOrder.OrderNum = ' + quoter(int(cValue)) ) no-error.
+               oDSI = cast(CurrentTask:DataSlots:Get(new String('OrderId')), DataSlotInstance)
+               cValue = oDSI:Value.
+                       
+        hOrderBuffer:find-first(' where eOrder.OrderId = ' + quoter(cValue) ) no-error.
         if hOrderBuffer:available then
         do:
             hOLineBuffer:find-first(' where eOrderLine.LineNum = 1 and eOrderLine.OrderId = ' + quoter(hOrderBuffer::OrderId)) no-error.  
             hFinishedItemBuffer:find-first(' where eFinishedItem.FinishedItemId = ' + quoter(hOLineBuffer::FinishedItemId)) no-error.
             hItemBuffer:find-first(' where eItem.ItemId = ' + quoter(hFinishedItemBuffer::ItemId)) no-error.
             
-            assign uxBrand:Text = hOrderBuffer::Brand
+            assign cDTZ = datetime(hOrderBuffer::OrderDate) 
+                   uxOrderDate:DateTime = cDTZ
+            
+                   /*uxBrand:Text = hOrderBuffer::Brand*/
                    uxCustomerName:Text = hOrderBuffer::CustomerName
                    uxModel:Text = hItemBuffer::ItemName.
             
             create query hQuery.
             hQuery:set-buffers(hComponentItemBuffer, hItemBuffer).
-            hQuery:query-prepare(' for each eComponentItem where eComponentItem.FinishedItemId = ' + hFinishedItemBuffer::FinishedItemId
+            hQuery:query-prepare(' for each eComponentItem where eComponentItem.FinishedItemId = ' + quoter(hFinishedItemBuffer::FinishedItemId)
                                 + ', each eItem where eItem.ItemId = eComponentItem.ItemId ').
             hQuery:query-open().
             
@@ -582,8 +582,8 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
             hQuery:query-close().
             delete object hQuery.
             
-            uxOrderNumber:Text = hOrderBuffer::OrderId.
-            this-object:Text = 'Order - ' + hOrderBuffer::OrderId.
+            uxOrderNumber:Text = hOrderBuffer::OrderNum.
+            this-object:Text = 'Order - ' + hOrderBuffer::OrderNUm.
         end.
         else
         do:
@@ -594,7 +594,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
             assign uxApprove:Enabled = false
                    uxDisapprove:Enabled = false.
             
-            undo, throw new NotFoundError('Order Detail', substitute(' WorkItem &1', CurrentTask:WorkItem:Name)).
+            undo, throw new NotFoundError('Order Detail ', substitute(' WorkItem &1', CurrentTask:WorkItem:Name)).
         end.
         
         finally:

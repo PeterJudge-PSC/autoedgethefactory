@@ -616,7 +616,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         this-object:uxAccordion:Size = new System.Drawing.Size(261, 495).
         this-object:uxAccordion:Style = Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarStyle:Listbar.
         this-object:uxAccordion:TabIndex = 12.
-        this-object:uxAccordion:ItemClick:Subscribe(this-object:ultraExplorerBar1_ItemClick).
+        this-object:uxAccordion:ItemClick:Subscribe(this-object:uxAccordion_ItemClick).
         /*  */
         /* splitter1 */
         /*  */
@@ -655,7 +655,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         RefreshTasksList().
     end method.
 
-    method private void ultraExplorerBar1_ItemClick( input sender as System.Object, input e as Infragistics.Win.UltraWinExplorerBar.ItemEventArgs):
+    method private void uxAccordion_ItemClick( input sender as System.Object, input e as Infragistics.Win.UltraWinExplorerBar.ItemEventArgs):
         define variable oTags as TagWrapper extent no-undo.
         define variable oTask as CurrentTask no-undo.
         define variable oForm as Form no-undo.
