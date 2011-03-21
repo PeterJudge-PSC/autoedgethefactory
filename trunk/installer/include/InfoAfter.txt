@@ -1,4 +1,4 @@
-Thank you for installing the OpenEdge Application Example, AutoEdge|TheFactory v1.0.0.
+Thank you for installing the OpenEdge Application Example, AutoEdge|TheFactory v1.0.x.
 
 ** There are a some additional steps to complete the installation based on the
 ** features you will be running. Please refer to the Installation and Release 
