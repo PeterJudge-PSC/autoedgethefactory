@@ -214,7 +214,7 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         do iLoop = 1 to iMax while not FetchAllTables:
             oTableRequest = poRequest:TableRequests:Get(Datasethandle:get-top-buffer(iLoop):name).
             if valid-object(oTableRequest) then
-                FetchAllTables = oTableRequest:TableRequestType:Equals(TableRequestTypeENum:All).
+                FetchAllTables = oTableRequest:TableRequestType:Equals(TableRequestTypeEnum:All).
         end.
         
         /* If there are no individual table requests, and we're not already getting all tables,
