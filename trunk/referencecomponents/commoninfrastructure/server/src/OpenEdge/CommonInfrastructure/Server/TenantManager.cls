@@ -7,7 +7,7 @@
     Created     : Tue Apr 06 11:40:51 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ITenantManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
@@ -19,7 +19,7 @@ using OpenEdge.Lang.Collections.IMap.
 
 class OpenEdge.CommonInfrastructure.Server.TenantManager inherits Service
         implements ITenantManager: 
-    
+
     constructor public TenantManager(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):        
         super(poServiceManager, poComponentInfo).
     end constructor.
