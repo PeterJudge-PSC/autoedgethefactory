@@ -10,7 +10,7 @@
     Created     : Tue Dec 14 14:14:30 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 /* ***************************  Definitions  ************************** */
 define stream strLoad.

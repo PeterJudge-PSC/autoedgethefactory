@@ -10,7 +10,7 @@
     Created     : Mon Dec 20 15:23:50 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.FillModeEnum.
 
