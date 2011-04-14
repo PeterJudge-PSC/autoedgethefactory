@@ -7,7 +7,7 @@
     Created     : Wed Dec 01 16:15:19 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.

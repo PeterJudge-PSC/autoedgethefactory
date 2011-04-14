@@ -11,7 +11,7 @@
     Created     : Tue Dec 14 14:23:42 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 /* available to all */
 run setup/data/load_geography.p.

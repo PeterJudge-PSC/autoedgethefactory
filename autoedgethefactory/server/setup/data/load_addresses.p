@@ -13,7 +13,7 @@
 
 /* ***************************  Definitions  ************************** */
 
-{routinelevel.i}
+routine-level on error undo, throw.
 
 /* ********************  Definitions  ******************** */
 define variable iLoop as integer no-undo.

@@ -10,7 +10,7 @@
     Created     : Tue Jan 25 14:49:02 EST 2011
     Notes       :
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.FillModeEnum.
 
@@ -63,7 +63,7 @@ function GetContactId returns longchar (input pcDetail as char):
         assign ContactDetail.ContactDetailId = guid(generate-uuid)
                ContactDetail.Detail = pcDetail.
     end.
-        
+    
     return ContactDetail.ContactDetailId.
 end function.
 
