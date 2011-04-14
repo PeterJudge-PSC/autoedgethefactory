@@ -7,7 +7,7 @@
     Created     : Wed Apr 07 16:44:04 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.

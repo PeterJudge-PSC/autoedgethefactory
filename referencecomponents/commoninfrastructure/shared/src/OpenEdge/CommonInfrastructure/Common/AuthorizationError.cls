@@ -7,7 +7,7 @@
     Created     : Fri Feb 25 10:16:03 EST 2011
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.AuthorizationError.
 using OpenEdge.Core.System.ApplicationError.

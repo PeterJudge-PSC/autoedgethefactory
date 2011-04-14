@@ -7,7 +7,7 @@
     Created     : Thu Jan 13 13:04:55 EST 2011
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.IConnectionParameters.
 

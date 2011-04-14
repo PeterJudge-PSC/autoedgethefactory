@@ -9,7 +9,7 @@
                     specialised for AppServers (eg so that the connection string can be composed
                     from properties, say).
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.IAppServerConnectionParameters.
 using OpenEdge.CommonInfrastructure.Common.ConnectionParameters.
