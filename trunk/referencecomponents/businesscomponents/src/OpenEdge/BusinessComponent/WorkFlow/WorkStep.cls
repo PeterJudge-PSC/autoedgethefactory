@@ -7,7 +7,7 @@
     Created     : Mon Dec 06 13:14:00 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.WorkFlow.IWorkStep.
 

@@ -8,7 +8,7 @@
     Created     : Wed Jan 26 11:10:58 EST 2011
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.Task.IBusinessTask.
 using OpenEdge.BusinessComponent.Task.BusinessTaskDecorator.

@@ -12,7 +12,7 @@
                     For instance, there is a ServiceInterface class which extents this
                     decorator, and which is used to expose the Business Entity as a service.  
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.Entity.IBusinessEntity.
 using OpenEdge.DataAccess.IDataAccess.

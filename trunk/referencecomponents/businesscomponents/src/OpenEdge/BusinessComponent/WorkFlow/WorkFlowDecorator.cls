@@ -9,7 +9,7 @@
     Notes       : * There's a decent description of Decorator pattern in Wikipedia
                     at http://en.wikipedia.org/wiki/Decorator_pattern
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowRequest.
