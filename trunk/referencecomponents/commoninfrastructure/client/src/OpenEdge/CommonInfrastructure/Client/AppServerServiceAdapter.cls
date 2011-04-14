@@ -8,7 +8,7 @@
    Created     : Tue Apr 27 08:43:10 EDT 2010
    Notes       : 
  ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
@@ -28,7 +28,7 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Client.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
@@ -112,7 +112,8 @@ class OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter inherits Serv
         end case.
         
         /* Update the session context with the results of the request. */
-        oSecurityManager:ValidateSession(oContext).
+        /* elaborate casting because of no interface inheritance :( */
+        cast(oSecurityManager, OpenEdge.CommonInfrastructure.Common.ISecurityManager):SetUserContext(oContext).
         
         return oResponse.
     end method.

@@ -9,7 +9,7 @@
     Created     : Fri Oct 29 15:15:39 EDT 2010
     Notes       :
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Client.ServiceAdapter.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
@@ -65,7 +65,7 @@ procedure EventProcedure_FetchData:
     end.
     
     /* Set context in to ContextManager from the data received from the server call. */
-    moSecMgr:ValidateSession(ServiceAdapter:DeserializeContext(pmUserContext)).
+    moSecMgr:SetUserContext(ServiceAdapter:DeserializeContext(pmUserContext)).
     
     moSMM:ExecuteResponse(cast(oResponse, IServiceResponse)).
     
@@ -102,7 +102,7 @@ procedure EventProcedure_SaveData:
     end.
     
     /* Set context in to ContextManager from the data received from the server call. */
-    moSecMgr:ValidateSession(ServiceAdapter:DeserializeContext(pmUserContext)).
+    moSecMgr:SetUserContext(ServiceAdapter:DeserializeContext(pmUserContext)).
     
     moSMM:ExecuteResponse(cast(oResponse, IServiceResponse)).
     
