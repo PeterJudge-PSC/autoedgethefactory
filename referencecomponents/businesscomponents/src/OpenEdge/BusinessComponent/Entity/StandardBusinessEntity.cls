@@ -5,7 +5,7 @@
     Description : 
     @author pjudge
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.DataAccess.IDataAccess.
 

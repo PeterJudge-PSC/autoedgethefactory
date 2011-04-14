@@ -8,7 +8,7 @@
     Created     : Mon Dec 06 11:50:45 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.EnterpriseServices.BizLogic.IBizLogicWorkFlow.
 using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.

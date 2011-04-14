@@ -10,7 +10,7 @@
                     data store could be a prodataset, temp-table or some other 
                     construct.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.Entity.BusinessEntity.
 using OpenEdge.BusinessComponent.Entity.IBusinessEntity.

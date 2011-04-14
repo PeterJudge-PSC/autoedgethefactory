@@ -8,7 +8,7 @@
     Created     : Tue Dec 07 11:10:29 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow.
 using OpenEdge.BusinessComponent.WorkFlow.WorkFlowDecorator.
