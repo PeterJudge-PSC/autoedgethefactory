@@ -9,7 +9,7 @@
                     and so the OnServerSession() binding is probably not strictly necessary.
                     However, it's useful to have, for clarity if nothing else.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum.
@@ -53,7 +53,6 @@ class OpenEdge.CommonInfrastructure.Server.InjectABL.ServerModule inherits Injec
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),
                      ManagerScopeEnum:SecurityManager)
             :OnServerSession().
-        
     end method.
     
 end class.
