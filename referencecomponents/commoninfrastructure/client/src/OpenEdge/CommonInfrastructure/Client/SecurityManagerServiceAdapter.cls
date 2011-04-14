@@ -7,7 +7,7 @@
     Created     : Tue Jan 04 14:23:46 EST 2011
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Client.ServiceAdapter.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
