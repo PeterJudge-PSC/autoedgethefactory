@@ -10,7 +10,7 @@
     Created     : Thu Dec 16 10:42:00 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager.
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ComponentKernel.

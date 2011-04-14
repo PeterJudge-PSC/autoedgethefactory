@@ -7,7 +7,7 @@
     Created     : Wed Nov 24 11:43:26 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask.
 using AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager.

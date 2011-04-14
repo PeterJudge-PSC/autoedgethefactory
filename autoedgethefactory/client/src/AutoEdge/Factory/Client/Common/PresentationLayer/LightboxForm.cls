@@ -7,7 +7,7 @@
     Created     : Fri Jul 09 09:52:53 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 using System.Drawing.Rectangle.
 using System.Drawing.Point.
 using System.Windows.Forms.Control.
