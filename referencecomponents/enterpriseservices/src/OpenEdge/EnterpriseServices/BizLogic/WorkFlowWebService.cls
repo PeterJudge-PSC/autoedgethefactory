@@ -13,7 +13,7 @@
                     There are currently no mixed-mode calls (where the inputs are primitives and
                     the outputs SOAP) although that's probably a candidate for refactoring.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.
 using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.

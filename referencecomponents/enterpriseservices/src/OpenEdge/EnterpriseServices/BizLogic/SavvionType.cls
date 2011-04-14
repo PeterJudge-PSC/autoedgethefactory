@@ -7,7 +7,7 @@
     Created     : Tue Nov 23 11:10:25 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.EnterpriseServices.BizLogic.SavvionType.
 
