@@ -7,7 +7,7 @@
     Created     : Mon Mar 09 10:37:02 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.IObjectOutput.

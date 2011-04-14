@@ -7,7 +7,7 @@
     Created     : Mon Nov 22 15:48:43 EST 2010
     Notes       : * See the ABL Help and//or documentation for details 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.SaxWriteStatusEnum.
 using OpenEdge.Lang.EnumMember.

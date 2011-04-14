@@ -8,7 +8,7 @@
     Notes       : * Is IExternalizable because its derived TableRequest is
                     potentially passed across the wire. 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.QueryBuffer.
 using OpenEdge.Core.System.QueryFilter.

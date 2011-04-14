@@ -7,7 +7,7 @@
     Created     : Wed Jul 08 10:27:18 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.BufferNotAvailableError.

@@ -13,7 +13,7 @@
                     so try to use an arithmetic operation if possible
                     e.g.    (myval & 255) is the same as (myval mod 256)
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 class OpenEdge.Core.Util.BinaryOperationsHelper:
      

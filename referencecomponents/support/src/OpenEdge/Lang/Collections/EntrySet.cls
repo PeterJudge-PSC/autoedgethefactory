@@ -13,7 +13,7 @@
                  - no empty constructor, specialised for IMap 
   ----------------------------------------------------------------------*/
 
-{routinelevel.i}
+routine-level on error undo, throw.
 using Progress.Lang.Object.
 using Progress.Lang.AppError. 
 

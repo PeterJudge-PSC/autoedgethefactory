@@ -7,7 +7,7 @@
     Created     : Wed Mar 03 10:08:57 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.Assert.
 using OpenEdge.Lang.DataTypeEnum.

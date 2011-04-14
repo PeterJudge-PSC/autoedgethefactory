@@ -12,7 +12,7 @@
                     which is what we would do if we could determine the callee
                     signatures in advance. 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.

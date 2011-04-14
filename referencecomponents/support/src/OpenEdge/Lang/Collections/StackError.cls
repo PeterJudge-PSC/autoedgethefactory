@@ -7,7 +7,7 @@
     Created     : Tue Jan 05 14:44:07 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.Collections.StackError.
 using Progress.Lang.AppError.

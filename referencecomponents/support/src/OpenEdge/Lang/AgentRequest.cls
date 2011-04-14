@@ -9,7 +9,7 @@
     Notes       : * The instance's lifespan is managed by as AppServer activate/deactivate
                     procedures.
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.AgentRequest.
 using OpenEdge.Lang.Collections.Map.
@@ -36,5 +36,5 @@ class OpenEdge.Lang.AgentRequest:
                RequestProperties = new Map()
                ActiveSince = now.
     end constructor.
-    
+
 end class.

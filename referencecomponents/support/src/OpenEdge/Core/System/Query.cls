@@ -9,7 +9,7 @@
                   be encapsulated. This is left as an exercise for the
                   reader :) 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.Query.
 using OpenEdge.Core.System.QueryFilter.

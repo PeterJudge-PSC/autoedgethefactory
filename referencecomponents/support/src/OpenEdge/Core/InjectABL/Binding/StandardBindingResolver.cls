@@ -10,7 +10,7 @@
     Created     : Tue Mar 09 09:02:30 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.Binding.IBindingResolver.

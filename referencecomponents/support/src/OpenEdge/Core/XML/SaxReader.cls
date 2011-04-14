@@ -16,7 +16,7 @@
                     and not the sender,eventargs convention otherwise used in
                     this reference code.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 class OpenEdge.Core.XML.SaxReader:
     

@@ -7,7 +7,7 @@
     Created     : Tue Jul 07 17:00:40 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.AccessViolationError.

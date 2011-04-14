@@ -9,7 +9,7 @@
     Notes       : 
   ----------------------------------------------------------------------*/
 
-{routinelevel.i}
+routine-level on error undo, throw.
 using Progress.Lang.*.
 using OpenEdge.Lang.Collections.*. 
  
