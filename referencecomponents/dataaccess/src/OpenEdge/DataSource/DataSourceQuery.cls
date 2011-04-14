@@ -7,7 +7,7 @@
     Created     : Wed Dec 29 14:39:34 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 
