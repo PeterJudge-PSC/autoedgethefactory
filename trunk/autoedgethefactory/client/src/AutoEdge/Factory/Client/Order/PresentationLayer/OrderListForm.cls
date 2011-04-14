@@ -7,7 +7,7 @@
     Created     : Thu Dec 16 11:33:05 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using Progress.Windows.Form.
 

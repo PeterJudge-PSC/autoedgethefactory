@@ -7,7 +7,7 @@
     Created     : Wed Jul 07 11:55:28 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup.
 using Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem.
@@ -38,7 +38,7 @@ using OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Client.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
@@ -735,8 +735,8 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         iMax = MdiChildren:Length - 1.        
         do iLoop = iMax to 0 by -1:
             oForm = cast(MdiChildren:GetValue(iLoop), Form).
-            if type-of(oForm, TaskDetailForm) and
-               cast(oForm, TaskDetailForm):CurrentTask eq cast(oTag:PABLO, CurrentTask) then
+            if type-of(oForm, CustomerOrderDetail) and
+               cast(oForm, CustomerOrderDetail):CurrentTask eq cast(oTag:PABLO, CurrentTask) then
                 oForm:Close().
         end.
         
@@ -921,7 +921,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         define variable cText as character no-undo.
         define variable cTool as character extent no-undo.
         
-        oUC = SecMgr:CurrentUserContext. 
+        oUC = cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):CurrentUserContext. 
         
         if valid-object(oUC) then
         do:

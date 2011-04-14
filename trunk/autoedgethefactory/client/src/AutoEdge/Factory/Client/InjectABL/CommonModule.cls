@@ -7,7 +7,7 @@
     Created     : Wed Dec 01 16:15:19 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum.
@@ -33,13 +33,13 @@ class AutoEdge.Factory.Client.InjectABL.CommonModule inherits InjectionModule:
         /* scopes the security manager's lifecycle to the service manager's */
         oBindingSyntax = Bind(ConnectionManager:IConnectionManagerType).
         oBindingSyntax
-            :To('AutoEdge.Factory.Client.Common.ConnectionManager')
+            :To('AutoEdge.Factory.Client.Common.CommonInfrastructure.ConnectionManager')
             :Using(InjectABLServiceProviderType)
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),
                      ManagerScopeEnum:ServiceManager)
             :OnThinClientSession().
         
-        LoadServices().
+        LoadServices().        
     end method.
     
     method protected void LoadServices():
@@ -52,6 +52,20 @@ class AutoEdge.Factory.Client.InjectABL.CommonModule inherits InjectionModule:
         oBindingSyntax
             :Named('UserLogin')
             :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
+            :OnThinClientSession().
+    end method.
+    
+    method protected void LoadConnections():
+        /* Use local variables oBS as bug workaround */
+        define variable oBindingSyntax as IBindingSyntax no-undo.
+        
+        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IAppServerConnectionParameters').
+        oBindingSyntax
+            :To('AutoEdge.Factory.Common.AppServerConnectionParameters')
+            :Named('AutoEdgeTheFactory')
+            :Using(InjectABLServiceProviderType)
+            :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),
+                     ManagerScopeEnum:ConnectionManager)
             :OnThinClientSession().
     end method.
     
