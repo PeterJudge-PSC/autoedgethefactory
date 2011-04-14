@@ -7,7 +7,7 @@
     Created     : Tue Apr 20 12:12:37 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Server.ComponentTypeEnum.
 using OpenEdge.Lang.EnumMember.
