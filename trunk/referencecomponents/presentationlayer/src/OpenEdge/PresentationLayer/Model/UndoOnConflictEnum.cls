@@ -8,7 +8,7 @@
     Created     : Thu Mar 19 11:28:06 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Model.UndoOnConflictEnum.
 using OpenEdge.Lang.EnumMember.

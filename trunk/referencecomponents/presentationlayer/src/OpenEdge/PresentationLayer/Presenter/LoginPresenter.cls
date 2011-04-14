@@ -7,7 +7,7 @@
     Created     : Mon Dec 10 16:50:29 EST 2007
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
   
 using OpenEdge.PresentationLayer.Presenter.Presenter.
 using OpenEdge.PresentationLayer.Presenter.IPresenter.

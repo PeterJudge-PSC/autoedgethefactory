@@ -7,7 +7,7 @@
     Created     : Fri Feb 20 14:38:47 EST 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.View.INavigationPanelView.
 using OpenEdge.PresentationLayer.View.ABLGui.ContainedObject.

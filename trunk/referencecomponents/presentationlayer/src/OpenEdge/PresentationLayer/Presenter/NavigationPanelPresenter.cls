@@ -7,7 +7,7 @@
     Created     : Thu Feb 05 15:43:38 EST 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.INavigationPanelPresenter. 
 using OpenEdge.PresentationLayer.Presenter.NavigationPanelPresenter.

@@ -7,7 +7,7 @@
     Created     : Thu Mar 19 14:36:29 EDT 2009
     Notes       : * These values taken from ADM2 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Model.UndoDeleteOnSubmitErrorEnum.
 using OpenEdge.Lang.EnumMember.

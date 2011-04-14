@@ -8,7 +8,7 @@
     Created     : Wed Jul 08 11:04:30 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.NoUserLoggedInError.
 using OpenEdge.Core.System.ApplicationError.
