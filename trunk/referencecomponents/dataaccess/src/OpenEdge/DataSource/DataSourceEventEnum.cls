@@ -7,7 +7,7 @@
     Created     : Fri Aug 27 16:59:30 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.DataSource.DataSourceEventEnum.
 using OpenEdge.Lang.EnumMember.

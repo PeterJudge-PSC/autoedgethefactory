@@ -9,7 +9,7 @@
                     where built-in ProDataSet callbacks are used, but the 
                     DataSource does support manual fill/fetch operations too.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.DataSource.DataSourceEventEnum.
 using OpenEdge.Lang.DataTypeEnum.

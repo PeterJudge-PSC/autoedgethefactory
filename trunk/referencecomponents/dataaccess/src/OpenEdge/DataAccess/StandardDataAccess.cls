@@ -7,7 +7,7 @@
     Created     : Tue Aug 24 15:04:40 EDT 2010
     Notes       : 
   --------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.DataAccess.IDataAccess.
 using OpenEdge.DataSource.IDataSource.

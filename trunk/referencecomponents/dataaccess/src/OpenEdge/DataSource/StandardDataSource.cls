@@ -8,7 +8,7 @@
     Notes       : * The QueryDefinition of this datasource is the 'base query';
                     the TableRequest adds to it for filtering. 
   --------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.DataSource.DataSource.
 using OpenEdge.DataAccess.IDataAccess.
