@@ -11,7 +11,7 @@
                     so that when it receives a response, it know who to pass that
                     response on to.
   ----------------------------------------------------------------------  */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
