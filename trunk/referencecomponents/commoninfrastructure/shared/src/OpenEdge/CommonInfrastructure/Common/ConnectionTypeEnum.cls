@@ -7,7 +7,7 @@
     Created     : Fri Jan 07 16:25:19 EST 2011
     Notes       : * Roughly equivalent to the ABL CONNECT method and statements
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum.
 using OpenEdge.Lang.EnumMember.
@@ -18,12 +18,14 @@ class OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum inherits EnumMembe
     define static public property Database as ConnectionTypeEnum no-undo get. private set.
     define static public property Socket as ConnectionTypeEnum no-undo get. private set.
     define static public property WebService as ConnectionTypeEnum no-undo get. private set.
+    define static public property BPMServer as ConnectionTypeEnum no-undo get. private set.
     
     constructor static ConnectionTypeEnum():
         ConnectionTypeEnum:AppServer = new ConnectionTypeEnum('AppServer').
         ConnectionTypeEnum:Database = new ConnectionTypeEnum('Database').
         ConnectionTypeEnum:Socket = new ConnectionTypeEnum('Socket').
         ConnectionTypeEnum:WebService = new ConnectionTypeEnum('WebService').
+        ConnectionTypeEnum:BPMServer = new ConnectionTypeEnum('BPMServer').
     end constructor.
     
     constructor public ConnectionTypeEnum ( input pcName as character ):
