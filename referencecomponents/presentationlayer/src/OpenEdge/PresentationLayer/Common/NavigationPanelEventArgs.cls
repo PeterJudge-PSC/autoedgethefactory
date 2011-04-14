@@ -7,7 +7,7 @@
     Created     : Fri Mar 06 13:20:57 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.RowPositionEnum. 
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.

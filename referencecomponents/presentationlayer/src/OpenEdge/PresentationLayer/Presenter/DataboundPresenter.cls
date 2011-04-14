@@ -12,7 +12,7 @@
                     in the Model, it doesn't actually talk directly to the Model
                     as an object.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.IDataboundPresenter.
 using OpenEdge.PresentationLayer.Presenter.DataboundPresenter.

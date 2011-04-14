@@ -7,7 +7,7 @@
     Created     : Tue Dec 11 11:31:52 EST 2007
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Presenter.IPresenter.
 using OpenEdge.PresentationLayer.View.EventLoopModeEnum.

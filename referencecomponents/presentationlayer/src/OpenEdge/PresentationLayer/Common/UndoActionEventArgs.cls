@@ -7,7 +7,7 @@
     Created     : Tue Mar 31 11:44:27 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.UpdateActionEnum.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.

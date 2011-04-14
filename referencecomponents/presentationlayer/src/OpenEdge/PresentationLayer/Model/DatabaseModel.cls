@@ -7,7 +7,7 @@
     Created     : Thu May 21 11:41:31 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Model.Model.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.

@@ -9,7 +9,7 @@
                  * We have an ABL implementation because not all of the UI we
                    work with will be .NET-based.  
  ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Common.DialogResultEnum.
 using OpenEdge.Lang.EnumMember.

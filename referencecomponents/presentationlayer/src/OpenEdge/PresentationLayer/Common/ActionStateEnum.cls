@@ -7,7 +7,7 @@
     Created     : Wed Mar 25 14:29:10 EDT 2009
     Notes       : 
   --------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Common.ActionStateEnum.
 using OpenEdge.Lang.FlagsEnum.

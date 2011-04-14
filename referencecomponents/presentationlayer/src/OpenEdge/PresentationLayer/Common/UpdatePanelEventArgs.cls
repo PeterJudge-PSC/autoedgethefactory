@@ -8,7 +8,7 @@
     Created     : Mon Mar 09 10:05:46 EDT 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Common.ModelActionEnum .
 using OpenEdge.PresentationLayer.Common.ModelActionEventArgs.

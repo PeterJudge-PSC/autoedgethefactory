@@ -7,7 +7,7 @@
     Created     : Wed Oct 28 12:27:03 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.PresentationLayer.Common.ModelActionEnum.
 using OpenEdge.Lang.EnumMember.

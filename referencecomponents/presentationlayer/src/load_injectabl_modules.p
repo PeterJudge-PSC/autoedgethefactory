@@ -7,7 +7,7 @@
     Created     : Mon Dec 13 13:40:24 EST 2010
     Notes       :
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 /** -- defs  -- **/
 using OpenEdge.Core.InjectABL.IKernel.
