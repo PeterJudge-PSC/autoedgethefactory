@@ -13,7 +13,7 @@
                   * The ServiceManager is a special type, and is not itself a service
                     or component (even though other services/components usually are).
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum.
