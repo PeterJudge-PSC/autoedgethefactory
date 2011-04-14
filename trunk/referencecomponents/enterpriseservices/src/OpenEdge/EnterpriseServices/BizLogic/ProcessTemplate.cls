@@ -7,7 +7,7 @@
     Created     : Tue Jul 06 11:57:08 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.EnterpriseServices.BizLogic.ProcessTemplateStateEnum.
 using OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate.
