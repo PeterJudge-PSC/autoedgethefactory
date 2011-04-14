@@ -9,7 +9,7 @@
     Notes       : * This is a sample LoginData: ILoginData could have 
                     anything in it, really. 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.*.
 

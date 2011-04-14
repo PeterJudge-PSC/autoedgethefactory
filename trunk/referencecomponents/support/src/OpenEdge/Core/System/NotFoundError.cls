@@ -7,7 +7,7 @@
     Created     : Mon Feb 22 12:56:33 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.NotFoundError.

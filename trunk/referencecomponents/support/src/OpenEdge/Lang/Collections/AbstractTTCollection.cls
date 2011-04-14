@@ -13,7 +13,7 @@
                   this is the management of the size().               
 ------------------------------------------------------------------------------*/
 
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using Progress.Lang.*.
 using OpenEdge.Lang.Collections.AbstractTTCollection.

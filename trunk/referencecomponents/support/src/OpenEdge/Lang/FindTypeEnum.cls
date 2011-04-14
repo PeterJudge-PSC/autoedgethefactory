@@ -6,7 +6,7 @@
     @author hdaniels
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.FindTypeEnum. 
 using OpenEdge.Lang.EnumMember.

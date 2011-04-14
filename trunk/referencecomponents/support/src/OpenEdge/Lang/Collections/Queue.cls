@@ -10,7 +10,7 @@
 
 using Progress.Lang.*.
 
-{routinelevel.i}
+routine-level on error undo, throw.
 
 class OpenEdge.Lang.Collections.Queue abstract: 
 

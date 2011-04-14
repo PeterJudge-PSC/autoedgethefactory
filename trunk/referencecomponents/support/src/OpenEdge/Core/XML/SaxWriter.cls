@@ -8,7 +8,7 @@
     Notes       : * The majority of method names correspond to the ABL attributes/methods,
                     which are comprehensively documented in the ABL documentation set.
   --------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.XML.SaxWriterError.
 using OpenEdge.Core.XML.SaxWriterDataTypeEnum.

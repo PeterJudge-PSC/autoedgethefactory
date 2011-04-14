@@ -7,7 +7,7 @@
     Created     : Thu Mar 11 12:05:46 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.KernelSettings.
 using OpenEdge.Lang.DateTimeAddIntervalEnum.

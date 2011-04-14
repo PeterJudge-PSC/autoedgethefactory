@@ -7,7 +7,7 @@
     Created     : Mon Mar 08 15:22:04 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.Conditions.Condition.
 using OpenEdge.Core.InjectABL.Binding.Conditions.ICondition.

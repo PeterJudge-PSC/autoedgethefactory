@@ -8,7 +8,7 @@
     Created     : Tue Apr 27 08:22:29 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.Int.
 using OpenEdge.Lang.ABLPrimitive.

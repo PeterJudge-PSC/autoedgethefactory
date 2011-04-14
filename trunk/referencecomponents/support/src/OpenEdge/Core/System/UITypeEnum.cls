@@ -9,7 +9,7 @@
     Notes       : * This class is not final since implementers could have their
                     own names for UI types.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.UITypeEnum.
 using OpenEdge.Lang.EnumMember.

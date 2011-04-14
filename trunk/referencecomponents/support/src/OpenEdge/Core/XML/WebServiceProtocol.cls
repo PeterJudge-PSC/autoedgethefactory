@@ -7,7 +7,7 @@
     Created     : Fri Jul 02 12:01:04 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.XML.WebServiceProtocol.
 using OpenEdge.Core.XML.WebServiceInvocationError.

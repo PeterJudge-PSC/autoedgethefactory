@@ -11,7 +11,7 @@
                   * For the protocol definition, see 
                     https://wiki.progress.com/display/OEBP/Object+Serialization+Protocol
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.

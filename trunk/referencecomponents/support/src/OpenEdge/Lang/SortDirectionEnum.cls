@@ -7,7 +7,7 @@
     Created     : Thu Mar 12 17:14:09 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.SortDirectionEnum.
 using OpenEdge.Lang.EnumMember.

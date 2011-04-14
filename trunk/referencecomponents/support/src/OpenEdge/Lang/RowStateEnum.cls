@@ -15,7 +15,7 @@
 
     
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.EnumMember.
 using OpenEdge.Lang.RowStateEnum.

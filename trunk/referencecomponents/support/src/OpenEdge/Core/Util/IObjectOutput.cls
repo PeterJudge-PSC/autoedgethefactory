@@ -37,7 +37,6 @@ interface OpenEdge.Core.Util.IObjectOutput:
     
     /** Write*() and Write*Array() methods to write individual members into the output.
         (see note above). */
-    
     method public void WriteObject(input poValue as Object).
     method public void WriteObjectArray(input poValue as Object extent).
     
@@ -81,5 +80,5 @@ interface OpenEdge.Core.Util.IObjectOutput:
     
     method public void WriteHandle(input phValue as handle).
     method public void WriteHandleArray(input phValue as handle extent).
-    
+
 end interface.

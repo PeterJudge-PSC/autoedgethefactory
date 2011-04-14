@@ -8,7 +8,7 @@
     Created     : Tue Mar 02 16:03:46 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.

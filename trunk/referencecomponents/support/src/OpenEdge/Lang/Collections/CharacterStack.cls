@@ -7,7 +7,7 @@
     Created     : Tue Jan 05 13:50:43 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.Collections.CharacterStack.
 using OpenEdge.Lang.Collections.Stack.

@@ -7,7 +7,7 @@
     Created     : Thu Feb 18 15:08:28 EST 2010
     Notes       : * Descriptions appear in the ABL documentation.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.SessionClientTypeEnum. 
 using OpenEdge.Lang.EnumMember.

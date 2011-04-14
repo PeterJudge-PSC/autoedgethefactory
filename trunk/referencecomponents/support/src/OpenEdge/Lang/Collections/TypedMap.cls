@@ -8,7 +8,7 @@
     Created     : Wed Apr 21 11:51:17 EDT 2010
     Notes       : * This class basically allows pseudo-generic collections
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.Collections.IMap.

@@ -7,7 +7,7 @@
     Created     : Wed Sep 02 13:46:49 EDT 2009
     Notes       : 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.ErrorSeverityEnum.

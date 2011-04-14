@@ -7,7 +7,7 @@
     Created     : Mon Mar 16 13:44:09 EDT 2009
     Notes       : * EnumMember numeric values taken from ADE
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
   
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.EnumMember.
