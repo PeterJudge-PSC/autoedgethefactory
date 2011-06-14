@@ -69,6 +69,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#establishsession(openedge.commoninfrastructure.common.iusercontext)'> EstablishSession</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
         </font>
       </td>
@@ -97,7 +111,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>VOID</code>
+          <code>LONGCHAR</code>
         </font>
       </td>
       <td>
@@ -122,20 +136,6 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs the current user out of the application.
       </td>
     </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#validatesession(openedge.commoninfrastructure.common.iusercontext)'> ValidateSession</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="method_detail"><!-- --></A>
@@ -149,6 +149,17 @@
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
       <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='establishsession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>EstablishSession</h3>
+    <code>PROTECTED  VOID
+      <b>EstablishSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
     </code>
     <dl>
       <dd>
@@ -193,7 +204,7 @@
     <hr />
     <a name='userlogin(character,character,character)'><!-- --></a>
     <h3>UserLogin</h3>
-    <code>OVERRIDE PUBLIC  VOID
+    <code>OVERRIDE PUBLIC  LONGCHAR
       <b>UserLogin</b>(CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword)
     </code>
     <dl>
@@ -205,6 +216,10 @@
             <b>Parameters:</b>
           </dt>
           <dd>character - The user's password. This should be encoded/encrypted.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>longchar If the login succeeded, the context id of the logged-inuser. </dd>
         </dl>
       </dd>
     </dl>
@@ -216,17 +231,6 @@
     </code>
     <dl>
       <dd>Logs the current user out of the application. <p> </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='validatesession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
-    <h3>ValidateSession</h3>
-    <code>PROTECTED  VOID
-      <b>ValidateSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-    </code>
-    <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>

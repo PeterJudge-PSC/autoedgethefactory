@@ -62,8 +62,8 @@
         <code>
           <b>
             <a href='#property.AppServerName'>AppServerName</a>
-          </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The logical name of the appserver to connect to; this logical name is used to retrieve the actual connection
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -190,6 +190,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setappservername(character)'> SetAppServerName</a>
+          </b>(CHARACTER pcAppServerName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;External setter of appserver name
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse" target="classFrame">IFetchResponse</a></code>
         </font>
       </td>
@@ -226,8 +240,10 @@
 				
     <a name='property.AppServerName'><!-- --></a>
     <h3>AppServerName</h3>
-    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <code>CHARACTER PUBLIC GET SET </code>
     <dl>
+      <dd>The logical name of the appserver to connect to; this logical name is used to retrieve the actual connection <p> </dd>
+      <dd>from the ConnectionManager </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -359,6 +375,18 @@
       <b>Save</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a> poRequest, <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
     </code>
     <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setappservername(character)'><!-- --></a>
+    <h3>SetAppServerName</h3>
+    <code>PUBLIC  VOID
+      <b>SetAppServerName</b>(CHARACTER pcAppServerName)
+    </code>
+    <dl>
+      <dd>External setter of appserver name <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

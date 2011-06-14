@@ -43,10 +43,12 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
         
         @param character The user's login name
         @param character The user's login/security domain
-        @param character The user's password. This should be encoded/encrypted. */
-    method override public void UserLogin(input pcUserName as character,
-                                          input pcUserDomain as character,
-                                          input pcPassword as character):
+        @param character The user's password. This should be encoded/encrypted.
+        @return longchar If the login succeeded, the context id of the logged-in
+                user. */
+    method override public longchar UserLogin(input pcUserName as character,
+                                              input pcUserDomain as character,
+                                              input pcPassword as character):
         define variable oResponse as SecurityManagerResponse extent no-undo.
         define variable oRequest as SecurityManagerRequest extent 1 no-undo.
         define variable oSMM as IServiceMessageManager no-undo.
@@ -54,7 +56,7 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
         define variable iMax as integer no-undo.
         define variable cErrorText as character no-undo.
         
-        oSMM = cast(ServiceManager:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
+        oSMM = cast(ServiceManager:GetService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
         
         oRequest[1] = new SecurityManagerRequest('SecurityManager.UserLogin', ServiceMessageActionEnum:UserLogin).
         assign oRequest[1]:UserName = pcUserName
@@ -67,6 +69,8 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
         
         /* Don't validate, since the current context should be ?, and we're estabilishing a new session */
         SetUserContext(oResponse[1]:UserContext).
+        
+        return oResponse[1]:UserContext:ContextId.
     end method.
     
     /** Merges the passed context into the curernt user's context. On the client,
@@ -76,12 +80,12 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
     method override public void SetUserContext(input poContext as IUserContext):
         Assert:ArgumentNotNull(poContext, 'User Context').
         
-        ValidateSession(poContext).
+        EstablishSession(poContext).
         
         super:SetUserContext(poContext).
     end method.
     
-    method protected void ValidateSession(input poContext as IUserContext):
+    method protected void EstablishSession(input poContext as IUserContext):
         Assert:ArgumentNotNull(poContext, 'User Context').
         
         if valid-object(CurrentUserContext) and not CurrentUserContext:Equals(poContext) then
@@ -94,7 +98,7 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
     /** The method validates the client session on the server.
         
         @param longchar The context ID for the user, so as to validate the session 
-    method override public void ValidateSession(input pcContextId as longchar):
+    method override public void EstablishSession(input pcContextId as longchar):
         define variable oResponse as SecurityManagerResponse extent no-undo.
         define variable oRequest as SecurityManagerRequest extent 1 no-undo.
         define variable oSMM as IServiceMessageManager no-undo.
@@ -102,9 +106,9 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
         define variable iMax as integer no-undo.
         define variable cErrorText as character no-undo.
         
-        oSMM = cast(ServiceManager:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
+        oSMM = cast(ServiceManager:GetService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
         
-        oRequest[1] = new SecurityManagerRequest('SecurityManager.ValidateSession', ServiceMessageActionEnum:ValidateSession).
+        oRequest[1] = new SecurityManagerRequest('SecurityManager.EstablishSession', ServiceMessageActionEnum:EstablishSession).
         oRequest[1]:ContextId = pcContextId.
         oRequest[1]:UserContext = GetPendingContext().
         
@@ -123,10 +127,13 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityMana
         define variable oRequest as SecurityManagerRequest extent 1 no-undo.
         define variable oSMM as IServiceMessageManager no-undo.
         
+        if not valid-object(CurrentUserContext) then
+            return.
+        
         /* We can use different service names for login and logout; both will resolve to the same service provider.
            This is used for illustrative purposes. See OpenEdge.CommonInfrastructure.Common.InjectABL.CommonInfrastructureModule 
            for more details */
-        oSMM = cast(ServiceManager:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
+        oSMM = cast(ServiceManager:GetService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
         
         oRequest[1] = new SecurityManagerRequest(SecurityManager:ISecurityManagerType:TypeName,
                                                  ServiceMessageActionEnum:UserLogout).

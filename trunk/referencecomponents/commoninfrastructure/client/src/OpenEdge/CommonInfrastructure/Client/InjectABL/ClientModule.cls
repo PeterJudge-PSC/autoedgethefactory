@@ -50,6 +50,7 @@ class OpenEdge.CommonInfrastructure.Client.InjectABL.ClientModule inherits Injec
             :To('OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter')
             :Named(SecurityManager:ISecurityManagerType:TypeName)
             :OnThinClientSession()
+            :WithPropertyValue('AppServerName', 'asAutoEdgeTheFactory')
             :WithPropertyValue('Service', SecurityManager:ISecurityManagerType:TypeName).
         
         oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider').
@@ -57,6 +58,7 @@ class OpenEdge.CommonInfrastructure.Client.InjectABL.ClientModule inherits Injec
             :To('OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter')
             :Named('SecurityManager.UserLogin')
             :OnThinClientSession()
+            :WithPropertyValue('AppServerName', 'asAutoEdgeTheFactory')
             :WithPropertyValue('Service', 'SecurityManager.UserLogin').
     
     end method.

@@ -30,6 +30,7 @@ using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
 
+using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
@@ -133,6 +134,8 @@ class OpenEdge.CommonInfrastructure.Client.ServiceAdapter abstract
     method static public memptr SerializeContext(input poUserContext as IUserContext):
         define variable mContext as memptr no-undo.
         define variable oOutput as IObjectOutput no-undo.
+        
+        set-byte-order(mContext) = ByteOrderEnum:BigEndian:Value.
         
         oOutput = new ObjectOutputStream().
         oOutput:WriteObject(poUserContext).

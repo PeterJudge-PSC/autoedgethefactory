@@ -9,7 +9,9 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter.
 using OpenEdge.CommonInfrastructure.Client.ServiceAdapter.
+
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider.
@@ -18,18 +20,23 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEn
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
-using OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
+using OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum.
 
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.System.UnsupportedOperationError.
+using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.System.UnhandledError.
 using OpenEdge.Core.System.InvalidCallError.
 using OpenEdge.Lang.ByteOrderEnum.
+using OpenEdge.Lang.WidgetHandle.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Error.
+using Progress.Lang.Object.
 
-class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherits ServiceAdapter:
-    
+class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherits AppServerServiceAdapter:
+
     constructor public SecurityManagerServiceAdapter():
         super().
     end constructor.
@@ -59,7 +66,7 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherit
         case cast(poRequest[1], IServiceMessage):ActionType:
             when ServiceMessageActionEnum:UserLogin then oResponse = UserLogin(cast(poRequest, SecurityManagerRequest)).
             when ServiceMessageActionEnum:UserLogout then oResponse = UserLogout(cast(poRequest, SecurityManagerRequest)).
-            when ServiceMessageActionEnum:ValidateSession then oResponse = ValidateSession(cast(poRequest, SecurityManagerRequest)).
+            when ServiceMessageActionEnum:EstablishSession then oResponse = EstablishSession(cast(poRequest, SecurityManagerRequest)).
             otherwise 
                 undo, throw new UnsupportedOperationError(
                                         cast(poRequest[1], IServiceMessage):ActionType:ToString(),
@@ -92,9 +99,21 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherit
             
             oResponse[iLoop]:UserContext = ServiceAdapter:DeserializeContext(mUserContext).
             
-            catch oError as Error:
+            catch oApplicationError as ApplicationError:
+                /* Create response, since we've got an UNDO block */
+                oResponse[iLoop] = new SecurityManagerResponse(poRequest[iLoop]).
+                
                 cast(oResponse[iLoop], IServiceResponse):HasError = true.
-                cast(oResponse[iLoop], IServiceResponse):ErrorText = oError:GetMessage(1).
+                cast(oResponse[iLoop], IServiceResponse):ErrorText = oApplicationError:ResolvedMessageText().
+            end catch.
+            catch oError as Error:
+                define variable oUHError as UnhandledError no-undo.
+                oUHError = new UnhandledError(oError).
+                
+                /* Create response, since we've got an UNDO block */
+                oResponse[iLoop] = new SecurityManagerResponse(poRequest[iLoop]).
+                cast(oResponse[iLoop], IServiceResponse):HasError = true.
+                cast(oResponse[iLoop], IServiceResponse):ErrorText = oUHError:ResolvedMessageText().
             end catch.
         end.
         
@@ -113,23 +132,33 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherit
         
         do iLoop = 1 to iMax on error undo, next:
             oResponse[iLoop] = new SecurityManagerResponse(poRequest[iLoop]).
+            
             set-byte-order(mUserContext) = ByteOrderEnum:BigEndian:Value.
+            
             mUserContext = ServiceAdapter:SerializeContext(poRequest[iLoop]:UserContext).
             
             run OpenEdge/CommonInfrastructure/Server/service_interface_userlogout.p on GetServiceLocation()
                     (input-output mUserContext).
             
             oResponse[iLoop]:UserContext = ServiceAdapter:DeserializeContext(mUserContext).
-            catch oError as Error:
+            
+            catch oApplicationError as ApplicationError:
                 cast(oResponse[iLoop], IServiceResponse):HasError = true.
-                cast(oResponse[iLoop], IServiceResponse):ErrorText = oError:GetMessage(1).
+                cast(oResponse[iLoop], IServiceResponse):ErrorText = oApplicationError:ResolvedMessageText().
+            end catch.
+            catch oError as Error:
+                define variable oUHError as UnhandledError no-undo.
+                oUHError = new UnhandledError(oError).
+                
+                cast(oResponse[iLoop], IServiceResponse):HasError = true.
+                cast(oResponse[iLoop], IServiceResponse):ErrorText = oUHError:ResolvedMessageText().
             end catch.
         end.
         
         return oResponse.
     end method.
     
-    method protected SecurityManagerResponse extent ValidateSession(input poRequest as SecurityManagerRequest extent):
+    method protected SecurityManagerResponse extent EstablishSession(input poRequest as SecurityManagerRequest extent):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         define variable cContextId as longchar no-undo.
@@ -148,20 +177,20 @@ class OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter inherit
             
             oResponse[iLoop]:UserContext = ServiceAdapter:DeserializeContext(mUserContext).
                                             
-            catch oError as Error:
+            catch oApplicationError as ApplicationError:
                 cast(oResponse[iLoop], IServiceResponse):HasError = true.
-                cast(oResponse[iLoop], IServiceResponse):ErrorText = oError:GetMessage(1).
+                cast(oResponse[iLoop], IServiceResponse):ErrorText = oApplicationError:ResolvedMessageText().
+            end catch.
+            catch oError as Error:
+                define variable oUHError as UnhandledError no-undo.
+                oUHError = new UnhandledError(oError).
+                
+                cast(oResponse[iLoop], IServiceResponse):HasError = true.
+                cast(oResponse[iLoop], IServiceResponse):ErrorText = oUHError:ResolvedMessageText().
             end catch.
         end.
         
         return oResponse.
-    end method.
-    
-    /** Returns the ABL service or session handle on which to run the service interface.
-        
-        @return handle A server handle on which to run this service.    */
-    method protected handle GetServiceLocation():
-        return ConnectionManager:GetConnectionHandle(ConnectionTypeEnum:AppServer, 'AutoEdgeTheFactory').
     end method.
     
 end class.

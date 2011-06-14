@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\Client</font>
       <br />CLASS SecurityManagerServiceAdapter
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Client/ServiceAdapter.cls.html" title="OpenEdge.CommonInfrastructure.Client.ServiceAdapter" target="classFrame">ServiceAdapter</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.Client.SecurityManagerServiceAdapter INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Client/AppServerServiceAdapter.cls.html" title="OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter" target="classFrame">AppServerServiceAdapter</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -63,6 +63,20 @@
           <b>
             <a href='#()'>CONSTRUCTOR </a>
           </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse" target="classFrame">SecurityManagerResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#establishsession(openedge.commoninfrastructure.common.servicemessage.securitymanagerrequest)'> EstablishSession</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest" target="classFrame">SecurityManagerRequest</a> poRequest)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -97,20 +111,6 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>HANDLE</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getservicelocation()'> GetServiceLocation</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the ABL service or session handle on which to run the service interface.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse" target="classFrame">SecurityManagerResponse</a></code>
         </font>
       </td>
@@ -136,20 +136,6 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse" target="classFrame">SecurityManagerResponse</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#validatesession(openedge.commoninfrastructure.common.servicemessage.securitymanagerrequest)'> ValidateSession</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest" target="classFrame">SecurityManagerRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="method_detail"><!-- --></A>
@@ -163,6 +149,17 @@
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
       <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='establishsession(openedge.commoninfrastructure.common.servicemessage.securitymanagerrequest)'><!-- --></a>
+    <h3>EstablishSession</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse" target="classFrame">SecurityManagerResponse</a>
+      <b>EstablishSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest" target="classFrame">SecurityManagerRequest</a> poRequest)
     </code>
     <dl>
       <dd>
@@ -210,23 +207,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='getservicelocation()'><!-- --></a>
-    <h3>GetServiceLocation</h3>
-    <code>PROTECTED  HANDLE
-      <b>GetServiceLocation</b>()
-    </code>
-    <dl>
-      <dd>Returns the ABL service or session handle on which to run the service interface. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>handle A server handle on which to run this service.</dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='userlogin(openedge.commoninfrastructure.common.servicemessage.securitymanagerrequest)'><!-- --></a>
     <h3>UserLogin</h3>
     <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse" target="classFrame">SecurityManagerResponse</a>
@@ -242,17 +222,6 @@
     <h3>UserLogout</h3>
     <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse" target="classFrame">SecurityManagerResponse</a>
       <b>UserLogout</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest" target="classFrame">SecurityManagerRequest</a> poRequest)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='validatesession(openedge.commoninfrastructure.common.servicemessage.securitymanagerrequest)'><!-- --></a>
-    <h3>ValidateSession</h3>
-    <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse" target="classFrame">SecurityManagerResponse</a>
-      <b>ValidateSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/SecurityManagerRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest" target="classFrame">SecurityManagerRequest</a> poRequest)
     </code>
     <dl>
       <dd>
