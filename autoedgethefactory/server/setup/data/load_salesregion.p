@@ -33,6 +33,11 @@ procedure loadSalesRegions:
     
     for each Tenant:
         do iLoop = 1 to iMax:
+            if can-find(SalesRegion where
+                        SalesRegion.Name eq entry(iLoop, cRegions, '|') and
+                        SalesRegion.TenantId eq Tenant.TenantId) then
+                next.
+            
             create SalesRegion.
             assign SalesRegion.Name = entry(iLoop, cRegions, '|')
                    SalesRegion.TenantId = Tenant.TenantId.

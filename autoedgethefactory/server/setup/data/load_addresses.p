@@ -22,6 +22,7 @@ define variable cStreets as character no-undo.
 define variable cStreetTypes as character no-undo.
 define variable cCities as character no-undo.
 define variable cPostCodes as character no-undo.
+define variable cTypes as character no-undo.
 
 function getRandom returns character (input cValueList as character):
     define variable iEntries as integer    no-undo.
@@ -30,6 +31,8 @@ function getRandom returns character (input cValueList as character):
         then return entry ((random (1, iEntries)), cValueList, '|') .
         else return cValueList .
 end function .
+
+cTypes  = 'shipping|billing|postal|home|street'.
 
 cStreets = 'Smith|Main|Shawsheen|Yellow Brick|High|Loopy|Apple Blossom|Long|Shore|Pine|Oak|Park|Barnyard'.
 cStreetTypes = 'Ave|Str|Rd|Terrace|Lane|Rt|Ct'.
@@ -42,21 +45,16 @@ run createTypes.
 run createDetail.
 
 procedure createTypes:
-    create AddressType.
-    assign AddressType.AddressType = 'shipping'.
-
-    create AddressType.
-    assign AddressType.AddressType = 'billing'.
-
-    create AddressType.
-    assign AddressType.AddressType = 'postal'.
-
-    create AddressType.
-    assign AddressType.AddressType = 'home'.
-
-    create AddressType.
-    assign AddressType.AddressType = 'street'.
+    iMax = num-entries(cTypes, '|').
     
+    do iLoop = 1 to iMax:
+        if can-find(AddressType where
+                    AddressType.AddressType eq entry(iLoop, cTypes, '|')) then
+            next.
+            
+        create AddressType.
+        assign AddressType.AddressType = entry(iLoop, cTypes, '|').
+    end.
 end procedure.
 
 procedure createDetail:

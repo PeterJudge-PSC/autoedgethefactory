@@ -46,14 +46,16 @@ class AutoEdge.Factory.Server.InjectABL.BuildModule inherits BusinessComponentMo
             :Using(InjectABLServiceProviderType). 
         
         /** BUSINESS WORKSTEPS **/
-        /*BindWorkStep(workstepname, concrete type, is bizlogic step)*/
-        BindWorkStep("BuildVehicle::ProcessComponents", "AutoEdge.Factory.Server.Build.BusinessComponents.ProcessComponents", false).
-        BindWorkStep("BuildVehicle::AssembleChassis", "AutoEdge.Factory.Server.Build.BusinessComponents.AssembleChassis", false).
-        BindWorkStep("BuildVehicle::AssembleBody", "AutoEdge.Factory.Server.Build.BusinessComponents.AssembleBody", false).
-        BindWorkStep("BuildVehicle::PaintVehicle", "AutoEdge.Factory.Server.Build.BusinessComponents.PaintVehicle", false).
-        BindWorkStep("BuildVehicle::AssembleInterior", "AutoEdge.Factory.Server.Build.BusinessComponents.AssembleInterior", false).
-        BindWorkStep("BuildVehicle::MateAssembledComponents", "AutoEdge.Factory.Server.Build.BusinessComponents.MateAssembledComponents", false).
-        BindWorkStep("BuildVehicle::CompleteVehicleBuild", "AutoEdge.Factory.Server.Build.BusinessComponents.CompleteVehicleBuild", true).
+        BindWorkStep("BuildVehicle::ProcessComponents", "AutoEdge.Factory.Server.Build.BusinessComponents.ProcessComponents", "").
+        BindWorkStep("BuildVehicle::AssembleChassis", "AutoEdge.Factory.Server.Build.BusinessComponents.AssembleChassis", "").
+        BindWorkStep("BuildVehicle::AssembleBody", "AutoEdge.Factory.Server.Build.BusinessComponents.AssembleBody", "").
+        BindWorkStep("BuildVehicle::PaintVehicle", "AutoEdge.Factory.Server.Build.BusinessComponents.PaintVehicle", "").
+        BindWorkStep("BuildVehicle::AssembleInterior", "AutoEdge.Factory.Server.Build.BusinessComponents.AssembleInterior", "").
+        BindWorkStep("BuildVehicle::MateAssembledComponents", "AutoEdge.Factory.Server.Build.BusinessComponents.MateAssembledComponents", "").
+        /* complete vehicle has a BizLogic decorator */
+        BindWorkStep("BuildVehicle::CompleteVehicleBuild",
+                     "AutoEdge.Factory.Server.Build.BusinessComponents.CompleteVehicleBuild",
+                     'AutoEdge.Factory.Server.Build.BusinessComponents.BizLogicCompleteVehicleBuild').
     end method.
     
     method override public void Load(  ):

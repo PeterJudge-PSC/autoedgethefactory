@@ -14,12 +14,12 @@
       <VerboseLogging>true</VerboseLogging>
       <SaveBeforeGen>true</SaveBeforeGen>
       <DotNetClient>false</DotNetClient>
-      <JavaClient>false</JavaClient>
-      <WebServicesClient>true</WebServicesClient>
+      <JavaClient>true</JavaClient>
+      <WebServicesClient>false</WebServicesClient>
       <ESBClient>false</ESBClient>
       <ESBClient2>false</ESBClient2>
       <UserDefinedAppService>true</UserDefinedAppService>
-      <JavaCompilerType>1</JavaCompilerType>
+      <JavaCompilerType>3</JavaCompilerType>
       <JavaCompiler>&lt;Install Dir&gt;\jdk\bin\javac</JavaCompiler>
       <JavaSwitches />
       <JavaClasspathSwitch>-classpath</JavaClasspathSwitch>

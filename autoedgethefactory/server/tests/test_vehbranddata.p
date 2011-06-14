@@ -25,7 +25,7 @@
   ----------------------------------------------------------------------*/
 
 /* ***************************  Definitions  ************************** */
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest.

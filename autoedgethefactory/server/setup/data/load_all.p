@@ -20,14 +20,13 @@ run setup/data/load_tenants.p.
 run setup/data/load_salesregion.p.
 
 /**/
-run setup/data/load_contacts.p.
+run setup/data/load_contact_types.p.
 run setup/data/load_addresses.p.
 
 run setup/data/load_dealers.p.
 run setup/data/load_customers.p.
 run setup/data/load_employees.p.
-/*run setup/data/load_suppliers.p.*/
 run setup/data/load_users.p.
 
-/*run setup/data/load_orders.p. */
 run setup/data/load_items.p.
+/*run setup/data/load_orders.p. */

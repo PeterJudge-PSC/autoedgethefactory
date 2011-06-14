@@ -12,9 +12,7 @@
   ----------------------------------------------------------------------*/
 
 /* ***************************  Definitions  ************************** */
-/*
 routine-level on error undo, throw.
-*/
 
 /* ********************  Preprocessor Definitions  ******************** */
 function getRandom returns character (input cValueList as character):
@@ -94,7 +92,6 @@ procedure loadSalesrep:
            Salesrep.Code = cCode
            Salesrep.SalesRegion = SalesRegion.Name
            .
-    
 end procedure.
 
 procedure AddContact:
@@ -119,6 +116,12 @@ procedure AddContact:
     
     find ContactType where ContactType.Name = pcContactType  no-lock.
     
+    if can-find(ContactXref where
+                ContactXref.ParentId eq pcParentId and
+                ContactXref.TenantId eq pcTenantId and
+                ContactXref.ContactType = ContactType.Name) then
+        return.
+    
     create ContactXref.
     assign ContactXref.ContactDetailId = ContactDetail.ContactDetailId
            ContactXref.ParentId = pcParentId
@@ -134,13 +137,21 @@ procedure loadEmployees:
     
     define variable iLoop as integer no-undo.
     define variable iMax as integer no-undo.
+    define variable iNumCreated as integer no-undo.
     define variable cDealerDomain as character no-undo.
     
     /* employees-per-departmnt */
     iMax = 5.
   
     if query qryDealer:num-results gt 0 then
-    do iLoop = 1 to iMax:
+    do while iNumCreated le iMax: 
+        piLastEmpNum = piLastEmpNum + 1.
+        
+        if can-find(Employee where
+                    Employee.EmpNum eq piLastEmpNum and
+                    Employee.TenantId eq pcTenantId) then
+            next.
+        
         reposition qryDealer to row random(0, iNumDealers).
         get next qryDealer no-lock.
         
@@ -148,12 +159,12 @@ procedure loadEmployees:
              ContactDetail.ContactDetailId = Dealer.SalesEmailContactId
              no-lock.                        
         cDealerDomain = entry(2, ContactDetail.Detail, '@').
-         
+        
         create Employee.
         assign Employee.Birthdate = date(random(1,12), random(1,28), random(1950, 1980))
                Employee.DepartmentId = pcDeptId
                Employee.EmployeeId = guid(generate-uuid)
-               piLastEmpNum = piLastEmpNum + 1
+               iNumCreated = iNumCreated  + 1
                Employee.EmpNum = piLastEmpNum
                Employee.FirstName = (if iLoop mod 2 eq 0 then getRandom(cFirstNamesFemale) else getRandom(cFirstNamesMale))  
                Employee.LastName = getRandom(cLastNames)
@@ -189,6 +200,12 @@ procedure AddHomeAddress:
     
     find AddressType where  AddressType.AddressType eq 'home' no-lock.
     
+    if can-find(AddressXref where
+                AddressXref.ParentId eq pcEmployeeId and
+                AddressXref.TenantId eq pcTenantId and
+                AddressXref.AddressType = ContactType.Name) then
+        return.
+    
     create AddressXref.
     assign AddressXref.AddressDetailId = pcAddressDetailId
            AddressXref.AddressType = AddressType.AddressType
@@ -210,8 +227,14 @@ procedure loadDepartments:
     iMax = num-entries(cNames, '|').
     
     for each Tenant no-lock:
-        iLastEmpNo = 100.
-        
+        for each Employee where
+                 Employee.TenantId eq Tenant.TenantId
+                 no-lock
+                 by Employee.EmpNum descending:
+            iLastEmpNo = 100.
+            leave.
+        end.
+                
         open query qryRegion preselect each SalesRegion where SalesRegion.TenantId = Tenant.TenantId no-lock.
         iNumRegions = max(query qryRegion:num-results - 1, 1).
         
@@ -231,13 +254,20 @@ procedure loadDepartments:
                  lbDept.Name = cParent
                  no-lock no-error.
             
-            create Department.
-            assign Department.Code = string(iLoop * 100)
-                   Department.DepartmentId = guid(generate-uuid)
-                   Department.Name = cCode
-                   Department.ParentDepartmentId = (if available lbDept then lbDept.DepartmentId else '')
-                   Department.TenantId = Tenant.TenantId.
-            
+            find Department where
+                 Department.Code eq string(iLoop * 100) and
+                 Department.TenantId eq Tenant.TenantId
+                 no-lock no-error.
+            if not available Department then
+            do:                 
+                create Department.
+                assign Department.Code = string(iLoop * 100)
+                       Department.DepartmentId = guid(generate-uuid)
+                       Department.Name = cCode
+                       Department.ParentDepartmentId = (if available lbDept then lbDept.DepartmentId else '')
+                       Department.TenantId = Tenant.TenantId.
+            end.
+                        
             run loadEmployees(Department.DepartmentId,
                               Department.TenantId,
                               Department.Name,

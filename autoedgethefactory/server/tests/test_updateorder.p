@@ -10,7 +10,7 @@
     Created     : Mon Aug 02 09:37:10 EDT 2010
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Lang.SessionClientTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceRequestError.
@@ -344,11 +344,11 @@ oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:ISer
 /* Are we who we say we are? Note that this should really happen on activate. activate doesn't run for state-free AppServers */
 oSecMgr = cast(oServiceMgr:StartService(SecurityManager:ISecurityManagerType), ISecurityManager).
 
-oSecMgr:UserLogin('guest', 'guest.' + pcBrand, encode('guest')).
+oSecMgr:UserLogin('guest', 'guest.' + pcBrand, 'letmein').
 
-/*oSecMgr:ValidateSession(pcUserContextId).*/
+/*oSecMgr:EstablishSession(pcUserContextId).*/
 
-oSecMgr:AuthenticateServiceAction('CaptureOrder', ServiceMessageActionEnum:SaveData).
+oSecMgr:AuthoriseServiceAction('CaptureOrder', ServiceMessageActionEnum:SaveData).
 
 oServiceMessageManager = cast(oServiceMgr:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
 
