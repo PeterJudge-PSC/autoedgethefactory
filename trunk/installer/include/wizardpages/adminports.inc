@@ -1,7 +1,3 @@
-[CustomMessages]
-adminportCaption=Progress AdminServer Port Setup
-adminportDescription=Specify the Progress AdminServer port to be used
-
 [Code]
 var
 	lblAdminServerPort: TLabel;
@@ -9,10 +5,6 @@ var
 	txtAdminServerPort: TEdit;
 	txtNSPort:			TEdit;
 
-function AdminPorts_NextButtonClick(Page: TWizardPage): Boolean;
-begin
-	Result := True;
-end;
 
 procedure AdminPort_CancelButtonClick(Page: TWizardPage; var Cancel, Confirm: Boolean);
 begin
@@ -76,10 +68,6 @@ begin
 		Text := '5162';
 	end;
   
-	with Page do
-	begin
-		OnNextButtonClick := @AdminPorts_NextButtonClick;
-	end;
 	
 	Result := Page.ID;
 end;

@@ -1,5 +1,5 @@
 
-Welcome to the OpenEdge Application Example, AutoEdge|TheFactory, Version 1.0.x.
+Welcome to the OpenEdge Application Example, AutoEdge|TheFactory.
 
 Please read these notes carefully before continuing the installation.
 
@@ -11,13 +11,13 @@ If you have a previous version of the OpenEdge Application Example installed:
 
 Pre-Requisite Software
 ======================
-In order to run the AutoEdge|TheFactory v1.0.x application, the following software is required to be pre-installed:
-1. Progress|OpenEdge Release 10.2Bx
+In order to run the AutoEdge|TheFactory reference application and its components, the following software is required to be pre-installed:
+1. Progress|OpenEdge Release 10.2B or later
   i) Development tools, specifically OpenEdge Architect
   ii) OpenEdge AppServer
   iii) WebServices Adapter, properly configured
 
-2. Progress|Savvion v7.6
+2. Progress|Savvion v7.6.1 or later
   i) A Business Manager service is required to run the business workflows
   ii) Process Modeller or SBM Studio is required to view the models
 

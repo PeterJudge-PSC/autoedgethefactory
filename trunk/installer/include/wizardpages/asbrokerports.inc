@@ -1,108 +1,157 @@
-[CustomMessages]
-ASBrokerPortsCaption=Progress AppServer Brokers Setup
-ASBrokerPortsDescription=Please specify the AppServer broker ports (TCP) to use
-
-[Code]
-var
-	lblASAutoEdgeFactory		: TLabel;
-  lblMinPort			: TLabel;
-  lblMaxPort			: TLabel;
-	txtASAutoEdgeFactory		: TEdit;
-  txtMinPort			: TEdit;
-  txtMaxPort			: TEdit;
-
-function ASBrokerPorts_NextButtonClick(Page: TWizardPage): Boolean;
-begin
-	Result := True;
-end;
-
-function ASBrokerPorts_CreatePage(PreviousPageId: Integer): Integer;
-var
-	Page: TWizardPage;
-begin
-	Page := CreateCustomPage( PreviousPageId,
-							  ExpandConstant( '{cm:ASBrokerPortsCaption}' ),
-							  ExpandConstant( '{cm:ASBrokerPortsDescription}' ));
-
-  { lblASAutoEdgeFactory }
-  lblASAutoEdgeFactory := TLabel.Create(Page);
-  with lblASAutoEdgeFactory do
+  
+    [Code]
+  var
+    lblAETFASBrokerPort: TLabel;
+    lblAETFASMinPort: TLabel;
+    lblAETFASMaxPort: TLabel;
+    lblAETFAppserverName: TLabel;
+    txtAETFASBrokerPort: TEdit;
+    txtAETFASMinPort: TEdit;
+    txtAETFASMaxPort: TEdit;
+    txtAEFAppserverName: TEdit;
+  
+  procedure ASBrokerPorts_Activate(Page: TWizardPage);
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(16);
-    Top := ScaleY(28);
-    Width := ScaleX(106);
-    Height := ScaleY(13);
-    Caption := 'AutoEdge|TheFactory';
   end;
   
-  { lblMinPort }
-  lblMinPort := TLabel.Create(Page);
-  with lblMinPort do
+  function ASBrokerPorts_ShouldSkipPage(Page: TWizardPage): Boolean;
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(16);
-    Top := ScaleY(60);
-    Width := ScaleX(76);
-    Height := ScaleY(13);
-    Caption := 'Agents Min Port';
+    Result := False;
   end;
   
-  { lblMaxPort }
-  lblMaxPort := TLabel.Create(Page);
-  with lblMaxPort do
+  function ASBrokerPorts_BackButtonClick(Page: TWizardPage): Boolean;
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(16);
-    Top := ScaleY(92);
-    Width := ScaleX(80);
-    Height := ScaleY(13);
-    Caption := 'Agents Max Port';
+    Result := True;
   end;
   
-  { txtASAutoEdgeFactory }
-  txtASAutoEdgeFactory := TEdit.Create(Page);
-  with txtASAutoEdgeFactory do
+  function ASBrokerPorts_NextButtonClick(Page: TWizardPage): Boolean;
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(168);
-    Top := ScaleY(24);
-    Width := ScaleX(65);
-    Height := ScaleY(21);
-    TabOrder := 0;
-    Text := '7101';
+    Result := True;
   end;
   
-  { txtMinPort }
-  txtMinPort := TEdit.Create(Page);
-  with txtMinPort do
+  procedure ASBrokerPorts_CancelButtonClick(Page: TWizardPage; var Cancel, Confirm: Boolean);
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(168);
-    Top := ScaleY(56);
-    Width := ScaleX(65);
-    Height := ScaleY(21);
-    TabOrder := 1;
-    Text := '2200';
   end;
   
-  { txtMaxPort }
-  txtMaxPort := TEdit.Create(Page);
-  with txtMaxPort do
+  function ASBrokerPorts_CreatePage(PreviousPageId: Integer): Integer;
+  var
+    Page: TWizardPage;
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(168);
-    Top := ScaleY(88);
-    Width := ScaleX(65);
-    Height := ScaleY(21);
-    TabOrder := 2;
-    Text := '2400';
+    Page := CreateCustomPage(
+      PreviousPageId,
+      ExpandConstant('{cm:ASBrokerPortsCaption}'),
+      ExpandConstant('{cm:ASBrokerPortsDescription}')
+    );
+  
+    { lblAETFASBrokerPort }
+    lblAETFASBrokerPort := TLabel.Create(Page);
+    with lblAETFASBrokerPort do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(16);
+      Top := ScaleY(52);
+      Width := ScaleX(54);
+      Height := ScaleY(13);
+      Caption := 'Broker Port';
+    end;
+    
+    { lblAETFASMinPort }
+    lblAETFASMinPort := TLabel.Create(Page);
+    with lblAETFASMinPort do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(16);
+      Top := ScaleY(84);
+      Width := ScaleX(76);
+      Height := ScaleY(13);
+      Caption := 'Agents Min Port';
+    end;
+    
+    { lblAETFASMaxPort }
+    lblAETFASMaxPort := TLabel.Create(Page);
+    with lblAETFASMaxPort do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(16);
+      Top := ScaleY(116);
+      Width := ScaleX(80);
+      Height := ScaleY(13);
+      Caption := 'Agents Max Port';
+    end;
+    
+    { lblAETFAppserverName }
+    lblAETFAppserverName := TLabel.Create(Page);
+    with lblAETFAppserverName do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(16);
+      Top := ScaleY(20);
+      Width := ScaleX(81);
+      Height := ScaleY(13);
+      Caption := 'AppServer Name';
+    end;
+    
+    { txtAETFASBrokerPort }
+    txtAETFASBrokerPort := TEdit.Create(Page);
+    with txtAETFASBrokerPort do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(168);
+      Top := ScaleY(48);
+      Width := ScaleX(65);
+      Height := ScaleY(21);
+      TabOrder := 0;
+      Text := '7101';
+    end;
+    
+    { txtAETFASMinPort }
+    txtAETFASMinPort := TEdit.Create(Page);
+    with txtAETFASMinPort do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(168);
+      Top := ScaleY(80);
+      Width := ScaleX(65);
+      Height := ScaleY(21);
+      TabOrder := 1;
+      Text := '2200';
+    end;
+    
+    { txtAETFASMaxPort }
+    txtAETFASMaxPort := TEdit.Create(Page);
+    with txtAETFASMaxPort do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(168);
+      Top := ScaleY(112);
+      Width := ScaleX(65);
+      Height := ScaleY(21);
+      TabOrder := 2;
+      Text := '2400';
+    end;
+    
+    { txtAEFAppserverName }
+    txtAEFAppserverName := TEdit.Create(Page);
+    with txtAEFAppserverName do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(168);
+      Top := ScaleY(16);
+      Width := ScaleX(137);
+      Height := ScaleY(21);
+      TabOrder := 3;
+      Text := 'asAutoEdgeTheFactory';
+    end;
+    
+  
+    with Page do
+    begin
+      OnActivate := @ASBrokerPorts_Activate;
+      OnShouldSkipPage := @ASBrokerPorts_ShouldSkipPage;
+      OnBackButtonClick := @ASBrokerPorts_BackButtonClick;
+      OnNextButtonClick := @ASBrokerPorts_NextButtonClick;
+      OnCancelButtonClick := @ASBrokerPorts_CancelButtonClick;
+    end;
+  
+    Result := Page.ID;
   end;
-  	
-	with Page do
-	begin
-		OnNextButtonClick := @ASBrokerPorts_NextButtonClick;
-	end;
-	
-	Result := Page.ID;
-end;
