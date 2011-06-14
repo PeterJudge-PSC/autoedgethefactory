@@ -7,7 +7,7 @@
     Created     : Thu Apr 08 10:13:33 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
   
 using OpenEdge.Test.*.
 using Progress.Lang.*.

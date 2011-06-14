@@ -11,7 +11,7 @@
 using Progress.Lang.*.
 using OpenEdge.Test.*.
 
-{routinelevel.i}
+routine-level on error undo, throw.
 
 class OpenEdge.Test.ChildPresenter implements OpenEdge.Test.IChildPresenter: 
 

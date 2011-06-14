@@ -7,7 +7,7 @@
     Created     : Wed Apr 07 14:25:43 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using Progress.Lang.*.
 using OpenEdge.PresentationLayer.View.*.

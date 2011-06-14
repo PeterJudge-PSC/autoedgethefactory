@@ -12,7 +12,7 @@ routine-level on error undo, throw.
   
 /* No USING to make it clear which Object is which */
 
-class OpenEdge.PresentationLayer.View.GuiForDotNet.TagWrapper inherits System.Object:
+class OpenEdge.PresentationLayer.View.GuiForDotNet.TagWrapper final inherits System.Object:
     /** The ABL Object being stored in the .NET Object's Tag property. */
     define public property PABLO as Progress.Lang.Object no-undo get. private set.  
     
