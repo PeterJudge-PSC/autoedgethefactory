@@ -40,9 +40,6 @@ interface OpenEdge.CommonInfrastructure.Common.IServiceManager /* inherits IMana
     @todo(doc="change sig in uml/doc ").
     @todo(doc="Add all below to OERA UML").
     
-    /** Starts all registered services */
-    method public void StartServices().
-    
     /** Starts and returns a running instance of a service
         
         @param ServiceTypeEnum The component type; ignored when InjectABL used,
@@ -54,7 +51,7 @@ interface OpenEdge.CommonInfrastructure.Common.IServiceManager /* inherits IMana
     
     /** Starts and returns a service as specified by a type/class. Typically
         an interface type name.
-                
+        
         @param Class The class of the service to start 
         @return IService The running instance of the requested service */
     method public IService StartService(input poService as class Class).
@@ -84,17 +81,10 @@ interface OpenEdge.CommonInfrastructure.Common.IServiceManager /* inherits IMana
     method public IService GetService(input poService as class Class,
                                       input pcInstanceName as character).
     
-    /** Stop all services */
-    method public void StopServices().
-    
     /** Stops a running service.
         @param poServiceInstance A running service instance */
     method public void StopService(input poServiceInstance as IService).
     
-    @deprecated(version=0.0).
-    @todo(task="doc", action="remove from OERA UML").
-/*    method public character GetServiceFile(pcServiceName as character, poComponentType as EnumMember).*/
-
     /** Finds (and starts if needed) an IServiceProvider which applies to the service name passed as 
         an argument. 
     

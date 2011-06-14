@@ -20,9 +20,6 @@ class OpenEdge.CommonInfrastructure.Common.ComponentTypeEnum inherits EnumMember
         members (Common, Client & Server). */
     define public static property Service as ComponentTypeEnum no-undo get. private set.
 
-    /** This component is a ServiceAdapter.  */
-    define public static property ServiceAdapter as ComponentTypeEnum no-undo get. private set.
-    
     /** This component is the ServiceManager for the session. It's not a service nor a manager, strictly speaking. */
     define public static property ServiceManager as ComponentTypeEnum no-undo get. private set.
 

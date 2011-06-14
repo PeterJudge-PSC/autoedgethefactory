@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\Common</font>
       <br />CLASS ServiceManager
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.Common.ServiceManager IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> , <a href="../../../OpenEdge/CommonInfrastructure/Common/IManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IManager" target="classFrame">IManager</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.Common.ServiceManager IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> , <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -52,6 +52,20 @@
 				<B>Property Summary</B></FONT></TH>
 				</TR>
 				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ComponentInfo'>ComponentInfo</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) Stores information about the component, such as a developer-defined instance name
+      </td>
+    </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
@@ -218,48 +232,6 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LOGICAL</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#registerservice(openedge.commoninfrastructure.common.servicetypeenum,character)'> RegisterService</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>LOGICAL</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#registerservice(openedge.commoninfrastructure.common.servicetypeenum,progress.lang.class)'> RegisterService</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#resetmanager()'> ResetManager</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
           <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a></code>
         </font>
       </td>
@@ -378,6 +350,17 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='property.ComponentInfo'><!-- --></a>
+    <h3>ComponentInfo</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>(mandatory) Stores information about the component, such as a developer-defined instance name <p> </dd>
+      <dd>so as to be able to uniquely identify the component. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='property.IServiceManagerType'><!-- --></a>
     <h3>IServiceManagerType</h3>
     <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> STATIC GET PRIVATE SET </code>
@@ -540,39 +523,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='registerservice(openedge.commoninfrastructure.common.servicetypeenum,character)'><!-- --></a>
-    <h3>RegisterService</h3>
-    <code>PROTECTED  LOGICAL
-      <b>RegisterService</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, CHARACTER pcServiceName)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='registerservice(openedge.commoninfrastructure.common.servicetypeenum,progress.lang.class)'><!-- --></a>
-    <h3>RegisterService</h3>
-    <code>PROTECTED  LOGICAL
-      <b>RegisterService</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceTypeEnum" target="classFrame">ServiceTypeEnum</a> poServiceType, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='resetmanager()'><!-- --></a>
-    <h3>ResetManager</h3>
-    <code>PUBLIC  VOID
-      <b>ResetManager</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='startcomponent(progress.lang.class,character)'><!-- --></a>
     <h3>StartComponent</h3>
     <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a>
@@ -650,7 +600,7 @@
     <hr />
     <a name='startservices()'><!-- --></a>
     <h3>StartServices</h3>
-    <code>PUBLIC  VOID
+    <code>PROTECTED  VOID
       <b>StartServices</b>()
     </code>
     <dl>
@@ -689,7 +639,7 @@
     <hr />
     <a name='stopservices()'><!-- --></a>
     <h3>StopServices</h3>
-    <code>PUBLIC  VOID
+    <code>PROTECTED  VOID
       <b>StopServices</b>()
     </code>
     <dl>

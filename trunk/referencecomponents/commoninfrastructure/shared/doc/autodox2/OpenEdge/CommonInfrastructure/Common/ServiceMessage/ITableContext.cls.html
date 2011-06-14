@@ -62,6 +62,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.FuzzyPageSize'>FuzzyPageSize</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether the PageSize property is accurate or not. For instance, if the
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>DATETIME-TZ</code>
         </font>
       </td>
@@ -166,6 +180,17 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='property.FuzzyPageSize'><!-- --></a>
+    <h3>FuzzyPageSize</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>Indicates whether the PageSize property is accurate or not. For instance, if the <p> </dd>
+      <dd>underlying query used PRESELECT we can be fairly sure it's accurate. Otherwise, not so much. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='property.LastUpdateAt'><!-- --></a>
     <h3>LastUpdateAt</h3>
     <code>DATETIME-TZ PUBLIC GET SET </code>

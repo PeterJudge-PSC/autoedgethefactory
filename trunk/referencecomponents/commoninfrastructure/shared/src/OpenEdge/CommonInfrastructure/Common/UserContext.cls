@@ -7,7 +7,7 @@
     Created     : Thu Dec 02 11:37:05 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ITenantManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
@@ -58,16 +58,22 @@ class OpenEdge.CommonInfrastructure.Common.UserContext
         get():
             if not valid-object(UserProperties) then
                 UserProperties = new Map().
-                                
+                
             return UserProperties.
         end get.
         private set.
             
+    /** ABL CLIENT-PRINCIPAL object for pertaining to this context */
+    define public property ClientPrincipal as handle no-undo get. private set.
+    
     constructor public UserContext():
         /* only used for Serialization */
+        create client-principal ClientPrincipal.
     end constructor.
-        
+    
     constructor public UserContext (input pcUserName as character):
+        this-object().
+        
         Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
         
         assign UserName = entry(1, pcUserName, '@')
@@ -76,15 +82,22 @@ class OpenEdge.CommonInfrastructure.Common.UserContext
         if num-entries(pcUserName, '@') gt 1 then
             UserDomain = entry(2, pcUserName, '@').
     end method.
-    
+
     constructor public UserContext (input pcUserName as character,
                                     input pcUserDomain as character):
+        this-object().
+        
         Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
         Assert:ArgumentNotNullOrEmpty(pcUserDomain, 'User Domain').
         
         assign UserName = pcUserName
-               UserDomain = pcUserDomain                              
+               UserDomain = pcUserDomain
                ContextId = guid(generate-uuid).
+        
+        create client-principal ClientPrincipal.
+        assign ClientPrincipal:session-id = ContextId
+               ClientPrincipal:user-id = UserName
+               ClientPrincipal:domain-name = lc(pcUserDomain).
     end constructor.
     
     /** Sets up the user's tenancy (including the tenant name and id map). */
@@ -101,9 +114,11 @@ class OpenEdge.CommonInfrastructure.Common.UserContext
         
         poStream:WriteObjectArray(TenantId:KeySet:ToArray()).
         poStream:WriteObjectArray(TenantId:Values:ToArray()).
-        
+
         poStream:WriteObjectArray(UserProperties:KeySet:ToArray()).
         poStream:WriteObjectArray(UserProperties:Values:ToArray()).
+        
+        /* We do not serialize the CLIENT-PRINCIPAL object */
     end method.
     
     method public void ReadObject(input poStream as IObjectInput):
@@ -133,9 +148,11 @@ class OpenEdge.CommonInfrastructure.Common.UserContext
         do iloop = 1 to iMax:
             UserProperties:Put(oKeys[iLoop], oValues[iLoop]).
         end.
+        
+        /* We do not deserialize the CLIENT-PRINCIPAL object */
     end method.
     
-	method override public logical Equals(input p0 as Object ):
+	method override public logical Equals(input p0 as Object):
 		define variable lEquals as logical no-undo.
 		define variable oUserContext as IUserContext no-undo.
 		
@@ -149,7 +166,7 @@ class OpenEdge.CommonInfrastructure.Common.UserContext
                               this-object:UserDomain eq oUserContext:UserDomain and
                               this-object:TenantName eq oUserContext:TenantName and
                               this-object:ContextId eq oUserContext:ContextId).
-        return lEquals.		
+        return lEquals.
 	end method.
-    
+	
 end class.

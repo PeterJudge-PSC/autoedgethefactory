@@ -23,8 +23,9 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
-using OpenEdge.CommonInfrastructure.Common.Service.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IManager.
+using OpenEdge.CommonInfrastructure.Common.Service.
 
 using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.Collections.IMap.
@@ -37,7 +38,7 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.ServiceMessageManager inherits Service 
-            implements IServiceMessageManager:
+            implements IServiceMessageManager, IManager:
     
     /** Use this property in lieu of having to say Class:GetClass('....IServiceManager') every time */
     define static public property IServiceMessageManagerType as class Class no-undo get. private set.

@@ -7,9 +7,10 @@
     Created     : Tue Apr 06 11:40:31 EDT 2010
     Notes       : 
   ---------------------------------------------------------------------- */
+using OpenEdge.CommonInfrastructure.Common.IManager.
 using OpenEdge.Lang.Collections.IMap.
 
-interface OpenEdge.CommonInfrastructure.Common.ITenantManager:  
+interface OpenEdge.CommonInfrastructure.Common.ITenantManager   /* inherits IManager*/:  
     
     /** Returns the tenant name for a given security domain.
     

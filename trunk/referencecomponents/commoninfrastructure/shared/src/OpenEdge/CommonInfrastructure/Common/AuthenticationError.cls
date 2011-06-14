@@ -32,7 +32,7 @@ class OpenEdge.CommonInfrastructure.Common.AuthenticationError inherits Applicat
         super(poErr).
         
         this-object:ErrorTitle = 'Authentication Error'.
-        this-object:ErrorText  = 'Unable to authentication &1 : &2'.
+        this-object:ErrorText  = 'Unable to authenticate &1 : &2'.
     end constructor.
 
 end class.

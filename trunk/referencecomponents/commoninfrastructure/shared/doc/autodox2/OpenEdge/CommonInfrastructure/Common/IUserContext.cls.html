@@ -55,6 +55,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ClientPrincipal'>ClientPrincipal</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABL CLIENT-PRINCIPAL object for pertaining to this context
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>LONGCHAR</code>
         </font>
       </td>
@@ -105,7 +119,7 @@
           <b>
             <a href='#property.UserDomain'>UserDomain</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;domain of the user to whom this context applies
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -119,7 +133,7 @@
           <b>
             <a href='#property.UserName'>UserName</a>
           </b> PUBLIC GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name of the user to whom this context applies
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -168,6 +182,16 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='property.ClientPrincipal'><!-- --></a>
+    <h3>ClientPrincipal</h3>
+    <code>HANDLE PUBLIC GET </code>
+    <dl>
+      <dd>ABL CLIENT-PRINCIPAL object for pertaining to this context <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='property.ContextId'><!-- --></a>
     <h3>ContextId</h3>
     <code>LONGCHAR PUBLIC GET </code>
@@ -203,6 +227,7 @@
     <h3>UserDomain</h3>
     <code>CHARACTER PUBLIC GET </code>
     <dl>
+      <dd>domain of the user to whom this context applies <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -212,6 +237,7 @@
     <h3>UserName</h3>
     <code>CHARACTER PUBLIC GET </code>
     <dl>
+      <dd>name of the user to whom this context applies <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

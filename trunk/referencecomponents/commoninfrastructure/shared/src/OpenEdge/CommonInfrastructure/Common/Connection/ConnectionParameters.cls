@@ -9,15 +9,18 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.Common.IConnectionParameters.
+using OpenEdge.CommonInfrastructure.Common.Connection.IConnectionParameters.
 
-class OpenEdge.CommonInfrastructure.Common.ConnectionParameters implements IConnectionParameters: 
+class OpenEdge.CommonInfrastructure.Common.Connection.ConnectionParameters implements IConnectionParameters: 
     /** This property contains a nicely-formatted string for use by the
         ABL CONNECT statement or method. */ 
     define public property Options as longchar no-undo get. set.
     
 	constructor public ConnectionParameters():
-	    
+    end constructor.
+
+    constructor public ConnectionParameters(input pcOptions as longchar):
+        this-object:Options = pcOptions.
     end constructor.
     
     /** The Connection Manager will call GetConnectionString() on this 

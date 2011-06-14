@@ -39,7 +39,7 @@ class OpenEdge.CommonInfrastructure.Common.Component implements IComponent:
     end constructor.
     
     destructor public Component():
-        DestroyComponent().
+        @todo(task="question", action="publish being destroyed here? for transients?").
     end destructor.
     
     /** General creation code; constructors should only be used for property setting, not
