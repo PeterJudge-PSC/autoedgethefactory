@@ -1,17 +1,14 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IManager
-    Purpose     : 
+    Purpose     : Common Manager interface - simple used for identifying services as managers. 
     Syntax      : 
     Description : 
     @author pjudge
     Created     : Tue Apr 06 11:45:19 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.IManager.
-using OpenEdge.CommonInfrastructure.Common.IComponent.
 
-interface OpenEdge.CommonInfrastructure.Common.IManager:    /* inherits IComponent */
+interface OpenEdge.CommonInfrastructure.Common.IManager:    /* inherits IService */
 
-    method public void ResetManager().
-      
 end interface.

@@ -98,7 +98,21 @@
       <td>
         <code>
           <b>
-            <a href='#authenticateserviceaction(character,openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'> AuthenticateServiceAction</a>
+            <a href='#authoriseoperation(openedge.lang.enummember)'> AuthoriseOperation</a>
+          </b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperation)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#authoriseserviceaction(character,openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'> AuthoriseServiceAction</a>
           </b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorises the current user to undertake the specified action on the
       </td>
@@ -114,49 +128,7 @@
           <b>
             <a href='#endsession()'> EndSession</a>
           </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ends a user's session (not a log out, but the opposite of ValidateSession).
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#endsession(longchar)'> EndSession</a>
-          </b>(LONGCHAR pcContextId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ends a user's session (not a log out, but the opposite of ValidateSession)
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#endsession(openedge.commoninfrastructure.common.iusercontext)'> EndSession</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ends a user's session (not a log out, but the opposite of ValidateSession)
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getpendingcontext()'> GetPendingContext</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves or build user context for passing across the wire (in either direction).
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ends a user's session (not a log out, but the opposite of EstablishSession).
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -176,7 +148,21 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setusercontext(openedge.commoninfrastructure.common.iusercontext)'> SetUserContext</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the passed context into that user's context.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LONGCHAR</code>
         </font>
       </td>
       <td>
@@ -190,7 +176,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
+          <code>LONGCHAR</code>
         </font>
       </td>
       <td>
@@ -199,76 +185,6 @@
             <a href='#userlogin(character,character,character)'> UserLogin</a>
           </b>(CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs a user into the application
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#userlogout()'> UserLogout</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs the current user out of the application.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#userlogout(longchar)'> UserLogout</a>
-          </b>(LONGCHAR pcContextId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs a user out of the application.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#userlogout(openedge.commoninfrastructure.common.iusercontext)'> UserLogout</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs a user out of the application.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#validatesession(longchar)'> ValidateSession</a>
-          </b>(LONGCHAR pcContextId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates a user's session as identified by a context id.
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#validatesession(openedge.commoninfrastructure.common.iusercontext)'> ValidateSession</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates a user's session as identified by context.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -308,10 +224,21 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='authenticateserviceaction(character,openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'><!-- --></a>
-    <h3>AuthenticateServiceAction</h3>
+    <a name='authoriseoperation(openedge.lang.enummember)'><!-- --></a>
+    <h3>AuthoriseOperation</h3>
     <code>PUBLIC  VOID
-      <b>AuthenticateServiceAction</b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
+      <b>AuthoriseOperation</b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poOperation)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='authoriseserviceaction(character,openedge.commoninfrastructure.common.servicemessage.servicemessageactionenum)'><!-- --></a>
+    <h3>AuthoriseServiceAction</h3>
+    <code>PUBLIC  VOID
+      <b>AuthoriseServiceAction</b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ServiceMessageActionEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum" target="classFrame">ServiceMessageActionEnum</a> poServiceMessageAction)
     </code>
     <dl>
       <dd>Authorises the current user to undertake the specified action on the <p> </dd>
@@ -332,61 +259,10 @@
       <b>EndSession</b>()
     </code>
     <dl>
-      <dd>Ends a user's session (not a log out, but the opposite of ValidateSession). <p> </dd>
+      <dd>Ends a user's session (not a log out, but the opposite of EstablishSession). <p> </dd>
       <dd>Ends the current session. </dd>
       <dd>
         <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='endsession(longchar)'><!-- --></a>
-    <h3>EndSession</h3>
-    <code>PUBLIC  VOID
-      <b>EndSession</b>(LONGCHAR pcContextId)
-    </code>
-    <dl>
-      <dd>Ends a user's session (not a log out, but the opposite of ValidateSession) <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>longchar - The context ID identifying the user who's session is being ended.<br/></dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='endsession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
-    <h3>EndSession</h3>
-    <code>PUBLIC  VOID
-      <b>EndSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-    </code>
-    <dl>
-      <dd>Ends a user's session (not a log out, but the opposite of ValidateSession) <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>IUserContext - The context identifying the user who's session is being ended.<br/></dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getpendingcontext()'><!-- --></a>
-    <h3>GetPendingContext</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
-      <b>GetPendingContext</b>()
-    </code>
-    <dl>
-      <dd>Retrieves or build user context for passing across the wire (in either direction). <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>IUserContext User context for sending across the wire</dd>
-        </dl>
       </dd>
     </dl>
     <hr />
@@ -411,9 +287,26 @@
       </dd>
     </dl>
     <hr />
+    <a name='setusercontext(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>SetUserContext</h3>
+    <code>PUBLIC  VOID
+      <b>SetUserContext</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
+    </code>
+    <dl>
+      <dd>Sets the passed context into that user's context. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IUserContext - The context to merge.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='userlogin(character,character)'><!-- --></a>
     <h3>UserLogin</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
+    <code>PUBLIC  LONGCHAR
       <b>UserLogin</b>(CHARACTER pcUserName, CHARACTER pcPassword)
     </code>
     <dl>
@@ -427,14 +320,14 @@
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>IUserContext The (validated) user context object for the given credentials.</dd>
+          <dd>longchar If the login succeeded, the context id of the logged-inuser. </dd>
         </dl>
       </dd>
     </dl>
     <hr />
     <a name='userlogin(character,character,character)'><!-- --></a>
     <h3>UserLogin</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
+    <code>PUBLIC  LONGCHAR
       <b>UserLogin</b>(CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword)
     </code>
     <dl>
@@ -448,91 +341,7 @@
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>IUserContext The (validated) user context object for the given credentials.</dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='userlogout()'><!-- --></a>
-    <h3>UserLogout</h3>
-    <code>PUBLIC  VOID
-      <b>UserLogout</b>()
-    </code>
-    <dl>
-      <dd>Logs the current user out of the application. <p> </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='userlogout(longchar)'><!-- --></a>
-    <h3>UserLogout</h3>
-    <code>PUBLIC  VOID
-      <b>UserLogout</b>(LONGCHAR pcContextId)
-    </code>
-    <dl>
-      <dd>Logs a user out of the application. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>longchar - The user context ID.<br/></dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='userlogout(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
-    <h3>UserLogout</h3>
-    <code>PUBLIC  VOID
-      <b>UserLogout</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-    </code>
-    <dl>
-      <dd>Logs a user out of the application. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>IUserContext - The (validated) user context object for the given credentials.<br/></dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='validatesession(longchar)'><!-- --></a>
-    <h3>ValidateSession</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
-      <b>ValidateSession</b>(LONGCHAR pcContextId)
-    </code>
-    <dl>
-      <dd>Validates a user's session as identified by a context id. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>longchar - A user context id (typically a guid).<br/></dd>
-          <dt>
-            <b>Returns:</b>
-          </dt>
-          <dd>IUserContext The (validated) user context object for the given ID.</dd>
-        </dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='validatesession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
-    <h3>ValidateSession</h3>
-    <code>PUBLIC  VOID
-      <b>ValidateSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-    </code>
-    <dl>
-      <dd>Validates a user's session as identified by context. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>IUserContext - The user context object being validated.<br/></dd>
+          <dd>longchar If the login succeeded, the context id of the logged-inuser. </dd>
         </dl>
       </dd>
     </dl>

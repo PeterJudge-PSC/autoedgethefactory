@@ -1,11 +1,12 @@
 /** ------------------------------------------------------------------------
     File        : IUserContext
-    Purpose     : 
+    Purpose     : Applicaiton User context
     Syntax      : 
     Description : 
-    Author      : pjudge
+    @author pjudge
     Created     : Mon Jun 07 14:26:49 EDT 2010
-    Notes       : 
+    Notes       : * Some of the properties on this object will move into the CLIENT-PRINCIPAL in
+                    11.0+ 
   --------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.ITenantManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
@@ -13,10 +14,13 @@ using OpenEdge.Lang.Collections.IMap.
 
 interface OpenEdge.CommonInfrastructure.Common.IUserContext:
     
-    /* name of the user to whom this context applies */
+    /** ABL CLIENT-PRINCIPAL object for pertaining to this context */
+    define public property ClientPrincipal as handle no-undo get.
+    
+    /** name of the user to whom this context applies */
     define public property UserName as character no-undo get.
     
-    /* domain of the user to whom this context applies */
+    /** domain of the user to whom this context applies */
     define public property UserDomain as character no-undo get.
     
     /** Unique identifier for the client session */

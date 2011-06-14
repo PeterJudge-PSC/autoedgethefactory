@@ -45,6 +45,71 @@
       </dd>
     </dl>
     <hr />
+				<A NAME="field_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Field Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.AfterConnectionConnected'>AfterConnectionConnected</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after a connection attempt is made.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.AfterConnectionDisconnected'>AfterConnectionDisconnected</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after a connection disconnect is attempted.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.BeforeConnectionConnected'>BeforeConnectionConnected</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired before a connection is attempted
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.BeforeConnectionDisconnected'>BeforeConnectionDisconnected</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired before a connection disconnect is attempted
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
 				<A NAME="method_summary"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -55,14 +120,14 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>HANDLE</code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#connect(openedge.commoninfrastructure.common.connectiontypeenum,character,openedge.commoninfrastructure.common.iconnectionparameters)'> Connect</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName, <a href="../../../OpenEdge/CommonInfrastructure/Common/IConnectionParameters.cls.html" title="OpenEdge.CommonInfrastructure.Common.IConnectionParameters" target="classFrame">IConnectionParameters</a> poParameters)
+            <a href='#connect(openedge.commoninfrastructure.common.connection.connectiontypeenum,character,openedge.commoninfrastructure.common.connection.iconnectionparameters)'> Connect</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName, <a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IConnectionParameters.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IConnectionParameters" target="classFrame">IConnectionParameters</a> poParameters)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connects to a server of the given type, with a unique name, for the
       </td>
     </tr>
@@ -75,23 +140,23 @@
       <td>
         <code>
           <b>
-            <a href='#disconnect(openedge.commoninfrastructure.common.connectiontypeenum,character)'> Disconnect</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+            <a href='#disconnect(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'> Disconnect</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disconnects from the specified connection
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>HANDLE</code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#getconnectionhandle(openedge.commoninfrastructure.common.connectiontypeenum,character)'> GetConnectionHandle</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rreturns the handle to the specified connection.
+            <a href='#getserverconnection(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'> GetServerConnection</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the connection object of the specified connection.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -103,13 +168,94 @@
       <td>
         <code>
           <b>
-            <a href='#isconnected(openedge.commoninfrastructure.common.connectiontypeenum,character)'> IsConnected</a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether the connection already exists.
+            <a href='#isconnected(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'> IsConnected</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether the connection has already been made
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#isregistered(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'> IsRegistered</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether a typed/named connection has been registered with the ConMgr.
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
 				
+				<A NAME="field_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Field Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='1194.AfterConnectionConnected'><!-- --></a>
+    <h3>AfterConnectionConnected</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>Event fired after a connection attempt is made. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The object publishing the event<br/>ConnectionManagerActionEventArgs - Arguments/parameters for the event.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.AfterConnectionDisconnected'><!-- --></a>
+    <h3>AfterConnectionDisconnected</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>Event fired after a connection disconnect is attempted. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The object publishing the event<br/>ConnectionManagerActionEventArgs - Arguments/parameters for the event.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.BeforeConnectionConnected'><!-- --></a>
+    <h3>BeforeConnectionConnected</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>Event fired before a connection is attempted <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The object publishing the event<br/>ConnectionManagerActionEventArgs - Arguments/parameters for the event.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='1194.BeforeConnectionDisconnected'><!-- --></a>
+    <h3>BeforeConnectionDisconnected</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>Event fired before a connection disconnect is attempted <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The object publishing the event<br/>ConnectionManagerActionEventArgs - Arguments/parameters for the event.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
 				<A NAME="method_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -117,10 +263,10 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='connect(openedge.commoninfrastructure.common.connectiontypeenum,character,openedge.commoninfrastructure.common.iconnectionparameters)'><!-- --></a>
+    <a name='connect(openedge.commoninfrastructure.common.connection.connectiontypeenum,character,openedge.commoninfrastructure.common.connection.iconnectionparameters)'><!-- --></a>
     <h3>Connect</h3>
-    <code>PUBLIC  HANDLE
-      <b>Connect</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName, <a href="../../../OpenEdge/CommonInfrastructure/Common/IConnectionParameters.cls.html" title="OpenEdge.CommonInfrastructure.Common.IConnectionParameters" target="classFrame">IConnectionParameters</a> poParameters)
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a>
+      <b>Connect</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName, <a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IConnectionParameters.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IConnectionParameters" target="classFrame">IConnectionParameters</a> poParameters)
     </code>
     <dl>
       <dd>Connects to a server of the given type, with a unique name, for the <p> </dd>
@@ -134,15 +280,15 @@
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>handle A handle to the server</dd>
+          <dd>IServerConnection A reference to the connection's server.</dd>
         </dl>
       </dd>
     </dl>
     <hr />
-    <a name='disconnect(openedge.commoninfrastructure.common.connectiontypeenum,character)'><!-- --></a>
+    <a name='disconnect(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'><!-- --></a>
     <h3>Disconnect</h3>
     <code>PUBLIC  VOID
-      <b>Disconnect</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+      <b>Disconnect</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
     </code>
     <dl>
       <dd>Disconnects from the specified connection <p> </dd>
@@ -156,13 +302,13 @@
       </dd>
     </dl>
     <hr />
-    <a name='getconnectionhandle(openedge.commoninfrastructure.common.connectiontypeenum,character)'><!-- --></a>
-    <h3>GetConnectionHandle</h3>
-    <code>PUBLIC  HANDLE
-      <b>GetConnectionHandle</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+    <a name='getserverconnection(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'><!-- --></a>
+    <h3>GetServerConnection</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a>
+      <b>GetServerConnection</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
     </code>
     <dl>
-      <dd>Rreturns the handle to the specified connection. <p> </dd>
+      <dd>Returns the connection object of the specified connection. <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
@@ -172,24 +318,45 @@
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>handle A handle to the server</dd>
+          <dd>IServerConnection A reference to the connection's server.</dd>
         </dl>
       </dd>
     </dl>
     <hr />
-    <a name='isconnected(openedge.commoninfrastructure.common.connectiontypeenum,character)'><!-- --></a>
+    <a name='isconnected(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'><!-- --></a>
     <h3>IsConnected</h3>
     <code>PUBLIC  LOGICAL
-      <b>IsConnected</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+      <b>IsConnected</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
     </code>
     <dl>
-      <dd>Indicates whether the connection already exists. <p> </dd>
+      <dd>Indicates whether the connection has already been made <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
           <dd>ConnectionTypeEnum - The type of connection<br/>character - The unique name for this connection<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='isregistered(openedge.commoninfrastructure.common.connection.connectiontypeenum,character)'><!-- --></a>
+    <h3>IsRegistered</h3>
+    <code>PUBLIC  LOGICAL
+      <b>IsRegistered</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName)
+    </code>
+    <dl>
+      <dd>Indicates whether a typed/named connection has been registered with the ConMgr. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ConnectionTypeEnum - The type of connection<br/>character - The unique name for this connection<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>logical Whether the conntection already exists</dd>
         </dl>
       </dd>
     </dl>

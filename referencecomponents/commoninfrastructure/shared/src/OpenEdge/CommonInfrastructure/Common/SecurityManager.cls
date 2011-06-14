@@ -17,6 +17,7 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo. 
 using OpenEdge.CommonInfrastructure.Common.ITenantManager.
 using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.IManager.
 using OpenEdge.CommonInfrastructure.Common.Service.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 using OpenEdge.CommonInfrastructure.Common.ConnectionManagerActionEventArgs.
@@ -37,7 +38,7 @@ using OpenEdge.Lang.String.
 using Progress.Lang.Class.
 
 class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Service 
-        implements ISecurityManager:
+        implements ISecurityManager, IManager:
     
     /** Use these properties in lieu of having to say Class:GetClass('....ISecurityManager') every time */
     define static public property IUserContextType as class Class no-undo get. private set.
@@ -48,7 +49,7 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
     define public property CurrentUserContext as IUserContext no-undo
         get.
         protected set.
-            
+    
     /** Describes whether the current session is managed or not. A managed session
         basically has a user associated with it. */
     define public property IsManagedSession as logical no-undo
@@ -79,32 +80,62 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
         
         @param IUserContext The context to merge.   */
     method public void SetUserContext(input poUserContext as IUserContext):
-        MergeUserContext(CurrentUserContext, poUserContext).
+        CurrentUserContext = MergeUserContext(CurrentUserContext, poUserContext).
+    end method.
+    
+    /** Resolves a context ID into a context object.
+        
+        @param longchar The identifier for the context.
+        @return IUserContext The user context object. */
+    method public IUserContext GetUserContext(input pcContextId as longchar):
+        define variable oContext as IUserContext no-undo.
+        
+        /* Assume the user is allowed to retrieve their own */
+        if valid-object(CurrentUserContext) and 
+           CurrentUserContext:ContextId eq pcContextId then
+            oContext = CurrentUserContext.
+        else
+        do:
+            /* is the current user allowed to return context for others? */
+            AuthoriseOperation(? /* SomeOperationEnum:EnumMember */).
+            oContext = ReadContextFromStore(pcContextId).
+        end.
+        
+        return oContext.
     end method.
     
     /** Merges contexts.
         
         @param IUserContext The target for the merge of context. Typically the CurrentUserContext
-        @param IUserContext The source context to merge into the target.    */
-    method protected void MergeUserContext(input poTargetContext as IUserContext,
-                                           input poSourceContext as IUserContext):
-        @todo(task="question", action="use :Clone() instead? ").                                                           
-        poTargetContext = poSourceContext.
+        @param IUserContext The source context to merge into the target.    
+        @return IUserContext The merged context. */
+    method protected IUserContext MergeUserContext(input poTargetContext as IUserContext,
+                                                   input poSourceContext as IUserContext):
+        @todo(task="question", action="use :Clone() instead? ").
+        if not valid-object(poTargetContext) or
+           poTargetContext:Equals(poSourceContext) then                                                       
+            poTargetContext = poSourceContext.
+        
+        return poTargetContext.
     end method.
     
     /** Logs a user into the application
     
         @param character The user's login name
         @param character The user's login/security domain
-        @param character The user's password. This should be encoded/encrypted. */    
-    method abstract public void UserLogin(input pcUserName as character,
-                                          input pcUserDomain as character,
-                                          input pcPassword as character).
+        @param character The user's password. This should be encoded/encrypted.    
+        @return longchar If the login succeeded, the context id of the logged-in
+                user. */
+    method abstract public longchar UserLogin(input pcUserName as character,
+                                              input pcUserDomain as character,
+                                              input pcPassword as character).
     /** Logs a user into the application
     
         @param character The user's login name
-        @param character The user's password. This should be encoded/encrypted.  */
-    method public void UserLogin(input pcUserName as character,
+        @param character The user's password. This should be encoded/encrypted.
+        @return longchar If the login succeeded, the context id of the logged-in
+                user. */
+    method public longchar UserLogin(input pcUserName as character,
                                  input pcPassword as character):
         define variable cDomain as character no-undo.
         
@@ -112,10 +143,10 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
             assign cDomain = entry(2,  pcUserName, '@')
                    pcUserName = entry(1,  pcUserName, '@').
         
-        UserLogin(pcUserName, cDomain, pcPassword).                                             
+        return UserLogin(pcUserName, cDomain, pcPassword).                                             
     end method.
     
-    /** Ends a user's session (not a log out, but the opposite of ValidateSession).
+    /** Ends a user's session (not a log out, but the opposite of EstablishSession).
         Ends the current session. */
     method public void EndSession():
         /* release context */
@@ -127,9 +158,6 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
         define variable oOIS as IObjectInput no-undo.
         define variable oUC as IUserContext no-undo.
         define variable cFilename as character no-undo.
-        define variable cClientPrincipal as longchar no-undo.
-        define variable mClientPrincipal as memptr no-undo.
-        define variable rClientPrincipal as raw no-undo.
         
         /* context goes in one place ... */ 
         cFilename = search(string(session:temp-dir + pcContextId + '.' + SecurityManager:IUserContextType:TypeName + '.ser')).
@@ -138,30 +166,42 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
             oOIS = new ObjectInputStream().
             oOIS:Read(cFilename).
             oUC = cast(oOIS:ReadObject(), IUserContext).
-        end.
-        
-        /* ... and client-principal in another */ 
-        cFilename = search(string(session:temp-dir + pcContextId + '.ClientPrincipal.ser')).
-        if valid-object(oUC) and not cFilename eq ? then
-        do:
-            copy-lob file cFilename to cClientPrincipal.
             
-            if cClientPrincipal ne '' then
-            do:
-                mClientPrincipal = base64-decode(cClientPrincipal).
-                rClientPrincipal = get-bytes(mClientPrincipal, 1, get-size(mClientPrincipal)).
-                oUC:ClientPrincipal:import-principal(rClientPrincipal).
-            end.
+            /** ... client-principal in another */
+            if valid-object(oUC) then
+                ReadClientPrincipalFromStore(oUC).
         end.
         
         return oUC.
+    end method.
+    
+    method protected void ReadClientPrincipalFromStore(input poUserContext as IUserContext):
+        define variable cFilename as character no-undo.
+        define variable cClientPrincipal as longchar no-undo.
+        define variable mClientPrincipal as memptr no-undo.
+        define variable rClientPrincipal as raw no-undo.
+        
+        if valid-object(poUserContext) then
+        do: 
+            cFilename = search(string(session:temp-dir + poUserContext:ContextId + '.ClientPrincipal.ser')).
+            if not cFilename eq ? then
+            do:
+                copy-lob file cFilename to cClientPrincipal.
+                
+                if cClientPrincipal ne '' then
+                do:
+                    mClientPrincipal = base64-decode(cClientPrincipal).
+                    rClientPrincipal = get-bytes(mClientPrincipal, 1, get-size(mClientPrincipal)).
+                    poUserContext:ClientPrincipal:import-principal(rClientPrincipal).
+                end.
+            end.
+        end.
     end method.
     
     method protected void WriteContextToStore(input poUserContext as IUserContext):
         define variable oOOS as IObjectOutput no-undo.
         define variable oUC as IUserContext no-undo.
         define variable cFilename as character no-undo.
-        define variable cClientPrincipal as longchar no-undo.
         
         if valid-object(poUserContext) then
         do:
@@ -170,13 +210,26 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
             oOOS = new ObjectOutputStream().
             oOOS:WriteObject(poUserContext).
             oOOS:Write(cFilename).
-
+            
+            /* ... client-principal to another */
+            WriteClientPrincipalToStore(poUserContext).
+        end.
+    end method.
+    
+    method protected void WriteClientPrincipalToStore(input poUserContext as IUserContext):
+        define variable oOOS as IObjectOutput no-undo.
+        define variable oUC as IUserContext no-undo.
+        define variable cFilename as character no-undo.
+        define variable cClientPrincipal as longchar no-undo.
+        
+        if valid-object(poUserContext) then
+        do:
             /* ... client-principal in another */
             cFilename = session:temp-dir + poUserContext:ContextId + '.ClientPrincipal.ser'.
             cClientPrincipal = base64-encode(poUserContext:ClientPrincipal:export-principal()). 
             copy-lob cClientPrincipal to file cFilename.
         end.
-    end method.
+    end method.    
     
     /** Authorises the current user to undertake the specified action on the
         service. AN error is thrown if the authentication fails.

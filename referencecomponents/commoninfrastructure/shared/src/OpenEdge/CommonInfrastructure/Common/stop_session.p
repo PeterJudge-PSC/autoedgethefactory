@@ -27,14 +27,20 @@ define variable oInjectABLKernel as IKernel no-undo.
 define variable oServiceManager as IServiceManager no-undo.
  
 /** -- main -- **/
-oServiceManager = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType), IServiceManager).
+oServiceManager = cast(ABLSession:Instance:SessionProperties:Remove(ServiceManager:IServiceManagerType), IServiceManager).
 
 /* shutdown the session */
-cast(oServiceManager:StartService(SecurityManager:ISecurityManagerType), ISecurityManager):EndSession().
+cast(oServiceManager:GetService(SecurityManager:ISecurityManagerType), ISecurityManager):EndSession().
 
 /* close the service manager */
-oInjectABLKernel = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')), IKernel).              
+oInjectABLKernel = cast(ABLSession:Instance:SessionProperties:Get(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')), IKernel).
 oInjectABLKernel:Release(oServiceManager).
+
+/* explicit delete of ServiceManager so that we know that it's cleaning up properly. */
+/*delete object oServiceManager no-error.*/
+oServiceManager = ?.
+oInjectABLKernel = ?.
+
 
 delete object ABLSession:Instance no-error.
 /** -- eof -- **/

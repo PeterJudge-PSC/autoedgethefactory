@@ -12,7 +12,7 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IMessageConsumer.
 
-interface OpenEdge.CommonInfrastructure.Common.IServiceMessageManager:
+interface OpenEdge.CommonInfrastructure.Common.IServiceMessageManager /* inherits IManager */:
 
     /** Executes the request(s) asynchroronously. Services a request. The service 
         provider will call ExecuteResponse() in the ServiceMessageManager once it's

@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\Common</font>
       <br /> start_session
     </h2>
-    <p>(CHARACTER pcSessionCode)</p>
+    <p>()</p>
     <dl>
       <dd>------------------------------------------------------------------------ <p> </dd>
       <dd>File        : OpenEdge/CommonInfrastructure/Common/start_session.p Purpose     :  General / common session bootstrapping procedure. Syntax      : Description : </dd>
@@ -48,6 +48,57 @@
             <b>Author:</b>
           </dt>
           <dd>pjudgeCreated     : Thu Dec 23 14:36:11 EST 2010 Notes       : ---------------------------------------------------------------------- </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#loadconfigfileinfo(character)'>FUNCTION LoadConfigFileInfo</a>
+          </b>(CHARACTER pcSessionParam)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the config file info into the session properties.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='loadconfigfileinfo(character)'><!-- --></a>
+    <h3>LoadConfigFileInfo</h3>
+    <code>FUNCTION  CHARACTER
+      <b>LoadConfigFileInfo</b>(CHARACTER pcSessionParam)
+    </code>
+    <dl>
+      <dd>Loads the config file info into the session properties. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - A string of the format CFGFILE=a/b/c.xml,CFGNAME=default<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>character The session name, based on the config</dd>
         </dl>
       </dd>
     </dl>
