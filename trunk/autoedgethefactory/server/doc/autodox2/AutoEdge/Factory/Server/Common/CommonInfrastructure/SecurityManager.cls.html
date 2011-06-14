@@ -131,8 +131,8 @@
       <td>
         <code>
           <b>
-            <a href='#bpmuserlogin(openedge.commoninfrastructure.common.connection.iserverconnection,character,character,character,longchar)'> BpmUserLogin</a>
-          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a> poServerConnection, CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword, LONGCHAR pcContextId)
+            <a href='#bpmestablishsession(openedge.commoninfrastructure.common.iusercontext)'> BpmEstablishSession</a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -145,8 +145,22 @@
       <td>
         <code>
           <b>
-            <a href='#bpmuserlogout(openedge.commoninfrastructure.common.connection.iserverconnection,openedge.commoninfrastructure.common.iusercontext)'> BpmUserLogout</a>
-          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a> poServerConnection, <a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+            <a href='#bpmuserlogin(openedge.commoninfrastructure.common.iusercontext,character)'> BpmUserLogin</a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext, CHARACTER pcPassword)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login to a BPM server.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#bpmuserlogout(openedge.commoninfrastructure.common.iusercontext)'> BpmUserLogout</a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -175,6 +189,20 @@
           <b>
             <a href='#destroycomponent()'> DestroyComponent</a>
           </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#establishsession(openedge.commoninfrastructure.common.iusercontext)'> EstablishSession</a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -340,10 +368,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='bpmuserlogin(openedge.commoninfrastructure.common.connection.iserverconnection,character,character,character,longchar)'><!-- --></a>
-    <h3>BpmUserLogin</h3>
+    <a name='bpmestablishsession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>BpmEstablishSession</h3>
     <code>PROTECTED  VOID
-      <b>BpmUserLogin</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a> poServerConnection, CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword, LONGCHAR pcContextId)
+      <b>BpmEstablishSession</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
     </code>
     <dl>
       <dd>
@@ -351,10 +379,27 @@
       </dd>
     </dl>
     <hr />
-    <a name='bpmuserlogout(openedge.commoninfrastructure.common.connection.iserverconnection,openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <a name='bpmuserlogin(openedge.commoninfrastructure.common.iusercontext,character)'><!-- --></a>
+    <h3>BpmUserLogin</h3>
+    <code>PROTECTED  VOID
+      <b>BpmUserLogin</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext, CHARACTER pcPassword)
+    </code>
+    <dl>
+      <dd>Login to a BPM server. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IUserContext - The currently-logged in user's context.<br/>character - The password. This value is not set in context, while most others are.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='bpmuserlogout(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
     <h3>BpmUserLogout</h3>
     <code>PROTECTED  VOID
-      <b>BpmUserLogout</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/Connection/IServerConnection.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection" target="classFrame">IServerConnection</a> poServerConnection, <a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+      <b>BpmUserLogout</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
     </code>
     <dl>
       <dd>
@@ -388,6 +433,17 @@
     <h3>DestroyComponent</h3>
     <code>OVERRIDE PUBLIC  VOID
       <b>DestroyComponent</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='establishsession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>EstablishSession</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>EstablishSession</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
     </code>
     <dl>
       <dd>
