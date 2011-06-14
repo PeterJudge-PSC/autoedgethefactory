@@ -10,6 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="sfe" uri="http://jmaki/v1.0/jsp" %>
+<%@ include file="/BizSolo/common/jsp/include_i18n_msgs.jsp" %>
   <jsp:useBean id="bizManage" class="com.savvion.sbm.bizmanage.api.BizManageBean" scope="session"></jsp:useBean>
   <jsp:useBean id="bean" class="com.savvion.BizSolo.beans.Bean" scope="session"></jsp:useBean>
   <jsp:useBean id="factoryBean" class="com.savvion.BizSolo.beans.EPFactoryBean" scope="session"></jsp:useBean>
@@ -35,6 +36,7 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
@@ -67,6 +69,9 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/sbm.utils.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/ux/fileuploadfield/FileUploadField.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/bm/common/bmfield.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/fonts/fonts.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/assets/skins/sam/resize.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/assets/skins/sam/container.css">
@@ -81,6 +86,7 @@
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/ext-all.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/xtheme-default.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-all.css">
+<link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-xml.css">
 <script language="JavaScript">
  Ext.BLANK_IMAGE_URL = '<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/images/default/s.gif';
 	 
@@ -280,7 +286,6 @@ function userValidationJavascipt() {
 </sbm:dataSources>
 <script language="JavaScript">
 <!--
-    
 function imgCheryLogo_onMouseDown(eventContext) {
 {
 sbm.util.setValue('txtBrand', 'Chery'); 
@@ -359,51 +364,7 @@ sbm.util.hide('imgToyolaLogoBw');
 sbm.util.hide('imgScubarooLogoBw');
 sbm.util.hide('imgFjordLogoBw');;
 }
-if (sbm.utils.compareConstant("txtBrand", "==", "Chery"))
-{
-imgCheryLogo_onMouseDown();;
-}
-if (sbm.utils.compareConstant("txtBrand", "==", "Hinda"))
-{
-imgHindaLogo_onMouseDown();;
-}
-if (sbm.utils.compareConstant("txtBrand", "==", "Potomoc"))
-{
-imgPotomocLogo_onMouseDown();;
-}
-if (sbm.utils.compareConstant("txtBrand", "==", "Toyola"))
-{
-imgToyolaLogo_onMouseDown();;
-}
-if (sbm.utils.compareConstant("txtBrand", "==", "Fjord"))
-{
-imgFjordLogo_onMouseDown();;
-}
-if (sbm.utils.compareConstant("txtBrand", "==", "Scubaroo"))
-{
-imgScubarooLogo_onMouseDown();;
-}
 sbm.util.hide("txtBrand");
-}
-
-
-function imgScubarooLogo_onMouseDown(eventContext) {
-{
-sbm.util.setValue('txtBrand', 'Scubaroo'); 
-// highlight selected brand, de-emphasise others
-sbm.util.hide('imgCheryLogo');
-sbm.util.show('imgCheryLogoBw');	
-sbm.util.hide('imgHindaLogo');
-sbm.util.show('imgHindaLogoBw');
-sbm.util.hide('imgPotomocLogo');
-sbm.util.show('imgPotomocLogoBw');
-sbm.util.hide('imgToyolaLogo');
-sbm.util.show('imgToyolaLogoBw');
-sbm.util.hide('imgFjordLogo');
-sbm.util.show('imgFjordLogoBw');
-sbm.util.show('imgScubarooLogo');
-sbm.util.hide('imgScubarooLogoBw');;
-}
 }
 
 
@@ -427,7 +388,23 @@ sbm.util.show('imgScubarooLogoBw');;
 }
 
 
-function Button1_onClick(eventContext) {
+function imgScubarooLogo_onMouseDown(eventContext) {
+{
+sbm.util.setValue('txtBrand', 'Scubaroo'); 
+// highlight selected brand, de-emphasise others
+sbm.util.hide('imgCheryLogo');
+sbm.util.show('imgCheryLogoBw');	
+sbm.util.hide('imgHindaLogo');
+sbm.util.show('imgHindaLogoBw');
+sbm.util.hide('imgPotomocLogo');
+sbm.util.show('imgPotomocLogoBw');
+sbm.util.hide('imgToyolaLogo');
+sbm.util.show('imgToyolaLogoBw');
+sbm.util.hide('imgFjordLogo');
+sbm.util.show('imgFjordLogoBw');
+sbm.util.show('imgScubarooLogo');
+sbm.util.hide('imgScubarooLogoBw');;
+}
 }
 
 
@@ -451,7 +428,10 @@ sbm.util.show('imgScubarooLogoBw');;
 }
 
 
-  -->
+function Button1_onClick(eventContext) {
+}
+
+-->
 </script>
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
