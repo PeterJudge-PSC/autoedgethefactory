@@ -1,65 +1,123 @@
-[CustomMessages]
-DBBrokerPortsCaption=Progress Database Brokers Setup
-DBBrokerPortsDescription=Please provide the database broker ports (TCP) to use
-
-[Code]
-var
-	lblDBAutoEdgeFactory		: TLabel;
-	txtDBAutoEdgeFactory		: TEdit;
-
-{ We will validate whether a port has been filled out and if it has 4 or more digits	}
-{ no real port check is done here now, which we could add later if required.			}
-	
-function DBBrokerPorts_NextButtonClick(Page: TWizardPage): Boolean;
-begin
-	if ( Length( txtDBAutoEdgeFactory.Text ) < 4 ) then
-	begin
-		MsgBox( 'Database Broker Port for AutoEdge|TheFactory needs to be 1000+!', mbError, MB_OK );
-		Result := false;
-	end
-	else
-	begin
-		Result := True;
-	end;
-end;
-
-function DBBrokerPorts_CreatePage(PreviousPageId: Integer): Integer;
-var
-	Page: TWizardPage;
-begin
-	Page := CreateCustomPage( PreviousPageId,
-							  ExpandConstant( '{cm:DBBrokerPortsCaption}' ),
-							  ExpandConstant( '{cm:DBBrokerPortsDescription}' ));
-
-  { lblDBAutoEdgeFactory }
-  lblDBAutoEdgeFactory := TLabel.Create(Page);
-  with lblDBAutoEdgeFactory do
+  [Code]
+  var
+    lblAETFDBService: TLabel;
+    lblAETFDBHost: TLabel;
+    lblAETFDBName: TLabel;
+    txtAETFDBService: TEdit;
+    txtAETFDBHost: TEdit;
+    txtAETFDBName: TEdit;
+  
+  procedure DBBrokerPorts_Activate(Page: TWizardPage);
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(35);
-    Top := ScaleY(28);
-    Width := ScaleX(106);
-    Height := ScaleY(13);
-    Caption := 'AutoEdge|TheFactory';
+  end;
+   
+  function DBBrokerPorts_BackButtonClick(Page: TWizardPage): Boolean;
+  begin
+    Result := True;
   end;
   
-  { txtDBAutoEdgeFactory }
-  txtDBAutoEdgeFactory := TEdit.Create(Page);
-  with txtDBAutoEdgeFactory do
+  function DBBrokerPorts_NextButtonClick(Page: TWizardPage): Boolean;
   begin
-    Parent := Page.Surface;
-    Left := ScaleX(176);
-    Top := ScaleY(24);
-    Width := ScaleX(65);
-    Height := ScaleY(21);
-    TabOrder := 0;
-    Text := '7010';
+    Result := True;
   end;
-	
-	with Page do
-	begin
-		OnNextButtonClick := @DBBrokerPorts_NextButtonClick;
-	end;
-	
-	Result := Page.ID;
-end;
+  
+  procedure DBBrokerPorts_CancelButtonClick(Page: TWizardPage; var Cancel, Confirm: Boolean);
+  begin
+  end;
+  
+  function DBBrokerPorts_CreatePage(PreviousPageId: Integer): Integer;
+  var
+    Page: TWizardPage;
+  begin
+    Page := CreateCustomPage(
+      PreviousPageId,
+      ExpandConstant('{cm:DBBrokerPortsCaption}'),
+      ExpandConstant('{cm:DBBrokerPortsDescription}')
+    );
+  
+    { lblAETFDBService }
+    lblAETFDBService := TLabel.Create(Page);
+    with lblAETFDBService do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(83);
+      Top := ScaleY(68);
+      Width := ScaleX(65);
+      Height := ScaleY(13);
+      Caption := 'Port / Service';
+    end;
+    
+    { lblAETFDBHost }
+    lblAETFDBHost := TLabel.Create(Page);
+    with lblAETFDBHost do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(83);
+      Top := ScaleY(44);
+      Width := ScaleX(22);
+      Height := ScaleY(13);
+      Caption := 'Host';
+    end;
+    
+    { lblAETFDBName }
+    lblAETFDBName := TLabel.Create(Page);
+    with lblAETFDBName do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(83);
+      Top := ScaleY(20);
+      Width := ScaleX(27);
+      Height := ScaleY(13);
+      Caption := 'Name';
+    end;
+    
+    { txtAETFDBService }
+    txtAETFDBService := TEdit.Create(Page);
+    with txtAETFDBService do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(176);
+      Top := ScaleY(64);
+      Width := ScaleX(65);
+      Height := ScaleY(21);
+      TabOrder := 0;
+      Text := '7010';
+    end;
+    
+    { txtAETFDBHost }
+    txtAETFDBHost := TEdit.Create(Page);
+    with txtAETFDBHost do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(176);
+      Top := ScaleY(40);
+      Width := ScaleX(129);
+      Height := ScaleY(21);
+      TabOrder := 1;
+      Text := 'localhost';
+    end;
+    
+    { txtAETFDBName }
+    txtAETFDBName := TEdit.Create(Page);
+    with txtAETFDBName do
+    begin
+      Parent := Page.Surface;
+      Left := ScaleX(176);
+      Top := ScaleY(16);
+      Width := ScaleX(129);
+      Height := ScaleY(21);
+      TabOrder := 2;
+      Text := 'dbAutoEdgeTheFactory';
+    end;
+    
+  
+    with Page do
+    begin
+      OnActivate := @DBBrokerPorts_Activate;
+      OnBackButtonClick := @DBBrokerPorts_BackButtonClick;
+      OnNextButtonClick := @DBBrokerPorts_NextButtonClick;
+      OnCancelButtonClick := @DBBrokerPorts_CancelButtonClick;
+    end;
+  
+    Result := Page.ID;
+  end;
