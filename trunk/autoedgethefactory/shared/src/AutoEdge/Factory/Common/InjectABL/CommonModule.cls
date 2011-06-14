@@ -7,7 +7,7 @@
     Created     : Wed Dec 01 16:15:19 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum.
 
@@ -27,13 +27,6 @@ class AutoEdge.Factory.Common.InjectABL.CommonModule inherits InjectionModule:
         define variable oBindingSyntax as IBindingSyntax no-undo.
         define variable cName as character no-undo.
         
-        /* savvion parameters */
-        cName = 'AutoEdgeTheFactory-Default'.
-        oBindingSyntax = this-object:Bind('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters').
-        oBindingSyntax
-            :Named(cName)
-            :To('AutoEdge.Factory.Common.EnterpriseServices.SavvionParameters')
-            :WithPropertyValue('ServerName', cName).
     end method.
     
 end class.

@@ -6,6 +6,9 @@
     @author pjudge
     Created     : Fri Feb 25 10:08:03 EST 2011
     Notes       : * Used for authorising actions
+                  * The types correspond to the foreign keys off the ApplicationUser
+                    table. In addition, we have a special kind of customer 'guest'
+                    who has differnt permissions to a customer.
   ---------------------------------------------------------------------- */
 using AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum.
 using OpenEdge.Lang.EnumMember.
@@ -14,16 +17,17 @@ class AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum inherits EnumMem
     
     define static public property Employee as UserTypeEnum no-undo get. private set.
     define static public property Customer as UserTypeEnum no-undo get. private set.
-    define static public property Factory as UserTypeEnum no-undo get. private set.    
     define static public property Guest as UserTypeEnum no-undo get. private set.
-    define static public property Admin as UserTypeEnum no-undo get. private set.
+    define static public property Supplier as UserTypeEnum no-undo get. private set.
+    define static public property System as UserTypeEnum no-undo get. private set.
+    
     
     constructor static UserTypeEnum ():
         UserTypeEnum:Employee = new UserTypeEnum('Employee').
         UserTypeEnum:Customer = new UserTypeEnum('Customer').
-        UserTypeEnum:Factory = new UserTypeEnum('Factory').
         UserTypeEnum:Guest = new UserTypeEnum('Guest').
-        UserTypeEnum:Admin = new UserTypeEnum('Admin').
+        UserTypeEnum:Supplier = new UserTypeEnum('Supplier').
+        UserTypeEnum:System = new UserTypeEnum('System').
     end constructor.
     
 	constructor public UserTypeEnum ( input pcName as character ):
@@ -36,9 +40,9 @@ class AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum inherits EnumMem
         case pcName:
             when UserTypeEnum:Employee:ToString() then oEnum = UserTypeEnum:Employee.
             when UserTypeEnum:Customer:ToString() then oEnum = UserTypeEnum:Customer.
-            when UserTypeEnum:Factory:ToString() then oEnum = UserTypeEnum:Factory.
             when UserTypeEnum:Guest:ToString() then oEnum = UserTypeEnum:Guest.
-            when UserTypeEnum:Admin:ToString() then oEnum = UserTypeEnum:Admin.
+            when UserTypeEnum:System:ToString() then oEnum = UserTypeEnum:System.
+            when UserTypeEnum:Supplier:ToString() then oEnum = UserTypeEnum:Supplier.
         end case.
         
         return oEnum.
