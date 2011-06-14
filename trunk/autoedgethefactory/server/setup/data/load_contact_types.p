@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------
-    File        : load_contacts.p
+    File        : load_contact_types.p
     Purpose     : 
 
     Syntax      :
@@ -12,24 +12,21 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-/* ***************************  Definitions  ************************** */
+run load_ContactTypes.
 
-
-
-/* ********************  Preprocessor Definitions  ******************** */
-
-
-/* ***************************  Main Block  *************************** */
 procedure load_ContactTypes:
     
-    define variable ctypes as character no-undo.
+    define variable cTypes as character no-undo.
     define variable iLoop as integer no-undo.
     define variable iMax as integer no-undo.
     
-    ctypes = 'email-sales|email-info|email-home|email-work|fax|phone-work|phone-home|phone-mobile'.
+    cTypes = 'email-sales|email-info|email-home|email-admin|email-work|fax-work|phone-work|phone-home|phone-mobile|fax-home'.
     
     iMax = num-entries(ctypes, '|').
     do iLoop = 1 to iMax:
+        if can-find(ContactType where ContactType.Name eq entry(iLoop, ctypes, '|')) then
+            next.
+        
         create ContactType.
         assign ContactType.Name = entry(iLoop, ctypes, '|').
     end.

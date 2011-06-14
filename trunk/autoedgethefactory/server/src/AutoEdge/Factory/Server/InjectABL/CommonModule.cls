@@ -12,7 +12,7 @@ routine-level on error undo, throw.
 using OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule.
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
-
+using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
 using OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule.
 using OpenEdge.Core.InjectABL.Binding.IBindingSyntax.
 
@@ -35,9 +35,7 @@ class AutoEdge.Factory.Server.InjectABL.CommonModule inherits BusinessComponentM
             :Using(InjectABLServiceProviderType)
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),
                      ManagerScopeEnum:ServiceManager)
-/*            :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),*/
-/*                     ManagerScopeEnum:SecurityManager)                                      */
-            .
+            :OnServerSession().
 
         /* scopes the security manager's lifecycle to the service manager's */
         oBindingSyntax = Bind(SecurityManager:ISecurityManagerType).
@@ -47,7 +45,7 @@ class AutoEdge.Factory.Server.InjectABL.CommonModule inherits BusinessComponentM
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),
                      ManagerScopeEnum:ServiceManager)
             :OnServerSession().
-        
+
         LoadEntities().
     end method.
     

@@ -423,9 +423,9 @@ cDealerCode = 'dealer03'.
 crepcode = 'fc'.
 iCustNum = 4.
 
-oSecMgr:UserLogin('frank.coleman', 'sales.employee.' + cTenant, encode('letmein')).
+oSecMgr:UserLogin('frank.coleman', 'sales.employee.' + cTenant, ('letmein')).
 
-oSecMgr:AuthenticateServiceAction('CaptureOrder', ServiceMessageActionEnum:SaveData).
+oSecMgr:AuthoriseServiceAction('CaptureOrder', ServiceMessageActionEnum:SaveData).
 
 oServiceMessageManager = cast(oServiceMgr:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
 

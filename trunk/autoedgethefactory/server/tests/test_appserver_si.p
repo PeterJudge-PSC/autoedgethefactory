@@ -10,17 +10,19 @@
     Created     : Wed Jan 19 09:25:39 EST 2011
     Notes       :
   ----------------------------------------------------------------------*/
+routine-level on error undo, throw.
 
 /* ***************************  Definitions  ************************** */
-{routinelevel.i}
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SecurityManagerRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
-
-using OpenEdge.Lang.SessionClientTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
+
+using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.System.UnhandledError.
+using OpenEdge.Lang.SessionClientTypeEnum.
 using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
@@ -69,14 +71,16 @@ function  SerializeContext returns memptr  (input poUserContext as IUserContext)
 end function.
 
 /* ***************************  Main Block  *************************** */
-&global-define USE-ROUTINE-LEVEL false
+define variable moUC as IUserContext extent no-undo.
 
 SessionClientTypeEnum:CurrentSession = SessionClientTypeEnum:AppServer.
 
 run OpenEdge/CommonInfrastructure/Server/as_startup.p (SessionClientTypeEnum:AppServer).
 
+/*run test_userlogin (output moUC).*/
+/*run test_userlogout (input moUC).*/
+
 /*run test_customerlogin.*/
-/*run test_userlogin.*/
 
 /*run test_getbranddata ('fjord').*/
 /*run test_captureorder.*/
@@ -169,20 +173,24 @@ procedure test_customerlogin:
 end procedure.     
 
 procedure test_userlogin:
+    define output parameter poUserContext as IUserContext extent no-undo.
+    
     define variable iLoop as integer no-undo.
     define variable iMax as integer no-undo.
     define variable cContextId as longchar no-undo.
     define variable oResponse as SecurityManagerResponse extent no-undo. 
     define variable mUserContext as memptr no-undo.
     define variable oRequest as SecurityManagerRequest extent 1 no-undo.
+    
 
         oRequest[1] = new SecurityManagerRequest('SecurityManager.UserLogin', ServiceMessageActionEnum:UserLogin).
-        assign oRequest[1]:UserName = 'amy'
-               oRequest[1]:UserDomain = 'customer.fjord'
-               oRequest[1]:UserPassword = encode('letmein').
+        assign oRequest[1]:UserName = 'john_webbs'
+               oRequest[1]:UserDomain = 'sales.employee.fjord'
+               oRequest[1]:UserPassword = 'letmein'.
     
     assign iMax = extent(oRequest)
-           extent(oResponse) = iMax.
+           extent(oResponse) = iMax
+           extent(poUserContext) = iMax.
     
     do iLoop = 1 to iMax on error undo, next:
         oResponse[iLoop] = new SecurityManagerResponse(oRequest[iLoop]).
@@ -196,7 +204,8 @@ procedure test_userlogin:
                   output mUserContext).
         
         oResponse[iLoop]:UserContext = DeserializeContext(mUserContext).
-        
+        poUserContext[iLoop] = oResponse[iLoop]:UserContext.
+         
         catch oError as Error:
             cast(oResponse[iLoop], IServiceResponse):HasError = true.
             cast(oResponse[iLoop], IServiceResponse):ErrorText = oError:GetMessage(1).
@@ -204,6 +213,53 @@ procedure test_userlogin:
     end.
     
 end procedure.
+
+procedure test_userlogout:
+    define input parameter poUserContext as IUserContext extent no-undo.
+    
+    define variable iLoop as integer no-undo.
+    define variable iMax as integer no-undo.
+    define variable oResponse as SecurityManagerResponse extent no-undo. 
+    define variable mUserContext as memptr no-undo.
+    define variable oRequest as SecurityManagerRequest extent no-undo.
+    
+    assign iMax = extent(poUserContext)
+           extent(oRequest) = iMax
+           extent(oResponse) = iMax.
+    
+    do iLoop = 1 to iMax on error undo, next:
+        oRequest[iLoop] = new SecurityManagerRequest(OpenEdge.CommonInfrastructure.Common.SecurityManager:ISecurityManagerType:TypeName,
+                                                     ServiceMessageActionEnum:UserLogout).
+        oRequest[iLoop]:ContextId = poUserContext[iLoop]:ContextId.
+        oRequest[iLoop]:UserContext = poUserContext[iLoop].
+    
+        oResponse[iLoop] = new SecurityManagerResponse(oRequest[iLoop]).
+        
+        set-byte-order(mUserContext) = ByteOrderEnum:BigEndian:Value.
+        
+        mUserContext = SerializeContext(poUserContext[iLoop]).
+        run OpenEdge/CommonInfrastructure/Server/service_interface_userlogout.p 
+                ( input-output mUserContext).
+        
+        oResponse[iLoop]:UserContext = DeserializeContext(mUserContext).
+        catch oApplicationError as ApplicationError:
+            cast(oResponse[iLoop], IServiceResponse):HasError = true.
+            cast(oResponse[iLoop], IServiceResponse):ErrorText = oApplicationError:ResolvedMessageText().
+            
+            oApplicationError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+
+            cast(oResponse[iLoop], IServiceResponse):HasError = true.
+            cast(oResponse[iLoop], IServiceResponse):ErrorText = oUHError:ResolvedMessageText().
+            
+            oUHError:ShowError().
+        end catch.
+    end.
+end procedure.
+
 
 procedure test_dealerdetail:
     define variable pcBrand as character no-undo.
@@ -220,7 +276,7 @@ procedure test_dealerdetail:
     
     pcBrand =  'fjord'.
     pcDealerCode = 'dealer03'.
-    pcUserContextId = '<NULL>'.
+    pcUserContextId = ''.
     
     run AutoEdge/Factory/Server/Order/BusinessComponent/service_dealer_detail.p
         (pcBrand, pcDealerCode, pcUserContextId,
@@ -249,12 +305,10 @@ define variable pcInteriorAccessories as longchar no-undo.
 define variable pcExteriorColour as longchar no-undo.
 define variable pcMoonroof as longchar no-undo.
 define variable pcWheels as longchar no-undo.
-    def var iOrderNum as int.
     def var cUserContextId as longchar.
     
     run AutoEdge/Factory/Server/Order/BusinessComponent/service_branddata.p (
                 input pcBrand,
-                input iOrderNum,
                 input cUserContextId,
                 
                 output pcDealerNameList ,
@@ -268,7 +322,7 @@ define variable pcWheels as longchar no-undo.
                 output pcInteriorAccessories ,
                 output pcExteriorColour ,
                 output pcMoonroof ,
-                output pcWheels     ) no-error.
+                output pcWheels     ).
                 
 message 
 error-status:error skip
@@ -281,29 +335,17 @@ view-as alert-box error title '[PJ DEBUG]'.
 end procedure.
 
 /** ----------------- **/
-catch oException as OpenEdge.Core.System.ApplicationError:
-    oException:LogError().
-    oException:ShowError().
+catch oApplicationError as ApplicationError:
+    oApplicationError:LogError().
+    oApplicationError:ShowError().
 end catch.
-
-catch oAppError as Progress.Lang.AppError:
-    message
-        oAppError:ReturnValue skip(2)
-        oAppError:CallStack
-        view-as alert-box error title 'Unhandled Progress.Lang.AppError'.
-end catch.
-
-catch oError as Progress.Lang.Error:
-    message
-        oError:GetMessage(1)      skip
-        '(' oError:GetMessageNum(1) ')' skip(2)        
-        oError:CallStack
-        view-as alert-box error title 'Unhandled Progress.Lang.Error'.
+catch oError as Error:
+    define variable oUHError as UnhandledError no-undo.
+    oUHError = new UnhandledError(oError).
+    oUHError:LogError().
+    oUHError:ShowError().
 end catch.
 
 finally:
-    message skip(2)
-    'just about done'
-    view-as alert-box error title '[PJ DEBUG]'.
     run OpenEdge/CommonInfrastructure/Common/stop_session.p.
 end finally.

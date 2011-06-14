@@ -8,7 +8,8 @@
 
     Author(s)   : pjudge
     Created     : Wed Dec 15 08:53:20 EST 2010
-    Notes       : * Tenants are car manufacturers
+    Notes       : * Tenants are car manufacturers; structured
+                  * The tenant structure is described in http://communities.progress.com/pcom/docs/DOC-106882/ 
   ----------------------------------------------------------------------*/
 
 /* ***************************  Definitions  ************************** */
@@ -38,6 +39,8 @@ do iLoop = 1 to iMax:
         assign cParent = entry(1, entry(iLoop, cTenants, '|'), ':')
                cBrand = entry(2, entry(iLoop, cTenants, '|'), ':').
     
+    if can-find(Tenant where Tenant.Name eq cBrand) then next.
+    
     create Tenant.
     assign Tenant.TenantId = guid(generate-uuid)
            Tenant.Name = cBrand
@@ -51,16 +54,25 @@ do iLoop = 1 to iMax:
     else
         Tenant.ParentTenantId = ''.
     
+    run AddContact('email-work',
+                   Tenant.TenantId,
+                   Tenant.TenantId,
+                   substitute('&1@&2.aetf','admin', Tenant.Name)).
     run CreateSecurityAuthenticationDomain(cDomainType, Tenant.Name, Tenant.TenantId).                    
 end.
 
 procedure CreateSecurityAuthenticationSystem:
     define output parameter pcDomainType as character no-undo.
     
+    pcDomainType = 'TABLE-ApplicationUser'.
+    
+    if can-find(_sec-authentication-system where
+                _sec-authentication-system._Domain-type eq pcDomainType) then
+        return.                
+    
     create _sec-authentication-system.
-    assign pcDomainType = 'TABLE-ApplicationUser'
-           _sec-authentication-system._Domain-type = pcDomainType
-           _sec-authentication-system._Domain-type-description = 'The AutoEdge|TheFactory ApplicationUser serves as the authentication domain'
+    assign _sec-authentication-system._Domain-type = pcDomainType
+           _sec-authentication-system._Domain-type-description = 'The AutoEdge|TheFactory ApplicationUser table serves as the authentication domain'
            .
 end procedure.
 
@@ -78,5 +90,38 @@ procedure CreateSecurityAuthenticationDomain:
            .
 end procedure.
     
-
+procedure AddContact:
+    define input parameter pcContactType as character no-undo.
+    define input parameter pcTenantId as character no-undo.
+    define input parameter pcParentId as character no-undo.
+    define input parameter pcContactDetail as character no-undo.
+    
+    define buffer ContactDetail for ContactDetail.
+    define buffer ContactType for ContactType.
+    define buffer ContactXref for ContactXref.
+    
+    find first ContactDetail where
+               ContactDetail.Detail eq pcContactDetail
+               no-lock no-error.
+    if not available ContactDetail then
+    do:
+        create ContactDetail.
+        assign ContactDetail.ContactDetailId = guid(generate-uuid)
+               ContactDetail.Detail = pcContactDetail.
+    end.
+    
+    find ContactType where ContactType.Name = pcContactType  no-lock.
+    
+    if can-find(ContactXref where
+                ContactXref.ParentId eq pcParentId and
+                ContactXref.TenantId eq pcTenantId and
+                ContactXref.ContactType = ContactType.Name) then
+        return.
+    
+    create ContactXref.
+    assign ContactXref.ContactDetailId = ContactDetail.ContactDetailId
+           ContactXref.ParentId = pcParentId
+           ContactXref.TenantId = pcTenantId
+           ContactXref.ContactType = ContactType.Name.
+end procedure.
 /* -- eof -- */

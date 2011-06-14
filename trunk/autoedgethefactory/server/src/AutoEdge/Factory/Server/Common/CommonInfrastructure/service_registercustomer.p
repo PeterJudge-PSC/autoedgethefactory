@@ -10,8 +10,9 @@
     Created     : Wed Mar 09 13:55:44 EST 2011
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
+using AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
@@ -62,16 +63,17 @@ Assert:ArgumentNotNullOrEmpty(pcCustomerEmail, 'Customer Email').
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType), IServiceManager).
 
-oSecMgr = cast(oServiceMgr:StartService(SecurityManager:ISecurityManagerType), ISecurityManager).
+oSecMgr = cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
 
 /* log in and establish tenancy, user context */
 assign cUserName = 'admin'
-       cUserDomain = 'admin.' + pcBrand
-       cUserPassword = encode('letmein').
+       cUserDomain = substitute('&1.&2',
+                        UserTypeEnum:System:ToString(),
+                        pcBrand).
+       cUserPassword = 'letmein'.
 oSecMgr:UserLogin(cUserName, cUserDomain, cUserPassword).
 
 @todo(task="implement", action="do something useful here").
-
 
 error-status:error = no.
 return.

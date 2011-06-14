@@ -12,13 +12,11 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Lang.FillModeEnum.
-
 /* ***************************  Definitions  ************************** */
 define temp-table ttDealer no-undo serialize-name 'dealer'
     field TenantName as character serialize-name 'brand' xml-node-type 'hidden'
     field DealerCode as character serialize-name 'code' xml-node-type 'attribute'
-    field DealerName as character serialize-name 'name'
+    field DealerName as character serialize-name 'name' xml-node-type 'attribute'
     field Address1 as character
     field Address2 as character
     field City as character
@@ -44,14 +42,24 @@ function GetAddressId returns longchar (input pcLine1 as char,
                                         input pcCity as char,
                                         input pcState as char,
                                         input pcZip as char):
-    create AddressDetail.
-    assign AddressDetail.AddressDetailId = guid(generate-uuid)
-           AddressDetail.AddressLine1 = pcLine1
-           AddressDetail.AddressLine2 = pcLine2
-           AddressDetail.City = pcCity
-           AddressDetail.PostalCode = pcZip
-           AddressDetail.State = pcState.
-    
+    find first AddressDetail where
+               AddressDetail.AddressLine1 eq pcLine1 and
+               AddressDetail.AddressLine2 eq pcLine2 and
+               AddressDetail.City eq pcCity and
+               AddressDetail.PostalCode eq pcZip and
+               AddressDetail.State eq pcState
+               no-lock no-error.
+    if not available AddressDetail then
+    do:               
+        create AddressDetail.
+        assign AddressDetail.AddressDetailId = guid(generate-uuid)
+               AddressDetail.AddressLine1 = pcLine1
+               AddressDetail.AddressLine2 = pcLine2
+               AddressDetail.City = pcCity
+               AddressDetail.PostalCode = pcZip
+               AddressDetail.State = pcState.
+    end.
+        
     return AddressDetail.AddressDetailId.
 end function.   
 
@@ -75,6 +83,11 @@ procedure load_dealer:
         
         for each ttDealer where 
                  ttDealer.TenantName = ttBrand.TenantName:
+                     
+            if can-find(Dealer where
+                        Dealer.Code eq ttDealer.DealerCode and
+                        Dealer.TenantId eq Tenant.TenantId) then next.
+            
             cDealerDomain  = ''.
             create Dealer.
             assign Dealer.DealerId = guid(generate-uuid)
@@ -91,7 +104,7 @@ procedure load_dealer:
                    Dealer.SwitchboardPhoneNumberId = GetContactId(ttDealer.Phone)
                    .
             if ttDealer.Fax ne '' then                   
-                run create_contact_xref ('fax', 
+                run create_contact_xref ('fax-work',
                                          GetContactId(ttDealer.Fax),
                                          Dealer.DealerId,
                                          Dealer.TenantId).
@@ -105,7 +118,7 @@ procedure load_dealer:
                 cDealerDomain = entry(2, ttDealer.SalesEmail, '@').
             if cDealerDomain ne '' then
                 /* admin email */
-                run create_contact_xref ('email-work', 
+                run create_contact_xref ('email-admin', 
                                          GetContactId('admin@' + cDealerDomain),
                                          Dealer.DealerId,
                                          Dealer.TenantId).
@@ -130,7 +143,9 @@ procedure create_contact_xref:
 end procedure.
 
 /* ***************************  Main Block  *************************** */
-dataset dsDealers:read-xml('file', search('data/dealers.xml'), FillModeEnum:Empty:ToString(), ?, ?).
+def var cFile as char.
+cFile = search('setup/data/dealers.xml').
+dataset dsDealers:read-xml('file', cFile, 'Empty', ?, ?).
 
 /*dataset dsDealers:write-json('file', session:temp-dir + '/dealers.json', true).*/
 

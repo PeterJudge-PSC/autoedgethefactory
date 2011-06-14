@@ -8,7 +8,7 @@
 
     Author(s)   : pjudge
     Created     : Tue Mar 08 15:23:43 EST 2011
-    Notes       :
+    Notes       : * COM documentation at http://www.hmailserver.com/documentation/v5.3/?page=overview 
   ----------------------------------------------------------------------*/
 define variable chMailServer as com-handle no-undo.
 define variable chDomain as com-handle no-undo.
@@ -30,7 +30,6 @@ function AddDomain returns com-handle(input pcDomain as char):
     return chDomain.
 end function. 
 
-
 /* since we're in demo-land :) the password is always a simple, constant value */
 cPassword = 'letmein'.
 
@@ -45,13 +44,41 @@ end.
 
 chMailServer:Authenticate("Administrator", "4mail").
 
+/* add brand accounts */
+for each Tenant no-lock,
+   first ContactXref where
+         ContactXref.TenantId eq Tenant.TenantId and
+         ContactXref.ParentId eq Tenant.TenantId and
+         ContactXref.ContactType eq ContactType.Name
+         no-lock,
+   first ContactDetail where
+         ContactDetail.ContactDetailId eq ContactXref.ContactDetailId
+         no-lock:
+    
+    chDomain = AddDomain(entry(2, ContactDetail.Detail, '@')).
+    
+    chAccount = chDomain:Accounts:ItemByAddress(ContactDetail.Detail) no-error.
+    if not valid-handle(chAccount) then
+    do:
+        chAccount = chDomain:Accounts:Add().
+            chAccount:Address = ContactDetail.Detail.
+            chAccount:PersonFirstName = 'Admin'.
+            chAccount:PersonLastName = Tenant.Name.
+            chAccount:Password = cPassword.
+            chAccount:Active = true.
+            chAccount:MaxSize = 100.    /* 100MB per user */
+        chAccount:Save().
+        release object chAccount.
+        chAccount = ?.
+    end.
+end.
+
 /* add domain and salesrep accounts per dealer */
 for each Dealer no-lock:
-    
     find ContactXref where
          ContactXref.TenantId eq Dealer.TenantId and
          ContactXref.ParentId eq Dealer.DealerId and
-         ContactXref.ContactType eq 'email-work'
+         ContactXref.ContactType eq ContactType.Name
          no-lock no-error.
      if available ContactXref then
         find ContactDetail where
@@ -66,6 +93,7 @@ for each Dealer no-lock:
         do:
             chAccount = chDomain:Accounts:Add().
                 chAccount:Address = ContactDetail.Detail.
+                chAccount:PersonFirstName = 'Info'.
                 chAccount:PersonLastName = Dealer.Name.
                 chAccount:Password = cPassword.
                 chAccount:Active = true.
@@ -89,6 +117,7 @@ for each Dealer no-lock:
         do:
             chAccount = chDomain:Accounts:Add().
                 chAccount:Address = ContactDetail.Detail.
+                chAccount:PersonFirstName = 'Sales'.
                 chAccount:PersonLastName = Dealer.Name.
                 chAccount:Password = cPassword.
                 chAccount:Active = true.

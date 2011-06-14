@@ -20,17 +20,26 @@ define variable cTenantUsers as character no-undo.
 define variable cPassword as character no-undo.
 
 define buffer lbUser for ApplicationUser.
+define buffer childTenant for Tenant.
 
 cPassword = 'letmein'.
 
+/* Customer users : UserTypeEnum:Customer */
 for each Customer no-lock,
     first Tenant where Tenant.TenantId = Customer.TenantId no-lock:
+        
+    /* allow for reloads */
+    if can-find(ApplicationUser where
+                ApplicationUser.CustomerId eq Customer.CustomerId and
+                ApplicationUser.TenantId eq Tenant.TenantId) then next. 
     
-    cDomain  = 'customer.' + Tenant.Name.         
+    cDomain  = 'customer.' + Tenant.Name.
     cLoginName = entry(1, Customer.Name, ' ').
     
     if can-find(lbUser where lbUser.LoginDomain = cDomain and lbUser.LoginName = cLoginName) then
-        cLoginName = cLoginName + substitute('-&1-&2', Customer.CustNum, Tenant.Name).
+        assign cLoginName = replace(lc(Customer.Name), ' ', '_')
+               cLoginName = replace(cLoginName, '__', '_')
+               cLoginName = replace(cLoginName, '.', '').
     
     create ApplicationUser.
     assign ApplicationUser.ApplicationUserId = guid(generate-uuid)
@@ -45,14 +54,20 @@ for each Customer no-lock,
            .
 end.
 
+/* Employee users : UserTypeEnum:Employee */
 for each Employee no-lock,
     first Department where Employee.DepartmentId = Department.DepartmentId no-lock,
     first Tenant where Tenant.TenantId = Employee.TenantId no-lock:
-
+    
+    /* allow for reloads */
+    if can-find(ApplicationUser where
+                ApplicationUser.EmployeeId eq Employee.EmployeeId and
+                ApplicationUser.TenantId eq Tenant.TenantId) then next. 
+    
     cDomain  = substitute('&1.employee.&2',
                       Department.Name,
                       Tenant.Name).
-    cLoginName = Employee.FirstName + '.' + Employee.LastName.
+    cLoginName = Employee.FirstName + '_' + Employee.LastName.
     
     if can-find(lbUser where lbUser.LoginDomain = cDomain and lbUser.LoginName = cLoginName) then
         cLoginName = cLoginName + substitute('-&1-&2', Employee.EmpNum, Tenant.Name).    
@@ -70,13 +85,30 @@ for each Employee no-lock,
            .
 end.
 
-cTenantUsers = 'admin|guest|factory'.
+/* system and brand users : UserTypeEnum:System */
+cTenantUsers = 'admin:system|guest:customer|factory:system|lob_manager:system'.
 iMax = num-entries(cTenantUsers, '|').
 
-for each Tenant no-lock:
-    do iLoop = 1 to iMax:
+for each Tenant no-lock:    
+    do iLoop = 1 to iMax:                
         cLoginName = entry(iLoop, cTenantUsers, '|').
-        cDomain  = cLoginName + '.' + Tenant.Name.
+        cDomain = entry(2, cLoginName, ':') + '.' + Tenant.Name.
+        cLoginName = entry(1, cLoginName, ':').
+        
+        if cDomain begins 'customer' then
+        do:
+            /* only want customers of brands */
+            if Tenant.ParentTenantId eq '' then next.
+            if can-find(first childTenant where childTenant.ParentTenantId = Tenant.TenantId) then next.
+        end.            
+        
+        if num-entries(cLoginName, ':') gt 1 then
+            cLoginName = entry(1, cLoginName, ':').
+        
+        /* allow for reloads */
+        if can-find(ApplicationUser where
+                    ApplicationUser.LoginDomain eq lc(cDomain) and
+                    ApplicationUser.LoginName eq lc(cLoginName) ) then next. 
         
         create ApplicationUser.
         assign ApplicationUser.ApplicationUserId = guid(generate-uuid)
