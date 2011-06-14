@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : IKernel
     Purpose     : InjectABL Kernel interface
     Syntax      : 
@@ -6,7 +6,7 @@
     @author pjudge
     Created     : Tue Mar 02 11:24:26 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule.
@@ -23,7 +23,7 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
     
     /** Gets the injection kernel settings  */
     define public property Settings as KernelSettings no-undo get.
-            
+    
     /** Gets the component container, which holds components that contribute to InjectABL.  */
     define public property Components as ComponentContainer no-undo get.
 
@@ -63,15 +63,6 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
     method public Object Get(input poService as class Class,
                              input poArguments as ICollection).
     
-    /** Instantiates all instances matching the specified scope. Typically
-        used to pre-start a set of objects when a Manager, for example, starts.
-        
-        @param StandardScopeEnum The scope type (ie manager)
-        @param Class The parent scope (eg ServiceManager or SecurityManager).
-        @return Object An array of objects matching the scope.  */
-    method public Object extent Get(input poScope as StandardScopeEnum,
-                                    input poScopeCallback as class Class).
-    
     /** Determines whether a module with the specified name has been loaded in the kernel.
         
         @param character The name of the module.
@@ -105,7 +96,7 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
                               input poArguments as ICollection).
 
     /** Deactivates and releases the specified instance if it is currently managed by InjectABL.
-    
+        
         @param Object The instance to release.
         @return logical True if the instance was found and released. otherwise false. */
     method public logical Release(input poInstance as Object).
@@ -114,5 +105,28 @@ interface OpenEdge.Core.InjectABL.IKernel: /* inherits IBindingRoot */
     
         @param Object The scope object for which to release instances.  */
     method public void Clear(input poScope as Object).
+    
+    /** Indicates whether a service is cached or not. 
+        
+        @param Class A service represented by a Progress.Lang.Class type instance.
+        @param character A name for the service
+        @return Logical Returns true if the service is being cached ; false if not in cache.
+                Note that a true return value doesn't mean there isn't a running instance of the service -
+                since transient instances aren't cached - but only that there are no cached instances. */        
+    method public logical IsCached(input poService as class Class,
+                                   input pcName as character).
+
+    /** Indicates whether a service is cached or not. 
+        
+        @param Class A service represented by a Progress.Lang.Class type instance.
+        @param character A name for the service
+        @param ICollection A collection of arguments to add to the bindings for the
+                            object being instantiated.        
+        @return Logical Returns true if the service is being cached ; false if not in cache.        
+                Note that a true return value doesn't mean there isn't a running instance of the service -
+                since transient instances aren't cached - but only that there are no cached instances. */        
+    method public logical IsCached(input poService as class Class,
+                                   input pcName as character,
+                                   input poArguments as ICollection).
     
 end interface.

@@ -250,34 +250,6 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     method public Object Get(poService as class Class):
         return this-object:Get(poService, '', ?).
     end method.
-
-    method public Object extent Get(input poScope as StandardScopeEnum,
-                                    input poScopeCallback as class Class ):
-        define variable oBinding as IBinding no-undo.
-        define variable oBindings as IList no-undo.
-        define variable oIterator as IIterator no-undo.
-        define variable oInstance as Object extent no-undo.
-        define variable iExtent as integer no-undo.
-        def var oContext as ILifecycleContext no-undo.
-        
-        oBindings = GetBindings(poScope, poScopeCallback).
-        if oBindings:Size gt 0 then
-        do:
-            extent(oInstance) = oBindings:Size.
-            
-            oIterator = oBindings:Iterator().
-            do while oIterator:HasNext():
-                oBinding = cast(oIterator:Next(), IBinding).
-                iExtent = iExtent + 1.
-                
-                /* [PJ] something buggy */
-                oContext = CreateContext(oBinding).
-                oInstance[iExtent] = oContext:Resolve().
-            end.
-        end.
-        
-        return oInstance.
-    end method.
     
     method public Object Get(input poService as class Class,
                              input poArguments as ICollection):
@@ -343,6 +315,10 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                created and added to the kernel. */
             oBinding = cast(oBindings:Get(1), IBinding).
         
+        Assert:ArgumentNotNull(
+                oBinding,
+                substitute('Binding for service &1 &2', poService:TypeName, pcName)).
+        
         /* Need to be able to invoke this type. */
         Assert:ArgumentNotAbstract(oBinding:TargetType).
         Assert:ArgumentNotInterface(oBinding:TargetType).
@@ -378,6 +354,55 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
                 , ICache):Release(poInstance).
     end method.
 
+
+    /** Indicates whether a service is cached or not. 
+        
+        @param Class A service represented by a Progress.Lang.Class type instance.
+        @param character A name for the service
+        @return Logical Returns true if the service is being cached ; false if not in cache.
+                Note that a true return value doesn't mean there isn't a running instance of the service -
+                since transient instances aren't cached - but only that there are no cached instances. */        
+    method public logical IsCached(input poService as class Class,
+                                   input pcName as character):
+        return IsCached(poService, pcName, ?).
+    end method.
+        
+    /** Indicates whether a service is cached or not. 
+        
+        @param Class A service represented by a Progress.Lang.Class type instance.
+        @param character A name for the service
+        @param ICollection A collection of arguments to add to the bindings for the
+                            object being instantiated.        
+        @return Logical Returns true if the service is being cached ; false if not in cache.        
+                Note that a true return value doesn't mean there isn't a running instance of the service -
+                since transient instances aren't cached - but only that there are no cached instances. */        
+    method public logical IsCached(input poService as class Class,
+                                   input pcName as character,
+                                   input poArguments as ICollection):
+    
+        define variable oBinding as IBinding no-undo.
+        define variable oContext as ILifecycleContext no-undo.
+        define variable lIsCached as logical no-undo.
+        
+        Assert:ArgumentNotNull(poService, 'Service').
+        Assert:ArgumentNotNull(pcName, 'Name').
+        
+        if poService:IsA(Class:GetClass('OpenEdge.Core.InjectABL.IKernel')) then
+            return true.
+        
+        oBinding = SelectBinding(poService, pcName).
+        
+        if valid-object(poArguments) then
+            oBinding:Arguments:AddAll(poArguments).
+        
+        oContext = CreateContext(oBinding).
+        
+        lIsCached = valid-object(
+                        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
+                            , ICache):TryGet(oContext)).
+        return lIsCached.                                                
+    end method.
+    
     method public void Clear(poScope as Object):
         Assert:ArgumentNotNull(poScope, "instance").
         
@@ -390,14 +415,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
                              , IBindingResolver):Resolve(Bindings, poService, pcName).
     end method.
-    
-    method protected IList GetBindings(input poScope as StandardScopeEnum,    
-                                       input poScopeCallback as class Class):
-        
-        return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Binding.IBindingResolver'))
-                             , IBindingResolver):Resolve(Bindings, poScopeCallback, poScope).
-    end method.
-        
+
     method protected IBinding CreateDefaultBinding(input poService as class Class):
         define variable oBinding as IBinding no-undo.
         define variable oBuilder as IBindingSyntax no-undo.
@@ -409,7 +427,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         
         oBuilder = Bind(poService).
         oBuilder:ToSelf().
-                
+        
         return oBinding.
     end method. 
     

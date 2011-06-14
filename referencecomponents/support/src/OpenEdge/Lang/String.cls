@@ -68,8 +68,7 @@ class OpenEdge.Lang.String
         if type-of(p0, OpenEdge.Lang.String) then
             return (this-object:Value eq cast(p0, OpenEdge.Lang.String):Value).
         else
-    
-        return super:Equals(p0).    
+            return super:Equals(p0).    
     end method.
     
 /** IExternalizable **/
@@ -124,13 +123,6 @@ class OpenEdge.Lang.String
         end.
         
         return cJoinedString.
-    end method.
-    
-    method public handle ToHandle():
-        define variable cValue as character no-undo.
-        cValue = this-object:Value.
-        
-        return widget-handle(cValue).
     end method.
     
     method override public character ToString():

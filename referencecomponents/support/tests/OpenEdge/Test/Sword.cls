@@ -12,7 +12,7 @@
 using Progress.Lang.*.
 using OpenEdge.Test.*.
 
-{routinelevel.i}
+routine-level on error undo, throw.
 
 class OpenEdge.Test.Sword implements IWeapon:
     

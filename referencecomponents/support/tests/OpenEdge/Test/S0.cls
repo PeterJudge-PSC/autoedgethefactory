@@ -7,7 +7,7 @@
     Created     : Fri Nov 20 10:44:33 EST 2009
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.Core.System.*.
 using OpenEdge.Core.Util.*.

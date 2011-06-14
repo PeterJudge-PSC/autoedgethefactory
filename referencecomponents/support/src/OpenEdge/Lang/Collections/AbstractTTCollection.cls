@@ -55,7 +55,7 @@ class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollec
         assign
             mhTempTable     = phtt
             mhDefaultBuffer = phtt:default-buffer-handle
-            mhField         = hField.                                                   
+            mhField         = hField.
     end constructor.
      
      method public logical Add( newObject as Object):
@@ -65,6 +65,7 @@ class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollec
             assign
                 mhField:buffer-value = newObject  
                 Size = Size + 1.    
+            mhDefaultBuffer:buffer-release().
             return true.
         end.
         return false.

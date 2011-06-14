@@ -211,5 +211,22 @@ class OpenEdge.Lang.Assert:
             undo, throw new AppError(substitute('&1 array must be indeterminate', pcName)).                                                               
     end method.
     
+    method public static void ArgumentIsAvailable(input phArgument as handle,
+                                                  input pcName as character):
+        Assert:ArgumentNotNull(phArgument, pcName).
+        
+        if not phArgument:available then
+            undo, throw new AppError(substitute('record in buffer &1 is not available', pcName)).                                                               
+    end method.
+
+    method public static void ArgumentIsInt(input pcArgument as character,
+                                            input pcName as character):
+        define variable iCheckVal as integer no-undo.
+        
+        iCheckVal = int(pcArgument) no-error.
+        if error-status:error then
+            undo, throw new AppError(substitute('&1 is an integer value', pcName)).                                                               
+    end method.
+    
     
 end class.

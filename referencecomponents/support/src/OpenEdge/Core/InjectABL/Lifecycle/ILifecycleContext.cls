@@ -18,30 +18,31 @@ using Progress.Lang.Object.
 interface OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext:  
     /** Gets the request. 
     define public property Request as IActivationRequest no-undo get.
-    **/
+    */
     
-    /** Gets the kernel that is driving the activation. **/
+    /** Gets the kernel that is driving the activation. */
     define public property Kernel as IKernel no-undo get.
     
-    /** Gets the binding. **/
+    /** Gets the binding. */
     define public property Binding as IBinding no-undo get.
     
-    /** Gets the arguments for the constructor/methods/etc that were passed to manipulate the activation process. **/
+    /** Gets the arguments for the constructor/methods/etc that were passed to manipulate the activation process. */
     define public property Arguments as ICollection no-undo get.
     
-    /** Gets or sets the pipeline component. **/
+    /** Gets or sets the pipeline component. */
     define public property Pipeline as IPipeline no-undo get.
     
     /** Gets the provider that should be used to create the instance for this context.
-        <returns>The provider that should be used.</returns> **/
+        
+        @return IProvider The provider that should be used. */
     method public IProvider GetProvider().
     
     /** Gets the scope for the context that "owns" the instance activated therein.
-        <returns>The object that acts as the scope.</returns> **/
+        @return Object The object that acts as the scope. */
     method public Object GetScope().
     
     /** Resolves this instance for this context.
-        <returns>The resolved instance.</returns> **/
+        The resolved instance. */
     method public Object Resolve().
     
 end interface.

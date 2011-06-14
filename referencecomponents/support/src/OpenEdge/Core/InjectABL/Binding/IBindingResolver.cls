@@ -25,14 +25,4 @@ interface OpenEdge.Core.InjectABL.Binding.IBindingResolver:
                                 input poService as class Class,
                                 input pcName as character).
     
-    /** Returns valid binding(s) for a scope from a set of bindings 
-        
-        @param IMap The complete set of bindings to resolve
-        @param Class The type of scope (standard, manager etc)
-        @param StandardScopeEnum The level of the scope (security manager, service manager etc)
-        @return IList  The list of bindings corresponding to the scope and type */
-    method public IList Resolve(input poBindings as IMap,
-                                input poScopeCallback as class Class,
-                                input poScope as StandardScopeEnum).
-    
 end interface.

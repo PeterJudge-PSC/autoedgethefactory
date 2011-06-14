@@ -31,7 +31,8 @@ class OpenEdge.Lang.Collections.List inherits AbstractTTCollection implements IL
       field objectref as Object 
       index objidx objectref
       index seq as unique primary sequence.
-
+        .
+        
     constructor public List(  ):
         super (temp-table ttList:handle,'objectref').        
     end constructor.
@@ -66,15 +67,25 @@ class OpenEdge.Lang.Collections.List inherits AbstractTTCollection implements IL
     end method.
     
     method protected override void FindBufferUseObject (findObject as Object):
+        define variable lFoundRecord as logical no-undo.
+        lFoundRecord = false.
+        
         for each ttList where objectref = findObject by ttList.sequence:
-            return. 
-        end.  
+            lFoundRecord = true.
+            return.
+        end.
+        
+        for each ttList     
+                 by ttList.sequence
+                 while not lFoundRecord:
+            lFoundRecord = ttList.objectref:Equals(findObject).
+        end.
     end method.
 
     method public logical Add(seq as integer, obj as Object ):    
         define buffer btList for ttList.
         
-        if super:add(obj) then
+        if super:Add(obj) then
         do:
             for each btList where btList.sequence >= seq by btList.sequence desc:
                 btList.sequence = btList.sequence + 1. 
@@ -248,14 +259,14 @@ class OpenEdge.Lang.Collections.List inherits AbstractTTCollection implements IL
         return oldObject.
     end method.
     
-    method public Object Set( input i as integer, input o as Object ):
+    method public Object Set( input i as integer, input poReplacement as Object ):
         define variable oldObject as Object.
         find ttList where ttList.sequence = i no-error.
         if avail ttList then 
         do: 
             assign 
                 oldObject        = ttList.objectref  
-                ttList.objectref = o.
+                ttList.objectref = poReplacement.
             return oldObject. 
         end.
     end method.
