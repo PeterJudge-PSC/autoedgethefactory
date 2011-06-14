@@ -15,7 +15,9 @@
                   * There are 3 separate loops that could be combined into 1 or 2 for performance reasons.
                     They remain separate here for illustrative purposes.
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
+
+using OpenEdge.CommonInfrastructure.Server.ISecurityManager.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
@@ -26,7 +28,6 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum. 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
@@ -73,21 +74,6 @@ do iLoop = 1 to iMax:
     
     set-byte-order(pmRequest[iLoop]) = ByteOrderEnum:BigEndian:Value. 
      
-    copy-lob pmRequest[iLoop] to file session:temp-dir + '/fetchrequest.ser'.
-    
-    def var i as int.
-def var i2 as int.
-output to value(session:temp-dir + '/fetchrequest.ser').
-do i = 1 to get-size(pmRequest[iLoop]):
-    i2 = get-byte(pmRequest[iLoop], i).
-     
-    put unformatted 
-        i '~t'
-        i2 '~t'         
-        chr(i2) skip.
-end. 
-    output close.
-
     oInput:Read(pmRequest[iLoop]).
     oRequest[iLoop] = cast(oInput:ReadObject(), IFetchRequest).
 end.
@@ -101,12 +87,12 @@ oContext = cast(oInput:ReadObject(), IUserContext).
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType), IServiceManager).
 
 /* Are we who we say we are? Note that this should really happen on activate. activate doesn't run for state-free AppServers */
-oSecMgr = cast(oServiceMgr:StartService(SecurityManager:ISecurityManagerType)
+oSecMgr = cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType)
                ,ISecurityManager).
 
-oSecMgr:ValidateSession(oContext).
+oSecMgr:EstablishSession(oContext).
 
-oServiceMessageManager = cast(oServiceMgr:StartService(ServiceMessageManager:IServiceMessageManagerType)
+oServiceMessageManager = cast(oServiceMgr:GetService(ServiceMessageManager:IServiceMessageManagerType)
                         , IServiceMessageManager).
 
 /* Perform request. This is where the actual work happens.
@@ -131,6 +117,8 @@ do iLoop = 1 to iMax:
     /* no leaks! */
     set-size(mTemp) = 0.
 end.
+
+oContext = oSecMgr:GetPendingContext(oContext:ContextId).
 
 oOutput = new ObjectOutputStream().
 oOutput:WriteObject(oContext).

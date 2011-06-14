@@ -28,7 +28,7 @@ define variable oServiceMgr as IServiceManager no-undo.
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType), IServiceManager).
                
-cast(oServiceMgr:StartService(SecurityManager:ISecurityManagerType), ISecurityManager):EndSession().
+cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType), ISecurityManager):EndSession().
                
 oServiceMgr:Kernel:Clear(AgentConnection:Instance).
 

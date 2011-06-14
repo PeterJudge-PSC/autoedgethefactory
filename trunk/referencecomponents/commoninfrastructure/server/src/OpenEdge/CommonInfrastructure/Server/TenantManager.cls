@@ -12,14 +12,15 @@ routine-level on error undo, throw.
 using OpenEdge.CommonInfrastructure.Common.ITenantManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo. 
+using OpenEdge.CommonInfrastructure.Common.IManager.
 using OpenEdge.CommonInfrastructure.Common.Service.
 
 using OpenEdge.Core.System.InvalidActionError.
 using OpenEdge.Lang.Collections.IMap.
 
 class OpenEdge.CommonInfrastructure.Server.TenantManager inherits Service
-        implements ITenantManager: 
-
+        implements ITenantManager, IManager: 
+    
     constructor public TenantManager(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):        
         super(poServiceManager, poComponentInfo).
     end constructor.

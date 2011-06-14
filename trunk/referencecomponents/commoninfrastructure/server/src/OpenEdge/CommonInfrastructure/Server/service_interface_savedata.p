@@ -16,7 +16,9 @@
                     They remain separate here for illustrative purposes.
 
   ---------------------------------------------------------------------- */
-{routinelevel.i}
+routine-level on error undo, throw.
+
+using OpenEdge.CommonInfrastructure.Server.ISecurityManager.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
@@ -26,7 +28,6 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
@@ -82,11 +83,10 @@ oServiceManager = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:
                         IServiceManager).
 
 /* Are we who we say we are? Note that this should really happen on activate. */
-oSecMgr = cast(oServiceManager:StartService(SecurityManager:ISecurityManagerType), ISecurityManager).
+oSecMgr = cast(oServiceManager:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
+oSecMgr:EstablishSession(oContext).
 
-oContext = oSecMgr:ValidateSession(oContext:ContextId).
-
-oServiceMessageManager = cast(oServiceManager:StartService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
+oServiceMessageManager = cast(oServiceManager:GetService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
 
 /* Perform request. This is where the actual work happens.
    If this was a specialised service interface, we might construct the service request here, rather than
@@ -110,6 +110,8 @@ do iLoop = 1 to iMax:
     /* no leaks! */
     set-size(mTemp) = 0.
 end.
+
+oContext = oSecMgr:GetPendingContext(oContext:ContextId).
 
 oOutput = new ObjectOutputStream().
 oOutput:WriteObject(oContext).

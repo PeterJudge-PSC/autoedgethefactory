@@ -23,7 +23,7 @@ using Progress.Lang.Error.
 /** -- params, defs -- **/
 define input parameter pcStartupData as character no-undo.
 
-run OpenEdge/CommonInfrastructure/Common/start_session.p (pcStartupData).
+run OpenEdge/CommonInfrastructure/Common/start_session.p.
 
 ABLSession:Instance:SessionProperties:Put(new String('startup-procedure-parameters'), new String(pcStartupData)).
 

@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\CommonInfrastructure\Server</font>
       <br />CLASS SecurityManager
     </h2>
-    <p>CLASS OpenEdge.CommonInfrastructure.Server.SecurityManager abstract INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Common/SecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.SecurityManager" target="classFrame">SecurityManager</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/Common/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.ISecurityManager" target="classFrame">ISecurityManager</a> </p>
+    <p>CLASS OpenEdge.CommonInfrastructure.Server.SecurityManager abstract INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Common/SecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.SecurityManager" target="classFrame">SecurityManager</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/Server/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Server.ISecurityManager" target="classFrame">ISecurityManager</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -112,9 +112,65 @@
       <td>
         <code>
           <b>
-            <a href='#endsession(openedge.commoninfrastructure.common.iusercontext)'> EndSession</a>
+            <a href='#destroycomponent()'> DestroyComponent</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#endsession(longchar)'> EndSession</a>
+          </b>(LONGCHAR pcContextId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ends a user's session (not a log out, but the opposite of EstablishSession)
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#establishsession(longchar)'> EstablishSession</a>
+          </b>(LONGCHAR pcContextId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates that the passed context is valid and that the session can be established.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#establishsession(openedge.commoninfrastructure.common.iusercontext)'> EstablishSession</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates that the passed context is valid and that the session can be established.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#finddomainkey(openedge.commoninfrastructure.common.iusercontext)'> FindDomainKey</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds/retrieves/calculates a domain key for given context.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -126,7 +182,7 @@
       <td>
         <code>
           <b>
-            <a href='#getusercontext(longchar)'> GetUserContext</a>
+            <a href='#getpendingcontext(longchar)'> GetPendingContext</a>
           </b>(LONGCHAR pcContextId)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -134,21 +190,77 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
+          <code>VOID</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#retrievecontextfromstore(longchar)'> RetrieveContextFromStore</a>
-          </b>(LONGCHAR pcContextId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the context for a given ID from the context store.
+            <a href='#initialize()'> Initialize</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#loadauthenticationdomains()'> LoadAuthenticationDomains</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the security authentication domains for the application.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#sealusercredentials(openedge.commoninfrastructure.common.iusercontext)'> SealUserCredentials</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setusercontext(openedge.commoninfrastructure.common.iusercontext)'> SetUserContext</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merges the passed context into the current user's context. The
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#unloadauthenticationdomains()'> UnloadAuthenticationDomains</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unloads the security authentication domains for the application.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LONGCHAR</code>
         </font>
       </td>
       <td>
@@ -168,23 +280,9 @@
       <td>
         <code>
           <b>
-            <a href='#validatecredentials(character,character,character)'> ValidateCredentials</a>
-          </b>(CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#validatesession(longchar)'> ValidateSession</a>
+            <a href='#userlogout(longchar)'> UserLogout</a>
           </b>(LONGCHAR pcContextId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs a user out of the application.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -196,9 +294,23 @@
       <td>
         <code>
           <b>
-            <a href='#validatesession(openedge.commoninfrastructure.common.iusercontext)'> ValidateSession</a>
+            <a href='#userlogout(openedge.commoninfrastructure.common.iusercontext)'> UserLogout</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates that the passed context is valid and that the session can be established.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs a user out of the application.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#validatecredentials(character,character,character)'> ValidateCredentials</a>
+          </b>(CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -244,7 +356,7 @@
     </code>
     <dl>
       <dd>Creates a IUserContext object for a validated user/domain. Will usually be <p> </dd>
-      <dd>overridden to add more details </dd>
+      <dd>overridden to add more details. </dd>
       <dd>
         <dl><!-- -->
           <dt>
@@ -259,10 +371,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='endsession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
-    <h3>EndSession</h3>
+    <a name='destroycomponent()'><!-- --></a>
+    <h3>DestroyComponent</h3>
     <code>OVERRIDE PUBLIC  VOID
-      <b>EndSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+      <b>DestroyComponent</b>()
     </code>
     <dl>
       <dd>
@@ -270,46 +382,195 @@
       </dd>
     </dl>
     <hr />
-    <a name='getusercontext(longchar)'><!-- --></a>
-    <h3>GetUserContext</h3>
-    <code>OVERRIDE PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
-      <b>GetUserContext</b>(LONGCHAR pcContextId)
+    <a name='endsession(longchar)'><!-- --></a>
+    <h3>EndSession</h3>
+    <code>PUBLIC  VOID
+      <b>EndSession</b>(LONGCHAR pcContextId)
     </code>
     <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='retrievecontextfromstore(longchar)'><!-- --></a>
-    <h3>RetrieveContextFromStore</h3>
-    <code>PROTECTED  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
-      <b>RetrieveContextFromStore</b>(LONGCHAR pcContextId)
-    </code>
-    <dl>
-      <dd>Retrieves the context for a given ID from the context store. <p> </dd>
+      <dd>Ends a user's session (not a log out, but the opposite of EstablishSession) <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
             <b>Parameters:</b>
           </dt>
-          <dd>longchar - A context ID<br/></dd>
+          <dd>longchar - The context ID identifying the user who's session is being ended.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='establishsession(longchar)'><!-- --></a>
+    <h3>EstablishSession</h3>
+    <code>PUBLIC  VOID
+      <b>EstablishSession</b>(LONGCHAR pcContextId)
+    </code>
+    <dl>
+      <dd>Validates that the passed context is valid and that the session can be established. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>longchar - A user context id.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='establishsession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>EstablishSession</h3>
+    <code>PUBLIC  VOID
+      <b>EstablishSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+    </code>
+    <dl>
+      <dd>Validates that the passed context is valid and that the session can be established. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IUserContext - The passed-in user context to validate.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='finddomainkey(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>FindDomainKey</h3>
+    <code> CHARACTER
+      <b>FindDomainKey</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+    </code>
+    <dl>
+      <dd>Finds/retrieves/calculates a domain key for given context. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IUserContext - The context for which to find the key<br/></dd>
           <dt>
             <b>Returns:</b>
           </dt>
-          <dd>IUserContext The user context object associated with that ID</dd>
+          <dd>character The domain key for the given context.</dd>
         </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getpendingcontext(longchar)'><!-- --></a>
+    <h3>GetPendingContext</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
+      <b>GetPendingContext</b>(LONGCHAR pcContextId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='initialize()'><!-- --></a>
+    <h3>Initialize</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>Initialize</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='loadauthenticationdomains()'><!-- --></a>
+    <h3>LoadAuthenticationDomains</h3>
+    <code> VOID
+      <b>LoadAuthenticationDomains</b>()
+    </code>
+    <dl>
+      <dd>Loads the security authentication domains for the application. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='sealusercredentials(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>SealUserCredentials</h3>
+    <code>PROTECTED  VOID
+      <b>SealUserCredentials</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setusercontext(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>SetUserContext</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>SetUserContext</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
+    </code>
+    <dl>
+      <dd>Merges the passed context into the current user's context. The <p> </dd>
+      <dd>default is to replace the current context completely. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IUserContext - The context to merge.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='unloadauthenticationdomains()'><!-- --></a>
+    <h3>UnloadAuthenticationDomains</h3>
+    <code> VOID
+      <b>UnloadAuthenticationDomains</b>()
+    </code>
+    <dl>
+      <dd>Unloads the security authentication domains for the application. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
     <a name='userlogin(character,character,character)'><!-- --></a>
     <h3>UserLogin</h3>
-    <code>OVERRIDE PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
+    <code>OVERRIDE PUBLIC  LONGCHAR
       <b>UserLogin</b>(CHARACTER pcUserName, CHARACTER pcUserDomain, CHARACTER pcPassword)
     </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='userlogout(longchar)'><!-- --></a>
+    <h3>UserLogout</h3>
+    <code>PUBLIC  VOID
+      <b>UserLogout</b>(LONGCHAR pcContextId)
+    </code>
+    <dl>
+      <dd>Logs a user out of the application. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>longchar - The user context ID.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='userlogout(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>UserLogout</h3>
+    <code>PUBLIC  VOID
+      <b>UserLogout</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
+    </code>
+    <dl>
+      <dd>Logs a user out of the application. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IUserContext - The (validated) user context object for the given credentials.<br/></dd>
+        </dl>
       </dd>
     </dl>
     <hr />
@@ -321,34 +582,6 @@
     <dl>
       <dd>
         <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='validatesession(longchar)'><!-- --></a>
-    <h3>ValidateSession</h3>
-    <code>OVERRIDE PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a>
-      <b>ValidateSession</b>(LONGCHAR pcContextId)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='validatesession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
-    <h3>ValidateSession</h3>
-    <code>PUBLIC OVERRIDE  VOID
-      <b>ValidateSession</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poContext)
-    </code>
-    <dl>
-      <dd>Validates that the passed context is valid and that the session can be established. <p> </dd>
-      <dd>
-        <dl><!-- -->
-          <dt>
-            <b>Parameters:</b>
-          </dt>
-          <dd>IUserContext - The passed-in user context.<br/></dd>
-        </dl>
       </dd>
     </dl>
     <hr />
