@@ -10,7 +10,7 @@
     Created     : Thu Dec 16 09:17:18 EST 2010
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
@@ -19,6 +19,7 @@ using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
 using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.System.UnhandledError.
 
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
@@ -34,7 +35,6 @@ define output parameter pcUserContextId as longchar no-undo.
 
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
-define variable oContext as IUserContext no-undo.
 
 /** -- validate defs -- **/
 if pcUserName eq 'Savvion::Test' then
@@ -50,13 +50,13 @@ Assert:ArgumentNotNullOrEmpty(pcPassword, 'User Password').
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType), IServiceManager).
 
-oSecMgr = cast(oServiceMgr:StartService(SecurityManager:ISecurityManagerType), ISecurityManager).
+oSecMgr = cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
 
 /* log in and establish tenancy, user context */
-oContext = oSecMgr:UserLogin(pcUserName,
-                             pcUserDomain,
-                             encode(pcPassword)).
-pcUserContextId = oContext:ContextId.
+oSecMgr:UserLogin(pcUserName,
+                  pcUserDomain,
+                  pcPassword).
+pcUserContextId = oSecMgr:CurrentUserContext:ContextId.
 
 Assert:ArgumentNotNullOrEmpty(pcUserContextId, 'User Context ID').
 
@@ -64,15 +64,12 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
+catch oApplicationError as ApplicationError:
+    return error oApplicationError:ResolvedMessageText().
 end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
-end catch.
-
 catch oError as Error:
-    return error oError:GetMessage(1).
+    define variable oUHError as UnhandledError no-undo.
+    oUHError = new UnhandledError(oError).
+    return error oUHError:ResolvedMessageText().
 end catch.
 /** -- eof -- **/

@@ -10,9 +10,9 @@
     Created     : Fri Jan 14 13:04:44 EST 2011
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Server.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
@@ -23,6 +23,8 @@ using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
 using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.System.UnhandledError.
+using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
@@ -39,6 +41,8 @@ define variable oOutput as IObjectOutput no-undo.
 define variable oContext as IUserContext no-undo.
 
 /** -- main -- **/
+set-byte-order(pmUserContext) = ByteOrderEnum:BigEndian:Value.
+
 oInput = new ObjectInputStream().
 oInput:Read(pmUserContext).
 oContext = cast(oInput:ReadObject(), IUserContext).
@@ -46,13 +50,12 @@ oContext = cast(oInput:ReadObject(), IUserContext).
 Assert:ArgumentNotNull(oContext, 'User Context').
 
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType), IServiceManager).
-oSecMgr = cast(oServiceMgr:StartService(SecurityManager:ISecurityManagerType), ISecurityManager).
+oSecMgr = cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
 
-/* log out and establish tenancy, user context */
 oSecMgr:UserLogout(oContext).
 
 /* The logout may have added a payload so we need to pass that back */
-oContext = oSecMgr:GetPendingContext().
+oContext = oSecMgr:GetPendingContext(oContext:ContextId).
 
 oOutput = new ObjectOutputStream().
 oOutput:WriteObject(oContext).
@@ -65,12 +68,9 @@ return.
 catch oApplError as ApplicationError:
     return error oApplError:ResolvedMessageText().
 end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
-end catch.
-
 catch oError as Error:
-    return error oError:GetMessage(1).
+    define variable oUHError as UnhandledError no-undo.
+    oUHError = new UnhandledError(oError).
+    return error oUHError:ResolvedMessageText().
 end catch.
 /** -- eof -- **/
