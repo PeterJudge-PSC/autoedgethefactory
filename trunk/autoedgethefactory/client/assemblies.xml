@@ -7,6 +7,7 @@
 <assembly name="Infragistics2.Win.UltraWinExplorerBar.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
 <assembly name="Infragistics2.Win.UltraWinGrid.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
 <assembly name="Infragistics2.Win.UltraWinListView.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
+<assembly name="Infragistics2.Win.UltraWinSchedule.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
 <assembly name="Infragistics2.Win.UltraWinStatusBar.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
 <assembly name="Infragistics2.Win.UltraWinTabControl.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
 <assembly name="Infragistics2.Win.UltraWinTabbedMdi.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
@@ -25,4 +26,5 @@
 <assembly name="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
 <assembly name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
 <assembly name="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+<assembly name="Infragistics2.Win.UltraWinGauge.v9.2, Version=9.2.20092.2119, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"/>
 </references>

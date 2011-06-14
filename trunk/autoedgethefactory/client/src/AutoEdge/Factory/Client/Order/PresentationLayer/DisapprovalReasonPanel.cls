@@ -7,9 +7,14 @@
     Created     : Mon Jul 12 11:31:18 EDT 2010
     Notes       : 
   ----------------------------------------------------------------------*/
+routine-level on error undo, throw.
+
+using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.System.UnhandledError.
 
 using Progress.Windows.Form.
 using Progress.Windows.UserControl.
+using Progress.Lang.Error.
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.DisapprovalReasonPanel inherits UserControl: 
 	
@@ -177,6 +182,15 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DisapprovalReasonPanel inh
 
 	method private void uxCancel_Click( input sender as System.Object, input e as System.EventArgs ):
         cast(this-object:Parent, Form):Close().
+
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
 	end method.
 	
 	method private void uxOK_Click(input sender as System.Object, input e as System.EventArgs ):
@@ -186,6 +200,15 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DisapprovalReasonPanel inh
             view-as alert-box error title 'AutoEdge|TheFactory Error'.
         else
             moParentForm:DisapproveOrder(uxDetail:Text).
+            
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
 	end method.
 	
 	destructor public DisapprovalReasonPanel ( ):

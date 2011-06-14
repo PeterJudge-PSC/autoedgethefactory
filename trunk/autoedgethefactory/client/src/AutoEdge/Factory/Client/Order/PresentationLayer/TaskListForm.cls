@@ -121,7 +121,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.TaskListForm inherits Form
         this-object:uxConnect:Size = new System.Drawing.Size(75, 23).
         this-object:uxConnect:TabIndex = 6.
         this-object:uxConnect:Text = "Connect".
-        this-object:uxConnect:Click:Subscribe(this-object:uxConnect_Click).
         /*  */
         /* lblPW */
         /*  */
@@ -240,17 +239,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.TaskListForm inherits Form
             undo, throw e.
         end catch.
     end method.
-
-    /*------------------------------------------------------------------------------
-            Purpose:                                                                        
-            Notes:                                                                        
-    ------------------------------------------------------------------------------*/
-    @VisualDesigner.
-    METHOD PRIVATE VOID uxConnect_Click( INPUT sender AS System.Object, INPUT e AS System.EventArgs ):
-        
-        RETURN.
-
-    END METHOD.
 
     destructor public TaskListForm ( ):
 

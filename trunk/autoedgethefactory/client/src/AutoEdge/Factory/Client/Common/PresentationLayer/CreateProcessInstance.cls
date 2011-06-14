@@ -9,9 +9,9 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.
-using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
-using OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate.
+using OpenEdge.Lang.BPM.IBizLogicAPI.
+using OpenEdge.Lang.BPM.WorkFlowWebService.
+using OpenEdge.Lang.BPM.ProcessTemplate.
 using AutoEdge.Factory.Client.Common.PresentationLayer.CreateProcessInstance. 
 using Progress.Windows.Form.
 

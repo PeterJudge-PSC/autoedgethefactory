@@ -45,6 +45,29 @@
       </dd>
     </dl>
     <hr />
+				<A NAME="field_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Field Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.TaskCompleted'>TaskCompleted</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
 				<A NAME="property_summary"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -55,27 +78,27 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a></code>
+          <code><a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.CurrentTask'>CurrentTask</a>
-          </b> PUBLIC GET SET 
+            <a href='#property.BpmServer'>BpmServer</a>
+          </b> PROTECTED GET SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a></code>
+          <code><a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.TaskList'>TaskList</a>
+            <a href='#property.CurrentTask'>CurrentTask</a>
           </b> PUBLIC GET SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -112,13 +135,71 @@
       <td>
         <code>
           <b>
-            <a href='#settask(autoedge.factory.client.common.enterpriseservices.currenttask,autoedge.factory.client.common.presentationlayer.itasklistmanager)'> SetTask</a>
-          </b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poCurrentTask, <a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a> poTaskList)
+            <a href='#completetask(openedge.lang.bpm.task)'> CompleteTask</a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#oncurrenttaskcompleted(openedge.lang.bpm.task)'> OnCurrentTaskCompleted</a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#reassigntask(openedge.lang.bpm.task,character)'> ReassignTask</a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask, CHARACTER pcPerformer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#settask(openedge.lang.bpm.task,openedge.lang.bpm.ibizlogicapi)'> SetTask</a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poCurrentTask, <a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> poBpmServer)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
 				
+				<A NAME="field_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Field Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='1194.TaskCompleted'><!-- --></a>
+    <h3>TaskCompleted</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
 				<A NAME="property_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -126,18 +207,18 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='property.CurrentTask'><!-- --></a>
-    <h3>CurrentTask</h3>
-    <code><a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> PUBLIC GET SET </code>
+    <a name='property.BpmServer'><!-- --></a>
+    <h3>BpmServer</h3>
+    <code><a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> PROTECTED GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='property.TaskList'><!-- --></a>
-    <h3>TaskList</h3>
-    <code><a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a> PUBLIC GET SET </code>
+    <a name='property.CurrentTask'><!-- --></a>
+    <h3>CurrentTask</h3>
+    <code><a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> PUBLIC GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -162,10 +243,43 @@
       </dd>
     </dl>
     <hr />
-    <a name='settask(autoedge.factory.client.common.enterpriseservices.currenttask,autoedge.factory.client.common.presentationlayer.itasklistmanager)'><!-- --></a>
+    <a name='completetask(openedge.lang.bpm.task)'><!-- --></a>
+    <h3>CompleteTask</h3>
+    <code>PUBLIC  VOID
+      <b>CompleteTask</b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='oncurrenttaskcompleted(openedge.lang.bpm.task)'><!-- --></a>
+    <h3>OnCurrentTaskCompleted</h3>
+    <code>PROTECTED  VOID
+      <b>OnCurrentTaskCompleted</b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='reassigntask(openedge.lang.bpm.task,character)'><!-- --></a>
+    <h3>ReassignTask</h3>
+    <code>PUBLIC  VOID
+      <b>ReassignTask</b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask, CHARACTER pcPerformer)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='settask(openedge.lang.bpm.task,openedge.lang.bpm.ibizlogicapi)'><!-- --></a>
     <h3>SetTask</h3>
     <code>PUBLIC  VOID
-      <b>SetTask</b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poCurrentTask, <a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a> poTaskList)
+      <b>SetTask</b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poCurrentTask, <a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> poBpmServer)
     </code>
     <dl>
       <dd>

@@ -16,43 +16,51 @@ using Infragistics.Win.UltraWinToolbars.ToolBase.
 using Infragistics.Win.UltraWinToolbars.ButtonTool.
 using System.Windows.Forms.DialogResult.
 using System.Drawing.Point.
+using System.Windows.Forms.FormClosedEventArgs.
 
+using AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout.
 using AutoEdge.Factory.Client.Common.PresentationLayer.DealerLoginPanel.
 using AutoEdge.Factory.Client.Common.PresentationLayer.LightboxForm.
 using AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail.  
 using AutoEdge.Factory.Client.Order.PresentationLayer.TaskDetailForm.
 using AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm.
-using AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask.
-using AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager.
 using AutoEdge.Factory.Client.Common.PresentationLayer.CreateProcessInstance.
-
 using OpenEdge.PresentationLayer.View.GuiForDotNet.TagWrapper.
 
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.  
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.
-using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
-using OpenEdge.EnterpriseServices.BizLogic.WorkItemStatusEnum.
-using OpenEdge.EnterpriseServices.BizLogic.WorkItem. 
-using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
-using OpenEdge.EnterpriseServices.BizLogic.ProcessTemplate.
+using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
+using OpenEdge.CommonInfrastructure.Common.Connection.BpmServerConnection.
+using OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum.
 
+using OpenEdge.CommonInfrastructure.Client.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
-using OpenEdge.CommonInfrastructure.Client.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
+using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
+using OpenEdge.CommonInfrastructure.Common.IApplicationStart.
 
+using OpenEdge.Core.System.UnhandledError.
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.XML.WebServiceInvocationError.
+using OpenEdge.Lang.BPM.Task.
+using OpenEdge.Lang.BPM.IBizLogicAPI.  
+using OpenEdge.Lang.BPM.WorkItemStatusEnum.
+using OpenEdge.Lang.BPM.WorkItem. 
+using OpenEdge.Lang.BPM.DataSlotInstance.
+using OpenEdge.Lang.BPM.ProcessTemplate.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.String.
+using OpenEdge.Lang.Assert.
+
 using Progress.Windows.Form.
 using Progress.Lang.AppError.
 using Progress.Lang.Error.
 using Progress.Lang.Class.
+using Progress.Lang.Object.
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
-        implements ITaskListManager:
+        implements IApplicationStart:
     
     define private variable imageListSmall as System.Windows.Forms.ImageList no-undo.
     define private variable imageListLarge as System.Windows.Forms.ImageList no-undo.
@@ -75,53 +83,67 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             return ServiceManager.
         end get.
         private set.
-
+    
     define protected property SecMgr as ISecurityManager no-undo
         get():
             if not valid-object(SecMgr) then
-                SecMgr = cast(ServiceManager:StartService(SecurityManager:ISecurityManagerType), ISecurityManager).
+                SecMgr = cast(ServiceManager:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
             return SecMgr.
         end get.
         private set.
-    
-    define protected property ServerParameters as IBizLogicServerParameters no-undo
+
+    define protected property ConMgr as IConnectionManager no-undo
         get():
-            if not valid-object(ServerParameters) then
-                ServerParameters = cast(ServiceManager:Kernel:Get(
-                                          Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters'),
-                                          'AutoEdgeTheFactory-Default')
-                                     , IBizLogicServerParameters).
-            
-            return ServerParameters.
+            if not valid-object(ConMgr) then
+                ConMgr = cast(ServiceManager:GetService(ConnectionManager:IConnectionManagerType), IConnectionManager).
+            return ConMgr.
         end get.
         private set.
     
-    define public property SessionId as longchar no-undo get. private set.
-    define protected property BizLogicService as IBizLogicAPI no-undo get. set.
-    define protected property IsBizLogicConnected as logical no-undo
+    define protected property BizLogicService as IBizLogicAPI no-undo
         get():
-            return (valid-object(BizLogicService) and SessionId ne '').
+            define variable oServerConnection as IServerConnection no-undo.
+            if not valid-object(BizLogicService) then
+            do:
+                oServerConnection = ConMgr:GetServerConnection(ConnectionTypeEnum:BpmServer, 'bpmAutoEdgeTheFactory').
+                if valid-object(oServerConnection) then
+                do:
+                    if not oServerConnection:IsConnected then
+                        oServerConnection:Connect().
+                    BizLogicService = cast(oServerConnection:Server, IBizLogicAPI).
+                end.
+            end.
+            return BizLogicService.
         end get.
-    
-    define public event CurrentTaskUpdated signature void(input piTaskId as int64).
-    
-    define private variable mcDisconnectedText as character no-undo init '<disconnected>'.
+        set.
     
     constructor public DealerReview (  ):
         super().
         
         InitializeComponent().
-        ServerDisconnect().
-        DealerLogout().
+        InitUI().
         
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
     end constructor.
 
-    method private void DealerReview_FormClosed( input sender as System.Object, input e as System.Windows.Forms.FormClosedEventArgs ):
-        ServerDisconnect().
-        DealerLogout().
+    method protected void InitUI():
+        define variable cTool as character extent no-undo.
+        
+        uxAccordion:Groups:Item["Orders"]:Enabled = false.
+        uxAccordion:Groups:Item["AllTasks"]:Enabled = false.
+        
+        extent(cTool) = ?.
+        extent(cTool) = 1.
+        cTool[1] = 'DealerLogin'.
+        SetToolState(cTool, true).
+        
+        extent(cTool) = ?.
+        extent(cTool) = 2.
+        cTool[1] = 'DealerLogout'.
+        cTool[2] = 'RefreshTasksList'.
+        SetToolState(cTool, false).
     end method.
 
     method private void InitializeComponent(  ):
@@ -137,29 +159,14 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         define variable ultraToolbar1 as Infragistics.Win.UltraWinToolbars.UltraToolbar no-undo.
         ultraToolbar1 = new Infragistics.Win.UltraWinToolbars.UltraToolbar("UltraToolbar1").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable labelTool1 as Infragistics.Win.UltraWinToolbars.LabelTool no-undo.
-        labelTool1 = new Infragistics.Win.UltraWinToolbars.LabelTool("BizLogicServerLabel").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool9 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool9 = new Infragistics.Win.UltraWinToolbars.ButtonTool("ServerConnect").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool5 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool5 = new Infragistics.Win.UltraWinToolbars.ButtonTool("ServerDisconnect").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool4 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool4 = new Infragistics.Win.UltraWinToolbars.ButtonTool("RefreshTasksList").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool10 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool10 = new Infragistics.Win.UltraWinToolbars.ButtonTool("RefreshProcessesList").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable labelTool4 as Infragistics.Win.UltraWinToolbars.LabelTool no-undo.
-        labelTool4 = new Infragistics.Win.UltraWinToolbars.LabelTool("DealerServerLabel").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool14 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool14 = new Infragistics.Win.UltraWinToolbars.ButtonTool("DealerLogin").
+        define variable buttonTool8 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
+        buttonTool8 = new Infragistics.Win.UltraWinToolbars.ButtonTool("DealerLogin").
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable buttonTool15 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
         buttonTool15 = new Infragistics.Win.UltraWinToolbars.ButtonTool("DealerLogout").
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable buttonTool4 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
+        buttonTool4 = new Infragistics.Win.UltraWinToolbars.ButtonTool("RefreshTasksList").
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable buttonTool16 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
         buttonTool16 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Help").
@@ -170,15 +177,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         define variable appearance11 as Infragistics.Win.Appearance no-undo.
         appearance11 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool6 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool6 = new Infragistics.Win.UltraWinToolbars.ButtonTool("ServerConnect").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance21 as Infragistics.Win.Appearance no-undo.
-        appearance21 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance16 as Infragistics.Win.Appearance no-undo.
-        appearance16 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable buttonTool3 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
         buttonTool3 = new Infragistics.Win.UltraWinToolbars.ButtonTool("RefreshTasksList").
         @VisualDesigner.FormMember (NeedsInitialize="true").
@@ -187,36 +185,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance18 as Infragistics.Win.Appearance no-undo.
         appearance18 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool1 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool1 = new Infragistics.Win.UltraWinToolbars.ButtonTool("ServerDisconnect").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance22 as Infragistics.Win.Appearance no-undo.
-        appearance22 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance19 as Infragistics.Win.Appearance no-undo.
-        appearance19 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable labelTool2 as Infragistics.Win.UltraWinToolbars.LabelTool no-undo.
-        labelTool2 = new Infragistics.Win.UltraWinToolbars.LabelTool("BizLogicServerLabel").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool7 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("RefreshProcessesList").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance14 as Infragistics.Win.Appearance no-undo.
-        appearance14 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance15 as Infragistics.Win.Appearance no-undo.
-        appearance15 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable buttonTool12 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
-        buttonTool12 = new Infragistics.Win.UltraWinToolbars.ButtonTool("RefreshOrders").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance13 as Infragistics.Win.Appearance no-undo.
-        appearance13 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance20 as Infragistics.Win.Appearance no-undo.
-        appearance20 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable buttonTool11 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
         buttonTool11 = new Infragistics.Win.UltraWinToolbars.ButtonTool("DealerLogin").
@@ -230,59 +198,17 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         define variable buttonTool13 as Infragistics.Win.UltraWinToolbars.ButtonTool no-undo.
         buttonTool13 = new Infragistics.Win.UltraWinToolbars.ButtonTool("DealerLogout").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable labelTool3 as Infragistics.Win.UltraWinToolbars.LabelTool no-undo.
-        labelTool3 = new Infragistics.Win.UltraWinToolbars.LabelTool("DealerServerLabel").
-        @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable resources as Progress.Util.ResourceManager no-undo.
         resources = new Progress.Util.ResourceManager("AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview").
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraStatusPanel1 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
         ultraStatusPanel1 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance3 as Infragistics.Win.Appearance no-undo.
-        appearance3 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraStatusPanel2 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
         ultraStatusPanel2 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraStatusPanel3 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
         ultraStatusPanel3 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel4 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel4 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel5 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel5 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel6 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel6 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel7 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel7 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance2 as Infragistics.Win.Appearance no-undo.
-        appearance2 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel8 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel8 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel9 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel9 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel10 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel10 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel11 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel11 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel12 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel12 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel13 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel13 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraStatusPanel14 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel no-undo.
-        ultraStatusPanel14 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance1 as Infragistics.Win.Appearance no-undo.
         appearance1 = new Infragistics.Win.Appearance().
@@ -301,12 +227,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance24 as Infragistics.Win.Appearance no-undo.
         appearance24 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraExplorerBarGroup3 as Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup no-undo.
-        ultraExplorerBarGroup3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraExplorerBarGroup2 as Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup no-undo.
-        ultraExplorerBarGroup2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup().
         this-object:ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this-object:components).
         this-object:imageListLarge = new System.Windows.Forms.ImageList(this-object:components).
         this-object:imageListSmall = new System.Windows.Forms.ImageList(this-object:components).
@@ -335,19 +255,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         this-object:ultraToolbarsManager1:ShowFullMenusDelay = 500.
         ultraToolbar1:DockedColumn = 0.
         ultraToolbar1:DockedRow = 0.
-        labelTool4:InstanceProps:IsFirstInGroup = true.
-        buttonTool16:InstanceProps:IsFirstInGroup = true.
+        buttonTool4:InstanceProps:IsFirstInGroup = true.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar0 as Infragistics.Win.UltraWinToolbars.ToolBase extent 9 no-undo.
-        arrayvar0[1] = labelTool1.
-        arrayvar0[2] = buttonTool9.
-        arrayvar0[3] = buttonTool5.
-        arrayvar0[4] = buttonTool4.
-        arrayvar0[5] = buttonTool10.
-        arrayvar0[6] = labelTool4.
-        arrayvar0[7] = buttonTool14.
-        arrayvar0[8] = buttonTool15.
-        arrayvar0[9] = buttonTool16.
+        define variable arrayvar0 as Infragistics.Win.UltraWinToolbars.ToolBase extent 4 no-undo.
+        arrayvar0[1] = buttonTool8.
+        arrayvar0[2] = buttonTool15.
+        arrayvar0[3] = buttonTool4.
+        arrayvar0[4] = buttonTool16.
         ultraToolbar1:NonInheritedTools:AddRange(arrayvar0).
         ultraToolbar1:Settings:AllowCustomize = Infragistics.Win.DefaultableBoolean:False.
         ultraToolbar1:Settings:AllowFloating = Infragistics.Win.DefaultableBoolean:False.
@@ -363,58 +277,23 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         buttonTool2:SharedPropsInternal:AppearancesSmall:Appearance = appearance11.
         buttonTool2:SharedPropsInternal:Caption = "Help".
         buttonTool2:SharedPropsInternal:DisplayStyle = Infragistics.Win.UltraWinToolbars.ToolDisplayStyle:ImageAndText.
-        appearance21:Image = 7.
-        buttonTool6:SharedPropsInternal:AppearancesLarge:Appearance = appearance21.
-        appearance16:Image = 5.
-        buttonTool6:SharedPropsInternal:AppearancesSmall:Appearance = appearance16.
-        buttonTool6:SharedPropsInternal:Caption = "Connect".
-        buttonTool6:SharedPropsInternal:DisplayStyle = Infragistics.Win.UltraWinToolbars.ToolDisplayStyle:ImageAndText.
-        buttonTool6:SharedPropsInternal:Spring = true.
         appearance17:Image = 4.
         buttonTool3:SharedPropsInternal:AppearancesLarge:Appearance = appearance17.
         appearance18:Image = 3.
         buttonTool3:SharedPropsInternal:AppearancesSmall:Appearance = appearance18.
         buttonTool3:SharedPropsInternal:Caption = "Refresh Tasks".
-        appearance22:Image = 6.
-        buttonTool1:SharedPropsInternal:AppearancesLarge:Appearance = appearance22.
-        appearance19:Image = 7.
-        buttonTool1:SharedPropsInternal:AppearancesSmall:Appearance = appearance19.
-        buttonTool1:SharedPropsInternal:Caption = "Disconnect".
-        buttonTool1:SharedPropsInternal:Spring = true.
-        labelTool2:SharedPropsInternal:Caption = "BizLogic Server".
-        labelTool2:SharedPropsInternal:DisplayStyle = Infragistics.Win.UltraWinToolbars.ToolDisplayStyle:TextOnlyAlways.
-        labelTool2:SharedPropsInternal:ShowInCustomizer = false.
-        appearance14:Image = 3.
-        buttonTool7:SharedPropsInternal:AppearancesLarge:Appearance = appearance14.
-        appearance15:Image = 4.
-        buttonTool7:SharedPropsInternal:AppearancesSmall:Appearance = appearance15.
-        buttonTool7:SharedPropsInternal:Caption = "Refresh Processes".
-        appearance13:Image = "basket_go_32x32.png".
-        buttonTool12:SharedPropsInternal:AppearancesLarge:Appearance = appearance13.
-        appearance20:Image = "basket_go_16x16.png".
-        buttonTool12:SharedPropsInternal:AppearancesSmall:Appearance = appearance20.
-        buttonTool12:SharedPropsInternal:Caption = "Refresh Orders".
         appearance26:Image = cast(resources:GetObject("appearance26.Image"), System.Object).
         buttonTool11:SharedPropsInternal:AppearancesLarge:Appearance = appearance26.
         appearance25:Image = cast(resources:GetObject("appearance25.Image"), System.Object).
         buttonTool11:SharedPropsInternal:AppearancesSmall:Appearance = appearance25.
         buttonTool11:SharedPropsInternal:Caption = "Login".
         buttonTool13:SharedPropsInternal:Caption = "Logout".
-        labelTool3:SharedPropsInternal:Caption = "Dealer Application".
-        labelTool3:SharedPropsInternal:DisplayStyle = Infragistics.Win.UltraWinToolbars.ToolDisplayStyle:TextOnlyAlways.
-        labelTool3:SharedPropsInternal:ShowInCustomizer = false.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar2 as Infragistics.Win.UltraWinToolbars.ToolBase extent 10 no-undo.
+        define variable arrayvar2 as Infragistics.Win.UltraWinToolbars.ToolBase extent 4 no-undo.
         arrayvar2[1] = buttonTool2.
-        arrayvar2[2] = buttonTool6.
-        arrayvar2[3] = buttonTool3.
-        arrayvar2[4] = buttonTool1.
-        arrayvar2[5] = labelTool2.
-        arrayvar2[6] = buttonTool7.
-        arrayvar2[7] = buttonTool12.
-        arrayvar2[8] = buttonTool11.
-        arrayvar2[9] = buttonTool13.
-        arrayvar2[10] = labelTool3.
+        arrayvar2[2] = buttonTool3.
+        arrayvar2[3] = buttonTool11.
+        arrayvar2[4] = buttonTool13.
         this-object:ultraToolbarsManager1:Tools:AddRange(arrayvar2).
         this-object:ultraToolbarsManager1:ToolClick:Subscribe(this-object:ultraToolbarsManager1_ToolClick).
         /*  */
@@ -456,72 +335,15 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         /*  */
         this-object:uxStatus:Location = new System.Drawing.Point(0, 530).
         this-object:uxStatus:Name = "uxStatus".
-        appearance3:FontData:BoldAsString = "True".
-        ultraStatusPanel1:Appearance = appearance3.
-        ultraStatusPanel1:Enabled = false.
-        ultraStatusPanel1:Key = "BizLogicServerLabel".
-        ultraStatusPanel1:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel1:Text = "BizLogic Server:".
-        ultraStatusPanel2:Key = "BizLogicServer".
-        ultraStatusPanel2:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel2:Text = "<bizlogic server name>".
-        ultraStatusPanel3:Enabled = false.
-        ultraStatusPanel3:Key = "BizLogicUserLabel".
+        ultraStatusPanel1:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Spring.
+        ultraStatusPanel2:Style = Infragistics.Win.UltraWinStatusBar.PanelStyle:Date.
         ultraStatusPanel3:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel3:Text = "Portal User:".
-        ultraStatusPanel4:Key = "BizLogicUser".
-        ultraStatusPanel4:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel4:Text = "<user name>".
-        ultraStatusPanel5:Enabled = false.
-        ultraStatusPanel5:Key = "BizLogicSessionIdLabel".
-        ultraStatusPanel5:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel5:Text = "Session Id:".
-        ultraStatusPanel6:Key = "BizLogicSessionId".
-        ultraStatusPanel6:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel6:Text = "<id>".
-        appearance2:FontData:BoldAsString = "True".
-        ultraStatusPanel7:Appearance = appearance2.
-        ultraStatusPanel7:Enabled = false.
-        ultraStatusPanel7:Key = "DealerAppLabel".
-        ultraStatusPanel7:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel7:Text = "Dealer Application".
-        ultraStatusPanel8:Enabled = false.
-        ultraStatusPanel8:Key = "UserLabel".
-        ultraStatusPanel8:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel8:Text = "User:".
-        ultraStatusPanel9:Key = "UserId".
-        ultraStatusPanel9:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel9:Text = "<user id>".
-        ultraStatusPanel10:Enabled = false.
-        ultraStatusPanel10:Key = "DealerLabel".
-        ultraStatusPanel10:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel10:Text = "Dealer:".
-        ultraStatusPanel11:Key = "DealerId".
-        ultraStatusPanel11:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Spring.
-        ultraStatusPanel11:Text = "<dealer id>".
-        ultraStatusPanel12:Enabled = false.
-        ultraStatusPanel12:MinWidth = 5.
-        ultraStatusPanel12:Style = Infragistics.Win.UltraWinStatusBar.PanelStyle:ControlContainer.
-        ultraStatusPanel12:Width = 19.
-        ultraStatusPanel13:Style = Infragistics.Win.UltraWinStatusBar.PanelStyle:Date.
-        ultraStatusPanel14:SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode:Automatic.
-        ultraStatusPanel14:Style = Infragistics.Win.UltraWinStatusBar.PanelStyle:Time.
+        ultraStatusPanel3:Style = Infragistics.Win.UltraWinStatusBar.PanelStyle:Time.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar3 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel extent 14 no-undo.
+        define variable arrayvar3 as Infragistics.Win.UltraWinStatusBar.UltraStatusPanel extent 3 no-undo.
         arrayvar3[1] = ultraStatusPanel1.
         arrayvar3[2] = ultraStatusPanel2.
         arrayvar3[3] = ultraStatusPanel3.
-        arrayvar3[4] = ultraStatusPanel4.
-        arrayvar3[5] = ultraStatusPanel5.
-        arrayvar3[6] = ultraStatusPanel6.
-        arrayvar3[7] = ultraStatusPanel7.
-        arrayvar3[8] = ultraStatusPanel8.
-        arrayvar3[9] = ultraStatusPanel9.
-        arrayvar3[10] = ultraStatusPanel10.
-        arrayvar3[11] = ultraStatusPanel11.
-        arrayvar3[12] = ultraStatusPanel12.
-        arrayvar3[13] = ultraStatusPanel13.
-        arrayvar3[14] = ultraStatusPanel14.
         this-object:uxStatus:Panels:AddRange(arrayvar3).
         this-object:uxStatus:Size = new System.Drawing.Size(974, 23).
         this-object:uxStatus:TabIndex = 0.
@@ -582,7 +404,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         appearance1:FontData:SizeInPoints = 12.
         this-object:uxAccordion:Appearance = appearance1.
         this-object:uxAccordion:Dock = System.Windows.Forms.DockStyle:Left.
-        ultraExplorerBarGroup1:Key = "AssignedTasks".
+        ultraExplorerBarGroup1:Key = "AllTasks".
         ultraExplorerBarGroup1:Text = "Orders For Review".
         ultraExplorerBarItem1:Key = "ListOrders".
         appearance23:Image = "basket_32x32.png".
@@ -596,16 +418,10 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         ultraExplorerBarGroup4:Items:AddRange(arrayvar4).
         ultraExplorerBarGroup4:Key = "Orders".
         ultraExplorerBarGroup4:Text = "Orders".
-        ultraExplorerBarGroup3:Key = "AvailableTasks".
-        ultraExplorerBarGroup3:Text = "Available Tasks".
-        ultraExplorerBarGroup2:Key = "SavvionProcesses".
-        ultraExplorerBarGroup2:Text = "Savvion Processes".
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar5 as Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup extent 4 no-undo.
+        define variable arrayvar5 as Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup extent 2 no-undo.
         arrayvar5[1] = ultraExplorerBarGroup1.
         arrayvar5[2] = ultraExplorerBarGroup4.
-        arrayvar5[3] = ultraExplorerBarGroup3.
-        arrayvar5[4] = ultraExplorerBarGroup2.
         this-object:uxAccordion:Groups:AddRange(arrayvar5).
         this-object:uxAccordion:GroupSettings:Style = Infragistics.Win.UltraWinExplorerBar.GroupStyle:LargeImagesWithText.
         this-object:uxAccordion:ImageListLarge = this-object:imageListLarge.
@@ -641,7 +457,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         this-object:Name = "DealerReview".
         this-object:Text = "AutoEdge|TheFactory: Customer Order Review".
         this-object:TransparencyKey = System.Drawing.Color:Fuchsia.
-        this-object:FormClosed:Subscribe(this-object:DealerReview_FormClosed).
         cast(this-object:ultraToolbarsManager1, System.ComponentModel.ISupportInitialize):EndInit().
         cast(this-object:ultraTabbedMdiManager1, System.ComponentModel.ISupportInitialize):EndInit().
         cast(this-object:uxAccordion, System.ComponentModel.ISupportInitialize):EndInit().
@@ -650,26 +465,44 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             undo, throw e.
         end catch.
     end method.
-
-    method private void timer1_Tick( input sender as System.Object, input e as System.EventArgs ):
-        RefreshTasksList().
+    
+    method public void TaskCompletedHandler(input poSender as Object, input poTask as Task):
+        define variable oGroup as UltraExplorerBarGroup no-undo.
+        define variable oItem as UltraExplorerBarItem no-undo.
+        define variable oForm as Form no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable oTag as TagWrapper no-undo.
+         
+        oItem = uxAccordion:Groups:Item['AllTasks']:Items:Item[string(poTask:WorkItem:Id)].
+        oTag = cast(oItem:Tag, TagWrapper).
+        
+        iMax = MdiChildren:Length - 1.        
+        do iLoop = iMax to 0 by -1:
+            oForm = cast(MdiChildren:GetValue(iLoop), Form).
+            if type-of(oForm, CustomerOrderDetail) and
+               cast(oForm, CustomerOrderDetail):CurrentTask:Equals(cast(oTag:PABLO, Task)) then
+                oForm:Close().
+        end.
+        
+        uxAccordion:Groups:Item['AllTasks']:Items:Remove(oItem).
     end method.
-
+    
     method private void uxAccordion_ItemClick( input sender as System.Object, input e as Infragistics.Win.UltraWinExplorerBar.ItemEventArgs):
         define variable oTags as TagWrapper extent no-undo.
-        define variable oTask as CurrentTask no-undo.
+        define variable oTask as Task no-undo.
         define variable oForm as Form no-undo.
         
         case e:Item:Group:Key:
-            when 'AssignedTasks' or when 'AvailableTasks' then
+            when 'AllTasks' then
             do:
-                oTask = cast(cast(e:Item:Tag, TagWrapper):PABLO, CurrentTask).
-                oForm = new CustomerOrderDetail(this-object, oTask).
+                oTask = cast(cast(e:Item:Tag, TagWrapper):PABLO, Task).
+                oForm = new CustomerOrderDetail(BizLogicService, oTask).
+                
+                oForm:FormClosed:Subscribe(CustomerOrderDetail_FormClosed).
+                
+                cast(oForm, CustomerOrderDetail):TaskCompleted:Subscribe(TaskCompletedHandler).
             end.
-            when 'SavvionProcesses' then
-                oForm = new CreateProcessInstance(SessionId,
-                                                  BizLogicService,
-                                                  cast(cast(e:Item:Tag, TagWrapper):PABLO, ProcessTemplate)).
             otherwise
             do:
                 case e:Item:Key:
@@ -684,101 +517,56 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             oForm:MdiParent = this-object.
             oForm:Show().
         end.
-        
-        catch oAppError as AppError:
-            message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
-            oAppError:ReturnValue
-            
-            view-as alert-box error title '[PJ DEBUG]'.
-            undo, throw oAppError.
+    
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
         end catch.
         catch oError as Error:
-            message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)            
-                oError:getmessage(1) skip
-            view-as alert-box error title '[PJ DEBUG]'.
-            
-            undo, throw oError.
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
         end catch.
     end method.
     
-    method public void CompleteTask(poTask as CurrentTask):
-        BizLogicService:CompleteWorkItemFromWIID(
-                            SessionId,
-                            poTask:WorkItem:Id,
-                            cast(poTask:DataSlots:Values:ToArray(), DataSlotInstance)).
-        
-        TaskCompleted(poTask:WorkItem:Id).
-        
-        OnCurrentTaskUpdated(poTask:WorkItem:Id).
-        
-        catch oError as WebServiceInvocationError:
-            oError:ShowError().
-            oError:LogError().
-        end catch.
-    end method.
-    
-    method protected void OnCurrentTaskUpdated(piTaskId as int64):
-        this-object:CurrentTaskUpdated:Publish(piTaskId).
-    end method.
-    
-    method public void TaskCompleted(piTaskId as int64):
-        define variable oGroup as UltraExplorerBarGroup no-undo.
-        define variable oItem as UltraExplorerBarItem no-undo.
-        define variable oForm as Form no-undo.
-        define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
-        define variable oTag as TagWrapper no-undo.
-         
-        oItem = uxAccordion:Groups:Item['AssignedTasks']:Items:Item[string(piTaskId)].
-        oTag = cast(oItem:Tag, TagWrapper).
-        
-        iMax = MdiChildren:Length - 1.        
-        do iLoop = iMax to 0 by -1:
-            oForm = cast(MdiChildren:GetValue(iLoop), Form).
-            if type-of(oForm, CustomerOrderDetail) and
-               cast(oForm, CustomerOrderDetail):CurrentTask eq cast(oTag:PABLO, CurrentTask) then
-                oForm:Close().
-        end.
-        
-        uxAccordion:Groups:Item['AssignedTasks']:Items:Remove(oItem).
-    end method.
-
     method private void ultraToolbarsManager1_ToolClick( input sender as System.Object, input e as Infragistics.Win.UltraWinToolbars.ToolClickEventArgs ):
-        case e:Tool:Key:
-            when 'DealerLogin' then DealerLogin().
-            when 'DealerLogout' then DealerLogout().
-            
-            when 'ServerConnect' then ServerConnect(this-object:ServerParameters).
-            when 'ServerDisconnect' then ServerDisconnect().
-            when 'RefreshTasksList' then RefreshTasksList().
-            when 'RefreshProcessesList' then RefreshProcessesList().
-            
-            when 'Help' then ShowHelp().
-        end case.
+        do on error undo, throw:
+            case e:Tool:Key:
+                when 'DealerLogin' then DealerLogin().
+                when 'DealerLogout' then DealerLogout().
+                when 'RefreshTasksList' then RefreshTasksList().
+                when 'Help' then ShowHelp().
+            end case.
+            /* catch ApplicationErrors since we don't want them becoming UnhandledErrors */
+            catch oApplError as ApplicationError:
+                undo, throw oApplError.
+            end catch.
+            catch oError as Error:
+                undo, throw new UnhandledError(oError).
+            end catch.
+        end.
+        /* catch both the former PLE and ApplError errors from DO block above */
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
     end method.
     
     method protected void ShowHelp():
-        message
-            'Dealer Salesrep Workbench'
-            view-as alert-box info title 'AutoEdge|TheFactory Help'.        
+        define variable oHelpAbout as HelpAbout no-undo.
+        
+        oHelpAbout = new HelpAbout().
+        wait-for oHelpAbout:ShowDialog().
+        
+        oHelpAbout = ?.
     end method.
     
     method protected void RefreshTasksList():
         session:set-wait-state('general').
         
-        ClearTasks('all').
-        FillTaskList('all').
+        /* Empty all the existing orders */
+        ClearTasks().
         
-        finally:
-            session:set-wait-state('').
-        end finally.
-    end method.
-
-    method protected void RefreshProcessesList():
-        session:set-wait-state('general').
-        
-        ClearProcesses().
-        FillProcessList().
+        PopulateTaskList(BizLogicService:GetAssignedTasks()).
+        PopulateTaskList(BizLogicService:GetAvailableTasks()).
         
         finally:
             session:set-wait-state('').
@@ -800,93 +588,10 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         end.
     end method.
     
-    method public void ServerDisconnect():
-        def var cTool as character extent no-undo.
-        
-        ClearTasks('all').
-        ClearProcesses().
-        
-        DisconnectBizLogicService().
-
-        uxStatus:Panels['BizLogicServer']:Text = mcDisconnectedText.
-        uxStatus:Panels['BizLogicUser']:Text = mcDisconnectedText.
-        uxStatus:Panels['BizLogicSessionId']:Text = mcDisconnectedText.
-                
-        extent(cTool) = 3.
-        cTool[1] = 'ServerDisconnect'.
-        cTool[2] = 'RefreshTasksList'.
-        cTool[3] = 'RefreshProcessesList'.
-        SetToolState(cTool, false).
-        
-        extent(cTool) = ?.
-        extent(cTool) = 1.
-        cTool[1] = 'ServerConnect'.
-        SetToolState(cTool, true).
-    end method.
-    
-    method public void ServerConnect(input poParameters as IBizLogicServerParameters):
-        def var cTool as character extent no-undo. 
-
-        session:set-wait-state('general').
-        
-        ConnectBizLogicService(poParameters).
-        
-        extent(cTool) = 3.
-        cTool[1] = 'ServerDisconnect'.
-        cTool[2] = 'RefreshTasksList'.
-        cTool[3] = 'RefreshProcessesList'.
-        SetToolState(cTool, true).
-        
-        extent(cTool) = ?.
-        extent(cTool) = 1.
-        cTool[1] = 'ServerConnect'.
-        SetToolState(cTool, false).
-
-        uxStatus:Panels['BizLogicServer']:Text = poParameters:ServerName. 
-        uxStatus:Panels['BizLogicUser']:Text = poParameters:UserName. 
-        uxStatus:Panels['BizLogicSessionId']:Text = SessionId.
-        
-/*        RefreshTasksList().*/
-        
-        catch oError as Progress.Lang.Error:
-            message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
-            oError:GetMessage(1) skip(2)
-            oError:CallStack 
-            view-as alert-box error title '[PJ DEBUG]'.
-            
-            undo, throw oError. 
-        end catch.
-        finally:
-            session:set-wait-state('').
-        end finally.
-    end method.
-    
-    method protected void ConnectBizLogicService(input poParameters as IBizLogicServerParameters):
-        define variable cWorkStep as character no-undo.
-        if not IsBizLogicConnected then
-        do:
-            BizLogicService = new WorkFlowWebService(poParameters:Host + ':' + string(poParameters:Port)).
-            SessionId = poParameters:Connect(BizLogicService).
-        end.
-    end method.
-    
-    method protected void DisconnectBizLogicService():
-        if IsBizLogicConnected then
-            BizLogicService:Disconnect(SessionId).
-        
-        finally:
-            BizLogicService = ?.
-            SessionId = ''.
-        end finally.
-    end method.
-    
     method protected void DealerLogout():
         define variable cTool as character extent no-undo.
         
         SecMgr:UserLogout().
-        
-        uxStatus:Panels['DealerId']:Text = mcDisconnectedText.
-        uxStatus:Panels['UserId']:Text = mcDisconnectedText.
         
         extent(cTool) = 1.
         cTool[1] = 'DealerLogin'.
@@ -896,6 +601,9 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         extent(cTool) = 1.
         cTool[1] = 'DealerLogout'.
         SetToolState(cTool, false).
+        
+        ClearTasks().
+        uxAccordion:Groups:Item["AllTasks"]:Enabled = false.
     end method.
     
     method protected void DealerLogin():
@@ -914,27 +622,31 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         oDealerLoginForm:FormClosed:Subscribe(this-object:DealerLogin_FormClosed).        
         oDealerLoginForm:Show().
     end method.
+
+    method public void CustomerOrderDetail_FormClosed( input sender as System.Object, input e as FormClosedEventArgs):
+        cast(sender, CustomerOrderDetail):TaskCompleted:Unsubscribe(TaskCompletedHandler).
+    end method.
     
-    method public void DealerLogin_FormClosed( input sender as System.Object, input e as System.Windows.Forms.FormClosedEventArgs):
+    method public void DealerLogin_FormClosed( input sender as System.Object, input e as FormClosedEventArgs):
         define variable oUC as IUserContext no-undo.
         define variable oPropertyValue as String no-undo.
         define variable cText as character no-undo.
         define variable cTool as character extent no-undo.
+        define variable lValidBpmSession as logical no-undo.
         
         oUC = cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):CurrentUserContext. 
         
         if valid-object(oUC) then
         do:
-            oPropertyValue = cast(oUC:UserProperties:Get(new String('Dealer.Code')), String).
+            lValidBpmSession = BizLogicService:IsSessionValid().
             
-            if valid-object(oPropertyValue) then
-                cText = oPropertyValue:Value.
-            else
-                cText = '<unknown>'.
+            extent(cTool) = ?.
+            extent(cTool) = 1.
+            cTool[1] = 'RefreshTasksList'.
+            SetToolState(cTool, lValidBpmSession).
+            RefreshTasksList().
             
-            uxStatus:Panels['DealerId']:Text = cText.
-            uxStatus:Panels['UserId']:Text = oUC:UserName.
-            
+            extent(cTool) = ?.
             extent(cTool) = 1.
             cTool[1] = 'DealerLogin'.
             SetToolState(cTool, false).
@@ -943,147 +655,90 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             extent(cTool) = 1.
             cTool[1] = 'DealerLogout'.
             SetToolState(cTool, true).
-        end.            
+            
+            uxAccordion:Groups:Item["AllTasks"]:Enabled = lValidBpmSession.
+        end.
+        
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUnhandledError as UnhandledError no-undo.
+            oUnhandledError = new UnhandledError(oError).
+            oUnhandledError:ShowError().
+        end catch.
     end method.
     
-    method public void SetTaskDataSlots(input poTask as CurrentTask):
-        if poTask:DataSlots:IsEmpty() then 
-            poTask:AddDataSlots(BizLogicService:GetWorkItemDataSlotsFromWIID(
-                                    SessionId,
-                                    poTask:WorkItem:Id)).
-    end method.
-    
-    method protected void FillTaskList(pcListType as character):
-        define variable oTaskList as WorkItem extent no-undo.
+    method private void PopulateTaskList(input poTaskList as Task extent):
+        define variable cOrderNum as character no-undo.
+        define variable cDealerCode as character no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
-        define variable oGroup as UltraExplorerBarGroup no-undo.
-        define variable oItem as UltraExplorerBarItem no-undo.
         define variable oTag as TagWrapper no-undo.
         define variable oAppLarge as Appearance no-undo.
         define variable oAppSmall as Appearance no-undo.
         define variable cLabel as character no-undo.
+        define variable oGroup as UltraExplorerBarGroup no-undo.
+        define variable oItem as UltraExplorerBarItem no-undo.
+        define variable oDSI as DataSlotInstance no-undo.
+        define variable oPropertyValue as String no-undo.
         
-        /* Empty all the existing orders */
-        ClearTasks(pcListType).
-        
-        case pcListType:
-            when 'assigned' then 
-                assign oGroup = uxAccordion:Groups:Item['AssignedTasks']
-                       oTaskList = BizLogicService:GetAssignedWorkItemList(SessionId)
-                       no-error.
-            when 'available' then 
-                assign oGroup = uxAccordion:Groups:Item['AvailableTasks']
-                       oTaskList = BizLogicService:GetAvailableWorkItemList(SessionId)
-                       no-error.
-            when 'all' then
-            do:
-                FillTaskList('assigned').
-                FillTaskList('available').
-            end.
-        end.
-        
-        if valid-object(oGroup) and extent(oTaskList) ne ? then
+        oGroup = uxAccordion:Groups:Item['AllTasks'].
+        if valid-object(oGroup) and extent(poTaskList) ne ? then
         do:
-            iMax = extent(oTaskList).
+            oPropertyValue = cast(cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager)
+                                :CurrentUserContext:UserProperties:Get(new String('Dealer.Code')), String).            
+            if valid-object(oPropertyValue) then
+                cDealerCode = oPropertyValue:Value.
+            
+            iMax = extent(poTaskList).
             do iLoop = 1 to iMax:
-                if valid-object(oTaskList[iLoop]) and 
-                   oTaskList[iLoop]:WorkStepName eq 'DealerReview' then
-                do on error undo, throw:
-                    cLabel = oTaskList[iLoop]:ProcessInstanceName.
-                    oItem = oGroup:Items:Add(string(oTaskList[iLoop]:Id), cLabel).
+                if valid-object(poTaskList[iLoop]) and poTaskList[iLoop]:WorkItem:WorkStepName eq 'DealerReview' then
+                do:
+                    oDSI = cast(poTaskList[iLoop]:DataSlots:Get(new String('DealerCode')), DataSlotInstance).
+                    /* Only show order for the current dealer (per login) */
+                    if not valid-object(oDSI) or oDSI:Value ne cDealerCode then
+                        next.
+                        
+                    oDSI = cast(poTaskList[iLoop]:DataSlots:Get(new String('OrderNum')), DataSlotInstance).
+                    if valid-object(oDSI) then
+                        cLabel = string(oDSI:Value).
+                    else
+                        cLabel = poTaskList[iLoop]:WorkItem:ProcessInstanceName.
                     
-                    if ReviewIsOverdue(oTaskList[iLoop]:duedate) then
+                    oItem = oGroup:Items:Add(string(poTaskList[iLoop]:WorkItem:Id), cLabel).
+                    
+                    if ReviewIsOverdue(poTaskList[iLoop]:WorkItem:duedate) then
                         assign oItem:Settings:AppearancesLarge:Appearance:Image = 'date_error_32x32.png'
                                oItem:Settings:AppearancesSmall:Appearance:Image = 'date_error_16x16.png'.
                     else
                         assign oItem:Settings:AppearancesLarge:Appearance:Image = 'date_32x32.png'
                                oItem:Settings:AppearancesSmall:Appearance:Image = 'date_16x16.png'.
                     
-                    oTag = new TagWrapper(new CurrentTask(oTaskList[iLoop])).
+                    oTag = new TagWrapper(poTaskList[iLoop]).
                     oItem:Tag = oTag.
                 end.
             end.
         end.
     end method.
-            
+    
     method public logical ReviewIsOverdue (pcDueDate as datetime-tz):
         return (interval(today, pcDueDate, 'hours') ge 6).
     end method.
     
-    method protected void FillProcessList():
-        define variable oProcessList as ProcessTemplate extent no-undo.
-        define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
-        define variable iLoop2 as integer no-undo.
-        define variable iMax2 as integer no-undo.
-        define variable oGroup as UltraExplorerBarGroup no-undo.
-        define variable oItem as UltraExplorerBarItem no-undo.
-        define variable oDataSlotInstances as DataSlotInstance extent no-undo.
-        define variable oTag as TagWrapper no-undo.
-        define variable cLabel as character no-undo.
-        define variable oAppLarge as Appearance no-undo.
-        define variable oAppSmall as Appearance no-undo.
-        
-        oProcessList = BizLogicService:getUserAuthorizedProcessTemplateList(SessionId).
-        iMax = extent(oProcessList).
-        
-        oGroup = uxAccordion:Groups:Item['SavvionProcesses'].
-        do iLoop = 1 to iMax:
-            if valid-object(oProcessList[iLoop]) and oProcessList[iLoop]:AppName begins 'AE_TF' then
-            do:
-                assign oItem = oGroup:Items:Add(string(oProcessList[iLoop]:id), oProcessList[iLoop]:AppName )
-                       oItem:ToolTipText = oProcessList[iLoop]:name
-                       oItem:Settings:AppearancesLarge:Appearance:Image = 'system_emblem_32x29.png'
-                       oItem:Settings:AppearancesSmall:Appearance:Image = 'system_emblem_16x15.png'.
-                
-                oTag = new TagWrapper(oProcessList[iLoop]).
-                oItem:Tag = oTag.
-            end.
-        end.
-    end method.
-    
-    method protected void ClearProcesses():
+    method protected void ClearTasks():
         define variable oGroup as UltraExplorerBarGroup no-undo.
         define variable oForm as Form no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         
-        oGroup = uxAccordion:Groups:Item['SavvionProcesses'].        
-        oGroup:Items:Clear().
-        
-        iMax = MdiChildren:Length - 1.
-        do iLoop = iMax to 0 by -1:
-            if type-of(MdiChildren:GetValue(iLoop), AutoEdge.Factory.Client.Common.PresentationLayer.CreateProcessInstance) then
-            do:
-                oForm = cast(MdiChildren:GetValue(iLoop), Form).
-                oForm:Close().
-            end.
-        end.
-    end method.
-    
-    method protected void ClearTasks(pcListType as character):
-        define variable oGroup as UltraExplorerBarGroup no-undo.
-        define variable oForm as Form no-undo.
-        define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
-        
-        case pcListType:
-            when 'assigned' then oGroup = uxAccordion:Groups:Item['AssignedTasks'].
-            when 'available' then oGroup = uxAccordion:Groups:Item['AvailableTasks'].
-            when 'all' then 
-            do:
-                ClearTasks('available').
-                ClearTasks('assigned').
-            end.
-        end.
-        
+        oGroup = uxAccordion:Groups:Item['AllTasks'].
         if valid-object(oGroup) then
         do:
             oGroup:Items:Clear().
             iMax = MdiChildren:Length - 1.        
             do iLoop = iMax to 0 by -1:
-                if type-of(MdiChildren:GetValue(iLoop), AutoEdge.Factory.Client.Order.PresentationLayer.TaskDetailForm) then
+                if type-of(MdiChildren:GetValue(iLoop), CustomerOrderDetail) then
                 do:
                     oForm = cast(MdiChildren:GetValue(iLoop), Form).
                     oForm:Close().
@@ -1092,23 +747,8 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         end.
     end method.
     
-    method public void ReassignTask(poTask as CurrentTask, pcPerformer as character):
-        case poTask:WorkItem:Status:
-            when WorkItemStatusEnum:Assigned then
-                BizLogicService:ReassignWorkItemFromWIID(SessionId, poTask:WorkItem:Id, pcPerformer).
-            otherwise
-                BizLogicService:AssignWorkItemFromWIID(SessionId, poTask:WorkItem:Id, pcPerformer).
-        end case.
-        
-        OnCurrentTaskUpdated(poTask:WorkItem:id).
-        catch oError as WebServiceInvocationError:
-            oError:LogError().
-        end catch.        
-    end method.
-    
     destructor public DealerReview ( ):
-        ServerDisconnect().
-        DealerLogout().
+        SecMgr:UserLogout().
         
         if valid-object(components) then do:
             cast(components, System.IDisposable):Dispose().

@@ -38,36 +38,13 @@
       <font size='-1'>AutoEdge\Factory\Client\Order\PresentationLayer</font>
       <br />CLASS DealerReview
     </h2>
-    <p>CLASS AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview INHERITS <a href="../../../../../Progress/Windows/Form.cls.html" title="Progress.Windows.Form" target="classFrame">Form</a> IMPLEMENTS <a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a> </p>
+    <p>CLASS AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview INHERITS <a href="../../../../../Progress/Windows/Form.cls.html" title="Progress.Windows.Form" target="classFrame">Form</a> IMPLEMENTS <a href="../../../../../OpenEdge/CommonInfrastructure/Common/IApplicationStart.cls.html" title="OpenEdge.CommonInfrastructure.Common.IApplicationStart" target="classFrame">IApplicationStart</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-				<A NAME="field_summary"><!-- --></A>
-				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-				<B>Field Summary</B></FONT></TH>
-				</TR>
-				
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#1194.CurrentTaskUpdated'>CurrentTaskUpdated</a>
-          </b>PUBLIC 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-				</TABLE>&nbsp;<P>
-				
 				<A NAME="property_summary"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -78,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicAPI.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI" target="classFrame">IBizLogicAPI</a></code>
+          <code><a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a></code>
         </font>
       </td>
       <td>
@@ -92,27 +69,13 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LOGICAL</code>
+          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/IConnectionManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IConnectionManager" target="classFrame">IConnectionManager</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.IsBizLogicConnected'>IsBizLogicConnected</a>
-          </b> PROTECTED GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.ISecurityManager" target="classFrame">ISecurityManager</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.SecMgr'>SecMgr</a>
+            <a href='#property.ConMgr'>ConMgr</a>
           </b> PROTECTED GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -120,13 +83,13 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a></code>
+          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Client/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Client.ISecurityManager" target="classFrame">ISecurityManager</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.ServerParameters'>ServerParameters</a>
+            <a href='#property.SecMgr'>SecMgr</a>
           </b> PROTECTED GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -141,20 +104,6 @@
         <code>
           <b>
             <a href='#property.ServiceManager'>ServiceManager</a>
-          </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>LONGCHAR</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.SessionId'>SessionId</a>
           </b> PUBLIC GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -191,7 +140,21 @@
       <td>
         <code>
           <b>
-            <a href='#clearprocesses()'> ClearProcesses</a>
+            <a href='#bpmserverconnect()'> BpmServerConnect</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connect to the BPM server. Note that this method simply establishes a connection;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#bpmserverdisconnect()'> BpmServerDisconnect</a>
           </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -205,8 +168,8 @@
       <td>
         <code>
           <b>
-            <a href='#cleartasks(character)'> ClearTasks</a>
-          </b>(CHARACTER pcListType)
+            <a href='#cleartasks()'> ClearTasks</a>
+          </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -219,22 +182,8 @@
       <td>
         <code>
           <b>
-            <a href='#completetask(autoedge.factory.client.common.enterpriseservices.currenttask)'> CompleteTask</a>
-          </b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poTask)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#connectbizlogicservice(openedge.enterpriseservices.bizlogic.ibizlogicserverparameters)'> ConnectBizLogicService</a>
-          </b>(<a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> poParameters)
+            <a href='#customerorderdetail_formclosed(system.object,system.windows.forms.formclosedeventargs)'> CustomerOrderDetail_FormClosed</a>
+          </b>(<a href="../../../../../System/Object.cls.html" title="System.Object" target="classFrame">Object</a> sender, <a href="../../../../../System/Windows/Forms/FormClosedEventArgs.cls.html" title="System.Windows.Forms.FormClosedEventArgs" target="classFrame">FormClosedEventArgs</a> e)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -289,8 +238,8 @@
       <td>
         <code>
           <b>
-            <a href='#disconnectbizlogicservice()'> DisconnectBizLogicService</a>
-          </b>()
+            <a href='#establishbpmsession(openedge.commoninfrastructure.common.iusercontext)'> EstablishBpmSession</a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -303,63 +252,7 @@
       <td>
         <code>
           <b>
-            <a href='#fillprocesslist()'> FillProcessList</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#filltasklist(character)'> FillTaskList</a>
-          </b>(CHARACTER pcListType)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#oncurrenttaskupdated(int64)'> OnCurrentTaskUpdated</a>
-          </b>(INT64 piTaskId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#reassigntask(autoedge.factory.client.common.enterpriseservices.currenttask,character)'> ReassignTask</a>
-          </b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poTask, CHARACTER pcPerformer)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#refreshprocesseslist()'> RefreshProcessesList</a>
+            <a href='#initui()'> InitUI</a>
           </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -401,48 +294,6 @@
       <td>
         <code>
           <b>
-            <a href='#serverconnect(openedge.enterpriseservices.bizlogic.ibizlogicserverparameters)'> ServerConnect</a>
-          </b>(<a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> poParameters)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#serverdisconnect()'> ServerDisconnect</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#settaskdataslots(autoedge.factory.client.common.enterpriseservices.currenttask)'> SetTaskDataSlots</a>
-          </b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poTask)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#settoolstate(character,logical)'> SetToolState</a>
           </b>(CHARACTER pcTool, LOGICAL plEnable)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -471,29 +322,13 @@
       <td>
         <code>
           <b>
-            <a href='#taskcompleted(int64)'> TaskCompleted</a>
-          </b>(INT64 piTaskId)
+            <a href='#taskcompletedhandler(progress.lang.object,openedge.lang.bpm.task)'> TaskCompletedHandler</a>
+          </b>(<a href="../../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poSender, <a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
 				
-				<A NAME="field_detail"><!-- --></A>
-				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-				<B>Field Detail</B></FONT></TH>
-				</TR></TABLE>
-				
-    <a name='1194.CurrentTaskUpdated'><!-- --></a>
-    <h3>CurrentTaskUpdated</h3>
-    <code> PUBLIC </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
 				<A NAME="property_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -503,16 +338,16 @@
 				
     <a name='property.BizLogicService'><!-- --></a>
     <h3>BizLogicService</h3>
-    <code><a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicAPI.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> PROTECTED GET SET </code>
+    <code><a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> PROTECTED GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='property.IsBizLogicConnected'><!-- --></a>
-    <h3>IsBizLogicConnected</h3>
-    <code>LOGICAL PROTECTED GET </code>
+    <a name='property.ConMgr'><!-- --></a>
+    <h3>ConMgr</h3>
+    <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/IConnectionManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IConnectionManager" target="classFrame">IConnectionManager</a> PROTECTED GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -521,16 +356,7 @@
     <hr />
     <a name='property.SecMgr'><!-- --></a>
     <h3>SecMgr</h3>
-    <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.ISecurityManager" target="classFrame">ISecurityManager</a> PROTECTED GET PRIVATE SET </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.ServerParameters'><!-- --></a>
-    <h3>ServerParameters</h3>
-    <code><a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> PROTECTED GET PRIVATE SET </code>
+    <code><a href="../../../../../OpenEdge/CommonInfrastructure/Client/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Client.ISecurityManager" target="classFrame">ISecurityManager</a> PROTECTED GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -540,15 +366,6 @@
     <a name='property.ServiceManager'><!-- --></a>
     <h3>ServiceManager</h3>
     <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> PUBLIC GET PRIVATE SET </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.SessionId'><!-- --></a>
-    <h3>SessionId</h3>
-    <code>LONGCHAR PUBLIC GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -573,10 +390,23 @@
       </dd>
     </dl>
     <hr />
-    <a name='clearprocesses()'><!-- --></a>
-    <h3>ClearProcesses</h3>
-    <code>PROTECTED  VOID
-      <b>ClearProcesses</b>()
+    <a name='bpmserverconnect()'><!-- --></a>
+    <h3>BpmServerConnect</h3>
+    <code>PUBLIC  VOID
+      <b>BpmServerConnect</b>()
+    </code>
+    <dl>
+      <dd>Connect to the BPM server. Note that this method simply establishes a connection; <p> </dd>
+      <dd>it doesn't log in to the BPM server. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='bpmserverdisconnect()'><!-- --></a>
+    <h3>BpmServerDisconnect</h3>
+    <code>PUBLIC  VOID
+      <b>BpmServerDisconnect</b>()
     </code>
     <dl>
       <dd>
@@ -584,10 +414,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='cleartasks(character)'><!-- --></a>
+    <a name='cleartasks()'><!-- --></a>
     <h3>ClearTasks</h3>
     <code>PROTECTED  VOID
-      <b>ClearTasks</b>(CHARACTER pcListType)
+      <b>ClearTasks</b>()
     </code>
     <dl>
       <dd>
@@ -595,21 +425,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='completetask(autoedge.factory.client.common.enterpriseservices.currenttask)'><!-- --></a>
-    <h3>CompleteTask</h3>
+    <a name='customerorderdetail_formclosed(system.object,system.windows.forms.formclosedeventargs)'><!-- --></a>
+    <h3>CustomerOrderDetail_FormClosed</h3>
     <code>PUBLIC  VOID
-      <b>CompleteTask</b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poTask)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='connectbizlogicservice(openedge.enterpriseservices.bizlogic.ibizlogicserverparameters)'><!-- --></a>
-    <h3>ConnectBizLogicService</h3>
-    <code>PROTECTED  VOID
-      <b>ConnectBizLogicService</b>(<a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> poParameters)
+      <b>CustomerOrderDetail_FormClosed</b>(<a href="../../../../../System/Object.cls.html" title="System.Object" target="classFrame">Object</a> sender, <a href="../../../../../System/Windows/Forms/FormClosedEventArgs.cls.html" title="System.Windows.Forms.FormClosedEventArgs" target="classFrame">FormClosedEventArgs</a> e)
     </code>
     <dl>
       <dd>
@@ -650,10 +469,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='disconnectbizlogicservice()'><!-- --></a>
-    <h3>DisconnectBizLogicService</h3>
+    <a name='establishbpmsession(openedge.commoninfrastructure.common.iusercontext)'><!-- --></a>
+    <h3>EstablishBpmSession</h3>
     <code>PROTECTED  VOID
-      <b>DisconnectBizLogicService</b>()
+      <b>EstablishBpmSession</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IUserContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.IUserContext" target="classFrame">IUserContext</a> poUserContext)
     </code>
     <dl>
       <dd>
@@ -661,54 +480,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='fillprocesslist()'><!-- --></a>
-    <h3>FillProcessList</h3>
+    <a name='initui()'><!-- --></a>
+    <h3>InitUI</h3>
     <code>PROTECTED  VOID
-      <b>FillProcessList</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='filltasklist(character)'><!-- --></a>
-    <h3>FillTaskList</h3>
-    <code>PROTECTED  VOID
-      <b>FillTaskList</b>(CHARACTER pcListType)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='oncurrenttaskupdated(int64)'><!-- --></a>
-    <h3>OnCurrentTaskUpdated</h3>
-    <code>PROTECTED  VOID
-      <b>OnCurrentTaskUpdated</b>(INT64 piTaskId)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='reassigntask(autoedge.factory.client.common.enterpriseservices.currenttask,character)'><!-- --></a>
-    <h3>ReassignTask</h3>
-    <code>PUBLIC  VOID
-      <b>ReassignTask</b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poTask, CHARACTER pcPerformer)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='refreshprocesseslist()'><!-- --></a>
-    <h3>RefreshProcessesList</h3>
-    <code>PROTECTED  VOID
-      <b>RefreshProcessesList</b>()
+      <b>InitUI</b>()
     </code>
     <dl>
       <dd>
@@ -738,39 +513,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='serverconnect(openedge.enterpriseservices.bizlogic.ibizlogicserverparameters)'><!-- --></a>
-    <h3>ServerConnect</h3>
-    <code>PUBLIC  VOID
-      <b>ServerConnect</b>(<a href="../../../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> poParameters)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='serverdisconnect()'><!-- --></a>
-    <h3>ServerDisconnect</h3>
-    <code>PUBLIC  VOID
-      <b>ServerDisconnect</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='settaskdataslots(autoedge.factory.client.common.enterpriseservices.currenttask)'><!-- --></a>
-    <h3>SetTaskDataSlots</h3>
-    <code>PUBLIC  VOID
-      <b>SetTaskDataSlots</b>(<a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poTask)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='settoolstate(character,logical)'><!-- --></a>
     <h3>SetToolState</h3>
     <code>PROTECTED  VOID
@@ -793,10 +535,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='taskcompleted(int64)'><!-- --></a>
-    <h3>TaskCompleted</h3>
+    <a name='taskcompletedhandler(progress.lang.object,openedge.lang.bpm.task)'><!-- --></a>
+    <h3>TaskCompletedHandler</h3>
     <code>PUBLIC  VOID
-      <b>TaskCompleted</b>(INT64 piTaskId)
+      <b>TaskCompletedHandler</b>(<a href="../../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poSender, <a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
     </code>
     <dl>
       <dd>

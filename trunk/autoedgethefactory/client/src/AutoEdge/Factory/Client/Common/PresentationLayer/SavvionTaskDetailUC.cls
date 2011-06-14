@@ -9,24 +9,26 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager.
-using AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask.
-using OpenEdge.PresentationLayer.View.GuiForDotNet.TagWrapper.
-
-using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
-using OpenEdge.EnterpriseServices.BizLogic.WorkItem.
-using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
-using OpenEdge.EnterpriseServices.BizLogic.SavvionType.
-using OpenEdge.Core.System.Query.
-using OpenEdge.Lang.Assert.
-
 using Infragistics.Win.UltraWinGrid.UltraGridAction.
 using Infragistics.Win.UltraWinGrid.SortIndicator.            
 using Infragistics.Win.UltraWinGrid.UltraGridColumn.
 using Infragistics.Win.UltraWinGrid.UltraGridRow.
+
+using OpenEdge.PresentationLayer.View.GuiForDotNet.TagWrapper.
+
+using OpenEdge.Core.System.Query.
+using OpenEdge.Lang.BPM.IBizLogicAPI.
+using OpenEdge.Lang.BPM.Task.
+using OpenEdge.Lang.BPM.WorkItem.
+using OpenEdge.Lang.BPM.DataSlotInstance.
+using OpenEdge.Lang.BPM.WorkItemStatusEnum.
+using OpenEdge.Lang.BPM.SavvionType.
+using OpenEdge.Lang.Assert.
+
 using Progress.Windows.UserControl.
 using Progress.Util.EnumHelper.
 using Progress.Lang.Class.
+using Progress.Lang.Object.
 
 class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-widget-pool inherits UserControl: 
     
@@ -64,9 +66,11 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-w
     define private variable uxWorkStepName as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
     define private variable uxWorkItemName as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
     
-    define public property CurrentTask as CurrentTask no-undo get. set.
-    define public property TaskList as ITaskListManager no-undo get. set.
+    define public property CurrentTask as Task no-undo get. set.
+    define protected property BpmServer as IBizLogicAPI no-undo get. set.
     
+    define public event TaskCompleted signature void(input poSender as Object, input poTask as Task).
+        
     constructor public SavvionTaskDetailUC (  ):
         super().
         InitializeComponent().
@@ -76,15 +80,17 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-w
         end catch.
     end constructor.
 
-    method public void SetTask(poCurrentTask as CurrentTask, poTaskList as ITaskListManager):
+    method public void SetTask(poCurrentTask as Task, poBpmServer as IBizLogicAPI):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
+        define variable hDataslots as handle no-undo.
+        define variable hQuery as handle no-undo.
         
         Assert:ArgumentNotNull(poCurrentTask, 'Current task').
-        Assert:ArgumentNotNull(poTaskList, 'Task List Manager').
+        Assert:ArgumentNotNull(poBpmServer, 'BPM Server').
         
         assign CurrentTask = poCurrentTask
-               TaskList = poTaskList
+               BpmServer = poBpmServer
                
                uxProcessInstanceName:Text = CurrentTask:WorkItem:ProcessInstanceName
                uxProcessInstanceCreator:Text = CurrentTask:WorkItem:ProcessInstanceCreator
@@ -101,19 +107,16 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-w
                uxWorkItemStatus:Text = CurrentTask:WorkItem:Status:ToString()
                uxWorkStepName:Text = CurrentTask:WorkItem:WorkStepName.
                
-        def var h as handle.
-        
-        SavvionType:ArrayToTable(Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance'),
+        SavvionType:ArrayToTable(Class:GetClass('OpenEdge.Lang.BPM.DataSlotInstance'),
                                  cast(CurrentTask:DataSlots:Values:ToArray(), DataSlotInstance),
-                                 output table-handle h).        
+                                 output table-handle hDataslots).
         
-        def var hquery as handle.
-        create query hquery.
-        hquery:set-buffers(h:default-buffer-handle).
-        hquery:query-prepare(' preselect each ' + h:default-buffer-handle:name).
-        hquery:query-open.
+        create query hQuery.
+        hQuery:set-buffers(hDataslots:default-buffer-handle).
+        hQuery:query-prepare(' preselect each ' + hDataslots:default-buffer-handle:name).
+        hQuery:query-open.
         
-        bsDataSlots:Handle = hquery.
+        bsDataSlots:Handle = hQuery.
     end method.
     
     method private void InitializeComponent(  ):
@@ -715,7 +718,7 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-w
     end method.
 
     method private void uxCompleteTask_Click( input sender as System.Object, input e as System.EventArgs ):
-        TaskList:CompleteTask(CurrentTask).
+        BpmServer:CompleteTask(CurrentTask).
     end method.
 
     @VisualDesigner.
@@ -740,7 +743,7 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-w
     end method.
 
     method private void uxReassignPerformer_Click( input sender as System.Object, input e as System.EventArgs ):
-        TaskList:ReassignTask(CurrentTask, uxReassignPerformer:Text).
+        ReassignTask(CurrentTask, uxReassignPerformer:Text).
         
         uxReassignPerformer:Text = ''.
     end method.
@@ -782,4 +785,24 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-w
         
         Query:Reposition(hQuery, cKey).
     end method.
+    
+    method public void ReassignTask(poTask as Task, pcPerformer as character):
+        case poTask:WorkItem:Status:
+            when WorkItemStatusEnum:Assigned then
+                BpmServer:ReassignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+            otherwise
+                BpmServer:AssignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+        end case.
+    end method.
+    
+    method public void CompleteTask(poTask as Task):
+        BpmServer:CompleteTask(poTask).
+        
+        OnCurrentTaskCompleted(poTask).
+    end method.
+    
+    method protected void OnCurrentTaskCompleted(input poTask as Task):
+        TaskCompleted:Publish(this-object, poTask).
+    end method.
+    
 end class.
