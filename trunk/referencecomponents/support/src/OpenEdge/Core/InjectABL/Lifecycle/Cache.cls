@@ -90,25 +90,26 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
     method public Object TryGet(input poContext as ILifecycleContext):
         define variable oInstance as Object no-undo.
         define variable oScope as Object no-undo.
+        
         define buffer lbCache for InstanceCache.
         
         Assert:ArgumentNotNull(poContext, "Context").
         oScope = poContext:GetScope().
         
-        find first lbCache where
-                   lbCache.Binding = poContext:Binding and
-                   lbCache.Scope = int(oScope)
-                   no-error.
-        if available lbCache then
-            oInstance = lbCache.Instance.
+        for each lbCache where 
+                 lbCache.Scope eq int(oScope)
+                 while not valid-object(oInstance):
+            if lbCache.Binding:Equals(poContext:Binding) then
+                oInstance = lbCache.Instance.
+        end.
         
         return oInstance.
     end method.
     
     /** Tries to find an ILifecycleContext object for a running instance.
-        @param poInstance The running instance on which to check.
-        @return The lifecycle context for the running object, if available
-      */
+        
+        @param Object The running instance on which to check.
+        @return ILifecycleContext The lifecycle context for the running object, if available */
     method public ILifecycleContext TryGetContext(poInstance as Object):
         define variable oContext as ILifecycleContext no-undo.
         
@@ -116,7 +117,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
         
         Assert:ArgumentNotNull(poInstance, "Instance").
         
-        find first lbCache where lbCache.Instance = poInstance no-error.
+        find first lbCache where lbCache.Instance eq poInstance no-error.
         if available lbCache then
             oContext = cast(lbCache.LifecycleContext, ILifecycleContext).
         
@@ -138,7 +139,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
     /** Removes instances from the cache which should no longer be re-used. */
     method public void Prune():
         if PruningInterval ne -1 then
-            ForgetAllWhere('CachedAt < ' + quoter(add-interval(now, PruningInterval * -1, PruningUnit:ToString()))).
+            ForgetAllWhere('CachedAt lt ' + quoter(add-interval(now, PruningInterval * -1, PruningUnit:ToString()))).
     end method.
     
     /** Immediately deactivates and removes all instances in the cache that are owned by
@@ -146,7 +147,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
         @param scope The scope whose instances should be deactivated.
      */
     method public void Clear(poScope as Object):
-        ForgetAllWhere('Scope = ' + quoter(int(poScope)) ).
+        ForgetAllWhere('Scope eq ' + quoter(int(poScope)) ).
     end method.
     
     /** Immediately deactivates and removes all instances in the cache, regardless of scope. */
@@ -192,7 +193,7 @@ class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
     method private logical Forget(poInstance as Object):
         define buffer lbCache for InstanceCache.
         
-        find lbCache where lbCache.Instance = poInstance no-error.
+        find lbCache where lbCache.Instance eq poInstance no-error.
         return Forget(buffer lbCache).
     end.
     

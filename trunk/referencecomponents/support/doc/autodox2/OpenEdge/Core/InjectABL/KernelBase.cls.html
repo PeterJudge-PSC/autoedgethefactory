@@ -280,20 +280,6 @@
       <td>
         <code>
           <b>
-            <a href='#get(openedge.core.injectabl.lifecycle.standardscopeenum,progress.lang.class)'> Get</a>
-          </b>(<a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#get(progress.lang.class)'> Get</a>
           </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -350,20 +336,6 @@
       <td>
         <code>
           <b>
-            <a href='#getbindings(openedge.core.injectabl.lifecycle.standardscopeenum,progress.lang.class)'> GetBindings</a>
-          </b>(<a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#getbindings(progress.lang.class,character)'> GetBindings</a>
           </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -395,6 +367,34 @@
             <a href='#inject(progress.lang.object,openedge.lang.collections.icollection)'> Inject</a>
           </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance, <a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> poArguments)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Injects (from outside) *
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#iscached(progress.lang.class,character)'> IsCached</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether a service is cached or not.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#iscached(progress.lang.class,character,openedge.lang.collections.icollection)'> IsCached</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName, <a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> poArguments)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether a service is cached or not.
       </td>
     </tr>
     <tr bgcolor='white' class='TableRowColor'>
@@ -682,17 +682,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='get(openedge.core.injectabl.lifecycle.standardscopeenum,progress.lang.class)'><!-- --></a>
-    <h3>Get</h3>
-    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
-      <b>Get</b>(<a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='get(progress.lang.class)'><!-- --></a>
     <h3>Get</h3>
     <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
@@ -748,17 +737,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='getbindings(openedge.core.injectabl.lifecycle.standardscopeenum,progress.lang.class)'><!-- --></a>
-    <h3>GetBindings</h3>
-    <code>PROTECTED  <a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a>
-      <b>GetBindings</b>(<a href="../../../OpenEdge/Core/InjectABL/Lifecycle/StandardScopeEnum.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum" target="classFrame">StandardScopeEnum</a> poScope, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poScopeCallback)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='getbindings(progress.lang.class,character)'><!-- --></a>
     <h3>GetBindings</h3>
     <code>PROTECTED  <a href="../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a>
@@ -790,6 +768,48 @@
       <dd>Injects (from outside) * <p> </dd>
       <dd>
         <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='iscached(progress.lang.class,character)'><!-- --></a>
+    <h3>IsCached</h3>
+    <code>PUBLIC  LOGICAL
+      <b>IsCached</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>Indicates whether a service is cached or not. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - A service represented by a Progress.Lang.Class type instance.<br/>character - A name for the service<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Logical Returns true if the service is being cached ; false if not in cache.Note that a true return value doesn't mean there isn't a running instance of the service - since transient instances aren't cached - but only that there are no cached instances. </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='iscached(progress.lang.class,character,openedge.lang.collections.icollection)'><!-- --></a>
+    <h3>IsCached</h3>
+    <code>PUBLIC  LOGICAL
+      <b>IsCached</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName, <a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> poArguments)
+    </code>
+    <dl>
+      <dd>Indicates whether a service is cached or not. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - A service represented by a Progress.Lang.Class type instance.<br/>character - A name for the service<br/>ICollection - A collection of arguments to add to the bindings for theobject being instantiated. <br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Logical Returns true if the service is being cached ; false if not in cache.Note that a true return value doesn't mean there isn't a running instance of the service - since transient instances aren't cached - but only that there are no cached instances. </dd>
+        </dl>
       </dd>
     </dl>
     <hr />

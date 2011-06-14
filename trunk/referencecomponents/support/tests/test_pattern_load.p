@@ -16,7 +16,7 @@ using OpenEdge.Lang.Assert.
 
 /* ***************************  Definitions  ************************** */
 
-{routinelevel.i}
+routine-level on error undo, throw.
 
 function Load return logical (input pcFilePattern as character):
         define variable iLoop as integer no-undo.

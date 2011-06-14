@@ -71,11 +71,7 @@ class OpenEdge.Core.XML.WebServiceProtocol abstract:
         
         ConnectService().
         
-        copy-lob pcInputParam to file session:temp-dir + pcOperationName + '.input.xml'.
-                
         run value(pcOperationName) in ConnectPortType(pcPortTypeName) (input pcInputParam, output cOutputParam).
-
-        copy-lob cOutputParam to file session:temp-dir + pcOperationName + '.output.xml'.
         
         return cOutputParam.
         

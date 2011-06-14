@@ -45,6 +45,6 @@ class OpenEdge.Core.InjectABL.Binding.Parameters.Routine:
         
         oClone:Parameters = this-object:Parameters.
         return oClone.        
-    end method.    
-    
+    end method.
+
 end class.

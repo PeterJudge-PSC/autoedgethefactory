@@ -18,6 +18,7 @@ using OpenEdge.Core.System.ErrorSeverityEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.IOModeEnum.
 using OpenEdge.Lang.FlagsEnum.
+using OpenEdge.Lang.Assert.
 using Progress.Lang.ParameterList.
 using Progress.Lang.AppError.
 using Progress.Lang.Object.
@@ -49,6 +50,8 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     
     constructor public ApplicationError(poInnerError as Error):               
         this-object().
+        
+        Assert:ArgumentNotNull(poInnerError, 'Inner Error').
         this-object:InnerError = poInnerError.
     end constructor.
     
@@ -85,8 +88,6 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     @todo(task="implement", action="needs refactoring sans formatting").            
     method public character ResolvedMessageText():
         define variable cMsg      as character no-undo.        
-        define variable cInnerMsg as character no-undo.
-        define variable oError    as Error no-undo.        
         
         cMsg = substitute(this-object:ErrorText,
                                GetMessage(1),
@@ -98,47 +99,56 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
                                GetMessage(7),
                                GetMessage(8),
                                GetMessage(9)).
-        if CallStack > "" then 
+        if CallStack gt "" then 
             cMsg = cMsg 
                  + "~n~n"
                  + "Call Stack:"
                  + "~n------------~n"
-                 + CallStack.                  
+                 + CallStack.            
+        
+        cMsg = ResolveInnerErrorText(cMsg).
+        
+        return cMsg.                 
+    end method.
+    
+    method protected character ResolveInnerErrorText(input pcMessageText as character):
+        define variable cInnerMsg as character no-undo.
+        
         if valid-object(InnerError) then 
         do:
-            if type-of(InnerError, ApplicationError) then                     
+            if type-of(InnerError, ApplicationError) then
                 cInnerMsg = cast(InnerError, ApplicationError):ResolvedMessageText().
             else if type-of(InnerError,AppError) then
                 cInnerMsg = CoreErrorMessageText(cast(InnerError, AppError)).
             else 
                 cInnerMsg = CoreErrorMessageText(InnerError).
-            if cInnerMsg > "" then
+            if cInnerMsg gt "" then
             do:
-               cMsg = cMsg 
-                    + (if cMsg = "" then "" 
+               pcMessageText = pcMessageText 
+                    + (if pcMessageText eq "" then "" 
                        else "~n~n" 
                             + "Caused by:" 
                             + "~n") 
                     + cInnerMsg.
-               if InnerError:CallStack > "" then 
-                  cMsg = cMsg 
+               if InnerError:CallStack gt "" then 
+                  pcMessageText = pcMessageText 
                        + "~n~n"
                        + "Call Stack:"
                        + "~n------------~n"
                        + InnerError:CallStack.
             end.       
-        end.     
+        end.         
         
-        return cMsg.                 
+        return pcMessageText.
     end method.
     
     /* returns text for an AppError 
        If there is a ReturnValue then NumMessages will not be checked or used  */  
     method protected character CoreErrorMessageText (poErr as AppError):
-        if poErr:ReturnValue > "" then 
+        if type-of(poErr, AppError) then 
             return poErr:ReturnValue.
         else  
-            return CoreErrorMessagetext(cast(poErr,Error)).   
+            return CoreErrorMessageText(cast(poErr,Error)).   
     end method.
     
     method protected character CoreErrorMessageText (poErr as Error):

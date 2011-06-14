@@ -7,7 +7,7 @@
     Created     : Tue Mar 02 10:58:45 EST 2010
     Notes       : 
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using Progress.Lang.*.
 using OpenEdge.Core.InjectABL.*.

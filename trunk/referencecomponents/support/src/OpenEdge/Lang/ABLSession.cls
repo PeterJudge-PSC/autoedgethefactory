@@ -18,6 +18,7 @@ using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.Collection.
+using OpenEdge.Lang.String.
 using Progress.Lang.Class. 
 using Progress.Lang.Object.
 
@@ -33,7 +34,7 @@ class OpenEdge.Lang.ABLSession:
     /** A collection of user-defined properties. These
         can be any key/value set of objects. */
     define public property SessionProperties as IMap no-undo get. private set.
-    
+
     /** An optional session type identifier. Defaults to SESSION:CLIENT-TYPE, but we have
         need for more complex session identifiers ('Development' or 'ClientRuntime'), which
         are not limited to simple client types. */
@@ -60,7 +61,15 @@ class OpenEdge.Lang.ABLSession:
         assign this-object:Id = guid(generate-uuid)
                ActiveSince = now
                SessionProperties = new Map().
+        
+        CacheStartupProperties().               
     end constructor.
+    
+    method private void CacheStartupProperties():
+        /* cache the value of -param on startup */
+        SessionProperties:Put(new String('SESSION:PARAM'), new String(session:parameter)). 
+        SessionProperties:Put(new String('SESSION:ICFPARAM'), new String(session:parameter)).
+    end method.
     
     /** Returns the first running persistent procedure instance found
         for a given name.

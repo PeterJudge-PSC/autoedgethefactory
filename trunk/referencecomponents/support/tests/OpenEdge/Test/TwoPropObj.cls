@@ -10,7 +10,7 @@
 using OpenEdge.Test.TwoPropObj.
 using Progress.Lang.*.
 
-{routinelevel.i}
+routine-level on error undo, throw.
 
 class OpenEdge.Test.TwoPropObj: 
     def public property PropOne as int no-undo get. set.

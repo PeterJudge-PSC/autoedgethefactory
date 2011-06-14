@@ -29,41 +29,6 @@ using Progress.Lang.Object.
 
 class OpenEdge.Core.InjectABL.Binding.StandardBindingResolver implements IBindingResolver:
     
-    /** Returns valid binding(s) for a scope from a set of bindings 
-        
-        @param IMap The complete set of bindings to resolve
-        @param Class The type of scope (standard, manager etc)
-        @param StandardScopeEnum The level of the scope (security manager, service manager etc)
-        @return IList  The list of bindings corresponding to the scope and type */
-    method public IList Resolve(input poBindings as IMap,
-                                input poScopeCallback as class Class,
-                                input poScope as StandardScopeEnum):
-        define variable oResolvedBindings as IList no-undo.
-        define variable oIterator as IIterator no-undo.
-        define variable oBinding as IBinding no-undo.
-        
-        oResolvedBindings = new List().
-        oIterator = poBindings:Values:Iterator().
-        do while oIterator:HasNext():
-            oBinding = cast(oIterator:Next(), IBinding).
-            
-            /* Scope needs to match */
-            if not oBinding:ScopeCallbackType eq poScopeCallback or
-               not oBinding:Scope eq poScope then
-                next.
-            
-            /* All conditions need to be satisfied */
-            if oBinding:IsConditional and
-               not ResolveCondition(oBinding) then
-                next.
-            
-            /* We can use this binding */
-            oResolvedBindings:Add(oBinding).
-        end.
-        
-        return oResolvedBindings.
-    end method.
-    
     /** Returns valid binding(s) for the service from a set of bindings
         
         @param IMap The complete set of bindings to resolve

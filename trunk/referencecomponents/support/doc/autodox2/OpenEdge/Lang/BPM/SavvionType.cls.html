@@ -1,0 +1,548 @@
+<html>
+  <head>
+    <title>SavvionType</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Lang\BPM</font>
+      <br />CLASS SavvionType
+    </h2>
+    <p>CLASS OpenEdge.Lang.BPM.SavvionType abstract </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#arraytotable(progress.lang.class,openedge.lang.bpm.savviontype,OUTPUT_handle)'> ArrayToTable</a>
+          </b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poType, <a href="../../../OpenEdge/Lang/BPM/SavvionType.cls.html" title="OpenEdge.Lang.BPM.SavvionType" target="classFrame">SavvionType</a> poSavvionType, OUTPUT HANDLE phTable)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serializes an array of SavvionType objects into a table.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#arraytoxml(openedge.core.xml.saxwriter,longchar,longchar,longchar)'> ArrayToXml</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcNamespace, LONGCHAR pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serializes an array of characters into XML.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#arraytoxml(openedge.core.xml.saxwriter,longchar,longchar,openedge.lang.bpm.savviontype)'> ArrayToXml</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcNamespace, <a href="../../../OpenEdge/Lang/BPM/SavvionType.cls.html" title="OpenEdge.Lang.BPM.SavvionType" target="classFrame">SavvionType</a> poSavvionType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serializes an array of SavvionType objects into XML.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#objecttobuffer(handle)'> ObjectToBuffer</a>
+          </b>(HANDLE phBuffer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serializes the SavvionType object to the input buffer handle.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#objecttoxml(openedge.core.xml.saxwriter,longchar)'> ObjectToXML</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serializes this instance of the type to XML, using a SAXWriter object.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#readelement(longchar,longchar)'> ReadElement</a>
+          </b>(LONGCHAR pcElementName, LONGCHAR pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passes data from the SAX Reader/Parser into the SavvionType object,
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#saxreadercharactershandler(handle,longchar,integer)'> SaxReaderCharactersHandler</a>
+          </b>(HANDLE phSaxReader, LONGCHAR pcCharData, INTEGER piNumChars)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CHARACTERS event handler for the SAX-READER. Method implemented as per
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#saxreaderendelementhandler(handle,longchar,longchar,longchar)'> SaxReaderEndElementHandler</a>
+          </b>(HANDLE phSaxReader, LONGCHAR pcName, LONGCHAR pcPublicID, LONGCHAR pcSystemID)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END-ELEMENT event handler for the SAX-READER. Method implemented as per
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#saxreaderstartelementhandler(handle,longchar,longchar,longchar,handle)'> SaxReaderStartElementHandler</a>
+          </b>(HANDLE phSaxReader, LONGCHAR pcNamespaceURI, LONGCHAR pcLocalName, LONGCHAR pcQName, HANDLE phAttributes)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;START-ELEMENT event handler for the SAX-READER. Method implemented as per
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeelement(openedge.core.xml.saxwriter,longchar,datetime-tz,longchar)'> WriteElement</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, DATETIME-TZ ptValue, LONGCHAR pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helper method for writing datetime elements.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeelement(openedge.core.xml.saxwriter,longchar,int64,longchar)'> WriteElement</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, INT64 piValue, LONGCHAR pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helper method for writing int64 elements.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeelement(openedge.core.xml.saxwriter,longchar,logical,longchar)'> WriteElement</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LOGICAL plValue, LONGCHAR pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helper method for writing logical/boolean elements.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeelement(openedge.core.xml.saxwriter,longchar,longchar,longchar)'> WriteElement</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcValue, LONGCHAR pcNamespace)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helper method that writes an element to the SaxWriter.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeelement(openedge.core.xml.saxwriter,longchar,longchar,longchar,longchar)'> WriteElement</a>
+          </b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcValue, LONGCHAR pcNamespace, LONGCHAR pcValueType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helper method that writes an element to the SaxWriter.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC <a href="../../../OpenEdge/Lang/BPM/SavvionType.cls.html" title="OpenEdge.Lang.BPM.SavvionType" target="classFrame">SavvionType</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#xmltoarray(longchar,longchar,progress.lang.class)'> XMLToArray</a>
+          </b>(LONGCHAR pcDocument, LONGCHAR pcOperationName, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poOutputType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts a SOAP message to an array of objects.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='arraytotable(progress.lang.class,openedge.lang.bpm.savviontype,OUTPUT_handle)'><!-- --></a>
+    <h3>ArrayToTable</h3>
+    <code>STATIC  VOID
+      <b>ArrayToTable</b>(<a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poType, <a href="../../../OpenEdge/Lang/BPM/SavvionType.cls.html" title="OpenEdge.Lang.BPM.SavvionType" target="classFrame">SavvionType</a> poSavvionType, OUTPUT HANDLE phTable)
+    </code>
+    <dl>
+      <dd>Serializes an array of SavvionType objects into a table. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - The concrete type of the SavvionType being serialised.<br/>SavvionType[] - An array of Savvion types to serialise as a table<br/>table-handle - The output table handle.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='arraytoxml(openedge.core.xml.saxwriter,longchar,longchar,longchar)'><!-- --></a>
+    <h3>ArrayToXml</h3>
+    <code>STATIC  VOID
+      <b>ArrayToXml</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcNamespace, LONGCHAR pcValue)
+    </code>
+    <dl>
+      <dd>Serializes an array of characters into XML. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SaxWriter object being used for the serialization<br/>longchar - The namespace in use<br/>longchar[] - The array of character values being serialized.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='arraytoxml(openedge.core.xml.saxwriter,longchar,longchar,openedge.lang.bpm.savviontype)'><!-- --></a>
+    <h3>ArrayToXml</h3>
+    <code>STATIC  VOID
+      <b>ArrayToXml</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcNamespace, <a href="../../../OpenEdge/Lang/BPM/SavvionType.cls.html" title="OpenEdge.Lang.BPM.SavvionType" target="classFrame">SavvionType</a> poSavvionType)
+    </code>
+    <dl>
+      <dd>Serializes an array of SavvionType objects into XML. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SaxWriter object being used for the serialization<br/>longchar - The namespace in use<br/>DataSlotInstance[] - The array of dataslots being serialized.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='objecttobuffer(handle)'><!-- --></a>
+    <h3>ObjectToBuffer</h3>
+    <code> VOID
+      <b>ObjectToBuffer</b>(HANDLE phBuffer)
+    </code>
+    <dl>
+      <dd>Serializes the SavvionType object to the input buffer handle. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>handle - The buffer handle into which the object is serialised.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='objecttoxml(openedge.core.xml.saxwriter,longchar)'><!-- --></a>
+    <h3>ObjectToXML</h3>
+    <code> VOID
+      <b>ObjectToXML</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcNamespace)
+    </code>
+    <dl>
+      <dd>Serializes this instance of the type to XML, using a SAXWriter object. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SAX writer used to serialize the object.<br/>longchar - The namespace used.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='readelement(longchar,longchar)'><!-- --></a>
+    <h3>ReadElement</h3>
+    <code> VOID
+      <b>ReadElement</b>(LONGCHAR pcElementName, LONGCHAR pcValue)
+    </code>
+    <dl>
+      <dd>Passes data from the SAX Reader/Parser into the SavvionType object, <p> </dd>
+      <dd>where it will be set (probably) to a property of that object. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>longchar - The data value<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='saxreadercharactershandler(handle,longchar,integer)'><!-- --></a>
+    <h3>SaxReaderCharactersHandler</h3>
+    <code>STATIC  VOID
+      <b>SaxReaderCharactersHandler</b>(HANDLE phSaxReader, LONGCHAR pcCharData, INTEGER piNumChars)
+    </code>
+    <dl>
+      <dd>CHARACTERS event handler for the SAX-READER. Method implemented as per <p> </dd>
+      <dd>ABL documentation. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='saxreaderendelementhandler(handle,longchar,longchar,longchar)'><!-- --></a>
+    <h3>SaxReaderEndElementHandler</h3>
+    <code>STATIC  VOID
+      <b>SaxReaderEndElementHandler</b>(HANDLE phSaxReader, LONGCHAR pcName, LONGCHAR pcPublicID, LONGCHAR pcSystemID)
+    </code>
+    <dl>
+      <dd>END-ELEMENT event handler for the SAX-READER. Method implemented as per <p> </dd>
+      <dd>ABL documentation. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='saxreaderstartelementhandler(handle,longchar,longchar,longchar,handle)'><!-- --></a>
+    <h3>SaxReaderStartElementHandler</h3>
+    <code>STATIC  VOID
+      <b>SaxReaderStartElementHandler</b>(HANDLE phSaxReader, LONGCHAR pcNamespaceURI, LONGCHAR pcLocalName, LONGCHAR pcQName, HANDLE phAttributes)
+    </code>
+    <dl>
+      <dd>START-ELEMENT event handler for the SAX-READER. Method implemented as per <p> </dd>
+      <dd>ABL documentation. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeelement(openedge.core.xml.saxwriter,longchar,datetime-tz,longchar)'><!-- --></a>
+    <h3>WriteElement</h3>
+    <code>STATIC PROTECTED  VOID
+      <b>WriteElement</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, DATETIME-TZ ptValue, LONGCHAR pcNamespace)
+    </code>
+    <dl>
+      <dd>Helper method for writing datetime elements. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SAX writer in use<br/>longchar - The namespace used.<br/>datetime-tz - The element's value<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeelement(openedge.core.xml.saxwriter,longchar,int64,longchar)'><!-- --></a>
+    <h3>WriteElement</h3>
+    <code>STATIC PROTECTED  VOID
+      <b>WriteElement</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, INT64 piValue, LONGCHAR pcNamespace)
+    </code>
+    <dl>
+      <dd>Helper method for writing int64 elements. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SAX writer in use<br/>longchar - The namespace used.<br/>int64 - The element's value<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeelement(openedge.core.xml.saxwriter,longchar,logical,longchar)'><!-- --></a>
+    <h3>WriteElement</h3>
+    <code>STATIC PROTECTED  VOID
+      <b>WriteElement</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LOGICAL plValue, LONGCHAR pcNamespace)
+    </code>
+    <dl>
+      <dd>Helper method for writing logical/boolean elements. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SAX writer in use<br/>longchar - The namespace used.<br/>logical - The element's value<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeelement(openedge.core.xml.saxwriter,longchar,longchar,longchar)'><!-- --></a>
+    <h3>WriteElement</h3>
+    <code>STATIC PROTECTED  VOID
+      <b>WriteElement</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcValue, LONGCHAR pcNamespace)
+    </code>
+    <dl>
+      <dd>Helper method that writes an element to the SaxWriter. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SAX writer in use<br/>longchar - The namespace used.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeelement(openedge.core.xml.saxwriter,longchar,longchar,longchar,longchar)'><!-- --></a>
+    <h3>WriteElement</h3>
+    <code>STATIC PROTECTED  VOID
+      <b>WriteElement</b>(<a href="../../../OpenEdge/Core/XML/SaxWriter.cls.html" title="OpenEdge.Core.XML.SaxWriter" target="classFrame">SaxWriter</a> poSaxWriter, LONGCHAR pcElementName, LONGCHAR pcValue, LONGCHAR pcNamespace, LONGCHAR pcValueType)
+    </code>
+    <dl>
+      <dd>Helper method that writes an element to the SaxWriter. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>SaxWriter - The SAX writer in use<br/>longchar - The Type of the value being written. This will add an attributeto the element indicating the type of the value. <br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='xmltoarray(longchar,longchar,progress.lang.class)'><!-- --></a>
+    <h3>XMLToArray</h3>
+    <code>STATIC  <a href="../../../OpenEdge/Lang/BPM/SavvionType.cls.html" title="OpenEdge.Lang.BPM.SavvionType" target="classFrame">SavvionType</a>
+      <b>XMLToArray</b>(LONGCHAR pcDocument, LONGCHAR pcOperationName, <a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poOutputType)
+    </code>
+    <dl>
+      <dd>Converts a SOAP message to an array of objects. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>longchar - The WebServices operation name<br/>Progress.Lang.Class - The actual/concrete type to create.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>SavvionType[] An array of objects of that type, containing data.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
