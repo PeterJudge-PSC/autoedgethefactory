@@ -32,22 +32,33 @@ using OpenEdge.CommonInfrastructure.Client.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
-using OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
+using OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum.
 
 using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
 
+using OpenEdge.Lang.WidgetHandle.
 using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.AppError.
+using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter inherits ServiceAdapter:
     
-    define public property AppServerName as character no-undo get. private set.
+    /** The logical name of the appserver to connect to; this logical name is used to retrieve the actual connection
+        from the ConnectionManager */
+    define public property AppServerName as character no-undo
+        get():
+            if AppServerName eq '' then
+                AppServerName = 'default'.
+            return AppServerName.
+        end get.
+        set.
     
     define private variable mcCallbackProcedureName as character no-undo initial 'OpenEdge/CommonInfrastructure/Client/service_managed_async_response.p'.
     
@@ -66,6 +77,11 @@ class OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter inherits Serv
         hProcedure = ABLSession:Instance:GetFirstRunningProc(mcCallbackProcedureName).
         delete object hProcedure no-error. 
     end destructor.
+    
+    /** External setter of appserver name */    
+    method public void SetAppServerName(input pcAppServerName as character):
+        AppServerName = pcAppServerName.
+    end method. 
     
     /** Services a request. The service provider will call ExecuteResponse() in 
         the ServiceMessageManager once it's done with the request and ready with 
@@ -119,7 +135,7 @@ class OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter inherits Serv
     end method.
     
     /** Data fetch request (async).
-                
+        
         @param IFetchRequest[] An array of fetch requests.
         @param IUserContext The context for this request.   */
     method protected void Fetch(input poRequest as IFetchRequest extent,
@@ -177,7 +193,7 @@ class OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter inherits Serv
         
         assign iMax = extent(poRequest)
                extent(mRequest) = iMax.
-               
+        
         do iLoop = 1 to iMax:
             oOutput = new ObjectOutputStream().
             oOutput:WriteObject(poRequest[iLoop]).
@@ -344,7 +360,7 @@ class OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter inherits Serv
         if not valid-handle(hProcedure) then
             run value(mcCallbackProcedureName) persistent set hProcedure.
         
-        return hProcedure.            
+        return hProcedure.     
     end method.
     
     /** Returns the ABL service or session handle on which to run the service interface.
@@ -352,8 +368,14 @@ class OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter inherits Serv
         @return handle A server handle on which to run this service.    */
     method protected handle GetServiceLocation():
         define variable hServer as handle no-undo.
+        define variable oServerConnection as IServerConnection no-undo.
         
-        hServer = ConnectionManager:GetConnectionHandle(ConnectionTypeEnum:AppServer, AppServerName).
+        Assert:ArgumentNotNullOrEmpty(AppServerName, 'AppServer Name').
+        
+        oServerConnection = ConnectionManager:GetServerConnection(ConnectionTypeEnum:AppServer, AppServerName).
+        Assert:ArgumentNotNull(oServerConnection, substitute('AppServer &1 connection', AppServerName)).
+        
+        hServer = cast(oServerConnection:Server, WidgetHandle):Value.
         
         return hServer.
     end method.
