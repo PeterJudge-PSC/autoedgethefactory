@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\BusinessComponent\WorkFlow</font>
       <br />CLASS BizLogicWorkStep
     </h2>
-    <p>CLASS OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract INHERITS <a href="../../../OpenEdge/BusinessComponent/WorkFlow/WorkStep.cls.html" title="OpenEdge.BusinessComponent.WorkFlow.WorkStep" target="classFrame">WorkStep</a> </p>
+    <p>CLASS OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract INHERITS <a href="../../../OpenEdge/BusinessComponent/WorkFlow/WorkStepDecorator.cls.html" title="OpenEdge.BusinessComponent.WorkFlow.WorkStepDecorator" target="classFrame">WorkStepDecorator</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -55,13 +55,55 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicAPI.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI" target="classFrame">IBizLogicAPI</a></code>
+          <code><a href="../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.BizLogicService'>BizLogicService</a>
+            <a href='#property.BpmServer'>BpmServer</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.BpmServerName'>BpmServerName</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The logical name of the BPM Server we're interacting with
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IConnectionManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IConnectionManager" target="classFrame">IConnectionManager</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ConnectionManager'>ConnectionManager</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ConnectionManager is used plentifully; we keep it as a property so that
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/BizLogicWorkStepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.BizLogicWorkStepRequest" target="classFrame">BizLogicWorkStepRequest</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.CurrentRequest'>CurrentRequest</a>
           </b> PROTECTED GET SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -69,43 +111,15 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LOGICAL</code>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a></code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#property.IsBizLogicConnected'>IsBizLogicConnected</a>
-          </b> PROTECTED GET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.ServerParameters'>ServerParameters</a>
-          </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Host and port of the Savvion SBM Server
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>LONGCHAR</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.SessionId'>SessionId</a>
+            <a href='#property.ServiceManager'>ServiceManager</a>
           </b> PROTECTED GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stores a reference to the session's Service Manager
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -126,22 +140,8 @@
       <td>
         <code>
           <b>
-            <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo,openedge.enterpriseservices.bizlogic.ibizlogicserverparameters)'>CONSTRUCTOR </a>
-          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> poBizLogicParams)
+            <a href='#(openedge.businesscomponent.workflow.iworkstep,character)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/BusinessComponent/WorkFlow/IWorkStep.cls.html" title="OpenEdge.BusinessComponent.WorkFlow.IWorkStep" target="classFrame">IWorkStep</a> poWorkStep, CHARACTER pcBpmServerName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -154,8 +154,8 @@
       <td>
         <code>
           <b>
-            <a href='#completeworkitem(openedge.enterpriseservices.bizlogic.dataslotinstance)'> CompleteWorkItem</a>
-          </b>(<a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+            <a href='#completeworkitem(openedge.lang.bpm.dataslotinstance)'> CompleteWorkItem</a>
+          </b>(<a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -168,49 +168,7 @@
       <td>
         <code>
           <b>
-            <a href='#connectbizlogicservice()'> ConnectBizLogicService</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#destroycomponent()'> DestroyComponent</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#disconnectbizlogicservice()'> DisconnectBizLogicService</a>
-          </b>()
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>VOID</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#initialize()'> Initialize</a>
+            <a href='#performstep()'> PerformStep</a>
           </b>()
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -238,8 +196,8 @@
       <td>
         <code>
           <b>
-            <a href='#updatedataslotvalue(int64,character,character,character)'> UpdateDataSlotValue</a>
-          </b>(INT64 piProcessInstanceId, CHARACTER pcProcessInstanceName, CHARACTER pcDataSlotName, CHARACTER pcDataSlotValue)
+            <a href='#updatedataslotvalue(character,character)'> UpdateDataSlotValue</a>
+          </b>(CHARACTER pcDataSlotName, CHARACTER pcDataSlotValue)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -252,38 +210,50 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='property.BizLogicService'><!-- --></a>
-    <h3>BizLogicService</h3>
-    <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicAPI.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> PROTECTED GET SET </code>
+    <a name='property.BpmServer'><!-- --></a>
+    <h3>BpmServer</h3>
+    <code><a href="../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> PROTECTED GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='property.IsBizLogicConnected'><!-- --></a>
-    <h3>IsBizLogicConnected</h3>
-    <code>LOGICAL PROTECTED GET </code>
+    <a name='property.BpmServerName'><!-- --></a>
+    <h3>BpmServerName</h3>
+    <code>CHARACTER PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>The logical name of the BPM Server we're interacting with <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ConnectionManager'><!-- --></a>
+    <h3>ConnectionManager</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IConnectionManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IConnectionManager" target="classFrame">IConnectionManager</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>The ConnectionManager is used plentifully; we keep it as a property so that <p> </dd>
+      <dd>we can get it whenever needed, without fuss. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.CurrentRequest'><!-- --></a>
+    <h3>CurrentRequest</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/BizLogicWorkStepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.BizLogicWorkStepRequest" target="classFrame">BizLogicWorkStepRequest</a> PROTECTED GET SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
-    <a name='property.ServerParameters'><!-- --></a>
-    <h3>ServerParameters</h3>
-    <code><a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> PUBLIC GET PRIVATE SET </code>
+    <a name='property.ServiceManager'><!-- --></a>
+    <h3>ServiceManager</h3>
+    <code><a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> PROTECTED GET PRIVATE SET </code>
     <dl>
-      <dd>Host and port of the Savvion SBM Server <p> </dd>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.SessionId'><!-- --></a>
-    <h3>SessionId</h3>
-    <code>LONGCHAR PROTECTED GET PRIVATE SET </code>
-    <dl>
+      <dd>Stores a reference to the session's Service Manager <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>
@@ -296,10 +266,10 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <a name='(openedge.businesscomponent.workflow.iworkstep,character)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/BusinessComponent/WorkFlow/IWorkStep.cls.html" title="OpenEdge.BusinessComponent.WorkFlow.IWorkStep" target="classFrame">IWorkStep</a> poWorkStep, CHARACTER pcBpmServerName)
     </code>
     <dl>
       <dd>
@@ -307,21 +277,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo,openedge.enterpriseservices.bizlogic.ibizlogicserverparameters)'><!-- --></a>
-    <h3>CONSTRUCTOR</h3>
-    <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo, <a href="../../../OpenEdge/EnterpriseServices/BizLogic/IBizLogicServerParameters.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters" target="classFrame">IBizLogicServerParameters</a> poBizLogicParams)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='completeworkitem(openedge.enterpriseservices.bizlogic.dataslotinstance)'><!-- --></a>
+    <a name='completeworkitem(openedge.lang.bpm.dataslotinstance)'><!-- --></a>
     <h3>CompleteWorkItem</h3>
     <code>PROTECTED  VOID
-      <b>CompleteWorkItem</b>(<a href="../../../OpenEdge/EnterpriseServices/BizLogic/DataSlotInstance.cls.html" title="OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+      <b>CompleteWorkItem</b>(<a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
     </code>
     <dl>
       <dd>
@@ -329,43 +288,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='connectbizlogicservice()'><!-- --></a>
-    <h3>ConnectBizLogicService</h3>
-    <code>PROTECTED  VOID
-      <b>ConnectBizLogicService</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='destroycomponent()'><!-- --></a>
-    <h3>DestroyComponent</h3>
+    <a name='performstep()'><!-- --></a>
+    <h3>PerformStep</h3>
     <code>OVERRIDE PUBLIC  VOID
-      <b>DestroyComponent</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='disconnectbizlogicservice()'><!-- --></a>
-    <h3>DisconnectBizLogicService</h3>
-    <code>PROTECTED  VOID
-      <b>DisconnectBizLogicService</b>()
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='initialize()'><!-- --></a>
-    <h3>Initialize</h3>
-    <code>OVERRIDE PUBLIC  VOID
-      <b>Initialize</b>()
+      <b>PerformStep</b>()
     </code>
     <dl>
       <dd>
@@ -384,10 +310,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='updatedataslotvalue(int64,character,character,character)'><!-- --></a>
+    <a name='updatedataslotvalue(character,character)'><!-- --></a>
     <h3>UpdateDataSlotValue</h3>
     <code>PROTECTED  VOID
-      <b>UpdateDataSlotValue</b>(INT64 piProcessInstanceId, CHARACTER pcProcessInstanceName, CHARACTER pcDataSlotName, CHARACTER pcDataSlotValue)
+      <b>UpdateDataSlotValue</b>(CHARACTER pcDataSlotName, CHARACTER pcDataSlotValue)
     </code>
     <dl>
       <dd>

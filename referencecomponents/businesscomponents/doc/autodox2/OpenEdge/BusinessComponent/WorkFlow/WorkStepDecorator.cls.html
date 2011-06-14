@@ -69,7 +69,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LONGCHAR</code>
+          <code>CHARACTER</code>
         </font>
       </td>
       <td>
@@ -145,6 +145,20 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setname(character)'> SetName</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="property_detail"><!-- --></A>
@@ -166,7 +180,7 @@
     <hr />
     <a name='property.Name'><!-- --></a>
     <h3>Name</h3>
-    <code>LONGCHAR PUBLIC GET SET </code>
+    <code>CHARACTER PUBLIC GET SET </code>
     <dl>
       <dd>(optional) The workstep name. <p> </dd>
       <dd>
@@ -218,6 +232,17 @@
     <h3>PerformStep</h3>
     <code>PUBLIC  VOID
       <b>PerformStep</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest" target="classFrame">IWorkstepRequest</a> poRequest)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setname(character)'><!-- --></a>
+    <h3>SetName</h3>
+    <code>PUBLIC  VOID
+      <b>SetName</b>(CHARACTER pcName)
     </code>
     <dl>
       <dd>

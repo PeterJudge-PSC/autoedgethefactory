@@ -25,11 +25,11 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStepDecorator abstract
     define protected property DecoratedWorkStep as IWorkStep no-undo get. private set.
 
     /** (optional) The workstep name. */
-    define public property Name as longchar no-undo
+    define public property Name as character no-undo
         get():
             return DecoratedWorkStep:Name.
         end get.
-        set (input pcName as longchar):
+        set (input pcName as character):
             DecoratedWorkStep:Name = pcName.
         end set.
     
@@ -49,5 +49,9 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStepDecorator abstract
     method public IWorkstepResponse GetResponse(input pcMessageId as longchar):
         return DecoratedWorkStep:GetResponse(pcMessageId).
     end method.
+
+	method public void SetName(input pcName as character):
+	    DecoratedWorkStep:SetName(pcName).
+	end method.
     
 end class.

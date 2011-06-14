@@ -24,15 +24,13 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
     
     define protected property IWorkStepType as class Class no-undo get. set.
     define protected property WorkStepServiceInterfaceType as class Class no-undo get. set.
-    define protected property BizLogicWorkStepType as class Class no-undo get. set.
-    define protected property IBizLogicServerParametersType as class Class no-undo get. set.
     define protected property BusinessEntityServiceInterfaceType as class Class no-undo get. set.
     define protected property IDataAccessType as class Class no-undo get. set.
     define protected property IServiceProviderType as class Class no-undo get. set.
     define protected property InjectABLServiceProviderType as class Class no-undo get. set.
     define protected property InjectABLComponentProviderType as class Class no-undo get. set.
     
-    constructor public BusinessComponentModule (  ):
+    constructor public BusinessComponentModule():
         super ().
         
         /* do this one per type, for readability and possibly performance too */
@@ -41,8 +39,6 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
                IServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider')
                IWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.IWorkStep')
                WorkStepServiceInterfaceType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.WorkStepServiceInterface')
-               BizLogicWorkStepType = Class:GetClass('OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep')
-               IBizLogicServerParametersType = Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters')
                InjectABLServiceProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ServiceProvider')
                InjectABLComponentProviderType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ComponentProvider').
     end constructor.
@@ -112,16 +108,26 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
         end.
     end method.
 
-    /* Workstep binding to service interface, workstep */
-    @todo(task="refactor", action="move to Ent Svcs").
+    /** Workstep binding to service interface, workstep 
+    
+        A Workstep can be decorated as BizLogic workstep. In that case, we                        
+            IWorkStep -> SomeBizLogicWorkStep decorates SomeWorkStep
+        If not, then the we use bormal binding
+            IWorkStep -> SomeWorkStep
+        
+        This possible decorated workstep now also needs to be exposed 
+        as a service interface
+            WorkStepServiceInterfaceType decorates IWorkStep (whih is either 
+                    SomeWorkStep or SomeBizLogicWorkStep)
+    */
     method protected void BindWorkStep(input pcBindingName as character,
                                        input pcConcreteType as character,
-                                       input plIsBizLogicStep as logical  ): 
+                                       input pcDecoratedType as character): 
         
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
         define variable oSIArgs as IParameter extent 2 no-undo.
-        define variable oBLArgs as IParameter extent 1 no-undo.
+        define variable oBLArgs as IParameter extent 2 no-undo.
         
         /* Use a service interface to bind the service to the workstep */
         oBindingSyntax = Bind(IServiceProviderType).
@@ -133,24 +139,35 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
         /* parameters for passing into constructor */
         oSIArgs[1] = new Parameter(IWorkStepType, pcBindingName).
         oSIArgs[2] = new Parameter(pcBindingName).
-        oBindingSyntax            
+        oBindingSyntax
             :WithConstructorArgument(oSIArgs).
         
         /* Internal/Standard exposure as IWorkStep */
-        oBindingSyntax = Bind(IWorkStepType).
-        oBindingSyntax
-            :Named(pcBindingName)
-            :To(pcConcreteType)
-            :Using(InjectABLServiceProviderType).
         
-        if plIsBizLogicStep then
+        oBindingSyntax = Bind(IWorkStepType).
+        oBindingSyntax:Named(pcBindingName)
+            :WithPropertyValue('Name', pcBindingName).
+        
+        /* if this is a plain workstep, then it's a service and we simply bind to the concrete type */
+        if pcDecoratedType eq '' then
+            oBindingSyntax
+                :To(pcConcreteType)
+                :Using(InjectABLServiceProviderType).
+        else
+        /* if it is a decorated type, then bind the decorated type to itself, and the */
         do:
-            /* Bizlogic workstep. */
-            oBLArgs[1] = new Parameter(IBizLogicServerParametersType).
+            oBindingSyntax = Bind(pcDecoratedType).
+            oBindingSyntax
+                :Named(pcBindingName)
+                :ToSelf()
+                :Using(InjectABLServiceProviderType).
+            
+            /* Bizlogic workstep: pass in the decorated type (the ABL workstep) and the BPM server name */
+            oBLArgs[1] = new Parameter(Class:GetClass(pcDecoratedType)).
+            oBLArgs[2] = new Parameter('AutoEdgeTheFactory').
             oBindingSyntax
                 :WithConstructorArgument(oBLArgs).
         end.
-        
     end method.
 
 end class.
