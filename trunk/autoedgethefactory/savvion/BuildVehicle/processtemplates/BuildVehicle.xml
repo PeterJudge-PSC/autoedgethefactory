@@ -67,7 +67,7 @@
   </Alerts>
   <AtomicWS height="36" name="Start" width="36" worktime="false" x="72" y="36">
     <AtomicType>START</AtomicType>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Dataoutput>OrderNum</Dataoutput>
     <Dataoutput>VehicleBrand</Dataoutput>
     <Dataoutput>ContextId</Dataoutput>
@@ -101,7 +101,7 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
     <Datainput>ContextId</Datainput>
@@ -149,7 +149,7 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>OrderNum</Datainput>
     <Datainput>OrderId</Datainput>
@@ -198,7 +198,7 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
     <Datainput>ContextId</Datainput>
@@ -247,39 +247,32 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
-    <Datainput>BuildStatus</Datainput>
-    <Datainput>ContextId</Datainput>
-    <Datainput>OrderId</Datainput>
+    <Datainput>VIN</Datainput>
     <Datainput>OrderNum</Datainput>
-    <Dataoutput>BuildStatus</Dataoutput>
-    <Dataoutput>ContextId</Dataoutput>
-    <Dataoutput>OrderId</Dataoutput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>BuildStatus</Datainput>
+    <Dataoutput>VIN</Dataoutput>
     <Dataoutput>OrderNum</Dataoutput>
-    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
-      <Label>BuildStatus:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
-      <Label>ContextId:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
-      <Label>orderid:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Format editable="true" input="VIN" label="VIN:" password="false" required="false" size="20" type="text">
+      <Label>VIN:</Label>
     </Format>
     <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
       <Label>OrderNum:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+    </Format>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
     </Format>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
@@ -296,7 +289,7 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
     <Datainput>ContextId</Datainput>
@@ -345,7 +338,7 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
     <Datainput>ContextId</Datainput>
@@ -393,16 +386,18 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>BuildStatus</Datainput>
     <Datainput>OrderId</Datainput>
     <Datainput>OrderNum</Datainput>
     <Datainput>ContextId</Datainput>
+    <Datainput>UseDemoShortcut</Datainput>
     <Dataoutput>BuildStatus</Dataoutput>
     <Dataoutput>OrderId</Dataoutput>
     <Dataoutput>OrderNum</Dataoutput>
     <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>UseDemoShortcut</Dataoutput>
     <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
       <Label>BuildStatus:</Label>
       <Validation>
@@ -427,6 +422,12 @@
         <ValidationType/>
       </Validation>
     </Format>
+    <Format editable="true" input="UseDemoShortcut" label="Shortcut process for demo:" type="boolean">
+      <Label>Shortcut process for demo:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)">
       <Duration value="7200">2h</Duration>
@@ -440,7 +441,7 @@
       <CollabFunction enabled="true" type="Reassign"/>
     </Collaboration>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <EmailSupport>FALSE</EmailSupport>
     <Datainput>OrderId</Datainput>
     <Datainput>BuildStatus</Datainput>
@@ -489,7 +490,7 @@
   </AtomicWS>
   <AtomicWS height="36" name="end" width="36" worktime="false" x="300" y="984">
     <AtomicType>END</AtomicType>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
   </AtomicWS>
@@ -498,7 +499,7 @@
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
     <Datainput>OrderId</Datainput>
@@ -517,7 +518,7 @@
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
     <Datainput>OrderId</Datainput>
@@ -536,7 +537,7 @@
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
     <Datainput>OrderId</Datainput>
@@ -555,7 +556,7 @@
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
     <Datainput>OrderId</Datainput>
@@ -574,7 +575,7 @@
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>AutoEdgeWebServiceEndpoint</Datainput>
     <Dataoutput>error</Dataoutput>
@@ -590,7 +591,7 @@
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <PreFunction type="java:function">// Construct a domain from the selected brand&#13;
 //java.lang.String userDomain = new java.lang.String('factory.');&#13;
 //userDomain.Append(jst.getDataSlotValue("SelectedVehicleBrand"));&#13;
@@ -615,7 +616,7 @@ jst.putDataSlot("FactoryDomain", userDomain);</PreFunction>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
     <Datainput>OrderId</Datainput>
@@ -634,7 +635,7 @@ jst.putDataSlot("FactoryDomain", userDomain);</PreFunction>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
     <Datainput>OrderId</Datainput>
@@ -653,7 +654,7 @@ jst.putDataSlot("FactoryDomain", userDomain);</PreFunction>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
     <Duration value="7200">2h</Duration>
-    <Priority>medium</Priority>
+    <Priority>MEDIUM</Priority>
     <Datainput>ContextId</Datainput>
     <Datainput>@WORKSTEPNAME</Datainput>
     <Datainput>OrderId</Datainput>
@@ -667,6 +668,30 @@ jst.putDataSlot("FactoryDomain", userDomain);</PreFunction>
     <InlineExecution>FALSE</InlineExecution>
     <AdapterType>process</AdapterType>
   </ExternalWS>
+  <Link Name="DemoShortcut" default="false">
+    <Label>Demo Shortcut</Label>
+    <Source cp="6">CompleteProcessComponents</Source>
+    <Point x="564.0" y="159.0"/>
+    <Point x="1076.0" y="159.0"/>
+    <Point x="1076.0" y="765.0"/>
+    <Point x="564.0" y="765.0"/>
+    <Target cp="7">CompleteCompleteVehicleBuild</Target>
+    <Condition type="java">UseDemoShortcut<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke1VzZURlbW9TaG9ydGN1dH08L3BhcmFtZXRlcj4KICAgICAg&#13;
+ICAgIDxwYXJhbWV0ZXIgbmFtZT0ib3BlcmF0b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxl&#13;
+PSJmYWxzZSIgZmlsdGVyPSIiPkJvb2xlYW5Jc1RydWU8L3BhcmFtZXRlcj4KICAgICAgICAgIDxw&#13;
+YXJhbWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFs&#13;
+c2UiIGZpbHRlcj0iIj4ke251bGx9PC9wYXJhbWV0ZXI+CiAgICAgICAgPC9wYXJhbWV0ZXJzPgog&#13;
+ICAgICAgIDxwcmVzZW50YXRpb24+CgogICAgICAgIDwvcHJlc2VudGF0aW9uPgogICAgICAgIDxj&#13;
+b2RlPgpVc2VEZW1vU2hvcnRjdXQKICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFO&#13;
+RDwvam9pbk5leHQ+CiAgICAgIDwvZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8&#13;
+L2V4cHJlc3Npb25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
   <Link Name="Connection 42" default="true">
     <Label>Connection 42</Label>
     <Source cp="2">Factory Logout</Source>
@@ -875,9 +900,9 @@ dGlvbj4K</ConditionXMLEncoded>
     <Label>Connection 31</Label>
     <Source cp="2">ProcessBuildError</Source>
     <Point x="846.0" y="480.0"/>
-    <Point x="846.0" y="870.0"/>
-    <Point x="372.0" y="870.0"/>
-    <Target cp="1">Factory Logout</Target>
+    <Point x="846.0" y="855.0"/>
+    <Point x="372.0" y="855.0"/>
+    <Target cp="6">Factory Logout</Target>
   </Link>
   <Link Name="Connection 26" default="true">
     <Label>Connection 26</Label>
@@ -990,6 +1015,26 @@ dGlvbj4K</ConditionXMLEncoded>
     <Point x="264.0" y="54.0"/>
     <Target cp="3">FactoryLogin</Target>
   </Link>
+  <Dataslot Name="UseDemoShortcut" category="AETF" name="UseDemoShortcut" type="BOOLEAN">
+    <Label>UseDemoShortcut:</Label>
+    <DataType>BOOLEAN</DataType>
+    <DataValue>true</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="UseDemoShortcut:" type="boolean">
+      <Label>UseDemoShortcut:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
   <Dataslot Name="error" category="VehicleOrder" name="error" type="STRING">
     <Label>error:</Label>
     <DataType>STRING</DataType>
@@ -1836,8 +1881,10 @@ dGlvbj4K</ConditionXMLEncoded>
 </Note>
   </Notes>
   <History>
+    <Deployed as="BuildVehicle" by="ebms" on="1306342366909" to="http://10.128.48.41:18793/sbm/deployment">Wed May 25 12:52:46 EDT 2011</Deployed>
     <Created as="BuildVehicle" by="pjudge" from="BuildVehicle" on="1300307270394">Wed Mar 16 16:27:50 EDT 2011</Created>
     <Deployed as="BuildVehicle" by="ebms" on="1300388251581" to="http://localhost:18793/sbm/deployment">Thu Mar 17 14:57:31 EDT 2011</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1306519165769" to="http://10.128.48.41:18793/sbm/deployment">Fri May 27 13:59:25 EDT 2011</Deployed>
   </History>
   <Repository/>
 </Process>

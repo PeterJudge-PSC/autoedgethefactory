@@ -10,6 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="sfe" uri="http://jmaki/v1.0/jsp" %>
+<%@ include file="/BizSolo/common/jsp/include_i18n_msgs.jsp" %>
   <jsp:useBean id="bizManage" class="com.savvion.sbm.bizmanage.api.BizManageBean" scope="session"></jsp:useBean>
   <jsp:useBean id="bean" class="com.savvion.BizSolo.beans.Bean" scope="session"></jsp:useBean>
   <jsp:useBean id="factoryBean" class="com.savvion.BizSolo.beans.EPFactoryBean" scope="session"></jsp:useBean>
@@ -35,6 +36,7 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
@@ -67,6 +69,9 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/sbm.utils.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/ux/fileuploadfield/FileUploadField.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/bm/common/bmfield.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/fonts/fonts.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/assets/skins/sam/resize.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/assets/skins/sam/container.css">
@@ -81,6 +86,7 @@
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/ext-all.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/xtheme-default.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-all.css">
+<link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-xml.css">
 <script language="JavaScript">
  Ext.BLANK_IMAGE_URL = '<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/images/default/s.gif';
 	 
@@ -298,12 +304,12 @@ function userValidationJavascipt() {
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
 <!--
-var allWidgets = [{widget:'rsSeatMaterial', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsInteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'cbInteriorAccessories', bound:'true', editable:'true', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'rsExteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsWheels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'rsMoonroof', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
+var allWidgets = [{widget:'rsSeatMaterial', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedInteriorSeatMaterial', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsInteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedInteriorTrimColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'cbInteriorAccessories', bound:'true', editable:'true', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedInteriorAccessories', dataSlotType:'LIST'}, dsType:'STRING', service:'false'},
+{widget:'rsExteriorColour', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExteriorColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsWheels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExteriorWheels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsMoonroof', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExteriorMoonroof', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
 ];
 var businessObjects = [];
 var formWidgetHandler;
@@ -320,13 +326,11 @@ var tabs = new Ext.TabPanel({
     cls:'auto-width-tab-strip',
     frame:true,
     plain:true,
-    defaults:{autoHeight: true},
-    items:[{    contentEl:'tabbedPane1_Seat',title:'Interior Options'
-                     
+    defaults:{autoHeight: true, autoWidth: true},
+    items:[{    contentEl:'tabbedPane1_Seat',title:sbm.i18n.properties['CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit']['SelectVehicleOptions.tabbedPane.tabbedPane1.tabbedPane1_Seat.label']
                      }
                      ,
-{    contentEl:'tabbedPane1_Color',title:'Exterior Options'
-                     
+{    contentEl:'tabbedPane1_Color',title:sbm.i18n.properties['CustomerVehicleOrderSubmit/properties/CustomerVehicleOrderSubmit']['SelectVehicleOptions.tabbedPane.tabbedPane1.tabbedPane1_Color.label']
                      }
                       ]});
 

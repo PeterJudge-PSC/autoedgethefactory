@@ -1,9 +1,9 @@
 <map version="1.3">
-  <param name="IN.pcInteriorAccessories.9_0" type="java.lang.String" value="@InteriorAccessories"/>
+  <param name="IN.pcInteriorAccessories.9_0" type="java.lang.String" value="@SelectedAccessories"/>
   <param name="SESSION_TOKEN_SUPPORT" type="java.lang.String" value="false"/>
-  <param name="IN.pcInteriorTrimColour.8_0" type="java.lang.String" value="@InteriorTrimColour"/>
+  <param name="IN.pcInteriorTrimColour.8_0" type="java.lang.String" value="@SelectedInteriorTrimColour"/>
   <param name="IN.pcModel.6_0" type="java.lang.String" value="@VehicleModel"/>
-  <param name="IN.pcExteriorColour.10_0" type="java.lang.String" value="@ExteriorColour"/>
+  <param name="IN.pcExteriorColour.10_0" type="java.lang.String" value="@SelectedExteriorColour"/>
   <param name="WSCONFIG" type="java.lang.String">
 <java class="java.beans.XMLDecoder" version="1.6.0_20"> 
  <object class="com.savvion.sbm.adapters.webservice.WSConfig"> 
@@ -915,8 +915,8 @@
   <param name="IN.pcBrand.1_0" type="java.lang.String" value="@VehicleBrand"/>
   <param name="IN.pcInstructions.5_0" type="java.lang.String" value="@ExtraInstructions"/>
   <param name="IN.pcDealerId.2_0" type="java.lang.String" value="@DealerCode"/>
-  <param name="IN.pcInteriorTrimMaterial.7_0" type="java.lang.String" value="@InteriorSeatMaterial"/>
-  <param name="IN.pcWheels.12_0" type="java.lang.String" value="@ExteriorWheels"/>
-  <param name="IN.pcMoonroof.11_0" type="java.lang.String" value="@ExteriorMoonroof"/>
+  <param name="IN.pcInteriorTrimMaterial.7_0" type="java.lang.String" value="@SelectedInteriorSeatMaterial"/>
+  <param name="IN.pcWheels.12_0" type="java.lang.String" value="@SelectedExteriorWheels"/>
+  <param name="IN.pcMoonroof.11_0" type="java.lang.String" value="@SelectedExteriorMoonroof"/>
   <param name="TARGET_EPA" type="java.lang.String" value="@AutoEdgeWebServiceEndpoint"/>
 </map>

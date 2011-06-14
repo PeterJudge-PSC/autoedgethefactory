@@ -10,6 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="sfe" uri="http://jmaki/v1.0/jsp" %>
+<%@ include file="/BizSolo/common/jsp/include_i18n_msgs.jsp" %>
   <jsp:useBean id="bizManage" class="com.savvion.sbm.bizmanage.api.BizManageBean" scope="session"></jsp:useBean>
   <jsp:useBean id="bean" class="com.savvion.BizSolo.beans.Bean" scope="session"></jsp:useBean>
   <jsp:useBean id="factoryBean" class="com.savvion.BizSolo.beans.EPFactoryBean" scope="session"></jsp:useBean>
@@ -35,6 +36,7 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
@@ -67,6 +69,9 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/sbm.utils.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/ux/fileuploadfield/FileUploadField.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/bm/common/bmfield.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/fonts/fonts.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/assets/skins/sam/resize.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/assets/skins/sam/container.css">
@@ -81,6 +86,7 @@
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/ext-all.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/xtheme-default.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-all.css">
+<link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-xml.css">
 <script language="JavaScript">
  Ext.BLANK_IMAGE_URL = '<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/images/default/s.gif';
 	 
@@ -183,9 +189,9 @@
                     <font color="#808080" face="Segoe UI" size="3">Brand</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.textfield" id="TextField3" args="{'type':'Label', 'size':32, 'maxlength':50, 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.'}" />
+                  <sfe:widget name="sbm.textfield" id="TextField3" args="{'type':'Label', 'size':32, 'maxlength':50, 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -195,7 +201,7 @@
                     <font color="#808080" face="Segoe UI" size="3">Model</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
                   <sfe:widget name="sbm.textfield" id="TextField1" args="{'type':'Label', 'size':32, 'maxlength':50, 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'0'}" />
 
@@ -207,9 +213,9 @@
                     <font color="#808080" face="Segoe UI" size="3">Exterior Color</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="cbExtColour" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
+                  <sfe:widget name="sbm.radio" id="rsExtColour" args="{'layout':'Horizontal', 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -219,9 +225,9 @@
                     <font color="#808080" face="Segoe UI" size="3">Wheels</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="Checkbox1" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
+                  <sfe:widget name="sbm.radio" id="rsWheels" args="{'layout':'Horizontal', 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -231,9 +237,9 @@
                     <font color="#808080" face="Segoe UI" size="3">Moonroof</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="Checkbox2" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
+                  <sfe:widget name="sbm.radio" id="rsMoonroof" args="{'layout':'Horizontal', 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -243,9 +249,9 @@
                     <font color="#808080" face="Segoe UI" size="3">Seat Material</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="Checkbox3" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
+                  <sfe:widget name="sbm.radio" id="rsSeatMaterial" args="{'layout':'Horizontal', 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -255,9 +261,9 @@
                     <font color="#808080" face="Segoe UI" size="3">Interior Trim Color</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="Checkbox4" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
+                  <sfe:widget name="sbm.radio" id="rsIntColour" args="{'layout':'Horizontal', 'readonly':true, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -267,9 +273,9 @@
                     <font color="#808080" face="Segoe UI" size="3">Accessories</font>
                   </div>
                 </td>
-                <td class="(default)" width="5" rowspan="1" colspan="1" valign="top"></td>
+                <td class="(default)" width="10" rowspan="1" colspan="1" valign="top"></td>
                 <td class="(default)" width="70%" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.checkbox" id="Checkbox5" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.'}" />
+                  <sfe:widget name="sbm.checkbox" id="cbAccessories" args="{'layout':'Horizontal', 'readonly':true, 'disabled':true, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Checkbox widget.', 'tabOrder':'0'}" />
 
                 </td>
               </tr>
@@ -278,13 +284,12 @@
         </div>
         <div align="center" id="">
           <font color="#008000" face="Segoe UI" size="3">
-            <i>Please select a dealer to arrange for the payment and collection of your new car, and confirm your email address in case we need to contact you.</i>
+            <i>Please select a dealer to arrange for the payment and collection of your new car</i>
           </font>
           <br clear="all">
-<sfe:widget name="sbm.combobox" id="cbDealer" args="{'size':150, 'readonly':false, 'disabled':false, 'cascade':false, 'level':0, 'validationType':'none', 'validation':{}, 'toolTip':'', 'tabOrder':'0'}" />
+<sfe:widget name="sbm.radio" id="rsDealer" args="{'layout':'Horizontal', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
 
         </div>
-        <div align="left" id=""></div>
       </fieldset>
       
 
@@ -337,34 +342,23 @@ function userValidationJavascipt() {
 </sbm:dataSources>
 <script language="JavaScript">
 <!--
-    
 function cbDealer_onChange(eventContext) {
-{
-var dlrId = sbm.util.getValue('cbDealer');
-sbm.util.setValue('txtDealerId', dlrId);
-switch (dlrId) {
-   case "dealer01": sbm.util.setValue('txtDealerEmail', 'info@stillerinc.com.aetf'); break;
-   case "dealer02": sbm.util.setValue('txtDealerEmail', 'info@rothcars.com.aetf'); break;
-   case "dealer03": sbm.util.setValue('txtDealerEmail', 'sales@merriweatherfieldsnowe.com.aetf'); break;   
-};
-}
 }
 
-
-  -->
+-->
 </script>
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
 <!--
 var allWidgets = [{widget:'TextField3', bound:'true', editable:'false', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleBrand', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedVehicleBrand', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'TextField1', bound:'true', editable:'false', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleModel', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ModelName', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'cbExtColour', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'Checkbox1', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'Checkbox2', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'Checkbox3', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'Checkbox4', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'Checkbox5', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'', dataSlotType:''}, dsType:'STRING', service:'false'},
-{widget:'cbDealer', bound:'true', editable:'true', type:'sbm.combobox', source: {type:'DATASLOT', dataSlotName:'DealerList', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'DealerCode', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
+{widget:'TextField1', bound:'true', editable:'false', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'ModelName', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'ModelName', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsExtColour', bound:'true', editable:'false', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExteriorColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsWheels', bound:'true', editable:'false', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorWheels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExteriorWheels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsMoonroof', bound:'true', editable:'false', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'ExteriorMoonroof', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedExteriorMoonroof', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsSeatMaterial', bound:'true', editable:'false', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorSeatMaterial', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedInteriorSeatMaterial', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'rsIntColour', bound:'true', editable:'false', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'InteriorTrimColour', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedInteriorTrimColour', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'cbAccessories', bound:'true', editable:'false', type:'sbm.checkbox', source: {type:'DATASLOT', dataSlotName:'InteriorAccessories', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedInteriorAccessories', dataSlotType:'LIST'}, dsType:'STRING', service:'false'},
+{widget:'rsDealer', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'DealerList', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'DealerCode', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
 ];
 var businessObjects = [];
 var formWidgetHandler;

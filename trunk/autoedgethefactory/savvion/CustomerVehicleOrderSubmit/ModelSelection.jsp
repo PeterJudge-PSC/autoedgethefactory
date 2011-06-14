@@ -10,6 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="sfe" uri="http://jmaki/v1.0/jsp" %>
+<%@ include file="/BizSolo/common/jsp/include_i18n_msgs.jsp" %>
   <jsp:useBean id="bizManage" class="com.savvion.sbm.bizmanage.api.BizManageBean" scope="session"></jsp:useBean>
   <jsp:useBean id="bean" class="com.savvion.BizSolo.beans.Bean" scope="session"></jsp:useBean>
   <jsp:useBean id="factoryBean" class="com.savvion.BizSolo.beans.EPFactoryBean" scope="session"></jsp:useBean>
@@ -35,6 +36,7 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
@@ -67,6 +69,9 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/sbm.utils.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/ux/fileuploadfield/FileUploadField.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/bm/common/bmfield.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/fonts/fonts.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/assets/skins/sam/resize.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/assets/skins/sam/container.css">
@@ -81,6 +86,7 @@
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/ext-all.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/xtheme-default.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-all.css">
+<link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-xml.css">
 <script language="JavaScript">
  Ext.BLANK_IMAGE_URL = '<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/images/default/s.gif';
 	 
@@ -210,22 +216,18 @@
                         <i>Compact Cars</i>
                       </b>
                     </font>
-                    <br clear="all">
-<font color="#808080" face="Segoe UI" size="2">
-                      <b>
-                        <i>Our compact cars turn on a dime, fit in any parking space and are cheap to run.</i>
-                      </b>
-                    </font>
                   </div>
                 </th>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
-                  <sfe:widget name="sbm.radio" id="uxCompactModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-<script language="javascript">
-<!--
-jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxCompactModels'){uxCompactModels_onChange(args);}});
-
--->
-</script>
+                  <div align="center" id="">
+                    <img border="0" id="imgSedan" width="82" height="32" src="images/blue_sedan.gif">
+                    <br clear="all">
+<font color="#0000ff" face="Segoe UI" size="3">
+                      <b>
+                        <i>Sedans</i>
+                      </b>
+                    </font>
+                  </div>
                 </th>
                 <th class="(default)" rowspan="1" colspan="1">
                   <div align="center" id="">
@@ -236,99 +238,20 @@ jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxCompa
                         <i>Premium &amp; Performance Vehicles</i>
                       </b>
                     </font>
-                    <br clear="all">
-<font color="#808080" face="Segoe UI" size="2">
-                      <b>
-                        <i>Top speed, total comfort.</i>
-                      </b>
-                    </font>
                   </div>
                 </th>
                 <th class="(default)" width="137" rowspan="1" colspan="1">
-                  <sfe:widget name="sbm.radio" id="uxPremiumModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-<script language="javascript">
-<!--
-jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxPremiumModels'){uxPremiumModels_onChange(args);}});
-
--->
-</script>
-                </th>
-              </tr>
-              <tr>
-                <th class="(default)" width="137" rowspan="1" colspan="1"></th>
-                <th class="(default)" width="137" rowspan="1" colspan="1"></th>
-                <th class="(default)" rowspan="1" colspan="1"></th>
-                <th class="(default)" width="137" rowspan="1" colspan="1"></th>
-              </tr>
-              <tr>
-                <th class="(default)" width="137" rowspan="1" colspan="1">
                   <div align="center" id="">
-                    <br clear="all">
-<img border="0" id="imgSedan" width="82" height="32" src="images/blue_sedan.gif">
-                    <br clear="all">
-<font color="#0000ff" face="Segoe UI" size="3">
-                      <b>
-                        <i>Sedans</i>
-                      </b>
-                    </font>
-                    <br clear="all">
-<font color="#808080" face="Segoe UI" size="2">
-                      <b>
-                        <i>Safety and comfort: our sedans give you the best value for money.</i>
-                      </b>
-                    </font>
-                  </div>
-                </th>
-                <th class="(default)" width="137" rowspan="1" colspan="1">
-                  <sfe:widget name="sbm.radio" id="uxSedanModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-<script language="javascript">
-<!--
-jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxSedanModels'){uxSedanModels_onChange(args);}});
-
--->
-</script>
-                </th>
-                <th class="(default)" rowspan="1" colspan="1">
-                  <div align="center" id="">
-                    <br clear="all">
-<img border="0" id="imgSUV" width="82" height="32" src="images/blue_suv.gif">
+                    <img border="0" id="imgSUV" width="82" height="32" src="images/blue_suv.gif">
                     <br clear="all">
 <font color="#0000ff" face="Segoe UI" size="3">
                       <b>
                         <i>Crossovers</i>
                       </b>
                     </font>
-                    <br clear="all">
-<font color="#808080" face="Segoe UI" size="2">
-                      <b>
-                        <i>Comfort, visibility, rugged good looks: the best of all worlds</i>
-                      </b>
-                    </font>
                   </div>
                 </th>
-                <th class="(default)" width="137" rowspan="1" colspan="1">
-                  <sfe:widget name="sbm.radio" id="uxSUVModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
-<script language="javascript">
-<!--
-jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxSUVModels'){uxSUVModels_onChange(args);}});
-
--->
-</script>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
-                <td class="(default)" rowspan="1" colspan="1" valign="top"></td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
-              </tr>
-              <tr>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top">
-                  <div align="center" id=""></div>
-                </td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top">
+                <th class="(default)" width="55" rowspan="1" colspan="1">
                   <div align="center" id="">
                     <img border="0" id="imgTruck" width="82" height="32" src="images/blue_truck.gif">
                     <br clear="all">
@@ -337,26 +260,114 @@ jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxSUVMo
                         <i>Trucks &amp; Vans</i>
                       </b>
                     </font>
-                    <br clear="all">
-<font color="#808080" face="Segoe UI" size="2">
+                  </div>
+                </th>
+              </tr>
+              <tr>
+                <th class="(default)" width="137" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <font color="#808080" face="Segoe UI" size="2">
+                      <b>
+                        <i>Our compact cars turn on a dime, fit in any parking space and are cheap to run.</i>
+                      </b>
+                    </font>
+                  </div>
+                </th>
+                <th class="(default)" width="137" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <font color="#808080" face="Segoe UI" size="2">
+                      <b>
+                        <i>Safety and comfort: our sedans give you the best value for money.</i>
+                      </b>
+                    </font>
+                  </div>
+                </th>
+                <th class="(default)" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <font color="#808080" face="Segoe UI" size="2">
+                      <b>
+                        <i>Top speed, total comfort.</i>
+                      </b>
+                    </font>
+                  </div>
+                </th>
+                <th class="(default)" width="137" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <font color="#808080" face="Segoe UI" size="2">
+                      <b>
+                        <i>Comfort, visibility, rugged good looks: the best of all worlds</i>
+                      </b>
+                    </font>
+                  </div>
+                </th>
+                <th class="(default)" width="55" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <font color="#808080" face="Segoe UI" size="2">
                       <b>
                         <i>Built to last, our trucks and vans won't be beat down.</i>
                       </b>
                     </font>
                   </div>
-                </td>
-                <td class="(default)" rowspan="1" colspan="1" valign="top">
-                  <sfe:widget name="sbm.radio" id="uxTruckModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+                </th>
+              </tr>
+              <tr>
+                <th class="ApInptRadio" width="137" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="uxCompactModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxCompactModels'){uxCompactModels_onChange(args);}});
+
+-->
+</script>
+                  </div>
+                </th>
+                <th class="ApInptRadio" width="137" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="uxSedanModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxSedanModels'){uxSedanModels_onChange(args);}});
+
+-->
+</script>
+                  </div>
+                </th>
+                <th class="ApInptRadio" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="uxPremiumModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxPremiumModels'){uxPremiumModels_onChange(args);}});
+
+-->
+</script>
+                  </div>
+                </th>
+                <th class="ApInptRadio" width="137" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="uxSUVModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
+<script language="javascript">
+<!--
+jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxSUVModels'){uxSUVModels_onChange(args);}});
+
+-->
+</script>
+                  </div>
+                </th>
+                <th class="ApInptRadio" width="55" rowspan="1" colspan="1">
+                  <div align="center" id="">
+                    <sfe:widget name="sbm.radio" id="uxTruckModels" args="{'layout':'Vertical', 'readonly':false, 'disabled':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion Radio widget.', 'tabOrder':'0'}" />
 <script language="javascript">
 <!--
 jmaki.subscribe("/sbm/radio/onChange", function(args){if(args.widgetId=='uxTruckModels'){uxTruckModels_onChange(args);}});
 
 -->
 </script>
-                </td>
-                <td class="(default)" width="137" rowspan="1" colspan="1" valign="top"></td>
+                  </div>
+                </th>
               </tr>
-            </tbody>
+            </thead>
           </table>
           <br clear="all">
 <br clear="all">
@@ -466,20 +477,20 @@ sbm.widgets.hide("txtModelName");
 }
 
 
-function uxCompactModels_onChange(eventContext) {
-sbm.widgets.setValue('txtModel',sbm.widgets.getValue('uxCompactModels'));
-{
-clearOtherSelections('uxCompactModels');
-assignModelName('uxCompactModels');;
-}
-}
-
-
 function uxSedanModels_onChange(eventContext) {
 sbm.widgets.setValue('txtModel',sbm.widgets.getValue('uxSedanModels'));
 {
 clearOtherSelections('uxSedanModels');
 assignModelName('uxSedanModels');;
+}
+}
+
+
+function uxCompactModels_onChange(eventContext) {
+sbm.widgets.setValue('txtModel',sbm.widgets.getValue('uxCompactModels'));
+{
+clearOtherSelections('uxCompactModels');
+assignModelName('uxCompactModels');;
 }
 }
 
@@ -498,8 +509,8 @@ assignModelName('uxPremiumModels');;
 <script language="JavaScript">
 <!--
 var allWidgets = [{widget:'uxCompactModels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'CompactModels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'CompactModels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
-{widget:'uxPremiumModels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'PremiumModels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'PremiumModels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
 {widget:'uxSedanModels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'SedanModels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SedanModels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'uxPremiumModels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'PremiumModels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'PremiumModels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
 {widget:'uxSUVModels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'SUVModels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SUVModels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
 {widget:'uxTruckModels', bound:'true', editable:'true', type:'sbm.radio', source: {type:'DATASLOT', dataSlotName:'TruckModels', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'TruckModels', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
 {widget:'txtModel', bound:'true', editable:'true', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'SelectedVehicleModel', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'SelectedVehicleModel', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},

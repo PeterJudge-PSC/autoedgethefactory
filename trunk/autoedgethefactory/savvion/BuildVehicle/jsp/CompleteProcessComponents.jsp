@@ -17,17 +17,17 @@
 <%! String __webAppName = "BuildVehicle"; %>
 <% pageContext.setAttribute( "contextPath", request.getContextPath()+"/"); %>
 <bizsolo:if test='<%=_PageName.equals(request.getParameter("_PageName")) %>'>
-    <bizsolo:setDS name="BuildStatus,OrderId,OrderNum,ContextId"></bizsolo:setDS>
+    <bizsolo:setDS name="BuildStatus,OrderId,OrderNum,ContextId,UseDemoShortcut"></bizsolo:setDS>
     <bizsolo:choose>
 <bizsolo:when test='<%=request.getParameter("bizsite_reassignTask") !=null %>'>
       <bizsolo:initDS name="performer" param="bizsite_assigneeName" hexval="FALSE"></bizsolo:initDS>
-      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKReassignWI" perfMethod="commit" mode="BizSite" dsi="" dso="BuildStatus,OrderId,OrderNum,ContextId"></bizsolo:executeAction>
+      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKReassignWI" perfMethod="commit" mode="BizSite" dsi="" dso="BuildStatus,OrderId,OrderNum,ContextId,UseDemoShortcut"></bizsolo:executeAction>
 </bizsolo:when>
 <bizsolo:when test='<%=request.getParameter("bizsite_saveTask") !=null %>'>
-      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKUpdateDS" perfMethod="commit" mode="BizSite" dsi="BuildStatus,OrderId,OrderNum,ContextId"></bizsolo:executeAction>
+      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKUpdateDS" perfMethod="commit" mode="BizSite" dsi="BuildStatus,OrderId,OrderNum,ContextId,UseDemoShortcut"></bizsolo:executeAction>
 </bizsolo:when>
     <bizsolo:otherwise>
-      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKSetDS" perfMethod="commit" mode="BizSite" dsi="BuildStatus,OrderId,OrderNum,ContextId" res=""></bizsolo:executeAction>
+      <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKSetDS" perfMethod="commit" mode="BizSite" dsi="BuildStatus,OrderId,OrderNum,ContextId,UseDemoShortcut" res=""></bizsolo:executeAction>
       </bizsolo:otherwise>
     </bizsolo:choose>
 <% /* Workaround, retAddr will disappear in the future */ %>
@@ -42,7 +42,8 @@
     <bizsolo:initDS name="OrderId" type="STRING"></bizsolo:initDS>
     <bizsolo:initDS name="OrderNum" type="LONG"></bizsolo:initDS>
     <bizsolo:initDS name="ContextId" type="STRING"></bizsolo:initDS>
-    <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKGetDS" perfMethod="commit" mode="BizSite" dso="BuildStatus,OrderId,OrderNum,ContextId"></bizsolo:executeAction>
+    <bizsolo:initDS name="UseDemoShortcut" type="BOOLEAN"></bizsolo:initDS>
+    <bizsolo:executeAction epClassName="com.savvion.BizSolo.beans.PAKGetDS" perfMethod="commit" mode="BizSite" dso="BuildStatus,OrderId,OrderNum,ContextId,UseDemoShortcut"></bizsolo:executeAction>
 </bizsolo:if>
 
 <title>CompleteProcessComponents</title>
@@ -62,6 +63,7 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.core.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.lang-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/fValidate.validators-<%=myLocale.getLanguage()%><%=myLocale.getCountry()%>.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fvalidate/pValidate.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/document.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/jscalendar/calendar.js"></script>
@@ -94,6 +96,9 @@
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/TransactionAjaxObject.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/BusinessObjectHandler.js"></script>
 <script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/sbm/sbm.utils.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/ux/fileuploadfield/FileUploadField.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/bm/common/bmfield.js"></script>
+<script language="JavaScript" src="<c:out value='${contextPath}'/>bpmportal/javascript/fileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/fonts/fonts.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/resize/assets/skins/sam/resize.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/yahoo/container/assets/skins/sam/container.css">
@@ -108,6 +113,7 @@
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/ext-all.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/css/xtheme-default.css">
 <link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-all.css">
+<link rel="stylesheet" type="text/css" href="<c:out value='${contextPath}'/>bpmportal/css/theme01/bm-xml.css">
 <script language="JavaScript">
  Ext.BLANK_IMAGE_URL = '<c:out value='${contextPath}'/>bpmportal/javascript/ext/resources/images/default/s.gif';
 	 
@@ -196,16 +202,16 @@
 <!-- Header -->
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr>
-<bizsolo:if test='<%=bean.getPropString(\"workitemName\") != null %>'>
 <td class="ApSegTblInBg">
 <table width="100%" cellpadding="4" align="center" cellspacing="0" border="0">
 <tr>
+
 <td class="ApSegTitle" align="center"><bizsolo:getDS name="workitemName"></bizsolo:getDS></td>
 </tr>
 </table>
 <table class="ApSegDataTbl" width="100%" cellspacing="1" cellpadding="4" border="0">
 <tr>
-<td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_INSTRUCTION_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData" colspan="5"><sbm:message key="workstep.CompleteProcessComponents.instruction" escapeLine="true"></sbm:message></td>
+<td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_INSTRUCTION_LABEL"></bizsolo:getLabel></td><td width="85%" class="ApSegGenData" colspan="5"><sbm:message key="workstep.CompleteProcessComponents.instruction" escapeLine="true"></sbm:message></td>
 </tr>
 <tr>
 <td width="15%" class="ApSegGenLabel"><bizsolo:getLabel type="RESOURCE" name="BIZSITE_PRIORITY_LABEL"></bizsolo:getLabel></td><td width="15%" class="ApSegGenData"><bizsolo:getDS name="bizsite_priority"></bizsolo:getDS></td>
@@ -214,7 +220,6 @@
 </tr>
 </table>
 </td>
-</bizsolo:if>
 </tr>
 </table>
 
@@ -222,7 +227,7 @@
       <tbody>
         <tr>
           <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
-            <Label class="ApSegDataslotLabel" for="textField1"><sbm:message key="dataslot.CompleteProcessComponents.BuildStatus.label"></sbm:message></Label>
+            <Label class="ApSegDataslotLabel" for="textField1"><sbm:message key="dataslot.BuildStatus.label"></sbm:message></Label>
           </td>
           <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
             <input class="ApInptTxt" type="text" id="textField1" name="BuildStatus" size="20" maxlength="256" value="<bizsolo:value name='BuildStatus'/>">
@@ -240,7 +245,7 @@
         </tr>
         <tr>
           <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
-            <Label class="ApSegDataslotLabel" for="textField3"><sbm:message key="dataslot.CompleteProcessComponents.OrderNum.label"></sbm:message></Label>
+            <Label class="ApSegDataslotLabel" for="textField3"><sbm:message key="dataslot.OrderNum.label"></sbm:message></Label>
           </td>
           <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
             <input class="ApInptTxt" type="text" id="textField3" name="OrderNum" size="30" maxlength="256" value="<bizsolo:value name='OrderNum'/>" alt="number|0|bok">
@@ -249,11 +254,22 @@
         </tr>
         <tr>
           <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
-            <Label class="ApSegDataslotLabel" for="textField4"><sbm:message key="dataslot.CompleteProcessComponents.ContextId.label"></sbm:message></Label>
+            <Label class="ApSegDataslotLabel" for="textField4"><sbm:message key="dataslot.ContextId.label"></sbm:message></Label>
           </td>
           <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
             <input class="ApInptTxt" type="text" id="textField4" name="ContextId" size="20" maxlength="256" value="<bizsolo:value name='ContextId'/>">
     <div style="display:none" id="textField4Error"><div><font color="red"><span class="error" id="textField4ErrorMsg"></span><a href="#" onclick="textField4ErrorMsgClose();return false;"><img border="0" src="<c:out value='${contextPath}'/>bpmportal/css/apptheme01/images/close.gif"></a></font></div></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="ApSegGenLabel" width="100" rowspan="1" colspan="1" valign="top">
+            <Label class="ApSegDataslotLabel" for="checkBox1"><sbm:message key="dataslot.CompleteProcessComponents.UseDemoShortcut.label"></sbm:message></Label>
+          </td>
+          <td class="ApSegDataVal" width="100%" rowspan="1" colspan="1" valign="top">
+            <input type="checkbox" value="true" class="ApInptChkBox" name="UseDemoShortcut" id="checkBox1">
+<script>addValue("UseDemoShortcut", '<bizsolo:value name="UseDemoShortcut"></bizsolo:value>');</script>
+      
+
           </td>
         </tr>
       </tbody>
