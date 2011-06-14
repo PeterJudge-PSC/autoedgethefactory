@@ -73,7 +73,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
             if not valid-object(SecurityManager) then
                 SecurityManager = cast(cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType)
                                         , IServiceManager)
-                                        :StartService(OpenEdge.CommonInfrastructure.Common.SecurityManager:ISecurityManagerType)
+                                        :GetService(OpenEdge.CommonInfrastructure.Common.SecurityManager:ISecurityManagerType)
                                     , ISecurityManager).
             return SecurityManager.
         end get.
@@ -216,32 +216,38 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         
-        assign oDSQuery = cast(ABLDataSources:Get(CurrentActionType), IQuery)
-               hABLDataSource = cast(oDSQuery, DataSourceQuery):ABLDataSource
-               iMax = hABLDataSource:num-source-buffers.
-        
-        oDSQuery:Open().
-        
-        lAvailable = oDSQuery:GetFirst().
-        if lAvailable then
-            OnBeforeFill().
-        
-        do while lAvailable:
-            cRowKey = oDSQuery:GetCurrentRowKey().
-            TargetBuffer:buffer-create().
+        /* If the target buffer is part of a ProDataSet, we can use FILL() on the 
+           buffer and get the use any callbacks that are in place. */
+        if valid-handle(TargetBuffer:dataset) then
+            TargetBuffer:fill().
+        else
+        do:
+            assign oDSQuery = cast(ABLDataSources:Get(CurrentActionType), IQuery)
+                   hABLDataSource = cast(oDSQuery, DataSourceQuery):ABLDataSource
+                   iMax = hABLDataSource:num-source-buffers.
             
-            /* Get values and populate this-object:HandleDataTarget */
-            OnBeforeRowFill(cRowKey).
-            do iLoop = 1 to iMax:
-                TargetBuffer:buffer-copy(hABLDataSource:get-source-buffer(iLoop)).
+            oDSQuery:Open().
+            
+            lAvailable = oDSQuery:GetFirst().
+            if lAvailable then
+                OnBeforeFill().
+            
+            do while lAvailable:
+                cRowKey = oDSQuery:GetCurrentRowKey().
+                TargetBuffer:buffer-create().
+                
+                /* Get values and populate this-object:HandleDataTarget */
+                OnBeforeRowFill(cRowKey).
+                do iLoop = 1 to iMax:
+                    TargetBuffer:buffer-copy(hABLDataSource:get-source-buffer(iLoop)).
+                end.
+                OnAfterRowFill(cRowKey).
+                
+                TargetBuffer:buffer-release().
+                lAvailable = oDSQuery:GetNext().
             end.
-            OnAfterRowFill(cRowKey).
-            
-            TargetBuffer:buffer-release().
-            lAvailable = oDSQuery:GetNext().
+            OnAfterFill().
         end.
-        OnAfterFill().
-        
     end method.
     
     /** Called on completion of a data fetch request, typically by the data access object.
@@ -260,6 +266,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         oDSQuery = cast(ABLDataSources:Get(CurrentActionType), IQuery).
         
         oTC:PageSize = oDSQuery:NumRows.
+        oTC:FuzzyPageSize = not oDSQuery:Definition:QueryBlockType:Equals(QueryBlockTypeEnum:Preselect).
         
         return CurrentTableResponse.
         finally:
