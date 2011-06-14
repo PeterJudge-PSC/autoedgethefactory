@@ -10,7 +10,7 @@
     Created     : Thu Jan 13 12:59:34 EST 2011
     Notes       :
   ----------------------------------------------------------------------*/
-{routinelevel.i}
+routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.IConnectionParameters.
 using OpenEdge.CommonInfrastructure.AppServerConnectionParameters.
@@ -26,7 +26,7 @@ def var oConMgr as IConnectionManager.
 def var hAS as handle.
 
 /** -------------- **/
-run OpenEdge/CommonInfrastructure/Common/start_session.p ('').
+run OpenEdge/CommonInfrastructure/Common/start_session.p ().
 
 oParams = new AppServerConnectionParameters().
 oParams:Options = '-AppService AutoEdgeTheFactory -sessionModel session-free '.
@@ -34,7 +34,7 @@ oParams:Options = '-AppService AutoEdgeTheFactory -sessionModel session-free '.
 oSvcMgr = cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType), IServiceManager).
 oConMgr = cast(oSvcMgr:StartService(OpenEdge.CommonInfrastructure.Common.ConnectionManager:IConnectionManagerType), IConnectionManager).  
 hAS = oConMgr:Connect(
-    OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum:AppServer,
+    OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum:AppServer,
     'AutoEdgeTheFactory',
     oParams).
 

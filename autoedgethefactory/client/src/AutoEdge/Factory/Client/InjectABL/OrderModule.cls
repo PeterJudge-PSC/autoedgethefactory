@@ -35,6 +35,7 @@ class AutoEdge.Factory.Client.InjectABL.OrderModule inherits InjectionModule:
         oBindingSyntax
             :Named('Order')
             :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
+            :WithPropertyValue('AppServerName', 'asAutoEdgeTheFactory')
             :OnThinClientSession().
 
         /* Bind as a service adapter. the server-side bindings will translate this into a IServiceProvider
@@ -43,6 +44,7 @@ class AutoEdge.Factory.Client.InjectABL.OrderModule inherits InjectionModule:
         oBindingSyntax
             :Named('OrderCapture')
             :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
+            :WithPropertyValue('AppServerName', 'asAutoEdgeTheFactory')
             :OnThinClientSession().
 
         /* Bind as a service adapter. the server-side bindings will translate this into a IServiceProvider
@@ -51,15 +53,14 @@ class AutoEdge.Factory.Client.InjectABL.OrderModule inherits InjectionModule:
         oBindingSyntax
             :Named('VehicleOptions')
             :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
+            :WithPropertyValue('AppServerName', 'asAutoEdgeTheFactory')
             :OnThinClientSession().
-
     end method.
     
     method protected void LoadUI():
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
-        
-        oBindingSyntax = Bind(Class:GetClass('AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager')).
+        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IApplicationStart').
         oBindingSyntax
             :To('AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview')
             :OnThinClientSession().

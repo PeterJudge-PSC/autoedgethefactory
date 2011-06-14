@@ -9,17 +9,16 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw. 
 
+using Progress.Windows.Form.
+using Progress.Windows.UserControl.
 
-using AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager.
-
-using OpenEdge.EnterpriseServices.BizLogic.BizLogicServerParameters.
 using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.Core.System.UnhandledError.
+using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Lang.ABLSession.
-
-using Progress.Windows.Form.
-using Progress.Windows.UserControl.
+using Progress.Lang.Error.
 
 class AutoEdge.Factory.Client.Common.PresentationLayer.DealerLoginPanel inherits UserControl: 
     
@@ -51,6 +50,11 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.DealerLoginPanel inherits
         
         InitializeComponent().
         
+        /* Sales */
+        uxDepartment:SelectedIndex = 5.
+        uxPassword:Text = 'letmein'.
+        
+        /* throws to wait-for */
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
@@ -416,30 +420,46 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.DealerLoginPanel inherits
     method override protected void OnLoad(input e as System.EventArgs ):
         super:OnLoad(input e).
         
-        this-object:ActiveControl  = uxBrand.
+        this-object:ActiveControl = uxBrand.
     end method.
 
     method private void uxCancel_Click( input sender as System.Object, input e as System.EventArgs ):
         cast(this-object:Parent, Form):Close().
+        
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
     end method.
     
     method private void uxLogin_Click( input sender as System.Object, input e as System.EventArgs ):
         define variable oSecMgr as ISecurityManager no-undo.
         define variable cDomain as character no-undo.
         
-        oSecMgr = cast(ServiceManager:StartService(SecurityManager:ISecurityManagerType), ISecurityManager).
+        oSecMgr = cast(ServiceManager:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
         
         cDomain = substitute('&1.employee.&2',
                               uxDepartment:Value:ToString(),
                               uxBrand:Value:ToString()).
         session:set-wait-state('general').
-                                      
-        oSecMgr:UserLogin(uxUser:Text,
-                          cDomain,
-                          encode(uxPassword:Text)).
+        
+        oSecMgr:UserLogin(uxUser:Text, cDomain, uxPassword:Text).
         
         /* do this here in case of error */
         cast(this-object:Parent, Form):Close().
+        
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
         finally:
             session:set-wait-state('').
         end finally.

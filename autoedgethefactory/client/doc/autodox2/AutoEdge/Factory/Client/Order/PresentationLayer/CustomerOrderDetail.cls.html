@@ -45,6 +45,29 @@
       </dd>
     </dl>
     <hr />
+				<A NAME="field_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Field Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#1194.TaskCompleted'>TaskCompleted</a>
+          </b>PUBLIC 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
 				<A NAME="property_summary"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -52,6 +75,20 @@
 				<B>Property Summary</B></FONT></TH>
 				</TR>
 				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.BpmServer'>BpmServer</a>
+          </b> PROTECTED GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
@@ -83,7 +120,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a></code>
+          <code><a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a></code>
         </font>
       </td>
       <td>
@@ -91,6 +128,20 @@
           <b>
             <a href='#property.CurrentTask'>CurrentTask</a>
           </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.ISecurityManager" target="classFrame">ISecurityManager</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.SecMgr'>SecMgr</a>
+          </b> PROTECTED GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -120,34 +171,6 @@
             <a href='#property.ServiceMessageManager'>ServiceMessageManager</a>
           </b> PROTECTED GET PRIVATE SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ServicemessageManager is used plentifully; we keep it as a property so that
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code>CHARACTER</code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.SessionId'>SessionId</a>
-          </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.TaskListManager'>TaskListManager</a>
-          </b> PUBLIC GET PRIVATE SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -182,8 +205,8 @@
       <td>
         <code>
           <b>
-            <a href='#(autoedge.factory.client.common.presentationlayer.itasklistmanager,autoedge.factory.client.common.enterpriseservices.currenttask)'>CONSTRUCTOR </a>
-          </b>(<a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a> poTaskListManager, <a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poCurrentTask)
+            <a href='#(openedge.lang.bpm.ibizlogicapi,openedge.lang.bpm.task)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> poBpmServer, <a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poCurrentTask)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -198,6 +221,20 @@
           <b>
             <a href='#approveorder()'> ApproveOrder</a>
           </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#completetask(openedge.lang.bpm.task)'> CompleteTask</a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -257,8 +294,52 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#oncurrenttaskcompleted(openedge.lang.bpm.task)'> OnCurrentTaskCompleted</a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#reassigntask(openedge.lang.bpm.task,character)'> ReassignTask</a>
+          </b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask, CHARACTER pcPerformer)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
+				<A NAME="field_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Field Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='1194.TaskCompleted'><!-- --></a>
+    <h3>TaskCompleted</h3>
+    <code> PUBLIC </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
 				<A NAME="property_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -266,6 +347,15 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='property.BpmServer'><!-- --></a>
+    <h3>BpmServer</h3>
+    <code><a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> PROTECTED GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='property.ConnectionManager'><!-- --></a>
     <h3>ConnectionManager</h3>
     <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/IConnectionManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IConnectionManager" target="classFrame">IConnectionManager</a> PROTECTED GET PRIVATE SET </code>
@@ -288,7 +378,16 @@
     <hr />
     <a name='property.CurrentTask'><!-- --></a>
     <h3>CurrentTask</h3>
-    <code><a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> PUBLIC GET PRIVATE SET </code>
+    <code><a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.SecMgr'><!-- --></a>
+    <h3>SecMgr</h3>
+    <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/ISecurityManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.ISecurityManager" target="classFrame">ISecurityManager</a> PROTECTED GET PRIVATE SET </code>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -317,24 +416,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='property.SessionId'><!-- --></a>
-    <h3>SessionId</h3>
-    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.TaskListManager'><!-- --></a>
-    <h3>TaskListManager</h3>
-    <code><a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a> PUBLIC GET PRIVATE SET </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
 				<A NAME="method_detail"><!-- --></A>
 				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -353,10 +434,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='(autoedge.factory.client.common.presentationlayer.itasklistmanager,autoedge.factory.client.common.enterpriseservices.currenttask)'><!-- --></a>
+    <a name='(openedge.lang.bpm.ibizlogicapi,openedge.lang.bpm.task)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PUBLIC  
-      <b>CONSTRUCTOR</b>(<a href="../../../../../AutoEdge/Factory/Client/Common/PresentationLayer/ITaskListManager.cls.html" title="AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager" target="classFrame">ITaskListManager</a> poTaskListManager, <a href="../../../../../AutoEdge/Factory/Client/Common/EnterpriseServices/CurrentTask.cls.html" title="AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask" target="classFrame">CurrentTask</a> poCurrentTask)
+      <b>CONSTRUCTOR</b>(<a href="../../../../../OpenEdge/Lang/BPM/IBizLogicAPI.cls.html" title="OpenEdge.Lang.BPM.IBizLogicAPI" target="classFrame">IBizLogicAPI</a> poBpmServer, <a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poCurrentTask)
     </code>
     <dl>
       <dd>
@@ -368,6 +449,17 @@
     <h3>ApproveOrder</h3>
     <code>PROTECTED  VOID
       <b>ApproveOrder</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='completetask(openedge.lang.bpm.task)'><!-- --></a>
+    <h3>CompleteTask</h3>
+    <code>PUBLIC  VOID
+      <b>CompleteTask</b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
     </code>
     <dl>
       <dd>
@@ -412,6 +504,28 @@
     <h3>InitUI</h3>
     <code>PROTECTED  VOID
       <b>InitUI</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='oncurrenttaskcompleted(openedge.lang.bpm.task)'><!-- --></a>
+    <h3>OnCurrentTaskCompleted</h3>
+    <code>PROTECTED  VOID
+      <b>OnCurrentTaskCompleted</b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='reassigntask(openedge.lang.bpm.task,character)'><!-- --></a>
+    <h3>ReassignTask</h3>
+    <code>PUBLIC  VOID
+      <b>ReassignTask</b>(<a href="../../../../../OpenEdge/Lang/BPM/Task.cls.html" title="OpenEdge.Lang.BPM.Task" target="classFrame">Task</a> poTask, CHARACTER pcPerformer)
     </code>
     <dl>
       <dd>

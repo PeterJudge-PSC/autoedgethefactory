@@ -10,6 +10,7 @@
 routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum.
 
 using OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule.
@@ -31,9 +32,9 @@ class AutoEdge.Factory.Client.InjectABL.CommonModule inherits InjectionModule:
         define variable oBindingSyntax as IBindingSyntax no-undo.
         
         /* scopes the security manager's lifecycle to the service manager's */
-        oBindingSyntax = Bind(ConnectionManager:IConnectionManagerType).
+        oBindingSyntax = Bind(SecurityManager:ISecurityManagerType).
         oBindingSyntax
-            :To('AutoEdge.Factory.Client.Common.CommonInfrastructure.ConnectionManager')
+            :To('AutoEdge.Factory.Client.Common.CommonInfrastructure.SecurityManager')
             :Using(InjectABLServiceProviderType)
             :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),
                      ManagerScopeEnum:ServiceManager)
@@ -46,27 +47,6 @@ class AutoEdge.Factory.Client.InjectABL.CommonModule inherits InjectionModule:
         /* Use local variables oBS as bug workaround */
         define variable oBindingSyntax as IBindingSyntax no-undo.
         
-        /* Bind as a service adapter. the server-side bindings will translate this into a IServiceProvider
-           object capable of doing something useful. */
-        oBindingSyntax = Bind(IServiceProviderType).
-        oBindingSyntax
-            :Named('UserLogin')
-            :To('OpenEdge.CommonInfrastructure.Client.AppServerServiceAdapter')
-            :OnThinClientSession().
-    end method.
-    
-    method protected void LoadConnections():
-        /* Use local variables oBS as bug workaround */
-        define variable oBindingSyntax as IBindingSyntax no-undo.
-        
-        oBindingSyntax = Bind('OpenEdge.CommonInfrastructure.Common.IAppServerConnectionParameters').
-        oBindingSyntax
-            :To('AutoEdge.Factory.Common.AppServerConnectionParameters')
-            :Named('AutoEdgeTheFactory')
-            :Using(InjectABLServiceProviderType)
-            :InScope(Class:GetClass('OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScope'),
-                     ManagerScopeEnum:ConnectionManager)
-            :OnThinClientSession().
     end method.
     
 end class.

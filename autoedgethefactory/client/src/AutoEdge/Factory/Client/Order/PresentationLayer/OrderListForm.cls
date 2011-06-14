@@ -11,18 +11,21 @@ routine-level on error undo, throw.
 
 using Progress.Windows.Form.
 
+using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
-using OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum.
 
+using OpenEdge.Lang.WidgetHandle.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.ABLSession.
-
+using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Core.System.UnhandledError.
+using Progress.Lang.Error.
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits Form: 
     
@@ -59,8 +62,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         
         InitData().
         
-        catch e as Progress.Lang.Error:
-            undo, throw e.
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
         end catch.
     end constructor.
 
@@ -574,15 +582,17 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         define variable oUC as IUserContext no-undo.
         define variable cDealerCode as character no-undo.
         define variable oPropertyValue as String no-undo.
+        define variable hServer as handle no-undo.
         
-        oUC = cast(SvcMgr:StartService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext.
+        oUC = cast(SvcMgr:GetService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext.
         
         oPropertyValue = cast(oUC:UserProperties:Get(new String('Dealer.Code')), String).
         if valid-object(oPropertyValue) then
            cDealerCode = oPropertyValue:Value.
-           
+
+        hServer = cast(ConnMgr:GetServerConnection(ConnectionTypeEnum:AppServer, 'asAutoEdgeTheFactory'):Server, WidgetHandle):Value.
         run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p
-               on ConnMgr:GetConnectionHandle(ConnectionTypeEnum:AppServer, 'AutoEdgeTheFactory') 
+               on hServer  
                     (input cDealerCode,
                      input oUC:ContextId,
                      output dataset-handle mhOrders).

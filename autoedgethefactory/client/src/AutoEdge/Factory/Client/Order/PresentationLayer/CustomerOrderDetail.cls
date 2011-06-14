@@ -12,37 +12,47 @@ routine-level on error undo, throw.
 using System.Drawing.Color.
 using System.Drawing.Point.
 using AutoEdge.Factory.Client.Order.PresentationLayer.DisapprovalReasonPanel.
-using AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask.
 using AutoEdge.Factory.Client.Common.PresentationLayer.LightboxForm.
-using AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager.
-
-using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
-using OpenEdge.EnterpriseServices.BizLogic.WorkItem.
-using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
 
 using OpenEdge.CommonInfrastructure.Client.ServiceAdapter.
+using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
-using OpenEdge.CommonInfrastructure.Common.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
+using OpenEdge.Core.XML.WebServiceInvocationError.
 using OpenEdge.Core.System.NotFoundError.
+using OpenEdge.Core.System.UnhandledError.
+using OpenEdge.Core.System.ApplicationError.
+
+using OpenEdge.Lang.BPM.IBizLogicAPI.
+using OpenEdge.Lang.BPM.Task.
+using OpenEdge.Lang.BPM.WorkItem.
+using OpenEdge.Lang.BPM.WorkItemStatusEnum.
+using OpenEdge.Lang.BPM.DataSlotInstance.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
-using Progress.Lang.Class.
+using OpenEdge.Lang.WidgetHandle.
+
 using Progress.Windows.Form.
 using Progress.Util.TypeHelper.
+using Progress.Lang.Class.
+using Progress.Lang.Error.
+
+using Progress.Lang.Object.
+
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inherits Form: 
-	
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable lblAccessories as Infragistics.Win.Misc.UltraLabel no-undo.
     define private variable lblModel as Infragistics.Win.Misc.UltraLabel no-undo.
     define private variable lblExtColour as Infragistics.Win.Misc.UltraLabel no-undo.
@@ -69,10 +79,12 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
     define private variable uxOrderNumber as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
     define private variable uxWheels as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
 
-    define public property TaskListManager as ITaskListManager no-undo get. private set.
-    define public property CurrentTask as CurrentTask no-undo get. private set.
-    define public property SessionId as character no-undo get. private set.
+    define public property CurrentTask as Task no-undo get. private set.
     define public property CurrentOrder as integer no-undo get. private set.
+    
+    define protected property BpmServer as IBizLogicAPI no-undo get. set.
+    
+    define public event TaskCompleted signature void(input poSender as Object, input poTask as Task).
     
     /** (mandatory) The session's service manager. Used to determine the ServiceMessageManager and 
         other managers for callbacks, context and more. */
@@ -84,6 +96,15 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
             return ServiceManager.
         end get.
         private set.
+    
+    define protected property SecMgr as ISecurityManager no-undo
+        get():
+            if not valid-object(SecMgr) then
+                SecMgr = cast(ServiceManager:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
+            return SecMgr.
+        end get.
+        private set.
+
     
     /** The ServicemessageManager is used plentifully; we keep it as a property so that
         we can get it whenever needed, without fuss. */
@@ -109,33 +130,40 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         
     define private variable mhOrders as handle no-undo.        
     
-    constructor public CustomerOrderDetail(input poTaskListManager as ITaskListManager,
-                                           input poCurrentTask as CurrentTask):
+    constructor public CustomerOrderDetail(input poBpmServer as IBizLogicAPI,
+                                           input poCurrentTask as Task):
         this-object().
         
         Assert:ArgumentNotNull(poCurrentTask, 'Current task').
-        Assert:ArgumentNotNull(poTaskListManager, 'Task List Manager').
+        Assert:ArgumentNotNull(poBpmServer, 'BPM Server').
         
-        assign TaskListManager = poTaskListManager
-               CurrentTask = poCurrentTask.
+        assign CurrentTask = poCurrentTask
+               BpmServer = poBpmServer.
         
-        TaskListManager:SetTaskDataSlots(CurrentTask).
-
         InitData().
         InitUI().
+        
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
     end constructor.
     
-	constructor public CustomerOrderDetail(  ):
+    constructor public CustomerOrderDetail(  ):
         super().
         InitializeComponent().
         
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end constructor.
+    end constructor.
     
-	method private void InitializeComponent(  ):
-		
+    method private void InitializeComponent(  ):
+        
         /* NOTE: The following method is automatically generated.
         
         We strongly suggest that the contents of this method only be modified using the
@@ -376,7 +404,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         /* imageList1 */
         /*  */
         this-object:imageList1:ImageStream = cast(resources:GetObject("imageList1.ImageStream"), System.Windows.Forms.ImageListStreamer).
-        this-object:imageList1:TransparentColor = Color:Transparent.
+/*        this-object:imageList1:TransparentColor = Color:Transparent.*/
         this-object:imageList1:Images:SetKeyName(0, "Knob Valid Green.png").
         this-object:imageList1:Images:SetKeyName(1, "Knob Remove Red.png").
         this-object:imageList1:Images:SetKeyName(2, "Knob Snapback.png").
@@ -482,29 +510,49 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
-	method private void uxApprove_Click( input sender as System.Object, input e as System.EventArgs ):
-	    ApproveOrder().
-	end method.
+    method private void uxApprove_Click( input sender as System.Object, input e as System.EventArgs ):
+        ApproveOrder().
+        
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
+    end method.
 
-	method private void uxDisapprove_Click( input sender as System.Object, input e as System.EventArgs ):
-		DisapproveOrder().
-	end method.
-	
-	method protected void InitData():
-	    define variable oUC as IUserContext no-undo.
+    method private void uxDisapprove_Click( input sender as System.Object, input e as System.EventArgs ):
+        DisapproveOrder().
+
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
+    end method.
+    
+    method protected void InitData():
+        define variable oUC as IUserContext no-undo.
         define variable cDealerCode as character no-undo.
         define variable oPropertyValue as String no-undo.
+        define variable hServer as handle no-undo.
         
-	    oUC = cast(ServiceManager:StartService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext.
+        oUC = cast(ServiceManager:GetService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext.
         
         oPropertyValue = cast(oUC:UserProperties:Get(new String('Dealer.Code')), String).
         if valid-object(oPropertyValue) then
-	       cDealerCode = oPropertyValue:Value.
-	    
-	    run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p
-	           on ConnectionManager:GetConnectionHandle(ConnectionTypeEnum:AppServer, 'AutoEdgeTheFactory') 
+           cDealerCode = oPropertyValue:Value.
+        
+        hServer = cast(ConnectionManager:GetServerConnection(ConnectionTypeEnum:AppServer, 'asAutoEdgeTheFactory'):Server, WidgetHandle):Value.
+        
+        run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p on hServer 
                     (input cDealerCode,
                      input oUC:ContextId,
                      output dataset-handle mhOrders).
@@ -534,18 +582,17 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
                
                oDSI = cast(CurrentTask:DataSlots:Get(new String('OrderId')), DataSlotInstance)
                cValue = oDSI:Value.
-                       
+                     
         hOrderBuffer:find-first(' where eOrder.OrderId = ' + quoter(cValue) ) no-error.
         if hOrderBuffer:available then
         do:
             hOLineBuffer:find-first(' where eOrderLine.LineNum = 1 and eOrderLine.OrderId = ' + quoter(hOrderBuffer::OrderId)) no-error.  
             hFinishedItemBuffer:find-first(' where eFinishedItem.FinishedItemId = ' + quoter(hOLineBuffer::FinishedItemId)) no-error.
             hItemBuffer:find-first(' where eItem.ItemId = ' + quoter(hFinishedItemBuffer::ItemId)) no-error.
-            
+
             assign cDTZ = datetime(hOrderBuffer::OrderDate) 
                    uxOrderDate:DateTime = cDTZ
-            
-                   /*uxBrand:Text = hOrderBuffer::Brand*/
+                   uxBrand:Text = SecMgr:CurrentUserContext:TenantName
                    uxCustomerName:Text = hOrderBuffer::CustomerName
                    uxModel:Text = hItemBuffer::ItemName.
             
@@ -562,6 +609,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
                     when 'ext-colour' then 
                     do:
                         uxExtColour:Text = hItemBuffer::ItemName.
+                        
                         if System.Enum:IsDefined(TypeHelper:GetType('System.Drawing.KnownColor'), hItemBuffer::ItemName) then
                             uxExtColour:Color = Color:FromName(hItemBuffer::ItemName).
                         else
@@ -600,17 +648,14 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         finally:
             session:date-format = cDateFormat.
         end finally.
-	end method.    
-	
-	method protected void ApproveOrder():
-	    cast(CurrentTask:DataSlots:Get(new String('OrderReviewed')), DataSlotInstance):value = 'true'.
-	    cast(CurrentTask:DataSlots:Get(new String('OrderApproved')), DataSlotInstance):value = 'true'. 
-	    cast(CurrentTask:DataSlots:Get(new String('VehicleInStock')), DataSlotInstance):value = string(uxInStock:Checked, 'true/false').
-        
-        TaskListManager:CompleteTask(CurrentTask).
+    end method.    
+    
+    method protected void ApproveOrder():
+        CurrentTask:SetDataSlotValue('OrderApproved', 'true').
+        CompleteTask(CurrentTask).
     end method.
     
-	method protected void DisapproveOrder():
+    method protected void DisapproveOrder():
         define variable oDisapprovalForm as LightboxForm no-undo.
         define variable oFrame as DisapprovalReasonPanel extent 1 no-undo. 
         
@@ -626,18 +671,57 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
     end method.
     
     method public void DisapproveOrder(input pcReason as character):
-        cast(CurrentTask:DataSlots:Get(new String('OrderReviewed')), DataSlotInstance):value = 'true'.
-        cast(CurrentTask:DataSlots:Get(new String('OrderApproved')), DataSlotInstance):value = 'false'.
-        cast(CurrentTask:DataSlots:Get(new String('OrderRejectionReason')), DataSlotInstance):value = pcReason. 
-        cast(CurrentTask:DataSlots:Get(new String('VehicleInStock')), DataSlotInstance):value = string(uxInStock:Checked, 'true/false').
+        CurrentTask:SetDataSlotValue('OrderApproved', 'false').
+        CurrentTask:SetDataSlotValue('OrderRejectionReason', pcReason). 
         
-        TaskListManager:CompleteTask(CurrentTask).
+        CompleteTask(CurrentTask).
     end method. 
 
-	destructor public CustomerOrderDetail ( ):
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
-	end destructor.
+    destructor public CustomerOrderDetail ( ):
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
+    end destructor.
 
+    method public void ReassignTask(poTask as Task, pcPerformer as character):
+        case poTask:WorkItem:Status:
+            when WorkItemStatusEnum:Assigned then
+                BpmServer:ReassignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+            otherwise
+                BpmServer:AssignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+        end case.
+        
+        if pcPerformer ne poTask:WorkItem:Performer then
+            OnCurrentTaskCompleted(poTask).
+        
+        catch oError as WebServiceInvocationError:
+            oError:LogError().
+        end catch.        
+    end method.
+    
+    method public void CompleteTask(poTask as Task):
+        if CurrentTask:WorkItem:Status:Equals(WorkItemStatusEnum:Available) then
+            BpmServer:AssignWorkItemFromWiid(
+                        CurrentTask:WorkItem:Id,
+                        lc(substitute('&1@&2',
+                                SecMgr:CurrentUserContext:UserName,
+                                SecMgr:CurrentUserContext:TenantName))).
+        
+        CurrentTask:SetDataSlotValue('OrderReviewed', 'true').
+        CurrentTask:SetDataSlotValue('VehicleInStock', string(uxInStock:Checked, 'true/false')).
+        
+        BpmServer:CompleteTask(poTask).
+        
+        OnCurrentTaskCompleted(poTask).
+        
+        catch oError as WebServiceInvocationError:
+            oError:ShowError().
+            oError:LogError().
+        end catch.
+    end method.
+    
+    method protected void OnCurrentTaskCompleted(input poTask as Task):
+        TaskCompleted:Publish(this-object, poTask).
+    end method.
+    
 end class.

@@ -9,10 +9,10 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using AutoEdge.Factory.Client.Common.EnterpriseServices.CurrentTask.
-using AutoEdge.Factory.Client.Common.PresentationLayer.ITaskListManager.
-
-using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
+using OpenEdge.Core.System.UnhandledError.
+using OpenEdge.Core.System.ApplicationError.
+using OpenEdge.Lang.BPM.Task.
+using OpenEdge.Lang.BPM.IBizLogicAPI.
 using OpenEdge.Lang.Assert.
 
 using Progress.Windows.Form.
@@ -23,23 +23,28 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.TaskDetailForm inherits Fo
     define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable savvionTaskDetailUC1 as AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC no-undo.
 
-    define public property TaskListManager as ITaskListManager no-undo get. private set.
-    define public property CurrentTask as CurrentTask no-undo get. private set.
-    define public property SessionId as character no-undo get. private set.
+    define public property CurrentTask as Task no-undo get. private set.
+    define protected property BpmServer as IBizLogicAPI no-undo get. set.
     
-    constructor public TaskDetailForm(input poTaskListManager as ITaskListManager,
-                                      input poCurrentTask as CurrentTask):
+    constructor public TaskDetailForm(input poBpmServer as IBizLogicAPI,
+                                      input poCurrentTask as Task):
         this-object().
         
         Assert:ArgumentNotNull(poCurrentTask, 'Current task').
-        Assert:ArgumentNotNull(poTaskListManager, 'Task List Manager').
+        Assert:ArgumentNotNull(poBpmServer, 'BPM Server').
         
-        assign TaskListManager = poTaskListManager
+        assign BpmServer = poBpmServer
                CurrentTask = poCurrentTask.
+        savvionTaskDetailUC1:SetTask(CurrentTask, BpmServer).
         
-        TaskListManager:SetTaskDataSlots(CurrentTask).
-        
-        savvionTaskDetailUC1:SetTask(CurrentTask, TaskListManager).        
+        catch oAppError as ApplicationError:
+            oAppError:ShowError().
+        end catch.
+        catch oError as Error:
+            define variable oUHError as UnhandledError no-undo.
+            oUHError = new UnhandledError(oError).
+            oUHError:ShowError().
+        end catch.
     end constructor.
         
     constructor public TaskDetailForm (  ):
