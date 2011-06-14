@@ -34,8 +34,8 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStep abstract inherits Service
         implements IWorkStep:
     
     /** [IWorkStep] (optional) The workstep name. Defaults to the service name in this case. */
-    define public property Name as longchar no-undo get. set.
-    
+    define public property Name as character no-undo get. set.
+
     /** Typically we'd only have a single request-response at a time, but we have no
         guarantee of that, so we use a map to be safe. */
     define protected property WorkstepResponses as IMap no-undo get. private set.
@@ -51,6 +51,11 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStep abstract inherits Service
     destructor public WorkStep():
         WorkstepResponses:Clear().
     end destructor.
+    
+    /** External method to dynamically set the service property via InjectABL */
+    method public void SetName (input pcName as character):
+        this-object:Name = pcName.
+    end method.
     
     method public void PerformStep(input poRequest as IWorkstepRequest):
         WorkstepResponses:Put(new String(cast(poRequest, IServiceMessage):MessageId),
@@ -71,7 +76,7 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStep abstract inherits Service
     
     /** Perform the actual step. Each concrete implementation of this
         class does something different.
-                
+        
         Note: make sure this method appears after PerformStep(IWorkstepRequest) because
         of bug OE00202799  */
     method abstract public void PerformStep().        

@@ -10,34 +10,96 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicWorkFlow.
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.
 using OpenEdge.BusinessComponent.WorkFlow.WorkFlowDecorator.
 using OpenEdge.BusinessComponent.WorkFlow.IBusinessWorkFlow.
 
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkflowRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+using OpenEdge.CommonInfrastructure.Common.Connection.ServerConnectionError.
+using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
+using OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.Connection.BpmServerConnection.
 
-class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkFlow inherits WorkFlowDecorator
-        implements IBizLogicWorkFlow:
+using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.IServiceManager.
+using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
+
+using OpenEdge.Lang.BPM.PriorityEnum.
+using OpenEdge.Lang.BPM.IBizLogicAPI.
+using OpenEdge.Lang.BPM.WorkFlowWebService.
+using OpenEdge.Lang.BPM.DataSlotTemplate.
+using OpenEdge.Lang.Assert.
+using OpenEdge.Lang.ABLSession.
+using Progress.Lang.Class. 
+
+class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkFlow inherits WorkFlowDecorator:
     
-    /* The Savvion Session ID */
-    define public property SessionId as longchar no-undo get.
+    /** Stores a reference to the session's Service Manager */
+    define protected property ServiceManager as IServiceManager no-undo
+        get():
+            if not valid-object(ServiceManager) then
+                ServiceManager = cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType)
+                                    , IServiceManager).
+            return ServiceManager.
+        end get.
+        private set.
+
+    /** The ConnectionManager is used plentifully; we keep it as a property so that
+        we can get it whenever needed, without fuss. */
+    define protected property ConnectionManager as IConnectionManager no-undo
+        get():
+            if not valid-object(ConnectionManager) then
+                ConnectionManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ConnectionManager:IConnectionManagerType)
+                                            , IConnectionManager).
+            return ConnectionManager.
+        end get.
+        private set.
     
-    /* Currently-running Process' instance ID  */
-    define public property ProcessInstanceId as int64 no-undo get.
-
-    define public property ServerParameter as IBizLogicServerParameters no-undo get. set. 
-
-    constructor public BizLogicWorkFlow(input poWorkFlow as IBusinessWorkFlow):
-        super(input poWorkFlow).
+    /** The logical name of the BPM Server we're interacting with */
+    define public property BpmServerName as character no-undo get. protected set.
+    
+    define protected property BpmServer as IBizLogicAPI no-undo
+        get():
+            define variable oServerConnection as IServerConnection no-undo.
+            
+            oServerConnection = ConnectionManager:GetServerConnection(ConnectionTypeEnum:BpmServer, BpmServerName).
+            Assert:ArgumentNotNull(oServerConnection, 'BPM Server connection').
+            
+            if not oServerConnection:IsConnected then
+                undo, throw new ServerConnectionError(
+                        BpmServerName,
+                        oServerConnection:ConnectionParameters:GetConnectionString()).
+        
+            BpmServer = cast(oServerConnection:Server, IBizLogicAPI).            
+        end get.
+        private set.
+    
+    constructor public BizLogicWorkFlow(input poWorkFlow as IBusinessWorkFlow,
+                                        input pcBpmServerName as character):
+        super (poWorkFlow).
+        
+        Assert:ArgumentNotNullOrEmpty(pcBpmServerName, 'BPM Server name').
+        BpmServerName = pcBpmServerName.
     end constructor.
-    
-    method public void Login (input pcUsername as character,    
-                              input pcPassword as character):
-    end method.
-    
-    method public void Logout():
-    end method.
+
+    /* eaxmple */
+	method override public void PerformFlow( ):
+	    define variable oDST as DataSlotTemplate extent no-undo.
+	    define variable cProcessInstanceNamePrefix as character no-undo.
+	    
+        BpmServer:CreateProcessInstance(string(this-object:Name),
+                                        cProcessInstanceNamePrefix,
+                                        PriorityEnum:Medium:Name,
+                                        oDST).
+	end method.
+
+	method override public void PerformFlow( input poRequest as IWorkflowRequest ):
+        Assert:ArgumentNotType(poRequest,
+                               Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.BizLogicWorkFlowRequest')).
+		
+		super:PerformFlow(input poRequest).
+	end method.
     
 end class.

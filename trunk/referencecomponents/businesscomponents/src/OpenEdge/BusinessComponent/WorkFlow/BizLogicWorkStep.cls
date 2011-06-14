@@ -11,85 +11,112 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.BusinessComponent.WorkFlow.WorkStepDecorator.
 using OpenEdge.BusinessComponent.WorkFlow.WorkStep.
 using OpenEdge.BusinessComponent.WorkFlow.IWorkStep.
 
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicWorkFlow.
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicAPI.
-using OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters.
-using OpenEdge.EnterpriseServices.BizLogic.WorkFlowWebService.
-using OpenEdge.EnterpriseServices.BizLogic.DataSlotInstance.
 
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.BizLogicWorkStepRequest.
 
+using OpenEdge.CommonInfrastructure.Common.Connection.ServerConnectionError.
+using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
+using OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum.
+using OpenEdge.CommonInfrastructure.Common.Connection.BpmServerConnection.
+
+using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
+using OpenEdge.CommonInfrastructure.Common.ConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
+using OpenEdge.Lang.BPM.IBizLogicAPI.
+using OpenEdge.Lang.BPM.DataSlotInstance.
 using OpenEdge.Lang.Assert.
+using OpenEdge.Lang.ABLSession.
 using Progress.Lang.Class. 
 
-class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract inherits WorkStep:
-    
-    /** Host and port of the Savvion SBM Server */
-    define public property ServerParameters as IBizLogicServerParameters no-undo get. private set.
-    
-    define protected property SessionId as longchar no-undo get. private set.
-    define protected property BizLogicService as IBizLogicAPI no-undo get. set.
-    define protected property IsBizLogicConnected as logical no-undo
-        get():
-            return (valid-object(BizLogicService) and SessionId ne '').
-        end get.
-    
-    constructor public BizLogicWorkStep(input poServiceManager as IServiceManager,
-                                        input poComponentInfo as IComponentInfo):
-        super(input poServiceManager, input poComponentInfo).
-    end constructor.
-    
-    constructor public BizLogicWorkStep(input poServiceManager as IServiceManager,
-                                        input poComponentInfo as IComponentInfo,
-                                        input poBizLogicParams as IBizLogicServerParameters):
-        this-object(input poServiceManager, poComponentInfo).
 
-        Assert:ArgumentNotNull(poBizLogicParams, 'BizLogic Server parameters').
-        ServerParameters = poBizLogicParams.
+class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract inherits WorkStepDecorator:
+    
+    /** Stores a reference to the session's Service Manager */
+    define protected property ServiceManager as IServiceManager no-undo
+        get():
+            if not valid-object(ServiceManager) then
+                ServiceManager = cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType)
+                                    , IServiceManager).
+            return ServiceManager.
+        end get.
+        private set.
+
+    /** The ConnectionManager is used plentifully; we keep it as a property so that
+        we can get it whenever needed, without fuss. */
+    define protected property ConnectionManager as IConnectionManager no-undo
+        get():
+            if not valid-object(ConnectionManager) then
+                ConnectionManager = cast(ServiceManager:GetService(OpenEdge.CommonInfrastructure.Common.ConnectionManager:IConnectionManagerType)
+                                            , IConnectionManager).
+            return ConnectionManager.
+        end get.
+        private set.
+    
+    /** The logical name of the BPM Server we're interacting with */
+    define public property BpmServerName as character no-undo get. protected set.
+    
+    define protected property CurrentRequest as BizLogicWorkStepRequest no-undo get. set.
+    
+    define protected property BpmServer as IBizLogicAPI no-undo
+        get():
+            define variable oServerConnection as IServerConnection no-undo.
+            
+            oServerConnection = ConnectionManager:GetServerConnection(ConnectionTypeEnum:BpmServer, BpmServerName).
+            Assert:ArgumentNotNull(oServerConnection, 'BPM Server connection').
+            
+            if not oServerConnection:IsConnected then
+                undo, throw new ServerConnectionError(
+                        BpmServerName,
+                        oServerConnection:ConnectionParameters:GetConnectionString()).
+            
+            BpmServer = cast(oServerConnection:Server, IBizLogicAPI).            
+        end get.
+        private set.
+    
+    constructor public BizLogicWorkStep(input poWorkStep as IWorkStep,
+                                        input pcBpmServerName as character):
+        super (poWorkStep).
+        
+        Assert:ArgumentNotNullOrEmpty(pcBpmServerName, 'BPM Server name').
+        BpmServerName = pcBpmServerName.
     end constructor.
     
-    method protected void ConnectBizLogicService():
-        define variable cWorkStep as character no-undo.
-        if not IsBizLogicConnected then
-        do:
-            if not valid-object(ServerParameters) then
-                ServerParameters = cast(ServiceManager:Kernel:Get(Class:GetClass('OpenEdge.EnterpriseServices.BizLogic.IBizLogicServerParameters'))
-                                     , IBizLogicServerParameters).
-            
-            /* once we're done with the step, tell Savvion */
-            BizLogicService = new WorkFlowWebService(ServerParameters:Host + ':' + string(ServerParameters:Port)).
-            SessionId = ServerParameters:Connect(BizLogicService).
-        end.
-    end method.
-    
-    method protected void DisconnectBizLogicService():
-        if IsBizLogicConnected then
-            BizLogicService:Disconnect(SessionId).
+    method override public void PerformStep( input poRequest as IWorkstepRequest):
+        define variable oBLRequest as BizLogicWorkStepRequest no-undo.
         
-        finally:
-            SessionId = ''.
+        Assert:ArgumentNotType(poRequest,
+                               Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.BizLogicWorkStepRequest')).
+        
+        CurrentRequest = cast(poRequest, BizLogicWorkStepRequest).
+        
+        super:PerformStep(input poRequest).
+        finally:        
+            CurrentRequest = ?.
         end finally.
     end method.
+    
+    method override public void PerformStep():
+        define variable oDSI as DataSlotInstance extent no-undo.
         
+        super:PerformStep().
+        
+        /* Complete the step in Bizlogic */
+        CompleteWorkItem(oDSI).
+    end method.
+    
     method protected void CompleteWorkItem(input poDataSlotInstance as DataSlotInstance extent):
-        if not IsBizLogicConnected then
-            ConnectBizLogicService().
-            
-        BizLogicService:CompleteWorkItem(SessionId,
-                                         string(Name),
-                                         poDataSlotInstance).
-    end method. 
-        
-    method protected void UpdateDataSlotValue(input piProcessInstanceId as int64,
-                                              input pcProcessInstanceName as character,
-                                              input pcDataSlotName as character extent,
+        BpmServer:CompleteWorkItem(string(Name), poDataSlotInstance).
+    end method.
+
+    method protected void UpdateDataSlotValue(input pcDataSlotName as character extent,
                                               input pcDataSlotValue as character extent):
         define variable oDataSlotInstance as DataSlotInstance extent no-undo.
         define variable iInnerLoop as integer no-undo.
@@ -97,12 +124,8 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract inherits Wor
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
 
-        if not IsBizLogicConnected then
-            ConnectBizLogicService().
-                
-        oDataSlotInstance= BizLogicService:GetProcessInstanceDataSlotFromPIID(
-                                SessionId,
-                                piProcessInstanceId,
+        oDataSlotInstance= BpmServer:GetProcessInstanceDataSlotFromPIID(
+                                CurrentRequest:ProcessInstanceId,
                                 pcDataSlotName).
         iMax = extent(oDataSlotInstance).
         iInnerMax = extent(pcDataSlotName).
@@ -117,30 +140,9 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract inherits Wor
             end.    /* inner loop */
         end. /* outer loop */
         
-        BizLogicService:SetProcessInstanceDataSlotsValue(
-                            SessionId,
-                            pcProcessInstanceName,
+        BpmServer:SetProcessInstanceDataSlotsValue(
+                            CurrentRequest:ProcessInstanceName,
                             oDataSlotInstance).
-    end method.
-    
-    method override public void DestroyComponent(  ):
-        super:DestroyComponent().
-    
-        DisconnectBizLogicService().
-    end method.
-
-
-    method override public void Initialize(  ):
-        super:Initialize().
-
-/*        ConnectBizLogicService().*/
-    end method.
-
-    method override public void PerformStep( input poRequest as OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest ):
-        Assert:ArgumentNotType(poRequest,
-                               Class:GetClass('OpenEdge.CommonInfrastructure.Common.ServiceMessage.BizLogicWorkFlowRequest')).
-        
-        super:PerformStep(input poRequest).
     end method.
 
 end class. 

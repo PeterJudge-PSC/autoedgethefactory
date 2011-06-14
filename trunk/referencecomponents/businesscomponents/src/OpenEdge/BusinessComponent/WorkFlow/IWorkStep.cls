@@ -13,10 +13,11 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse.
 interface OpenEdge.BusinessComponent.WorkFlow.IWorkStep:
     
     /** (optional) The workstep name. */
-    define public property Name as longchar no-undo get. set.
+    define public property Name as character no-undo get. set.
     
-@todo(task="implement", action="refactor to service interface?").
-    /** Performs the WorkStep as the result of being called as a service provider.
+    method public void SetName (input pcName as character).
+    
+    /** Performs the WorkStep as the result of being called by a service provider.
         
         @param IWorkstepRequest The request parameters for this call. */
     method public void PerformStep(input poRequest as IWorkstepRequest).

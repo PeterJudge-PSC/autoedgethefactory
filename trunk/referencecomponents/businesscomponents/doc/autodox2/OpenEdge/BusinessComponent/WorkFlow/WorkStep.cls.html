@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LONGCHAR</code>
+          <code>CHARACTER</code>
         </font>
       </td>
       <td>
@@ -145,6 +145,20 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setname(character)'> SetName</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;External method to dynamically set the service property via InjectABL
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="property_detail"><!-- --></A>
@@ -156,7 +170,7 @@
 				
     <a name='property.Name'><!-- --></a>
     <h3>Name</h3>
-    <code>LONGCHAR PUBLIC GET SET </code>
+    <code>CHARACTER PUBLIC GET SET </code>
     <dl>
       <dd>[IWorkStep] (optional) The workstep name. Defaults to the service name in this case. <p> </dd>
       <dd>
@@ -223,6 +237,18 @@
       <b>PerformStep</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest" target="classFrame">IWorkstepRequest</a> poRequest)
     </code>
     <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setname(character)'><!-- --></a>
+    <h3>SetName</h3>
+    <code>PUBLIC  VOID
+      <b>SetName</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>External method to dynamically set the service property via InjectABL <p> </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

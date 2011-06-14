@@ -61,35 +61,7 @@
       <td>
         <code>
           <b>
-            <a href='#property.BizLogicWorkStepType'>BizLogicWorkStepType</a>
-          </b> PROTECTED GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
             <a href='#property.BusinessEntityServiceInterfaceType'>BusinessEntityServiceInterfaceType</a>
-          </b> PROTECTED GET SET 
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#property.IBizLogicServerParametersType'>IBizLogicServerParametersType</a>
           </b> PROTECTED GET SET 
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -224,9 +196,9 @@
       <td>
         <code>
           <b>
-            <a href='#bindworkstep(character,character,logical)'> BindWorkStep</a>
-          </b>(CHARACTER pcBindingName, CHARACTER pcConcreteType, LOGICAL plIsBizLogicStep)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='#bindworkstep(character,character,character)'> BindWorkStep</a>
+          </b>(CHARACTER pcBindingName, CHARACTER pcConcreteType, CHARACTER pcDecoratedType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Workstep binding to service interface, workstep
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -238,26 +210,8 @@
 				<B>Property Detail</B></FONT></TH>
 				</TR></TABLE>
 				
-    <a name='property.BizLogicWorkStepType'><!-- --></a>
-    <h3>BizLogicWorkStepType</h3>
-    <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> PROTECTED GET SET </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='property.BusinessEntityServiceInterfaceType'><!-- --></a>
     <h3>BusinessEntityServiceInterfaceType</h3>
-    <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> PROTECTED GET SET </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='property.IBizLogicServerParametersType'><!-- --></a>
-    <h3>IBizLogicServerParametersType</h3>
     <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> PROTECTED GET SET </code>
     <dl>
       <dd>
@@ -349,12 +303,14 @@
       </dd>
     </dl>
     <hr />
-    <a name='bindworkstep(character,character,logical)'><!-- --></a>
+    <a name='bindworkstep(character,character,character)'><!-- --></a>
     <h3>BindWorkStep</h3>
     <code>PROTECTED  VOID
-      <b>BindWorkStep</b>(CHARACTER pcBindingName, CHARACTER pcConcreteType, LOGICAL plIsBizLogicStep)
+      <b>BindWorkStep</b>(CHARACTER pcBindingName, CHARACTER pcConcreteType, CHARACTER pcDecoratedType)
     </code>
     <dl>
+      <dd>Workstep binding to service interface, workstep <p> </dd>
+      <dd>A Workstep can be decorated as BizLogic workstep. In that case, we IWorkStep -> SomeBizLogicWorkStep decorates SomeWorkStep If not, then the we use bormal binding IWorkStep -> SomeWorkStep This possible decorated workstep now also needs to be exposed as a service interface WorkStepServiceInterfaceType decorates IWorkStep (whih is either SomeWorkStep or SomeBizLogicWorkStep) </dd>
       <dd>
         <dl><!-- --></dl>
       </dd>

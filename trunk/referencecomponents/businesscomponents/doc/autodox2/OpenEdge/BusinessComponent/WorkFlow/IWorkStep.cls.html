@@ -55,7 +55,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>LONGCHAR</code>
+          <code>CHARACTER</code>
         </font>
       </td>
       <td>
@@ -114,7 +114,21 @@
           <b>
             <a href='#performstep(openedge.commoninfrastructure.common.servicemessage.iworksteprequest)'> PerformStep</a>
           </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest" target="classFrame">IWorkstepRequest</a> poRequest)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs the WorkStep as the result of being called as a service provider.
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs the WorkStep as the result of being called by a service provider.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setname(character)'> SetName</a>
+          </b>(CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
 				</TABLE>&nbsp;<P>
@@ -128,7 +142,7 @@
 				
     <a name='property.Name'><!-- --></a>
     <h3>Name</h3>
-    <code>LONGCHAR PUBLIC GET SET </code>
+    <code>CHARACTER PUBLIC GET SET </code>
     <dl>
       <dd>(optional) The workstep name. <p> </dd>
       <dd>
@@ -172,7 +186,7 @@
       <b>PerformStep</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest" target="classFrame">IWorkstepRequest</a> poRequest)
     </code>
     <dl>
-      <dd>Performs the WorkStep as the result of being called as a service provider. <p> </dd>
+      <dd>Performs the WorkStep as the result of being called by a service provider. <p> </dd>
       <dd>
         <dl><!-- -->
           <dt>
@@ -180,6 +194,17 @@
           </dt>
           <dd>IWorkstepRequest - The request parameters for this call.<br/></dd>
         </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setname(character)'><!-- --></a>
+    <h3>SetName</h3>
+    <code>PUBLIC  VOID
+      <b>SetName</b>(CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
       </dd>
     </dl>
     <hr />
