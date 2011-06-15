@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [InnoIDE_Settings]
-LogFile=C:\devarea\projects\OEBP\installer\output\compile.log
+LogFile=C:\devarea\staging\aetf\trunk\installer\output\compile.log
 LogFileOverwrite=true
 
 [Setup]
@@ -46,7 +46,7 @@ OutputDir=installer\output
 PrivilegesRequired=none
 ; Use relative paths?
 ;SourceDir=..
-SourceDir=C:\devarea\projects\OEBP
+SourceDir=C:\devarea\staging\aetf\trunk
 WizardImageBackColor=$00400000
 AllowRootDirectory=true
 AllowNoIcons=true
@@ -166,7 +166,7 @@ Name: {app}\installer\include; Flags: uninsneveruninstall; Components: INSTALLER
 
 [Files]
 ; Root
-Source: autodox2-index.html; DestDir: {app}; Flags: ignoreversion uninsremovereadonly; Tasks: 
+Source: doc\autodox2-index.html; DestDir: {app}; Flags: ignoreversion uninsremovereadonly; Tasks:
 
 ;AETF
 ;client
@@ -218,7 +218,7 @@ Source: autoedgethefactory\savvion\*.*; DestDir: {app}\autoedgethefactory\savvio
 
 ;OERA - BusinessComponents
 Source: referencecomponents\businesscomponents\src\*.*; DestDir: {app}\referencecomponents\businesscomponents\src; Excludes: .svn,.*; Flags: uninsneveruninstall recursesubdirs createallsubdirs touch; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS; Tasks: 
-Source: referencecomponents\businesscomponents\bin\*.*; DestDir: {app}\referencecomponents\businesscomponents\bin; Excludes: .svn,.*; Flags: uninsneveruninstall recursesubdirs createallsubdirs touch; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS; Tasks:
+Source: referencecomponents\businesscomponents\bin\*.*; DestDir: {app}\referencecomponents\businesscomponents\bin; Excludes: .svn,.*; Flags: uninsneveruninstall recursesubdirs createallsubdirs touch skipifsourcedoesntexist; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS; Tasks:
 Source: referencecomponents\businesscomponents\tests\*.*; DestDir: {app}\referencecomponents\businesscomponents\tests; Excludes: .svn,.*; Flags: uninsneveruninstall recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS; Tasks: 
 Source: referencecomponents\businesscomponents\doc\*.*; DestDir: {app}\referencecomponents\businesscomponents\doc; Excludes: .svn; Flags: uninsneveruninstall recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS; Tasks: 
 Source: referencecomponents\businesscomponents\resources\*.*; DestDir: {app}\referencecomponents\businesscomponents\resources; Excludes: .svn; Flags: uninsneveruninstall recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS; Tasks: 
