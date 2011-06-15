@@ -199,8 +199,9 @@ Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsdl; DestDi
 Source: autoedgethefactory\server\.propath; DestDir: {app}\autoedgethefactory\server; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER
 Source: autoedgethefactory\server\.project; DestDir: {app}\autoedgethefactory\server; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER
 Source: autoedgethefactory\server\.dbconnection; DestDir: {app}\autoedgethefactory\server; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER 
-Source: autoedgethefactory\server\db\*.df; DestDir: {app}\autoedgethefactory\server\db; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER; Tasks: 
-Source: autoedgethefactory\server\db\autoedgethefactory.bup; DestDir: {app}\autoedgethefactory\server\db; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER; Tasks: 
+Source: autoedgethefactory\server\db\aetf.df; DestDir: {app}\autoedgethefactory\server\db; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER; Tasks:
+Source: autoedgethefactory\server\db\aetf.st; DestDir: {app}\autoedgethefactory\server\db; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER; Tasks:
+Source: autoedgethefactory\server\db\aetf.bup; DestDir: {app}\autoedgethefactory\server\db; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER; Tasks:
 
 ;shared
 Source: autoedgethefactory\shared\cfg\*.*; DestDir: {app}\autoedgethefactory\shared\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_CLIENT AETF_SERVER; Tasks: 
