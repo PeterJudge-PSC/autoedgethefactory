@@ -1858,6 +1858,14 @@ ADD FIELD "ItemId" OF "ItemOption" AS character
   ORDER 20
   MANDATORY
 
+ADD FIELD "StandardOption" OF "ItemOption" AS logical 
+  DESCRIPTION "Indicates whether this is a standard option"
+  FORMAT "yes/no"
+  INITIAL "no"
+  POSITION 6
+  MAX-WIDTH 1
+  ORDER 40
+
 ADD FIELD "TenantId" OF "ItemOption" AS character 
   DESCRIPTION "Object ID"
   FORMAT "x(32)"
@@ -3028,4 +3036,4 @@ ADD INDEX "Name" ON "Warehouse"
 PSC
 cpstream=UTF-8
 .
-0000065894
+0000065292
