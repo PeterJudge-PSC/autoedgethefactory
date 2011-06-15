@@ -187,6 +187,20 @@
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether a typed/named connection has been registered with the ConMgr.
       </td>
     </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#registerconnection(openedge.commoninfrastructure.common.connection.connectiontypeenum,character,openedge.commoninfrastructure.common.connection.iconnectionparameters)'> RegisterConnection</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName, <a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IConnectionParameters.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IConnectionParameters" target="classFrame">IConnectionParameters</a> poParameters)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register a connection for later use.
+      </td>
+    </tr>
 				</TABLE>&nbsp;<P>
 				
 				<A NAME="field_detail"><!-- --></A>
@@ -357,6 +371,23 @@
             <b>Returns:</b>
           </dt>
           <dd>logical Whether the conntection already exists</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='registerconnection(openedge.commoninfrastructure.common.connection.connectiontypeenum,character,openedge.commoninfrastructure.common.connection.iconnectionparameters)'><!-- --></a>
+    <h3>RegisterConnection</h3>
+    <code>PUBLIC  VOID
+      <b>RegisterConnection</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/ConnectionTypeEnum.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.ConnectionTypeEnum" target="classFrame">ConnectionTypeEnum</a> poConnectionType, CHARACTER pcConnectionName, <a href="../../../OpenEdge/CommonInfrastructure/Common/Connection/IConnectionParameters.cls.html" title="OpenEdge.CommonInfrastructure.Common.Connection.IConnectionParameters" target="classFrame">IConnectionParameters</a> poParameters)
+    </code>
+    <dl>
+      <dd>Register a connection for later use. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ConnectionTypeEnum - The type of connection<br/>character - The unique name for this connection<br/>IConnectionParameters - A set of parameters for the connection<br/></dd>
         </dl>
       </dd>
     </dl>
