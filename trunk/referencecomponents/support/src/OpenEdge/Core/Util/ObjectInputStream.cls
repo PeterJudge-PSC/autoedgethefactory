@@ -15,8 +15,8 @@ routine-level on error undo, throw.
 
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
-using OpenEdge.Core.System.ObjectStreamConstants.
-using OpenEdge.Core.System.ObjectInputError.
+using OpenEdge.Core.Util.ObjectStreamConstants.
+using OpenEdge.Core.Util.ObjectInputError.
 using OpenEdge.Lang.SortDirectionEnum.
 using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.Collections.ObjectStack.

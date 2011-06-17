@@ -10,10 +10,10 @@
 routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
-using OpenEdge.Core.System.ObjectInputError.
+using OpenEdge.Core.Util.ObjectInputError.
 using Progress.Lang.Error.
 
-class OpenEdge.Core.System.ObjectInputError inherits ApplicationError:    
+class OpenEdge.Core.Util.ObjectInputError inherits ApplicationError:    
     define static public property TYPE as character no-undo init 'type' get.
     define static public property BYTE as character no-undo init 'byte' get.
     define static public property STREAM_VERSION as character no-undo init 'stream version' get.
