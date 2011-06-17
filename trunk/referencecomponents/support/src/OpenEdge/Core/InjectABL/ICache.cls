@@ -12,7 +12,7 @@ using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Lang.DateTimeAddIntervalEnum.
 using Progress.Lang.Object.
 
-interface OpenEdge.Core.InjectABL.Lifecycle.ICache:
+interface OpenEdge.Core.InjectABL.ICache:
     /** The interval between pruning attempts; the unit in which this is denominated is
         defined by the PruningUnit property. */
     define public property PruningInterval as integer no-undo get. set.

@@ -9,7 +9,7 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Core.InjectABL.Lifecycle.ICache.
+using OpenEdge.Core.InjectABL.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
 using OpenEdge.Lang.DateTimeAddIntervalEnum.
@@ -17,7 +17,7 @@ using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-class OpenEdge.Core.InjectABL.Lifecycle.Cache use-widget-pool
+class OpenEdge.Core.InjectABL.Cache use-widget-pool
         implements ICache:
     
     define private temp-table InstanceCache no-undo

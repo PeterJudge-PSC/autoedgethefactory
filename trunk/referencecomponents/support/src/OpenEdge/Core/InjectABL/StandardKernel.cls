@@ -21,8 +21,8 @@ class OpenEdge.Core.InjectABL.StandardKernel inherits KernelBase:
         /* these are mappings */
         
         /* Cache */
-        Components:Add(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'), 
-                       Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.Cache')).
+        Components:Add(Class:GetClass('OpenEdge.Core.InjectABL.ICache'), 
+                       Class:GetClass('OpenEdge.Core.InjectABL.Cache')).
 
         /* Pipeline */
         Components:Add(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.IPipeline'),

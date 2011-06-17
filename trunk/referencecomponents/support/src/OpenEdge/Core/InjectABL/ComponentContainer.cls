@@ -133,7 +133,7 @@ class OpenEdge.Core.InjectABL.ComponentContainer:
                 case poService:TypeName:
                     when 'OpenEdge.Core.InjectABL.Lifecycle.IPipeline' then                    
                         oComponent = GetPipeline(oImplentingType).
-                    when 'OpenEdge.Core.InjectABL.Lifecycle.ICache' then
+                    when 'OpenEdge.Core.InjectABL.ICache' then
                         oComponent = GetCache(oImplentingType).
                     otherwise
                         oComponent = oImplentingType:New().

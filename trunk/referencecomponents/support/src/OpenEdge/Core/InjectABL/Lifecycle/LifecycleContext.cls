@@ -1,17 +1,17 @@
- /*------------------------------------------------------------------------
-    File        : Context
+ /** ------------------------------------------------------------------------
+    File        : LifecycleContext
     Purpose     : 
     Syntax      : 
-    Description : Contains information about the activation of a single instance.
+    Description : 
     @author pjudge
     Created     : Wed Mar 03 10:03:26 EST 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext.
-using OpenEdge.Core.InjectABL.Lifecycle.ICache.
+using OpenEdge.Core.InjectABL.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
 using OpenEdge.Core.InjectABL.Lifecycle.IProvider.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
