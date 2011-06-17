@@ -25,8 +25,8 @@ class OpenEdge.PresentationLayer.Presenter.LoginPresenter
         inherits Presenter
         implements ILoginPresenter, IApplicationLogin:
     
-    constructor public LoginPresenter(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public LoginPresenter(poComponentInfo as IComponentInfo):
+        super(poComponentInfo).
     end constructor.
     
     /* ILoginPresenter methods below */
