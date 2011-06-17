@@ -405,7 +405,6 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                                  input poDataSourceQuery as DataSourceQuery,
                                  input phSourceBuffer as handle):
         define variable hDbBuffer as handle no-undo.
-        define variable hField as handle no-undo.
         
         hDbBuffer = phABLDatasource:get-source-buffer(piBufferIndex).
         
@@ -415,15 +414,46 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
             phSourceBuffer:save-row-changes(piBufferIndex).
         else
         do:
-            hField = hDbBuffer:buffer-field(TenantFilterFieldName).
-            
             hDbBuffer:buffer-create().
             
             /* The BUFFER-COPY is cool in that it respects the DATA-SOURCE attach mappings */
             hDbBuffer:buffer-copy(phSourceBuffer:after-buffer, TenantFilterFieldName).
-            hField:buffer-value = cast(SecurityManager:CurrentUserContext:TenantId:Get(new String(hDbBuffer:dbname))
-                                    , String):Value.
+            
+            /* separate calls so that we don't depend on the concrete DS remembering to call super(). */
+            AddTenantKeys(hDbBuffer).
+            AddPrimaryKeys(hDbBuffer, phSourceBuffer).
+            UpdateForeignKeys(hDbBuffer, phSourceBuffer).
         end.
+    end method.
+    
+    @method(virtual="true").
+    /** Add any primary key values that aren't in the source dataset/temp-table
+        
+        @param handle The DB buffer being operated on        
+        @param handle The source (typically before-image) buffer handle. */
+    method protected void AddPrimaryKeys(input phDbBuffer as handle,
+                                         input phSourceBuffer as handle):
+    end method.
+
+    @method(virtual="true").
+    /** Update (add or modify) any foreign key values that aren't easily
+        mappable from the source dataset/temp-table
+        
+        @param handle The DB buffer being operated on        
+        @param handle The source (typically before-image) buffer handle. */
+    method protected void UpdateForeignKeys(input phDbBuffer as handle,
+                                            input phSourceBuffer as handle):
+    end method.
+
+    /** Add tenant key values to the DB buffer
+        
+        @param handle The DB buffer being added. */
+    method protected void AddTenantKeys(input phDbBuffer as handle):
+        define variable hField as handle no-undo.
+        
+        hField = phDbBuffer:buffer-field(TenantFilterFieldName) no-error.
+        error-status:error = no.
+        if valid-handle(hField) and SecurityManager:IsManagedSession then        
     end method.
     
     /** Deletes a DB row. 
@@ -446,7 +476,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         phSourceBuffer:save-row-changes(piBufferIndex).
         */
     end method.
-
+    
     /** Modifies a DB row 
         
         @param handle The ABL datasource object
@@ -457,13 +487,17 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                                     input piBufferIndex as integer,
                                     input poDataSourceQuery as DataSourceQuery,
                                     input phSourceBuffer as handle):
+        define variable hDbBuffer as handle no-undo.
+                                                
         /* build the where string */
+        hDbBuffer = phABLDatasource:get-source-buffer(piBufferIndex). 
         phABLDataSource:save-where-string(piBufferIndex) = BuildBufferKeyClause(
-                                    phABLDataSource:get-source-buffer(piBufferIndex):name,   /* for identification */
+                                    hDbBuffer:name,   /* for identification */
                                     poDataSourceQuery, /* for filters */
                                     phSourceBuffer).    /* for data */                                                                            
         /* do save */
         phSourceBuffer:save-row-changes(piBufferIndex).
+        UpdateForeignKeys(hDbBuffer, phSourceBuffer).
     end method.
 
     /** Save data for the current row to the database.
@@ -740,9 +774,6 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                        hBuffer = oDSQuery:ABLDataSource:get-source-buffer(iLoop).
                 
                 /* no-error since this field may not exist */
-                hField = hBuffer:buffer-field(TenantFilterFieldName) no-error.
-                error-status:error = no.
-                if valid-handle(hField) then
                     oFilter = new QueryFilter(
                                     hBuffer:name,
                                     TenantFilterFieldName,
@@ -849,5 +880,15 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
 		super:ClearDataTarget().
 		TargetBuffer = ?.
 	end method.
-
+	
+	/** Returns the next opaque ID value for key values. This 
+	    defaults to a GUID but could be anything. 
+	    
+	    @param character The DB table name for which to retrieve a key value.
+	    
+	    @return character A new opaque id for a key value.     */
+	method protected character GetNextOpaqueId(input pcTableName as character):
+	    return guid(generate-uuid).
+    end method.
+    
 end class.
