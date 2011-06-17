@@ -30,22 +30,16 @@ using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.InjectABL.ComponentProvider inherits StandardProvider:
     
-    constructor public ComponentProvider(poClass as class Class):
+    constructor public ComponentProvider(input poClass as class Class):
         super(poClass).
     end constructor.
 
     method override public Object Create(input poContext as ILifecycleContext):
         define variable oComponent as Object no-undo.
-        define variable oNewParams as IParameter extent no-undo.
         define variable oRoutine as Routine no-undo.
         define variable oIterator as IIterator no-undo.
-        define variable iLoop as integer no-undo.
-        define variable iMax as integer no-undo.
-        define variable iOffset as integer no-undo init 1.
-        
-        if poContext:Arguments:Size eq 0 then
-            poContext:Arguments:Add(new Routine(poContext:Binding:Service, '', RoutineTypeEnum:Constructor)).
-        
+        define variable lHasCtorArgs as logical no-undo.
+
         oIterator = poContext:Arguments:Iterator().
         do while oIterator:HasNext():
             oRoutine = cast(oIterator:Next(), Routine).
@@ -54,36 +48,54 @@ class OpenEdge.CommonInfrastructure.Common.InjectABL.ComponentProvider inherits 
             if not oRoutine:RoutineType:Equals(RoutineTypeEnum:Constructor) then
                 next.
             
-            extent(oNewParams) = ?.
-            iMax = extent(oRoutine:Parameters) + iOffset.            
-            if iMax eq ? then
-                iMax = iOffset.
-            extent(oNewParams) = iMax.
+            /* need at least one constructor */
+            lHasCtorArgs = true.
             
-            oNewParams[1] = new Parameter(
-                                new ComponentInfo(
-                                    poContext:Binding:Service,
-                                    poContext:Binding:Name,
-                                    ComponentTypeEnum:ApplicationComponent,
-                                    true),
-                                ComponentInfo:IComponentInfoType).
-            do iLoop = (iOffset + 1) to iMax:
-                oNewParams[iLoop] = oRoutine:Parameters[iLoop - iOffset].
-            end.
+            AddCommonArguments(oRoutine, poContext).
+        end.
+        
+        if not lHasCtorArgs then
+        do:
+            oRoutine = new Routine(poContext:Binding:Service, '', RoutineTypeEnum:Constructor).
+            AddCommonArguments(oRoutine, poContext).
             
-            /* replace old with new 
-            oRoutine:Parameters = ?.
-            */
-            extent(oRoutine:Parameters) = ?.
-            oRoutine:Parameters = oNewParams.
+            poContext:Arguments:Add(oRoutine).
         end.
         
         oComponent = super:Create(poContext).
         
-        /* Component:IComponentType. */
+        /* Service:IServiceType. */
         Assert:ArgumentIsType(oComponent, Class:GetClass('OpenEdge.CommonInfrastructure.Common.IComponent')).
         
         return oComponent.
+    end method.
+    
+    method protected void AddCommonArguments(input poRoutine as Routine,
+                                             input poContext as ILifecycleContext):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable iOffset as integer no-undo init 1.
+        define variable oNewParams as IParameter extent no-undo.
+        
+        iMax = extent(poRoutine:Parameters) + iOffset.
+        if iMax eq ? then
+            iMax = iOffset.
+        extent(oNewParams) = iMax.
+        
+        oNewParams[1] = new Parameter(
+                            new ComponentInfo(
+                                poContext:Binding:Service,
+                                poContext:Binding:Name,
+                                ComponentTypeEnum:Service,
+                                true),
+                            ComponentInfo:IComponentInfoType). 
+        do iLoop = (iOffset + 1) to iMax:
+            oNewParams[iLoop] = poRoutine:Parameters[iLoop - iOffset].
+        end.
+        
+        /* replace old with new */
+        extent(poRoutine:Parameters) = ?.
+        poRoutine:Parameters = oNewParams.
     end method.
     
 end class.
