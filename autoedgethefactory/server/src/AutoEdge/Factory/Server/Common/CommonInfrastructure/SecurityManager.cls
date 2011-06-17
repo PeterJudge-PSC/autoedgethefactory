@@ -38,8 +38,8 @@ using Progress.Lang.Object.
 
 class AutoEdge.Factory.Server.Common.CommonInfrastructure.SecurityManager inherits SecurityManager:
 
-    constructor public SecurityManager ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public SecurityManager(input poComponentInfo as IComponentInfo ):
+        super(input poComponentInfo).
     end constructor.
     
     method override public void ValidateCredentials(input pcUserName as character,
