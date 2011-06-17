@@ -38,15 +38,13 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
     @todo(task="refactor", action="investigate this mechanism. use property or just make Copy...() abstract?").    
     define protected property StaticDatasetHandle as handle no-undo get. private set.
 
-    constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
-                                              input poComponentInfo as IComponentInfo,
+    constructor public StandardBusinessEntity(input poComponentInfo as IComponentInfo,
                                               input poDAO as IDataAccess ):
-        super(input poServiceManager, input poComponentInfo, input poDAO).
+        super(input poComponentInfo, input poDAO).
     end constructor.
 
-    constructor public StandardBusinessEntity(input poServiceManager as IServiceManager,
-                                              input poComponentInfo as IComponentInfo ):
-        super(input poServiceManager, input poComponentInfo).
+    constructor public StandardBusinessEntity(input poComponentInfo as IComponentInfo ):
+        super(input poComponentInfo).
     end constructor.
 
     method override public void FetchData(poRequest as IFetchRequest):
