@@ -41,19 +41,17 @@ class OpenEdge.BusinessComponent.Entity.BusinessEntity abstract inherits Service
     constructor static BusinessEntity():        
         BusinessEntity:IBusinessEntityType = Class:GetClass('OpenEdge.BusinessComponent.Entity.IBusinessEntity').
     end constructor.
-    
-    constructor public BusinessEntity(input poServiceManager as IServiceManager,
-                                      input poComponentInfo as IComponentInfo,
+
+    constructor public BusinessEntity(input poComponentInfo as IComponentInfo):
+        super(poComponentInfo).
+    end constructor.
+        
+    constructor public BusinessEntity(input poComponentInfo as IComponentInfo,
                                       input poDAO as IDataAccess):
-        this-object(poServiceManager, poComponentInfo).
+        super(poComponentInfo).
         
         Assert:ArgumentNotNull(poDAO, 'Data Access Object').
         DataAccess = poDAO.
-    end constructor.
-    
-    constructor public BusinessEntity(input poServiceManager as IServiceManager,
-                                      input poComponentInfo as IComponentInfo):
-        super(input poServiceManager, input poComponentInfo).
     end constructor.
     
     method public void FetchData(poRequest as IFetchRequest):

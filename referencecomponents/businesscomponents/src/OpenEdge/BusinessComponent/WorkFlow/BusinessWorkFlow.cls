@@ -45,18 +45,16 @@ class OpenEdge.BusinessComponent.WorkFlow.BusinessWorkFlow abstract inherits Ser
         guarantee of that, so we use a map to be safe. */
     define protected property ServiceResponses as IMap no-undo get. private set.
 
-    constructor public BusinessWorkFlow(input poServiceManager as IServiceManager,
-                                        input poComponentInfo as IComponentInfo,
+    constructor public BusinessWorkFlow(input poComponentInfo as IComponentInfo,
                                         input pcFlowName as longchar):
-        this-object(poServiceManager, poComponentInfo).
+        this-object(poComponentInfo).
         
         Assert:ArgumentNotNullOrEmpty(pcFlowName, 'WorkFlow name').
         this-object:Name = pcFlowName.                                    
     end constructor.
         
-    constructor public BusinessWorkFlow(input poServiceManager as IServiceManager,
-                                        input poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public BusinessWorkFlow(input poComponentInfo as IComponentInfo):
+        super(poComponentInfo).
         
         assign ServiceResponses = new TypedMap(
                                       String:Type, 

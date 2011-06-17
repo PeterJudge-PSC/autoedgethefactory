@@ -40,8 +40,8 @@ class OpenEdge.BusinessComponent.WorkFlow.WorkStep abstract inherits Service
         guarantee of that, so we use a map to be safe. */
     define protected property WorkstepResponses as IMap no-undo get. private set.
     
-    constructor public WorkStep(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public WorkStep(input poComponentInfo as IComponentInfo):
+        super(poComponentInfo).
         
         WorkstepResponses = new TypedMap(
                                       String:Type, 
