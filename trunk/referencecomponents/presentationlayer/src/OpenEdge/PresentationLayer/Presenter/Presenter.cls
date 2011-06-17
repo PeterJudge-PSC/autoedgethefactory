@@ -57,8 +57,8 @@ class OpenEdge.PresentationLayer.Presenter.Presenter abstract inherits Service
             return valid-object(this-object:View).
         end get.
     
-    constructor public Presenter(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo): 
-        super(poServiceManager, poComponentInfo).
+    constructor public Presenter(poComponentInfo as IComponentInfo): 
+        super(poComponentInfo).
     end constructor.
     
     /** Use method since we can't (yet) set properties via reflection */

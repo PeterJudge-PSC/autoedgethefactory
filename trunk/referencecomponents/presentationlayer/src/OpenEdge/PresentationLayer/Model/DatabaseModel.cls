@@ -16,12 +16,8 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 class OpenEdge.PresentationLayer.Model.DatabaseModel  abstract 
         inherits Model:
     
-    constructor public DatabaseModel (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
-    end constructor.
-    
-    constructor public DatabaseModel ( input pcServiceName as character, input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-        super (input pcServiceName, input poServiceManager, input poComponentInfo).
+    constructor public DatabaseModel(input pcServiceName as character, input poComponentInfo as IComponentInfo ):
+        super(input pcServiceName, input poComponentInfo).
     end constructor.
     
     method override protected handle GetBufferHandle(input pcTableName as character):

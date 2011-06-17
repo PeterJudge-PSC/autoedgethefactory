@@ -70,10 +70,10 @@ class OpenEdge.PresentationLayer.Model.DatasetModel abstract inherits Model:
     /** The dataset that contains this Model's data */    
     define protected property MasterDataset as handle no-undo get. set.
     
-    constructor public DatasetModel(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
-    end constructor.
-    
+	constructor public DatasetModel(input pcServiceName as character, input poComponentInfo as IComponentInfo):
+		super (input pcServiceName, input poComponentInfo).
+	end constructor.
+
     method override protected void ReceiveFetchSchemaResponse(input poResponse as IFetchResponse):
         /* Pull the dataset into the model before super(), since we need the dataset to be able\
            to work with buffer handles etc. */

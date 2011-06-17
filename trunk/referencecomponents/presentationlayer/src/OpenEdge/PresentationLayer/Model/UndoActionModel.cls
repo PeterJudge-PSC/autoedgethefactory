@@ -27,10 +27,10 @@ class OpenEdge.PresentationLayer.Model.UndoActionModel inherits DatasetModel :
     
     define dataset dsUndoAction for eAction.
                 
-    constructor public UndoActionModel (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
-    end constructor.
-    
+	constructor public UndoActionModel(input pcServiceName as character, input poComponentInfo as IComponentInfo):
+		super(input pcServiceName, input poComponentInfo).
+	end constructor.
+
     method override protected void CreateMasterDataset():
         /* no service adapter - all data is local */
         MasterDataset = dataset dsUndoAction:handle.

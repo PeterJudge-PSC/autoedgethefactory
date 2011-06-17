@@ -35,8 +35,8 @@ class OpenEdge.PresentationLayer.Presenter.NavigationPanelPresenter inherits Pre
     define public property ModelService as IComponentInfo no-undo get. set.          
     define public property QueryName as char no-undo get. set.
 
-    constructor public NavigationPanelPresenter(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public NavigationPanelPresenter(input poComponentInfo as IComponentInfo):
+        super(input poComponentInfo).
     end constructor.
 
     method override public void Initialize():

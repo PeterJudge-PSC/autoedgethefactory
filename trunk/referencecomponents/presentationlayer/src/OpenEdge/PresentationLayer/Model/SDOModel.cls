@@ -36,10 +36,10 @@ class OpenEdge.PresentationLayer.Model.SDOModel abstract
         /* SDO only has ever one table. */
         return dynamic-function('GetRowObject' in mhSdo).
     end method.
-    
-    constructor public SDOModel(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
-    end constructor.
+
+	constructor public SDOModel ( input pcServiceName as character, input poComponentInfo as IComponentInfo ):
+		super (input pcServiceName, input poComponentInfo).
+	end constructor.
     
     method public logical GetFirst( input pcQuery as character ):
         define variable oQuery as IQuery no-undo.

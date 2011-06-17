@@ -93,15 +93,13 @@ class OpenEdge.PresentationLayer.Presenter.DataboundPresenter abstract inherits 
        integer value and is an arbitrary, unique value. */
     define protected property ServiceRequests as IMap no-undo get. private set.
     
-    constructor public DataboundPresenter(input poServiceManager as IServiceManager,
-                                          input poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public DataboundPresenter(input poComponentInfo as IComponentInfo):
+        super(input poComponentInfo).
     end constructor.
     
-    constructor public DataboundPresenter(input poServiceManager as IServiceManager,
-                                          input poComponentInfo as IComponentInfo,
+    constructor public DataboundPresenter(input poComponentInfo as IComponentInfo,
                                           input poModel as IModel extent):
-        this-object(poServiceManager, poComponentInfo).
+        this-object(poComponentInfo).
         
         AddModel(poModel).
     end constructor.

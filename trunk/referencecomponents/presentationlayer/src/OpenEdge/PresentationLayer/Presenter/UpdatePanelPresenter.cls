@@ -76,12 +76,12 @@ class OpenEdge.PresentationLayer.Presenter.UpdatePanelPresenter inherits Databou
         end get. 
         set.
         
-    constructor public UpdatePanelPresenter (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public UpdatePanelPresenter(input poComponentInfo as IComponentInfo):
+        super(input poComponentInfo).
     end constructor.
     
-    constructor public UpdatePanelPresenter(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo, poModel as IModel extent):
-        super(poServiceManager, poComponentInfo, poModel).
+    constructor public UpdatePanelPresenter(input poComponentInfo as IComponentInfo, poModel as IModel extent):
+        super(poComponentInfo, poModel).
     end constructor.
     
     method override public void Initialize():

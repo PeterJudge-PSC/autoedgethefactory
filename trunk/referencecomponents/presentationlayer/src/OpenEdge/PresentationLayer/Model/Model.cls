@@ -50,6 +50,7 @@ using OpenEdge.Core.System.QueryDefinition.
 using OpenEdge.Core.System.IQuery.
 using OpenEdge.Core.System.AccessViolationError.
 
+using OpenEdge.Lang.Assert.
 using OpenEdge.Lang.Collections.TypedMap.
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.IIterator.
@@ -243,21 +244,19 @@ class OpenEdge.PresentationLayer.Model.Model abstract inherits Service
     method protected void OnServiceRequestError(input poEventArgs as ModelErrorEventArgs):
         this-object:ServiceRequestError:Publish(this-object, poEventArgs).
     end method.
-    
+
     constructor public Model(input pcServiceName as character,
-                             input poServiceManager as IServiceManager,
                              input poComponentInfo as IComponentInfo):
-        this-object(poServiceManager, poComponentInfo).
+        super(poComponentInfo).
+        
+        Assert:ArgumentNotNullOrEmpty(pcServiceName, 'Service name').
         
         ServiceName = pcServiceName.
     end constructor.
     
-    constructor public Model(input poServiceManager as IServiceManager,
-                             input poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
-    end constructor.
-    
     method public void SetServiceName(input pcServiceName as character):
+        Assert:ArgumentNotNullOrEmpty(pcServiceName, 'Service name').
+        
         ServiceName = pcServiceName.
     end method.
 
