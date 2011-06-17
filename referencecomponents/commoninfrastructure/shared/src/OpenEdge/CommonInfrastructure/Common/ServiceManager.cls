@@ -38,7 +38,7 @@ using OpenEdge.Core.InjectABL.Binding.IBindingCollection.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Routine.
 using OpenEdge.Core.InjectABL.Binding.Parameters.Parameter.
 using OpenEdge.Core.InjectABL.Binding.Parameters.IParameter.
-using OpenEdge.Core.InjectABL.Lifecycle.ICache.
+using OpenEdge.Core.InjectABL.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext. 
 using OpenEdge.Core.InjectABL.IKernel.
 
@@ -110,7 +110,7 @@ class OpenEdge.CommonInfrastructure.Common.ServiceManager
         
         /* Also stop objects that are scoped to the Service Manager, although  
            any registered services should be stopped already anyway. */
-        cast(Kernel:Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache')), ICache):Clear(this-object).
+        cast(Kernel:Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.ICache')), ICache):Clear(this-object).
         
         StopService(GetService(ConnectionManager:IConnectionManagerType)).
     end method.

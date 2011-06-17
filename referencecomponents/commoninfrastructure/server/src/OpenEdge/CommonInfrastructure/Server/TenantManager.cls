@@ -21,8 +21,8 @@ using OpenEdge.Lang.Collections.IMap.
 class OpenEdge.CommonInfrastructure.Server.TenantManager inherits Service
         implements ITenantManager, IManager: 
     
-    constructor public TenantManager(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):        
-        super(poServiceManager, poComponentInfo).
+    constructor public TenantManager(input poComponentInfo as IComponentInfo):        
+        super(input poComponentInfo).
     end constructor.
     
     /** Returns the tenant name for a given security domain.

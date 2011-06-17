@@ -34,7 +34,7 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum.
 using OpenEdge.CommonInfrastructure.Common.IManager.
 
-using OpenEdge.Core.InjectABL.Lifecycle.ICache.
+using OpenEdge.Core.InjectABL.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Binding.IBinding.
 
@@ -128,10 +128,6 @@ class OpenEdge.CommonInfrastructure.Common.ConnectionManager inherits Service
     
 	constructor public ConnectionManager(input poComponentInfo as IComponentInfo):
 		super (input poComponentInfo).
-	end constructor.
-
-	constructor public ConnectionManager(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):
-		super (input poServiceManager, input poComponentInfo).
 	end constructor.
 
     /** Connects to a server of the given type, with a unique name, for the

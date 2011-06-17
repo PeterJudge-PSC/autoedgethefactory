@@ -50,9 +50,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceMessageManager inherits Servic
     /** A (lookup) map of message ID's and their requestors. */
     define protected property MessageConsumers as IMap no-undo get. private set.
     
-    constructor public ServiceMessageManager(input poServiceManager as IServiceManager,
-                                             input poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public ServiceMessageManager(input poComponentInfo as IComponentInfo):
+        super(poComponentInfo).
     end constructor.
     
     /** Executes the request(s) asynchroronously.

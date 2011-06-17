@@ -44,10 +44,6 @@ class OpenEdge.CommonInfrastructure.Server.SecurityManager abstract inherits Sec
         end get.
         set.
     
-    constructor public SecurityManager(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
-    end constructor.
-    
     /** Validates that the passed context is valid and that the session can be established.
         
         @param IUserContext The passed-in user context to validate. */
@@ -214,5 +210,9 @@ class OpenEdge.CommonInfrastructure.Server.SecurityManager abstract inherits Sec
     method public void UserLogout(input pcContextId as longchar):
         UserLogout(GetUserContext(pcContextId)).
     end method.
-    
+		
+	constructor public SecurityManager(input poComponentInfo as IComponentInfo):
+		super(input poComponentInfo).
+	end constructor.
+
 end class.
