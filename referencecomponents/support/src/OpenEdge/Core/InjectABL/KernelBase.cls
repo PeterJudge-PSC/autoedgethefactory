@@ -20,7 +20,7 @@ using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModuleCollection.
 using OpenEdge.Core.InjectABL.Binding.Modules.IInjectionModule.
 using OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext.
 using OpenEdge.Core.InjectABL.Lifecycle.LifecycleContext.
-using OpenEdge.Core.InjectABL.Lifecycle.ICache.
+using OpenEdge.Core.InjectABL.ICache.
 using OpenEdge.Core.InjectABL.Lifecycle.IPipeline.
 using OpenEdge.Core.InjectABL.Lifecycle.StandardScopeEnum.
 using OpenEdge.Core.InjectABL.IInjectionRequest.
@@ -63,7 +63,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     
     destructor public KernelBase():
         /* Clean up all the singletons (ie those scoped to this Kernel) */
-        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
+        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.ICache'))
                 , ICache):Clear(this-object).
     end destructor.
     
@@ -336,7 +336,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         Assert:ArgumentNotNull(poInstance, "instance").
         Assert:ArgumentNotNull(poArguments, "arguments").
         
-        oContext = cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
+        oContext = cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.ICache'))
                 , ICache):TryGetContext(poInstance).
         if not valid-object(oContext) then
             oContext = CreateContext(CreateDefaultBinding(poInstance:GetClass())).
@@ -350,7 +350,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     method public logical Release(poInstance as Object):
         Assert:ArgumentNotNull(poInstance, "instance").
         
-        return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
+        return cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.ICache'))
                 , ICache):Release(poInstance).
     end method.
 
@@ -398,7 +398,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         oContext = CreateContext(oBinding).
         
         lIsCached = valid-object(
-                        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
+                        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.ICache'))
                             , ICache):TryGet(oContext)).
         return lIsCached.                                                
     end method.
@@ -406,7 +406,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
     method public void Clear(poScope as Object):
         Assert:ArgumentNotNull(poScope, "instance").
         
-        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache'))
+        cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.ICache'))
                 , ICache):Clear(poScope).
     end method.
     
@@ -441,7 +441,7 @@ class OpenEdge.Core.InjectABL.KernelBase inherits BindingRoot
         return new LifecycleContext(this-object,
                                     poBinding,
                                     cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.IPipeline')), IPipeline),
-                                    cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.Lifecycle.ICache')), ICache)).
+                                    cast(Components:Get(Class:GetClass('OpenEdge.Core.InjectABL.ICache')), ICache)).
     end method.
     
     method protected logical TypeIsSelfBindable(poService as class Class):
