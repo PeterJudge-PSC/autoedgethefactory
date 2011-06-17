@@ -18,7 +18,7 @@ using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.CommonInfrastructure.Common.Component implements IComponent:
-        
+    
     define static public property IComponentType as class Class no-undo
         get():
             if not valid-object(Component:IComponentType) then

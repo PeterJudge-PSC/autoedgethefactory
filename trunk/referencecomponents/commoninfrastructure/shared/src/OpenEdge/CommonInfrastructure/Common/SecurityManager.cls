@@ -71,8 +71,8 @@ class OpenEdge.CommonInfrastructure.Common.SecurityManager abstract inherits Ser
         SecurityManager:IUserContextType = Class:GetClass('OpenEdge.CommonInfrastructure.Common.IUserContext').
     end constructor.
     
-    constructor public SecurityManager(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo).
+    constructor public SecurityManager(input poComponentInfo as IComponentInfo):
+        super(poComponentInfo).
     end constructor.
     
     /** Merges the passed context into the current user's context. The

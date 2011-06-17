@@ -35,19 +35,16 @@ class OpenEdge.CommonInfrastructure.Common.Service inherits Component
     /** (mandatory) Stores a reference to the session's Service Manager */
     define public property ServiceManager as IServiceManager no-undo
         get():
-            /* fully-qualify type name since this propery and the type have the same name. */
-            return cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType)
-                                   , IServiceManager).
+            if not valid-object(ServiceManager) then
+                /* fully-qualify type name since this propery and the type have the same name. */
+                ServiceManager = cast(ABLSession:Instance:SessionProperties:Get(OpenEdge.CommonInfrastructure.Common.ServiceManager:IServiceManagerType)
+                                       , IServiceManager).
+            return ServiceManager.                                   
         end get.
+        private set.
     
-    constructor public Service (poComponentInfo as IComponentInfo):
+    constructor public Service (input poComponentInfo as IComponentInfo):
         super(poComponentInfo).
-    end constructor.
-    
-    @todo(task="refactor", action="remove this ctor").
-    constructor public Service (poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(cast(poComponentInfo, IComponentInfo)).
-        
     end constructor.
     
 end class.

@@ -34,8 +34,8 @@ using Progress.Lang.Class.
 class OpenEdge.CommonInfrastructure.Client.SecurityManager inherits SecurityManager
         implements ISecurityManager:
     
-    constructor public SecurityManager(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public SecurityManager(input poComponentInfo as IComponentInfo ):
+        super(input poComponentInfo).
     end constructor.
     
     /** Logs a user into the application. The client-side version of this passes the request across to the
