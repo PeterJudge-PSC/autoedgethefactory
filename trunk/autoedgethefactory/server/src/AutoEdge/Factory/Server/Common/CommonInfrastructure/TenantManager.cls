@@ -21,8 +21,8 @@ using OpenEdge.Lang.String.
 
 class AutoEdge.Factory.Server.Common.CommonInfrastructure.TenantManager inherits TenantManager: 
 
-    constructor public TenantManager ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public TenantManager(input poComponentInfo as IComponentInfo ):
+        super(input poComponentInfo).
     end constructor.
 
     /** Returns the tenant name for a given security domain.
