@@ -10,10 +10,10 @@
 routine-level on error undo, throw.
 
 using OpenEdge.Core.System.ApplicationError.
-using OpenEdge.Core.System.ObjectOutputError.
+using OpenEdge.Core.Util.ObjectOutputError.
 using Progress.Lang.Error.
 
-class OpenEdge.Core.System.ObjectOutputError inherits ApplicationError:
+class OpenEdge.Core.Util.ObjectOutputError inherits ApplicationError:
     define static public property STREAM as character no-undo init 'stream' get.
     define static public property TYPE as character no-undo init 'type' get.
     define static public property API_CALL as character no-undo init 'API call' get.

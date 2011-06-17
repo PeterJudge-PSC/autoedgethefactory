@@ -9,9 +9,9 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
-using OpenEdge.Core.System.*.
+using OpenEdge.Core.Util.ObjectStreamConstants.
 
-class OpenEdge.Core.System.ObjectStreamConstants final: 
+class OpenEdge.Core.Util.ObjectStreamConstants final: 
     
     define public static property /* BYTE */ PROTOCOL_VERSION_1    as integer init 1       no-undo get.
     
