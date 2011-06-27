@@ -17,8 +17,9 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 class AutoEdge.Factory.Server.Build.BusinessComponents.AssembleChassis inherits VehicleBuildStep:
         
-    constructor public AssembleChassis(input poComponentInfo as IComponentInfo ):
-        super (input poComponentInfo).
+    constructor public AssembleChassis(input poServiceManager as IServiceManager, 
+                                       input poComponentInfo as IComponentInfo ):
+        super (input poServiceManager, input poComponentInfo).
     end constructor.
 
     method override public void PerformStep():

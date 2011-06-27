@@ -77,8 +77,8 @@ class AutoEdge.Factory.Server.Build.BusinessComponents.VehicleBuildStep abstract
     
     define private variable mhOrderDataset as handle no-undo.
 
-    constructor public VehicleBuildStep(input poComponentInfo as IComponentInfo):
-        super(poComponentInfo).
+    constructor public VehicleBuildStep(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
+        super(poServiceManager, poComponentInfo).
     end constructor.
         
     method override public IWorkStepResponse GetResponse(input pcMessageId as longchar):
