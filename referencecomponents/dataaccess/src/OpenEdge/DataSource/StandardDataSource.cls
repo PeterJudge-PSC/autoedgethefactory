@@ -154,6 +154,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         define variable cWhereClause as character no-undo.
         define variable oDSQuery as IQuery no-undo.
         define variable cResolvedFieldName as character extent no-undo.
+        define variable hDataSourceBuffer as handle no-undo.
         
         HandleDataTarget:fill-mode = poRequest:FillMode:ToString().
         
@@ -175,8 +176,16 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         else
         do:
             AttachDataStoreToTarget(poAction).
+            
+            /* Resovle business entity's eCustomer -> Customer */
             cResolvedFieldName = poDAO:ResolveFieldName(poRequest:TableName, '').
-            cWhereClause = oDSQuery:Definition:GetFilter(cResolvedFieldName[2]).
+            
+            /* Resolved table name needs to be resolved again to the buffer name being used in the 
+               datasource. Customer -> Customer_1243-5678 */
+            hDataSourceBuffer = cast(oDSQuery, DataSourceQuery):GetTableHandle(cResolvedFieldName[2]).
+            cWhereClause = oDSQuery:Definition:GetFilter(hDataSourceBuffer:name).
+            
+            /*cResolvedFieldName[2]).*/
             if cWhereClause ne '' then
                 cast(oDSQuery, DataSourceQuery):ABLDataSource:fill-where-string = ' where ' + cWhereClause.
         end.
