@@ -17,9 +17,8 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 class AutoEdge.Factory.Server.Build.BusinessComponents.MateAssembledComponents inherits VehicleBuildStep:
     
-    constructor public MateAssembledComponents(input poServiceManager as IServiceManager,
-                                               input poComponentInfo as IComponentInfo  ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public MateAssembledComponents(input poComponentInfo as IComponentInfo  ):
+        super (input poComponentInfo).
     end constructor.
     
     method override public void PerformStep():

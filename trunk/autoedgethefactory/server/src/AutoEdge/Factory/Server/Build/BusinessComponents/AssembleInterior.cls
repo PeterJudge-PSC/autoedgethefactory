@@ -17,9 +17,8 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 class AutoEdge.Factory.Server.Build.BusinessComponents.AssembleInterior inherits VehicleBuildStep:  
     
-    constructor public AssembleInterior(input poServiceManager as IServiceManager,
-                                        input poComponentInfo as IComponentInfo  ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public AssembleInterior(input poComponentInfo as IComponentInfo  ):
+        super (input poComponentInfo).
     end constructor.
 
     /* step */

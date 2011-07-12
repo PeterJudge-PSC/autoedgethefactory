@@ -16,9 +16,8 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
 class AutoEdge.Factory.Server.Build.BusinessComponents.ProcessComponents inherits VehicleBuildStep:
 
-    constructor public ProcessComponents(input poServiceManager as IServiceManager,
-                                         input poComponentInfo as IComponentInfo):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public ProcessComponents(input poComponentInfo as IComponentInfo):
+        super (input poComponentInfo).
     end constructor.
     
     /* step */

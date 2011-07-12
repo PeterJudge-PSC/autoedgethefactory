@@ -104,12 +104,12 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         data-relation for eFinishedItem, eComponentItem relation-fields (FinishedItemId, FinishedItemId)
         .
     
-    constructor public OrderEntity ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public OrderEntity(input poComponentInfo as IComponentInfo ):
+        super (input poComponentInfo).
     end constructor.
 
-    constructor public OrderEntity ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo, input poDAO as IDataAccess ):
-        super (input poServiceManager, input poComponentInfo, input poDAO).
+    constructor public OrderEntity(input poComponentInfo as IComponentInfo, input poDAO as IDataAccess ):
+        super(input poComponentInfo, input poDAO).
     end constructor.
 
     method override protected handle CopyStaticDataset (output dataset-handle phDataset):

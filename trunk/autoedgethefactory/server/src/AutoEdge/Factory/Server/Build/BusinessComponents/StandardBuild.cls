@@ -63,8 +63,8 @@ class AutoEdge.Factory.Server.Build.BusinessComponents.StandardBuild inherits Bu
     end method.
 */    
     
-    constructor public StandardBuild(poServiceManager as IServiceManager, poComponentInfo as IComponentInfo):
-        super(poServiceManager, poComponentInfo, 'BuildVehicle').
+    constructor public StandardBuild(poComponentInfo as IComponentInfo):
+        super(poComponentInfo, 'BuildVehicle').
     end constructor.
     
     method override public IWorkflowResponse GetResponse(input pcMessageId as longchar):

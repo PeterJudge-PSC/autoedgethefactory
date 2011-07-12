@@ -29,12 +29,12 @@ class AutoEdge.Factory.Server.Common.BusinessComponent.UserLoginEntity inherits 
     
     define private dataset dsUser for eUserLogin.        
     
-    constructor public UserLoginEntity ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public UserLoginEntity(input poComponentInfo as IComponentInfo ):
+        super(input poComponentInfo).
     end constructor.
         
-    constructor public UserLoginEntity ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo, input poDAO as IDataAccess ):
-        super (input poServiceManager, input poComponentInfo, input poDAO).
+    constructor public UserLoginEntity(input poComponentInfo as IComponentInfo, input poDAO as IDataAccess ):
+        super(input poComponentInfo, input poDAO).
     end constructor.
 
     method override protected handle CopyStaticDataset (output dataset-handle phDataset):

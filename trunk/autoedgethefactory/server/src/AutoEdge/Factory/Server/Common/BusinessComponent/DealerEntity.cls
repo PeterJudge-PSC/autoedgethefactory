@@ -39,15 +39,13 @@ class AutoEdge.Factory.Server.Common.BusinessComponent.DealerEntity inherits Sta
 	define dataset dsDealer for eDealer, eSalesrep
 	   /*data-relation for eDealer, eSalesrep relation-fields(DealerId, DealerId)*/ .
     
-	constructor public DealerEntity(input poServiceManager as IServiceManager, 
-	                                input poComponentInfo as IComponentInfo,
+	constructor public DealerEntity(input poComponentInfo as IComponentInfo,
 	                                input poDAO as IDataAccess ):
-		super(input poServiceManager, input poComponentInfo, input poDAO).
+		super(input poComponentInfo, input poDAO).
 	end constructor.
 	
-	constructor public DealerEntity(input poServiceManager as IServiceManager,
-	                                input poComponentInfo as IComponentInfo):
-		super (input poServiceManager, input poComponentInfo).
+	constructor public DealerEntity(input poComponentInfo as IComponentInfo):
+		super(input poComponentInfo).
 	end constructor.
 	
     method override protected handle CopyStaticDataset (output dataset-handle phDataset):
