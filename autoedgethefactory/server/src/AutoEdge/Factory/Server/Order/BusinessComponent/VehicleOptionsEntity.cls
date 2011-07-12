@@ -56,12 +56,12 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsEntity inher
         data-relation for eItemOption, eItem relation-fields (ChildItemId, ItemId)
         .
     
-    constructor public VehicleOptionsEntity ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo ):
-        super (input poServiceManager, input poComponentInfo).
+    constructor public VehicleOptionsEntity(input poComponentInfo as IComponentInfo ):
+        super (input poComponentInfo).
     end constructor.
 
-    constructor public VehicleOptionsEntity ( input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo, input poDAO as IDataAccess ):
-        super (input poServiceManager, input poComponentInfo, input poDAO).
+    constructor public VehicleOptionsEntity ( input poComponentInfo as IComponentInfo, input poDAO as IDataAccess ):
+        super (input poComponentInfo, input poDAO).
     end constructor.
 
     method override protected handle CopyStaticDataset (output dataset-handle phDataset):
