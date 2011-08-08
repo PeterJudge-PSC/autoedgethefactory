@@ -1,11 +1,11 @@
 /** ------------------------------------------------------------------------
     File        : DealerReview
-    Purpose     : 
-    Syntax      : 
-    Description : 
+    Purpose     :
+    Syntax      :
+    Description :
     @author pjudge
     Created     : Wed Jul 07 11:55:28 EDT 2010
-    Notes       : 
+    Notes       :
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
@@ -21,7 +21,7 @@ using System.Windows.Forms.FormClosedEventArgs.
 using AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout.
 using AutoEdge.Factory.Client.Common.PresentationLayer.DealerLoginPanel.
 using AutoEdge.Factory.Client.Common.PresentationLayer.LightboxForm.
-using AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail.  
+using AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail.
 using AutoEdge.Factory.Client.Order.PresentationLayer.TaskDetailForm.
 using AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm.
 using AutoEdge.Factory.Client.Common.PresentationLayer.CreateProcessInstance.
@@ -44,9 +44,9 @@ using OpenEdge.Core.System.UnhandledError.
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.XML.WebServiceInvocationError.
 using OpenEdge.Lang.BPM.Task.
-using OpenEdge.Lang.BPM.IBizLogicAPI.  
+using OpenEdge.Lang.BPM.IBizLogicAPI.
 using OpenEdge.Lang.BPM.WorkItemStatusEnum.
-using OpenEdge.Lang.BPM.WorkItem. 
+using OpenEdge.Lang.BPM.WorkItem.
 using OpenEdge.Lang.BPM.DataSlotInstance.
 using OpenEdge.Lang.BPM.ProcessTemplate.
 using OpenEdge.Lang.ABLSession.
@@ -61,7 +61,7 @@ using Progress.Lang.Object.
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         implements IApplicationStart:
-    
+
     define private variable imageListSmall as System.Windows.Forms.ImageList no-undo.
     define private variable imageListLarge as System.Windows.Forms.ImageList no-undo.
     define private variable m_DealerReview_Toolbars_Dock_Area_Top as Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea no-undo.
@@ -75,7 +75,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
 
     define private variable uxAccordion as Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar no-undo.
     define private variable uxStatus as Infragistics.Win.UltraWinStatusBar.UltraStatusBar no-undo.
-    
+
     define public property ServiceManager as IServiceManager no-undo
         get():
             if not valid-object(ServiceManager) then
@@ -83,7 +83,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             return ServiceManager.
         end get.
         private set.
-    
+
     define protected property SecMgr as ISecurityManager no-undo
         get():
             if not valid-object(SecMgr) then
@@ -99,7 +99,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             return ConMgr.
         end get.
         private set.
-    
+
     define protected property BizLogicService as IBizLogicAPI no-undo
         get():
             define variable oServerConnection as IServerConnection no-undo.
@@ -116,13 +116,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             return BizLogicService.
         end get.
         set.
-    
+
     constructor public DealerReview (  ):
         super().
-        
+
         InitializeComponent().
         InitUI().
-        
+
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
@@ -130,15 +130,15 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
 
     method protected void InitUI():
         define variable cTool as character extent no-undo.
-        
+
         uxAccordion:Groups:Item["Orders"]:Enabled = false.
         uxAccordion:Groups:Item["AllTasks"]:Enabled = false.
-        
+
         extent(cTool) = ?.
         extent(cTool) = 1.
         cTool[1] = 'DealerLogin'.
         SetToolState(cTool, true).
-        
+
         extent(cTool) = ?.
         extent(cTool) = 2.
         cTool[1] = 'DealerLogout'.
@@ -147,12 +147,12 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
     end method.
 
     method private void InitializeComponent(  ):
-        
+
         /* NOTE: The following method is automatically generated.
-        
+
         We strongly suggest that the contents of this method only be modified using the
         Visual Designer to avoid any incompatible modifications.
-        
+
         Modifying the contents of this method using a code editor will invalidate any support for this file. */
         this-object:components = new System.ComponentModel.Container().
         @VisualDesigner.FormMember (NeedsInitialize="true").
@@ -355,9 +355,9 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         this-object:m_DealerReview_Toolbars_Dock_Area_Left:BackColor = System.Drawing.SystemColors:Control.
         this-object:m_DealerReview_Toolbars_Dock_Area_Left:DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition:Left.
         this-object:m_DealerReview_Toolbars_Dock_Area_Left:ForeColor = System.Drawing.SystemColors:ControlText.
-        this-object:m_DealerReview_Toolbars_Dock_Area_Left:Location = new System.Drawing.Point(0, 35).
+        this-object:m_DealerReview_Toolbars_Dock_Area_Left:Location = new System.Drawing.Point(0, 60).
         this-object:m_DealerReview_Toolbars_Dock_Area_Left:Name = "m_DealerReview_Toolbars_Dock_Area_Left".
-        this-object:m_DealerReview_Toolbars_Dock_Area_Left:Size = new System.Drawing.Size(0, 495).
+        this-object:m_DealerReview_Toolbars_Dock_Area_Left:Size = new System.Drawing.Size(0, 470).
         this-object:m_DealerReview_Toolbars_Dock_Area_Left:ToolbarsManager = this-object:ultraToolbarsManager1.
         /*  */
         /* m_DealerReview_Toolbars_Dock_Area_Right */
@@ -366,9 +366,9 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         this-object:m_DealerReview_Toolbars_Dock_Area_Right:BackColor = System.Drawing.SystemColors:Control.
         this-object:m_DealerReview_Toolbars_Dock_Area_Right:DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition:Right.
         this-object:m_DealerReview_Toolbars_Dock_Area_Right:ForeColor = System.Drawing.SystemColors:ControlText.
-        this-object:m_DealerReview_Toolbars_Dock_Area_Right:Location = new System.Drawing.Point(974, 35).
+        this-object:m_DealerReview_Toolbars_Dock_Area_Right:Location = new System.Drawing.Point(974, 60).
         this-object:m_DealerReview_Toolbars_Dock_Area_Right:Name = "m_DealerReview_Toolbars_Dock_Area_Right".
-        this-object:m_DealerReview_Toolbars_Dock_Area_Right:Size = new System.Drawing.Size(0, 495).
+        this-object:m_DealerReview_Toolbars_Dock_Area_Right:Size = new System.Drawing.Size(0, 470).
         this-object:m_DealerReview_Toolbars_Dock_Area_Right:ToolbarsManager = this-object:ultraToolbarsManager1.
         /*  */
         /* m_DealerReview_Toolbars_Dock_Area_Top */
@@ -379,7 +379,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         this-object:m_DealerReview_Toolbars_Dock_Area_Top:ForeColor = System.Drawing.SystemColors:ControlText.
         this-object:m_DealerReview_Toolbars_Dock_Area_Top:Location = new System.Drawing.Point(0, 0).
         this-object:m_DealerReview_Toolbars_Dock_Area_Top:Name = "m_DealerReview_Toolbars_Dock_Area_Top".
-        this-object:m_DealerReview_Toolbars_Dock_Area_Top:Size = new System.Drawing.Size(974, 35).
+        this-object:m_DealerReview_Toolbars_Dock_Area_Top:Size = new System.Drawing.Size(974, 60).
         this-object:m_DealerReview_Toolbars_Dock_Area_Top:ToolbarsManager = this-object:ultraToolbarsManager1.
         /*  */
         /* m_DealerReview_Toolbars_Dock_Area_Bottom */
@@ -427,18 +427,18 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         this-object:uxAccordion:ImageListLarge = this-object:imageListLarge.
         this-object:uxAccordion:ImageListSmall = this-object:imageListSmall.
         this-object:uxAccordion:ItemSettings:Style = Infragistics.Win.UltraWinExplorerBar.ItemStyle:Button.
-        this-object:uxAccordion:Location = new System.Drawing.Point(0, 35).
+        this-object:uxAccordion:Location = new System.Drawing.Point(0, 60).
         this-object:uxAccordion:Name = "uxAccordion".
-        this-object:uxAccordion:Size = new System.Drawing.Size(261, 495).
+        this-object:uxAccordion:Size = new System.Drawing.Size(261, 470).
         this-object:uxAccordion:Style = Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarStyle:Listbar.
         this-object:uxAccordion:TabIndex = 12.
         this-object:uxAccordion:ItemClick:Subscribe(this-object:uxAccordion_ItemClick).
         /*  */
         /* splitter1 */
         /*  */
-        this-object:splitter1:Location = new System.Drawing.Point(261, 35).
+        this-object:splitter1:Location = new System.Drawing.Point(261, 60).
         this-object:splitter1:Name = "splitter1".
-        this-object:splitter1:Size = new System.Drawing.Size(10, 495).
+        this-object:splitter1:Size = new System.Drawing.Size(10, 470).
         this-object:splitter1:TabIndex = 13.
         this-object:splitter1:TabStop = false.
         /*  */
@@ -465,7 +465,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             undo, throw e.
         end catch.
     end method.
-    
+
     method public void TaskCompletedHandler(input poSender as Object, input poTask as Task):
         define variable oGroup as UltraExplorerBarGroup no-undo.
         define variable oItem as UltraExplorerBarItem no-undo.
@@ -473,34 +473,34 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
         define variable oTag as TagWrapper no-undo.
-         
+
         oItem = uxAccordion:Groups:Item['AllTasks']:Items:Item[string(poTask:WorkItem:Id)].
         oTag = cast(oItem:Tag, TagWrapper).
-        
-        iMax = MdiChildren:Length - 1.        
+
+        iMax = MdiChildren:Length - 1.
         do iLoop = iMax to 0 by -1:
             oForm = cast(MdiChildren:GetValue(iLoop), Form).
             if type-of(oForm, CustomerOrderDetail) and
                cast(oForm, CustomerOrderDetail):CurrentTask:Equals(cast(oTag:PABLO, Task)) then
                 oForm:Close().
         end.
-        
+
         uxAccordion:Groups:Item['AllTasks']:Items:Remove(oItem).
     end method.
-    
+
     method private void uxAccordion_ItemClick( input sender as System.Object, input e as Infragistics.Win.UltraWinExplorerBar.ItemEventArgs):
         define variable oTags as TagWrapper extent no-undo.
         define variable oTask as Task no-undo.
         define variable oForm as Form no-undo.
-        
+
         case e:Item:Group:Key:
             when 'AllTasks' then
             do:
                 oTask = cast(cast(e:Item:Tag, TagWrapper):PABLO, Task).
                 oForm = new CustomerOrderDetail(BizLogicService, oTask).
-                
+
                 oForm:FormClosed:Subscribe(CustomerOrderDetail_FormClosed).
-                
+
                 cast(oForm, CustomerOrderDetail):TaskCompleted:Subscribe(TaskCompletedHandler).
             end.
             otherwise
@@ -511,13 +511,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
                 end case.
             end.
         end case.
-        
+
         if valid-object(oForm) then
         do:
             oForm:MdiParent = this-object.
             oForm:Show().
         end.
-    
+
         catch oAppError as ApplicationError:
             oAppError:ShowError().
         end catch.
@@ -527,7 +527,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             oUHError:ShowError().
         end catch.
     end method.
-    
+
     method private void ultraToolbarsManager1_ToolClick( input sender as System.Object, input e as Infragistics.Win.UltraWinToolbars.ToolClickEventArgs ):
         do on error undo, throw:
             case e:Tool:Key:
@@ -549,25 +549,25 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             oAppError:ShowError().
         end catch.
     end method.
-    
+
     method protected void ShowHelp():
         define variable oHelpAbout as HelpAbout no-undo.
-        
-        oHelpAbout = new HelpAbout().
+
+        oHelpAbout = new HelpAbout(this-object:GetClass()).
         wait-for oHelpAbout:ShowDialog().
-        
+
         oHelpAbout = ?.
     end method.
-    
+
     method protected void RefreshTasksList():
         session:set-wait-state('general').
-        
+
         /* Empty all the existing orders */
         ClearTasks().
-        
+
         PopulateTaskList(BizLogicService:GetAssignedTasks()).
         PopulateTaskList(BizLogicService:GetAvailableTasks()).
-        
+
         finally:
             session:set-wait-state('').
         end finally.
@@ -577,88 +577,88 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         def var iIndex as integer no-undo.
         def var iLoop as integer no-undo.
         define variable oTool as ToolBase no-undo.
-        
+
         do iLoop = 1 to extent(pcTool):
             iIndex = ultraToolbarsManager1:Tools:IndexOf(pcTool[iLoop]).
             if iIndex ge 0 then
                 oTool = cast(ultraToolbarsManager1:Tools:GetItem(iIndex), ButtonTool).
-            
+
             if valid-object(oTool) then
                 oTool:SharedProps:Enabled = plEnable.
         end.
     end method.
-    
+
     method protected void DealerLogout():
         define variable cTool as character extent no-undo.
-        
+
         SecMgr:UserLogout().
-        
+
         extent(cTool) = 1.
         cTool[1] = 'DealerLogin'.
         SetToolState(cTool, true).
-        
+
         extent(cTool) = ?.
         extent(cTool) = 1.
         cTool[1] = 'DealerLogout'.
         SetToolState(cTool, false).
-        
+
         ClearTasks().
         uxAccordion:Groups:Item["AllTasks"]:Enabled = false.
     end method.
-    
+
     method protected void DealerLogin():
         define variable oFrame as DealerLoginPanel extent 1 no-undo.
         define variable oDealerLoginForm as LightboxForm no-undo.
-        
+
         oFrame[1] = new DealerLoginPanel().
-        
+
         /* position where we want it on *this* form */
         oFrame[1]:Location = new Point(
             int((this-object:Size:Width / 2) - (oFrame[1]:Size:Width / 2 )),
             int((this-object:Size:Height / 2) - (oFrame[1]:Size:Height / 2 ) )).
-        
+
         oDealerLoginForm = new LightboxForm(this-object, oFrame).
-        
-        oDealerLoginForm:FormClosed:Subscribe(this-object:DealerLogin_FormClosed).        
+
+        oDealerLoginForm:FormClosed:Subscribe(this-object:DealerLogin_FormClosed).
         oDealerLoginForm:Show().
     end method.
 
     method public void CustomerOrderDetail_FormClosed( input sender as System.Object, input e as FormClosedEventArgs):
         cast(sender, CustomerOrderDetail):TaskCompleted:Unsubscribe(TaskCompletedHandler).
     end method.
-    
+
     method public void DealerLogin_FormClosed( input sender as System.Object, input e as FormClosedEventArgs):
         define variable oUC as IUserContext no-undo.
         define variable oPropertyValue as String no-undo.
         define variable cText as character no-undo.
         define variable cTool as character extent no-undo.
         define variable lValidBpmSession as logical no-undo.
-        
-        oUC = cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):CurrentUserContext. 
-        
+
+        oUC = cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):CurrentUserContext.
+
         if valid-object(oUC) then
         do:
             lValidBpmSession = BizLogicService:IsSessionValid().
-            
+
             extent(cTool) = ?.
             extent(cTool) = 1.
             cTool[1] = 'RefreshTasksList'.
             SetToolState(cTool, lValidBpmSession).
             RefreshTasksList().
-            
+
             extent(cTool) = ?.
             extent(cTool) = 1.
             cTool[1] = 'DealerLogin'.
             SetToolState(cTool, false).
-            
+
             extent(cTool) = ?.
             extent(cTool) = 1.
             cTool[1] = 'DealerLogout'.
             SetToolState(cTool, true).
-            
+
             uxAccordion:Groups:Item["AllTasks"]:Enabled = lValidBpmSession.
         end.
-        
+
         catch oAppError as ApplicationError:
             oAppError:ShowError().
         end catch.
@@ -668,7 +668,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             oUnhandledError:ShowError().
         end catch.
     end method.
-    
+
     method private void PopulateTaskList(input poTaskList as Task extent):
         define variable cOrderNum as character no-undo.
         define variable cDealerCode as character no-undo.
@@ -682,15 +682,15 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         define variable oItem as UltraExplorerBarItem no-undo.
         define variable oDSI as DataSlotInstance no-undo.
         define variable oPropertyValue as String no-undo.
-        
+
         oGroup = uxAccordion:Groups:Item['AllTasks'].
         if valid-object(oGroup) and extent(poTaskList) ne ? then
         do:
             oPropertyValue = cast(cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager)
-                                :CurrentUserContext:UserProperties:Get(new String('Dealer.Code')), String).            
+                                :CurrentUserContext:UserProperties:Get(new String('Dealer.Code')), String).
             if valid-object(oPropertyValue) then
                 cDealerCode = oPropertyValue:Value.
-            
+
             iMax = extent(poTaskList).
             do iLoop = 1 to iMax:
                 if valid-object(poTaskList[iLoop]) and poTaskList[iLoop]:WorkItem:WorkStepName eq 'DealerReview' then
@@ -699,44 +699,44 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
                     /* Only show order for the current dealer (per login) */
                     if not valid-object(oDSI) or oDSI:Value ne cDealerCode then
                         next.
-                        
+
                     oDSI = cast(poTaskList[iLoop]:DataSlots:Get(new String('OrderNum')), DataSlotInstance).
                     if valid-object(oDSI) then
                         cLabel = string(oDSI:Value).
                     else
                         cLabel = poTaskList[iLoop]:WorkItem:ProcessInstanceName.
-                    
+
                     oItem = oGroup:Items:Add(string(poTaskList[iLoop]:WorkItem:Id), cLabel).
-                    
+
                     if ReviewIsOverdue(poTaskList[iLoop]:WorkItem:duedate) then
                         assign oItem:Settings:AppearancesLarge:Appearance:Image = 'date_error_32x32.png'
                                oItem:Settings:AppearancesSmall:Appearance:Image = 'date_error_16x16.png'.
                     else
                         assign oItem:Settings:AppearancesLarge:Appearance:Image = 'date_32x32.png'
                                oItem:Settings:AppearancesSmall:Appearance:Image = 'date_16x16.png'.
-                    
+
                     oTag = new TagWrapper(poTaskList[iLoop]).
                     oItem:Tag = oTag.
                 end.
             end.
         end.
     end method.
-    
+
     method public logical ReviewIsOverdue (pcDueDate as datetime-tz):
         return (interval(today, pcDueDate, 'hours') ge 6).
     end method.
-    
+
     method protected void ClearTasks():
         define variable oGroup as UltraExplorerBarGroup no-undo.
         define variable oForm as Form no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
-        
+
         oGroup = uxAccordion:Groups:Item['AllTasks'].
         if valid-object(oGroup) then
         do:
             oGroup:Items:Clear().
-            iMax = MdiChildren:Length - 1.        
+            iMax = MdiChildren:Length - 1.
             do iLoop = iMax to 0 by -1:
                 if type-of(MdiChildren:GetValue(iLoop), CustomerOrderDetail) then
                 do:
@@ -746,14 +746,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             end.
         end.
     end method.
-    
+
     destructor public DealerReview ( ):
         SecMgr:UserLogout().
-        
+
         if valid-object(components) then do:
             cast(components, System.IDisposable):Dispose().
         end.
     end destructor.
 
 end class.
-        
