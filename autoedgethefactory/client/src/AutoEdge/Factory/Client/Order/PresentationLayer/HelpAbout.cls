@@ -1,13 +1,16 @@
 /** ------------------------------------------------------------------------
     File        : HelpAbout
-    Purpose     : 
-    Syntax      : 
-    Description : 
+    Purpose     :
+    Syntax      :
+    Description :
     Author(s)   : pjudge
     Created     : Fri Jun 03 14:18:58 EDT 2011
-    Notes       : 
+    Notes       :
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
+
+using Infragistics.Win.UltraWinTabControl.UltraTab.
+using Progress.Windows.Form.
 
 using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
 using OpenEdge.CommonInfrastructure.Common.Connection.BpmServerConnection.
@@ -27,43 +30,47 @@ using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.XML.WebServiceInvocationError.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.BPM.Task.
-using OpenEdge.Lang.BPM.IBizLogicAPI.  
+using OpenEdge.Lang.BPM.IBizLogicAPI.
 using OpenEdge.Lang.BPM.WorkItemStatusEnum.
-using OpenEdge.Lang.BPM.WorkItem. 
+using OpenEdge.Lang.BPM.WorkItem.
 using OpenEdge.Lang.BPM.DataSlotInstance.
 using OpenEdge.Lang.BPM.ProcessTemplate.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
 
-using Progress.Lang.*.
-using Progress.Windows.Form.
+using Progress.Lang.Class.
+using Progress.Lang.Object.
 
 
 class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
-     
-	define private temp-table ttSetting no-undo
-	   field SettingGroup as character
-	   field Order as integer
-	   field Key as character
-	   field SettingValue as character
-	   index idx1 as primary SettingGroup Key 
-	   index idx2 SettingGroup Order.
-    
-    define private query qrySettings for ttSetting scrolling.
-    
+
+    define private temp-table mSettingData no-undo
+        field SettingGroup as character
+        field Order as integer
+        field Key as character
+        field SettingValue as character
+        index idx1 as primary SettingGroup Key
+        index idx2 SettingGroup Order.
+    define private query mQrySettings for mSettingData scrolling.
+
+    define variable mcDocURL as character no-undo.
+
     define private variable bsSettings as Progress.Data.BindingSource no-undo.
-	define private variable components as System.ComponentModel.IContainer no-undo.
+    define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable imageList1 as System.Windows.Forms.ImageList no-undo.
     define private variable ultraPanel1 as Infragistics.Win.Misc.UltraPanel no-undo.
     define private variable ultraTabPageControl3 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabPageControl2 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
+    define private variable ultraTabPageControl5 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabSharedControlsPage1 as Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage no-undo.
     define private variable ultraTabPageControl1 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable uxDetail as Infragistics.Win.UltraWinGrid.UltraGrid no-undo.
     define private variable uxLogo as Infragistics.Win.UltraWinEditors.UltraPictureBox no-undo.
     define private variable uxSettingsGroup as Infragistics.Win.UltraWinTabControl.UltraTabControl no-undo.
     define private variable uxVersionInfo as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
+    define private variable uxWebBrowser as System.Windows.Forms.WebBrowser no-undo.
+    define private variable uxWebBrowserPanel as Infragistics.Win.Misc.UltraPanel no-undo.
 
     define public property ServiceManager as IServiceManager no-undo
         get():
@@ -72,7 +79,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
             return ServiceManager.
         end get.
         private set.
-    
+
     define protected property SecMgr as ISecurityManager no-undo
         get():
             if not valid-object(SecMgr) then
@@ -88,7 +95,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
             return ConMgr.
         end get.
         private set.
-    
+
     define protected property BizLogicService as IBizLogicAPI no-undo
         get():
             define variable oServerConnection as IServerConnection no-undo.
@@ -105,33 +112,49 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
             return BizLogicService.
         end get.
         set.
-    
-		
-	constructor public HelpAbout (  ):
+
+    /** Shows help about a class.
+
+        @param Class The caller of this dialog */
+    constructor public HelpAbout(input poCaller as class Class):
+        define variable oTab as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
+
+        this-object().
+
+        mcDocURL = BuildAutoDoxURL(poCaller).
+        oTab = uxSettingsGroup:Tabs['uxCodeDoc'].
+        oTab:Enabled = true.
+    end constructor.
+
+    constructor public HelpAbout():
         super().
+
         InitializeComponent().
-                
+
         InitData().
+
+        /* default to not show any code documentation */
+        uxSettingsGroup:Tabs['uxCodeDoc']:Enabled = false.
+
         ShowHelp().
-        
+
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end constructor.
-	
+    end constructor.
 
-	method protected void ShowHelp():
+    method protected void ShowHelp():
         define variable cVersion as character no-undo.
-        
+
         input from 'version.txt'.
             import unformatted cVersion.
         input close.
-        
+
         uxVersionInfo:Text = cVersion.
 
     end method.
-    
-	method protected void InitData():
+
+    method protected void InitData():
         define variable cBpmSessionId as character no-undo.
         define variable cBpmServerHost as character no-undo.
         define variable lBpmServerConnected as logical no-undo.
@@ -147,61 +170,61 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         define variable iLoop as integer no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oKey as Object no-undo.
-        
+
         cUnknownString = '<unknown>'.
-        
+
         /* servers */
         oServerConnection = ConMgr:GetServerConnection(ConnectionTypeEnum:BpmServer, 'bpmAutoEdgeTheFactory').
-        if valid-object(oServerConnection) then 
+        if valid-object(oServerConnection) then
             assign cBpmServerHost = string(oServerConnection:ConnectionParameters:GetConnectionString())
                    lBpmServerConnected = oServerConnection:IsConnected.
         else
             assign cBpmServerHost = cUnknownString
-                   lBpmServerConnected = false. 
+                   lBpmServerConnected = false.
 
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'BPM'
-               ttSetting.Order = 1
-               ttSetting.Key = 'Bpm Server Name'
-               ttSetting.SettingValue = 'bpmAutoEdgeTheFactory'.
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'BPM'
+               mSettingData.Order = 1
+               mSettingData.Key = 'Bpm Server Name'
+               mSettingData.SettingValue = 'bpmAutoEdgeTheFactory'.
 
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'BPM'
-               ttSetting.Order = 2
-               ttSetting.Key = 'Bpm Server Host'
-               ttSetting.SettingValue = cBpmServerHost.
-        
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'BPM'
-               ttSetting.Order = 3
-               ttSetting.Key = 'IsConnected'
-               ttSetting.SettingValue = string(lBpmServerConnected).
-        
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'BPM'
+               mSettingData.Order = 2
+               mSettingData.Key = 'Bpm Server Host'
+               mSettingData.SettingValue = cBpmServerHost.
+
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'BPM'
+               mSettingData.Order = 3
+               mSettingData.Key = 'IsConnected'
+               mSettingData.SettingValue = string(lBpmServerConnected).
+
         oServerConnection = ConMgr:GetServerConnection(ConnectionTypeEnum:AppServer, 'asAutoEdgeTheFactory').
-        if valid-object(oServerConnection) then 
+        if valid-object(oServerConnection) then
             assign cAppServerHost = string(oServerConnection:ConnectionParameters:GetConnectionString())
                    lAppServerConnected = oServerConnection:IsConnected.
         else
             assign cAppServerHost = cUnknownString
-                   lAppServerConnected = false. 
+                   lAppServerConnected = false.
 
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'OPENEDGE'
-               ttSetting.Order = 1
-               ttSetting.Key = 'AppServer Name'
-               ttSetting.SettingValue = 'asAutoEdgeTheFactory'.
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'OPENEDGE'
+               mSettingData.Order = 1
+               mSettingData.Key = 'AppServer Name'
+               mSettingData.SettingValue = 'asAutoEdgeTheFactory'.
 
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'OPENEDGE'
-               ttSetting.Order = 2
-               ttSetting.Key = 'AppServer Host'
-               ttSetting.SettingValue = cAppServerHost.
-        
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'OPENEDGE'
-               ttSetting.Order = 3
-               ttSetting.Key = 'IsConnected'
-               ttSetting.SettingValue = string(lAppServerConnected).
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'OPENEDGE'
+               mSettingData.Order = 2
+               mSettingData.Key = 'AppServer Host'
+               mSettingData.SettingValue = cAppServerHost.
+
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'OPENEDGE'
+               mSettingData.Order = 3
+               mSettingData.Key = 'IsConnected'
+               mSettingData.SettingValue = string(lAppServerConnected).
 
         oUC = cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):CurrentUserContext.
         if valid-object(oUC) then
@@ -213,46 +236,47 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
             oIterator = oUC:UserProperties:KeySet:Iterator().
             do while oIterator:HasNext():
                 oKey = oIterator:Next().
-                
-                create ttSetting.
-                assign ttSetting.SettingGroup = 'USER'
-                       ttSetting.Order = iLoop
+
+                create mSettingData.
+                assign mSettingData.SettingGroup = 'USER'
+                       mSettingData.Order = iLoop
                        iLoop = iLoop + 1
-                       ttSetting.Key = oKey:ToString()
-                       ttSetting.SettingValue = oUC:UserProperties:Get(oKey):ToString().
+                       mSettingData.Key = oKey:ToString()
+                       mSettingData.SettingValue = oUC:UserProperties:Get(oKey):ToString().
             end.
         end.
-        else                   
+        else
             assign cUserName = cUnknownString
                    cUserDomain = cUnknownString
                    cTenantName = cUnknownString.
-        
-        create ttSetting.        
-        assign ttSetting.SettingGroup = 'USER'
-               ttSetting.Order = 1
-               ttSetting.Key = 'Login Name'
-               ttSetting.SettingValue = cUserName.
-        
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'USER'
-               ttSetting.Order = 2
-               ttSetting.Key = 'Login Domain'
-               ttSetting.SettingValue = cUserDomain.       
 
-        create ttSetting.
-        assign ttSetting.SettingGroup = 'USER'
-               ttSetting.Order = 3
-               ttSetting.Key = 'Tenant Name'
-               ttSetting.SettingValue = cTenantName.
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'USER'
+               mSettingData.Order = 1
+               mSettingData.Key = 'Login Name'
+               mSettingData.SettingValue = cUserName.
+
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'USER'
+               mSettingData.Order = 2
+               mSettingData.Key = 'Login Domain'
+               mSettingData.SettingValue = cUserDomain.
+
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'USER'
+               mSettingData.Order = 3
+               mSettingData.Key = 'Tenant Name'
+               mSettingData.SettingValue = cTenantName.
+
     end method.
-    
-	method private void InitializeComponent(  ):
-		
+
+    method private void InitializeComponent(  ):
+
         /* NOTE: The following method is automatically generated.
-        
+
         We strongly suggest that the contents of this method only be modified using the
         Visual Designer to avoid any incompatible modifications.
-        
+
         Modifying the contents of this method using a code editor will invalidate any support for this file. */
         this-object:components = new System.ComponentModel.Container().
         @VisualDesigner.FormMember (NeedsInitialize="true").
@@ -260,7 +284,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         appearance81 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraGridBand1 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
-        ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("ttSetting", -1).
+        ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("mSettingData", -1).
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraGridColumn1 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
         ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Key").
@@ -308,7 +332,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         appearance94 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable tableDesc1 as Progress.Data.TableDesc no-undo.
-        tableDesc1 = new Progress.Data.TableDesc("ttSetting").
+        tableDesc1 = new Progress.Data.TableDesc("mSettingData").
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable resources as Progress.Util.ResourceManager no-undo.
         resources = new Progress.Util.ResourceManager("AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout").
@@ -333,17 +357,28 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance5 as Infragistics.Win.Appearance no-undo.
         appearance5 = new Infragistics.Win.Appearance().
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraTab5 as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
+        ultraTab5 = new Infragistics.Win.UltraWinTabControl.UltraTab().
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable appearance3 as Infragistics.Win.Appearance no-undo.
+        appearance3 = new Infragistics.Win.Appearance().
+        this-object:uxWebBrowserPanel = new Infragistics.Win.Misc.UltraPanel().
+        this-object:uxWebBrowser = new System.Windows.Forms.WebBrowser().
         this-object:ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
-        this-object:uxDetail = new Infragistics.Win.UltraWinGrid.UltraGrid().
-        this-object:bsSettings = new Progress.Data.BindingSource(this-object:components).
         this-object:ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraTabPageControl3 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
+        this-object:uxDetail = new Infragistics.Win.UltraWinGrid.UltraGrid().
+        this-object:bsSettings = new Progress.Data.BindingSource(this-object:components).
+        this-object:ultraTabPageControl5 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraPanel1 = new Infragistics.Win.Misc.UltraPanel().
         this-object:uxLogo = new Infragistics.Win.UltraWinEditors.UltraPictureBox().
         this-object:uxVersionInfo = new Infragistics.Win.UltraWinEditors.UltraTextEditor().
         this-object:imageList1 = new System.Windows.Forms.ImageList(this-object:components).
         this-object:uxSettingsGroup = new Infragistics.Win.UltraWinTabControl.UltraTabControl().
         this-object:ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage().
+        this-object:uxWebBrowserPanel:ClientArea:SuspendLayout().
+        this-object:uxWebBrowserPanel:SuspendLayout().
         this-object:ultraTabPageControl1:SuspendLayout().
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):BeginInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):BeginInit().
@@ -355,12 +390,47 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:ultraTabSharedControlsPage1:SuspendLayout().
         this-object:SuspendLayout().
         /*  */
+        /* uxWebBrowserPanel */
+        /*  */
+        /*  */
+        /* uxWebBrowserPanel.ClientArea */
+        /*  */
+        this-object:uxWebBrowserPanel:ClientArea:Controls:Add(this-object:uxWebBrowser).
+        this-object:uxWebBrowserPanel:Dock = System.Windows.Forms.DockStyle:Fill.
+        this-object:uxWebBrowserPanel:Location = new System.Drawing.Point(0, 0).
+        this-object:uxWebBrowserPanel:Name = "uxWebBrowserPanel".
+        this-object:uxWebBrowserPanel:Size = new System.Drawing.Size(452, 187).
+        this-object:uxWebBrowserPanel:TabIndex = 2.
+        /*  */
+        /* uxWebBrowser */
+        /*  */
+        this-object:uxWebBrowser:AllowNavigation = false.
+        this-object:uxWebBrowser:Dock = System.Windows.Forms.DockStyle:Fill.
+        this-object:uxWebBrowser:Location = new System.Drawing.Point(0, 0).
+        this-object:uxWebBrowser:MinimumSize = new System.Drawing.Size(20, 20).
+        this-object:uxWebBrowser:Name = "uxWebBrowser".
+        this-object:uxWebBrowser:ScriptErrorsSuppressed = true.
+        this-object:uxWebBrowser:Size = new System.Drawing.Size(452, 187).
+        this-object:uxWebBrowser:TabIndex = 0.
+        /*  */
         /* ultraTabPageControl1 */
         /*  */
         this-object:ultraTabPageControl1:Controls:Add(this-object:uxDetail).
         this-object:ultraTabPageControl1:Location = new System.Drawing.Point(38, 1).
         this-object:ultraTabPageControl1:Name = "ultraTabPageControl1".
-        this-object:ultraTabPageControl1:Size = new System.Drawing.Size(315, 181).
+        this-object:ultraTabPageControl1:Size = new System.Drawing.Size(452, 187).
+        /*  */
+        /* ultraTabPageControl2 */
+        /*  */
+        this-object:ultraTabPageControl2:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl2:Name = "ultraTabPageControl2".
+        this-object:ultraTabPageControl2:Size = new System.Drawing.Size(452, 187).
+        /*  */
+        /* ultraTabPageControl3 */
+        /*  */
+        this-object:ultraTabPageControl3:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl3:Name = "ultraTabPageControl3".
+        this-object:ultraTabPageControl3:Size = new System.Drawing.Size(452, 187).
         /*  */
         /* uxDetail */
         /*  */
@@ -373,12 +443,12 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         ultraGridColumn1:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
         ultraGridColumn1:Header:Fixed = true.
         ultraGridColumn1:Header:VisiblePosition = 0.
-        ultraGridColumn1:Width = 153.
+        ultraGridColumn1:Width = 203.
         ultraGridColumn2:AllowGroupBy = Infragistics.Win.DefaultableBoolean:False.
         ultraGridColumn2:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
         ultraGridColumn2:Header:Fixed = true.
         ultraGridColumn2:Header:VisiblePosition = 1.
-        ultraGridColumn2:Width = 160.
+        ultraGridColumn2:Width = 247.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
         define variable arrayvar0 as System.Object extent 2 no-undo.
         arrayvar0[1] = ultraGridColumn1.
@@ -451,7 +521,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxDetail:Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle:Regular, System.Drawing.GraphicsUnit:Point, System.Convert:ToByte(0)).
         this-object:uxDetail:Location = new System.Drawing.Point(0, 0).
         this-object:uxDetail:Name = "uxDetail".
-        this-object:uxDetail:Size = new System.Drawing.Size(315, 181).
+        this-object:uxDetail:Size = new System.Drawing.Size(452, 187).
         this-object:uxDetail:TabIndex = 1.
         this-object:uxDetail:Text = "User Detail".
         /*  */
@@ -471,17 +541,11 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         tableDesc1:Columns = arrayvar2.
         this-object:bsSettings:TableSchema = tableDesc1.
         /*  */
-        /* ultraTabPageControl2 */
+        /* ultraTabPageControl5 */
         /*  */
-        this-object:ultraTabPageControl2:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl2:Name = "ultraTabPageControl2".
-        this-object:ultraTabPageControl2:Size = new System.Drawing.Size(315, 181).
-        /*  */
-        /* ultraTabPageControl3 */
-        /*  */
-        this-object:ultraTabPageControl3:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl3:Name = "ultraTabPageControl3".
-        this-object:ultraTabPageControl3:Size = new System.Drawing.Size(315, 181).
+        this-object:ultraTabPageControl5:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl5:Name = "ultraTabPageControl5".
+        this-object:ultraTabPageControl5:Size = new System.Drawing.Size(452, 187).
         /*  */
         /* ultraPanel1 */
         /*  */
@@ -492,7 +556,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:ultraPanel1:Dock = System.Windows.Forms.DockStyle:Top.
         this-object:ultraPanel1:Location = new System.Drawing.Point(0, 0).
         this-object:ultraPanel1:Name = "ultraPanel1".
-        this-object:ultraPanel1:Size = new System.Drawing.Size(354, 61).
+        this-object:ultraPanel1:Size = new System.Drawing.Size(491, 55).
         this-object:ultraPanel1:TabIndex = 0.
         /*  */
         /* uxLogo */
@@ -502,7 +566,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxLogo:Image = cast(resources:GetObject("uxLogo.Image"), System.Object).
         this-object:uxLogo:Location = new System.Drawing.Point(0, 0).
         this-object:uxLogo:Name = "uxLogo".
-        this-object:uxLogo:Size = new System.Drawing.Size(354, 50).
+        this-object:uxLogo:Size = new System.Drawing.Size(491, 50).
         this-object:uxLogo:TabIndex = 1.
         /*  */
         /* uxVersionInfo */
@@ -515,11 +579,11 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxVersionInfo:BackColor = System.Drawing.Color:White.
         this-object:uxVersionInfo:Dock = System.Windows.Forms.DockStyle:Top.
         this-object:uxVersionInfo:Enabled = false.
-        this-object:uxVersionInfo:Location = new System.Drawing.Point(0, 61).
+        this-object:uxVersionInfo:Location = new System.Drawing.Point(0, 55).
         this-object:uxVersionInfo:Multiline = true.
         this-object:uxVersionInfo:Name = "uxVersionInfo".
         this-object:uxVersionInfo:ShowOverflowIndicator = true.
-        this-object:uxVersionInfo:Size = new System.Drawing.Size(354, 43).
+        this-object:uxVersionInfo:Size = new System.Drawing.Size(491, 43).
         this-object:uxVersionInfo:TabIndex = 0.
         this-object:uxVersionInfo:TabStop = false.
         /*  */
@@ -532,6 +596,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:imageList1:Images:SetKeyName(2, "user_orange.png").
         this-object:imageList1:Images:SetKeyName(3, "progress.ico").
         this-object:imageList1:Images:SetKeyName(4, "aetf_logo.png").
+        this-object:imageList1:Images:SetKeyName(5, "source_p_32x32.png").
         /*  */
         /* uxSettingsGroup */
         /*  */
@@ -539,17 +604,19 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl1).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl2).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl3).
+        this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl5).
         this-object:uxSettingsGroup:Dock = System.Windows.Forms.DockStyle:Fill.
         this-object:uxSettingsGroup:ImageList = this-object:imageList1.
         this-object:uxSettingsGroup:ImageSize = new System.Drawing.Size(32, 32).
-        this-object:uxSettingsGroup:Location = new System.Drawing.Point(0, 104).
+        this-object:uxSettingsGroup:Location = new System.Drawing.Point(0, 98).
         this-object:uxSettingsGroup:Name = "uxSettingsGroup".
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar3 as System.Windows.Forms.Control extent 1 no-undo.
+        define variable arrayvar3 as System.Windows.Forms.Control extent 2 no-undo.
         arrayvar3[1] = this-object:uxDetail.
+        arrayvar3[2] = this-object:uxWebBrowserPanel.
         this-object:uxSettingsGroup:SharedControls:AddRange(arrayvar3).
         this-object:uxSettingsGroup:SharedControlsPage = this-object:ultraTabSharedControlsPage1.
-        this-object:uxSettingsGroup:Size = new System.Drawing.Size(354, 183).
+        this-object:uxSettingsGroup:Size = new System.Drawing.Size(491, 189).
         this-object:uxSettingsGroup:TabButtonStyle = Infragistics.Win.UIElementButtonStyle:Borderless.
         this-object:uxSettingsGroup:TabIndex = 1.
         this-object:uxSettingsGroup:TabOrientation = Infragistics.Win.UltraWinTabs.TabOrientation:LeftTop.
@@ -557,29 +624,57 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         appearance6:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance6:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab3:Appearance = appearance6.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar4 as System.Windows.Forms.Control extent 1 no-undo.
+        arrayvar4[1] = this-object:uxWebBrowserPanel.
+        ultraTab3:ExcludedSharedControls:AddRange(arrayvar4).
         ultraTab3:Key = "uxAETFGroup".
         ultraTab3:TabPage = this-object:ultraTabPageControl1.
         ultraTab3:Text = "".
+        ultraTab3:ToolTipText = "Application settings".
         appearance4:Image = "bpmstudio.ico".
         appearance4:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance4:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab1:Appearance = appearance4.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar5 as System.Windows.Forms.Control extent 1 no-undo.
+        arrayvar5[1] = this-object:uxWebBrowserPanel.
+        ultraTab1:ExcludedSharedControls:AddRange(arrayvar5).
         ultraTab1:Key = "uxBpmGroup".
         ultraTab1:TabPage = this-object:ultraTabPageControl2.
         ultraTab1:Text = "".
+        ultraTab1:ToolTipText = "BPM server settings ".
         appearance5:Image = "progress.ico".
         appearance5:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance5:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab2:Appearance = appearance5.
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar6 as System.Windows.Forms.Control extent 1 no-undo.
+        arrayvar6[1] = this-object:uxWebBrowserPanel.
+        ultraTab2:ExcludedSharedControls:AddRange(arrayvar6).
         ultraTab2:Key = "uxOEGroup".
         ultraTab2:TabPage = this-object:ultraTabPageControl3.
         ultraTab2:Text = "".
+        ultraTab2:ToolTipText = "OpenEdge-centric settings".
+        appearance3:Image = "source_p_32x32.png".
+        appearance3:ImageHAlign = Infragistics.Win.HAlign:Center.
+        appearance3:ImageVAlign = Infragistics.Win.VAlign:Middle.
+        ultraTab5:Appearance = appearance3.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar4 as Infragistics.Win.UltraWinTabControl.UltraTab extent 3 no-undo.
-        arrayvar4[1] = ultraTab3.
-        arrayvar4[2] = ultraTab1.
-        arrayvar4[3] = ultraTab2.
-        this-object:uxSettingsGroup:Tabs:AddRange(arrayvar4).
+        define variable arrayvar7 as System.Windows.Forms.Control extent 1 no-undo.
+        arrayvar7[1] = this-object:uxDetail.
+        ultraTab5:ExcludedSharedControls:AddRange(arrayvar7).
+        ultraTab5:Key = "uxCodeDoc".
+        ultraTab5:TabPage = this-object:ultraTabPageControl5.
+        ultraTab5:Text = "".
+        ultraTab5:ToolTipText = "Code documentation".
+        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
+        define variable arrayvar8 as Infragistics.Win.UltraWinTabControl.UltraTab extent 4 no-undo.
+        arrayvar8[1] = ultraTab3.
+        arrayvar8[2] = ultraTab1.
+        arrayvar8[3] = ultraTab2.
+        arrayvar8[4] = ultraTab5.
+        this-object:uxSettingsGroup:Tabs:AddRange(arrayvar8).
         this-object:uxSettingsGroup:UseFlatMode = Infragistics.Win.DefaultableBoolean:False.
         this-object:uxSettingsGroup:ViewStyle = Infragistics.Win.UltraWinTabControl.ViewStyle:Office2007.
         this-object:uxSettingsGroup:ActiveTabChanging:Subscribe(this-object:uxSettingsGroup_ActiveTabChanging).
@@ -587,13 +682,14 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         /* ultraTabSharedControlsPage1 */
         /*  */
         this-object:ultraTabSharedControlsPage1:Controls:Add(this-object:uxDetail).
+        this-object:ultraTabSharedControlsPage1:Controls:Add(this-object:uxWebBrowserPanel).
         this-object:ultraTabSharedControlsPage1:Location = new System.Drawing.Point(-10000, -10000).
         this-object:ultraTabSharedControlsPage1:Name = "ultraTabSharedControlsPage1".
-        this-object:ultraTabSharedControlsPage1:Size = new System.Drawing.Size(315, 181).
+        this-object:ultraTabSharedControlsPage1:Size = new System.Drawing.Size(452, 187).
         /*  */
         /* HelpAbout */
         /*  */
-        this-object:ClientSize = new System.Drawing.Size(354, 287).
+        this-object:ClientSize = new System.Drawing.Size(491, 287).
         this-object:Controls:Add(this-object:uxSettingsGroup).
         this-object:Controls:Add(this-object:uxVersionInfo).
         this-object:Controls:Add(this-object:ultraPanel1).
@@ -602,6 +698,8 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:Name = "HelpAbout".
         this-object:StartPosition = System.Windows.Forms.FormStartPosition:CenterParent.
         this-object:Text = "About".
+        this-object:uxWebBrowserPanel:ClientArea:ResumeLayout(false).
+        this-object:uxWebBrowserPanel:ResumeLayout(false).
         this-object:ultraTabPageControl1:ResumeLayout(false).
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):EndInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):EndInit().
@@ -616,38 +714,59 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
-	end method.
+    end method.
 
-	/*------------------------------------------------------------------------------
-			Purpose:  																	  
-			Notes:  																	  
-	------------------------------------------------------------------------------*/
-	@VisualDesigner.
-	method private void uxSettingsGroup_ActiveTabChanging( input sender as System.Object, input e as Infragistics.Win.UltraWinTabControl.ActiveTabChangingEventArgs ):
-        define variable cGroup as character no-undo.
-        define variable cCaption as character no-undo.
-
+    /*------------------------------------------------------------------------------
+            Purpose:
+            Notes:
+    ------------------------------------------------------------------------------*/
+    @VisualDesigner.
+    method private void uxSettingsGroup_ActiveTabChanging( input sender as System.Object, input e as Infragistics.Win.UltraWinTabControl.ActiveTabChangingEventArgs ):
         case string(e:Tab:Key):
-            when 'uxAETFGroup' then
-                assign cGroup = 'USER'
-                       cCaption = 'User Detail'.
-            when 'uxBpmGroup' then
-                assign cGroup = 'BPM'
-                       cCaption = 'BPM Server Detail'.
-            when 'uxOEGroup' then
-                assign cGroup = 'OPENEDGE'
-                       cCaption = 'AppServer Detail'.
+            when 'uxAETFGroup' then ShowDetailGrid('USER', 'User Detail').
+            when 'uxBpmGroup' then ShowDetailGrid('BPM', 'BPM Server Detail').
+            when 'uxOEGroup' then ShowDetailGrid('OPENEDGE', 'AppServer Detail').
+            when 'uxCodeDoc' then ShowUrl(mcDocURL).
         end case.
-        
-        open query qrySettings preselect each ttSetting where ttSetting.SettingGroup eq cGroup by ttSetting.Order.
-        bsSettings:Handle = query qrySettings:handle.
-        uxDetail:Text = cCaption.
-	end method.
+    end method.
 
-	destructor public HelpAbout ( ):
-		if valid-object(components) then do:
-			cast(components, System.IDisposable):Dispose().
-		end.
-	end destructor.
+    method private character BuildAutoDoxURL(input poCaller as class Class):
+        define variable cFullPath as character no-undo.
+        define variable cRelativePath as character no-undo.
+
+        cRelativePath = 'autodox2/' + replace(poCaller:TypeName, '.', '~/') + '.cls.html'.
+        cFullPath = search(cRelativePath).
+        if cFullPath ne ? then
+            cFullPath = 'file:///' + replace(cFullPath, '~\', '~/').
+        else
+        do:
+            cRelativePath = 'autodox2/index.html'.
+            cFullPath = search(cRelativePath).
+            if cFullPath ne ? then
+                cFullPath = 'file:///' + replace(cFullPath, '~\', '~/').
+            Assert:ArgumentNotNullOrEmpty(cFullPath, 'Top-level AutoDox index page').
+        end.
+
+        return cFullPath.
+    end method.
+
+    method private void ShowURL(input pcURL as character):
+        uxWebBrowser:Url = new System.Uri(pcURL).
+    end method.
+
+    method private void ShowDetailGrid(input pcGroup as character,
+                                       input pcCaption as character):
+
+        open query mQrySettings preselect each mSettingData where mSettingData.SettingGroup eq pcGroup by mSettingData.Order.
+        bsSettings:Handle = query mQrySettings:handle.
+
+        uxDetail:Text = pcCaption.
+    end method.
+
+    destructor public HelpAbout ( ):
+        if valid-object(components) then do:
+            cast(components, System.IDisposable):Dispose().
+        end.
+    end destructor.
 
 end class.
