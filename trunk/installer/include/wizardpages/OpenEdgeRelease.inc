@@ -19,6 +19,8 @@ var
 	S : string;
 	I : integer;
 	startPos : integer;
+  strMajorVer, strMinorVer : string;
+  intPos, intMajorVer : integer; 
 begin
 
 	OpenEdgeVersion := '';
@@ -35,7 +37,15 @@ begin
 		for I := 0 to ( GetArrayLength( OpenEdgeReleases ) - 1 ) do
 		begin
 			S := OpenEdgeReleases[ I ];
-			if ( Pos( '10.', S ) > 0 ) then
+      intPos := Pos('.', S);
+      strMajorVer := Copy(S, 1, intPos-1);
+      intMajorVer := StrToInt(strMajorVer);
+      
+      // Only allow versions of OpenEdge > 10.2B
+      if ( ( intMajorVer = 10 ) and
+           ( Copy(S, intPos+1, 2) = '2B' ) ) or  
+      // anything from 11 onwards works
+           ( intMajorVer >= 10 ) then 
 			begin
 				cbOpenEdgeRelease.Items.Add( S );				
 			end;
@@ -112,4 +122,5 @@ begin
 
 	Result := Page.ID;
 end;
+
 

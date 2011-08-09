@@ -1,4 +1,4 @@
-AutoEdge is a part of OpenEdge Best Practises, and is about providing experience based architecture and solutions guidance. It includes formal definitions, design considerations, reference implementations, and small application samples. This body of work is available on PSDN to help our partners and customers create the world's best business applications.
+AutoEdge is a part of OpenEdge Best Practices, and is about providing experience based architecture and solutions guidance. It includes formal definitions, design considerations, reference implementations, and small application samples. This body of work is available on PSDN to help our partners and customers create the world's best business applications.
 
 AutoEdge is an application built for a fictitious automobile company. It comprises two modules: AutoEdge|TheDealer is an application for dealerships relating to retail customer testdrives and the scheduling around them, and AutoEdge|TheFactory is an application for the ordering and manufacturing of vehicles by dealerships and retail customer from a manufacturing concern.
 
