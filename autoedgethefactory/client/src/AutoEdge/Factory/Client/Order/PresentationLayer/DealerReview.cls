@@ -552,8 +552,14 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
 
     method protected void ShowHelp():
         define variable oHelpAbout as HelpAbout no-undo.
+        define variable oCurrentType as class Class no-undo.
 
-        oHelpAbout = new HelpAbout(this-object:GetClass()).
+        if valid-object(this-object:ActiveControl) then
+            oCurrentType = this-object:ActiveControl:GetClass().
+        else
+            oCurrentType = this-object:GetClass().
+
+        oHelpAbout = new HelpAbout(oCurrentType).
         wait-for oHelpAbout:ShowDialog().
 
         oHelpAbout = ?.
@@ -563,7 +569,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         session:set-wait-state('general').
 
         /* Empty all the existing orders */
-        ClearTasks().
+        ClearUI('AllTasks', Class:GetClass('AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail')).
 
         PopulateTaskList(BizLogicService:GetAssignedTasks()).
         PopulateTaskList(BizLogicService:GetAvailableTasks()).
@@ -602,8 +608,11 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         cTool[1] = 'DealerLogout'.
         SetToolState(cTool, false).
 
-        ClearTasks().
+        ClearUI('Orders', Class:GetClass('AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm')).
+        ClearUI('AllTasks', Class:GetClass('AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail')).
+
         uxAccordion:Groups:Item["AllTasks"]:Enabled = false.
+        uxAccordion:Groups:Item["Orders"]:Enabled = false.
     end method.
 
     method protected void DealerLogin():
@@ -634,17 +643,17 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         define variable cTool as character extent no-undo.
         define variable lValidBpmSession as logical no-undo.
 
+        lValidBpmSession = false.
         oUC = cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):CurrentUserContext.
 
         if valid-object(oUC) then
         do:
-            lValidBpmSession = BizLogicService:IsSessionValid().
+            lValidBpmSession = valid-object(BizLogicService) and BizLogicService:IsSessionValid().
 
             extent(cTool) = ?.
             extent(cTool) = 1.
             cTool[1] = 'RefreshTasksList'.
             SetToolState(cTool, lValidBpmSession).
-            RefreshTasksList().
 
             extent(cTool) = ?.
             extent(cTool) = 1.
@@ -656,8 +665,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
             cTool[1] = 'DealerLogout'.
             SetToolState(cTool, true).
 
+            if lValidBpmSession then
+                RefreshTasksList().
+
             uxAccordion:Groups:Item["AllTasks"]:Enabled = lValidBpmSession.
+            uxAccordion:Groups:Item["Orders"]:Enabled = true.
         end.
+
 
         catch oAppError as ApplicationError:
             oAppError:ShowError().
@@ -726,19 +740,20 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
         return (interval(today, pcDueDate, 'hours') ge 6).
     end method.
 
-    method protected void ClearTasks():
+    method protected void ClearUI(input pcGroupName as character,
+                                  input poFormType as class Class):
         define variable oGroup as UltraExplorerBarGroup no-undo.
         define variable oForm as Form no-undo.
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
 
-        oGroup = uxAccordion:Groups:Item['AllTasks'].
+        oGroup = uxAccordion:Groups:Item[pcGroupName].
         if valid-object(oGroup) then
         do:
             oGroup:Items:Clear().
             iMax = MdiChildren:Length - 1.
             do iLoop = iMax to 0 by -1:
-                if type-of(MdiChildren:GetValue(iLoop), CustomerOrderDetail) then
+                if MdiChildren:GetValue(iLoop):GetClass():IsA(poFormType) then
                 do:
                     oForm = cast(MdiChildren:GetValue(iLoop), Form).
                     oForm:Close().

@@ -62,6 +62,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
     define private variable ultraPanel1 as Infragistics.Win.Misc.UltraPanel no-undo.
     define private variable ultraTabPageControl3 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabPageControl2 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
+    define private variable ultraTabPageControl4 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabPageControl5 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabSharedControlsPage1 as Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage no-undo.
     define private variable ultraTabPageControl1 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
@@ -363,13 +364,16 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance3 as Infragistics.Win.Appearance no-undo.
         appearance3 = new Infragistics.Win.Appearance().
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraTab4 as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
+        ultraTab4 = new Infragistics.Win.UltraWinTabControl.UltraTab().
         this-object:uxWebBrowserPanel = new Infragistics.Win.Misc.UltraPanel().
         this-object:uxWebBrowser = new System.Windows.Forms.WebBrowser().
         this-object:ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
-        this-object:ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
-        this-object:ultraTabPageControl3 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:uxDetail = new Infragistics.Win.UltraWinGrid.UltraGrid().
         this-object:bsSettings = new Progress.Data.BindingSource(this-object:components).
+        this-object:ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
+        this-object:ultraTabPageControl3 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraTabPageControl5 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraPanel1 = new Infragistics.Win.Misc.UltraPanel().
         this-object:uxLogo = new Infragistics.Win.UltraWinEditors.UltraPictureBox().
@@ -377,11 +381,12 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:imageList1 = new System.Windows.Forms.ImageList(this-object:components).
         this-object:uxSettingsGroup = new Infragistics.Win.UltraWinTabControl.UltraTabControl().
         this-object:ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage().
+        this-object:ultraTabPageControl4 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:uxWebBrowserPanel:ClientArea:SuspendLayout().
         this-object:uxWebBrowserPanel:SuspendLayout().
-        this-object:ultraTabPageControl1:SuspendLayout().
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):BeginInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):BeginInit().
+        this-object:ultraTabPageControl3:SuspendLayout().
         this-object:ultraPanel1:ClientArea:SuspendLayout().
         this-object:ultraPanel1:SuspendLayout().
         cast(this-object:uxVersionInfo, System.ComponentModel.ISupportInitialize):BeginInit().
@@ -399,7 +404,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxWebBrowserPanel:Dock = System.Windows.Forms.DockStyle:Fill.
         this-object:uxWebBrowserPanel:Location = new System.Drawing.Point(0, 0).
         this-object:uxWebBrowserPanel:Name = "uxWebBrowserPanel".
-        this-object:uxWebBrowserPanel:Size = new System.Drawing.Size(452, 187).
+        this-object:uxWebBrowserPanel:Size = new System.Drawing.Size(452, 248).
         this-object:uxWebBrowserPanel:TabIndex = 2.
         /*  */
         /* uxWebBrowser */
@@ -410,27 +415,14 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxWebBrowser:MinimumSize = new System.Drawing.Size(20, 20).
         this-object:uxWebBrowser:Name = "uxWebBrowser".
         this-object:uxWebBrowser:ScriptErrorsSuppressed = true.
-        this-object:uxWebBrowser:Size = new System.Drawing.Size(452, 187).
+        this-object:uxWebBrowser:Size = new System.Drawing.Size(452, 248).
         this-object:uxWebBrowser:TabIndex = 0.
         /*  */
         /* ultraTabPageControl1 */
         /*  */
-        this-object:ultraTabPageControl1:Controls:Add(this-object:uxDetail).
-        this-object:ultraTabPageControl1:Location = new System.Drawing.Point(38, 1).
+        this-object:ultraTabPageControl1:Location = new System.Drawing.Point(-10000, -10000).
         this-object:ultraTabPageControl1:Name = "ultraTabPageControl1".
-        this-object:ultraTabPageControl1:Size = new System.Drawing.Size(452, 187).
-        /*  */
-        /* ultraTabPageControl2 */
-        /*  */
-        this-object:ultraTabPageControl2:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl2:Name = "ultraTabPageControl2".
-        this-object:ultraTabPageControl2:Size = new System.Drawing.Size(452, 187).
-        /*  */
-        /* ultraTabPageControl3 */
-        /*  */
-        this-object:ultraTabPageControl3:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl3:Name = "ultraTabPageControl3".
-        this-object:ultraTabPageControl3:Size = new System.Drawing.Size(452, 187).
+        this-object:ultraTabPageControl1:Size = new System.Drawing.Size(452, 248).
         /*  */
         /* uxDetail */
         /*  */
@@ -443,12 +435,12 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         ultraGridColumn1:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
         ultraGridColumn1:Header:Fixed = true.
         ultraGridColumn1:Header:VisiblePosition = 0.
-        ultraGridColumn1:Width = 203.
+        ultraGridColumn1:Width = 202.
         ultraGridColumn2:AllowGroupBy = Infragistics.Win.DefaultableBoolean:False.
         ultraGridColumn2:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
         ultraGridColumn2:Header:Fixed = true.
         ultraGridColumn2:Header:VisiblePosition = 1.
-        ultraGridColumn2:Width = 247.
+        ultraGridColumn2:Width = 248.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
         define variable arrayvar0 as System.Object extent 2 no-undo.
         arrayvar0[1] = ultraGridColumn1.
@@ -521,7 +513,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxDetail:Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle:Regular, System.Drawing.GraphicsUnit:Point, System.Convert:ToByte(0)).
         this-object:uxDetail:Location = new System.Drawing.Point(0, 0).
         this-object:uxDetail:Name = "uxDetail".
-        this-object:uxDetail:Size = new System.Drawing.Size(452, 187).
+        this-object:uxDetail:Size = new System.Drawing.Size(452, 248).
         this-object:uxDetail:TabIndex = 1.
         this-object:uxDetail:Text = "User Detail".
         /*  */
@@ -541,11 +533,24 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         tableDesc1:Columns = arrayvar2.
         this-object:bsSettings:TableSchema = tableDesc1.
         /*  */
+        /* ultraTabPageControl2 */
+        /*  */
+        this-object:ultraTabPageControl2:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl2:Name = "ultraTabPageControl2".
+        this-object:ultraTabPageControl2:Size = new System.Drawing.Size(452, 248).
+        /*  */
+        /* ultraTabPageControl3 */
+        /*  */
+        this-object:ultraTabPageControl3:Controls:Add(this-object:uxDetail).
+        this-object:ultraTabPageControl3:Location = new System.Drawing.Point(38, 1).
+        this-object:ultraTabPageControl3:Name = "ultraTabPageControl3".
+        this-object:ultraTabPageControl3:Size = new System.Drawing.Size(452, 248).
+        /*  */
         /* ultraTabPageControl5 */
         /*  */
         this-object:ultraTabPageControl5:Location = new System.Drawing.Point(-10000, -10000).
         this-object:ultraTabPageControl5:Name = "ultraTabPageControl5".
-        this-object:ultraTabPageControl5:Size = new System.Drawing.Size(452, 187).
+        this-object:ultraTabPageControl5:Size = new System.Drawing.Size(452, 248).
         /*  */
         /* ultraPanel1 */
         /*  */
@@ -583,7 +588,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxVersionInfo:Multiline = true.
         this-object:uxVersionInfo:Name = "uxVersionInfo".
         this-object:uxVersionInfo:ShowOverflowIndicator = true.
-        this-object:uxVersionInfo:Size = new System.Drawing.Size(491, 43).
+        this-object:uxVersionInfo:Size = new System.Drawing.Size(491, 32).
         this-object:uxVersionInfo:TabIndex = 0.
         this-object:uxVersionInfo:TabStop = false.
         /*  */
@@ -597,6 +602,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:imageList1:Images:SetKeyName(3, "progress.ico").
         this-object:imageList1:Images:SetKeyName(4, "aetf_logo.png").
         this-object:imageList1:Images:SetKeyName(5, "source_p_32x32.png").
+        this-object:imageList1:Images:SetKeyName(6, "appserver_32x32.png").
         /*  */
         /* uxSettingsGroup */
         /*  */
@@ -605,10 +611,11 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl2).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl3).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl5).
+        this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl4).
         this-object:uxSettingsGroup:Dock = System.Windows.Forms.DockStyle:Fill.
         this-object:uxSettingsGroup:ImageList = this-object:imageList1.
         this-object:uxSettingsGroup:ImageSize = new System.Drawing.Size(32, 32).
-        this-object:uxSettingsGroup:Location = new System.Drawing.Point(0, 98).
+        this-object:uxSettingsGroup:Location = new System.Drawing.Point(0, 87).
         this-object:uxSettingsGroup:Name = "uxSettingsGroup".
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
         define variable arrayvar3 as System.Windows.Forms.Control extent 2 no-undo.
@@ -616,7 +623,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         arrayvar3[2] = this-object:uxWebBrowserPanel.
         this-object:uxSettingsGroup:SharedControls:AddRange(arrayvar3).
         this-object:uxSettingsGroup:SharedControlsPage = this-object:ultraTabSharedControlsPage1.
-        this-object:uxSettingsGroup:Size = new System.Drawing.Size(491, 189).
+        this-object:uxSettingsGroup:Size = new System.Drawing.Size(491, 250).
         this-object:uxSettingsGroup:TabButtonStyle = Infragistics.Win.UIElementButtonStyle:Borderless.
         this-object:uxSettingsGroup:TabIndex = 1.
         this-object:uxSettingsGroup:TabOrientation = Infragistics.Win.UltraWinTabs.TabOrientation:LeftTop.
@@ -668,12 +675,16 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         ultraTab5:TabPage = this-object:ultraTabPageControl5.
         ultraTab5:Text = "".
         ultraTab5:ToolTipText = "Code documentation".
+        ultraTab4:Key = "uxAppServerGroup".
+        ultraTab4:TabPage = this-object:ultraTabPageControl4.
+        ultraTab4:Text = "".
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar8 as Infragistics.Win.UltraWinTabControl.UltraTab extent 4 no-undo.
+        define variable arrayvar8 as Infragistics.Win.UltraWinTabControl.UltraTab extent 5 no-undo.
         arrayvar8[1] = ultraTab3.
         arrayvar8[2] = ultraTab1.
         arrayvar8[3] = ultraTab2.
         arrayvar8[4] = ultraTab5.
+        arrayvar8[5] = ultraTab4.
         this-object:uxSettingsGroup:Tabs:AddRange(arrayvar8).
         this-object:uxSettingsGroup:UseFlatMode = Infragistics.Win.DefaultableBoolean:False.
         this-object:uxSettingsGroup:ViewStyle = Infragistics.Win.UltraWinTabControl.ViewStyle:Office2007.
@@ -685,11 +696,17 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:ultraTabSharedControlsPage1:Controls:Add(this-object:uxWebBrowserPanel).
         this-object:ultraTabSharedControlsPage1:Location = new System.Drawing.Point(-10000, -10000).
         this-object:ultraTabSharedControlsPage1:Name = "ultraTabSharedControlsPage1".
-        this-object:ultraTabSharedControlsPage1:Size = new System.Drawing.Size(452, 187).
+        this-object:ultraTabSharedControlsPage1:Size = new System.Drawing.Size(452, 248).
+        /*  */
+        /* ultraTabPageControl4 */
+        /*  */
+        this-object:ultraTabPageControl4:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl4:Name = "ultraTabPageControl4".
+        this-object:ultraTabPageControl4:Size = new System.Drawing.Size(452, 248).
         /*  */
         /* HelpAbout */
         /*  */
-        this-object:ClientSize = new System.Drawing.Size(491, 287).
+        this-object:ClientSize = new System.Drawing.Size(491, 337).
         this-object:Controls:Add(this-object:uxSettingsGroup).
         this-object:Controls:Add(this-object:uxVersionInfo).
         this-object:Controls:Add(this-object:ultraPanel1).
@@ -700,9 +717,9 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:Text = "About".
         this-object:uxWebBrowserPanel:ClientArea:ResumeLayout(false).
         this-object:uxWebBrowserPanel:ResumeLayout(false).
-        this-object:ultraTabPageControl1:ResumeLayout(false).
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):EndInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):EndInit().
+        this-object:ultraTabPageControl3:ResumeLayout(false).
         this-object:ultraPanel1:ClientArea:ResumeLayout(false).
         this-object:ultraPanel1:ResumeLayout(false).
         cast(this-object:uxVersionInfo, System.ComponentModel.ISupportInitialize):EndInit().
