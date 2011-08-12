@@ -42,7 +42,6 @@ using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 
-
 class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
 
     define private temp-table mSettingData no-undo
@@ -62,7 +61,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
     define private variable ultraPanel1 as Infragistics.Win.Misc.UltraPanel no-undo.
     define private variable ultraTabPageControl3 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabPageControl2 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
-    define private variable ultraTabPageControl4 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabPageControl5 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabSharedControlsPage1 as Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage no-undo.
     define private variable ultraTabPageControl1 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
@@ -287,11 +285,11 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         define variable ultraGridBand1 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
         ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("mSettingData", -1).
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn1 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Key").
+        define variable ultraGridColumn3 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Key").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraGridColumn2 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
-        ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("SettingValue").
+        define variable ultraGridColumn4 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
+        ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("SettingValue").
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance82 as Infragistics.Win.Appearance no-undo.
         appearance82 = new Infragistics.Win.Appearance().
@@ -364,16 +362,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance3 as Infragistics.Win.Appearance no-undo.
         appearance3 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraTab4 as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
-        ultraTab4 = new Infragistics.Win.UltraWinTabControl.UltraTab().
         this-object:uxWebBrowserPanel = new Infragistics.Win.Misc.UltraPanel().
         this-object:uxWebBrowser = new System.Windows.Forms.WebBrowser().
         this-object:ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
-        this-object:uxDetail = new Infragistics.Win.UltraWinGrid.UltraGrid().
-        this-object:bsSettings = new Progress.Data.BindingSource(this-object:components).
         this-object:ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraTabPageControl3 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
+        this-object:uxDetail = new Infragistics.Win.UltraWinGrid.UltraGrid().
+        this-object:bsSettings = new Progress.Data.BindingSource(this-object:components).
         this-object:ultraTabPageControl5 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraPanel1 = new Infragistics.Win.Misc.UltraPanel().
         this-object:uxLogo = new Infragistics.Win.UltraWinEditors.UltraPictureBox().
@@ -381,12 +376,11 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:imageList1 = new System.Windows.Forms.ImageList(this-object:components).
         this-object:uxSettingsGroup = new Infragistics.Win.UltraWinTabControl.UltraTabControl().
         this-object:ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage().
-        this-object:ultraTabPageControl4 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:uxWebBrowserPanel:ClientArea:SuspendLayout().
         this-object:uxWebBrowserPanel:SuspendLayout().
+        this-object:ultraTabPageControl1:SuspendLayout().
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):BeginInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):BeginInit().
-        this-object:ultraTabPageControl3:SuspendLayout().
         this-object:ultraPanel1:ClientArea:SuspendLayout().
         this-object:ultraPanel1:SuspendLayout().
         cast(this-object:uxVersionInfo, System.ComponentModel.ISupportInitialize):BeginInit().
@@ -420,9 +414,22 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         /*  */
         /* ultraTabPageControl1 */
         /*  */
-        this-object:ultraTabPageControl1:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl1:Controls:Add(this-object:uxDetail).
+        this-object:ultraTabPageControl1:Location = new System.Drawing.Point(38, 1).
         this-object:ultraTabPageControl1:Name = "ultraTabPageControl1".
         this-object:ultraTabPageControl1:Size = new System.Drawing.Size(452, 248).
+        /*  */
+        /* ultraTabPageControl2 */
+        /*  */
+        this-object:ultraTabPageControl2:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl2:Name = "ultraTabPageControl2".
+        this-object:ultraTabPageControl2:Size = new System.Drawing.Size(452, 248).
+        /*  */
+        /* ultraTabPageControl3 */
+        /*  */
+        this-object:ultraTabPageControl3:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl3:Name = "ultraTabPageControl3".
+        this-object:ultraTabPageControl3:Size = new System.Drawing.Size(452, 248).
         /*  */
         /* uxDetail */
         /*  */
@@ -432,19 +439,19 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxDetail:DisplayLayout:Appearance = appearance81.
         this-object:uxDetail:DisplayLayout:AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle:ResizeAllColumns.
         ultraGridBand1:ColHeadersVisible = false.
-        ultraGridColumn1:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
-        ultraGridColumn1:Header:Fixed = true.
-        ultraGridColumn1:Header:VisiblePosition = 0.
-        ultraGridColumn1:Width = 202.
-        ultraGridColumn2:AllowGroupBy = Infragistics.Win.DefaultableBoolean:False.
-        ultraGridColumn2:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
-        ultraGridColumn2:Header:Fixed = true.
-        ultraGridColumn2:Header:VisiblePosition = 1.
-        ultraGridColumn2:Width = 248.
+        ultraGridColumn3:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
+        ultraGridColumn3:Header:Fixed = true.
+        ultraGridColumn3:Header:VisiblePosition = 0.
+        ultraGridColumn3:Width = 201.
+        ultraGridColumn4:AllowGroupBy = Infragistics.Win.DefaultableBoolean:False.
+        ultraGridColumn4:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
+        ultraGridColumn4:Header:Fixed = true.
+        ultraGridColumn4:Header:VisiblePosition = 1.
+        ultraGridColumn4:Width = 249.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
         define variable arrayvar0 as System.Object extent 2 no-undo.
-        arrayvar0[1] = ultraGridColumn1.
-        arrayvar0[2] = ultraGridColumn2.
+        arrayvar0[1] = ultraGridColumn3.
+        arrayvar0[2] = ultraGridColumn4.
         ultraGridBand1:Columns:AddRange(arrayvar0).
         ultraGridBand1:Override:CellDisplayStyle = Infragistics.Win.UltraWinGrid.CellDisplayStyle:PlainText.
         this-object:uxDetail:DisplayLayout:BandsSerializer:Add(ultraGridBand1).
@@ -533,19 +540,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         tableDesc1:Columns = arrayvar2.
         this-object:bsSettings:TableSchema = tableDesc1.
         /*  */
-        /* ultraTabPageControl2 */
-        /*  */
-        this-object:ultraTabPageControl2:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl2:Name = "ultraTabPageControl2".
-        this-object:ultraTabPageControl2:Size = new System.Drawing.Size(452, 248).
-        /*  */
-        /* ultraTabPageControl3 */
-        /*  */
-        this-object:ultraTabPageControl3:Controls:Add(this-object:uxDetail).
-        this-object:ultraTabPageControl3:Location = new System.Drawing.Point(38, 1).
-        this-object:ultraTabPageControl3:Name = "ultraTabPageControl3".
-        this-object:ultraTabPageControl3:Size = new System.Drawing.Size(452, 248).
-        /*  */
         /* ultraTabPageControl5 */
         /*  */
         this-object:ultraTabPageControl5:Location = new System.Drawing.Point(-10000, -10000).
@@ -596,13 +590,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         /*  */
         this-object:imageList1:ImageStream = cast(resources:GetObject("imageList1.ImageStream"), System.Windows.Forms.ImageListStreamer).
         this-object:imageList1:TransparentColor = System.Drawing.Color:Transparent.
-        this-object:imageList1:Images:SetKeyName(0, "bpmstudio.ico").
-        this-object:imageList1:Images:SetKeyName(1, "aetf.ico").
-        this-object:imageList1:Images:SetKeyName(2, "user_orange.png").
-        this-object:imageList1:Images:SetKeyName(3, "progress.ico").
-        this-object:imageList1:Images:SetKeyName(4, "aetf_logo.png").
-        this-object:imageList1:Images:SetKeyName(5, "source_p_32x32.png").
-        this-object:imageList1:Images:SetKeyName(6, "appserver_32x32.png").
+        this-object:imageList1:Images:SetKeyName(0, "aetf.ico").
+        this-object:imageList1:Images:SetKeyName(1, "progress.ico").
+        this-object:imageList1:Images:SetKeyName(2, "aetf_logo.png").
+        this-object:imageList1:Images:SetKeyName(3, "source_p_32x32.png").
+        this-object:imageList1:Images:SetKeyName(4, "services_32x32.png").
+        this-object:imageList1:Images:SetKeyName(5, "bpmstudio_32x32.ico").
+        this-object:imageList1:Images:SetKeyName(6, "user_32x32.png").
         /*  */
         /* uxSettingsGroup */
         /*  */
@@ -611,7 +605,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl2).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl3).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl5).
-        this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl4).
         this-object:uxSettingsGroup:Dock = System.Windows.Forms.DockStyle:Fill.
         this-object:uxSettingsGroup:ImageList = this-object:imageList1.
         this-object:uxSettingsGroup:ImageSize = new System.Drawing.Size(32, 32).
@@ -627,7 +620,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:uxSettingsGroup:TabButtonStyle = Infragistics.Win.UIElementButtonStyle:Borderless.
         this-object:uxSettingsGroup:TabIndex = 1.
         this-object:uxSettingsGroup:TabOrientation = Infragistics.Win.UltraWinTabs.TabOrientation:LeftTop.
-        appearance6:Image = "user_orange.png".
+        appearance6:Image = "user_32x32.png".
         appearance6:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance6:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab3:Appearance = appearance6.
@@ -639,7 +632,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         ultraTab3:TabPage = this-object:ultraTabPageControl1.
         ultraTab3:Text = "".
         ultraTab3:ToolTipText = "Application settings".
-        appearance4:Image = "bpmstudio.ico".
+        appearance4:Image = "bpmstudio_32x32.ico".
         appearance4:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance4:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab1:Appearance = appearance4.
@@ -651,7 +644,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         ultraTab1:TabPage = this-object:ultraTabPageControl2.
         ultraTab1:Text = "".
         ultraTab1:ToolTipText = "BPM server settings ".
-        appearance5:Image = "progress.ico".
+        appearance5:Image = "services_32x32.png".
         appearance5:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance5:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab2:Appearance = appearance5.
@@ -662,7 +655,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         ultraTab2:Key = "uxOEGroup".
         ultraTab2:TabPage = this-object:ultraTabPageControl3.
         ultraTab2:Text = "".
-        ultraTab2:ToolTipText = "OpenEdge-centric settings".
+        ultraTab2:ToolTipText = "AppServer settings".
         appearance3:Image = "source_p_32x32.png".
         appearance3:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance3:ImageVAlign = Infragistics.Win.VAlign:Middle.
@@ -674,17 +667,13 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         ultraTab5:Key = "uxCodeDoc".
         ultraTab5:TabPage = this-object:ultraTabPageControl5.
         ultraTab5:Text = "".
-        ultraTab5:ToolTipText = "Code documentation".
-        ultraTab4:Key = "uxAppServerGroup".
-        ultraTab4:TabPage = this-object:ultraTabPageControl4.
-        ultraTab4:Text = "".
+        ultraTab5:ToolTipText = "AutoDox2 code documentation".
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar8 as Infragistics.Win.UltraWinTabControl.UltraTab extent 5 no-undo.
+        define variable arrayvar8 as Infragistics.Win.UltraWinTabControl.UltraTab extent 4 no-undo.
         arrayvar8[1] = ultraTab3.
         arrayvar8[2] = ultraTab1.
         arrayvar8[3] = ultraTab2.
         arrayvar8[4] = ultraTab5.
-        arrayvar8[5] = ultraTab4.
         this-object:uxSettingsGroup:Tabs:AddRange(arrayvar8).
         this-object:uxSettingsGroup:UseFlatMode = Infragistics.Win.DefaultableBoolean:False.
         this-object:uxSettingsGroup:ViewStyle = Infragistics.Win.UltraWinTabControl.ViewStyle:Office2007.
@@ -697,12 +686,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:ultraTabSharedControlsPage1:Location = new System.Drawing.Point(-10000, -10000).
         this-object:ultraTabSharedControlsPage1:Name = "ultraTabSharedControlsPage1".
         this-object:ultraTabSharedControlsPage1:Size = new System.Drawing.Size(452, 248).
-        /*  */
-        /* ultraTabPageControl4 */
-        /*  */
-        this-object:ultraTabPageControl4:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl4:Name = "ultraTabPageControl4".
-        this-object:ultraTabPageControl4:Size = new System.Drawing.Size(452, 248).
         /*  */
         /* HelpAbout */
         /*  */
@@ -717,9 +700,9 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:Text = "About".
         this-object:uxWebBrowserPanel:ClientArea:ResumeLayout(false).
         this-object:uxWebBrowserPanel:ResumeLayout(false).
+        this-object:ultraTabPageControl1:ResumeLayout(false).
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):EndInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):EndInit().
-        this-object:ultraTabPageControl3:ResumeLayout(false).
         this-object:ultraPanel1:ClientArea:ResumeLayout(false).
         this-object:ultraPanel1:ResumeLayout(false).
         cast(this-object:uxVersionInfo, System.ComponentModel.ISupportInitialize):EndInit().
