@@ -732,22 +732,16 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
 
     method private character BuildAutoDoxURL(input poCaller as class Class):
         define variable cFullPath as character no-undo.
-        define variable cRelativePath as character no-undo.
 
-        cRelativePath = 'autodox2/' + replace(poCaller:TypeName, '.', '~/') + '.cls.html'.
-        cFullPath = search(cRelativePath).
-        if cFullPath ne ? then
-            cFullPath = 'file:///' + replace(cFullPath, '~\', '~/').
-        else
-        do:
-            cRelativePath = 'autodox2/index.html'.
-            cFullPath = search(cRelativePath).
-            if cFullPath ne ? then
-                cFullPath = 'file:///' + replace(cFullPath, '~\', '~/').
-            Assert:ArgumentNotNullOrEmpty(cFullPath, 'Top-level AutoDox index page').
-        end.
+        cFullPath = search('autodox2/' + replace(poCaller:TypeName, '.', '~/') + '.cls.html').
+        if cFullPath eq ? then
+            cFullPath = search('autodox2/index.html').
 
-        return cFullPath.
+        Assert:ArgumentNotNullOrEmpty(cFullPath, 'Top-level AutoDox index page').
+        file-info:file-name = cFullPath.
+        cFullPath = file-info:full-pathname.
+
+        return 'file:///' + replace(cFullPath, '~\', '~/').
     end method.
 
     method private void ShowURL(input pcURL as character):
