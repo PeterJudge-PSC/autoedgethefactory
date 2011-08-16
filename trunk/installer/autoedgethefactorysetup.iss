@@ -7,15 +7,15 @@ LogFileOverwrite=true
 
 [Setup]
 InternalCompressLevel=Max
-OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.5
+OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.6
 SolidCompression=true
-VersionInfoVersion=1.0.5
+VersionInfoVersion=1.0.6
 VersionInfoCompany=Progress Software Corp.
 VersionInfoDescription=OpenEdge AutoEdge|TheFactory Application Example Setup
 MinVersion=0,5.0.2195sp3
 AppCopyright=Copyright 2011 © Progress Software Corp.
 AppName=OpenEdge AutoEdge|TheFactory Application Example
-AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.5
+AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.6
 InfoAfterFile=installer\include\InfoAfter.txt
 InfoBeforeFile=installer\include\InfoBefore.txt
 LicenseFile=installer\include\License.txt
@@ -28,11 +28,11 @@ AlwaysShowComponentsList=true
 ShowLanguageDialog=auto
 SetupIconFile=installer\include\autoedge.ico
 AppID={{62CE4B50-E7A0-4279-9889-0D6EC3B80C0E}
-VersionInfoTextVersion=1.0.5
+VersionInfoTextVersion=1.0.6
 AppPublisher=Progress Software Corp.
 AppPublisherURL=http://www.progress.com
 AppSupportURL=http://communities.progress.com/pcom/community/psdn/openedge/architecture/autoedgethefactory
-AppVersion=1.0.5
+AppVersion=1.0.6
 UninstallDisplayName=OpenEdge AutoEdge|TheFactory Application Example
 ExtraDiskSpaceRequired=1000000
 AlwaysRestart=false
@@ -52,7 +52,7 @@ AllowRootDirectory=true
 AllowNoIcons=true
 
 [Dirs]
-; AETF
+; AETF Application
 Name: {app}\autoedgethefactory\shared; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER; Tasks: 
 Name: {app}\autoedgethefactory\shared\bin; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER; Tasks: 
 Name: {app}\autoedgethefactory\shared\src; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER; Tasks: 
@@ -164,13 +164,13 @@ Name: {app}\autoedgethefactory\savvion; Flags: uninsneveruninstall; Components: 
 Name: {app}\installer; Flags: uninsneveruninstall; Components: INSTALLER ; Tasks:
 Name: {app}\installer\include; Flags: uninsneveruninstall; Components: INSTALLER ; Tasks:
 
-[Files]
-; Root
-Source: doc\autodox2-index.html; DestDir: {app}; Flags: ignoreversion uninsremovereadonly; Tasks:
+; Root-Doc
+Name: {app}\doc; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks:
 
+[Files]
+; 
 ;AETF
-;client
-Source: autoedgethefactory\client\cfg\client.*; DestDir: {app}\autoedgethefactory\client\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch touch; Components: AETF_CLIENT; 
+;client 
 Source: autoedgethefactory\client\src\*.*; DestDir: {app}\autoedgethefactory\client\src; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_CLIENT; Tasks:
 Source: autoedgethefactory\client\bin\*.*; DestDir: {app}\autoedgethefactory\client\bin; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_CLIENT; Tasks: 
 Source: autoedgethefactory\client\doc\*.*; DestDir: {app}\autoedgethefactory\client\doc; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_CLIENT; Tasks: 
@@ -190,7 +190,6 @@ Source: autoedgethefactory\server\tests\*.*; DestDir: {app}\autoedgethefactory\s
 Source: autoedgethefactory\server\resources\*.*; DestDir: {app}\autoedgethefactory\server\resources; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER; Tasks: 
 Source: autoedgethefactory\server\setup\*.*; DestDir: {app}\autoedgethefactory\server\setup; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_SERVER; Tasks: 
 
-Source: autoedgethefactory\server\cfg\server.pf; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
 Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsdl; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
 Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsm; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
 Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.xpxg; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
@@ -310,9 +309,12 @@ Source: installer\include\version.txt; DestDir: {app}; Excludes: .svn,.*,*.~*; F
 Source: installer\include\startdbs.ico; DestDir: {app}\autoedgethefactory\server\cfg; Flags: ignoreversion uninsremovereadonly; Components: AETF_SERVER
 Source: installer\include\stopdbs.ico; DestDir: {app}\autoedgethefactory\server\cfg; Flags: ignoreversion uninsremovereadonly; Components: AETF_SERVER
 
+; Root-Doc
+Source: doc\*.*; DestDir: {app}\doc; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks:
 
 [Icons]
-Name: {app}\AutoDox2 doc-comments; Filename: {app}\autodox2-index.html; WorkingDir: {app}; Comment: AutoDox2 Developer documentation
+; docs
+Name: {app}\AutoDox2 doc-comments; Filename: {app}\doc\autodox2-index.html; WorkingDir: {app}; Comment: "AutoDox2 Developer documentation"; 
 Name: {app}\Project Page on Progress Communities; Filename: http://communities.progress.com/pcom/community/psdn/openedge/architecture/autoedgethefactory; WorkingDir: {app}; IconFilename: {app}\autoedgethefactory\shared\cfg\aetf.ico; Components: 
 
 ;servers
@@ -323,12 +325,21 @@ Name: {group}\AutoEdge\Factory Module\Server\Start AppServers; Filename: {app}\a
 Name: {group}\AutoEdge\Factory Module\Server\Stop All Processes; Filename: {app}\autoedgethefactory\server\cfg\StopAll.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; IconFilename: {app}\autoedgethefactory\server\cfg\stopdbs.ico; IconIndex: 0; Components: AETF_SERVER
 Name: {group}\AutoEdge\Factory Module\Server\Stop Database Servers; Filename: {app}\autoedgethefactory\server\cfg\StopDatabases.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; IconFilename: {app}\autoedgethefactory\server\cfg\stopdbs.ico; IconIndex: 0; Components: AETF_SERVER
 Name: {group}\AutoEdge\Factory Module\Server\Stop AppServers; Filename: {app}\autoedgethefactory\server\cfg\StopAppServers.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; IconFilename: {app}\autoedgethefactory\server\cfg\stopdbs.ico; IconIndex: 0; Components: AETF_SERVER
-;devenv
-Name: {group}\AutoEdge\Factory Module\Development Environment(OpenEdge Architect); Filename: {code:getDLCDirectory}\oeide\eclipse\eclipse.exe; Parameters: """-showlocation -vm "" ""{code:getDLCDirectory}\jre\bin\javaw.exe"""""; WorkingDir: {app}; Comment: AutoEdge|TheFactory OpenEdge Architect; IconFilename: {app}\autoedgethefactory\shared\cfg\aetf.ico; IconIndex: 0; Components: 
+
+;devenv 
+Name: {group}\AutoEdge\Factory Module\Development Environment(OpenEdge Architect); Filename: {code:getDLCDirectory}\oeide\eclipse\eclipse.exe;  Parameters: -showlocation -vm {code:getDLCDirectory}\jre\bin\javaw.exe; WorkingDir: {app}; Comment: AutoEdge|TheFactory OpenEdge Architect; IconFilename: {app}\autoedgethefactory\shared\resources\aetf.ico; IconIndex: 0; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; 
+
 ;runtime
 Name: {group}\AutoEdge\Factory Module\Client\Dealer Review GUI; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-pf ""autoedgethefactory\client\cfg\client.pf"" -basekey INI -ininame ""autoedgethefactory\client\cfg\client.ini"" -p start_ui.p "; WorkingDir: {app}; Comment: AutoEdge|TheFactory Dealer Review GUI; IconFilename: {app}\autoedgethefactory\shared\resources\aetf.ico; IconIndex: 0; Components: AETF_CLIENT; Tasks: 
-Name: {group}\AutoEdge\Factory Module\Client\Admin Console; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-pf ""autoedgethefactory\client\cfg\client.pf"" -basekey INI -ininame ""autoedgethefactory\client\cfg\client.ini"" -p _edit.p "; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Client Admin Console (Editor)"; Components: AETF_CLIENT;
-Name: "{group}\AutoEdge\Factory Module\Server\Admin Console"; Filename: "{code:getDLCDirectory}\bin\prowin32.exe "; Parameters: "-p _edit.p -debugalert -ini autoedgethefactory/server/cfg/console.ini -pf autoedgethefactory/server/cfg/console.pf"; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Server Admin Console (Editor)"; Components: AETF_SERVER; 
+Name: {group}\AutoEdge\Factory Module\Client\Admin Console; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-p _edit.p -debugalert -ini autoedgethefactory/client/cfg/client.ini -pf autoedgethefactory/client/cfg/base.pf"; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Client Admin Console (Editor)"; Components: AETF_CLIENT; 
+Name: {group}\AutoEdge\Factory Module\Server\Admin Console; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-p _edit.p -debugalert -ini autoedgethefactory/server/cfg/console.ini -pf autoedgethefactory/server/cfg/console.pf"; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Server Admin Console (Editor)"; Components: AETF_SERVER;
+
+Name: {group}\AutoEdge\Factory Module\Application User List; Filename: {app}\autoedgethefactory\shared\doc\applicationusers.txt; WorkingDir: {app}; Comment: "Application User List";
+
+; Savvion
+; SBM portal
+Name: "{group}\AutoEdge\Factory Module\Savvion Portal"; Filename: {code:getSBMURL}/sbm/bpmportal/login.jsp; Components: BPM_SERVER_SUPPORT; WorkingDir: {app}; 
+Name: "{group}\AutoEdge\Factory Module\Customer Vehicle Order Process"; Filename: {code:getSBMURL}/sbm/BizSolo/CustomerVehicleOrderSubmit/Start.jsp; Components: BPM_SERVER_SUPPORT; WorkingDir: {app}; 
  
 
 [Components]
@@ -352,6 +363,8 @@ LogFileAppend=false
 [UninstallRun]
 Filename: {app}\autoedgethefactory\server\cfg\StopAll.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER
 Filename: {app}\autoedgethefactory\server\cfg\UndeployWebservices.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER; Flags: SkipIfDoesntExist NoWait
+Filename: {app}\autoedgethefactory\server\cfg\UninstallAppserver.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER; Flags: SkipIfDoesntExist NoWait
+Filename: {app}\autoedgethefactory\server\cfg\UninstallDatabase.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER; Flags: SkipIfDoesntExist NoWait
 
 [Code]
 { === CODE Section for AutoEdge|TheFactory Setup IIS ======================== }
@@ -406,6 +419,16 @@ end;
 function getDLCDirectory( str : string ) : string;
 begin
 	Result := strDLCDirectory;
+end;
+
+{	Return the strDLCDirectory value }
+function getSBMURL( str : string ) : string;
+begin
+    if (isComponentSelected('BPM_SERVER_SUPPORT')) then
+    begin
+    	Result := 'http://' + txtBpmServerHost.Text + ':' + txtBpmServerPort.Text;
+    end;
+	Result := '';
 end;
 
 { 	Return the CLASSPATH value }
@@ -580,7 +603,7 @@ var
 	TotalMB 	: cardinal;
 begin
 	{ Get and display free megabytes on the Program Files drive }
-	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.5';
+	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.6';
 	Path 		:= ExpandConstant('{pf}');
 
 	if GetSpaceOnDisk(Path, True, FreeMB, TotalMB) then
@@ -744,50 +767,46 @@ begin
 		MsgBox( 'Return code: ' + intToStr( ret ) + ' [ ' + SysErrorMessage( ret ) + ' ]', mbInformation, MB_OK );
 end;
 
-
-{ === PROCEDURE DoUpdateConfigFiles ===================================================== }
-{ =																						= }
-{ =		Make changes to the configuration files to reflect the new directory where		= }
-{ =		the AutoEdge App will be put. The config files are shortcuts, Progress PF		= }
-{ =		files and the likes.															= }
-{ =																						= }
-{ ======================================================================================= }
-
-procedure DoUpdateConfigFiles;
+procedure DoUpdateServerConfigFiles;
 var
 	FileName, Propath, FileBody	: string;
   ChildNode, ParentNode : Variant;  
 //  Path: String;
 begin
-	DebugMsg( 'Updating Configuration Files' );
+		DebugMsg( 'Creating Server config files' );
+		
+    { Create the server.pf file }
+    FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\server.pf' );
+    SaveStringToFile( FileName,
+                      '# AutoEdge|TheFactory Database Connection'                                 + #13#10 +
+                      '-param CFGFILE=./autoedgethefactory/server/cfg/config.xml,CFGNAME=default' + #13#10 + 
+                      '-pf ./autoedgethefactory/shared/cfg/shared.pf'                             + #13#10 +
+                      '-T  ./autoedgethefactory/server/temp'                                      + #13#10 +
+                      '# eof'                                                                     + #13#10,
+                      false );
 
-	{ === Create the necessary PF files === }
-	{ Server only }
-	if isComponentSelected( 'AETF_SERVER' ) then
-	begin
-		DebugMsg( 'Creating Server command files' );
+    { Create the console.pf file }
+    FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\console.pf' );
+    SaveStringToFile( FileName,
+                      '# AutoEdge|TheFactory Server Admin Console Parameter File'   + #13#10 +
+                      '# AutoEdge|TheFactory Database Connection'                   + #13#10 + 
+                      '-db ./autoedgethefactory/server/db/aetf.db -ld aetf  -H ' 
+                      + txtAETFDBHost.Text + ' -S ' + txtAETFDBService.Text         + #13#10 +
+                      '-pf ./autoedgethefactory/shared/cfg/shared.pf'               + #13#10 +
+                      '-T  ./autoedgethefactory/server/temp'                        + #13#10 +
+                      '# eof'                                                       + #13#10,
+                      false );
 
-        { Create the server.pf file }
-        FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\server.pf' );
-        SaveStringToFile( FileName,
-                          '# AutoEdge|TheFactory Database Connection'                                 + #13#10 +
-                          '-param CFGFILE=./autoedgethefactory/server/cfg/config.xml,CFGNAME=default' + #13#10 + 
-                          '-pf ./autoedgethefactory/shared/cfg/shared.pf'                                   + #13#10 +
-                          '-T  ./autoedgethefactory/server/temp'                                                        + #13#10 +
-                          '# eof'                                                                                       + #13#10,
-                          false );
-
-        { Create the console.pf file }
-        FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\console.pf' );
-        SaveStringToFile( FileName,
-                          '# AutoEdge|TheFactory Server Admin Console Parameter File'                   + #13#10 +
-                          '# AutoEdge|TheFactory Database Connection'                                   + #13#10 + 
-                          '-db ./autoedgethefactory/server/db/aetf.db -ld aetf  -H ' + txtAETFDBHost.Text + ' -S ' + txtAETFDBService.Text + #13#10 +
-                          '-pf ./autoedgethefactory/shared/cfg/shared.pf' + #13#10 +
-                          '-T  ./autoedgethefactory/server/temp'                                                        + #13#10 +
-                          '# eof'                                                                                       + #13#10,
-                          false );
-
+    { ===  Server Console INI file === }
+		FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\console.ini' );		
+		FileCopy(ExpandConstant('{code:getDLCDirectory}\bin\progress.ini'), FileName, false);
+		
+    Propath := ExpandConstant('.\autoedgethefactory\server\bin,.\autoedgethefactory\shared\bin,.\referencecomponents\businesscomponents\bin,.\referencecomponents\dataaccess\bin,.\referencecomponents\enterpriseservices\bin,.\referencecomponents\commoninfrastructure\server\bin,.\referencecomponents\commoninfrastructure\shared\bin,.\referencecomponents\support\bin,.\autoedgethefactory\server\src,.\autoedgethefactory\shared\src,.\referencecomponents\businesscomponents\src,.\referencecomponents\dataaccess\src,.\referencecomponents\enterpriseservices\src,.\referencecomponents\commoninfrastructure\server\src,.\referencecomponents\commoninfrastructure\shared\src,.\referencecomponents\support\src,.\autoedgethefactory\server\tests,.\autoedgethefactory\shared\tests,{code:getDLCDirectory},{code:getDLCDirectory}\bin');    
+		SetIniString( 'Startup', 'PROPATH', Propath, FileName );
+		
+		Propath := ExpandConstant('.,{code:getDLCDirectory}\tty,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
+		SetIniString( 'WinCharStartup', 'PROPATH', Propath, FileName );		
+		
 		{ === StartDatabases.cmd === }
 		FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\StartDatabases.cmd' );
 
@@ -892,17 +911,6 @@ begin
 						        + ' -undeploy ' +#13#10,
 						   false);
 
-    { ===  Server Console INI file === }        
-		FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\console.ini' );
-		SetIniString( 'Startup', 'DLC', strDLCDirectory, FileName );
-    Propath := ExpandConstant('./autoedgethefactory/server/bin;./autoedgethefactory/shared/bin;./referencecomponents/businesscomponents/bin;./referencecomponents/dataaccess/bin;./referencecomponents/enterpriseservices/bin;./referencecomponents/commoninfrastructure/server/bin;./referencecomponents/commoninfrastructure/shared/bin;./referencecomponents/support/bin;./autoedgethefactory/server/src;./autoedgethefactory/shared/src;./referencecomponents/businesscomponents/src;./referencecomponents/dataaccess/src;./referencecomponents/enterpriseservices/src;./referencecomponents/commoninfrastructure/server/src;./referencecomponents/commoninfrastructure/shared/src;./referencecomponents/support/src;./autoedgethefactory/server/tests;./autoedgethefactory/shared/tests;{code:getDLCDirectory};{code:getDLCDirectory}/bin');
-		SetIniString( 'Startup', 'PROPATH', Propath, FileName );
-
-		SetIniString( 'WinCharStartup', 'DLC', strDLCDirectory, FileName );
-		Propath := ExpandConstant('.,{code:getDLCDirectory}\tty,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
-		SetIniString( 'WinCharStartup', 'PROPATH', Propath, FileName );
-
-        
     { ABL session config file }
     //Get the config node.
     ParentNode := serverConfigXML.selectSingleNode('/configs/config[name="default"]');
@@ -929,7 +937,7 @@ begin
     ChildNode := serverConfigXML.createElement('value');
     ChildNode.text := './autoedgethefactory/server/db/aetf.db';    
     ParentNode.appendChild(ChildNode);
-    
+
     // back up to serverconnection
     ParentNode := ChildNode.parentNode.parentNode;
     
@@ -988,6 +996,9 @@ begin
       ChildNode := serverConfigXML.createElement('name');
       ChildNode.text := 'bpmAutoEdgeTheFactory';    
       ParentNode.appendChild(ChildNode);
+      ChildNode := clientConfigXML.createElement('enabled');
+      ChildNode.text := 'true';    
+      ParentNode.appendChild(ChildNode);
          
       // parameter for host
       ChildNode := serverConfigXML.createElement('parameter');
@@ -1013,29 +1024,40 @@ begin
       ChildNode := serverConfigXML.createElement('value');
       ChildNode.text := txtBpmServerPort.Text;    
       ParentNode.appendChild(ChildNode);
-      end;    
-	end;	
+      end;    	
+end;
 
-	{ Progress GUI Client only }
-	if isComponentSelected( 'AETF_CLIENT' ) then
-	begin
+procedure DoUpdateClientConfigFiles;
+var
+	FileName, Propath, FileBody	: string;
+  ChildNode, ParentNode : Variant;  
+//  Path: String;
+begin
 		DebugMsg( 'Creating Factory Client config files' );
 
 		FileName := ExpandConstant( '{app}\autoedgethefactory\client\cfg\client.pf' );
 		SaveStringToFile( FileName,
 						  '# PF for AutoEdge|TheFactory Client session'             + #13#10 +
 						  '-param CFGFILE=./autoedgethefactory/client/cfg/config.xml,CFGNAME=default' + #13#10 +						  
-						  '-pf  ./autoedgethefactory/shared/cfg/shared.pf ' 				+ #13#10 +
-						  '-T   ./autoedgethefactory/client/temp ' 									+ #13#10 +
-						  '-assemblies ./autoedgethefactory/client '                + #13#10,
+						  '-pf  ./autoedgethefactory/client/cfg/base.pf ' ,
 						  false );
 
-		FileName := ExpandConstant( '{app}\autoedgethefactory\client\cfg\client.ini' );
-		SetIniString( 'Startup', 'DLC', strDLCDirectory, FileName );
-		Propath := ExpandConstant('.\autoedgethefactory\client\bin,.\autoedgethefactory\shared\bin,.\referencecomponents\presentationlayer\bin,.\referencecomponents\enterpriseservices\bin,.\referencecomponents\commoninfrastructure\client\bin,.\referencecomponents\commoninfrastructure\shared\bin,.\referencecomponents\support\bin,.\autoedgethefactory\client\src,.\autoedgethefactory\shared\src,.\referencecomponents\presentationlayer\src,.\referencecomponents\enterpriseservices\src,.\referencecomponents\commoninfrastructure\client\src,.\referencecomponents\commoninfrastructure\shared\src,.\referencecomponents\support\src,.\autoedgethefactory\client\tests,.\autoedgethefactory\shared\tests,{code:getDLCDirectory}\gui,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
+    { Create the console.pf file }
+    FileName := ExpandConstant( '{app}\autoedgethefactory\client\cfg\base.pf' );
+    SaveStringToFile( FileName,
+                      '# AutoEdge|TheFactory Client Base Parameter File' + #13#10 + 
+						          '-pf  ./autoedgethefactory/shared/cfg/shared.pf '  + #13#10 +
+        						  '-T   ./autoedgethefactory/client/temp ' 					 + #13#10 +
+				        		  '-assemblies ./autoedgethefactory/client '         + #13#10 +
+                      '# eof'                                            + #13#10,
+                      false );
+    
+		FileName := ExpandConstant( '{app}\autoedgethefactory\client\cfg\client.ini');
+		FileCopy(ExpandConstant('{code:getDLCDirectory}\bin\progress.ini'), FileName, false);
+		
+    Propath := ExpandConstant('.\autoedgethefactory\client\bin,.\autoedgethefactory\shared\bin,.\referencecomponents\presentationlayer\bin,.\referencecomponents\enterpriseservices\bin,.\referencecomponents\commoninfrastructure\client\bin,.\referencecomponents\commoninfrastructure\shared\bin,.\referencecomponents\support\bin,.\autoedgethefactory\client\src,.\autoedgethefactory\shared\src,.\referencecomponents\presentationlayer\src,.\referencecomponents\enterpriseservices\src,.\referencecomponents\commoninfrastructure\client\src,.\referencecomponents\commoninfrastructure\shared\src,.\referencecomponents\support\src,.\autoedgethefactory\client\doc,.\autoedgethefactory\shared\doc,.\referencecomponents\presentationlayer\doc,.\referencecomponents\enterpriseservices\doc,.\referencecomponents\commoninfrastructure\client\doc,.\referencecomponents\commoninfrastructure\shared\doc,.\referencecomponents\support\doc,.\autoedgethefactory\client\tests,.\autoedgethefactory\shared\tests,{code:getDLCDirectory}\gui,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
 		SetIniString( 'Startup', 'PROPATH', Propath, FileName );
 
-		SetIniString( 'WinCharStartup', 'DLC', strDLCDirectory, FileName );
 		Propath := ExpandConstant('.,{code:getDLCDirectory}\tty,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
 		SetIniString( 'WinCharStartup', 'PROPATH', Propath, FileName );
 				
@@ -1052,6 +1074,9 @@ begin
     ParentNode.appendChild(ChildNode);
     ChildNode := clientConfigXML.createElement('name');
     ChildNode.text := txtAETFASClientName.Text;    
+    ParentNode.appendChild(ChildNode);
+    ChildNode := clientConfigXML.createElement('enabled');
+    ChildNode.text := 'true';    
     ParentNode.appendChild(ChildNode);
     
     // parameter for AppService 
@@ -1109,6 +1134,9 @@ begin
       ChildNode := clientConfigXML.createElement('name');
       ChildNode.text := 'bpmAutoEdgeTheFactory';    
       ParentNode.appendChild(ChildNode);
+      ChildNode := clientConfigXML.createElement('enabled');
+      ChildNode.text := 'true';    
+      ParentNode.appendChild(ChildNode);
          
       // parameter for host
       ChildNode := clientConfigXML.createElement('parameter');
@@ -1134,8 +1162,29 @@ begin
       ChildNode := clientConfigXML.createElement('value');
       ChildNode.text := txtBpmServerPort.Text;    
       ParentNode.appendChild(ChildNode);
-    end;        
- end;
+    end;        	
+end;
+
+{ === PROCEDURE DoUpdateConfigFiles ===================================================== }
+{ =																						= }
+{ =		Make changes to the configuration files to reflect the new directory where		= }
+{ =		the AutoEdge App will be put. The config files are shortcuts, Progress PF		= }
+{ =		files and the likes.															= }
+{ =																						= }
+{ ======================================================================================= }
+
+procedure DoUpdateConfigFiles;
+begin
+	DebugMsg( 'Updating Configuration Files' );
+
+	{ === Create the necessary PF files === }
+	{ Server only }
+	if isComponentSelected( 'AETF_SERVER' ) then
+	   DoUpdateServerConfigFiles;
+
+	{ Progress GUI Client only }
+	if isComponentSelected( 'AETF_CLIENT' ) then
+	 DoUpdateClientConfigFiles;
 end;
 
 { === PROCEDURE DoAddDatabase2ConmgrFile ================================================ }
@@ -1298,7 +1347,7 @@ begin
 								txtAETFASBrokerPort.Text,
                 ExpandConstant('./autoedgethefactory/server/bin;./autoedgethefactory/shared/bin;./referencecomponents/businesscomponents/bin;./referencecomponents/dataaccess/bin;./referencecomponents/enterpriseservices/bin;./referencecomponents/commoninfrastructure/server/bin;./referencecomponents/commoninfrastructure/shared/bin;./referencecomponents/support/bin;./autoedgethefactory/server/src;./autoedgethefactory/shared/src;./referencecomponents/businesscomponents/src;./referencecomponents/dataaccess/src;./referencecomponents/enterpriseservices/src;./referencecomponents/commoninfrastructure/server/src;./referencecomponents/commoninfrastructure/shared/src;./referencecomponents/support/src;./autoedgethefactory/server/tests;./autoedgethefactory/shared/tests;{code:getDLCDirectory};{code:getDLCDirectory}/bin'),
 								'-pf ./autoedgethefactory/server/cfg/server.pf',
-                '9ac3e995eba6ce0d:46471e5:12ddf173a65:-8000',
+                '0da8f650f94beecc:13f73c94:131ce84799f:-8000',
 								ExpandConstant( '{app}' ));
 
 		{ Add the startup procedures }
@@ -1435,7 +1484,7 @@ begin
 	begin
 		{ Restore the databases to normal structure }
 		DoProRestore(ExpandConstant( '{app}\autoedgethefactory\server\db\aetf.db' ),
-     					   ExpandConstant( '{app}\autoedgethefactory\server\db\autoedgethefactory.bup' ),
+     					   ExpandConstant( '{app}\autoedgethefactory\server\db\aetf.bup' ),
       					 ExpandConstant( '{app}\autoedgethefactory\server\db\' ));
 
     { Start config XML file }
@@ -1697,5 +1746,6 @@ DBBrokerPortsDescription=Please provide the database broker ports (TCP) to use
 
 [Tasks]
 Components: AETF_SERVER; Name: StartAllServers; Description: "Start the AutoEdge servers (DB, AppServer)";
-Components: AETF_SERVER; Name: DeployWebServices; Description: "Deploy the AutoEdge|TheFactory WebServices"; 
+Components: AETF_SERVER; Name: DeployWebServices; Description: "Deploy the AutoEdge|TheFactory WebServices";
+ 
 

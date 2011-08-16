@@ -39,7 +39,11 @@ begin
 			S := OpenEdgeReleases[ I ];
       intPos := Pos('.', S);
       strMajorVer := Copy(S, 1, intPos-1);
-      intMajorVer := StrToInt(strMajorVer);
+      try
+        intMajorVer := StrToInt(strMajorVer);
+      except
+        intMajorVer := 0; 
+      end;
       
       // Only allow versions of OpenEdge > 10.2B
       if ( ( intMajorVer = 10 ) and
@@ -47,9 +51,13 @@ begin
       // anything from 11 onwards works
            ( intMajorVer >= 10 ) then 
 			begin
-				cbOpenEdgeRelease.Items.Add( S );				
+				cbOpenEdgeRelease.Items.Add( S );
 			end;
 		end;
+
+    // select first item 
+    if ( cbOpenEdgeRelease.Items.Count > 0 ) then
+      cbOpenEdgeRelease.ItemIndex := 0;
 	end
 	else
 	begin

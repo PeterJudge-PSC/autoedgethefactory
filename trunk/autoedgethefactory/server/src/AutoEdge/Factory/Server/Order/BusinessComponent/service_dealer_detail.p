@@ -1,16 +1,18 @@
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Server/Order/BusinessComponent/service_dealer_detail.p
-    Purpose     : Returns details about a single dealer. 
+    Purpose     : Returns details about a single dealer.
 
     Syntax      :
 
-    Description : 
+    Description :
 
     Author(s)   : pjudge
     Created     : Wed Feb 16 14:40:50 EST 2011
     Notes       :
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
+
+using AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
@@ -71,27 +73,27 @@ function BuildDealerRequest returns IFetchRequest ():
     define variable oFetchRequest as IFetchRequest no-undo.
     define variable cTableName as character no-undo.
     define variable oTableRequest as ITableRequest no-undo.
-    
+
     oFetchRequest = new FetchRequest('Dealer').
-    
+
     cTableName = 'eDealer'.
     oTableRequest = new TableRequest(cTableName).
     oTableRequest:TableRequestType = TableRequestTypeEnum:NoChildren.
     oFetchRequest:TableRequests:Put(cTableName, oTableRequest).
-    
+
     cast(oTableRequest, IQueryDefinition):AddFilter(cTableName,
                                           'Code',
                                           OperatorEnum:IsEqual,
                                           new String(pcDealerCode),
                                           DataTypeEnum:Character,
                                           JoinEnum:And).
-    
-    /* we also want the salesreps 
+
+    /* we also want the salesreps
     cTableName = 'eSalesrep'.
     oTableRequest = new TableRequest(cTableName).
     oFetchRequest:TableRequests:Put(cTableName, oTableRequest).
     */
-    
+
     return oFetchRequest.
 end function.
 
@@ -99,11 +101,11 @@ end function.
 procedure BuildDealerOutputParameters:
     define input parameter poResponse as IServiceResponse no-undo.
     @todo(task="refactor", action="add JSON serialiser as IObjectOutput implementation").
-    
+
     define variable hDataSet as handle no-undo.
     define variable hQuery as handle no-undo.
     define variable hBuffer as handle no-undo.
-        
+
     cast(poResponse, IServiceMessage):GetMessageData(output hDataSet).
 
     hBuffer = hDataSet:get-buffer-handle('eDealer').
@@ -115,14 +117,14 @@ procedure BuildDealerOutputParameters:
                pcInfoEmail = hBuffer::InfoEmail
                pcStreetAddress = hBuffer::StreetAddress
                pcPhoneNumber = hBuffer::PhoneNumber.
-    
+
     finally:
         delete object hDataSet no-error.
     end finally.
 end procedure.
 
 /** Dummy return for modelling purposes (Savvion lets us make a test call to a WebService). */
-if pcUserContextId eq 'Savvion::Test' then    
+if pcUserContextId eq 'Savvion::Test' then
 do:
     assign pcDealerId = 'pcDealerId'
            pcName = 'pcName'
@@ -144,7 +146,9 @@ if pcUserContextId eq '' or pcUserContextId eq ? or pcUserContextId eq '<NULL>' 
 do:
     /* log in and establish tenancy, user context */
     assign cUserName = 'guest'
-           cUserDomain = 'guest.' + pcBrand
+           cUserDomain = substitute('&1.&2',
+                            UserTypeEnum:Customer:ToString(),
+                            pcBrand)
            cUserPassword = 'letmein'.
     cast(oSecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):UserLogin(cUserName, cUserDomain, cUserPassword).
 end.
@@ -178,7 +182,7 @@ catch oApplError as ApplicationError:
 end catch.
 
 catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
+    return error oAppError:ReturnValue.
 end catch.
 
 catch oError as Error:

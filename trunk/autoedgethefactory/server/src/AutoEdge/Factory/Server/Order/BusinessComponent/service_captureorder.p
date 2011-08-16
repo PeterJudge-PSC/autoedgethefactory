@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Order/BusinessComponent/service_captureorder.p
-    Purpose     : 
+    Purpose     :
 
     Syntax      :
 
-    Description : 
+    Description :
 
     Author(s)   : pjudge
     Created     : Mon Aug 02 09:37:10 EDT 2010
@@ -12,11 +12,12 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceRequestError.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceProvider.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
-using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.  
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchRequest.
@@ -83,14 +84,14 @@ function GetSelectedOption returns character (input pcOptions as longchar):
     define variable hTable as handle no-undo.
     define variable hQuery as handle no-undo.
     define variable hBuffer as handle no-undo.
-    
+
     if pcOptions eq '' or pcOptions eq ? OR pcOptions EQ '<NULL>' then
-        return ''. 
-        
+        return ''.
+
     /* ABL needs to know the/some/any tt name before read-json() works */
     if substring(left-trim(pcOptions), 1, 1) eq '[' then
-        pcOptions = '~{' + quoter("ttOptions")  + ':' + pcOptions + '~}'.                
-    
+        pcOptions = '~{' + quoter("ttOptions")  + ':' + pcOptions + '~}'.
+
     create temp-table hTable.
     hTable:read-json('longchar', pcOptions).
     hBuffer = hTable:default-buffer-handle.
@@ -99,16 +100,16 @@ function GetSelectedOption returns character (input pcOptions as longchar):
     hQuery:set-buffers(hBuffer).
     hQuery:query-prepare('for each ' + hBuffer:name + ' where selected = true ').
     hQuery:query-open().
-    
+
     hQuery:get-first().
     do while hbuffer:available:
-        cSelectedOption = cSelectedOption 
+        cSelectedOption = cSelectedOption
                         + ',' + hBuffer:buffer-field('value'):buffer-value.
         hQuery:get-next().
     end.
-    
+
     return left-trim(cSelectedOption, ',').
-    
+
     finally:
         if valid-handle(hQuery) then
             hQuery:query-close().
@@ -121,9 +122,9 @@ end function.
 function FetchSchema returns logical (output dataset-handle phDataset):
     define variable oRequest as IServiceRequest extent 1 no-undo.
     define variable oResponse as IServiceResponse extent no-undo.
-    
+
     oRequest[1] = new FetchRequest('Order', ServiceMessageActionEnum:FetchSchema).
-    
+
     oResponse = oServiceMessageManager:ExecuteRequest(oRequest).
     cast(oResponse[1], IServiceMessage):GetMessageData(output phDataset).
 end function.
@@ -136,34 +137,34 @@ function BuildSaveRequest returns ISaveRequest ():
     define variable iExtent as integer no-undo.
     define variable hTransportDataset as handle no-undo.
     define variable hBuffer as handle no-undo.
-    
+
     oSaveRequest = new SaveRequest('Order').
-    
+
     /* Get the change data */
     create dataset hTransportDataset.
     hTransportDataset:create-like(mhOrderDataset).
     hTransportDataset:get-changes(mhOrderDataset).
-    
+
     /* Put the PDS into the message */
     cast(oSaveRequest, IServiceMessage):SetMessageData(
             hTransportDataset,
             DataFormatEnum:ProDataSet).
-    
+
     /* We set the ISaveRequest:TableNames property, but we
        can probably also derive that from the dataset. */
     assign iMax = hTransportDataset:num-buffers
            extent(cChangedTables) = iMax.
-    
+
     do iLoop = 1 to iMax:
         hBuffer = hTransportDataset:get-buffer-handle(iLoop).
-        
+
         /* There will always be records in the before buffer, regardless of the operation.
            The 'after' buffer won't contain deletes. */
         if hBuffer:before-buffer:table-handle:has-records then
             assign iExtent = iExtent + 1
                    cChangedTables[iExtent] = hBuffer:name.
     end.
-    
+
     if iExtent gt 0 then
     do:
         /* Fill the array backwards, since a stack is always LIFO. Order is
@@ -173,24 +174,24 @@ function BuildSaveRequest returns ISaveRequest ():
             oSaveRequest:TableNames[iLoop] = cChangedTables[iloop].
         end.
     end.
-    
-    return oSaveRequest.         
+
+    return oSaveRequest.
 end function.
 
 function EnableDatasetForUpdate returns logical (phDataset as handle):
     define variable iLoop   as integer no-undo.
     define variable hBuffer as handle  no-undo.
-        
+
     do iLoop = 1 to phDataset:num-buffers:
         hBuffer = phDataset:get-buffer-handle(iLoop).
         hBuffer:table-handle:tracking-changes = true.
     end.
 end function.
-        
+
 function DisableDatasetForUpdate returns logical (phDataset as handle):
     define variable iLoop   as integer no-undo.
     define variable hBuffer as handle  no-undo.
-    
+
     do iLoop = 1 to phDataset:num-buffers:
         hBuffer = phDataset:get-buffer-handle(iLoop).
         hBuffer:table-handle:tracking-changes = no.
@@ -202,17 +203,17 @@ function CreateComponentItem returns logical (
                 input pcFinishedItemId as character,
                 input pcItemId as character,
                 input pdQuantity as decimal):
-    
+
     if pcItemId eq '' or pcItemId eq ? or pcItemId eq '<NULL>' then
         return false.
-    
+
     phBuffer:buffer-create().
     assign
         phBuffer::ItemId = pcItemId
         phBuffer::FinishedItemId = pcFinishedItemId
         phBuffer::Quantity = pdQuantity.
     phBuffer:buffer-release().
-    
+
     return true.
 end function.
 
@@ -228,18 +229,18 @@ function CreateEntityData returns logical (input phDataset as handle):
     define variable iMax as integer no-undo.
     define variable cSalesrepCode as character no-undo.
     define variable oPropertyValue as String no-undo.
-    
+
     assign hOrder = phDataset:get-buffer-handle('eOrder')
            hOrderLine = phDataset:get-buffer-handle('eOrderLine')
            hFinishedItem = phDataset:get-buffer-handle('eFinishedItem')
            hComponentItem = phDataset:get-buffer-handle('eComponentItem').
-    
+
     oPropertyValue = cast(oSecMgr:CurrentUserContext:UserProperties:Get(new String('Salesrep.Code')), String).
     if valid-object(oPropertyValue) then
         cSalesrepCode = oPropertyValue:Value.
-    
+
     EnableDatasetForUpdate(phDataset).
-    
+
     do transaction:
         /** -- add an order  -- **/
         hOrder:buffer-create().
@@ -253,12 +254,12 @@ function CreateEntityData returns logical (input phDataset as handle):
             hOrder::Salesrepcode = cSalesrepCode
             hOrder::OrderStatus = 'ORDER-NEW'
             hOrder::CustomerNum = int(pcCustomerId)
-            hOrder::Instructions = pcInstructions. 
+            hOrder::Instructions = pcInstructions.
         hOrder:buffer-release().
-        
+
         /* finished item */
         cItemId = GetSelectedOption(pcModel).
-        hFinishedItem:buffer-create().        
+        hFinishedItem:buffer-create().
         assign
             cFinishedItemId = guid(generate-uuid)
             hFinishedItem::FinishedItemId = cFinishedItemId
@@ -269,22 +270,22 @@ function CreateEntityData returns logical (input phDataset as handle):
 
         /* orderline */
         hOrderLine:buffer-create().
-        assign 
+        assign
             hOrderLine::OrderId = pcOrderId
             hOrderLine::LineNum = 1
             hOrderLine::Quantity = 1
             hOrderLine::ItemId = cItemId
             hOrderLine::FinishedItemId = cFinishedItemId
-            hOrderLine::OrderLineStatus = 'ORDER-NEW'. 
+            hOrderLine::OrderLineStatus = 'ORDER-NEW'.
         hOrderLine:buffer-release().
-                        
+
         /* components */
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcInteriorTrimColour), 1).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcInteriorTrimMaterial), 1).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcExteriorColour), 1).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcWheels), 5).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcMoonroof), 1).
-        
+
         iMax = num-entries(pcInteriorAccessories).
         do iLoop = 1 to iMax:
             CreateComponentItem(hComponentItem, cFinishedItemId, entry(iLoop, pcInteriorAccessories), 1).
@@ -298,11 +299,11 @@ function SaveData returns logical (input poRequest as ISaveRequest):
     define variable oRequest as IServiceRequest extent 1 no-undo.
     define variable oResponse as IServiceResponse extent 1 no-undo.
     define variable cTableName as character no-undo.
-    define variable oTableResponse as ITableResponse no-undo.   
+    define variable oTableResponse as ITableResponse no-undo.
     define variable cKeys as longchar no-undo.
     define variable cTexts as longchar no-undo.
-               
-    oRequest[1] = cast(BuildSaveRequest(), IServiceRequest).
+    
+    oRequest[1] = cast(poRequest, IServiceRequest).
     oResponse = oServiceMessageManager:ExecuteRequest(oRequest).
 
     if cast(oResponse[1], IServiceResponse):HasError then
@@ -310,16 +311,16 @@ function SaveData returns logical (input poRequest as ISaveRequest):
         iMax  = num-entries(oResponse[1]:ErrorText, '|').
         do iLoop = 1 to iMax:
             cTableName = entry(iLoop, oResponse[1]:ErrorText, '|').
-            
+
             oTableResponse = cast(cast(oResponse[1], ISaveResponse):TableResponses:Get(new String(cTableName)) , ITableResponse).
-            
+
             cKeys = String:Join(cast(oTableResponse:ErrorText:KeySet:ToArray(), String), '|').
             cTexts = String:Join(cast(oTableResponse:ErrorText:Values:ToArray(), String), '|').
             undo, throw new ServiceRequestError(
-                                'creating orders', 
+                                'creating orders',
                                 substitute('[ OrderNum: &1 ]', piOrderNumber)).
         end.
-    end.    
+    end.
 end function.
 
 /** -- main block -- **/
@@ -336,6 +337,7 @@ Assert:ArgumentNotNullOrEmpty(pcBrand, 'Brand').
 /*Assert:ArgumentNotNullOrEmpty(pcUserContextId, 'User Context').*/
 Assert:ArgumentNonZero(piOrderNumber, 'Order Number').
 
+
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType)
                , IServiceManager).
@@ -343,7 +345,10 @@ oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:ISer
 /* Are we who we say we are? Note that this should really happen on activate. activate doesn't run for state-free AppServers */
 oSecMgr = cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
 
-oSecMgr:UserLogin('admin', 'admin.' + pcBrand, 'letmein').
+oSecMgr:UserLogin('admin',
+                  substitute('&1.&2', UserTypeEnum:System:ToString(), pcBrand),
+                  'letmein').
+
 oSecMgr:AuthoriseServiceAction('CaptureOrder', ServiceMessageActionEnum:SaveData).
 
 oServiceMessageManager = cast(oServiceMgr:GetService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
@@ -363,7 +368,7 @@ catch oApplError as ApplicationError:
 end catch.
 
 catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
+    return error oAppError:ReturnValue.
 end catch.
 
 catch oError as Error:

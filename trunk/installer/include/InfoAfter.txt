@@ -6,7 +6,7 @@ Thank you for installing the OpenEdge Application Example, AutoEdge|TheFactory.
 
 The command files are stored in the <install_dir>\autoedgethefactory\client\cfg and <install_dir>\autoedgethefactory\server\cfg folders, depending on the installation options selected.
 
-Source-code or API documentation is available from the <install_dir>\autodox2-index.html page in a web browser.
+Source-code or API documentation is available from the <install_dir>\doc\autodox2-index.html page in a web browser.
 
 Overviews and design documentation is available at the Progress Communities AutoEdge|TheFactory project page, at http://communities.progress.com/pcom/community/psdn/openedge/architecture/autoedgethefactory , which is a part of the Architecture, SaaS & Cloud Computing community on Progress Communities.
 
