@@ -51,7 +51,6 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     constructor public ApplicationError(poInnerError as Error):               
         this-object().
         
-        Assert:ArgumentNotNull(poInnerError, 'Inner Error').
         this-object:InnerError = poInnerError.
     end constructor.
     

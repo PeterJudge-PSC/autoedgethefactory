@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Server/Order/BusinessComponent/service_branddata.p
-    Purpose     : 
+    Purpose     :
 
     Syntax      :
 
@@ -8,9 +8,11 @@
 
     Author(s)   : pjudge
     Created     : Wed Jul 28 16:50:34 EDT 2010
-    Notes       : 
+    Notes       :
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
+
+using AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
@@ -78,11 +80,11 @@ function BuildVehicleRequest returns IFetchRequest ():
     define variable oTableContext as ITableContext no-undo.
     define variable oTableRequest as ITableRequest no-undo.
     define variable iMax as integer no-undo.
-    define variable iLoop as integer no-undo. 
+    define variable iLoop as integer no-undo.
     define variable cTableName as character no-undo.
-    
+
     oFetchRequest = new FetchRequest('VehicleOptions').
-    
+
     /* Fetch defaults / all */
     return oFetchRequest.
 end function.
@@ -91,14 +93,14 @@ function BuildDealerRequest returns IFetchRequest ():
     define variable oFetchRequest as IFetchRequest no-undo.
     define variable cTableName as character no-undo.
     define variable oTableRequest as ITableRequest no-undo.
-    
+
     oFetchRequest = new FetchRequest('Dealer').
-    
+
     cTableName = 'eDealer'.
     oTableRequest = new TableRequest(cTableName).
     oTableRequest:TableRequestType = TableRequestTypeEnum:NoChildren.
     oFetchRequest:TableRequests:Put(cTableName, oTableRequest).
-    
+
     return oFetchRequest.
 end function.
 
@@ -106,9 +108,9 @@ end function.
 function SanitiseString returns character (input pcString as character):
     define variable cString as character no-undo.
     define variable c as character no-undo.
-    
+
     cString = pcString.
-    
+
     if index(cString, '~"') gt 0 then
         cString = replace(cString, '~"', '\~"').
 
@@ -117,7 +119,7 @@ function SanitiseString returns character (input pcString as character):
 
     if index(cString, '~[') gt 0 then
         cString = replace(cString, '~[', '\~[').
-    
+
     return cString.
 end function.
 
@@ -126,17 +128,17 @@ function GetOptions returns longchar (input pcGroup as character, input phDatase
     define variable hQuery as handle no-undo.
     define variable hItemBuffer as handle no-undo.
     define variable hOptionBuffer as handle no-undo.
-    
+
     hItemBuffer = phDataset:get-buffer-handle('eItem').
     hOptionBuffer = phDataset:get-buffer-handle('eItemOption').
-    
+
     create query hQuery.
     hQuery:set-buffers(hItemBuffer, hOptionBuffer).
     hQuery:query-prepare(' for each eItem where eItem.ItemType eq ' + quoter(pcGroup)
                         + ', first eItemOption where eItemOption.ChildItemId eq eItem.ItemId ').
     hQuery:query-open().
-    
-    cOptions = ''.    
+
+    cOptions = ''.
     hQuery:get-first().
     do while not hQuery:query-off-end:
             cOptions = cOptions + ', ~{ '
@@ -146,12 +148,12 @@ function GetOptions returns longchar (input pcGroup as character, input phDatase
                      + ' ~}'.
         hQuery:get-next().
     end.
-    
+
     if cOptions eq '' then
        cOptions = cOptions + ' ~{ ~"selected~" : false, '
                      + '~"value~" : ~"none~", '
                      + '~"label~" : ~"None~" ~} '.
-    
+
     cOptions = '[' + trim(cOptions, ',')  + ' ]'.
     return cOptions.
     finally:
@@ -166,14 +168,14 @@ function GetModels returns longchar (input pcStyle as character, input phDataset
     define variable hBuffer as handle no-undo.
     define variable iLoop as integer no-undo.
     define variable iMax as integer no-undo.
-    
+
     assign iMax = num-entries(pcStyle)
            cModels = ''
            hBuffer = phDataset:get-buffer-handle('eVehicle').
-           
+
     create query hQuery.
     hQuery:set-buffers(hBuffer).
-    
+
     do iLoop = 1 to iMax:
         hQuery:query-prepare(' for each eVehicle where eVehicle.VehicleType = ' + quoter(entry(iloop, pcStyle))).
         hQuery:query-open().
@@ -188,7 +190,7 @@ function GetModels returns longchar (input pcStyle as character, input phDataset
         end.
         hQuery:query-close().
     end.
-    
+
     if cModels eq '' then
        cModels = cModels + ' ~{ ~"selected~" : false, '
                      + '~"value~" : ~"none~", '
@@ -207,38 +209,38 @@ end function.
 procedure BuildDealerOutputParameters:
     define input parameter poResponse as IServiceResponse no-undo.
     @todo(task="refactor", action="add JSON serialiser as IObjectOutput implementation").
-    
+
     define variable hDataSet as handle no-undo.
     define variable hQuery as handle no-undo.
     define variable hBuffer as handle no-undo.
-        
+
     cast(poResponse, IServiceMessage):GetMessageData(output hDataSet).
 
     hBuffer = hDataSet:get-buffer-handle('eDealer').
-    
+
     create query hQuery.
     hQuery:set-buffers(hBuffer).
     hQuery:query-prepare(' for each eDealer ').
     hQuery:query-open().
-    
+
     pcDealerNameList = ''.
-    
+
     hQuery:get-first().
     do while hBuffer:available:
         pcDealerNameList = pcDealerNameList
                          + substitute(', ~{ ~"selected~":'
-                                      + string(logical(pcDealerNameList eq ''), 'true/false') 
+                                      + string(logical(pcDealerNameList eq ''), 'true/false')
                                       + ', ~"value~": ~"&1~", ~"label~": ~"&2~" ~}',
                                       SanitiseString(hBuffer::Code),
                                       SanitiseString(hBuffer::Name)).
         hQuery:get-next().
     end.
-    
+
     if pcDealerNameList eq '' then
        pcDealerNameList = pcDealerNameList + ' ~{ ~"selected~" : true, '
                      + '~"value~" : ~"none~", '
                      + '~"label~" : ~"No dealers available~" ~}'.
-    
+
     pcDealerNameList= ' [ ' + trim(pcDealerNameList, ',')  + ' ]'.
     finally:
         hQuery:query-close().
@@ -249,13 +251,13 @@ end procedure.
 
 procedure BuildVehicleOutputParameters:
     define input  parameter poResponse as IServiceResponse no-undo.
-    
+
     define variable hDataSet as handle no-undo.
     define variable hQuery as handle no-undo.
     define variable hBuffer as handle no-undo.
-    
+
     cast(poResponse, IServiceMessage):GetMessageData(output hDataSet).
-    
+
     assign pcCompactModels = GetModels('Vehicle-Compact', hDataSet)
            pcTruckModels = GetModels('Vehicle-Truck,Vehicle-Commercial', hDataSet)
            pcSedanModels = GetModels('Vehicle-Sedan', hDataSet)
@@ -268,14 +270,14 @@ procedure BuildVehicleOutputParameters:
            pcExteriorColour = GetOptions('Ext-Colour', hDataSet)
            pcMoonroof = GetOptions('Moonroof', hDataSet)
            pcWheels = GetOptions('Wheels', hDataSet).
-           
+
     finally:
         delete object hDataSet no-error.
-    end finally.           
+    end finally.
 end procedure.
 
 /** Dummy return for modelling purposes (Savvion lets us make a test call to a WebService). */
-if pcUserContextId eq 'Savvion::Test' then    
+if pcUserContextId eq 'Savvion::Test' then
 do:
     assign pcDealerNameList = 'pcDealerNameList'
            pcCompactModels = 'pcCompactModels '
@@ -300,7 +302,9 @@ oSecMgr = cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType), ISe
 
 /* log in and establish tenancy, user context */
 assign cUserName = 'guest'
-       cUserDomain = 'guest.' + pcBrand
+       cUserDomain = substitute('&1.&2',
+                            UserTypeEnum:Customer:ToString(),
+                            pcBrand)
        cUserPassword = 'letmein'.
 oSecMgr:UserLogin(cUserName, cUserDomain, cUserPassword).
 
@@ -333,7 +337,7 @@ catch oApplError as ApplicationError:
 end catch.
 
 catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
+    return error oAppError:ReturnValue.
 end catch.
 
 catch oError as Error:

@@ -1,4 +1,3 @@
-
 Welcome to the OpenEdge Application Example, AutoEdge|TheFactory.
 
 Please read these notes carefully before continuing the installation.
