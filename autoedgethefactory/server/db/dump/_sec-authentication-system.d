@@ -4,7 +4,7 @@ PSC
 filename=_sec-authentication-system
 records=0000000000001
 ldbname=aetf
-timestamp=2011/08/18-09:52:58
+timestamp=2011/08/18-14:43:46
 numformat=44,46
 dateformat=mdy-1950
 map=NO-MAP

@@ -3,7 +3,7 @@ PSC
 filename=SupplierItem
 records=0000000000000
 ldbname=aetf
-timestamp=2011/05/16-16:46:07
+timestamp=2011/08/18-14:43:26
 numformat=44,46
 dateformat=mdy-1950
 map=NO-MAP
