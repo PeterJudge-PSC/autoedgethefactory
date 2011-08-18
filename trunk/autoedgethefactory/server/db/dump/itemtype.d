@@ -1,3 +1,4 @@
+"8485ddda-5ae2-e8ae-e011-6585da5eda13" "Vehicle-Compact" "Items of type Vehicle-Compact"
 "e27c5d68-c9a2-77ae-e011-ae240504e409" "Vehicle-SUV" "Items of type SUV"
 "e27c5d68-c9a2-77ae-e011-ae245a50d308" "Vehicle-Coupe" "Items of type Coupe"
 "e27c5d68-c9a2-77ae-e011-ae247dff0d08" "Vehicle-Convertible" "Items of type Convertible"
@@ -16,12 +17,12 @@
 .
 PSC
 filename=ItemType
-records=0000000000015
+records=0000000000016
 ldbname=aetf
-timestamp=2011/05/16-16:46:07
+timestamp=2011/08/18-14:43:26
 numformat=44,46
 dateformat=mdy-1950
 map=NO-MAP
 cpstream=UTF-8
 .
-0000001193
+0000001283

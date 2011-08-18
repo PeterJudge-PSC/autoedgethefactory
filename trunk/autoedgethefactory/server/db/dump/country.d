@@ -249,7 +249,7 @@ PSC
 filename=Country
 records=0000000000246
 ldbname=aetf
-timestamp=2011/05/16-16:46:05
+timestamp=2011/08/18-14:43:25
 numformat=44,46
 dateformat=mdy-1950
 map=NO-MAP

@@ -30,15 +30,19 @@
 "8a57828a-13a7-2dac-e011-c00e619417fb" "EMEA"
 "8a57828a-13a7-2dac-e011-c00e619417fb" "NorthAmerica"
 "8a57828a-13a7-2dac-e011-c00e619417fb" "SouthCentralAmerica"
+"e00ea2b2-7f41-4f8b-e011-c728b9731717" "APAC"
+"e00ea2b2-7f41-4f8b-e011-c728b9731717" "EMEA"
+"e00ea2b2-7f41-4f8b-e011-c728b9731717" "NorthAmerica"
+"e00ea2b2-7f41-4f8b-e011-c728b9731717" "SouthCentralAmerica"
 .
 PSC
 filename=SalesRegion
-records=0000000000032
+records=0000000000036
 ldbname=aetf
-timestamp=2011/05/16-16:46:07
+timestamp=2011/08/18-14:43:26
 numformat=44,46
 dateformat=mdy-1950
 map=NO-MAP
 cpstream=UTF-8
 .
-0000001691
+0000001902
