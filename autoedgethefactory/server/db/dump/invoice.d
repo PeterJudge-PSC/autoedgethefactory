@@ -1,0 +1,12 @@
+.
+PSC
+filename=Invoice
+records=0000000000000
+ldbname=aetf
+timestamp=2011/05/16-16:46:06
+numformat=44,46
+dateformat=mdy-1950
+map=NO-MAP
+cpstream=UTF-8
+.
+0000000003
