@@ -419,8 +419,8 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
 
         hDbBuffer:buffer-create().
 
-        /* The BUFFER-COPY is cool in that it respects the DATA-SOURCE attach mappings */
-        hDbBuffer:buffer-copy(phSourceBuffer:after-buffer, TenantFilterFieldName).
+        /* The BUFFER-COPY is cool in that it respects the DATA-SOURCE attach mappings. Except when there are 'EXCEPT' values */
+        hDbBuffer:buffer-copy(phSourceBuffer:after-buffer).
 
         if poDataSourceQuery:TenantFilters:ContainsKey(new String(hDbBuffer:name)) then
             AddTenantKeys(hDbBuffer).
