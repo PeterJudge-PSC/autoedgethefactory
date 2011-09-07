@@ -10,6 +10,7 @@
 routine-level on error undo, throw.
 
 using Infragistics.Win.UltraWinTabControl.UltraTab.
+using Infragistics.Win.UltraWinGrid.UltraGridColumn.
 using Progress.Windows.Form.
 
 using OpenEdge.CommonInfrastructure.Common.Connection.IServerConnection.
@@ -53,23 +54,23 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         index idx2 SettingGroup Order.
     define private query mQrySettings for mSettingData scrolling.
 
-    define variable mcDocURL as character no-undo.
+    define variable moDocType as class Class no-undo.
 
     define private variable bsSettings as Progress.Data.BindingSource no-undo.
     define private variable components as System.ComponentModel.IContainer no-undo.
     define private variable imageList1 as System.Windows.Forms.ImageList no-undo.
     define private variable ultraPanel1 as Infragistics.Win.Misc.UltraPanel no-undo.
     define private variable ultraTabPageControl3 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
-    define private variable ultraTabPageControl2 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
+    DEFINE PRIVATE VARIABLE ultraTabPageControl4 AS Infragistics.Win.UltraWinTabControl.UltraTabPageControl NO-UNDO.
     define private variable ultraTabPageControl5 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable ultraTabSharedControlsPage1 as Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage no-undo.
     define private variable ultraTabPageControl1 as Infragistics.Win.UltraWinTabControl.UltraTabPageControl no-undo.
     define private variable uxDetail as Infragistics.Win.UltraWinGrid.UltraGrid no-undo.
+    define private variable uxFormattedKeyText as Infragistics.Win.FormattedLinkLabel.UltraFormattedLinkLabel no-undo.
+    define private variable uxFormattedValueText as Infragistics.Win.FormattedLinkLabel.UltraFormattedLinkLabel no-undo.
     define private variable uxLogo as Infragistics.Win.UltraWinEditors.UltraPictureBox no-undo.
     define private variable uxSettingsGroup as Infragistics.Win.UltraWinTabControl.UltraTabControl no-undo.
     define private variable uxVersionInfo as Infragistics.Win.UltraWinEditors.UltraTextEditor no-undo.
-    define private variable uxWebBrowser as System.Windows.Forms.WebBrowser no-undo.
-    define private variable uxWebBrowserPanel as Infragistics.Win.Misc.UltraPanel no-undo.
 
     define public property ServiceManager as IServiceManager no-undo
         get():
@@ -116,13 +117,12 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
 
         @param Class The caller of this dialog */
     constructor public HelpAbout(input poCaller as class Class):
-        define variable oTab as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
-
         this-object().
 
-        mcDocURL = BuildAutoDoxURL(poCaller).
-        oTab = uxSettingsGroup:Tabs['uxCodeDoc'].
-        oTab:Enabled = true.
+        moDocType = poCaller.
+        uxSettingsGroup:Tabs['uxCodeDoc']:Enabled = valid-object(poCaller).
+
+        InitCodeDocData().
     end constructor.
 
     constructor public HelpAbout():
@@ -135,103 +135,72 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         /* default to not show any code documentation */
         uxSettingsGroup:Tabs['uxCodeDoc']:Enabled = false.
 
-        ShowHelp().
-
         catch e as Progress.Lang.Error:
             undo, throw e.
         end catch.
     end constructor.
 
-    method protected void ShowHelp():
+    method protected void InitVersionInfo():
         define variable cVersion as character no-undo.
+        define variable oProperty as String no-undo.
 
-        input from 'version.txt'.
+        oProperty = cast(ABLSession:Instance:SessionProperties:Get(new String('Config.Property.APPROOT')), String).
+
+        input from value(substitute('&1/version.txt', oProperty:Value)).
             import unformatted cVersion.
         input close.
 
         uxVersionInfo:Text = cVersion.
-
     end method.
 
-    method protected void InitData():
-        define variable cBpmSessionId as character no-undo.
-        define variable cBpmServerHost as character no-undo.
-        define variable lBpmServerConnected as logical no-undo.
-        define variable cAppServerHost as character no-undo.
-        define variable lAppServerConnected as logical no-undo.
-        define variable cUserName as character no-undo.
-        define variable cUserDomain as character no-undo.
-        define variable cTenantName as character no-undo.
-        define variable oPropertyValue  as String no-undo.
+    method protected void InitCodeDocData():
+        define variable iLoop as integer no-undo.
+        define variable cHTML as character no-undo.
+        define variable cURL as character no-undo.
+
+        /* AutoDox */
+        cURL = BuildAutoDoxURL(moDocType).
+        cHTML = substitute('<a href="&1">&2</a>', cURL, moDocType:TypeName).
+        iLoop = 1.
+        create mSettingData.
+        assign mSettingData.SettingGroup = 'CODEDOC'
+               mSettingData.Order = iLoop
+               iLoop = iLoop + 1
+               mSettingData.Key = cHTML
+               mSettingData.SettingValue = cURL.
+    end method.
+
+    method protected void InitUserData():
         define variable oUC as IUserContext no-undo.
-        define variable oServerConnection as IServerConnection no-undo.
-        define variable cUnknownString as character no-undo.
         define variable iLoop as integer no-undo.
         define variable oIterator as IIterator no-undo.
         define variable oKey as Object no-undo.
 
-        cUnknownString = '<unknown>'.
-
-        /* servers */
-        oServerConnection = ConMgr:GetServerConnection(ConnectionTypeEnum:BpmServer, 'bpmAutoEdgeTheFactory').
-        if valid-object(oServerConnection) then
-            assign cBpmServerHost = string(oServerConnection:ConnectionParameters:GetConnectionString())
-                   lBpmServerConnected = oServerConnection:IsConnected.
-        else
-            assign cBpmServerHost = cUnknownString
-                   lBpmServerConnected = false.
-
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'BPM'
-               mSettingData.Order = 1
-               mSettingData.Key = 'Bpm Server Name'
-               mSettingData.SettingValue = 'bpmAutoEdgeTheFactory'.
-
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'BPM'
-               mSettingData.Order = 2
-               mSettingData.Key = 'Bpm Server Host'
-               mSettingData.SettingValue = cBpmServerHost.
-
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'BPM'
-               mSettingData.Order = 3
-               mSettingData.Key = 'IsConnected'
-               mSettingData.SettingValue = string(lBpmServerConnected).
-
-        oServerConnection = ConMgr:GetServerConnection(ConnectionTypeEnum:AppServer, 'asAutoEdgeTheFactory').
-        if valid-object(oServerConnection) then
-            assign cAppServerHost = string(oServerConnection:ConnectionParameters:GetConnectionString())
-                   lAppServerConnected = oServerConnection:IsConnected.
-        else
-            assign cAppServerHost = cUnknownString
-                   lAppServerConnected = false.
-
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'OPENEDGE'
-               mSettingData.Order = 1
-               mSettingData.Key = 'AppServer Name'
-               mSettingData.SettingValue = 'asAutoEdgeTheFactory'.
-
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'OPENEDGE'
-               mSettingData.Order = 2
-               mSettingData.Key = 'AppServer Host'
-               mSettingData.SettingValue = cAppServerHost.
-
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'OPENEDGE'
-               mSettingData.Order = 3
-               mSettingData.Key = 'IsConnected'
-               mSettingData.SettingValue = string(lAppServerConnected).
-
+        iLoop = 1.
         oUC = cast(SecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):CurrentUserContext.
         if valid-object(oUC) then
         do:
-            assign cUserName = oUC:UserName
-                   cUserDomain = oUC:UserDomain
-                   cTenantName = oUC:TenantName.
-            iLoop = 4.
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'USER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'Login Name'
+                   mSettingData.SettingValue = oUC:UserName.
+
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'USER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'Login Domain'
+                   mSettingData.SettingValue = oUC:UserDomain.
+
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'USER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'Tenant Name'
+                   mSettingData.SettingValue = oUC:TenantName.
+
             oIterator = oUC:UserProperties:KeySet:Iterator().
             do while oIterator:HasNext():
                 oKey = oIterator:Next().
@@ -244,29 +213,117 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
                        mSettingData.SettingValue = oUC:UserProperties:Get(oKey):ToString().
             end.
         end.
-        else
-            assign cUserName = cUnknownString
-                   cUserDomain = cUnknownString
-                   cTenantName = cUnknownString.
+    end method.
 
+    method protected void InitServerData():
+        define variable oServerConnection as IServerConnection no-undo.
+        define variable iLoop as integer no-undo.
+        define variable oIterator as IIterator no-undo.
+        define variable oKey as Object no-undo.
+        define variable cBpmSessionId as character no-undo.
+        define variable cBpmServerHost as character no-undo.
+        define variable lBpmServerConnected as logical no-undo.
+        define variable cAppServerHost as character no-undo.
+        define variable lAppServerConnected as logical no-undo.
+
+        iLoop = 1.
+        oServerConnection = ConMgr:GetServerConnection(ConnectionTypeEnum:AppServer, 'asAutoEdgeTheFactory').
+        if valid-object(oServerConnection) then
+        do:
+            assign cAppServerHost = string(oServerConnection:ConnectionParameters:GetConnectionString())
+                   lAppServerConnected = oServerConnection:IsConnected.
+
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'SERVER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'AppServer Name'
+                   mSettingData.SettingValue = 'asAutoEdgeTheFactory'.
+
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'SERVER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'AppServer Host'
+                   mSettingData.SettingValue = cAppServerHost.
+
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'SERVER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'AppServer IsConnected'
+                   mSettingData.SettingValue = string(lAppServerConnected).
+        end.
+
+        /* spacer */
         create mSettingData.
-        assign mSettingData.SettingGroup = 'USER'
-               mSettingData.Order = 1
-               mSettingData.Key = 'Login Name'
-               mSettingData.SettingValue = cUserName.
+        assign mSettingData.SettingGroup = 'SERVER'
+               mSettingData.Order = iLoop
+               iLoop = iLoop + 1
+               mSettingData.Key = ''
+               mSettingData.SettingValue = ''.
 
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'USER'
-               mSettingData.Order = 2
-               mSettingData.Key = 'Login Domain'
-               mSettingData.SettingValue = cUserDomain.
+        oServerConnection = ConMgr:GetServerConnection(ConnectionTypeEnum:BpmServer, 'bpmAutoEdgeTheFactory').
+        if valid-object(oServerConnection) then
+        do:
+            assign cBpmServerHost = string(oServerConnection:ConnectionParameters:GetConnectionString())
+                   lBpmServerConnected = oServerConnection:IsConnected.
 
-        create mSettingData.
-        assign mSettingData.SettingGroup = 'USER'
-               mSettingData.Order = 3
-               mSettingData.Key = 'Tenant Name'
-               mSettingData.SettingValue = cTenantName.
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'SERVER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'BPM Server Name'
+                   mSettingData.SettingValue = 'bpmAutoEdgeTheFactory'.
 
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'SERVER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'BPM Server Host'
+                   mSettingData.SettingValue = substitute('<a href="&1">&2</a>',
+                            substitute('&1/sbm/bpmportal/login.jsp',cBpmServerHost),
+                            cBpmServerHost).
+
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'SERVER'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = 'BPM Server IsConnected'
+                   mSettingData.SettingValue = string(lBpmServerConnected).
+        end.
+    end method.
+
+    method protected void InitSessionData():
+        define variable iLoop as integer no-undo.
+        define variable oIterator as IIterator no-undo.
+        define variable oKey as Object no-undo.
+        define variable oValue as Object no-undo.
+
+        /* Session info */
+        oIterator = ABLSession:Instance:SessionProperties:KeySet:Iterator().
+        iLoop = 1.
+        do while oIterator:HasNext():
+            oKey = oIterator:Next().
+            if not type-of(oKey, String) then
+                next.
+
+            oValue = ABLSession:Instance:SessionProperties:Get(oKey).
+
+            create mSettingData.
+            assign mSettingData.SettingGroup = 'SESSION'
+                   mSettingData.Order = iLoop
+                   iLoop = iLoop + 1
+                   mSettingData.Key = oKey:ToString()
+                   mSettingData.SettingValue = oValue:ToString().
+        end.
+    end method.
+
+    method protected void InitData():
+        InitVersionInfo().
+        InitUserData().
+        InitServerData().
+        InitSessionData().
     end method.
 
     method private void InitializeComponent(  ):
@@ -279,8 +336,8 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         Modifying the contents of this method using a code editor will invalidate any support for this file. */
         this-object:components = new System.ComponentModel.Container().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance81 as Infragistics.Win.Appearance no-undo.
-        appearance81 = new Infragistics.Win.Appearance().
+        define variable appearance4 as Infragistics.Win.Appearance no-undo.
+        appearance4 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraGridBand1 as Infragistics.Win.UltraWinGrid.UltraGridBand no-undo.
         ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("mSettingData", -1).
@@ -291,44 +348,44 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         define variable ultraGridColumn4 as Infragistics.Win.UltraWinGrid.UltraGridColumn no-undo.
         ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("SettingValue").
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance82 as Infragistics.Win.Appearance no-undo.
-        appearance82 = new Infragistics.Win.Appearance().
+        define variable appearance7 as Infragistics.Win.Appearance no-undo.
+        appearance7 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance83 as Infragistics.Win.Appearance no-undo.
-        appearance83 = new Infragistics.Win.Appearance().
+        define variable appearance8 as Infragistics.Win.Appearance no-undo.
+        appearance8 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance84 as Infragistics.Win.Appearance no-undo.
-        appearance84 = new Infragistics.Win.Appearance().
+        define variable appearance9 as Infragistics.Win.Appearance no-undo.
+        appearance9 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance85 as Infragistics.Win.Appearance no-undo.
-        appearance85 = new Infragistics.Win.Appearance().
+        define variable appearance10 as Infragistics.Win.Appearance no-undo.
+        appearance10 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance86 as Infragistics.Win.Appearance no-undo.
-        appearance86 = new Infragistics.Win.Appearance().
+        define variable appearance11 as Infragistics.Win.Appearance no-undo.
+        appearance11 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance87 as Infragistics.Win.Appearance no-undo.
-        appearance87 = new Infragistics.Win.Appearance().
+        define variable appearance12 as Infragistics.Win.Appearance no-undo.
+        appearance12 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance88 as Infragistics.Win.Appearance no-undo.
-        appearance88 = new Infragistics.Win.Appearance().
+        define variable appearance13 as Infragistics.Win.Appearance no-undo.
+        appearance13 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance89 as Infragistics.Win.Appearance no-undo.
-        appearance89 = new Infragistics.Win.Appearance().
+        define variable appearance14 as Infragistics.Win.Appearance no-undo.
+        appearance14 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance90 as Infragistics.Win.Appearance no-undo.
-        appearance90 = new Infragistics.Win.Appearance().
+        define variable appearance15 as Infragistics.Win.Appearance no-undo.
+        appearance15 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance91 as Infragistics.Win.Appearance no-undo.
-        appearance91 = new Infragistics.Win.Appearance().
+        define variable appearance16 as Infragistics.Win.Appearance no-undo.
+        appearance16 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance92 as Infragistics.Win.Appearance no-undo.
-        appearance92 = new Infragistics.Win.Appearance().
+        define variable appearance17 as Infragistics.Win.Appearance no-undo.
+        appearance17 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance93 as Infragistics.Win.Appearance no-undo.
-        appearance93 = new Infragistics.Win.Appearance().
+        define variable appearance18 as Infragistics.Win.Appearance no-undo.
+        appearance18 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance94 as Infragistics.Win.Appearance no-undo.
-        appearance94 = new Infragistics.Win.Appearance().
+        define variable appearance19 as Infragistics.Win.Appearance no-undo.
+        appearance19 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable tableDesc1 as Progress.Data.TableDesc no-undo.
         tableDesc1 = new Progress.Data.TableDesc("mSettingData").
@@ -345,39 +402,37 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         define variable appearance6 as Infragistics.Win.Appearance no-undo.
         appearance6 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable ultraTab1 as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
-        ultraTab1 = new Infragistics.Win.UltraWinTabControl.UltraTab().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
-        define variable appearance4 as Infragistics.Win.Appearance no-undo.
-        appearance4 = new Infragistics.Win.Appearance().
-        @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraTab2 as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
         ultraTab2 = new Infragistics.Win.UltraWinTabControl.UltraTab().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance5 as Infragistics.Win.Appearance no-undo.
         appearance5 = new Infragistics.Win.Appearance().
         @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable ultraTab4 as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
+        ultraTab4 = new Infragistics.Win.UltraWinTabControl.UltraTab().
+        @VisualDesigner.FormMember (NeedsInitialize="true").
+        define variable appearance2 as Infragistics.Win.Appearance no-undo.
+        appearance2 = new Infragistics.Win.Appearance().
+        @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable ultraTab5 as Infragistics.Win.UltraWinTabControl.UltraTab no-undo.
         ultraTab5 = new Infragistics.Win.UltraWinTabControl.UltraTab().
         @VisualDesigner.FormMember (NeedsInitialize="true").
         define variable appearance3 as Infragistics.Win.Appearance no-undo.
         appearance3 = new Infragistics.Win.Appearance().
-        this-object:uxWebBrowserPanel = new Infragistics.Win.Misc.UltraPanel().
-        this-object:uxWebBrowser = new System.Windows.Forms.WebBrowser().
+        this-object:uxFormattedKeyText = new Infragistics.Win.FormattedLinkLabel.UltraFormattedLinkLabel().
+        this-object:uxFormattedValueText = new Infragistics.Win.FormattedLinkLabel.UltraFormattedLinkLabel().
         this-object:ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
-        this-object:ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraTabPageControl3 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
+        this-object:ultraTabPageControl4 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
+        this-object:ultraTabPageControl5 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:uxDetail = new Infragistics.Win.UltraWinGrid.UltraGrid().
         this-object:bsSettings = new Progress.Data.BindingSource(this-object:components).
-        this-object:ultraTabPageControl5 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl().
         this-object:ultraPanel1 = new Infragistics.Win.Misc.UltraPanel().
         this-object:uxLogo = new Infragistics.Win.UltraWinEditors.UltraPictureBox().
         this-object:uxVersionInfo = new Infragistics.Win.UltraWinEditors.UltraTextEditor().
         this-object:imageList1 = new System.Windows.Forms.ImageList(this-object:components).
         this-object:uxSettingsGroup = new Infragistics.Win.UltraWinTabControl.UltraTabControl().
         this-object:ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage().
-        this-object:uxWebBrowserPanel:ClientArea:SuspendLayout().
-        this-object:uxWebBrowserPanel:SuspendLayout().
         this-object:ultraTabPageControl1:SuspendLayout().
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):BeginInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):BeginInit().
@@ -389,41 +444,38 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:ultraTabSharedControlsPage1:SuspendLayout().
         this-object:SuspendLayout().
         /*  */
-        /* uxWebBrowserPanel */
+        /* uxFormattedKeyText */
         /*  */
+        this-object:uxFormattedKeyText:Location = new System.Drawing.Point(118, 129).
+        this-object:uxFormattedKeyText:Name = "uxFormattedKeyText".
+        this-object:uxFormattedKeyText:Size = new System.Drawing.Size(130, 23).
+        this-object:uxFormattedKeyText:TabIndex = 2.
+        this-object:uxFormattedKeyText:TabStop = true.
+        this-object:uxFormattedKeyText:TreatValueAs = Infragistics.Win.FormattedLinkLabel.TreatValueAs:Auto.
+        this-object:uxFormattedKeyText:Value = "".
+        this-object:uxFormattedKeyText:Visible = false.
+        this-object:uxFormattedKeyText:WrapText = false.
         /*  */
-        /* uxWebBrowserPanel.ClientArea */
+        /* uxFormattedValueText */
         /*  */
-        this-object:uxWebBrowserPanel:ClientArea:Controls:Add(this-object:uxWebBrowser).
-        this-object:uxWebBrowserPanel:Dock = System.Windows.Forms.DockStyle:Fill.
-        this-object:uxWebBrowserPanel:Location = new System.Drawing.Point(0, 0).
-        this-object:uxWebBrowserPanel:Name = "uxWebBrowserPanel".
-        this-object:uxWebBrowserPanel:Size = new System.Drawing.Size(452, 248).
-        this-object:uxWebBrowserPanel:TabIndex = 2.
-        /*  */
-        /* uxWebBrowser */
-        /*  */
-        this-object:uxWebBrowser:AllowNavigation = false.
-        this-object:uxWebBrowser:Dock = System.Windows.Forms.DockStyle:Fill.
-        this-object:uxWebBrowser:Location = new System.Drawing.Point(0, 0).
-        this-object:uxWebBrowser:MinimumSize = new System.Drawing.Size(20, 20).
-        this-object:uxWebBrowser:Name = "uxWebBrowser".
-        this-object:uxWebBrowser:ScriptErrorsSuppressed = true.
-        this-object:uxWebBrowser:Size = new System.Drawing.Size(452, 248).
-        this-object:uxWebBrowser:TabIndex = 0.
+        this-object:uxFormattedValueText:Location = new System.Drawing.Point(208, 100).
+        this-object:uxFormattedValueText:Name = "uxFormattedValueText".
+        this-object:uxFormattedValueText:Size = new System.Drawing.Size(130, 23).
+        this-object:uxFormattedValueText:TabIndex = 3.
+        this-object:uxFormattedValueText:TabStop = true.
+        this-object:uxFormattedValueText:TreatValueAs = Infragistics.Win.FormattedLinkLabel.TreatValueAs:Auto.
+        this-object:uxFormattedValueText:Value = "".
+        this-object:uxFormattedValueText:Visible = false.
+        this-object:uxFormattedValueText:WrapText = false.
         /*  */
         /* ultraTabPageControl1 */
         /*  */
+        this-object:ultraTabPageControl1:Controls:Add(this-object:uxFormattedValueText).
+        this-object:ultraTabPageControl1:Controls:Add(this-object:uxFormattedKeyText).
         this-object:ultraTabPageControl1:Controls:Add(this-object:uxDetail).
         this-object:ultraTabPageControl1:Location = new System.Drawing.Point(38, 1).
         this-object:ultraTabPageControl1:Name = "ultraTabPageControl1".
         this-object:ultraTabPageControl1:Size = new System.Drawing.Size(452, 248).
-        /*  */
-        /* ultraTabPageControl2 */
-        /*  */
-        this-object:ultraTabPageControl2:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl2:Name = "ultraTabPageControl2".
-        this-object:ultraTabPageControl2:Size = new System.Drawing.Size(452, 248).
         /*  */
         /* ultraTabPageControl3 */
         /*  */
@@ -431,87 +483,102 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:ultraTabPageControl3:Name = "ultraTabPageControl3".
         this-object:ultraTabPageControl3:Size = new System.Drawing.Size(452, 248).
         /*  */
+        /* ultraTabPageControl4 */
+        /*  */
+        this-object:ultraTabPageControl4:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl4:Name = "ultraTabPageControl4".
+        this-object:ultraTabPageControl4:Size = new System.Drawing.Size(452, 248).
+        /*  */
+        /* ultraTabPageControl5 */
+        /*  */
+        this-object:ultraTabPageControl5:Location = new System.Drawing.Point(-10000, -10000).
+        this-object:ultraTabPageControl5:Name = "ultraTabPageControl5".
+        this-object:ultraTabPageControl5:Size = new System.Drawing.Size(452, 248).
+        /*  */
         /* uxDetail */
         /*  */
         this-object:uxDetail:DataSource = this-object:bsSettings.
-        appearance81:BackColor = System.Drawing.SystemColors:Window.
-        appearance81:BorderColor = System.Drawing.SystemColors:InactiveCaption.
-        this-object:uxDetail:DisplayLayout:Appearance = appearance81.
-        this-object:uxDetail:DisplayLayout:AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle:ResizeAllColumns.
+        appearance4:BackColor = System.Drawing.SystemColors:Window.
+        appearance4:BorderColor = System.Drawing.SystemColors:InactiveCaption.
+        this-object:uxDetail:DisplayLayout:Appearance = appearance4.
         ultraGridBand1:ColHeadersVisible = false.
-        ultraGridColumn3:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
+        ultraGridColumn3:AutoSizeMode = Infragistics.Win.UltraWinGrid.ColumnAutoSizeMode:AllRowsInBand.
+        ultraGridColumn3:CellActivation = Infragistics.Win.UltraWinGrid.Activation:ActivateOnly.
+        ultraGridColumn3:EditorComponent = this-object:uxFormattedKeyText.
         ultraGridColumn3:Header:Fixed = true.
         ultraGridColumn3:Header:VisiblePosition = 0.
-        ultraGridColumn3:Width = 201.
+        ultraGridColumn3:Width = 183.
         ultraGridColumn4:AllowGroupBy = Infragistics.Win.DefaultableBoolean:False.
         ultraGridColumn4:CellActivation = Infragistics.Win.UltraWinGrid.Activation:NoEdit.
+        ultraGridColumn4:EditorComponent = this-object:uxFormattedValueText.
         ultraGridColumn4:Header:Fixed = true.
         ultraGridColumn4:Header:VisiblePosition = 1.
-        ultraGridColumn4:Width = 249.
+        ultraGridColumn4:Width = 267.
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
         define variable arrayvar0 as System.Object extent 2 no-undo.
         arrayvar0[1] = ultraGridColumn3.
         arrayvar0[2] = ultraGridColumn4.
         ultraGridBand1:Columns:AddRange(arrayvar0).
-        ultraGridBand1:Override:CellDisplayStyle = Infragistics.Win.UltraWinGrid.CellDisplayStyle:PlainText.
         this-object:uxDetail:DisplayLayout:BandsSerializer:Add(ultraGridBand1).
         this-object:uxDetail:DisplayLayout:BorderStyle = Infragistics.Win.UIElementBorderStyle:Solid.
-        appearance82:FontData:Name = "Segoe UI".
-        appearance82:ForeColor = System.Drawing.SystemColors:InactiveCaptionText.
-        appearance82:TextHAlignAsString = "Center".
-        this-object:uxDetail:DisplayLayout:CaptionAppearance = appearance82.
+        appearance7:FontData:Name = "Segoe UI".
+        appearance7:ForeColor = System.Drawing.SystemColors:InactiveCaptionText.
+        appearance7:TextHAlignAsString = "Center".
+        this-object:uxDetail:DisplayLayout:CaptionAppearance = appearance7.
         this-object:uxDetail:DisplayLayout:CaptionVisible = Infragistics.Win.DefaultableBoolean:True.
-        appearance83:BackColor = System.Drawing.SystemColors:ActiveBorder.
-        appearance83:BackColor2 = System.Drawing.SystemColors:ControlDark.
-        appearance83:BackGradientStyle = Infragistics.Win.GradientStyle:Vertical.
-        appearance83:BorderColor = System.Drawing.SystemColors:Window.
-        this-object:uxDetail:DisplayLayout:GroupByBox:Appearance = appearance83.
-        appearance84:ForeColor = System.Drawing.SystemColors:GrayText.
-        this-object:uxDetail:DisplayLayout:GroupByBox:BandLabelAppearance = appearance84.
+        appearance8:BackColor = System.Drawing.SystemColors:ActiveBorder.
+        appearance8:BackColor2 = System.Drawing.SystemColors:ControlDark.
+        appearance8:BackGradientStyle = Infragistics.Win.GradientStyle:Vertical.
+        appearance8:BorderColor = System.Drawing.SystemColors:Window.
+        this-object:uxDetail:DisplayLayout:GroupByBox:Appearance = appearance8.
+        appearance9:ForeColor = System.Drawing.SystemColors:GrayText.
+        this-object:uxDetail:DisplayLayout:GroupByBox:BandLabelAppearance = appearance9.
         this-object:uxDetail:DisplayLayout:GroupByBox:BorderStyle = Infragistics.Win.UIElementBorderStyle:Solid.
         this-object:uxDetail:DisplayLayout:GroupByBox:Hidden = true.
-        appearance85:BackColor = System.Drawing.SystemColors:ControlLightLight.
-        appearance85:BackColor2 = System.Drawing.SystemColors:Control.
-        appearance85:BackGradientStyle = Infragistics.Win.GradientStyle:Horizontal.
-        appearance85:ForeColor = System.Drawing.SystemColors:GrayText.
-        this-object:uxDetail:DisplayLayout:GroupByBox:PromptAppearance = appearance85.
+        appearance10:BackColor = System.Drawing.SystemColors:ControlLightLight.
+        appearance10:BackColor2 = System.Drawing.SystemColors:Control.
+        appearance10:BackGradientStyle = Infragistics.Win.GradientStyle:Horizontal.
+        appearance10:ForeColor = System.Drawing.SystemColors:GrayText.
+        this-object:uxDetail:DisplayLayout:GroupByBox:PromptAppearance = appearance10.
         this-object:uxDetail:DisplayLayout:MaxColScrollRegions = 1.
         this-object:uxDetail:DisplayLayout:MaxRowScrollRegions = 1.
-        appearance86:BackColor = System.Drawing.SystemColors:Window.
-        appearance86:ForeColor = System.Drawing.SystemColors:ControlText.
-        this-object:uxDetail:DisplayLayout:Override:ActiveCellAppearance = appearance86.
-        appearance87:BackColor = System.Drawing.SystemColors:Highlight.
-        appearance87:ForeColor = System.Drawing.SystemColors:HighlightText.
-        this-object:uxDetail:DisplayLayout:Override:ActiveRowAppearance = appearance87.
+        appearance11:BackColor = System.Drawing.SystemColors:Window.
+        appearance11:ForeColor = System.Drawing.SystemColors:ControlText.
+        this-object:uxDetail:DisplayLayout:Override:ActiveCellAppearance = appearance11.
+        appearance12:BackColor = System.Drawing.SystemColors:Highlight.
+        appearance12:ForeColor = System.Drawing.SystemColors:HighlightText.
+        this-object:uxDetail:DisplayLayout:Override:ActiveRowAppearance = appearance12.
         this-object:uxDetail:DisplayLayout:Override:AllowAddNew = Infragistics.Win.UltraWinGrid.AllowAddNew:No.
+        this-object:uxDetail:DisplayLayout:Override:AllowColSizing = Infragistics.Win.UltraWinGrid.AllowColSizing:Free.
         this-object:uxDetail:DisplayLayout:Override:AllowDelete = Infragistics.Win.DefaultableBoolean:False.
         this-object:uxDetail:DisplayLayout:Override:AllowUpdate = Infragistics.Win.DefaultableBoolean:False.
         this-object:uxDetail:DisplayLayout:Override:BorderStyleCell = Infragistics.Win.UIElementBorderStyle:None.
         this-object:uxDetail:DisplayLayout:Override:BorderStyleRow = Infragistics.Win.UIElementBorderStyle:None.
-        appearance88:BackColor = System.Drawing.SystemColors:Window.
-        this-object:uxDetail:DisplayLayout:Override:CardAreaAppearance = appearance88.
-        appearance89:BorderColor = System.Drawing.Color:Silver.
-        appearance89:TextTrimming = Infragistics.Win.TextTrimming:EllipsisCharacter.
-        this-object:uxDetail:DisplayLayout:Override:CellAppearance = appearance89.
+        appearance13:BackColor = System.Drawing.SystemColors:Window.
+        this-object:uxDetail:DisplayLayout:Override:CardAreaAppearance = appearance13.
+        appearance14:BorderColor = System.Drawing.Color:Silver.
+        appearance14:TextTrimming = Infragistics.Win.TextTrimming:EllipsisCharacter.
+        this-object:uxDetail:DisplayLayout:Override:CellAppearance = appearance14.
         this-object:uxDetail:DisplayLayout:Override:CellClickAction = Infragistics.Win.UltraWinGrid.CellClickAction:EditAndSelectText.
         this-object:uxDetail:DisplayLayout:Override:CellPadding = 0.
-        appearance90:BackColor = System.Drawing.SystemColors:Control.
-        appearance90:BackColor2 = System.Drawing.SystemColors:ControlDark.
-        appearance90:BackGradientAlignment = Infragistics.Win.GradientAlignment:Element.
-        appearance90:BackGradientStyle = Infragistics.Win.GradientStyle:Horizontal.
-        appearance90:BorderColor = System.Drawing.SystemColors:Window.
-        this-object:uxDetail:DisplayLayout:Override:GroupByRowAppearance = appearance90.
-        appearance91:TextHAlignAsString = "Left".
-        this-object:uxDetail:DisplayLayout:Override:HeaderAppearance = appearance91.
+        this-object:uxDetail:DisplayLayout:Override:ColumnSizingArea = Infragistics.Win.UltraWinGrid.ColumnSizingArea:EntireColumn.
+        appearance15:BackColor = System.Drawing.SystemColors:Control.
+        appearance15:BackColor2 = System.Drawing.SystemColors:ControlDark.
+        appearance15:BackGradientAlignment = Infragistics.Win.GradientAlignment:Element.
+        appearance15:BackGradientStyle = Infragistics.Win.GradientStyle:Horizontal.
+        appearance15:BorderColor = System.Drawing.SystemColors:Window.
+        this-object:uxDetail:DisplayLayout:Override:GroupByRowAppearance = appearance15.
+        appearance16:TextHAlignAsString = "Left".
+        this-object:uxDetail:DisplayLayout:Override:HeaderAppearance = appearance16.
         this-object:uxDetail:DisplayLayout:Override:HeaderStyle = Infragistics.Win.HeaderStyle:WindowsXPCommand.
-        appearance92:BackColor = System.Drawing.SystemColors:GradientInactiveCaption.
-        this-object:uxDetail:DisplayLayout:Override:RowAlternateAppearance = appearance92.
-        appearance93:BackColor = System.Drawing.SystemColors:Window.
-        appearance93:BorderColor = System.Drawing.Color:Silver.
-        this-object:uxDetail:DisplayLayout:Override:RowAppearance = appearance93.
+        appearance17:BackColor = System.Drawing.SystemColors:GradientInactiveCaption.
+        this-object:uxDetail:DisplayLayout:Override:RowAlternateAppearance = appearance17.
+        appearance18:BackColor = System.Drawing.SystemColors:Window.
+        appearance18:BorderColor = System.Drawing.Color:Silver.
+        this-object:uxDetail:DisplayLayout:Override:RowAppearance = appearance18.
         this-object:uxDetail:DisplayLayout:Override:RowSelectors = Infragistics.Win.DefaultableBoolean:False.
-        appearance94:BackColor = System.Drawing.SystemColors:ControlLight.
-        this-object:uxDetail:DisplayLayout:Override:TemplateAddRowAppearance = appearance94.
+        appearance19:BackColor = System.Drawing.SystemColors:ControlLight.
+        this-object:uxDetail:DisplayLayout:Override:TemplateAddRowAppearance = appearance19.
         this-object:uxDetail:DisplayLayout:RowConnectorStyle = Infragistics.Win.UltraWinGrid.RowConnectorStyle:None.
         this-object:uxDetail:DisplayLayout:ScrollBounds = Infragistics.Win.UltraWinGrid.ScrollBounds:ScrollToFill.
         this-object:uxDetail:DisplayLayout:ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle:Immediate.
@@ -539,12 +606,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         arrayvar2[2] = new Progress.Data.ColumnPropDesc("SettingValue", "Value", Progress.Data.DataType:CHARACTER).
         tableDesc1:Columns = arrayvar2.
         this-object:bsSettings:TableSchema = tableDesc1.
-        /*  */
-        /* ultraTabPageControl5 */
-        /*  */
-        this-object:ultraTabPageControl5:Location = new System.Drawing.Point(-10000, -10000).
-        this-object:ultraTabPageControl5:Name = "ultraTabPageControl5".
-        this-object:ultraTabPageControl5:Size = new System.Drawing.Size(452, 248).
         /*  */
         /* ultraPanel1 */
         /*  */
@@ -596,85 +657,69 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:imageList1:Images:SetKeyName(3, "source_p_32x32.png").
         this-object:imageList1:Images:SetKeyName(4, "services_32x32.png").
         this-object:imageList1:Images:SetKeyName(5, "bpmstudio_32x32.ico").
-        this-object:imageList1:Images:SetKeyName(6, "user_32x32.png").
+        this-object:imageList1:Images:SetKeyName(6, "system_info_32x32.png").
+        this-object:imageList1:Images:SetKeyName(7, "user_info_32x32.png").
         /*  */
         /* uxSettingsGroup */
         /*  */
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabSharedControlsPage1).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl1).
-        this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl2).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl3).
         this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl5).
+        this-object:uxSettingsGroup:Controls:Add(this-object:ultraTabPageControl4).
         this-object:uxSettingsGroup:Dock = System.Windows.Forms.DockStyle:Fill.
         this-object:uxSettingsGroup:ImageList = this-object:imageList1.
         this-object:uxSettingsGroup:ImageSize = new System.Drawing.Size(32, 32).
         this-object:uxSettingsGroup:Location = new System.Drawing.Point(0, 87).
         this-object:uxSettingsGroup:Name = "uxSettingsGroup".
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar3 as System.Windows.Forms.Control extent 2 no-undo.
+        define variable arrayvar3 as System.Windows.Forms.Control extent 1 no-undo.
         arrayvar3[1] = this-object:uxDetail.
-        arrayvar3[2] = this-object:uxWebBrowserPanel.
         this-object:uxSettingsGroup:SharedControls:AddRange(arrayvar3).
         this-object:uxSettingsGroup:SharedControlsPage = this-object:ultraTabSharedControlsPage1.
         this-object:uxSettingsGroup:Size = new System.Drawing.Size(491, 250).
         this-object:uxSettingsGroup:TabButtonStyle = Infragistics.Win.UIElementButtonStyle:Borderless.
         this-object:uxSettingsGroup:TabIndex = 1.
         this-object:uxSettingsGroup:TabOrientation = Infragistics.Win.UltraWinTabs.TabOrientation:LeftTop.
-        appearance6:Image = "user_32x32.png".
+        appearance6:Image = "user_info_32x32.png".
         appearance6:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance6:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab3:Appearance = appearance6.
-        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar4 as System.Windows.Forms.Control extent 1 no-undo.
-        arrayvar4[1] = this-object:uxWebBrowserPanel.
-        ultraTab3:ExcludedSharedControls:AddRange(arrayvar4).
-        ultraTab3:Key = "uxAETFGroup".
+        ultraTab3:Key = "uxUserInfo".
         ultraTab3:TabPage = this-object:ultraTabPageControl1.
         ultraTab3:Text = "".
         ultraTab3:ToolTipText = "Application settings".
-        appearance4:Image = "bpmstudio_32x32.ico".
-        appearance4:ImageHAlign = Infragistics.Win.HAlign:Center.
-        appearance4:ImageVAlign = Infragistics.Win.VAlign:Middle.
-        ultraTab1:Appearance = appearance4.
-        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar5 as System.Windows.Forms.Control extent 1 no-undo.
-        arrayvar5[1] = this-object:uxWebBrowserPanel.
-        ultraTab1:ExcludedSharedControls:AddRange(arrayvar5).
-        ultraTab1:Key = "uxBpmGroup".
-        ultraTab1:TabPage = this-object:ultraTabPageControl2.
-        ultraTab1:Text = "".
-        ultraTab1:ToolTipText = "BPM server settings ".
         appearance5:Image = "services_32x32.png".
         appearance5:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance5:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab2:Appearance = appearance5.
-        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar6 as System.Windows.Forms.Control extent 1 no-undo.
-        arrayvar6[1] = this-object:uxWebBrowserPanel.
-        ultraTab2:ExcludedSharedControls:AddRange(arrayvar6).
-        ultraTab2:Key = "uxOEGroup".
+        ultraTab2:Key = "uxServerInfo".
         ultraTab2:TabPage = this-object:ultraTabPageControl3.
         ultraTab2:Text = "".
         ultraTab2:ToolTipText = "AppServer settings".
+        appearance2:Image = "system_info_32x32.png".
+        appearance2:ImageHAlign = Infragistics.Win.HAlign:Center.
+        appearance2:ImageVAlign = Infragistics.Win.VAlign:Middle.
+        ultraTab4:Appearance = appearance2.
+        ultraTab4:Key = "uxSessionInfo".
+        ultraTab4:TabPage = this-object:ultraTabPageControl4.
+        ultraTab4:Text = "".
+        ultraTab4:ToolTipText = "System information".
         appearance3:Image = "source_p_32x32.png".
         appearance3:ImageHAlign = Infragistics.Win.HAlign:Center.
         appearance3:ImageVAlign = Infragistics.Win.VAlign:Middle.
         ultraTab5:Appearance = appearance3.
-        @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar7 as System.Windows.Forms.Control extent 1 no-undo.
-        arrayvar7[1] = this-object:uxDetail.
-        ultraTab5:ExcludedSharedControls:AddRange(arrayvar7).
         ultraTab5:Key = "uxCodeDoc".
         ultraTab5:TabPage = this-object:ultraTabPageControl5.
         ultraTab5:Text = "".
         ultraTab5:ToolTipText = "AutoDox2 code documentation".
         @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true").
-        define variable arrayvar8 as Infragistics.Win.UltraWinTabControl.UltraTab extent 4 no-undo.
-        arrayvar8[1] = ultraTab3.
-        arrayvar8[2] = ultraTab1.
-        arrayvar8[3] = ultraTab2.
-        arrayvar8[4] = ultraTab5.
-        this-object:uxSettingsGroup:Tabs:AddRange(arrayvar8).
+        define variable arrayvar4 as Infragistics.Win.UltraWinTabControl.UltraTab extent 4 no-undo.
+        arrayvar4[1] = ultraTab3.
+        arrayvar4[2] = ultraTab2.
+        arrayvar4[3] = ultraTab4.
+        arrayvar4[4] = ultraTab5.
+        this-object:uxSettingsGroup:Tabs:AddRange(arrayvar4).
         this-object:uxSettingsGroup:UseFlatMode = Infragistics.Win.DefaultableBoolean:False.
         this-object:uxSettingsGroup:ViewStyle = Infragistics.Win.UltraWinTabControl.ViewStyle:Office2007.
         this-object:uxSettingsGroup:ActiveTabChanging:Subscribe(this-object:uxSettingsGroup_ActiveTabChanging).
@@ -682,7 +727,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         /* ultraTabSharedControlsPage1 */
         /*  */
         this-object:ultraTabSharedControlsPage1:Controls:Add(this-object:uxDetail).
-        this-object:ultraTabSharedControlsPage1:Controls:Add(this-object:uxWebBrowserPanel).
         this-object:ultraTabSharedControlsPage1:Location = new System.Drawing.Point(-10000, -10000).
         this-object:ultraTabSharedControlsPage1:Name = "ultraTabSharedControlsPage1".
         this-object:ultraTabSharedControlsPage1:Size = new System.Drawing.Size(452, 248).
@@ -698,8 +742,6 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
         this-object:Name = "HelpAbout".
         this-object:StartPosition = System.Windows.Forms.FormStartPosition:CenterParent.
         this-object:Text = "About".
-        this-object:uxWebBrowserPanel:ClientArea:ResumeLayout(false).
-        this-object:uxWebBrowserPanel:ResumeLayout(false).
         this-object:ultraTabPageControl1:ResumeLayout(false).
         cast(this-object:uxDetail, System.ComponentModel.ISupportInitialize):EndInit().
         cast(this-object:bsSettings, System.ComponentModel.ISupportInitialize):EndInit().
@@ -723,33 +765,70 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
     @VisualDesigner.
     method private void uxSettingsGroup_ActiveTabChanging( input sender as System.Object, input e as Infragistics.Win.UltraWinTabControl.ActiveTabChangingEventArgs ):
         case string(e:Tab:Key):
-            when 'uxAETFGroup' then ShowDetailGrid('USER', 'User Detail').
-            when 'uxBpmGroup' then ShowDetailGrid('BPM', 'BPM Server Detail').
-            when 'uxOEGroup' then ShowDetailGrid('OPENEDGE', 'AppServer Detail').
-            when 'uxCodeDoc' then ShowUrl(mcDocURL).
+            when 'uxUserInfo' then ShowDetailGrid('USER', 'User Detail', '').
+            when 'uxServerInfo' then ShowDetailGrid('SERVER', 'Server Detail', '').
+            when 'uxSessionInfo' then ShowDetailGrid('SESSION', 'Session Detail', '').
+/*            when 'uxCodeDoc' then ShowUrl('CODEDOC').*/
+            when 'uxCodeDoc' then ShowDetailGrid('CODEDOC', 'AutoDox2 Code Documentation', 'SettingValue').
         end case.
     end method.
 
     method private character BuildAutoDoxURL(input poCaller as class Class):
-        define variable cFullPath as character no-undo.
+        define variable cProtocolRoot as character no-undo.
+        define variable cPackageRoot as character no-undo.
+        define variable cAutoDoxRoot as character no-undo.
+        define variable cDocumentName as character no-undo.
+        define variable oProperty as String no-undo.
+        define variable cSplitType as character extent no-undo.
+        define variable cSplitPath as character extent no-undo.
+        define variable cSplitAppRoot as character extent no-undo.
 
-        cFullPath = search('autodox2/' + replace(poCaller:TypeName, '.', '~/') + '.cls.html').
-        if cFullPath eq ? then
-            cFullPath = search('autodox2/index.html').
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable iMin as integer no-undo.
 
-        Assert:ArgumentNotNullOrEmpty(cFullPath, 'Top-level AutoDox index page').
-        file-info:file-name = cFullPath.
-        cFullPath = file-info:full-pathname.
+        /* things we always know */
+        cProtocolRoot = 'http://localhost/aetf'.
 
-        return 'file:///' + replace(cFullPath, '~\', '~/').
-    end method.
+        if valid-object(poCaller) then
+        do:
+            assign cAutoDoxRoot = '/doc/autodox2' /* by convention */
+                   cDocumentName = substitute('/&1.cls.html', replace(poCaller:TypeName, '.', '~/'))
+                   iMin = 1
+                   oProperty = cast(ABLSession:Instance:SessionProperties:Get(new String('Config.Property.AppRoot')), String).
+            if valid-object(oProperty) then
+                assign cSplitAppRoot = String:Split(replace(oProperty:Value, '~\','~/'), '~/')
+                       iMin = extent(cSplitAppRoot) + 1.
 
-    method private void ShowURL(input pcURL as character):
-        uxWebBrowser:Url = new System.Uri(pcURL).
+            file-info:file-name = search(replace(poCaller:TypeName, '.', '~/') + '.cls').
+            cSplitPath = String:Split(replace(file-info:full-pathname, '~\','~/'), '~/').
+            cSplitType = String:Split(poCaller:TypeName, '.').
+
+            /* last element will be 'src' or 'bin' */
+            iMax = extent(cSplitPath) - extent(cSplitType) - 1.
+
+            do iLoop = iMin to iMax:
+                cPackageRoot = cPackageRoot + '/' + cSplitPath[iLoop].
+            end.
+        end.
+        else
+            assign cPackageRoot = ''
+                   cAutoDoxRoot = '/doc'
+                   cDocumentName = '/autodox2-index.html'.
+
+        return (cProtocolRoot + cPackageRoot + cAutoDoxRoot + cDocumentName).
     end method.
 
     method private void ShowDetailGrid(input pcGroup as character,
-                                       input pcCaption as character):
+                                       input pcCaption as character,
+                                       input pcHideColumns as character):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+
+        iMax = uxDetail:DisplayLayout:Bands[0]:Columns:Count.
+        do iLoop = 0 to (iMax - 1):
+            uxDetail:DisplayLayout:Bands[0]:Columns[iLoop]:Hidden = lookup(pcHideColumns, uxDetail:DisplayLayout:Bands[0]:Columns[iLoop]:Key) gt 0.
+        end.
 
         open query mQrySettings preselect each mSettingData where mSettingData.SettingGroup eq pcGroup by mSettingData.Order.
         bsSettings:Handle = query mQrySettings:handle.
