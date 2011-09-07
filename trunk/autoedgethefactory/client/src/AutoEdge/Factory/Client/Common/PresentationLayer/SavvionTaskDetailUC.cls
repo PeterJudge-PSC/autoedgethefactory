@@ -789,9 +789,9 @@ class AutoEdge.Factory.Client.Common.PresentationLayer.SavvionTaskDetailUC use-w
     method public void ReassignTask(poTask as Task, pcPerformer as character):
         case poTask:WorkItem:Status:
             when WorkItemStatusEnum:Assigned then
-                BpmServer:ReassignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+                BpmServer:ReassignWorkItem(poTask:WorkItem:Id, pcPerformer).
             otherwise
-                BpmServer:AssignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+                BpmServer:AssignWorkItem(poTask:WorkItem:Id, pcPerformer).
         end case.
     end method.
     

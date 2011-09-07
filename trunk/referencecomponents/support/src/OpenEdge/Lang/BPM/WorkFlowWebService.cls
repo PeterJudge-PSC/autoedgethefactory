@@ -179,7 +179,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
     end method.
     
     method public void CompleteTask(input poTask as Task):
-        CompleteWorkItemFromWiid(
+        CompleteWorkItem(
             poTask:WorkItem:Id,
             cast(poTask:DataSlots:Values:ToArray(), DataSlotInstance)).
     end method.
@@ -391,7 +391,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         extent(oTask) = iMax.
                 
         do iLoop = 1 to iMax:
-            oDSI = GetWorkItemDataSlotsFromWIID(poWorkItem[iLoop]:Id).
+            oDSI = GetWorkItemDataSlots(poWorkItem[iLoop]:Id).
             oTask[iLoop] = new Task(poWorkItem[iLoop], oDSI).
         end.
         
@@ -677,7 +677,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         end finally.        
     end method.
             
-    method public character GetProcessTemplateNameFromProcessInstance(input pcProcessInstanceName as character).
+    method public character GetProcessTemplateName(input pcProcessInstanceName as character).
         define variable cTemplateName as character no-undo.
         
         ConnectService().
@@ -694,7 +694,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         end finally.        
     end method.
     
-    method public character GetProcessTemplateNameFromProcessID(input piProcessTemplateId as int64).
+    method public character GetProcessTemplateName(input piProcessTemplateId as int64).
         define variable cTemplateName as character no-undo.
         
         ConnectService().
@@ -735,7 +735,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         return cast(oWST, WorkStepTemplate).
     end method.
             
-    method public ProcessTemplate GetProcessTemplateFromID(input piProcessTemplateId as int64).
+    method public ProcessTemplate GetProcessTemplate(input piProcessTemplateId as int64).
         define variable cOutputParam as longchar no-undo.
         define variable cNamespace as character no-undo.
         define variable cOperation as character no-undo.
@@ -866,7 +866,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         return cast(oDST, DataSlotInstance).
     end method.
             
-    method public DataSlotInstance extent GetProcessInstanceDataSlotFromPiid(input piProcessInstanceId as int64,
+    method public DataSlotInstance extent GetProcessInstanceDataSlot(input piProcessInstanceId as int64,
                                                                              input pcDataslotName as character extent).
         define variable cOutputParam as longchar no-undo.
         define variable cNamespace as character no-undo.
@@ -922,7 +922,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         return cast(oDST, DataSlotInstance).
     end method.
             
-    method public DataSlotInstance extent GetWorkStepInstanceDataSlotsFromPiid(input piProcessInstanceId as int64,
+    method public DataSlotInstance extent GetWorkStepInstanceDataSlots(input piProcessInstanceId as int64,
                                                                                input pcWorkstepInstanceName as character).
         define variable cOutputParam as longchar no-undo.
         define variable cNamespace as character no-undo.
@@ -974,7 +974,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         return cast(oDataSlotInstance, DataSlotInstance). 
     end method.
             
-    method public DataSlotInstance extent GetWorkItemDataSlotsFromWiid(input piWorkstepInstanceId as int64):
+    method public DataSlotInstance extent GetWorkItemDataSlots(input piWorkstepInstanceId as int64):
         define variable cNamespace as character no-undo.
         define variable cOperation as character no-undo.
         define variable cOutputParam as longchar no-undo.
@@ -1029,7 +1029,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         return cast(oDataSlotTemplate, DataSlotTemplate). 
     end method.
     
-    method public DataSlotTemplate extent GetWorkStepTemplateDataSlotsFromPtid(input piProcessTemplateId as int64,
+    method public DataSlotTemplate extent GetWorkStepTemplateDataSlots(input piProcessTemplateId as int64,
                                                                                input pcWorkStepName as character):
         define variable cNamespace as character no-undo.
         define variable cOperation as character no-undo.
@@ -1198,7 +1198,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
                          SoapMessageToLongchar()).
     end method.
             
-    method public ProcessInstance GetProcessInstanceFromID(input piProcessInstanceId as int64):
+    method public ProcessInstance GetProcessInstance(input piProcessInstanceId as int64):
         define variable cOutputParam as longchar no-undo.
         define variable cNamespace as character no-undo.
         define variable cOperation as character no-undo.
@@ -1237,7 +1237,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         end finally.        
     end method.
     
-    method public WorkItem GetWorkItemFromID(input piWorkItemInstanceId as int64):
+    method public WorkItem GetWorkItem(input piWorkItemInstanceId as int64):
         define variable cOutputParam as longchar no-undo.
         define variable cNamespace as character no-undo.
         define variable cOperation as character no-undo.
@@ -1288,7 +1288,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         end finally.        
     end method.
     
-    method public void AssignWorkItemFromWiid(input piWorkItemInstanceId as int64,
+    method public void AssignWorkItem(input piWorkItemInstanceId as int64,
                                               input pcPerformer as character).
         ConnectService().
         
@@ -1316,7 +1316,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         end finally.        
     end method.
           
-    method public void ReassignWorkItemFromWiid(input piWorkItemInstanceId as int64,
+    method public void ReassignWorkItem(input piWorkItemInstanceId as int64,
                                                 input pcPerformer as character).
         ConnectService().
         
@@ -1345,7 +1345,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         end finally.        
     end method.
     
-    method public void MakeAvailableWorkItemFromWiid(input piWorkItemInstanceId as int64,
+    method public void MakeAvailableWorkItem(input piWorkItemInstanceId as int64,
                                                      input pcPerformers as character extent).
         ConnectService().
         
@@ -1360,7 +1360,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
         end finally.        
     end method.
     
-    method public void CompleteWorkItemFromWiid(input piWorkItemInstanceId as int64,
+    method public void CompleteWorkItem(input piWorkItemInstanceId as int64,
                                                 input poDataSlotInstance as DataSlotInstance extent).
         define variable cNamespace as character no-undo.
         define variable cOperation as character no-undo.
@@ -1383,7 +1383,7 @@ class OpenEdge.Lang.BPM.WorkFlowWebService inherits WebServiceProtocol
                          SoapMessageToLongchar()).
     end method.
     
-    method public WorkStepInstance GetWorkStepInstanceFromPiid(input piProcessInstanceId as int64,
+    method public WorkStepInstance GetWorkStepInstance(input piProcessInstanceId as int64,
                                                                input pcWorkStepName as character).
         define variable cOutputParam as longchar no-undo.
         define variable cNamespace as character no-undo.

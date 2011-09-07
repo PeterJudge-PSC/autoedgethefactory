@@ -124,7 +124,7 @@ class OpenEdge.BusinessComponent.WorkFlow.BizLogicWorkStep abstract inherits Wor
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
 
-        oDataSlotInstance= BpmServer:GetProcessInstanceDataSlotFromPIID(
+        oDataSlotInstance= BpmServer:GetProcessInstanceDataSlot(
                                 CurrentRequest:ProcessInstanceId,
                                 pcDataSlotName).
         iMax = extent(oDataSlotInstance).
