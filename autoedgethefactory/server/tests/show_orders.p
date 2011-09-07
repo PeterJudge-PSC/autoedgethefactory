@@ -1,17 +1,17 @@
 /*------------------------------------------------------------------------
     File        : show_orders.p
-    Purpose     : 
+    Purpose     :
 
     Syntax      :
 
-    Description : 
+    Description :
 
     Author(s)   : pjudge
     Created     : Mon Apr 04 15:33:24 EDT 2011
     Notes       :
   ----------------------------------------------------------------------*/
-  
-current-window:width-c = 150.
+
+current-window:width-c = 180.
 
 /* ***************************  Definitions  ************************** */
 define buffer itemItem for Item.
@@ -36,16 +36,16 @@ for each Tenant no-lock:
               no-lock,
         first StatusDetail where
               StatusDetail.StatusDetailId eq Order.StatusId
-              no-lock              
+              no-lock
               by Order.OrderNum descending:
-        displ 
+        displ
             Tenant.Name label 'Brand'
             StatusDetail.Code form 'x(30)' label 'Status' skip
-            Order.OrderNum 
-            Customer.Name label 'Customer' 
+            Order.OrderNum
+            Customer.Name label 'Customer'
             Order.OrderDate
-            with width 120 title 'Orders' side-labels.
-                                    
+            with width 150 title 'Orders' side-labels.
+
         for each OrderLine where
                  OrderLine.OrderId eq Order.OrderId and
                  OrderLine.TenantId eq Order.TenantId
@@ -61,14 +61,17 @@ for each Tenant no-lock:
             first finishedItemItemType where
                   finishedItemItemType.ItemTypeId eq FinishedItemItem.ItemTypeId
                   no-lock:
-            
+
             displ
                 OrderLine.LineNum
+                OrderLine.Price
+                OrderLine.Qty
                 finishedItemItem.ItemNum
                 finishedItemItem.ItemName
+                finishedItemItem.Price
                 finishedItemItemType.Name
-                with width 120 title 'Order Lines' no-labels.                     
-            
+                with width 150 title 'Order Lines' no-labels.
+
             for each ComponentItem where
                      ComponentItem.FinishedItemId eq FinishedItem.FinishedItemId and
                      ComponentItem.TenantId eq FinishedItem.TenantId
@@ -80,15 +83,17 @@ for each Tenant no-lock:
                 first itemItemType where
                       itemItemType.ItemTypeId eq itemItem.ItemTypeId
                       no-lock:
-                          
+
                 displ
                     itemItem.ItemNum
                     itemItem.ItemName
+                    ComponentItem.Qty
+                    itemItem.Price (sum)
                     itemItemType.Name
-                    with width 120 title 'Component Items'.
-                                          
+                    with width 150 title 'Component Items'.
+
             end.
-        end.                          
+        end.
     end.
 end.
 
