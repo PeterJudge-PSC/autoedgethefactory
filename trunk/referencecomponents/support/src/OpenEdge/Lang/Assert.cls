@@ -53,6 +53,28 @@ class OpenEdge.Lang.Assert:
             undo, throw new AppError(substitute('&1 cannot be zero', pcName)).
     end method.
     
+    method public static void ArgumentNonZero(piArgument as integer extent, pcName as character):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+
+        Assert:ArgumentHasDeterminateExtent(piArgument, pcName).
+        iMax = extent(piArgument).
+        do iLoop = 1 to iMax:
+            Assert:ArgumentNonZero(piArgument[iLoop], substitute('Extent &2 of &1', pcName, iLoop)).
+        end.
+    end method.
+
+    method public static void ArgumentNonZero(piArgument as int64 extent, pcName as character):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+
+        Assert:ArgumentHasDeterminateExtent(piArgument, pcName).
+        iMax = extent(piArgument).
+        do iLoop = 1 to iMax:
+            Assert:ArgumentNonZero(piArgument[iLoop], substitute('Extent &2 of &1', pcName, iLoop)).
+        end.
+    end method.
+
     method public static void ArgumentNonZero(piArgument as decimal, pcName as character):
         if piArgument eq 0 then
             undo, throw new AppError(substitute('&1 cannot be zero', pcName)).
@@ -211,6 +233,30 @@ class OpenEdge.Lang.Assert:
             undo, throw new AppError(substitute('&1 array must be indeterminate', pcName)).                                                               
     end method.
     
+    method public static void ArgumentHasDeterminateExtent(input piArgument as integer extent,
+                                                           input pcName as character):
+        if extent(piArgument) eq ? then
+            undo, throw new AppError(substitute('&1 array cannot be indeterminate', pcName)).
+    end method.
+
+    method public static void ArgumentIsIndeterminateArray(input piArgument as integer extent,
+                                                           input pcName as character):
+        if extent(piArgument) ne ? then
+            undo, throw new AppError(substitute('&1 array must be indeterminate', pcName)).
+    end method.
+
+    method public static void ArgumentHasDeterminateExtent(input piArgument as int64 extent,
+                                                           input pcName as character):
+        if extent(piArgument) eq ? then
+            undo, throw new AppError(substitute('&1 array cannot be indeterminate', pcName)).
+    end method.
+
+    method public static void ArgumentIsIndeterminateArray(input piArgument as int64 extent,
+                                                           input pcName as character):
+        if extent(piArgument) ne ? then
+            undo, throw new AppError(substitute('&1 array must be indeterminate', pcName)).
+    end method.
+
     method public static void ArgumentIsAvailable(input phArgument as handle,
                                                   input pcName as character):
         Assert:ArgumentNotNull(phArgument, pcName).

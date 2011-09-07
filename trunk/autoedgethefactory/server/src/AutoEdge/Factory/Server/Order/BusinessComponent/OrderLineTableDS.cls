@@ -9,6 +9,7 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
+using OpenEdge.DataSource.DataSourceEventArgs.
 using OpenEdge.DataSource.StandardDataSource.
 using OpenEdge.DataSource.DataSourceQuery.
 using OpenEdge.DataAccess.IDataAccess.
@@ -83,6 +84,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderLineTableDS inherits 
         define variable hABLDataSource as handle no-undo.
         define variable oDSQuery as DataSourceQuery no-undo.
         define variable hStatusBuffer as handle no-undo.
+        define variable hOLineBuffer as handle no-undo.
         define variable cPairsList as character no-undo.
         
         case poAction:
@@ -91,15 +93,31 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderLineTableDS inherits 
                 assign oDSQuery = cast(ABLDataSources:Get(poAction), DataSourceQuery)
                        hABLDataSource = oDSQuery:ABLDataSource
                        hABLDataSource:prefer-dataset = true
+                       hOLineBuffer = oDSQuery:GetTableBuffer('OrderLine')
                        hStatusBuffer = oDSQuery:GetTableBuffer('StatusDetail').
                 
                 cPairsList = '&1.OrderLineStatus,&2.Code'.
                 TargetBuffer:attach-data-source(hABLDataSource,
                             substitute(cPairsList,
                                        TargetBuffer:name,
-                                       hStatusBuffer:name)).
+                                       hStatusBuffer:name,
+                                       hOLineBuffer:name)).
                 AttachedActions:Add(poAction).
-            end.
+            end.    /* fetchdata */
+            when ServiceMessageActionEnum:SaveData then
+            do:
+                assign oDSQuery = cast(ABLDataSources:Get(poAction), DataSourceQuery)
+                       hABLDataSource = oDSQuery:ABLDataSource
+                       hABLDataSource:prefer-dataset = true
+                       hOLineBuffer = oDSQuery:GetTableBuffer('OrderLine').
+
+                cPairsList = '&1.Quantity,&2.Qty'.
+                TargetBuffer:attach-data-source(hABLDataSource,
+                            substitute(cPairsList,
+                                       TargetBuffer:name,
+                                       hOLineBuffer:name)).
+                AttachedActions:Add(poAction).
+            end.    /* savedata */
             otherwise
                 super:AttachDataStoreToTarget(poAction).
         end case.

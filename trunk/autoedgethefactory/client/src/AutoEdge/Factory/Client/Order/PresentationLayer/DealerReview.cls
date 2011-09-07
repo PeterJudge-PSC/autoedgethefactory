@@ -599,20 +599,10 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.DealerReview inherits Form
 
         SecMgr:UserLogout().
 
-        extent(cTool) = 1.
-        cTool[1] = 'DealerLogin'.
-        SetToolState(cTool, true).
-
-        extent(cTool) = ?.
-        extent(cTool) = 1.
-        cTool[1] = 'DealerLogout'.
-        SetToolState(cTool, false).
-
         ClearUI('Orders', Class:GetClass('AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm')).
         ClearUI('AllTasks', Class:GetClass('AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail')).
 
-        uxAccordion:Groups:Item["AllTasks"]:Enabled = false.
-        uxAccordion:Groups:Item["Orders"]:Enabled = false.
+        InitUI().
     end method.
 
     method protected void DealerLogin():

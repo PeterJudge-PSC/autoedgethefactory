@@ -43,7 +43,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.ComponentItemTableDS inher
         define variable cPairsList as character no-undo.
         
         case poAction:
-            when ServiceMessageActionEnum:FetchData then
+            when ServiceMessageActionEnum:FetchData or when ServiceMessageActionEnum:SaveData then
             do:
                 assign oDSQuery = cast(ABLDataSources:Get(poAction), DataSourceQuery)
                        hABLDataSource = oDSQuery:ABLDataSource
@@ -61,4 +61,119 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.ComponentItemTableDS inher
         end case.
     end method.    
     
+    method override protected void UpdateRow(input phABLDatasource as handle,
+                                             input piBufferIndex as integer,
+                                             input poDataSourceQuery as DataSourceQuery,
+                                             input phSourceBuffer as handle ):
+        define variable hDbBuffer as handle no-undo.
+        define variable dOldPrice as decimal no-undo.
+        define variable dNewPrice as decimal no-undo.
+
+        dOldPrice = CalculateComponentItemPrice(
+                        phSourceBuffer:after-buffer::TenantId,
+                        phSourceBuffer:after-buffer::FinishedItemId,
+                        phSourceBuffer:after-buffer::ItemId).
+
+        super:UpdateRow(input phABLDatasource, input piBufferIndex, input poDataSourceQuery, input phSourceBuffer).
+
+        hDbBuffer = phABLDatasource:get-source-buffer(piBufferIndex).
+        dNewPrice = CalculateComponentItemPrice(
+                        hDbBuffer::TenantId,
+                        hDbBuffer::FinishedItemId,
+                        hDbBuffer::ItemId).
+
+        UpdateOrderLinePrice(hDbBuffer::TenantId,
+                             hDbBuffer::FinishedItemId,
+                             dOldPrice,
+                             dNewPrice).
+    end method.
+
+    method override protected void DeleteRow(input phABLDatasource as handle,
+                                             input piBufferIndex as integer,
+                                             input poDataSourceQuery as DataSourceQuery,
+                                             input phSourceBuffer as handle ):
+        define variable hDbBuffer as handle no-undo.
+        define variable dOldPrice as decimal no-undo.
+
+        hDbBuffer = phABLDatasource:get-source-buffer(piBufferIndex).
+        dOldPrice = CalculateComponentItemPrice(
+                            hDbBuffer::TenantId,
+                            hDbBuffer::FinishedItemId,
+                            hDbBuffer::ItemId).
+
+        super:DeleteRow(input phABLDatasource, input piBufferIndex, input poDataSourceQuery, input phSourceBuffer).
+
+        UpdateOrderLinePrice(hDbBuffer::TenantId,
+                             hDbBuffer::FinishedItemId,
+                             dOldPrice,
+                             0).
+    end method.
+
+    method override protected void AddRow(input phABLDatasource as handle,
+                                          input piBufferIndex as integer,
+                                          input poDataSourceQuery as DataSourceQuery,
+                                          input phSourceBuffer as handle ):
+        define variable hDbBuffer as handle no-undo.
+
+        define buffer lbStatus for StatusDetail.
+        define buffer lbOrderLine for OrderLine.
+        define buffer lbItem for Item.
+
+        super:AddRow(input phABLDatasource, input piBufferIndex, input poDataSourceQuery, input phSourceBuffer).
+
+        hDbBuffer = phABLDatasource:get-source-buffer(piBufferIndex).
+
+        find lbStatus where
+             lbStatus.Code = phSourceBuffer:after-buffer::FinishedItemStatus
+             no-lock no-error.
+        if available lbStatus then
+            hDbBuffer::StatusId = lbStatus.StatusDetailId.
+
+        UpdateOrderLinePrice(hDbBuffer::TenantId,
+                             hDbBuffer::FinishedItemId,
+                             0,
+                             CalculateComponentItemPrice(
+                                    hDbBuffer::TenantId,
+                                    hDbBuffer::FinishedItemId,
+                                    hDbBuffer::ItemId)).
+    end method.
+
+    method protected decimal CalculateComponentItemPrice(input pcTenantId as character,
+                                                         input pcFinishedItemId as character,
+                                                         input pcItemId as character):
+        define variable dPrice as decimal no-undo.
+
+        define buffer lbComponentItem for ComponentItem.
+        define buffer lbItem for Item.
+
+        find lbComponentItem where
+             lbComponentItem.TenantId eq pcTenantId and
+             lbComponentItem.FinishedItemId eq pcFinishedItemId and
+             lbComponentItem.ItemId eq pcItemId
+             no-lock no-error.
+        if available lbComponentItem then
+            find lbItem where
+                 lbItem.ItemId eq lbComponentItem.ItemId and
+                 lbItem.TenantId eq lbComponentItem.TenantId
+                 no-lock no-error.
+        if available lbItem then
+            dPrice = lbItem.Price * lbComponentItem.Qty.
+
+        return dPrice.
+    end method.
+
+    method protected void UpdateOrderLinePrice(input pcTenantId as character,
+                                               input pcFinishedItemId as character,
+                                               input pdOldPrice as decimal,
+                                               input pdNewPrice as decimal):
+        define buffer lbOrderLine for OrderLine.
+
+        find lbOrderLine where
+             lbOrderLine.FinishedItemId eq pcFinishedItemId and
+             lbOrderLine.TenantId eq pcTenantId
+             exclusive-lock no-wait no-error.
+        if available lbOrderLine then
+            lbOrderLine.Price = lbOrderLine.Price
+                              - pdOldPrice + pdNewPrice.
+    end method.
 end class.

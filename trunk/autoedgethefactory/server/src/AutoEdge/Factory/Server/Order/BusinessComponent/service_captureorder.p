@@ -20,6 +20,8 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
@@ -34,6 +36,7 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SaveRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponse.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.Service.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
@@ -46,6 +49,9 @@ using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.IQueryDefinition.
+using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
@@ -56,7 +62,6 @@ using Progress.Lang.Error.
 /** -- params, variables -- **/
 define input parameter piOrderNumber as integer no-undo.
 define input parameter pcBrand as character no-undo.
-/*define input parameter pcUserContextId as longchar no-undo.*/
 
 define input parameter pcDealerCode as longchar no-undo.
 define input parameter pcCustomerId as longchar no-undo.
@@ -77,6 +82,7 @@ define variable oServiceMessageManager as IServiceMessageManager no-undo.
 define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
 define variable mhOrderDataset as handle no-undo.
+define variable mhOrderBuffer as handle no-undo.
 
 /* ***************************  Functions  *************************** */
 function GetSelectedOption returns character (input pcOptions as longchar):
@@ -85,12 +91,12 @@ function GetSelectedOption returns character (input pcOptions as longchar):
     define variable hQuery as handle no-undo.
     define variable hBuffer as handle no-undo.
 
-    if pcOptions eq '' or pcOptions eq ? OR pcOptions EQ '<NULL>' then
-        return ''.
-
     /* ABL needs to know the/some/any tt name before read-json() works */
     if substring(left-trim(pcOptions), 1, 1) eq '[' then
         pcOptions = '~{' + quoter("ttOptions")  + ':' + pcOptions + '~}'.
+    else
+        /* this is not JSON-formatted text */
+        return ''.
 
     create temp-table hTable.
     hTable:read-json('longchar', pcOptions).
@@ -124,6 +130,28 @@ function FetchSchema returns logical (output dataset-handle phDataset):
     define variable oResponse as IServiceResponse extent no-undo.
 
     oRequest[1] = new FetchRequest('Order', ServiceMessageActionEnum:FetchSchema).
+
+    oResponse = oServiceMessageManager:ExecuteRequest(oRequest).
+    cast(oResponse[1], IServiceMessage):GetMessageData(output phDataset).
+end function.
+
+function FetchData returns logical (output dataset-handle phDataset):
+    define variable oRequest as IServiceRequest extent 1 no-undo.
+    define variable oResponse as IServiceResponse extent no-undo.
+    define variable cTableName as character no-undo.
+    define variable oTableRequest as ITableRequest no-undo.
+
+    oRequest[1] = new FetchRequest('Order', ServiceMessageActionEnum:FetchData).
+
+    cTableName = 'eOrder'.
+    oTableRequest = new TableRequest(cTableName).
+    cast(oRequest[1], IFetchRequest):TableRequests:Put(cTableName, oTableRequest).
+    cast(oTableRequest, IQueryDefinition):AddFilter(cTableName,
+                                          'OrderNum',
+                                          OperatorEnum:IsEqual,
+                                          new String(string(piOrderNumber)),
+                                          DataTypeEnum:Integer,
+                                          JoinEnum:And).
 
     oResponse = oServiceMessageManager:ExecuteRequest(oRequest).
     cast(oResponse[1], IServiceMessage):GetMessageData(output phDataset).
@@ -198,20 +226,24 @@ function DisableDatasetForUpdate returns logical (phDataset as handle):
     end.
 end function.
 
-function CreateComponentItem returns logical (
-                input phBuffer as handle,
-                input pcFinishedItemId as character,
-                input pcItemId as character,
-                input pdQuantity as decimal):
-
+function CreateComponentItem returns logical (input phBuffer as handle,
+                                              input pcFinishedItemId as character,
+                                              input pcItemId as character,
+                                              input pdQuantity as decimal):
     if pcItemId eq '' or pcItemId eq ? or pcItemId eq '<NULL>' then
         return false.
 
-    phBuffer:buffer-create().
-    assign
-        phBuffer::ItemId = pcItemId
-        phBuffer::FinishedItemId = pcFinishedItemId
-        phBuffer::Quantity = pdQuantity.
+    phBuffer:find-first(substitute(' where &1.ItemId eq &2 and &1.FinishedItemId eq &3',
+                               phBuffer:name,
+                               quoter(pcItemId),
+                               quoter(pcFinishedItemId))) no-error.
+    if not phBuffer:available then
+    do:
+        phBuffer:buffer-create().
+        assign phBuffer::ItemId = pcItemId
+               phBuffer::FinishedItemId = pcFinishedItemId.
+    end.
+    phBuffer::Quantity = phBuffer::Quantity + pdQuantity.
     phBuffer:buffer-release().
 
     return true.
@@ -229,6 +261,7 @@ function CreateEntityData returns logical (input phDataset as handle):
     define variable iMax as integer no-undo.
     define variable cSalesrepCode as character no-undo.
     define variable oPropertyValue as String no-undo.
+    define variable cSelectedAccessories as character no-undo.
 
     assign hOrder = phDataset:get-buffer-handle('eOrder')
            hOrderLine = phDataset:get-buffer-handle('eOrderLine')
@@ -283,12 +316,13 @@ function CreateEntityData returns logical (input phDataset as handle):
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcInteriorTrimColour), 1).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcInteriorTrimMaterial), 1).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcExteriorColour), 1).
-        CreateComponentItem(hComponentItem, cFinishedItemId, string(pcWheels), 5).
+        CreateComponentItem(hComponentItem, cFinishedItemId, string(pcWheels), 1).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcMoonroof), 1).
 
-        iMax = num-entries(pcInteriorAccessories).
+        cSelectedAccessories = GetSelectedOption(pcInteriorAccessories).
+        iMax = num-entries(cSelectedAccessories).
         do iLoop = 1 to iMax:
-            CreateComponentItem(hComponentItem, cFinishedItemId, entry(iLoop, pcInteriorAccessories), 1).
+            CreateComponentItem(hComponentItem, cFinishedItemId, entry(iLoop, cSelectedAccessories), 1).
         end.
     end. /*transaction*/
 end function.
@@ -302,7 +336,7 @@ function SaveData returns logical (input poRequest as ISaveRequest):
     define variable oTableResponse as ITableResponse no-undo.
     define variable cKeys as longchar no-undo.
     define variable cTexts as longchar no-undo.
-    
+
     oRequest[1] = cast(poRequest, IServiceRequest).
     oResponse = oServiceMessageManager:ExecuteRequest(oRequest).
 
@@ -334,9 +368,7 @@ end.
 
 /** -- validate defs -- **/
 Assert:ArgumentNotNullOrEmpty(pcBrand, 'Brand').
-/*Assert:ArgumentNotNullOrEmpty(pcUserContextId, 'User Context').*/
 Assert:ArgumentNonZero(piOrderNumber, 'Order Number').
-
 
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType)
@@ -358,6 +390,14 @@ FetchSchema(output dataset-handle mhOrderDataset).
 CreateEntityData(mhOrderDataset).
 
 SaveData(BuildSaveRequest()).
+
+/* Now get the amount of the newly-created order */
+FetchData(output dataset-handle mhOrderDataset).
+
+mhOrderBuffer = mhOrderDataset:get-buffer-handle('eOrder').
+
+mhOrderBuffer:find-first().
+pdOrderAmount = mhOrderBuffer::OrderAmount.
 
 error-status:error = no.
 return.

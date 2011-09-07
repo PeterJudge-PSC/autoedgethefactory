@@ -306,7 +306,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         define variable arrayvar5 as Progress.Data.ColumnPropDesc extent 5 no-undo.
         arrayvar5[1] = new Progress.Data.ColumnPropDesc("FinishedItemId", "", Progress.Data.DataType:CHARACTER).
         arrayvar5[2] = new Progress.Data.ColumnPropDesc("ItemId", "", Progress.Data.DataType:CHARACTER).
-        arrayvar5[3] = new Progress.Data.ColumnPropDesc("StatusDate", "", Progress.Data.DataType:DATETIME_TZ).
+        arrayvar5[3] = new Progress.Data.ColumnPropDesc("StatusDate", "", Progress.Data.DataType:DATETIME).
         arrayvar5[4] = new Progress.Data.ColumnPropDesc("FinishedItemStatus", "", Progress.Data.DataType:CHARACTER).
         arrayvar5[5] = new Progress.Data.ColumnPropDesc("ExternalId", "", Progress.Data.DataType:CHARACTER).
         tableDesc4:Columns = arrayvar5.
@@ -335,7 +335,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.OrderListForm inherits For
         arrayvar9[1] = new Progress.Data.ColumnPropDesc("OrderNum", "", Progress.Data.DataType:INTEGER).
         arrayvar9[2] = new Progress.Data.ColumnPropDesc("OrderId", "", Progress.Data.DataType:CHARACTER).
         arrayvar9[3] = new Progress.Data.ColumnPropDesc("OrderDate", "", Progress.Data.DataType:DATE).
-        arrayvar9[4] = new Progress.Data.ColumnPropDesc("EnteredDate", "", Progress.Data.DataType:DATETIME_TZ).
+        arrayvar9[4] = new Progress.Data.ColumnPropDesc("EnteredDate", "", Progress.Data.DataType:DATETIME).
         arrayvar9[5] = new Progress.Data.ColumnPropDesc("FromEmail", "", Progress.Data.DataType:LOGICAL).
         arrayvar9[6] = new Progress.Data.ColumnPropDesc("CustomerNum", "", Progress.Data.DataType:INTEGER).
         arrayvar9[7] = new Progress.Data.ColumnPropDesc("CustomerName", "", Progress.Data.DataType:CHARACTER).

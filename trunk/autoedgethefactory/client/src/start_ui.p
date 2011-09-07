@@ -32,6 +32,10 @@ using Progress.Lang.Class.
 define variable oTasks as Object no-undo.
 define variable oServiceManager as IServiceManager no-undo.
 
+session:debug-alert = true.
+session:error-stack-trace = true.
+session:system-alert-boxes = true.
+session:appl-alert-boxes = true.
 /** -- main -- **/
 run OpenEdge/CommonInfrastructure/Common/start_session.p.
 

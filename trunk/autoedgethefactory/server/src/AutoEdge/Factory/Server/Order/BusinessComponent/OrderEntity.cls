@@ -23,11 +23,11 @@ using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 using OpenEdge.Lang.RowStateEnum.
 
 class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits StandardBusinessEntity:
-    define temp-table eOrder no-undo
+    define temp-table eOrder no-undo before-table beOrder
         field OrderNum      as integer
         field OrderId       as character
         field OrderDate     as date
-        field EnteredDate   as datetime-tz
+        field EnteredDate   as datetime
         field FromEmail     as logical
 
         field CustomerNum   as integer
@@ -45,7 +45,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         index idx2 as unique OrderNum.
 
     /* one-to-one map to eOrder */
-    define temp-table eOrderPayment no-undo
+    define temp-table eOrderPayment no-undo before-table beOrderPayment
         field OrderNum          as integer
         field PromiseDate       as date
         field InvoiceNum        as character
@@ -59,7 +59,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         index idx1 as primary unique OrderNum.
     
     @todo(task="refactor", action="merge OrderLine and FinishedItem into single BE table? ").
-    define temp-table eOrderLine no-undo
+    define temp-table eOrderLine no-undo before-table beOrderLine
         field OrderId           as character
         field LineNum           as integer
         field Price             as decimal
@@ -70,15 +70,15 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         field FinishedItemId    as character
         index idx1 as primary unique OrderId LineNum.
     
-    define temp-table eFinishedItem no-undo
+    define temp-table eFinishedItem no-undo before-table beFinishedItem
         field FinishedItemId as character
         field ItemId as character
-        field StatusDate as datetime-tz
+        field StatusDate as datetime
         field FinishedItemStatus as character
         field ExternalId as character   /* This is likely to be the VIN */
         index idx1 as primary unique FinishedItemId.
     
-    define temp-table eComponentItem no-undo
+    define temp-table eComponentItem no-undo before-table beComponentItem
         field ItemId as character
         field FinishedItemId as character
         field Quantity as decimal
@@ -86,7 +86,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         index idx2 FinishedItemId
         .
     
-    define temp-table eItem no-undo
+    define temp-table eItem no-undo before-table beItem
         field ItemId as character
         field ItemNum as integer
         field ItemName as character
@@ -161,42 +161,47 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
             delete object hQuery.
         end finally.
 	end method.
-	
-	method protected character GenerateVIN():
-	    define variable cVIN as character no-undo.
-	    /*
-	    model, brand, year, etc 
-	    */
-	    cVIN = 'brand-model-year-000000'.
-	    
-	    return cVIN.
-    end method.
 
-	method override public IFetchResponse GetData( input pcMessageId as longchar ):
-	    define variable oResponse as IFetchResponse no-undo.
-		
-		oResponse = super:GetData(input pcMessageId).
-		
+    method override public IFetchResponse GetData(input pcMessageId as longchar ):
+        define variable oResponse as IFetchResponse no-undo.
+        define variable hOrder as handle no-undo.
+        define variable hOrderLine as handle no-undo.
+        define variable hItem as handle no-undo.
+        define variable hDataset as handle no-undo.
+        define variable hQuery as handle no-undo.
+
+        oResponse = super:GetData(input pcMessageId).
+
         /* Aggregate order total */
-        
+        cast(oResponse, IServiceMessage):GetMessageData(output hDataset).
+
+        hOrderLine = hDataset:get-buffer-handle('eOrderLine').
+        hOrder = hDataset:get-buffer-handle('eOrder').
+
+        create query hQuery.
+
+        /* make sure new records have a salesrep */
+        hQuery:set-buffers(hOrderLine, hOrder).
+        hQuery:query-prepare('for each eOrderLine, first eOrder where eOrder.OrderId eq eOrderLine.OrderId ').
+        hQuery:query-open().
+        hQuery:get-first().
+
+        do while hOrderLine:available:
+            hOrder::OrderAmount = hOrder::OrderAmount
+                                + ( hOrderLine::Price * hOrderLine::Quantity
+                                    * (-1 * hOrderLine::Discount)).
+
+            hQuery:get-next().
+        end.
+        hQuery:query-close().
+        delete object hQuery.
+
         return oResponse.        
 	end method.
 
     method protected void ValidateNewRow(input phDataset as handle,
                                          input phBuffer as handle):
-        case phBuffer:name:
-            when 'eOrder' then
-            do:
-                if phBuffer::SalesrepCode eq '' then
-                do:
-                    /* find a salesrep from the dealer */
-                end. 
-            end.
-            when 'eFinishedItem' then
-            do:
-                phBuffer::ExternalId = GenerateVIN().
-            end.
-        end case.
+        /*eg */
     end method.
 
 end class.

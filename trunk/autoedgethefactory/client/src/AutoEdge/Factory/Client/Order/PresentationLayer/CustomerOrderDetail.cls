@@ -132,16 +132,19 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
     
     constructor public CustomerOrderDetail(input poBpmServer as IBizLogicAPI,
                                            input poCurrentTask as Task):
+        define variable iOrderNum as integer no-undo.
+
         this-object().
-        
+
         Assert:ArgumentNotNull(poCurrentTask, 'Current task').
         Assert:ArgumentNotNull(poBpmServer, 'BPM Server').
-        
+
         assign CurrentTask = poCurrentTask
                BpmServer = poBpmServer.
-        
-        InitData().
-        InitUI().
+
+        iOrderNum = integer(cast(CurrentTask:DataSlots:Get(new String('OrderNum')), DataSlotInstance):Value).
+        InitData(iOrderNum).
+        InitUI(iOrderNum).
         
         catch oAppError as ApplicationError:
             oAppError:ShowError().
@@ -395,7 +398,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         /*  */
         this-object:uxOrderDate:ImageList = this-object:imageList1.
         this-object:uxOrderDate:Location = new System.Drawing.Point(428, 50).
-        this-object:uxOrderDate:MaskInput = "~{date~} ~{time~}".
+        this-object:uxOrderDate:MaskInput = "~{date~}".
         this-object:uxOrderDate:Name = "uxOrderDate".
         this-object:uxOrderDate:ReadOnly = true.
         this-object:uxOrderDate:Size = new System.Drawing.Size(170, 21).
@@ -404,7 +407,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         /* imageList1 */
         /*  */
         this-object:imageList1:ImageStream = cast(resources:GetObject("imageList1.ImageStream"), System.Windows.Forms.ImageListStreamer).
-/*        this-object:imageList1:TransparentColor = Color:Transparent.*/
+        this-object:imageList1:TransparentColor = System.Drawing.Color:Transparent.
         this-object:imageList1:Images:SetKeyName(0, "Knob Valid Green.png").
         this-object:imageList1:Images:SetKeyName(1, "Knob Remove Red.png").
         this-object:imageList1:Images:SetKeyName(2, "Knob Snapback.png").
@@ -538,29 +541,24 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         end catch.
     end method.
     
-    method protected void InitData():
+    method protected void InitData(input piOrderNum as integer):
         define variable oUC as IUserContext no-undo.
-        define variable cDealerCode as character no-undo.
-        define variable oPropertyValue as String no-undo.
+        define variable iOrderNum as integer extent 1 no-undo.
         define variable hServer as handle no-undo.
-        
+
         oUC = cast(ServiceManager:GetService(SecurityManager:ISecurityManagerType), ISecurityManager):CurrentUserContext.
-        
-        oPropertyValue = cast(oUC:UserProperties:Get(new String('Dealer.Code')), String).
-        if valid-object(oPropertyValue) then
-           cDealerCode = oPropertyValue:Value.
-        
+
         hServer = cast(ConnectionManager:GetServerConnection(ConnectionTypeEnum:AppServer, 'asAutoEdgeTheFactory'):Server, WidgetHandle):Value.
-        
-        run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p on hServer 
-                    (input cDealerCode,
+
+        iOrderNum[1] = piOrderNum.
+
+        run AutoEdge/Factory/Server/Order/BusinessComponent/service_orderbynumber.p on hServer
+                    (input iOrderNum,
                      input oUC:ContextId,
                      output dataset-handle mhOrders).
     end method.
         
-    method protected void InitUI():
-        define variable cValue as character no-undo.
-        define variable oDSI as DataSlotInstance no-undo.
+    method protected void InitUI(input piOrderNum as integer):
         define variable cDTZ as datetime  no-undo.
         define variable cDateFormat as character no-undo.
         define variable hOrderBuffer as handle no-undo.
@@ -569,7 +567,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
         define variable hItemBuffer as handle no-undo.
         define variable hComponentItemBuffer as handle no-undo.
         define variable hQuery as handle no-undo.
-        
+
         cDateFormat = session:date-format.
         /* needed to convert ISO dates into ABL datetime-tz */
         session:date-format = 'ymd'.
@@ -578,11 +576,8 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
                hOLineBuffer = mhOrders:get-buffer-handle('eOrderLine')
                hFinishedItemBuffer = mhOrders:get-buffer-handle('eFinishedItem')
                hComponentItemBuffer = mhOrders:get-buffer-handle('eComponentItem')
-               hItemBuffer = mhOrders:get-buffer-handle('eItem')               
-               
-               oDSI = cast(CurrentTask:DataSlots:Get(new String('OrderId')), DataSlotInstance)
-               cValue = oDSI:Value.
-                     
+               hItemBuffer = mhOrders:get-buffer-handle('eItem').
+
         hOrderBuffer:find-first(' where eOrder.OrderId = ' + quoter(cValue) ) no-error.
         if hOrderBuffer:available then
         do:
@@ -686,9 +681,9 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
     method public void ReassignTask(poTask as Task, pcPerformer as character):
         case poTask:WorkItem:Status:
             when WorkItemStatusEnum:Assigned then
-                BpmServer:ReassignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+                BpmServer:ReassignWorkItem(poTask:WorkItem:Id, pcPerformer).
             otherwise
-                BpmServer:AssignWorkItemFromWIID(poTask:WorkItem:Id, pcPerformer).
+                BpmServer:AssignWorkItem(poTask:WorkItem:Id, pcPerformer).
         end case.
         
         if pcPerformer ne poTask:WorkItem:Performer then
@@ -701,7 +696,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
     
     method public void CompleteTask(poTask as Task):
         if CurrentTask:WorkItem:Status:Equals(WorkItemStatusEnum:Available) then
-            BpmServer:AssignWorkItemFromWiid(
+            BpmServer:AssignWorkItem(
                         CurrentTask:WorkItem:Id,
                         lc(substitute('&1@&2',
                                 SecMgr:CurrentUserContext:UserName,
