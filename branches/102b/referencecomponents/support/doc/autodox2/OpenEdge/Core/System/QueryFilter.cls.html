@@ -1,0 +1,344 @@
+<html>
+  <head>
+    <title>QueryFilter</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\System</font>
+      <br />CLASS QueryFilter
+    </h2>
+    <p>CLASS OpenEdge.Core.System.QueryFilter IMPLEMENTS <a href="../../../OpenEdge/Core/Util/IExternalizable.cls.html" title="OpenEdge.Core.Util.IExternalizable" target="classFrame">IExternalizable</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.BufferName'>BufferName</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.FieldName'>FieldName</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.FieldType'>FieldType</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/String.cls.html" title="OpenEdge.Lang.String" target="classFrame">String</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.FieldValue'>FieldValue</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.JoinType'>JoinType</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Operator'>Operator</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character,character,openedge.lang.operatorenum,openedge.lang.string,openedge.lang.datatypeenum,openedge.lang.joinenum)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, <a href="../../../OpenEdge/Lang/String.cls.html" title="OpenEdge.Lang.String" target="classFrame">String</a> poFieldValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#equals(progress.lang.object)'> Equals</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> p0)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#readobject(openedge.core.util.iobjectinput)'> ReadObject</a>
+          </b>(<a href="../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#tostring()'> ToString</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeobject(openedge.core.util.iobjectoutput)'> WriteObject</a>
+          </b>(<a href="../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.BufferName'><!-- --></a>
+    <h3>BufferName</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.FieldName'><!-- --></a>
+    <h3>FieldName</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.FieldType'><!-- --></a>
+    <h3>FieldType</h3>
+    <code><a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.FieldValue'><!-- --></a>
+    <h3>FieldValue</h3>
+    <code><a href="../../../OpenEdge/Lang/String.cls.html" title="OpenEdge.Lang.String" target="classFrame">String</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.JoinType'><!-- --></a>
+    <h3>JoinType</h3>
+    <code><a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.Operator'><!-- --></a>
+    <h3>Operator</h3>
+    <code><a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> PUBLIC GET SET </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(character,character,openedge.lang.operatorenum,openedge.lang.string,openedge.lang.datatypeenum,openedge.lang.joinenum)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcBufferName, CHARACTER pcFieldName, <a href="../../../OpenEdge/Lang/OperatorEnum.cls.html" title="OpenEdge.Lang.OperatorEnum" target="classFrame">OperatorEnum</a> poOperator, <a href="../../../OpenEdge/Lang/String.cls.html" title="OpenEdge.Lang.String" target="classFrame">String</a> poFieldValue, <a href="../../../OpenEdge/Lang/DataTypeEnum.cls.html" title="OpenEdge.Lang.DataTypeEnum" target="classFrame">DataTypeEnum</a> poFieldType, <a href="../../../OpenEdge/Lang/JoinEnum.cls.html" title="OpenEdge.Lang.JoinEnum" target="classFrame">JoinEnum</a> poJoinType)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='equals(progress.lang.object)'><!-- --></a>
+    <h3>Equals</h3>
+    <code>OVERRIDE PUBLIC  LOGICAL
+      <b>Equals</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> p0)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='readobject(openedge.core.util.iobjectinput)'><!-- --></a>
+    <h3>ReadObject</h3>
+    <code>PUBLIC  VOID
+      <b>ReadObject</b>(<a href="../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='tostring()'><!-- --></a>
+    <h3>ToString</h3>
+    <code>OVERRIDE PUBLIC  CHARACTER
+      <b>ToString</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeobject(openedge.core.util.iobjectoutput)'><!-- --></a>
+    <h3>WriteObject</h3>
+    <code>PUBLIC  VOID
+      <b>WriteObject</b>(<a href="../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

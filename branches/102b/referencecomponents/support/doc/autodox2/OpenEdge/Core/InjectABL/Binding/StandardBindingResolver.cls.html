@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <title>StandardBindingResolver</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL\Binding</font>
+      <br />CLASS StandardBindingResolver
+    </h2>
+    <p>CLASS OpenEdge.Core.InjectABL.Binding.StandardBindingResolver IMPLEMENTS <a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingResolver.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingResolver" target="classFrame">IBindingResolver</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resolve(openedge.lang.collections.imap,progress.lang.class,character)'> Resolve</a>
+          </b>(<a href="../../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> poBindings, <a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns valid binding(s) for the service from a set of bindings
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#resolvecondition(openedge.core.injectabl.binding.ibinding)'> ResolveCondition</a>
+          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolved the conditions attached to a binding
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='resolve(openedge.lang.collections.imap,progress.lang.class,character)'><!-- --></a>
+    <h3>Resolve</h3>
+    <code>PUBLIC  <a href="../../../../OpenEdge/Lang/Collections/IList.cls.html" title="OpenEdge.Lang.Collections.IList" target="classFrame">IList</a>
+      <b>Resolve</b>(<a href="../../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> poBindings, <a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService, CHARACTER pcName)
+    </code>
+    <dl>
+      <dd>Returns valid binding(s) for the service from a set of bindings <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IMap - The complete set of bindings to resolve<br/>Class - The service type<br/>character - The binding name<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IList  The list of bindings corresponding to the service & name</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='resolvecondition(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>ResolveCondition</h3>
+    <code>PROTECTED  LOGICAL
+      <b>ResolveCondition</b>(<a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>Resolved the conditions attached to a binding <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IBinding - The biding in question<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Logical Whether the binding meets the conditions or not.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
