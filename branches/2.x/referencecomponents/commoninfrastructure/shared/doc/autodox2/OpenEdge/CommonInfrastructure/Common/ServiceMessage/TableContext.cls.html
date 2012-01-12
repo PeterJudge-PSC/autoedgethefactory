@@ -1,0 +1,401 @@
+<html>
+  <head>
+    <title>TableContext</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\Common\ServiceMessage</font>
+      <br />CLASS TableContext
+    </h2>
+    <p>CLASS OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableContext IMPLEMENTS <a href="../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITableContext.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext" target="classFrame">ITableContext</a> , <a href="../../../../OpenEdge/Core/Util/IExternalizable.cls.html" title="OpenEdge.Core.Util.IExternalizable" target="classFrame">IExternalizable</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.FuzzyPageSize'>FuzzyPageSize</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether the PageSize property is accurate or not. For instance, if the
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>DATETIME-TZ</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.LastUpdateAt'>LastUpdateAt</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The last time that a request was made for the table to be updated
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.NextPosition'>NextPosition</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Context info/key for where to start appending next page
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.NumRemainingPages'>NumRemainingPages</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of remaining pages to retrieve. If this is zero, then
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>INTEGER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PageSize'>PageSize</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num rows in resultset (on server if paging)
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LOGICAL</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PagingEnabled'>PagingEnabled</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether paging/batching is enabled for this table. If false,
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.PrevPosition'>PrevPosition</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context info/key for where to start appending next page
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>HANDLE</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableHandle'>TableHandle</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The buffer/table handle corresponding to the tableName
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.TableName'>TableName</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected set - not changeable - provide with constructor
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(character,handle)'>CONSTRUCTOR </a>
+          </b>(CHARACTER pcTableName, HANDLE phTable)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#clone()'> Clone</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#readobject(openedge.core.util.iobjectinput)'> ReadObject</a>
+          </b>(<a href="../../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeobject(openedge.core.util.iobjectoutput)'> WriteObject</a>
+          </b>(<a href="../../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.FuzzyPageSize'><!-- --></a>
+    <h3>FuzzyPageSize</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>Indicates whether the PageSize property is accurate or not. For instance, if the <p> </dd>
+      <dd>underlying query used PRESELECT we can be fairly sure it's accurate. Otherwise, not so much. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.LastUpdateAt'><!-- --></a>
+    <h3>LastUpdateAt</h3>
+    <code>DATETIME-TZ PUBLIC GET SET </code>
+    <dl>
+      <dd>The last time that a request was made for the table to be updated <p> </dd>
+      <dd>(either fetched or saved). </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NextPosition'><!-- --></a>
+    <h3>NextPosition</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>Context info/key for where to start appending next page <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.NumRemainingPages'><!-- --></a>
+    <h3>NumRemainingPages</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>The number of remaining pages to retrieve. If this is zero, then <p> </dd>
+      <dd>all data has been retrieved. If it is negative, then we haven't yet retrieved any pages and don't know how many there are. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PageSize'><!-- --></a>
+    <h3>PageSize</h3>
+    <code>INTEGER PUBLIC GET SET </code>
+    <dl>
+      <dd>num rows in resultset (on server if paging) <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PagingEnabled'><!-- --></a>
+    <h3>PagingEnabled</h3>
+    <code>LOGICAL PUBLIC GET SET </code>
+    <dl>
+      <dd>Whether paging/batching is enabled for this table. If false, <p> </dd>
+      <dd>the the PageSize property is ignored. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.PrevPosition'><!-- --></a>
+    <h3>PrevPosition</h3>
+    <code>CHARACTER PUBLIC GET SET </code>
+    <dl>
+      <dd>context info/key for where to start appending next page <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableHandle'><!-- --></a>
+    <h3>TableHandle</h3>
+    <code>HANDLE PUBLIC GET SET </code>
+    <dl>
+      <dd>The buffer/table handle corresponding to the tableName <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.TableName'><!-- --></a>
+    <h3>TableName</h3>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>protected set - not changeable - provide with constructor <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(character,handle)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(CHARACTER pcTableName, HANDLE phTable)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='clone()'><!-- --></a>
+    <h3>Clone</h3>
+    <code>OVERRIDE PUBLIC  <a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Clone</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='readobject(openedge.core.util.iobjectinput)'><!-- --></a>
+    <h3>ReadObject</h3>
+    <code>PUBLIC  VOID
+      <b>ReadObject</b>(<a href="../../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeobject(openedge.core.util.iobjectoutput)'><!-- --></a>
+    <h3>WriteObject</h3>
+    <code>PUBLIC  VOID
+      <b>WriteObject</b>(<a href="../../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

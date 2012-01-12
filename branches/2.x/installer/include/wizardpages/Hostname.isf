@@ -1,0 +1,45 @@
+object WizardForm: TISCustomForm
+  Left = 0
+  Top = 0
+  Width = 413
+  Height = 237
+  DesignPanel = frmISWizardPage.elDesignPanel
+  object lblHostname: TLabel
+    Left = 11
+    Top = 32
+    Width = 48
+    Height = 13
+    Caption = 'Hostname'
+  end
+  object lblWebServerPort: TLabel
+    Left = 11
+    Top = 60
+    Width = 80
+    Height = 13
+    Caption = 'Web Server Port'
+  end
+  object txtHostname: TEdit
+    Left = 103
+    Top = 29
+    Width = 217
+    Height = 21
+    TabOrder = 0
+    Text = 'localhost'
+  end
+  object btnPing: TButton
+    Left = 328
+    Top = 28
+    Width = 75
+    Height = 23
+    Caption = 'Ping'
+    TabOrder = 1
+  end
+  object txtWebServerPort: TEdit
+    Left = 104
+    Top = 56
+    Width = 57
+    Height = 21
+    TabOrder = 2
+    Text = '80'
+  end
+end
