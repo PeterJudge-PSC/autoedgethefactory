@@ -2151,7 +2151,7 @@ ADD FIELD "EmailDate" OF "Order" AS datetime-tz
   INITIAL ?
   LABEL "Email Date"
   POSITION 22
-  MAX-WIDTH 32
+  MAX-WIDTH 12
   COLUMN-LABEL "Email Date"
   HELP "Date of Order Email"
   ORDER 240
