@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /** ----------------------------------------------------------------------
     File        : AutoEdge/Factory/Common/CommonInfrastructure/service_customerlogin.p
     Purpose     : 
@@ -19,14 +20,10 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
-using OpenEdge.Core.System.ApplicationError.
-
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params, defs -- **/
 define input  parameter pcBrand as character no-undo.
@@ -58,6 +55,8 @@ do:
 end.
 
 /** -- validate defs -- **/
+pcUserContextId = '-1'.
+
 Assert:ArgumentNotNullOrEmpty(pcUserName, 'User Name').
 Assert:ArgumentNotNullOrEmpty(pcBrand, 'Brand').
 Assert:ArgumentNotNullOrEmpty(pcPassword, 'User Password').
@@ -88,15 +87,8 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i    
+    &THROW-ERROR=false 
+    &RETURN-ERROR=false
+}
 /** -- eof -- **/

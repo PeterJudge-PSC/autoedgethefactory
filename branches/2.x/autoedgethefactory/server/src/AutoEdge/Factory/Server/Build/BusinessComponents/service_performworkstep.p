@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Build/BusinessComponent/service_performworkstep.p
     Purpose     : 
@@ -26,13 +27,9 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 using OpenEdge.CommonInfrastructure.Common.UserContext.
 
-using OpenEdge.Core.System.ApplicationError.
-
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params, defs -- **/
 define input parameter pcWorkFlowName as character no-undo.             /* expecting 'BuildVehicle' or similar. */
@@ -97,15 +94,5 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i}
 /** -- eof -- **/

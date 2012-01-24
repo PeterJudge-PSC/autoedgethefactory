@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Order/BusinessComponent/service_captureorder.p
     Purpose     :
@@ -47,7 +48,6 @@ using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
-using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.OperatorEnum.
@@ -55,9 +55,6 @@ using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
-
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params, variables -- **/
 define input parameter piOrderNumber as integer no-undo.
@@ -235,13 +232,13 @@ function CreateComponentItem returns logical (input phBuffer as handle,
 
     phBuffer:find-first(substitute(' where &1.ItemId eq &2 and &1.FinishedItemId eq &3',
                                phBuffer:name,
-                               quoter(pcItemId),
-                               quoter(pcFinishedItemId))) no-error.
+                               quoter(trim(pcItemId)),
+                               quoter(trim(pcFinishedItemId)))) no-error.
     if not phBuffer:available then
     do:
         phBuffer:buffer-create().
-        assign phBuffer::ItemId = pcItemId
-               phBuffer::FinishedItemId = pcFinishedItemId.
+        assign phBuffer::ItemId = trim(pcItemId)
+               phBuffer::FinishedItemId = trim(pcFinishedItemId).
     end.
     phBuffer::Quantity = phBuffer::Quantity + pdQuantity.
     phBuffer:buffer-release().
@@ -319,8 +316,11 @@ function CreateEntityData returns logical (input phDataset as handle):
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcWheels), 1).
         CreateComponentItem(hComponentItem, cFinishedItemId, string(pcMoonroof), 1).
 
-        cSelectedAccessories = GetSelectedOption(pcInteriorAccessories).
+/*        cSelectedAccessories = GetSelectedOption(pcInteriorAccessories).*/
+        cSelectedAccessories = left-trim(cSelectedAccessories, '[').
+        cSelectedAccessories = right-trim(cSelectedAccessories, ']').
         iMax = num-entries(cSelectedAccessories).
+        if cSelectedAccessories ne '' and cSelectedAccessories ne ?  then
         do iLoop = 1 to iMax:
             CreateComponentItem(hComponentItem, cFinishedItemId, entry(iLoop, cSelectedAccessories), 1).
         end.
@@ -352,7 +352,8 @@ function SaveData returns logical (input poRequest as ISaveRequest):
             cTexts = String:Join(cast(oTableResponse:ErrorText:Values:ToArray(), String), '|').
             undo, throw new ServiceRequestError(
                                 'creating orders',
-                                substitute('[ OrderNum: &1 ]', piOrderNumber)).
+                                substitute('[ OrderNum: &1 ]', piOrderNumber),
+                                string(cTexts)).
         end.
     end.
 end function.
@@ -403,18 +404,9 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue.
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
-
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i
+    &LOG-ERROR=true
+    &RETURN-ERROR=true  }
 finally:
     delete object mhOrderDataset no-error.
 end finally.
