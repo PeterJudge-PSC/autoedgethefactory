@@ -141,15 +141,23 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.HelpAbout inherits Form:
     end constructor.
 
     method protected void InitVersionInfo():
+        define variable cVersionFile as character no-undo.
         define variable cVersion as character no-undo.
         define variable oProperty as String no-undo.
 
         oProperty = cast(ABLSession:Instance:SessionProperties:Get(new String('Config.Property.APPROOT')), String).
-
-        input from value(substitute('&1/version.txt', oProperty:Value)).
-            import unformatted cVersion.
-        input close.
-
+        if valid-object(oProperty) then
+            cVersionFile = substitute('&1/version.txt', oProperty:Value).
+        
+        if search(cVersionFile) ne ? then
+        do:                              
+            input from value(cVersionFile).
+                import unformatted cVersion.
+            input close.
+        end.
+        else
+            cVersion = 'Unable to determine version'.
+        
         uxVersionInfo:Text = cVersion.
     end method.
 
