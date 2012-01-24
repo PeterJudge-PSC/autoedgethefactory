@@ -1,0 +1,12 @@
+#Fri Jan 20 16:16:45 EST 2012
+publishing.type=Reintall
+application.name=CustomerOrderVehicle
+inherit.acl=true
+module.type=com.savvion.studio.designer.module.bpm
+publish.webservice=false
+application.mainprocessname=CustomerOrderVehicle
+module.id=731c6d79-9077-4e05-99fe-8a1f112a0644
+module.version=8
+application.mainappfile=CustomerOrderVehicle/processtemplates/CustomerOrderVehicle.spt
+module.name=CustomerOrderVehicle
+application.root=CustomerOrderVehicle

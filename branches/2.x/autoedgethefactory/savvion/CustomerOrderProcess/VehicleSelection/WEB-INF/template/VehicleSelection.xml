@@ -1,0 +1,2177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Process SYSTEM "../../common/processtemplates/processTemplate.dtd">
+<Process name="VehicleSelection" type="BIZSOLO">
+  <Description/>
+  <Application name="VehicleSelection"/>
+  <Category level="0">AutoEdge</Category>
+  <Category level="1">Factory</Category>
+  <Group/>
+  <Manager/>
+  <EstimatedDuration/>
+  <TimeCreated>1326831232180</TimeCreated>
+  <Author>pjudge</Author>
+  <Version/>
+  <Attributes>
+    <Attribute name="ProcessType" required="false">
+      <Label>Process Type</Label>
+      <Description>Type of the Process</Description>
+      <Value>PresentationProcess</Value>
+    </Attribute>
+    <Attribute name="Objective" required="false">
+      <Label>Objective</Label>
+      <Description>Objective for developing this process model. E.g. Objective is to automate order processing</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Goal" required="false">
+      <Label>Goal</Label>
+      <Description>The goal of this process model. E.g. Goal is to reduce order processing cost by 10%</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="OrganizationalUnit" required="false">
+      <Label>Organizational Unit</Label>
+      <Description>The organizational unit that owns this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Influencers" required="false">
+      <Label>Influencers</Label>
+      <Description>People who have influenced development of this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Risks" required="false">
+      <Label>Risks</Label>
+      <Description>Risks associated with this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Rewards" required="false">
+      <Label>Rewards</Label>
+      <Description>Potential rewards on investment for this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Executable" required="false">
+      <Label>Executable</Label>
+      <Description>Can the Process  Ever be made executable?</Description>
+      <Value>Yes</Value>
+    </Attribute>
+  </Attributes>
+  <AtomicWS height="36" name="Start" width="36" worktime="false" x="96" y="60">
+    <AtomicType>START</AtomicType>
+    <PerformingApp>Start.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <AtomicWS height="60" name="ExitPage" width="108" worktime="false" x="360" y="792">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">ExitPage.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="true"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="LoginCustomer" width="108" worktime="false" x="180" y="264">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">LoginCustomer.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>userid</Datainput>
+    <Datainput>password</Datainput>
+    <Dataoutput>userid</Dataoutput>
+    <Dataoutput>password</Dataoutput>
+    <Format editable="true" input="userid" label="Userid:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Userid:</Label>
+    </Format>
+    <Format editable="true" input="password" label="Password:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Password:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="true"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="LoginFailure" width="108" worktime="false" x="540" y="600">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">LoginFailure.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>NumLoginAttempts</Datainput>
+    <Datainput>password</Datainput>
+    <Datainput>userid</Datainput>
+    <Dataoutput>NumLoginAttempts</Dataoutput>
+    <Dataoutput>password</Dataoutput>
+    <Dataoutput>userid</Dataoutput>
+    <Format editable="true" input="NumLoginAttempts" label="Num Login Attempts:" required="false" type="field">
+      <Label>Num Login Attempts:</Label>
+    </Format>
+    <Format editable="true" input="password" label="Password:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Password:</Label>
+    </Format>
+    <Format editable="true" input="userid" label="Userid:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Userid:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="true"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="LoginRetryExceeded" width="108" worktime="false" x="540" y="696">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">LoginRetryExceeded.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="true"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="RegisterCustomer" width="108" worktime="false" x="360" y="264">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">RegisterCustomer.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="false"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="SelectBrand" width="108" worktime="false" x="180" y="48">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">SelectBrand.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Dataoutput>SelectedVehicleBrand</Dataoutput>
+    <Format editable="true" input="SelectedVehicleBrand" label="Selected Vehicle Brand:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Vehicle Brand:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="false"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="SelectModel" width="108" worktime="false" x="180" y="156">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">SelectModel.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>PremiumModels</Datainput>
+    <Datainput>ModelName</Datainput>
+    <Datainput>SelectedVehicleModel</Datainput>
+    <Datainput>SUVModels</Datainput>
+    <Datainput>TruckModels</Datainput>
+    <Datainput>SedanModels</Datainput>
+    <Datainput>CompactModels</Datainput>
+    <Dataoutput>PremiumModels</Dataoutput>
+    <Dataoutput>ModelName</Dataoutput>
+    <Dataoutput>SelectedVehicleModel</Dataoutput>
+    <Dataoutput>SUVModels</Dataoutput>
+    <Dataoutput>TruckModels</Dataoutput>
+    <Dataoutput>SedanModels</Dataoutput>
+    <Dataoutput>CompactModels</Dataoutput>
+    <Format editable="false" input="SelectedVehicleBrand" label="Selected vehicle brand" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected vehicle brand</Label>
+    </Format>
+    <Format editable="true" input="PremiumModels" label="Premium Models:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Premium Models:</Label>
+    </Format>
+    <Format editable="true" input="ModelName" label="Model Name:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Model Name:</Label>
+    </Format>
+    <Format editable="true" input="SelectedVehicleModel" label="Selected Vehicle Model:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Vehicle Model:</Label>
+    </Format>
+    <Format editable="true" input="SUVModels" label="SUVModels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SUVModels:</Label>
+    </Format>
+    <Format editable="true" input="TruckModels" label="Truck Models:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Truck Models:</Label>
+    </Format>
+    <Format editable="true" input="SedanModels" label="Sedan Models:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Sedan Models:</Label>
+    </Format>
+    <Format editable="true" input="CompactModels" label="Compact Models:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Compact Models:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="true"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="SelectOptions" width="108" worktime="false" x="360" y="156">
+    <AtomicType>ACTIVITY</AtomicType>
+    <PerformingApp type="JSP">SelectOptions.jsp</PerformingApp>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>SelectedInteriorSeatMaterial</Datainput>
+    <Datainput>DealerList</Datainput>
+    <Datainput>SelectedAccessoryList</Datainput>
+    <Datainput>SelectedExteriorMoonroof</Datainput>
+    <Datainput>SelectedExteriorColour</Datainput>
+    <Datainput>DealerCode</Datainput>
+    <Datainput>ExteriorColour</Datainput>
+    <Datainput>ExteriorWheels</Datainput>
+    <Datainput>SelectedInteriorTrimColour</Datainput>
+    <Datainput>SelectedExteriorWheels</Datainput>
+    <Datainput>ExteriorMoonroof</Datainput>
+    <Datainput>InteriorSeatMaterial</Datainput>
+    <Datainput>InteriorAccessories</Datainput>
+    <Datainput>InteriorTrimColour</Datainput>
+    <Dataoutput>SelectedInteriorSeatMaterial</Dataoutput>
+    <Dataoutput>DealerList</Dataoutput>
+    <Dataoutput>SelectedAccessoryList</Dataoutput>
+    <Dataoutput>SelectedExteriorMoonroof</Dataoutput>
+    <Dataoutput>SelectedExteriorColour</Dataoutput>
+    <Dataoutput>DealerCode</Dataoutput>
+    <Dataoutput>ExteriorColour</Dataoutput>
+    <Dataoutput>ExteriorWheels</Dataoutput>
+    <Dataoutput>SelectedInteriorTrimColour</Dataoutput>
+    <Dataoutput>SelectedExteriorWheels</Dataoutput>
+    <Dataoutput>ExteriorMoonroof</Dataoutput>
+    <Dataoutput>InteriorSeatMaterial</Dataoutput>
+    <Dataoutput>InteriorAccessories</Dataoutput>
+    <Dataoutput>InteriorTrimColour</Dataoutput>
+    <Format editable="true" input="SelectedInteriorSeatMaterial" label="Selected Interior Seat Material:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Interior Seat Material:</Label>
+    </Format>
+    <Format editable="true" input="DealerList" label="Dealer List:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Dealer List:</Label>
+    </Format>
+    <Format editable="true" input="SelectedAccessoryList" label="Selected Accessories List:" required="false" type="list">
+      <Label>Selected Accessories List:</Label>
+    </Format>
+    <Format editable="true" input="SelectedExteriorMoonroof" label="Selected Exterior Moonroof:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Exterior Moonroof:</Label>
+    </Format>
+    <Format editable="true" input="SelectedExteriorColour" label="Selected Exterior Colour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Exterior Colour:</Label>
+    </Format>
+    <Format editable="true" input="DealerCode" label="Dealer Id:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Dealer Id:</Label>
+    </Format>
+    <Format editable="true" input="ExteriorColour" label="Exterior Colour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior Colour:</Label>
+    </Format>
+    <Format editable="true" input="ExteriorWheels" label="Exterior Wheels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior Wheels:</Label>
+    </Format>
+    <Format editable="true" input="SelectedInteriorTrimColour" label="Selected Interior Trim Colour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Interior Trim Colour:</Label>
+    </Format>
+    <Format editable="true" input="SelectedExteriorWheels" label="Selected Exterior Wheels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Selected Exterior Wheels:</Label>
+    </Format>
+    <Format editable="true" input="ExteriorMoonroof" label="Exterior Moonroof:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Exterior Moonroof:</Label>
+    </Format>
+    <Format editable="true" input="InteriorSeatMaterial" label="Interior Seat Material:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Interior Seat Material:</Label>
+    </Format>
+    <Format editable="true" input="InteriorAccessories" label="Interior Accessories:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Interior Accessories:</Label>
+    </Format>
+    <Format editable="true" input="InteriorTrimColour" label="Interior Trim Colour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>Interior Trim Colour:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Option name="Instructions" visible="true"/>
+    <Option name="Priority" visible="false"/>
+    <Option name="StartDate" visible="false"/>
+    <Option name="DueDate" visible="false"/>
+    <Option name="Reassign" visible="true"/>
+  </AtomicWS>
+  <AtomicWS height="36" name="End 1" width="36" worktime="false" x="576" y="804">
+    <AtomicType>END</AtomicType>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <RollbackPoint>FALSE</RollbackPoint>
+  </AtomicWS>
+  <ExternalWS height="60" name="CustomerLogin" width="108" x="180" y="492">
+    <Performer category="OEAdapters" generate="false" managed="true" name="CustomerLogin">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>MEDIUM</Priority>
+    <Datainput>password</Datainput>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>userid</Datainput>
+    <Dataoutput>CustomerName</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>CustomerEmail</Dataoutput>
+    <Dataoutput>CustomerId</Dataoutput>
+    <Dataoutput>CustomerCreditLimit</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="CustomerLogout" width="108" x="180" y="792">
+    <Performer category="OEAdapters" generate="false" managed="true" name="ApplicationUserLogout">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>MEDIUM</Priority>
+    <Datainput>ContextId</Datainput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="CustomerRegistration" width="108" x="360" y="384">
+    <Performer category="OEAdapters" generate="false" managed="true" name="CustomerRegistration">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>MEDIUM</Priority>
+    <Datainput>CustomerName</Datainput>
+    <Datainput>CustomerEmail</Datainput>
+    <Datainput>password</Datainput>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>userid</Datainput>
+    <Dataoutput>CustomerId</Dataoutput>
+    <Dataoutput>SalesrepCode</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="GetBrandDetail" width="108" x="360" y="48">
+    <Performer category="OEAdapters" generate="false" managed="true" name="GetBrandDetail">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>MEDIUM</Priority>
+    <Datainput>SelectedVehicleBrand</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Dataoutput>InteriorTrimColour</Dataoutput>
+    <Dataoutput>SUVModels</Dataoutput>
+    <Dataoutput>ExteriorMoonroof</Dataoutput>
+    <Dataoutput>SedanModels</Dataoutput>
+    <Dataoutput>ExteriorColour</Dataoutput>
+    <Dataoutput>PremiumModels</Dataoutput>
+    <Dataoutput>CompactModels</Dataoutput>
+    <Dataoutput>InteriorAccessories</Dataoutput>
+    <Dataoutput>DealerList</Dataoutput>
+    <Dataoutput>InteriorSeatMaterial</Dataoutput>
+    <Dataoutput>ExteriorWheels</Dataoutput>
+    <Dataoutput>TruckModels</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS generate="false" height="60" name="OrderCreation" width="108" x="180" y="696">
+    <Performer generate="false">com.savvion.BizSolo.beans.PAKCreatePI</Performer>
+    <PerformBy>commit</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>MEDIUM</Priority>
+    <PreFunction type="java:function">// each tenant/brand has its own admin user&#13;
+java.lang.String userName = "lob_manager@"+bean.getPropString("SelectedVehicleBrand").toLowerCase();&#13;
+bean.setPropString("BIZSITE_USER", userName);&#13;
+&#13;
+//System.out.println("BIZSITE_USER=" + bean.getPropString("BIZSITE_USER"));&#13;
+&#13;
+&#13;
+// ABL doesn't like List objects, turn into String for passing into BizLogic process&#13;
+java.lang.String accessoryList = bean.getPropVector("SelectedAccessoryList").toString();&#13;
+bean.setPropString("SelectedInteriorAccessories", accessoryList);&#13;
+&#13;
+//System.out.println("SelectedAccessoryList=" + bean.getPropVector("SelectedAccessoryList").toString());&#13;
+//System.out.println("SelectedInteriorAccessories=" + bean.getPropString("SelectedInteriorAccessories"));&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+</PreFunction>
+    <Datainput>PT_NAME@ptName</Datainput>
+    <Datainput>SelectedInteriorTrimColour@SelectedInteriorTrimColour</Datainput>
+    <Datainput>BIZSITE_USER@bizsite_user</Datainput>
+    <Datainput>CustomerCreditLimit@CustomerCreditLimit</Datainput>
+    <Datainput>CustomerEmail@CustomerEmail</Datainput>
+    <Datainput>ModelName@ModelName</Datainput>
+    <Datainput>SelectedInteriorAccessories@SelectedInteriorAccessories</Datainput>
+    <Datainput>SelectedVehicleBrand@VehicleBrand</Datainput>
+    <Datainput>SelectedInteriorSeatMaterial@SelectedInteriorSeatMaterial</Datainput>
+    <Datainput>CustomerId@CustomerId</Datainput>
+    <Datainput>SelectedVehicleModel@VehicleModel</Datainput>
+    <Datainput>BIZSITE_PASSWORD@bizsite_pass</Datainput>
+    <Datainput>SelectedExteriorColour@SelectedExteriorColour</Datainput>
+    <Datainput>CustomerName@CustomerName</Datainput>
+    <Datainput>SelectedExteriorMoonroof@SelectedExteriorMoonroof</Datainput>
+    <Datainput>DealerCode@DealerCode</Datainput>
+    <Datainput>SelectedExteriorWheels@SelectedExteriorWheels</Datainput>
+    <Dataoutput>error@error</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="RegistrationConfirmation" width="108" x="360" y="492">
+    <Performer category="EmailAdapters" generate="false" managed="true" name="GenericEmailAdapter">com.savvion.sbm.adapters.email.EmailAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Priority>MEDIUM</Priority>
+    <Datainput>CustomerEmail</Datainput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ConnectorWS height="60" name="Decision 1" width="60" x="204" y="600">
+    <ConnectorType>DECISIONSPLIT</ConnectorType>
+  </ConnectorWS>
+  <ConnectorWS height="60" name="Decision 2" width="60" x="384" y="600">
+    <ConnectorType>DECISIONSPLIT</ConnectorType>
+  </ConnectorWS>
+  <Link Name="linkCustomerLogin" default="true" x="42" y="13">
+    <Label>Login</Label>
+    <Source cp="2">LoginCustomer</Source>
+    <Point x="234.0" y="324.0"/>
+    <Point x="234.0" y="492.0"/>
+    <Target cp="0">CustomerLogin</Target>
+  </Link>
+  <Link Name="Connection 1" default="true">
+    <Source cp="1">Start</Source>
+    <Point x="132.0" y="78.0"/>
+    <Point x="180.0" y="78.0"/>
+    <Target cp="3">SelectBrand</Target>
+  </Link>
+  <Link Name="linkSelectModel" default="true">
+    <Label>Select Model</Label>
+    <Source cp="1">SelectBrand</Source>
+    <Point x="288.0" y="78.0"/>
+    <Point x="360.0" y="78.0"/>
+    <Target cp="3">GetBrandDetail</Target>
+  </Link>
+  <Link Name="Connection 3" default="true">
+    <Source cp="2">GetBrandDetail</Source>
+    <Point x="414.0" y="108.0"/>
+    <Point x="414.0" y="128.0"/>
+    <Point x="234.0" y="128.0"/>
+    <Point x="234.0" y="156.0"/>
+    <Target cp="0">SelectModel</Target>
+  </Link>
+  <Link Name="linkLoginCustomer" default="true">
+    <Label>Complete Order</Label>
+    <Source cp="2">SelectOptions</Source>
+    <Point x="414.0" y="216.0"/>
+    <Point x="414.0" y="236.0"/>
+    <Point x="234.0" y="236.0"/>
+    <Point x="234.0" y="264.0"/>
+    <Target cp="0">LoginCustomer</Target>
+  </Link>
+  <Link Name="linkRegisterCustomer" default="true">
+    <Label>Register</Label>
+    <Source cp="1">LoginCustomer</Source>
+    <Point x="288.0" y="294.0"/>
+    <Point x="360.0" y="294.0"/>
+    <Target cp="3">RegisterCustomer</Target>
+  </Link>
+  <Link Name="linkReturnToLogin" default="true" submit="TRUE" type="image" value="images/under_construction_blue.png">
+    <Label>Return To Login</Label>
+    <Source cp="9">RegisterCustomer</Source>
+    <Point x="387.0" y="324.0"/>
+    <Point x="387.0" y="344.0"/>
+    <Point x="261.0" y="344.0"/>
+    <Point x="261.0" y="324.0"/>
+    <Target cp="8">LoginCustomer</Target>
+  </Link>
+  <Link Name="linkCustomerRegistration" default="true">
+    <Label>Submit</Label>
+    <Source cp="2">RegisterCustomer</Source>
+    <Point x="414.0" y="324.0"/>
+    <Point x="414.0" y="384.0"/>
+    <Target cp="0">CustomerRegistration</Target>
+  </Link>
+  <Link Name="Connection 11" default="true">
+    <Source cp="2">CustomerRegistration</Source>
+    <Point x="414.0" y="444.0"/>
+    <Point x="414.0" y="492.0"/>
+    <Target cp="0">RegistrationConfirmation</Target>
+  </Link>
+  <Link Name="Connection 12" default="true">
+    <Source cp="3">RegistrationConfirmation</Source>
+    <Point x="360.0" y="522.0"/>
+    <Point x="288.0" y="522.0"/>
+    <Target cp="1">CustomerLogin</Target>
+  </Link>
+  <Link Name="Connection 13" default="true">
+    <Source cp="2">CustomerLogin</Source>
+    <Point x="234.0" y="552.0"/>
+    <Point x="234.0" y="600.0"/>
+    <Target cp="0">Decision 1</Target>
+  </Link>
+  <Link Name="Connection 14" default="true">
+    <Source cp="2">OrderCreation</Source>
+    <Point x="234.0" y="756.0"/>
+    <Point x="234.0" y="792.0"/>
+    <Target cp="0">CustomerLogout</Target>
+  </Link>
+  <Link Name="Connection 15" default="true">
+    <Source cp="1">CustomerLogout</Source>
+    <Point x="288.0" y="822.0"/>
+    <Point x="360.0" y="822.0"/>
+    <Target cp="3">ExitPage</Target>
+  </Link>
+  <Link Name="linkExitComplete" default="true">
+    <Label>Exit</Label>
+    <Source cp="1">ExitPage</Source>
+    <Point x="468.0" y="822.0"/>
+    <Point x="576.0" y="822.0"/>
+    <Target cp="3">End 1</Target>
+  </Link>
+  <Link Name="linkExitRetryAttempts" default="true">
+    <Label>Exit</Label>
+    <Source cp="2">LoginRetryExceeded</Source>
+    <Point x="594.0" y="756.0"/>
+    <Point x="594.0" y="804.0"/>
+    <Target cp="0">End 1</Target>
+  </Link>
+  <Link Name="linkLoginFailure" default="true" type="CONDITION">
+    <Label>Login Failure</Label>
+    <Source cp="1">Decision 1</Source>
+    <Point x="264.0" y="630.0"/>
+    <Point x="384.0" y="630.0"/>
+    <Target cp="3">Decision 2</Target>
+  </Link>
+  <Link Name="linkCanRetryLogin" default="false" type="CONDITION">
+    <Label>Can Retry Login</Label>
+    <Source cp="1">Decision 2</Source>
+    <Point x="444.0" y="630.0"/>
+    <Point x="540.0" y="630.0"/>
+    <Target cp="3">LoginFailure</Target>
+    <Condition type="java">NumLoginAttempts&lt;=MaxLoginAttempts<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPG1vZGU+QklaU09MTzwvbW9k&#13;
+ZT4KICAgICAgICA8cGFyYW1ldGVycz4KICAgICAgICAgIDxwYXJhbWV0ZXIgbmFtZT0iZmlyc3RP&#13;
+cGVyYW5kIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxzZSIgZmlsdGVyPSIiPiR7TnVtTG9n&#13;
+aW5BdHRlbXB0c308L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJhbWV0ZXIgbmFtZT0ib3BlcmF0&#13;
+b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxzZSIgZmlsdGVyPSIiPk51bWJlcklz&#13;
+TGVzc1RoYW5PckVxdWFsVG88L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJhbWV0ZXIgbmFtZT0i&#13;
+c2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2UiIGZpbHRlcj0iIj4k&#13;
+e01heExvZ2luQXR0ZW1wdHN9PC9wYXJhbWV0ZXI+CiAgICAgICAgPC9wYXJhbWV0ZXJzPgogICAg&#13;
+ICAgIDxwcmVzZW50YXRpb24+CgogICAgICAgIDwvcHJlc2VudGF0aW9uPgogICAgICAgIDxjb2Rl&#13;
+PgpOdW1Mb2dpbkF0dGVtcHRzJmx0Oz1NYXhMb2dpbkF0dGVtcHRzCiAgICAgICAgPC9jb2RlPgog&#13;
+ICAgICAgIDxqb2luTmV4dD5BTkQ8L2pvaW5OZXh0PgogICAgICA8L2V4cHJlc3Npb24+CiAgICA8&#13;
+L2NvbmZpZ3VyYXRpb24+CiAgPC9leHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="linkRetryLogin" default="true">
+    <Label>Retry Login</Label>
+    <Source cp="0">LoginFailure</Source>
+    <Point x="594.0" y="600.0"/>
+    <Point x="594.0" y="580.0"/>
+    <Point x="261.0" y="580.0"/>
+    <Point x="261.0" y="552.0"/>
+    <Target cp="8">CustomerLogin</Target>
+  </Link>
+  <Link Name="linkRetryAttemptsExceeded" default="true" type="CONDITION">
+    <Label>Retry Attempts Exceeded</Label>
+    <Source cp="2">Decision 2</Source>
+    <Point x="414.0" y="660.0"/>
+    <Point x="414.0" y="726.0"/>
+    <Point x="540.0" y="726.0"/>
+    <Target cp="3">LoginRetryExceeded</Target>
+  </Link>
+  <Link Name="linkLoginSuccess" default="false" type="CONDITION">
+    <Label>Login Success</Label>
+    <Source cp="2">Decision 1</Source>
+    <Point x="234.0" y="660.0"/>
+    <Point x="234.0" y="696.0"/>
+    <Target cp="0">OrderCreation</Target>
+    <Condition type="java">!ContextId.equals("-1")<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPG1vZGU+QklaU09MTzwvbW9k&#13;
+ZT4KICAgICAgICA8cGFyYW1ldGVycz4KICAgICAgICAgIDxwYXJhbWV0ZXIgbmFtZT0iZmlyc3RP&#13;
+cGVyYW5kIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxzZSIgZmlsdGVyPSIiPiR7Q29udGV4&#13;
+dElkfTwvcGFyYW1ldGVyPgogICAgICAgICAgPHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUi&#13;
+IHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZhbHNlIiBmaWx0ZXI9IiI+U3RyaW5nRG9lc05vdEVx&#13;
+dWFsPC9wYXJhbWV0ZXI+CiAgICAgICAgICA8cGFyYW1ldGVyIG5hbWU9InNlY29uZE9wZXJhbmQi&#13;
+IHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZhbHNlIiBmaWx0ZXI9IiI+JnF1b3Q7LTEmcXVvdDs8&#13;
+L3BhcmFtZXRlcj4KICAgICAgICA8L3BhcmFtZXRlcnM+CiAgICAgICAgPHByZXNlbnRhdGlvbj4K&#13;
+CiAgICAgICAgPC9wcmVzZW50YXRpb24+CiAgICAgICAgPGNvZGU+CiFDb250ZXh0SWQuZXF1YWxz&#13;
+KCZxdW90Oy0xJnF1b3Q7KQogICAgICAgIDwvY29kZT4KICAgICAgICA8am9pbk5leHQ+QU5EPC9q&#13;
+b2luTmV4dD4KICAgICAgPC9leHByZXNzaW9uPgogICAgPC9jb25maWd1cmF0aW9uPgogIDwvZXhw&#13;
+cmVzc2lvbnM+CjwvY29uZGl0aW9uPgo=</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="linkSelectOptions" default="true">
+    <Label>Select Options</Label>
+    <Source cp="1">SelectModel</Source>
+    <Point x="288.0" y="186.0"/>
+    <Point x="360.0" y="186.0"/>
+    <Target cp="3">SelectOptions</Target>
+  </Link>
+  <Dataslot Name="BIZSITE_PASSWORD" category="AETF" name="BIZSITE_PASSWORD" type="STRING">
+    <Label>BIZSITE_PASSWORD:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>letmein</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="BIZSITE_PASSWORD:" length="20" password="false" required="false" size="20" type="text">
+      <Label>BIZSITE_PASSWORD:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="BIZSITE_USER" category="AETF" name="BIZSITE_USER" type="STRING">
+    <Label>BIZSITE_USER:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="BIZSITE_USER:" length="20" password="false" required="false" size="20" type="text">
+      <Label>BIZSITE_USER:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="CompactModels" category="AETF" name="CompactModels" type="STRING">
+    <Label>CompactModels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CompactModels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>CompactModels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="ContextId" category="AETF" name="ContextId" type="STRING">
+    <Label>ContextId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="ContextId:" length="20" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="CustomerCreditLimit" category="AETF" name="CustomerCreditLimit" type="ExtensibleBusinessObject">
+    <Label>CustomerCreditLimit:</Label>
+    <DataType>OBJECT</DataType>
+    <DataValue>com.progress.lang.Decimal</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerCreditLimit:" required="false" type="">
+      <Label>CustomerCreditLimit:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="CustomerEmail" category="AETF" name="CustomerEmail" type="STRING">
+    <Label>CustomerEmail:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerEmail:" length="20" password="false" required="true" size="20" type="text">
+      <Label>CustomerEmail:</Label>
+      <Validation>
+        <ValidationType>email|bok</ValidationType>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="CustomerId" category="AETF" name="CustomerId" type="STRING">
+    <Label>CustomerId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerId:" length="20" password="false" required="false" size="20" type="text">
+      <Label>CustomerId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="CustomerName" category="AETF" name="CustomerName" type="STRING">
+    <Label>CustomerName:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="CustomerName:" length="20" password="false" required="false" size="20" type="text">
+      <Label>CustomerName:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="DealerCode" category="AETF" name="DealerCode" type="STRING">
+    <Label>DealerId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="DealerId:" length="20" password="false" required="false" size="20" type="text">
+      <Label>DealerId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="DealerList" category="AETF" name="DealerList" type="STRING">
+    <Label>DealerList:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="DealerList:" length="60" password="false" required="false" size="60" type="text">
+      <Label>DealerList:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="error" category="AETF" name="error" type="STRING">
+    <Label>error:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="error:" length="20" password="false" required="false" size="20" type="text">
+      <Label>error:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="ExteriorColour" category="AETF" name="ExteriorColour" type="STRING">
+    <Label>ExteriorColour:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="ExteriorColour:" required="false" type="textarea" width="20">
+      <Label>ExteriorColour:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="ExteriorMoonroof" category="AETF" name="ExteriorMoonroof" type="STRING">
+    <Label>ExteriorMoonroof:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="ExteriorMoonroof:" required="false" type="textarea" width="20">
+      <Label>ExteriorMoonroof:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="ExteriorWheels" category="AETF" name="ExteriorWheels" type="STRING">
+    <Label>ExteriorWheels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="ExteriorWheels:" required="false" type="textarea" width="20">
+      <Label>ExteriorWheels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="InteriorAccessories" category="AETF" name="InteriorAccessories" type="STRING">
+    <Label>InteriorAccessories:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="InteriorAccessories:" required="false" type="textarea" width="20">
+      <Label>InteriorAccessories:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="InteriorSeatMaterial" category="AETF" name="InteriorSeatMaterial" type="STRING">
+    <Label>InteriorSeatMaterial:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="InteriorSeatMaterial:" required="false" type="textarea" width="20">
+      <Label>InteriorSeatMaterial:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="InteriorTrimColour" category="AETF" name="InteriorTrimColour" type="STRING">
+    <Label>InteriorTrimColour:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>true</MultiLine>
+    <Format editable="true" height="4" label="InteriorTrimColour:" required="false" type="textarea" width="20">
+      <Label>InteriorTrimColour:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="MaxLoginAttempts" category="AETF" name="MaxLoginAttempts" type="NUMBER">
+    <Label>MaxLoginAttempts:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>3</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="MaxLoginAttempts:" required="false" type="field">
+      <Label>MaxLoginAttempts:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="ModelName" category="AETF" name="ModelName" type="STRING">
+    <Label>ModelName:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="ModelName:" length="20" password="false" required="false" size="20" type="text">
+      <Label>ModelName:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="NumLoginAttempts" category="AETF" name="NumLoginAttempts" type="NUMBER">
+    <Label>NumLoginAttempts:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="NumLoginAttempts:" required="false" type="field">
+      <Label>NumLoginAttempts:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="OrderChannel" category="AETF" name="OrderChannel" type="STRING">
+    <Label>OrderChannel:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>WEB</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="OrderChannel:" length="20" password="false" required="false" size="20" type="text">
+      <Label>OrderChannel:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="orderid" category="AETF" name="orderid" type="NUMBER">
+    <Label>orderid:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="orderid:" required="false" type="field">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="OrderNum" category="AETF" name="OrderNum" type="NUMBER">
+    <Label>OrderNum:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="PAK_URL" category="AETF" name="PAK_URL" type="STRING">
+    <Label>PAK_URL:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>//localhost/PAKServer</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="PAK_URL:" length="20" password="false" required="false" size="20" type="text">
+      <Label>PAK_URL:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="password" category="AETF" name="password" type="STRING">
+    <Label>password:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="password:" length="20" password="false" required="false" size="20" type="text">
+      <Label>password:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="PremiumModels" category="AETF" name="PremiumModels" type="STRING">
+    <Label>PremiumModels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="PremiumModels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>PremiumModels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="PT_NAME" category="AETF" name="PT_NAME" type="STRING">
+    <Label>PT_NAME:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>CustomerOrderVehicle</DataValue>
+    <MultiLine>false</MultiLine>
+    <Format editable="false" label="PT_NAME:" length="20" password="false" required="false" size="20" type="text">
+      <Label>PT_NAME:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SalesrepCode" category="AETF" name="SalesrepCode" type="STRING">
+    <Label>SalesrepCode:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SalesrepCode:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SalesrepCode:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SedanModels" category="AETF" name="SedanModels" type="STRING">
+    <Label>SedanModels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SedanModels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SedanModels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SelectedExteriorColour" category="AETF" name="SelectedExteriorColour" type="STRING">
+    <Label>SelectedExteriorColour:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedExteriorColour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SelectedExteriorColour:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SelectedExteriorMoonroof" category="AETF" name="SelectedExteriorMoonroof" type="STRING">
+    <Label>SelectedExteriorMoonroof:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedExteriorMoonroof:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SelectedExteriorMoonroof:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SelectedExteriorWheels" category="AETF" name="SelectedExteriorWheels" type="STRING">
+    <Label>SelectedExteriorWheels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedExteriorWheels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SelectedExteriorWheels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SelectedInteriorAccessories" category="AETF" name="SelectedInteriorAccessories" type="STRING">
+    <Label>SelectedInteriorAccessories:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedInteriorAccessories:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SelectedInteriorAccessories:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="SelectedInteriorSeatMaterial" category="AETF" name="SelectedInteriorSeatMaterial" type="STRING">
+    <Label>SelectedInteriorSeatMaterial:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedInteriorSeatMaterial:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SelectedInteriorSeatMaterial:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SelectedInteriorTrimColour" category="AETF" name="SelectedInteriorTrimColour" type="STRING">
+    <Label>SelectedInteriorTrimColour:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedInteriorTrimColour:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SelectedInteriorTrimColour:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SelectedVehicleBrand" category="AETF" name="SelectedVehicleBrand" type="STRING">
+    <Label>SelectedVehicleBrand:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedVehicleBrand:" length="0" password="false" required="true" size="20" type="text">
+      <Label>SelectedVehicleBrand:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="SelectedVehicleModel" category="AETF" name="SelectedVehicleModel" type="STRING">
+    <Label>SelectedVehicleModel:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedVehicleModel:" length="0" password="false" required="false" size="20" type="text">
+      <Label>SelectedVehicleModel:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="SUVModels" category="AETF" name="SUVModels" type="STRING">
+    <Label>SUVModels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SUVModels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>SUVModels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="TruckModels" category="AETF" name="TruckModels" type="STRING">
+    <Label>TruckModels:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="TruckModels:" length="20" password="false" required="false" size="20" type="text">
+      <Label>TruckModels:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="userid" category="AETF" name="userid" type="STRING">
+    <Label>userid:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="userid:" length="20" password="false" required="false" size="20" type="text">
+      <Label>userid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+  </Dataslot>
+  <Dataslot Name="SelectedAccessoryList" category="AETF" name="SelectedAccessoryList" type="LIST">
+    <Label>SelectedAccessoriesList:</Label>
+    <DataType>LIST</DataType>
+    <DataSize>2000</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="SelectedAccessoriesList:" required="false" type="list">
+      <Label>SelectedAccessoriesList:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="java.util.Vector"/>
+  </Dataslot>
+  <Notes>
+    <Note color="255,255,255" connectTo="RegisterCustomer" height="96" shape="annotation" width="132" x="756" y="204">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1326893926931" version="7.6"&gt;&#13;
+  &lt;Dataslot Name="BIZSITE_PASSWORD" category="AETF" name="BIZSITE_PASSWORD" type="STRING" webbpaID="1296488373056"&gt;&#13;
+    &lt;Label&gt;BIZSITE_PASSWORD:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;letmein&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="BIZSITE_PASSWORD:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BIZSITE_PASSWORD:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BIZSITE_USER" category="AETF" name="BIZSITE_USER" type="STRING" webbpaID="1296488373057"&gt;&#13;
+    &lt;Label&gt;BIZSITE_USER:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="BIZSITE_USER:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BIZSITE_USER:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CompactModels" category="AETF" name="CompactModels" type="STRING" webbpaID="1300301228197"&gt;&#13;
+    &lt;Label&gt;CompactModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CompactModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CompactModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF" name="ContextId" type="STRING" webbpaID="1300304632328"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerCreditLimit" category="AETF" name="CustomerCreditLimit" type="NUMBER" webbpaID="1296488373046"&gt;&#13;
+    &lt;Label&gt;CustomerCreditLimit:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerCreditLimit:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;CustomerCreditLimit:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerEmail" category="AETF" name="CustomerEmail" type="STRING" webbpaID="1296488373052"&gt;&#13;
+    &lt;Label&gt;CustomerEmail:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerEmail:" length="20" password="false" required="true" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CustomerEmail:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType&gt;email|bok&lt;/ValidationType&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerId" category="AETF" name="CustomerId" type="STRING" webbpaID="1296488373047"&gt;&#13;
+    &lt;Label&gt;CustomerId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerId:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CustomerId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerName" category="AETF" name="CustomerName" type="STRING" webbpaID="1299697272060"&gt;&#13;
+    &lt;Label&gt;CustomerName:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerName:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CustomerName:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerCode" category="AETF" name="DealerCode" type="STRING" webbpaID="1296488373075"&gt;&#13;
+    &lt;Label&gt;DealerId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="DealerId:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;DealerId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerList" category="AETF" name="DealerList" type="STRING" webbpaID="1300308432425"&gt;&#13;
+    &lt;Label&gt;DealerList:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="DealerList:" length="60" password="false" required="false" size="60" type="text"&gt;&#13;
+      &lt;Label&gt;DealerList:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="error" category="AETF" name="error" type="STRING" webbpaID="1296488373060"&gt;&#13;
+    &lt;Label&gt;error:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="error:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;error:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorColour" category="AETF" name="ExteriorColour" type="STRING" webbpaID="1296488373072"&gt;&#13;
+    &lt;Label&gt;ExteriorColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorColour:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorMoonroof" category="AETF" name="ExteriorMoonroof" type="STRING" webbpaID="1296488373073"&gt;&#13;
+    &lt;Label&gt;ExteriorMoonroof:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorMoonroof:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorMoonroof:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorWheels" category="AETF" name="ExteriorWheels" type="STRING" webbpaID="1296488373074"&gt;&#13;
+    &lt;Label&gt;ExteriorWheels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorWheels:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorWheels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorAccessories" category="AETF" name="InteriorAccessories" type="STRING" webbpaID="1296488373071"&gt;&#13;
+    &lt;Label&gt;InteriorAccessories:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorAccessories:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorAccessories:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorSeatMaterial" category="AETF" name="InteriorSeatMaterial" type="STRING" webbpaID="1296488373069"&gt;&#13;
+    &lt;Label&gt;InteriorSeatMaterial:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorSeatMaterial:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorSeatMaterial:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorTrimColour" category="AETF" name="InteriorTrimColour" type="STRING" webbpaID="1296488373070"&gt;&#13;
+    &lt;Label&gt;InteriorTrimColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorTrimColour:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorTrimColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="MaxLoginAttempts" category="AETF" name="MaxLoginAttempts" type="NUMBER" webbpaID="1303410454176"&gt;&#13;
+    &lt;Label&gt;MaxLoginAttempts:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;3&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="MaxLoginAttempts:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;MaxLoginAttempts:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ModelName" category="AETF" name="ModelName" type="STRING" webbpaID="1300388891051"&gt;&#13;
+    &lt;Label&gt;ModelName:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="ModelName:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ModelName:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="NumLoginAttempts" category="AETF" name="NumLoginAttempts" type="NUMBER" webbpaID="1303410454171"&gt;&#13;
+    &lt;Label&gt;NumLoginAttempts:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="NumLoginAttempts:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;NumLoginAttempts:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderChannel" category="AETF" name="OrderChannel" type="STRING" webbpaID="1296488373049"&gt;&#13;
+    &lt;Label&gt;OrderChannel:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;WEB&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="OrderChannel:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderChannel:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="orderid" category="AETF" name="orderid" type="NUMBER" webbpaID="1296488373055"&gt;&#13;
+    &lt;Label&gt;orderid:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="orderid:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;orderid:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF" name="OrderNum" type="NUMBER" webbpaID="1296488373048"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PAK_URL" category="AETF" name="PAK_URL" type="STRING" webbpaID="1296488373058"&gt;&#13;
+    &lt;Label&gt;PAK_URL:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;//localhost/PAKServer&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="PAK_URL:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PAK_URL:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="password" category="AETF" name="password" type="STRING" webbpaID="1296488373054"&gt;&#13;
+    &lt;Label&gt;password:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="password:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;password:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PremiumModels" category="AETF" name="PremiumModels" type="STRING" webbpaID="1300301228195"&gt;&#13;
+    &lt;Label&gt;PremiumModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="PremiumModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PremiumModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PT_NAME" category="AETF" name="PT_NAME" type="STRING" webbpaID="1296488373059"&gt;&#13;
+    &lt;Label&gt;PT_NAME:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;CustomerOrderVehicle&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="PT_NAME:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PT_NAME:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SalesrepCode" category="AETF" name="SalesrepCode" type="STRING" webbpaID="1300152837082"&gt;&#13;
+    &lt;Label&gt;SalesrepCode:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SalesrepCode:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SalesrepCode:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SedanModels" category="AETF" name="SedanModels" type="STRING" webbpaID="1300301228196"&gt;&#13;
+    &lt;Label&gt;SedanModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SedanModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SedanModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedExteriorColour" category="AETF" name="SelectedExteriorColour" type="STRING" webbpaID="1306339146716"&gt;&#13;
+    &lt;Label&gt;SelectedExteriorColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedExteriorColour:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedExteriorColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedExteriorMoonroof" category="AETF" name="SelectedExteriorMoonroof" type="STRING" webbpaID="1306339146715"&gt;&#13;
+    &lt;Label&gt;SelectedExteriorMoonroof:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedExteriorMoonroof:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedExteriorMoonroof:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedExteriorWheels" category="AETF" name="SelectedExteriorWheels" type="STRING" webbpaID="1306339146714"&gt;&#13;
+    &lt;Label&gt;SelectedExteriorWheels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedExteriorWheels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedExteriorWheels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedInteriorAccessories" category="AETF" name="SelectedInteriorAccessories" type="LIST" webbpaID="1306339146717"&gt;&#13;
+    &lt;Label&gt;SelectedInteriorAccessories:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedInteriorAccessories:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;SelectedInteriorAccessories:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedInteriorSeatMaterial" category="AETF" name="SelectedInteriorSeatMaterial" type="STRING" webbpaID="1306339146713"&gt;&#13;
+    &lt;Label&gt;SelectedInteriorSeatMaterial:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedInteriorSeatMaterial:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedInteriorSeatMaterial:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedInteriorTrimColour" category="AETF" name="SelectedInteriorTrimColour" type="STRING" webbpaID="1306339146712"&gt;&#13;
+    &lt;Label&gt;SelectedInteriorTrimColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedInteriorTrimColour:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedInteriorTrimColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedVehicleBrand" category="AETF" name="SelectedVehicleBrand" type="STRING" webbpaID="1296488373061"&gt;&#13;
+    &lt;Label&gt;SelectedVehicleBrand:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedVehicleBrand:" length="0" password="false" required="true" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedVehicleBrand:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedVehicleModel" category="AETF" name="SelectedVehicleModel" type="STRING" webbpaID="1296488373062"&gt;&#13;
+    &lt;Label&gt;SelectedVehicleModel:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedVehicleModel:" length="0" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedVehicleModel:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SUVModels" category="AETF" name="SUVModels" type="STRING" webbpaID="1300301228194"&gt;&#13;
+    &lt;Label&gt;SUVModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SUVModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SUVModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="TruckModels" category="AETF" name="TruckModels" type="STRING" webbpaID="1300301228193"&gt;&#13;
+    &lt;Label&gt;TruckModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="TruckModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;TruckModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="userid" category="AETF" name="userid" type="STRING" webbpaID="1296488373053"&gt;&#13;
+    &lt;Label&gt;userid:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="userid:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;userid:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;Customer Registration functionality is currently under construction. Please use an existing user.&lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
+    <Note color="255,255,255" connectTo="GetBrandDetail" height="144" shape="annotation" width="144" x="756" y="48">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1326893914881" version="7.6"&gt;&#13;
+  &lt;Dataslot Name="BIZSITE_PASSWORD" category="AETF" name="BIZSITE_PASSWORD" type="STRING" webbpaID="1296488373056"&gt;&#13;
+    &lt;Label&gt;BIZSITE_PASSWORD:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;letmein&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="BIZSITE_PASSWORD:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BIZSITE_PASSWORD:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BIZSITE_USER" category="AETF" name="BIZSITE_USER" type="STRING" webbpaID="1296488373057"&gt;&#13;
+    &lt;Label&gt;BIZSITE_USER:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="BIZSITE_USER:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BIZSITE_USER:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CompactModels" category="AETF" name="CompactModels" type="STRING" webbpaID="1300301228197"&gt;&#13;
+    &lt;Label&gt;CompactModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CompactModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CompactModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF" name="ContextId" type="STRING" webbpaID="1300304632328"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerCreditLimit" category="AETF" name="CustomerCreditLimit" type="NUMBER" webbpaID="1296488373046"&gt;&#13;
+    &lt;Label&gt;CustomerCreditLimit:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerCreditLimit:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;CustomerCreditLimit:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerEmail" category="AETF" name="CustomerEmail" type="STRING" webbpaID="1296488373052"&gt;&#13;
+    &lt;Label&gt;CustomerEmail:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerEmail:" length="20" password="false" required="true" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CustomerEmail:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType&gt;email|bok&lt;/ValidationType&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerId" category="AETF" name="CustomerId" type="STRING" webbpaID="1296488373047"&gt;&#13;
+    &lt;Label&gt;CustomerId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerId:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CustomerId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="CustomerName" category="AETF" name="CustomerName" type="STRING" webbpaID="1299697272060"&gt;&#13;
+    &lt;Label&gt;CustomerName:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="CustomerName:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;CustomerName:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerCode" category="AETF" name="DealerCode" type="STRING" webbpaID="1296488373075"&gt;&#13;
+    &lt;Label&gt;DealerId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="DealerId:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;DealerId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="DealerList" category="AETF" name="DealerList" type="STRING" webbpaID="1300308432425"&gt;&#13;
+    &lt;Label&gt;DealerList:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="DealerList:" length="60" password="false" required="false" size="60" type="text"&gt;&#13;
+      &lt;Label&gt;DealerList:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="error" category="AETF" name="error" type="STRING" webbpaID="1296488373060"&gt;&#13;
+    &lt;Label&gt;error:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="error:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;error:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorColour" category="AETF" name="ExteriorColour" type="STRING" webbpaID="1296488373072"&gt;&#13;
+    &lt;Label&gt;ExteriorColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorColour:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorMoonroof" category="AETF" name="ExteriorMoonroof" type="STRING" webbpaID="1296488373073"&gt;&#13;
+    &lt;Label&gt;ExteriorMoonroof:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorMoonroof:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorMoonroof:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ExteriorWheels" category="AETF" name="ExteriorWheels" type="STRING" webbpaID="1296488373074"&gt;&#13;
+    &lt;Label&gt;ExteriorWheels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="ExteriorWheels:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;ExteriorWheels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorAccessories" category="AETF" name="InteriorAccessories" type="STRING" webbpaID="1296488373071"&gt;&#13;
+    &lt;Label&gt;InteriorAccessories:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorAccessories:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorAccessories:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorSeatMaterial" category="AETF" name="InteriorSeatMaterial" type="STRING" webbpaID="1296488373069"&gt;&#13;
+    &lt;Label&gt;InteriorSeatMaterial:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorSeatMaterial:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorSeatMaterial:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="InteriorTrimColour" category="AETF" name="InteriorTrimColour" type="STRING" webbpaID="1296488373070"&gt;&#13;
+    &lt;Label&gt;InteriorTrimColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" height="4" label="InteriorTrimColour:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;InteriorTrimColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="MaxLoginAttempts" category="AETF" name="MaxLoginAttempts" type="NUMBER" webbpaID="1303410454176"&gt;&#13;
+    &lt;Label&gt;MaxLoginAttempts:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;3&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="MaxLoginAttempts:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;MaxLoginAttempts:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ModelName" category="AETF" name="ModelName" type="STRING" webbpaID="1300388891051"&gt;&#13;
+    &lt;Label&gt;ModelName:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="ModelName:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ModelName:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="NumLoginAttempts" category="AETF" name="NumLoginAttempts" type="NUMBER" webbpaID="1303410454171"&gt;&#13;
+    &lt;Label&gt;NumLoginAttempts:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="NumLoginAttempts:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;NumLoginAttempts:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderChannel" category="AETF" name="OrderChannel" type="STRING" webbpaID="1296488373049"&gt;&#13;
+    &lt;Label&gt;OrderChannel:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;WEB&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="OrderChannel:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderChannel:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="orderid" category="AETF" name="orderid" type="NUMBER" webbpaID="1296488373055"&gt;&#13;
+    &lt;Label&gt;orderid:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="orderid:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;orderid:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF" name="OrderNum" type="NUMBER" webbpaID="1296488373048"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PAK_URL" category="AETF" name="PAK_URL" type="STRING" webbpaID="1296488373058"&gt;&#13;
+    &lt;Label&gt;PAK_URL:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;//localhost/PAKServer&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="PAK_URL:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PAK_URL:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="password" category="AETF" name="password" type="STRING" webbpaID="1296488373054"&gt;&#13;
+    &lt;Label&gt;password:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="password:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;password:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PremiumModels" category="AETF" name="PremiumModels" type="STRING" webbpaID="1300301228195"&gt;&#13;
+    &lt;Label&gt;PremiumModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="PremiumModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PremiumModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PT_NAME" category="AETF" name="PT_NAME" type="STRING" webbpaID="1296488373059"&gt;&#13;
+    &lt;Label&gt;PT_NAME:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;CustomerOrderVehicle&lt;/DataValue&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="false" label="PT_NAME:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PT_NAME:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SalesrepCode" category="AETF" name="SalesrepCode" type="STRING" webbpaID="1300152837082"&gt;&#13;
+    &lt;Label&gt;SalesrepCode:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SalesrepCode:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SalesrepCode:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SedanModels" category="AETF" name="SedanModels" type="STRING" webbpaID="1300301228196"&gt;&#13;
+    &lt;Label&gt;SedanModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SedanModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SedanModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedExteriorColour" category="AETF" name="SelectedExteriorColour" type="STRING" webbpaID="1306339146716"&gt;&#13;
+    &lt;Label&gt;SelectedExteriorColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedExteriorColour:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedExteriorColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedExteriorMoonroof" category="AETF" name="SelectedExteriorMoonroof" type="STRING" webbpaID="1306339146715"&gt;&#13;
+    &lt;Label&gt;SelectedExteriorMoonroof:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedExteriorMoonroof:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedExteriorMoonroof:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedExteriorWheels" category="AETF" name="SelectedExteriorWheels" type="STRING" webbpaID="1306339146714"&gt;&#13;
+    &lt;Label&gt;SelectedExteriorWheels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedExteriorWheels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedExteriorWheels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedInteriorAccessories" category="AETF" name="SelectedInteriorAccessories" type="LIST" webbpaID="1306339146717"&gt;&#13;
+    &lt;Label&gt;SelectedInteriorAccessories:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;LIST&lt;/DataType&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedInteriorAccessories:" required="false" type="list"&gt;&#13;
+      &lt;Label&gt;SelectedInteriorAccessories:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="java.util.Vector"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedInteriorSeatMaterial" category="AETF" name="SelectedInteriorSeatMaterial" type="STRING" webbpaID="1306339146713"&gt;&#13;
+    &lt;Label&gt;SelectedInteriorSeatMaterial:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedInteriorSeatMaterial:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedInteriorSeatMaterial:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedInteriorTrimColour" category="AETF" name="SelectedInteriorTrimColour" type="STRING" webbpaID="1306339146712"&gt;&#13;
+    &lt;Label&gt;SelectedInteriorTrimColour:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedInteriorTrimColour:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedInteriorTrimColour:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedVehicleBrand" category="AETF" name="SelectedVehicleBrand" type="STRING" webbpaID="1296488373061"&gt;&#13;
+    &lt;Label&gt;SelectedVehicleBrand:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedVehicleBrand:" length="0" password="false" required="true" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedVehicleBrand:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SelectedVehicleModel" category="AETF" name="SelectedVehicleModel" type="STRING" webbpaID="1296488373062"&gt;&#13;
+    &lt;Label&gt;SelectedVehicleModel:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SelectedVehicleModel:" length="0" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SelectedVehicleModel:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="SUVModels" category="AETF" name="SUVModels" type="STRING" webbpaID="1300301228194"&gt;&#13;
+    &lt;Label&gt;SUVModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="SUVModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;SUVModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="TruckModels" category="AETF" name="TruckModels" type="STRING" webbpaID="1300301228193"&gt;&#13;
+    &lt;Label&gt;TruckModels:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="TruckModels:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;TruckModels:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="userid" category="AETF" name="userid" type="STRING" webbpaID="1296488373053"&gt;&#13;
+    &lt;Label&gt;userid:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;Format editable="true" label="userid:" length="20" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;userid:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;&#13;
+    &lt;font color="#000000"&gt;Query Dealer database to retrieve models matching brand and year.&lt;/font&gt;&#13;
+    &lt;br clear="all"/&gt;&#13;
+&lt;br clear="all"/&gt;&#13;
+&lt;font color="#000000"&gt;Retrieve vehicle information based on order number&lt;/font&gt;&#13;
+  &lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
+  </Notes>
+  <History>
+    <Deployed as="VehicleSelection" by="ebms" on="1327357081888" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:18:01 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327349233874" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:07:13 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327328131709" to="http://localhost:18793/sbm/deployment">Mon Jan 23 09:15:31 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327326807588" to="http://localhost:18793/sbm/deployment">Mon Jan 23 08:53:27 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327094059348" to="http://localhost:18793/sbm/deployment">Fri Jan 20 16:14:19 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327091734332" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:35:34 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327091162897" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:26:02 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327090981378" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:23:01 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327087444379" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:24:04 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327082947189" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:09:07 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327079863671" to="http://localhost:18793/sbm/deployment">Fri Jan 20 12:17:43 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326992034384" to="http://localhost:18793/sbm/deployment">Thu Jan 19 11:53:54 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326922044505" to="http://localhost:18793/sbm/deployment">Wed Jan 18 16:27:24 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326921559962" to="http://localhost:18793/sbm/deployment">Wed Jan 18 16:19:19 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326918572735" to="http://localhost:18793/sbm/deployment">Wed Jan 18 15:29:32 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326916687567" to="http://localhost:18793/sbm/deployment">Wed Jan 18 14:58:07 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326913934341" to="http://localhost:18793/sbm/deployment">Wed Jan 18 14:12:14 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326835657192" to="http://localhost:18793/sbm/deployment">Tue Jan 17 16:27:37 EST 2012</Deployed>
+    <Created as="VehicleSelection" by="pjudge" on="1326831232181">Tue Jan 17 15:13:52 EST 2012</Created>
+    <Deployed as="VehicleSelection" by="ebms" on="1326835710652" to="http://localhost:18793/sbm/deployment">Tue Jan 17 16:28:30 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1326911252222" to="http://localhost:18793/sbm/deployment">Wed Jan 18 13:27:32 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327010439322" to="http://localhost:18793/sbm/deployment">Thu Jan 19 17:00:39 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327080066836" to="http://localhost:18793/sbm/deployment">Fri Jan 20 12:21:06 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327083810268" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:23:30 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327093563491" to="http://localhost:18793/sbm/deployment">Fri Jan 20 16:06:03 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327329409127" to="http://localhost:18793/sbm/deployment">Mon Jan 23 09:36:49 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327335090107" to="http://localhost:18793/sbm/deployment">Mon Jan 23 11:11:30 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327348525599" to="http://localhost:18793/sbm/deployment">Mon Jan 23 14:55:25 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327356563477" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:09:23 EST 2012</Deployed>
+    <Deployed as="VehicleSelection" by="ebms" on="1327357421497" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:23:41 EST 2012</Deployed>
+  </History>
+  <Repository/>
+</Process>
