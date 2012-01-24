@@ -19,7 +19,7 @@ PSC
 filename=ItemType
 records=0000000000016
 ldbname=aetf
-timestamp=2011/08/18-14:43:26
+timestamp=2012/01/23-20:54:05
 numformat=44,46
 dateformat=mdy-1950
 map=NO-MAP

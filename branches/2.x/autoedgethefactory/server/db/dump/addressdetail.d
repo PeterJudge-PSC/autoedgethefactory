@@ -195,7 +195,7 @@ PSC
 filename=AddressDetail
 records=0000000000192
 ldbname=aetf
-timestamp=2011/08/18-14:43:46
+timestamp=2012/01/23-20:54:03
 numformat=44,46
 dateformat=mdy-1950
 map=NO-MAP
