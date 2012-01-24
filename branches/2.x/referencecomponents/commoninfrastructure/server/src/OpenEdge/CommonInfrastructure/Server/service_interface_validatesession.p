@@ -27,8 +27,6 @@ using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params, defs -- **/
 define input-output parameter pmUserContext as memptr no-undo.
@@ -63,15 +61,5 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i}
 /** -- eof -- **/

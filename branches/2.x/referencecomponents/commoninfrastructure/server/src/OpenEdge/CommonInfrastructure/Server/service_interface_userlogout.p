@@ -22,14 +22,10 @@ using OpenEdge.Core.Util.IObjectOutput.
 using OpenEdge.Core.Util.ObjectOutputStream.
 using OpenEdge.Core.Util.IObjectInput.
 using OpenEdge.Core.Util.ObjectInputStream.
-using OpenEdge.Core.System.ApplicationError.
-using OpenEdge.Core.System.UnhandledError.
 using OpenEdge.Lang.ByteOrderEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params, defs -- **/
 define input-output parameter pmUserContext as memptr no-undo.
@@ -65,12 +61,5 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-catch oError as Error:
-    define variable oUHError as UnhandledError no-undo.
-    oUHError = new UnhandledError(oError).
-    return error oUHError:ResolvedMessageText().
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i}
 /** -- eof -- **/

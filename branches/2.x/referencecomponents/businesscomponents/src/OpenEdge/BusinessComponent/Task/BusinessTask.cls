@@ -51,10 +51,6 @@ class OpenEdge.BusinessComponent.Task.BusinessTask inherits Service
         end get.
         private set.
     
-	constructor public BusinessTask(input poServiceManager as IServiceManager, input poComponentInfo as IComponentInfo):
-		super (input poServiceManager, input poComponentInfo).
-	end constructor.
-	
 	constructor public BusinessTask(input poComponentInfo as IComponentInfo):
 		super (input poComponentInfo).
 	end constructor.
