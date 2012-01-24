@@ -578,7 +578,7 @@ class AutoEdge.Factory.Client.Order.PresentationLayer.CustomerOrderDetail inheri
                hComponentItemBuffer = mhOrders:get-buffer-handle('eComponentItem')
                hItemBuffer = mhOrders:get-buffer-handle('eItem').
 
-        hOrderBuffer:find-first(' where eOrder.OrderId = ' + quoter(cValue) ) no-error.
+        hOrderBuffer:find-first(' where eOrder.OrderNum = ' + quoter(piOrderNum) ) no-error.
         if hOrderBuffer:available then
         do:
             hOLineBuffer:find-first(' where eOrderLine.LineNum = 1 and eOrderLine.OrderId = ' + quoter(hOrderBuffer::OrderId)) no-error.  
