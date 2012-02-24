@@ -53,7 +53,7 @@ do:
 end.
 
 pcBuildStatus = ' [DEBUG] RETURN.'.
-/* [DEBUG] */ RETURN.
+/* [DEBUG] */ return.
 
 
 /** -- validate defs -- **/

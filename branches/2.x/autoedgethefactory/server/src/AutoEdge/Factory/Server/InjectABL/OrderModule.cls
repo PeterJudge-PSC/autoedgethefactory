@@ -59,8 +59,11 @@ class AutoEdge.Factory.Server.InjectABL.OrderModule inherits BusinessComponentMo
                .
 
         BindBusinessEntity(
-            'Order', 'AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity',
-            'OrderDA', 'AutoEdge.Factory.Server.Order.BusinessComponent.OrderDA',
+            'Order',
+                'AutoEdge.Factory.Server.Order.BusinessComponent.IOrderEntity',
+                'AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity',
+            'OrderDA',
+                'AutoEdge.Factory.Server.Order.BusinessComponent.OrderDA',
             cDSName, cDataSourceKey, cConcreteDS).
 
         /* Vehicle Brand data */

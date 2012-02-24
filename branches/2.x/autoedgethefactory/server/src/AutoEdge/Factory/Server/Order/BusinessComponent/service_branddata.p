@@ -20,7 +20,7 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Server.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
@@ -327,6 +327,7 @@ do iLoop = 1 to iMax:
     end case.
 end.
 
+oSecMgr:UserLogout(oSecMgr:CurrentUserContext).
 error-status:error = no.
 return.
 

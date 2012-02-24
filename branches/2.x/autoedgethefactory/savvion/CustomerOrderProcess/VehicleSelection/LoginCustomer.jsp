@@ -173,7 +173,43 @@
     <div align="center" id="">
       <img border="0" id="aetf_logo" width="400" height="69" src="images/aetf_logo.png">
       <br clear="all">
+<div id="div1" name="div1">
+        <div align="center" id="">
+          <font color="#008000" face="Segoe UI" size="4">
+            <i>Please login or register to continue</i>
+          </font>
+          <br clear="all">
+<br clear="all">
+<table align="center" cellpadding="0" cellspacing="0" class="ApSegDataTbl" id="table1" width="65%">
+            <tbody>
+              <tr>
+                <td class="ApSegDataVal" width="50%" rowspan="1" colspan="1" valign="top">
+                  <div align="right" id="">
+                    <font color="#808080" face="Segoe UI" size="3">Login Name</font>
+                  </div>
+                </td>
+                <td class="ApSegDataVal" width="50%" rowspan="1" colspan="1" valign="top">
+                  <sfe:widget name="sbm.textfield" id="TextField1" args="{'type':'text', 'size':32, 'maxlength':50, 'readonly':false, 'disabled':false, 'required':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.', 'tabOrder':'0'}" />
+
+                </td>
+              </tr>
+              <tr>
+                <td class="(default)" width="50%" rowspan="1" colspan="1" valign="top">
+                  <div align="right" id="">
+                    <font color="#808080" face="Segoe UI" size="3">Password</font>
+                  </div>
+                </td>
+                <td class="(default)" width="50%" rowspan="1" colspan="1" valign="top">
+                  <sfe:widget name="sbm.textfield" id="TextField2" args="{'type':'text', 'size':32, 'maxlength':50, 'readonly':false, 'disabled':false, 'required':false, 'validationType':'none', 'validation':{}, 'toolTip':'Savvion text field widget.'}" />
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br clear="all">
 </div>
+      </div>
+    </div>
     <div align="left" id="">
       
 
@@ -235,12 +271,14 @@ function txtUserName_onChange(eventContext) {
 <!--Initialize extensible widgets.-->
 <script language="JavaScript">
 <!--
-var allWidgets = [];
+var allWidgets = [{widget:'TextField1', bound:'true', editable:'true', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'userid', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'userid', dataSlotType:'STRING'}, dsType:'STRING', service:'false'},
+{widget:'TextField2', bound:'true', editable:'true', type:'sbm.textfield', source: {type:'DATASLOT', dataSlotName:'password', dataSlotType:'STRING'}, target:{type:'DATASLOT', dataSlotName:'password', dataSlotType:'STRING'}, dsType:'STRING', service:'false'}
+];
 var businessObjects = [];
 var formWidgetHandler;
 sbm.utils.onDOMReady = function() {
 YAHOO.util.Event.onDOMReady(function(){
-formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:'VehicleSelection',adapletCache:{}});
+formWidgetHandler = new FormWidgetHandler(allWidgets,{processName:'VehicleSelection',adapletCache:{'user':''}});
  });
  }
 Ext.onReady(function(){

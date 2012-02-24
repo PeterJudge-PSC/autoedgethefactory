@@ -79,11 +79,12 @@ function BuildFetchRequest returns IFetchRequest extent (input piOrderNum as int
                                               DataTypeEnum:Integer,
                                               JoinEnum:Or).
     end.
+    
     return oFetchRequest.
 end function.
 
 /** -- validate defs -- **/
-Assert:ArgumentNonZero(piorderNumber, 'Order Number').
+Assert:ArgumentNotZero(piOrderNumber[1], 'Order Number').
 Assert:ArgumentNotNullOrEmpty(pcContextId, 'User Context Id').
 
 /** -- main -- **/

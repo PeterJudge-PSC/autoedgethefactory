@@ -1,5 +1,5 @@
-#Fri Jan 13 15:49:07 EST 2012
-publishing.type=Copy_Files_Only
+#Thu Feb 09 12:26:49 EST 2012
+publishing.type=Reintall
 application.name=BuildVehicle
 inherit.acl=true
 module.type=com.savvion.studio.designer.module.bpm

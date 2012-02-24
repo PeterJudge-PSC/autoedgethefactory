@@ -148,7 +148,7 @@ do:
                             UserTypeEnum:Customer:ToString(),
                             pcBrand)
            cUserPassword = 'letmein'.
-    cast(oSecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):UserLogin(cUserName, cUserDomain, cUserPassword).
+    oSecMgr:UserLogin(cUserName, cUserDomain, cUserPassword).
 end.
 else
     oSecMgr:EstablishSession(pcUserContextId).
@@ -171,6 +171,9 @@ do iLoop = 1 to iMax:
     end case.
 end.
 
+if pcUserContextId eq '' or pcUserContextId eq ? or pcUserContextId eq '<NULL>' then
+    oSecMgr:UserLogout(oSecMgr:CurrentUserContext).
+    
 error-status:error = no.
 return.
 

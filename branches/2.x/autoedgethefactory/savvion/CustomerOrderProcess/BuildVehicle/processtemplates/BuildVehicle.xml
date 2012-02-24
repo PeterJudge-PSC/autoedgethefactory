@@ -1858,6 +1858,7 @@ L2V4cHJlc3Npb25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
     <Deployed as="BuildVehicle" by="ebms" on="1327349212457" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:06:52 EST 2012</Deployed>
     <Deployed as="BuildVehicle" by="ebms" on="1327350247045" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:24:07 EST 2012</Deployed>
     <Deployed as="BuildVehicle" by="ebms" on="1327356403841" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:06:43 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327368975300" to="http://localhost:18793/sbm/deployment">Mon Jan 23 20:36:15 EST 2012</Deployed>
   </History>
   <Repository/>
 </Process>

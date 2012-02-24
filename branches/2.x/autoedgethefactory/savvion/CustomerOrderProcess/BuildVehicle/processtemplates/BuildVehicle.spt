@@ -24,7 +24,7 @@
   <Author>pjudge</Author>
   <Version>BuildVehicle</Version>
   <Attributes>
-    <Attribute name="ProcessType" required="false">
+    <Attribute name="ProcessType" required="true">
       <Label>Process Type</Label>
       <Description>Type of the Process</Description>
       <Value>BusinessProcess</Value>
@@ -78,7 +78,7 @@
       </AlertDelivery>
     </Alert>
   </Alerts>
-  <AtomicWS height="36" id="1299766443210" name="Start" status="INACTIVE" webbpaID="1296488373086" width="36" worktime="false" x="72" y="36">
+  <AtomicWS height="36" id="1299766443210" name="Start" webbpaID="1296488373086" width="36" worktime="false" x="72" y="36">
     <AtomicType>START</AtomicType>
     <Priority>MEDIUM</Priority>
     <Dataoutput>OrderNum</Dataoutput>
@@ -105,7 +105,7 @@
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443217" name="CompleteAssembleBody" status="INACTIVE" webbpaID="1296488373087" width="168" worktime="false" x="396" y="324">
+  <AtomicWS height="60" id="1299766443217" name="CompleteAssembleBody" webbpaID="1296488373087" width="168" worktime="false" x="396" y="324">
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>FactoryGroup</Performer>
     <PerformBy>ANY</PerformBy>
@@ -806,7 +806,7 @@ b24vPg0KICA8aGVhZC8+DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443215" name="CompleteAssembleChassis" status="INACTIVE" webbpaID="1296488373088" width="168" worktime="false" x="396" y="228">
+  <AtomicWS height="60" id="1299766443215" name="CompleteAssembleChassis" webbpaID="1296488373088" width="168" worktime="false" x="396" y="228">
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>FactoryGroup</Performer>
     <PerformBy>ANY</PerformBy>
@@ -1507,7 +1507,7 @@ b24vPg0KICA8aGVhZC8+DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443221" name="CompleteAssembleInterior" status="INACTIVE" webbpaID="1296488373089" width="168" worktime="false" x="396" y="516">
+  <AtomicWS height="60" id="1299766443221" name="CompleteAssembleInterior" webbpaID="1296488373089" width="168" worktime="false" x="396" y="516">
     <Label>CompleteAssembleInterior</Label>
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>FactoryGroup</Performer>
@@ -2209,7 +2209,7 @@ b24vPg0KICA8aGVhZC8+DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443225" name="CompleteCompleteVehicleBuild" status="INACTIVE" webbpaID="1296488373090" width="168" worktime="false" x="396" y="720">
+  <AtomicWS height="60" id="1299766443225" name="CompleteCompleteVehicleBuild" webbpaID="1296488373090" width="168" worktime="false" x="396" y="720">
     <Label>CompleteCompleteVehicleBuild</Label>
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>FactoryGroup</Performer>
@@ -2220,8 +2220,8 @@ b24vPg0KICA8aGVhZC8+DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
     </Collaboration>
     <Form name="CompleteCompleteVehicleBuild.jsp" type="form/mime64">
 PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8&#13;
-IURPQ1RZUEUgRm9ybSBTWVNURU0gImZvcm0uZHRkIj4NCjxGb3JtIHRzdGFtcD0iMTMyNzM2ODk2&#13;
-MTYyNSIgdmVyc2lvbj0iNy42Ij4NCiAgPERhdGFzbG90IE5hbWU9IlZJTiIgY2F0ZWdvcnk9IkFF&#13;
+IURPQ1RZUEUgRm9ybSBTWVNURU0gImZvcm0uZHRkIj4NCjxGb3JtIHRzdGFtcD0iMTMyOTc4OTg2&#13;
+NDQ0MyIgdmVyc2lvbj0iNy42Ij4NCiAgPERhdGFzbG90IE5hbWU9IlZJTiIgY2F0ZWdvcnk9IkFF&#13;
 VEYiIG5hbWU9IlZJTiIgdHlwZT0iU1RSSU5HIiB3ZWJicGFJRD0iMTMwMDM4ODIxODExMiI+DQog&#13;
 ICAgPExhYmVsPlZJTjo8L0xhYmVsPg0KICAgIDxEYXRhVHlwZT5TVFJJTkc8L0RhdGFUeXBlPg0K&#13;
 ICAgIDxEYXRhVmFsdWUvPg0KICAgIDxEYXRhU2l6ZT4yNTY8L0RhdGFTaXplPg0KICAgIDxJc1B1&#13;
@@ -2494,7 +2494,7 @@ ICAgPC9zZWN0aW9uPg0KICA8L2JvZHk+DQo8L0Zvcm0+DQo=
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443223" name="CompleteMateAssembledComponents" status="INACTIVE" webbpaID="1296488373091" width="168" worktime="false" x="396" y="612">
+  <AtomicWS height="60" id="1299766443223" name="CompleteMateAssembledComponents" webbpaID="1296488373091" width="168" worktime="false" x="396" y="612">
     <Label>CompleteMateAssembledComponents</Label>
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>FactoryGroup</Performer>
@@ -3196,7 +3196,7 @@ b24vPg0KICA8aGVhZC8+DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443219" name="CompletePaintVehicle" status="INACTIVE" webbpaID="1296488373092" width="168" worktime="false" x="396" y="420">
+  <AtomicWS height="60" id="1299766443219" name="CompletePaintVehicle" webbpaID="1296488373092" width="168" worktime="false" x="396" y="420">
     <Label>CompletePaintVehicle</Label>
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>FactoryGroup</Performer>
@@ -3898,7 +3898,7 @@ b24vPg0KICA8aGVhZC8+DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443213" name="CompleteProcessComponents" status="INACTIVE" webbpaID="1296488373093" width="168" worktime="false" x="396" y="144">
+  <AtomicWS height="60" id="1299766443213" name="CompleteProcessComponents" webbpaID="1296488373093" width="168" worktime="false" x="396" y="144">
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>FactoryGroup</Performer>
     <PerformBy>ANY</PerformBy>
@@ -3908,8 +3908,8 @@ b24vPg0KICA8aGVhZC8+DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
     </Collaboration>
     <Form name="CompleteProcessComponents.jsp" type="form/mime64">
 PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8&#13;
-IURPQ1RZUEUgRm9ybSBTWVNURU0gImZvcm0uZHRkIj4NCjxGb3JtIHRzdGFtcD0iMTMyNzM2ODk2&#13;
-MTU1MiIgdmVyc2lvbj0iNy42Ij4NCiAgPERhdGFzbG90IE5hbWU9IlZJTiIgY2F0ZWdvcnk9IkFF&#13;
+IURPQ1RZUEUgRm9ybSBTWVNURU0gImZvcm0uZHRkIj4NCjxGb3JtIHRzdGFtcD0iMTMyOTc4OTg2&#13;
+NDM3OSIgdmVyc2lvbj0iNy42Ij4NCiAgPERhdGFzbG90IE5hbWU9IlZJTiIgY2F0ZWdvcnk9IkFF&#13;
 VEYiIG5hbWU9IlZJTiIgdHlwZT0iU1RSSU5HIiB3ZWJicGFJRD0iMTMwMDM4ODIxODExMiI+DQog&#13;
 ICAgPExhYmVsPlZJTjo8L0xhYmVsPg0KICAgIDxEYXRhVHlwZT5TVFJJTkc8L0RhdGFUeXBlPg0K&#13;
 ICAgIDxEYXRhVmFsdWUvPg0KICAgIDxEYXRhU2l6ZT4yNTY8L0RhdGFTaXplPg0KICAgIDxJc1B1&#13;
@@ -4197,7 +4197,7 @@ Rm9ybT4NCg==
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" id="1299766443228" name="ProcessBuildError" status="INACTIVE" webbpaID="1296488373094" width="108" worktime="false" x="792" y="420">
+  <AtomicWS height="60" id="1299766443228" name="ProcessBuildError" webbpaID="1296488373094" width="108" worktime="false" x="792" y="420">
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>@CREATOR</Performer>
     <PerformingApp type="JSP">ProcessBuildError.jsp</PerformingApp>
@@ -4450,13 +4450,13 @@ DQogIDxib2R5Lz4NCjwvRm9ybT4NCg==
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="36" id="1299766443227" name="end" status="INACTIVE" webbpaID="1296488373096" width="36" worktime="false" x="300" y="984">
+  <AtomicWS height="36" id="1299766443227" name="end" webbpaID="1296488373096" width="36" worktime="false" x="300" y="984">
     <AtomicType>END</AtomicType>
     <Priority>MEDIUM</Priority>
     <RollbackPoint>FALSE</RollbackPoint>
     <Simulation distribution="ct" scenario="(default)"/>
   </AtomicWS>
-  <ExternalWS height="60" id="1299766443216" name="AssembleBody" status="INACTIVE" webbpaID="1296488373097" width="108" x="120" y="324">
+  <ExternalWS height="60" id="1299766443216" name="AssembleBody" webbpaID="1296488373097" width="108" x="120" y="324">
     <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -4835,6 +4835,10 @@ PHdzYWQ6TW9kZT4yPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRlcj4NCiAgPC93c2Fk&#13
 OlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6YmluZGluZz4NCjwvcGlk&#13;
 bDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
+YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -4864,13 +4868,9 @@ ZSIgdHlwZT0iamF2YS5sYW5nLlN0cmluZyIgdmFsdWU9IjUxNjIiLz4KICA8cGFyYW0gbmFtZT0i&#13
 Y29uLnNzbCIgdHlwZT0iamF2YS5sYW5nLkJvb2xlYW4iIHZhbHVlPSJmYWxzZSIvPgo8L21hcD4K&#13;
 
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
-YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443214" name="AssembleChassis" status="INACTIVE" webbpaID="1296488373098" width="108" x="120" y="228">
+  <ExternalWS height="60" id="1299766443214" name="AssembleChassis" webbpaID="1296488373098" width="108" x="120" y="228">
     <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>FALSE</ClosedConnection>
@@ -5249,6 +5249,10 @@ PHdzYWQ6TW9kZT4yPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRlcj4NCiAgPC93c2Fk&#13
 OlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6YmluZGluZz4NCjwvcGlk&#13;
 bDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
+YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -5278,13 +5282,9 @@ ZSIgdHlwZT0iamF2YS5sYW5nLlN0cmluZyIgdmFsdWU9IjUxNjIiLz4KICA8cGFyYW0gbmFtZT0i&#13
 Y29uLnNzbCIgdHlwZT0iamF2YS5sYW5nLkJvb2xlYW4iIHZhbHVlPSJmYWxzZSIvPgo8L21hcD4K&#13;
 
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
-YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443220" name="AssembleInterior" status="INACTIVE" webbpaID="1296488373099" width="108" x="120" y="516">
+  <ExternalWS height="60" id="1299766443220" name="AssembleInterior" webbpaID="1296488373099" width="108" x="120" y="516">
     <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -5663,6 +5663,10 @@ PHdzYWQ6TW9kZT4yPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRlcj4NCiAgPC93c2Fk&#13
 OlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6YmluZGluZz4NCjwvcGlk&#13;
 bDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
+YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -5692,13 +5696,9 @@ ZSIgdHlwZT0iamF2YS5sYW5nLlN0cmluZyIgdmFsdWU9IjUxNjIiLz4KICA8cGFyYW0gbmFtZT0i&#13
 Y29uLnNzbCIgdHlwZT0iamF2YS5sYW5nLkJvb2xlYW4iIHZhbHVlPSJmYWxzZSIvPgo8L21hcD4K&#13;
 
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
-YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443224" name="CompleteVehicleBuild" status="INACTIVE" webbpaID="1296488373100" width="108" x="120" y="720">
+  <ExternalWS height="60" id="1299766443224" name="CompleteVehicleBuild" webbpaID="1296488373100" width="108" x="120" y="720">
     <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -6077,6 +6077,10 @@ PHdzYWQ6TW9kZT4yPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRlcj4NCiAgPC93c2Fk&#13
 OlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6YmluZGluZz4NCjwvcGlk&#13;
 bDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
+YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -6106,13 +6110,9 @@ ZSIgdHlwZT0iamF2YS5sYW5nLlN0cmluZyIgdmFsdWU9IjUxNjIiLz4KICA8cGFyYW0gbmFtZT0i&#13
 Y29uLnNzbCIgdHlwZT0iamF2YS5sYW5nLkJvb2xlYW4iIHZhbHVlPSJmYWxzZSIvPgo8L21hcD4K&#13;
 
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
-YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443226" name="Factory Logout" status="INACTIVE" webbpaID="1297864458377" width="108" x="264" y="840">
+  <ExternalWS height="60" id="1299766443226" name="Factory Logout" webbpaID="1297864458377" width="108" x="264" y="840">
     <Performer category="OEAdapters" generate="false" managed="true" name="ApplicationUserLogout">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -6386,6 +6386,9 @@ eXBlPg0KICAgICAgPHdzYWQ6TW9kZT4xPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRl&#13
 cj4NCiAgPC93c2FkOlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6Ymlu&#13;
 ZGluZz4NCjwvcGlkbDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgo8L21hcD4K
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjb24uc2VydmljZW5hbWUiIHR5cGU9&#13;
 ImphdmEubGFuZy5TdHJpbmciIHZhbHVlPSI1MTYyIi8+CiAgPHBhcmFtIG5hbWU9ImNhZi5hcmNo&#13;
@@ -6410,12 +6413,9 @@ IG5hbWU9ImNvbi5zZXNzaW9ubW9kZWwiIHR5cGU9ImphdmEubGFuZy5TdHJpbmciIHZhbHVlPSJT&#13
 ZXNzaW9uLWZyZWUiLz4KICA8cGFyYW0gbmFtZT0icGNDb250ZXh0SWQiIHR5cGU9ImphdmEubGFu&#13;
 Zy5PYmplY3QiIHZhbHVlPSJAQ29udGV4dElkIi8+CjwvbWFwPgo=
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgo8L21hcD4K
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443211" name="FactoryLogin" status="INACTIVE" webbpaID="1297718905664" width="108" x="264" y="24">
+  <ExternalWS height="60" id="1299766443211" name="FactoryLogin" webbpaID="1297718905664" width="108" x="264" y="24">
     <Performer category="OEAdapters" generate="false" managed="true" name="ApplicationUserLogin">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -6771,6 +6771,10 @@ ICAgICA8d3NhZDpUeXBlPjM5PC93c2FkOlR5cGU+DQogICAgICA8d3NhZDpNb2RlPjI8L3dzYWQ6&#13
 TW9kZT4NCiAgICA8L3dzYWQ6UGFyYW1ldGVyPg0KICA8L3dzYWQ6UHJvY0RldGFpbD4NCjwvd3Nh&#13;
 ZDpPcGVyYXRpb24+DQogIDwvcGlkbDpiaW5kaW5nPg0KPC9waWRsOmRlc2NyaXB0aW9uPg0K
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJDb250ZXh0SWQiIHR5cGU9ImphdmEu&#13;
+bGFuZy5TdHJpbmciIHZhbHVlPSJAcGNVc2VyQ29udGV4dElkIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -6798,13 +6802,9 @@ ZT0iY29uLnNlcnZpY2VuYW1lIiB0eXBlPSJqYXZhLmxhbmcuU3RyaW5nIiB2YWx1ZT0iNTE2MiIv&#13
 PgogIDxwYXJhbSBuYW1lPSJjb24uc3NsIiB0eXBlPSJqYXZhLmxhbmcuQm9vbGVhbiIgdmFsdWU9&#13;
 ImZhbHNlIi8+CjwvbWFwPgo=
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJDb250ZXh0SWQiIHR5cGU9ImphdmEu&#13;
-bGFuZy5TdHJpbmciIHZhbHVlPSJAcGNVc2VyQ29udGV4dElkIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443222" name="MateAssembledComponents" status="INACTIVE" webbpaID="1296488373101" width="108" x="120" y="612">
+  <ExternalWS height="60" id="1299766443222" name="MateAssembledComponents" webbpaID="1296488373101" width="108" x="120" y="612">
     <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -7183,6 +7183,10 @@ PHdzYWQ6TW9kZT4yPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRlcj4NCiAgPC93c2Fk&#13
 OlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6YmluZGluZz4NCjwvcGlk&#13;
 bDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
+YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -7212,13 +7216,9 @@ ZSIgdHlwZT0iamF2YS5sYW5nLlN0cmluZyIgdmFsdWU9IjUxNjIiLz4KICA8cGFyYW0gbmFtZT0i&#13
 Y29uLnNzbCIgdHlwZT0iamF2YS5sYW5nLkJvb2xlYW4iIHZhbHVlPSJmYWxzZSIvPgo8L21hcD4K&#13;
 
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
-YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443218" name="PaintVehicle" status="INACTIVE" webbpaID="1296488373102" width="108" x="120" y="420">
+  <ExternalWS height="60" id="1299766443218" name="PaintVehicle" webbpaID="1296488373102" width="108" x="120" y="420">
     <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -7597,6 +7597,10 @@ PHdzYWQ6TW9kZT4yPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRlcj4NCiAgPC93c2Fk&#13
 OlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6YmluZGluZz4NCjwvcGlk&#13;
 bDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
+YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -7626,13 +7630,9 @@ ZSIgdHlwZT0iamF2YS5sYW5nLlN0cmluZyIgdmFsdWU9IjUxNjIiLz4KICA8cGFyYW0gbmFtZT0i&#13
 Y29uLnNzbCIgdHlwZT0iamF2YS5sYW5nLkJvb2xlYW4iIHZhbHVlPSJmYWxzZSIvPgo8L21hcD4K&#13;
 
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
-YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <ExternalWS height="60" id="1299766443212" name="ProcessComponents" status="INACTIVE" webbpaID="1296488373103" width="108" x="120" y="144">
+  <ExternalWS height="60" id="1299766443212" name="ProcessComponents" webbpaID="1296488373103" width="108" x="120" y="144">
     <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
     <PerformBy>execute</PerformBy>
     <ClosedConnection>TRUE</ClosedConnection>
@@ -8011,6 +8011,10 @@ PHdzYWQ6TW9kZT4yPC93c2FkOk1vZGU+DQogICAgPC93c2FkOlBhcmFtZXRlcj4NCiAgPC93c2Fk&#13
 OlByb2NEZXRhaWw+DQo8L3dzYWQ6T3BlcmF0aW9uPg0KICA8L3BpZGw6YmluZGluZz4NCjwvcGlk&#13;
 bDpkZXNjcmlwdGlvbj4NCg==
 </File>
+      <File name="output.map" type="form/mime64">
+PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
+YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
+</File>
       <File name="input.map" type="form/mime64">
 PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJjYWYucGlkbCIgdHlwZT0iamF2YS5s&#13;
 YW5nLlN0cmluZyIgdmFsdWU9IlRPS0VOX0JJWk9FX0ZJTEUiLz4KICA8cGFyYW0gbmFtZT0iY29u&#13;
@@ -8040,170 +8044,132 @@ ZSIgdHlwZT0iamF2YS5sYW5nLlN0cmluZyIgdmFsdWU9IjUxNjIiLz4KICA8cGFyYW0gbmFtZT0i&#13
 Y29uLnNzbCIgdHlwZT0iamF2YS5sYW5nLkJvb2xlYW4iIHZhbHVlPSJmYWxzZSIvPgo8L21hcD4K&#13;
 
 </File>
-      <File name="output.map" type="form/mime64">
-PG1hcCB2ZXJzaW9uPSIxLjMiPgogIDxwYXJhbSBuYW1lPSJCdWlsZFN0YXR1cyIgdHlwZT0iamF2&#13;
-YS5sYW5nLlN0cmluZyIgdmFsdWU9IkBwY0J1aWxkU3RhdHVzIi8+CjwvbWFwPgo=
-</File>
     </Configuration>
   </ExternalWS>
-  <Link Name="DemoShortcut" default="false" webbpaID="1306339146719">
-    <Label>Demo Shortcut</Label>
-    <Source cp="6">CompleteProcessComponents</Source>
-    <Point x="564.0" y="159.0"/>
-    <Point x="1076.0" y="159.0"/>
-    <Point x="1076.0" y="765.0"/>
-    <Point x="564.0" y="765.0"/>
-    <Target cp="7">CompleteCompleteVehicleBuild</Target>
-    <Condition type="java">UseDemoShortcut<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
-c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
-ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
-ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
-ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
-ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke1VzZURlbW9TaG9ydGN1dH08L3BhcmFtZXRlcj4KICAgICAg&#13;
-ICAgIDxwYXJhbWV0ZXIgbmFtZT0ib3BlcmF0b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxl&#13;
-PSJmYWxzZSIgZmlsdGVyPSIiPkJvb2xlYW5Jc1RydWU8L3BhcmFtZXRlcj4KICAgICAgICAgIDxw&#13;
-YXJhbWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFs&#13;
-c2UiIGZpbHRlcj0iIj4ke251bGx9PC9wYXJhbWV0ZXI+CiAgICAgICAgPC9wYXJhbWV0ZXJzPgog&#13;
-ICAgICAgIDxwcmVzZW50YXRpb24+CgogICAgICAgIDwvcHJlc2VudGF0aW9uPgogICAgICAgIDxj&#13;
-b2RlPgpVc2VEZW1vU2hvcnRjdXQKICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFO&#13;
-RDwvam9pbk5leHQ+CiAgICAgIDwvZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8&#13;
-L2V4cHJlc3Npb25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
-    </Condition>
+  <Link Name="Connection 1" default="true" webbpaID="1296488373125">
+    <Label>Connection 1</Label>
+    <Source cp="1">Start</Source>
+    <Point x="108.0" y="54.0"/>
+    <Point x="264.0" y="54.0"/>
+    <Target cp="3">FactoryLogin</Target>
   </Link>
-  <Link Name="Connection 42" default="true" webbpaID="1297864458378">
-    <Label>Connection 42</Label>
-    <Source cp="2">Factory Logout</Source>
-    <Point x="318.0" y="900.0"/>
-    <Point x="318.0" y="984.0"/>
-    <Target cp="0">end</Target>
+  <Link Name="Connection 40" default="true" webbpaID="1297718905665">
+    <Label>Connection 40</Label>
+    <Source cp="2">FactoryLogin</Source>
+    <Point x="318.0" y="84.0"/>
+    <Point x="318.0" y="104.0"/>
+    <Point x="100.0" y="104.0"/>
+    <Point x="100.0" y="174.0"/>
+    <Point x="120.0" y="174.0"/>
+    <Target cp="3">ProcessComponents</Target>
   </Link>
-  <Link Name="Connection 2" default="true" webbpaID="1296488373126">
-    <Label>Connection 2</Label>
-    <Source cp="1">ProcessComponents</Source>
-    <Point x="228.0" y="174.0"/>
-    <Point x="396.0" y="174.0"/>
-    <Target cp="3">CompleteProcessComponents</Target>
+  <Link Name="Connection 4" default="true" webbpaID="1296488373104">
+    <Label>Connection 4</Label>
+    <Source cp="2">CompleteAssembleBody</Source>
+    <Point x="480.0" y="384.0"/>
+    <Point x="480.0" y="404.0"/>
+    <Point x="100.0" y="404.0"/>
+    <Point x="100.0" y="435.0"/>
+    <Point x="120.0" y="435.0"/>
+    <Target cp="11">PaintVehicle</Target>
   </Link>
-  <Link Name="Connection 20" default="true" webbpaID="1296488373124" x="5" y="-10">
-    <Label>Connection 20</Label>
-    <Source cp="2">CompleteProcessComponents</Source>
-    <Point x="480.0" y="204.0"/>
-    <Point x="480.0" y="224.0"/>
-    <Point x="100.0" y="224.0"/>
-    <Point x="100.0" y="243.0"/>
-    <Point x="120.0" y="243.0"/>
-    <Target cp="11">AssembleChassis</Target>
+  <Link Name="Connection 5" default="true" webbpaID="1296488373105">
+    <Label>Connection 5</Label>
+    <Source cp="1">PaintVehicle</Source>
+    <Point x="228.0" y="450.0"/>
+    <Point x="396.0" y="450.0"/>
+    <Target cp="3">CompletePaintVehicle</Target>
   </Link>
-  <Link Name="Connection 3" default="true" webbpaID="1296488373123">
-    <Label>Connection 3</Label>
-    <Source cp="1">AssembleChassis</Source>
-    <Point x="228.0" y="258.0"/>
-    <Point x="396.0" y="258.0"/>
-    <Target cp="3">CompleteAssembleChassis</Target>
+  <Link Name="Connection 6" default="true" webbpaID="1296488373106">
+    <Label>Connection 6</Label>
+    <Source cp="1">AssembleInterior</Source>
+    <Point x="228.0" y="546.0"/>
+    <Point x="396.0" y="546.0"/>
+    <Target cp="3">CompleteAssembleInterior</Target>
   </Link>
-  <Link Name="CompleteCompleteVehicleBuildErr" default="false" webbpaID="1296488373122">
-    <Label>CompleteCompleteVehicleBuildErr</Label>
-    <Source cp="6">CompleteCompleteVehicleBuild</Source>
-    <Point x="564.0" y="735.0"/>
-    <Point x="772.0" y="735.0"/>
-    <Point x="772.0" y="450.0"/>
-    <Point x="792.0" y="450.0"/>
-    <Target cp="3">ProcessBuildError</Target>
-    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
-c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
-ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
-ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
-ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
-ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
-PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
-bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
-bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
-IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
-dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
-ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
-ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
-ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
-dGlvbj4K</ConditionXMLEncoded>
-    </Condition>
+  <Link Name="Connection 7" default="true" webbpaID="1296488373107">
+    <Label>Connection 7</Label>
+    <Source cp="2">CompleteMateAssembledComponents</Source>
+    <Point x="480.0" y="672.0"/>
+    <Point x="480.0" y="700.0"/>
+    <Point x="100.0" y="700.0"/>
+    <Point x="100.0" y="735.0"/>
+    <Point x="120.0" y="735.0"/>
+    <Target cp="11">CompleteVehicleBuild</Target>
   </Link>
-  <Link Name="CompleteMateComponentsError" default="false" webbpaID="1296488373121">
-    <Label>CompleteMateComponentsError</Label>
-    <Source cp="6">CompleteMateAssembledComponents</Source>
-    <Point x="564.0" y="627.0"/>
-    <Point x="772.0" y="627.0"/>
-    <Point x="772.0" y="450.0"/>
-    <Point x="792.0" y="450.0"/>
-    <Target cp="3">ProcessBuildError</Target>
-    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
-c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
-ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
-ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
-ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
-ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
-PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
-bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
-bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
-IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
-dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
-ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
-ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
-ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
-dGlvbj4K</ConditionXMLEncoded>
-    </Condition>
+  <Link Name="Connection 19" default="true" webbpaID="1296488373108">
+    <Label>Connection 19</Label>
+    <Source cp="1">CompleteVehicleBuild</Source>
+    <Point x="228.0" y="750.0"/>
+    <Point x="396.0" y="750.0"/>
+    <Target cp="3">CompleteCompleteVehicleBuild</Target>
   </Link>
-  <Link Name="CompleteAssembleInteriorError" default="false" webbpaID="1296488373120">
-    <Label>CompleteAssembleInterior</Label>
-    <Source cp="6">CompleteAssembleInterior</Source>
-    <Point x="564.0" y="531.0"/>
-    <Point x="772.0" y="531.0"/>
-    <Point x="772.0" y="450.0"/>
-    <Point x="792.0" y="450.0"/>
-    <Target cp="3">ProcessBuildError</Target>
-    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
-c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
-ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
-ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
-ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
-ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
-PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
-bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
-bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
-IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
-dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
-ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
-ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
-ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
-dGlvbj4K</ConditionXMLEncoded>
-    </Condition>
+  <Link Name="Connection 21" default="true" webbpaID="1296488373109">
+    <Label>Connection 21</Label>
+    <Source cp="2">CompleteAssembleChassis</Source>
+    <Point x="480.0" y="288.0"/>
+    <Point x="480.0" y="308.0"/>
+    <Point x="100.0" y="308.0"/>
+    <Point x="100.0" y="339.0"/>
+    <Point x="120.0" y="339.0"/>
+    <Target cp="11">AssembleBody</Target>
   </Link>
-  <Link Name="CompletePaintVehicleError" default="false" webbpaID="1296488373119">
-    <Label>CompletePaintVehicleError</Label>
-    <Source cp="1">CompletePaintVehicle</Source>
-    <Point x="564.0" y="450.0"/>
-    <Point x="792.0" y="450.0"/>
-    <Target cp="3">ProcessBuildError</Target>
-    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
-c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
-ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
-ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
-ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
-ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
-PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
-bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
-bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
-IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
-dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
-ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
-ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
-ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
-dGlvbj4K</ConditionXMLEncoded>
-    </Condition>
+  <Link Name="Connection 22" default="true" webbpaID="1296488373110">
+    <Label>Connection 22</Label>
+    <Source cp="1">AssembleBody</Source>
+    <Point x="228.0" y="354.0"/>
+    <Point x="396.0" y="354.0"/>
+    <Target cp="3">CompleteAssembleBody</Target>
   </Link>
-  <Link Name="CompleteAssembleBodyError" default="false" webbpaID="1296488373118">
-    <Label>CompleteAssembleBodyError</Label>
-    <Source cp="7">CompleteAssembleBody</Source>
-    <Point x="564.0" y="369.0"/>
-    <Point x="772.0" y="369.0"/>
+  <Link Name="Connection 23" default="true" webbpaID="1296488373111">
+    <Label>Connection 23</Label>
+    <Source cp="1">MateAssembledComponents</Source>
+    <Point x="228.0" y="642.0"/>
+    <Point x="396.0" y="642.0"/>
+    <Target cp="3">CompleteMateAssembledComponents</Target>
+  </Link>
+  <Link Name="Connection 24" default="true" webbpaID="1296488373112">
+    <Label>Connection 24</Label>
+    <Source cp="2">CompletePaintVehicle</Source>
+    <Point x="480.0" y="480.0"/>
+    <Point x="480.0" y="500.0"/>
+    <Point x="100.0" y="500.0"/>
+    <Point x="100.0" y="531.0"/>
+    <Point x="120.0" y="531.0"/>
+    <Target cp="11">AssembleInterior</Target>
+  </Link>
+  <Link Name="Connection 25" default="true" webbpaID="1296488373113">
+    <Label>Connection 25</Label>
+    <Source cp="2">CompleteAssembleInterior</Source>
+    <Point x="480.0" y="576.0"/>
+    <Point x="480.0" y="596.0"/>
+    <Point x="100.0" y="596.0"/>
+    <Point x="100.0" y="627.0"/>
+    <Point x="120.0" y="627.0"/>
+    <Target cp="11">MateAssembledComponents</Target>
+  </Link>
+  <Link Name="Connection 26" default="true" webbpaID="1296488373114">
+    <Label>Connection 26</Label>
+    <Source cp="2">CompleteCompleteVehicleBuild</Source>
+    <Point x="480.0" y="780.0"/>
+    <Point x="480.0" y="820.0"/>
+    <Point x="318.0" y="820.0"/>
+    <Point x="318.0" y="840.0"/>
+    <Target cp="0">Factory Logout</Target>
+  </Link>
+  <Link Name="Connection 31" default="true" webbpaID="1296488373115">
+    <Label>Connection 31</Label>
+    <Source cp="2">ProcessBuildError</Source>
+    <Point x="846.0" y="480.0"/>
+    <Point x="846.0" y="855.0"/>
+    <Point x="372.0" y="855.0"/>
+    <Target cp="6">Factory Logout</Target>
+  </Link>
+  <Link Name="CompleteProcessComponentsError" default="false" webbpaID="1296488373116">
+    <Label>CompleteProcessComponentsError</Label>
+    <Source cp="7">CompleteProcessComponents</Source>
+    <Point x="564.0" y="189.0"/>
+    <Point x="772.0" y="189.0"/>
     <Point x="772.0" y="450.0"/>
     <Point x="792.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
@@ -8249,11 +8215,11 @@ ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13
 dGlvbj4K</ConditionXMLEncoded>
     </Condition>
   </Link>
-  <Link Name="CompleteProcessComponentsError" default="false" webbpaID="1296488373116">
-    <Label>CompleteProcessComponentsError</Label>
-    <Source cp="7">CompleteProcessComponents</Source>
-    <Point x="564.0" y="189.0"/>
-    <Point x="772.0" y="189.0"/>
+  <Link Name="CompleteAssembleBodyError" default="false" webbpaID="1296488373118">
+    <Label>CompleteAssembleBodyError</Label>
+    <Source cp="7">CompleteAssembleBody</Source>
+    <Point x="564.0" y="369.0"/>
+    <Point x="772.0" y="369.0"/>
     <Point x="772.0" y="450.0"/>
     <Point x="792.0" y="450.0"/>
     <Target cp="3">ProcessBuildError</Target>
@@ -8274,242 +8240,161 @@ ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13
 dGlvbj4K</ConditionXMLEncoded>
     </Condition>
   </Link>
-  <Link Name="Connection 31" default="true" webbpaID="1296488373115">
-    <Label>Connection 31</Label>
-    <Source cp="2">ProcessBuildError</Source>
-    <Point x="846.0" y="480.0"/>
-    <Point x="846.0" y="855.0"/>
-    <Point x="372.0" y="855.0"/>
-    <Target cp="6">Factory Logout</Target>
+  <Link Name="CompletePaintVehicleError" default="false" webbpaID="1296488373119">
+    <Label>CompletePaintVehicleError</Label>
+    <Source cp="1">CompletePaintVehicle</Source>
+    <Point x="564.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
   </Link>
-  <Link Name="Connection 26" default="true" webbpaID="1296488373114">
-    <Label>Connection 26</Label>
-    <Source cp="2">CompleteCompleteVehicleBuild</Source>
-    <Point x="480.0" y="780.0"/>
-    <Point x="480.0" y="820.0"/>
-    <Point x="318.0" y="820.0"/>
-    <Point x="318.0" y="840.0"/>
-    <Target cp="0">Factory Logout</Target>
+  <Link Name="CompleteAssembleInteriorError" default="false" webbpaID="1296488373120">
+    <Label>CompleteAssembleInterior</Label>
+    <Source cp="6">CompleteAssembleInterior</Source>
+    <Point x="564.0" y="531.0"/>
+    <Point x="772.0" y="531.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
   </Link>
-  <Link Name="Connection 25" default="true" webbpaID="1296488373113">
-    <Label>Connection 25</Label>
-    <Source cp="2">CompleteAssembleInterior</Source>
-    <Point x="480.0" y="576.0"/>
-    <Point x="480.0" y="596.0"/>
-    <Point x="100.0" y="596.0"/>
-    <Point x="100.0" y="627.0"/>
-    <Point x="120.0" y="627.0"/>
-    <Target cp="11">MateAssembledComponents</Target>
+  <Link Name="CompleteMateComponentsError" default="false" webbpaID="1296488373121">
+    <Label>CompleteMateComponentsError</Label>
+    <Source cp="6">CompleteMateAssembledComponents</Source>
+    <Point x="564.0" y="627.0"/>
+    <Point x="772.0" y="627.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
   </Link>
-  <Link Name="Connection 24" default="true" webbpaID="1296488373112">
-    <Label>Connection 24</Label>
-    <Source cp="2">CompletePaintVehicle</Source>
-    <Point x="480.0" y="480.0"/>
-    <Point x="480.0" y="500.0"/>
-    <Point x="100.0" y="500.0"/>
-    <Point x="100.0" y="531.0"/>
-    <Point x="120.0" y="531.0"/>
-    <Target cp="11">AssembleInterior</Target>
+  <Link Name="CompleteCompleteVehicleBuildErr" default="false" webbpaID="1296488373122">
+    <Label>CompleteCompleteVehicleBuildErr</Label>
+    <Source cp="6">CompleteCompleteVehicleBuild</Source>
+    <Point x="564.0" y="735.0"/>
+    <Point x="772.0" y="735.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
   </Link>
-  <Link Name="Connection 23" default="true" webbpaID="1296488373111">
-    <Label>Connection 23</Label>
-    <Source cp="1">MateAssembledComponents</Source>
-    <Point x="228.0" y="642.0"/>
-    <Point x="396.0" y="642.0"/>
-    <Target cp="3">CompleteMateAssembledComponents</Target>
+  <Link Name="Connection 3" default="true" webbpaID="1296488373123">
+    <Label>Connection 3</Label>
+    <Source cp="1">AssembleChassis</Source>
+    <Point x="228.0" y="258.0"/>
+    <Point x="396.0" y="258.0"/>
+    <Target cp="3">CompleteAssembleChassis</Target>
   </Link>
-  <Link Name="Connection 22" default="true" webbpaID="1296488373110">
-    <Label>Connection 22</Label>
-    <Source cp="1">AssembleBody</Source>
-    <Point x="228.0" y="354.0"/>
-    <Point x="396.0" y="354.0"/>
-    <Target cp="3">CompleteAssembleBody</Target>
+  <Link Name="Connection 20" default="true" webbpaID="1296488373124" x="5" y="-10">
+    <Label>Connection 20</Label>
+    <Source cp="2">CompleteProcessComponents</Source>
+    <Point x="480.0" y="204.0"/>
+    <Point x="480.0" y="224.0"/>
+    <Point x="100.0" y="224.0"/>
+    <Point x="100.0" y="243.0"/>
+    <Point x="120.0" y="243.0"/>
+    <Target cp="11">AssembleChassis</Target>
   </Link>
-  <Link Name="Connection 21" default="true" webbpaID="1296488373109">
-    <Label>Connection 21</Label>
-    <Source cp="2">CompleteAssembleChassis</Source>
-    <Point x="480.0" y="288.0"/>
-    <Point x="480.0" y="308.0"/>
-    <Point x="100.0" y="308.0"/>
-    <Point x="100.0" y="339.0"/>
-    <Point x="120.0" y="339.0"/>
-    <Target cp="11">AssembleBody</Target>
+  <Link Name="Connection 2" default="true" webbpaID="1296488373126">
+    <Label>Connection 2</Label>
+    <Source cp="1">ProcessComponents</Source>
+    <Point x="228.0" y="174.0"/>
+    <Point x="396.0" y="174.0"/>
+    <Target cp="3">CompleteProcessComponents</Target>
   </Link>
-  <Link Name="Connection 19" default="true" webbpaID="1296488373108">
-    <Label>Connection 19</Label>
-    <Source cp="1">CompleteVehicleBuild</Source>
-    <Point x="228.0" y="750.0"/>
-    <Point x="396.0" y="750.0"/>
-    <Target cp="3">CompleteCompleteVehicleBuild</Target>
+  <Link Name="Connection 42" default="true" webbpaID="1297864458378">
+    <Label>Connection 42</Label>
+    <Source cp="2">Factory Logout</Source>
+    <Point x="318.0" y="900.0"/>
+    <Point x="318.0" y="984.0"/>
+    <Target cp="0">end</Target>
   </Link>
-  <Link Name="Connection 7" default="true" webbpaID="1296488373107">
-    <Label>Connection 7</Label>
-    <Source cp="2">CompleteMateAssembledComponents</Source>
-    <Point x="480.0" y="672.0"/>
-    <Point x="480.0" y="700.0"/>
-    <Point x="100.0" y="700.0"/>
-    <Point x="100.0" y="735.0"/>
-    <Point x="120.0" y="735.0"/>
-    <Target cp="11">CompleteVehicleBuild</Target>
+  <Link Name="DemoShortcut" default="false" webbpaID="1306339146719">
+    <Label>Demo Shortcut</Label>
+    <Source cp="6">CompleteProcessComponents</Source>
+    <Point x="564.0" y="159.0"/>
+    <Point x="1076.0" y="159.0"/>
+    <Point x="1076.0" y="765.0"/>
+    <Point x="564.0" y="765.0"/>
+    <Target cp="7">CompleteCompleteVehicleBuild</Target>
+    <Condition type="java">UseDemoShortcut<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke1VzZURlbW9TaG9ydGN1dH08L3BhcmFtZXRlcj4KICAgICAg&#13;
+ICAgIDxwYXJhbWV0ZXIgbmFtZT0ib3BlcmF0b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxl&#13;
+PSJmYWxzZSIgZmlsdGVyPSIiPkJvb2xlYW5Jc1RydWU8L3BhcmFtZXRlcj4KICAgICAgICAgIDxw&#13;
+YXJhbWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFs&#13;
+c2UiIGZpbHRlcj0iIj4ke251bGx9PC9wYXJhbWV0ZXI+CiAgICAgICAgPC9wYXJhbWV0ZXJzPgog&#13;
+ICAgICAgIDxwcmVzZW50YXRpb24+CgogICAgICAgIDwvcHJlc2VudGF0aW9uPgogICAgICAgIDxj&#13;
+b2RlPgpVc2VEZW1vU2hvcnRjdXQKICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFO&#13;
+RDwvam9pbk5leHQ+CiAgICAgIDwvZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8&#13;
+L2V4cHJlc3Npb25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
+    </Condition>
   </Link>
-  <Link Name="Connection 6" default="true" webbpaID="1296488373106">
-    <Label>Connection 6</Label>
-    <Source cp="1">AssembleInterior</Source>
-    <Point x="228.0" y="546.0"/>
-    <Point x="396.0" y="546.0"/>
-    <Target cp="3">CompleteAssembleInterior</Target>
-  </Link>
-  <Link Name="Connection 5" default="true" webbpaID="1296488373105">
-    <Label>Connection 5</Label>
-    <Source cp="1">PaintVehicle</Source>
-    <Point x="228.0" y="450.0"/>
-    <Point x="396.0" y="450.0"/>
-    <Target cp="3">CompletePaintVehicle</Target>
-  </Link>
-  <Link Name="Connection 4" default="true" webbpaID="1296488373104">
-    <Label>Connection 4</Label>
-    <Source cp="2">CompleteAssembleBody</Source>
-    <Point x="480.0" y="384.0"/>
-    <Point x="480.0" y="404.0"/>
-    <Point x="100.0" y="404.0"/>
-    <Point x="100.0" y="435.0"/>
-    <Point x="120.0" y="435.0"/>
-    <Target cp="11">PaintVehicle</Target>
-  </Link>
-  <Link Name="Connection 40" default="true" webbpaID="1297718905665">
-    <Label>Connection 40</Label>
-    <Source cp="2">FactoryLogin</Source>
-    <Point x="318.0" y="84.0"/>
-    <Point x="318.0" y="104.0"/>
-    <Point x="100.0" y="104.0"/>
-    <Point x="100.0" y="174.0"/>
-    <Point x="120.0" y="174.0"/>
-    <Target cp="3">ProcessComponents</Target>
-  </Link>
-  <Link Name="Connection 1" default="true" webbpaID="1296488373125">
-    <Label>Connection 1</Label>
-    <Source cp="1">Start</Source>
-    <Point x="108.0" y="54.0"/>
-    <Point x="264.0" y="54.0"/>
-    <Target cp="3">FactoryLogin</Target>
-  </Link>
-  <Dataslot Name="UseDemoShortcut" category="AETF" name="UseDemoShortcut" type="BOOLEAN" webbpaID="1306339146718">
-    <Label>UseDemoShortcut:</Label>
-    <DataType>BOOLEAN</DataType>
-    <DataValue>true</DataValue>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="UseDemoShortcut:" type="boolean">
-      <Label>UseDemoShortcut:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="OrderId" category="VehicleOrder" name="OrderId" type="STRING" webbpaID="1296488373190">
-    <Label>orderid:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>2000</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="orderid:" password="false" required="false" size="20" type="text">
-      <Label>orderid:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="2000" type="VARCHAR"/>
-  </Dataslot>
-  <Dataslot Name="WorkStepError" category="VehicleOrder" name="WorkStepError" type="STRING" webbpaID="1296488373133">
-    <Label>WorkStepError:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>2000</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text">
-      <Label>WorkStepError:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="2000" type="VARCHAR"/>
-  </Dataslot>
-  <Dataslot Name="OrderNum" category="VehicleOrder" name="OrderNum" type="NUMBER" webbpaID="1296488373048">
-    <Label>OrderNum:</Label>
-    <DataType>LONG</DataType>
-    <DataValue>0</DataValue>
-    <DataSize>256</DataSize>
-    <MultiLine>false</MultiLine>
-    <Format editable="true" label="OrderNum:" required="false" type="field">
-      <Label>OrderNum:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage type="LONG"/>
-  </Dataslot>
-  <Dataslot Name="FactoryUsers" category="VehicleOrder" name="FactoryUsers" type="STRING" webbpaID="1296488373135">
-    <Label>FactoryUsers:</Label>
-    <DataType>STRING</DataType>
-    <DataValue>factory</DataValue>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text">
-      <Label>FactoryUsers:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="ContextId" category="VehicleOrder" name="ContextId" type="STRING" webbpaID="1296488373180">
-    <Label>ContextId:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>2000</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text">
-      <Label>ContextId:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="2000" type="VARCHAR"/>
-  </Dataslot>
-  <Dataslot Name="BuildStatus" category="VehicleOrder" name="BuildStatus" type="STRING" webbpaID="1296488373130">
-    <Label>BuildStatus:</Label>
-    <Description>The status of the build step</Description>
+  <Dataslot Name="VIN" category="AETF" name="VIN" type="STRING" webbpaID="1300388218112">
+    <Label>VIN:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
     <DataSize>256</DataSize>
@@ -8520,48 +8405,8 @@ dGlvbj4K</ConditionXMLEncoded>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text">
-      <Label>BuildStatus:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="VehicleBrand" category="VehicleOrder" name="VehicleBrand" type="STRING" webbpaID="1296488373061">
-    <Label>SelectedVehicleBrand:</Label>
-    <DataType>STRING</DataType>
-    <DataValue/>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="SelectedVehicleBrand:" password="false" required="true" size="20" type="text">
-      <Label>SelectedVehicleBrand:</Label>
-      <Validation>
-        <ValidationType/>
-      </Validation>
-    </Format>
-    <Storage size="256" type="CHAR"/>
-  </Dataslot>
-  <Dataslot Name="password" category="VehicleOrder" name="password" type="STRING" webbpaID="1296488373054">
-    <Label>password:</Label>
-    <DataType>STRING</DataType>
-    <DataValue>letmein</DataValue>
-    <DataSize>256</DataSize>
-    <IsPublic>true</IsPublic>
-    <MultiLine>false</MultiLine>
-    <BizManageAccessFlag>true</BizManageAccessFlag>
-    <Access type="PUBLIC" value="true"/>
-    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
-    <Access type="GLOBAL" value="false"/>
-    <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="password:" password="false" required="false" size="20" type="text">
-      <Label>password:</Label>
+    <Format editable="true" label="VIN:" password="false" required="false" size="20" type="text">
+      <Label>VIN:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -8588,8 +8433,28 @@ dGlvbj4K</ConditionXMLEncoded>
     </Format>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
-  <Dataslot Name="VIN" category="AETF" name="VIN" type="STRING" webbpaID="1300388218112">
-    <Label>VIN:</Label>
+  <Dataslot Name="password" category="VehicleOrder" name="password" type="STRING" webbpaID="1296488373054">
+    <Label>password:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>letmein</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="password:" password="false" required="false" size="20" type="text">
+      <Label>password:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="VehicleBrand" category="VehicleOrder" name="VehicleBrand" type="STRING" webbpaID="1296488373061">
+    <Label>SelectedVehicleBrand:</Label>
     <DataType>STRING</DataType>
     <DataValue/>
     <DataSize>256</DataSize>
@@ -8600,8 +8465,143 @@ dGlvbj4K</ConditionXMLEncoded>
     <Access type="BIZ_MANAGE_ACCESS" value="true"/>
     <Access type="GLOBAL" value="false"/>
     <Access type="BIZ_SITE_COLUMN" value="false"/>
-    <Format editable="true" label="VIN:" password="false" required="false" size="20" type="text">
-      <Label>VIN:</Label>
+    <Format editable="true" label="SelectedVehicleBrand:" password="false" required="true" size="20" type="text">
+      <Label>SelectedVehicleBrand:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="BuildStatus" category="VehicleOrder" name="BuildStatus" type="STRING" webbpaID="1296488373130">
+    <Label>BuildStatus:</Label>
+    <Description>The status of the build step</Description>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="ContextId" category="VehicleOrder" name="ContextId" type="STRING" webbpaID="1296488373180">
+    <Label>ContextId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="FactoryUsers" category="VehicleOrder" name="FactoryUsers" type="STRING" webbpaID="1296488373135">
+    <Label>FactoryUsers:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>factory</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text">
+      <Label>FactoryUsers:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="OrderNum" category="VehicleOrder" name="OrderNum" type="NUMBER" webbpaID="1296488373048">
+    <Label>OrderNum:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="WorkStepError" category="VehicleOrder" name="WorkStepError" type="STRING" webbpaID="1296488373133">
+    <Label>WorkStepError:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text">
+      <Label>WorkStepError:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="OrderId" category="VehicleOrder" name="OrderId" type="STRING" webbpaID="1296488373190">
+    <Label>orderid:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="UseDemoShortcut" category="AETF" name="UseDemoShortcut" type="BOOLEAN" webbpaID="1306339146718">
+    <Label>UseDemoShortcut:</Label>
+    <DataType>BOOLEAN</DataType>
+    <DataValue>true</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="UseDemoShortcut:" type="boolean">
+      <Label>UseDemoShortcut:</Label>
       <Validation>
         <ValidationType/>
       </Validation>
@@ -8609,6 +8609,400 @@ dGlvbj4K</ConditionXMLEncoded>
     <Storage size="256" type="CHAR"/>
   </Dataslot>
   <Notes>
+    <Note color="255,255,255" height="96" shape="annotation" webbpaID="1296488373000" width="312" x="684" y="36">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1295533759491" version="7.0SP1"&gt;&#13;
+  &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
+    &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING"&gt;&#13;
+    &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+    &lt;Description&gt;Savvion ProcessInstanceId&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="PIID:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING"&gt;&#13;
+    &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING"&gt;&#13;
+    &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING"&gt;&#13;
+    &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The status of the build step&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
+    &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" height="4" label="WebServiceEndpoint:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN"&gt;&#13;
+    &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;BOOLEAN&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;false&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="VehicleBuildComplete:" type="boolean"&gt;&#13;
+      &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The Order number for this order.&lt;/Description&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;&#13;
+    &lt;font color="#000000" face="Arial"&gt;&#13;
+      &lt;b&gt;The Complete* steps are completed externally, by a OpenEdge process, which is analogous to input received by a scanner on the factory floor which scans the being-built vehicle as it moves down the production line.&lt;/b&gt;&#13;
+    &lt;/font&gt;&#13;
+  &lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
+    <Note color="255,255,153" height="84" shape="sticky" webbpaID="1296488372999" width="252" x="432" y="912">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1295533767862" version="7.0SP1"&gt;&#13;
+  &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
+    &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING"&gt;&#13;
+    &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+    &lt;Description&gt;Savvion ProcessInstanceId&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="PIID:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING"&gt;&#13;
+    &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING"&gt;&#13;
+    &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING"&gt;&#13;
+    &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The status of the build step&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
+    &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" height="4" label="WebServiceEndpoint:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN"&gt;&#13;
+    &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;BOOLEAN&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;false&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="VehicleBuildComplete:" type="boolean"&gt;&#13;
+      &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The Order number for this order.&lt;/Description&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;&#13;
+    &lt;font color="#000000" face="Arial"&gt;&#13;
+      &lt;b&gt;No doubt the &amp;lt;step&amp;gt; + Complete&amp;lt;step&amp;gt; + error handling can be further modularised into its own sub-process&lt;/b&gt;&#13;
+    &lt;/font&gt;&#13;
+  &lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
     <Note color="255,255,153" connectTo="ProcessBuildError" height="204" shape="annotation" webbpaID="1296488372998" width="132" x="924" y="540">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
 &lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
 &lt;Form tstamp="1295534106662" version="7.0SP1"&gt;&#13;
@@ -8811,458 +9205,64 @@ dGlvbj4K</ConditionXMLEncoded>
   &lt;/body&gt;&#13;
 &lt;/Form&gt;&#13;
 </Note>
-    <Note color="255,255,153" height="84" shape="sticky" webbpaID="1296488372999" width="252" x="432" y="912">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
-&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
-&lt;Form tstamp="1295533767862" version="7.0SP1"&gt;&#13;
-  &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
-    &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING"&gt;&#13;
-    &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
-    &lt;Description&gt;Savvion ProcessInstanceId&lt;/Description&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="PIID:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING"&gt;&#13;
-    &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
-    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
-    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING"&gt;&#13;
-    &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING"&gt;&#13;
-    &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
-    &lt;Description&gt;The status of the build step&lt;/Description&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
-    &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" height="4" label="WebServiceEndpoint:" required="false" type="textarea" width="20"&gt;&#13;
-      &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN"&gt;&#13;
-    &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;BOOLEAN&lt;/DataType&gt;&#13;
-    &lt;DataValue&gt;false&lt;/DataValue&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="VehicleBuildComplete:" type="boolean"&gt;&#13;
-      &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER"&gt;&#13;
-    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
-    &lt;Description&gt;The Order number for this order.&lt;/Description&gt;&#13;
-    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
-    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
-      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage type="LONG"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;DataSources/&gt;&#13;
-  &lt;Validation/&gt;&#13;
-  &lt;head/&gt;&#13;
-  &lt;body&gt;&#13;
-    &lt;font color="#000000" face="Arial"&gt;&#13;
-      &lt;b&gt;No doubt the &amp;lt;step&amp;gt; + Complete&amp;lt;step&amp;gt; + error handling can be further modularised into its own sub-process&lt;/b&gt;&#13;
-    &lt;/font&gt;&#13;
-  &lt;/body&gt;&#13;
-&lt;/Form&gt;&#13;
-</Note>
-    <Note color="255,255,255" height="96" shape="annotation" webbpaID="1296488373000" width="312" x="684" y="36">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
-&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
-&lt;Form tstamp="1295533759491" version="7.0SP1"&gt;&#13;
-  &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
-    &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING"&gt;&#13;
-    &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
-    &lt;Description&gt;Savvion ProcessInstanceId&lt;/Description&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="PIID:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING"&gt;&#13;
-    &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
-    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
-    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING"&gt;&#13;
-    &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING"&gt;&#13;
-    &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
-    &lt;Description&gt;The status of the build step&lt;/Description&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue/&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text"&gt;&#13;
-      &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
-    &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
-    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
-    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" height="4" label="WebServiceEndpoint:" required="false" type="textarea" width="20"&gt;&#13;
-      &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN"&gt;&#13;
-    &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
-    &lt;DataType&gt;BOOLEAN&lt;/DataType&gt;&#13;
-    &lt;DataValue&gt;false&lt;/DataValue&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="VehicleBuildComplete:" type="boolean"&gt;&#13;
-      &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage size="256" type="CHAR"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER"&gt;&#13;
-    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
-    &lt;Description&gt;The Order number for this order.&lt;/Description&gt;&#13;
-    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
-    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
-    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
-    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
-    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
-    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
-    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
-    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
-    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
-    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
-    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
-      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
-      &lt;Validation&gt;&#13;
-        &lt;ValidationType/&gt;&#13;
-      &lt;/Validation&gt;&#13;
-    &lt;/Format&gt;&#13;
-    &lt;Storage type="LONG"/&gt;&#13;
-  &lt;/Dataslot&gt;&#13;
-  &lt;DataSources/&gt;&#13;
-  &lt;Validation/&gt;&#13;
-  &lt;head/&gt;&#13;
-  &lt;body&gt;&#13;
-    &lt;font color="#000000" face="Arial"&gt;&#13;
-      &lt;b&gt;The Complete* steps are completed externally, by a OpenEdge process, which is analogous to input received by a scanner on the factory floor which scans the being-built vehicle as it moves down the production line.&lt;/b&gt;&#13;
-    &lt;/font&gt;&#13;
-  &lt;/body&gt;&#13;
-&lt;/Form&gt;&#13;
-</Note>
   </Notes>
   <Performers>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="Factory Logout" managed="true" name="ApplicationUserLogout" type="managed" webbpaID="1326741677349"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="CompleteVehicleBuild" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677350"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="MateAssembledComponents" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677351"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="AssembleInterior" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677352"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="PaintVehicle" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677353"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="AssembleBody" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677354"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="AssembleChassis" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677355"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="ProcessComponents" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677348"/>
-    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="FactoryLogin" managed="true" name="ApplicationUserLogin" type="managed" webbpaID="1326741677347"/>
-    <Performer category="" class="" generate="false" id="ProcessBuildError" managed="true" name="" type="managed" webbpaID="1297864458380"/>
-    <Performer name="FactoryGroup" select="ANY" type="group" webbpaID="1296488373145"/>
     <Performer name="@CREATOR" type="user" webbpaID="1296488373143"/>
+    <Performer name="FactoryGroup" select="ANY" type="group" webbpaID="1296488373145"/>
+    <Performer category="" class="" generate="false" id="ProcessBuildError" managed="true" name="" type="managed" webbpaID="1297864458380"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="FactoryLogin" managed="true" name="ApplicationUserLogin" type="managed" webbpaID="1326741677347"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="ProcessComponents" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677348"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="AssembleChassis" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677355"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="AssembleBody" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677354"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="PaintVehicle" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677353"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="AssembleInterior" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677352"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="MateAssembledComponents" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677351"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="CompleteVehicleBuild" managed="true" name="PerformBuildVehicleStep" type="managed" webbpaID="1326741677350"/>
+    <Performer category="OEAdapters" class="com.savvion.sbm.adapters.oe.OEAdapter" generate="false" id="Factory Logout" managed="true" name="ApplicationUserLogout" type="managed" webbpaID="1326741677349"/>
   </Performers>
   <TabularViewWorkstepOrder>1299766443210,1299766443211,1299766443212,1299766443213,1299766443214,1299766443215,1299766443216,1299766443217,1299766443218,1299766443219,1299766443220,1299766443221,1299766443222,1299766443223,1299766443224,1299766443225,1299766443226,1299766443227,1299766443228</TabularViewWorkstepOrder>
   <History>
-    <Deployed as="BuildVehicle" by="ebms" on="1327368975300" to="http://localhost:18793/sbm/deployment">Mon Jan 23 20:36:15 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327356403841" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:06:43 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327350247045" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:24:07 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327349212457" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:06:52 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327348506531" to="http://localhost:18793/sbm/deployment">Mon Jan 23 14:55:06 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327329384232" to="http://localhost:18793/sbm/deployment">Mon Jan 23 09:36:24 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327326786276" to="http://localhost:18793/sbm/deployment">Mon Jan 23 08:53:06 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327094011714" to="http://localhost:18793/sbm/deployment">Fri Jan 20 16:13:31 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327092494269" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:48:14 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327085475382" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:51:15 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327083773197" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:22:53 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327082908342" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:08:28 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327080026000" to="http://localhost:18793/sbm/deployment">Fri Jan 20 12:20:26 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327077582336" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:39:42 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327076407076" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:20:07 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327075835953" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:10:35 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326835610096" to="http://localhost:18793/sbm/deployment">Tue Jan 17 16:26:50 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326829451344" to="http://localhost:18793/sbm/deployment">Tue Jan 17 14:44:11 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326825193375" to="http://localhost:18793/sbm/deployment">Tue Jan 17 13:33:13 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326814371323" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:32:51 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326728264216" to="http://localhost:18793/sbm/deployment">Mon Jan 16 10:37:44 EST 2012</Deployed>
-    <Created as="BuildVehicle" by="pjudge" from="BuildVehicle" on="1326487747117">Fri Jan 13 15:49:07 EST 2012</Created>
-    <Deployed as="BuildVehicle" by="ebms" on="1326724067873" to="http://localhost:18793/sbm/deployment">Mon Jan 16 09:27:47 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326728128244" to="http://localhost:18793/sbm/deployment">Mon Jan 16 10:35:28 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326742535526" to="http://localhost:18793/sbm/deployment">Mon Jan 16 14:35:35 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326744179004" to="http://localhost:18793/sbm/deployment">Mon Jan 16 15:02:59 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326746533736" to="http://localhost:18793/sbm/deployment">Mon Jan 16 15:42:13 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326747637684" to="http://localhost:18793/sbm/deployment">Mon Jan 16 16:00:37 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326813378658" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:16:18 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1326813742333" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:22:22 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327087389065" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:23:09 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327088223897" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:37:03 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327088311446" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:38:31 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327088763250" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:46:03 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327089373766" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:56:13 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327090963730" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:22:43 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327091659867" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:34:19 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327348439251" to="http://localhost:18793/sbm/deployment">Mon Jan 23 14:53:59 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327356542731" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:09:02 EST 2012</Deployed>
-    <Deployed as="BuildVehicle" by="ebms" on="1327357064886" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:17:44 EST 2012</Deployed>
     <Deployed as="BuildVehicle" by="ebms" on="1327357402729" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:23:22 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327357064886" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:17:44 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327356542731" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:09:02 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327348439251" to="http://localhost:18793/sbm/deployment">Mon Jan 23 14:53:59 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327091659867" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:34:19 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327090963730" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:22:43 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327089373766" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:56:13 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327088763250" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:46:03 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327088311446" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:38:31 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327088223897" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:37:03 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327087389065" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:23:09 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326813742333" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:22:22 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326813378658" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:16:18 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326747637684" to="http://localhost:18793/sbm/deployment">Mon Jan 16 16:00:37 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326746533736" to="http://localhost:18793/sbm/deployment">Mon Jan 16 15:42:13 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326744179004" to="http://localhost:18793/sbm/deployment">Mon Jan 16 15:02:59 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326742535526" to="http://localhost:18793/sbm/deployment">Mon Jan 16 14:35:35 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326728128244" to="http://localhost:18793/sbm/deployment">Mon Jan 16 10:35:28 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326724067873" to="http://localhost:18793/sbm/deployment">Mon Jan 16 09:27:47 EST 2012</Deployed>
+    <Created as="BuildVehicle" by="pjudge" from="BuildVehicle" on="1326487747117">Fri Jan 13 15:49:07 EST 2012</Created>
+    <Deployed as="BuildVehicle" by="ebms" on="1326728264216" to="http://localhost:18793/sbm/deployment">Mon Jan 16 10:37:44 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326814371323" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:32:51 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326825193375" to="http://localhost:18793/sbm/deployment">Tue Jan 17 13:33:13 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326829451344" to="http://localhost:18793/sbm/deployment">Tue Jan 17 14:44:11 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326835610096" to="http://localhost:18793/sbm/deployment">Tue Jan 17 16:26:50 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327075835953" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:10:35 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327076407076" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:20:07 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327077582336" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:39:42 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327080026000" to="http://localhost:18793/sbm/deployment">Fri Jan 20 12:20:26 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327082908342" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:08:28 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327083773197" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:22:53 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327085475382" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:51:15 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327092494269" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:48:14 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327094011714" to="http://localhost:18793/sbm/deployment">Fri Jan 20 16:13:31 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327326786276" to="http://localhost:18793/sbm/deployment">Mon Jan 23 08:53:06 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327329384232" to="http://localhost:18793/sbm/deployment">Mon Jan 23 09:36:24 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327348506531" to="http://localhost:18793/sbm/deployment">Mon Jan 23 14:55:06 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327349212457" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:06:52 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327350247045" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:24:07 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327356403841" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:06:43 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327368975300" to="http://localhost:18793/sbm/deployment">Mon Jan 23 20:36:15 EST 2012</Deployed>
   </History>
   <Repository/>
   <Forms/>

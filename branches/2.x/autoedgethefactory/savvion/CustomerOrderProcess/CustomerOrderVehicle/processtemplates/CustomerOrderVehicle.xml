@@ -341,7 +341,7 @@ Pgo=</AlertConditionXML>
       <Duration value="7200">2h</Duration>
     </Simulation>
   </AtomicWS>
-  <AtomicWS height="60" name="DealerReview" width="96" worktime="false" x="336" y="372">
+  <AtomicWS height="60" name="DealerReview" width="96" worktime="false" x="324" y="372">
     <AtomicType>ACTIVITY</AtomicType>
     <Performer>SalesrepGroup</Performer>
     <PerformBy>ANY</PerformBy>
@@ -644,8 +644,8 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Source cp="0">CaptureOrder</Source>
     <Point x="378.0" y="492.0"/>
     <Point x="378.0" y="452.0"/>
-    <Point x="384.0" y="452.0"/>
-    <Point x="384.0" y="432.0"/>
+    <Point x="372.0" y="452.0"/>
+    <Point x="372.0" y="432.0"/>
     <Target cp="2">DealerReview</Target>
   </Link>
   <Link Name="Connection 23" default="true">
@@ -656,29 +656,14 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Point x="918.0" y="372.0"/>
     <Target cp="0">Or 1</Target>
   </Link>
-  <Link Name="OrderNotApproved" default="false">
+  <Link Name="OrderNotApproved" default="true">
     <Label>Order Not Approved</Label>
     <Source cp="0">DealerReview</Source>
-    <Point x="384.0" y="372.0"/>
-    <Point x="384.0" y="104.0"/>
+    <Point x="372.0" y="372.0"/>
+    <Point x="372.0" y="104.0"/>
     <Point x="378.0" y="104.0"/>
     <Point x="378.0" y="84.0"/>
     <Target cp="2">VehicleOrderResubmit</Target>
-    <Condition type="java">!OrderApproved<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
-c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
-ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
-ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
-ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
-ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke09yZGVyQXBwcm92ZWR9PC9wYXJhbWV0ZXI+CiAgICAgICAg&#13;
-ICA8cGFyYW1ldGVyIG5hbWU9Im9wZXJhdG9yTmFtZSIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0i&#13;
-ZmFsc2UiIGZpbHRlcj0iIj5Cb29sZWFuSXNGYWxzZTwvcGFyYW1ldGVyPgogICAgICAgICAgPHBh&#13;
-cmFtZXRlciBuYW1lPSJzZWNvbmRPcGVyYW5kIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxlPSJmYWxz&#13;
-ZSIgZmlsdGVyPSIiPiR7bnVsbH08L3BhcmFtZXRlcj4KICAgICAgICA8L3BhcmFtZXRlcnM+CiAg&#13;
-ICAgICAgPHByZXNlbnRhdGlvbj4KCiAgICAgICAgPC9wcmVzZW50YXRpb24+CiAgICAgICAgPGNv&#13;
-ZGU+CiFPcmRlckFwcHJvdmVkCiAgICAgICAgPC9jb2RlPgogICAgICAgIDxqb2luTmV4dD5BTkQ8&#13;
-L2pvaW5OZXh0PgogICAgICA8L2V4cHJlc3Npb24+CiAgICA8L2NvbmZpZ3VyYXRpb24+CiAgPC9l&#13;
-eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
-    </Condition>
   </Link>
   <Link Name="VehicleInInventory" default="false" x="36" y="2">
     <Label>Vehicle In Stock</Label>
@@ -728,7 +713,7 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
   <Link Name="OrderApproved" default="true">
     <Label>Order Approved</Label>
     <Source cp="1">DealerReview</Source>
-    <Point x="432.0" y="402.0"/>
+    <Point x="420.0" y="402.0"/>
     <Point x="516.0" y="402.0"/>
     <Target cp="3">Decision 2</Target>
   </Link>
@@ -7549,6 +7534,7 @@ eHByZXNzaW9ucz4KPC9jb25kaXRpb24+Cg==</ConditionXMLEncoded>
     <Deployed as="CustomerOrderVehicle" by="ebms" on="1327349199937" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:06:39 EST 2012</Deployed>
     <Deployed as="CustomerOrderVehicle" by="ebms" on="1327350238149" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:23:58 EST 2012</Deployed>
     <Deployed as="CustomerOrderVehicle" by="ebms" on="1327357395313" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:23:15 EST 2012</Deployed>
+    <Deployed as="CustomerOrderVehicle" by="ebms" on="1327368960967" to="http://localhost:18793/sbm/deployment">Mon Jan 23 20:36:00 EST 2012</Deployed>
   </History>
   <Repository committer="sbm" model="AE_TF_REL_V3" time="1281637430967" url="http://184.72.251.33:18793/sbm/services" version="1.0"/>
 </Process>
