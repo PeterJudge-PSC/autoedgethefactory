@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dealers>
+    <brand name="Hinda">
+        <dealer code="dealer01" name="Stiller Motors Inc.">
+            <Address1>14 Oak Park</Address1>
+            <Address2/>
+            <City>Bedford</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@stillerinc.com.aetf</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>01730</ZIP>
+            <State>MA</State>
+            <Phone>781-555-4444</Phone>
+        </dealer>
+        <dealer code="dealer02" name="Rt 497 Hinda Shed">
+            <Address1>Exit 19, Rt 497</Address1>
+            <Address2/>
+            <City>Lawrence</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@hindashed.com.aetf</SalesEmail>
+            <Fax>
+            </Fax>
+            <Mobile/>
+            <ZIP>01840</ZIP>
+            <State>MA</State>
+            <Phone>978-555-7614</Phone>
+        </dealer>
+    </brand>
+    <brand name="Toyola">
+        <dealer code="dealer01" name="Stiller Motors Inc.">
+            <Address1>14 Oak Park</Address1>
+            <Address2/>
+            <City>Bedford</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@stillerinc.com.aetf</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>01730</ZIP>
+            <State>MA</State>
+            <Phone>781-555-4444</Phone>
+        </dealer>
+        <dealer code="dealer02" name="Toyolas-r-Us">
+            <Address1>1 Ottomile</Address1>
+            <Address2/>
+            <City>Abbotdale</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@toyolas-r-us.com.aetf</SalesEmail>
+            <Fax>781-555-0015</Fax>
+            <Mobile/>
+            <ZIP>01730</ZIP>
+            <State>MA</State>
+            <Phone>781-555-0012</Phone>
+        </dealer>
+    </brand>
+    <brand name="Chery">
+        <dealer code="dealer02" name="Roth Brothers Corp.">
+            <Address1>14 Summer Street</Address1>
+            <Address2/>
+            <City>Waltham</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@rothcars.com.aetf</SalesEmail>
+            <Fax>781-555-5678</Fax>
+            <Mobile/>
+            <ZIP>02452</ZIP>
+            <State>MA</State>
+            <Phone>781-544-3333</Phone>
+        </dealer>
+    </brand>
+    <brand name="Potomoc">
+        <dealer code="dealer02" name="Roth Brothers Corp.">
+            <Address1>14 Summer Street</Address1>
+            <Address2/>
+            <City>Waltham</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@rothcars.com.aetf</SalesEmail>
+            <Fax>781-555-5678</Fax>
+            <Mobile/>
+            <ZIP>02452</ZIP>
+            <State>MA</State>
+            <Phone>781-544-3333</Phone>
+        </dealer>
+        <dealer code="dealer01" name="Washington Wagons">
+            <Address1>1400 White House Drive</Address1>
+            <Address2/>
+            <City>Waltham</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@washingtonwagons.com.aetf</SalesEmail>
+            <Fax>781-555-1762</Fax>
+            <Mobile/>
+            <ZIP>02452</ZIP>
+            <State>MA</State>
+            <Phone>781-544-1630</Phone>
+        </dealer>
+    </brand>
+    <brand name="Fjord">
+        <dealer code="dealer03" name="Merriweather, Field &amp; Snowe">
+            <Address1>27 Industrial Park Road</Address1>
+            <Address2/>
+            <City>Malden</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@merriweatherfieldsnowe.com.aetf</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>02020</ZIP>
+            <State>MA</State>
+            <Phone>781-555-0001</Phone>
+        </dealer>
+        <dealer code="dealer01" name="River Crossing Cars">
+            <Address1>93 Charles River Road</Address1>
+            <Address2/>
+            <City>Boston</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@rivercrossing.com.aetf</SalesEmail>
+            <Fax>-555-</Fax>
+            <Mobile/>
+            <ZIP>MA</ZIP>
+            <State>02020</State>
+            <Phone>-555-</Phone>
+        </dealer>
+    </brand>
+    <brand name="Scubaroo">
+        <dealer code="dealer03" name="Merriweather, Field &amp; Snowe">
+            <Address1>27 Industrial Park Road</Address1>
+            <Address2/>
+            <City>Malden</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@merriweatherfieldsnowe.com.aetf</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <Mobile/>
+            <ZIP>02020</ZIP>
+            <State>MA</State>
+            <Phone>781-555-0001</Phone>
+        </dealer>
+        <dealer code="dealer01" name="Dans Diverse Drives">
+            <Address1>12 Loopy Lane</Address1>
+            <Address2/>
+            <City>Manchester</City>
+            <Country>USA</Country>
+            <SalesEmail>sales@triple-d-motors.com.aetf</SalesEmail>
+            <Fax>603-555-5213</Fax>
+            <Mobile/>
+            <ZIP>NH</ZIP>
+            <State>03051</State>
+            <Phone>603-555-8581</Phone>
+        </dealer>
+    </brand>
+    <brand name="motorgroupeast">
+        <dealer code="HQ" name="Motor Group East HQ">
+            <Address1>Suite 42, Ninety-third Floor, One Verylarge Tower</Address1>
+            <Address2>1010 Tenth Ave</Address2>
+            <City>Boston</City>
+            <Country>USA</Country>
+            <SalesEmail>info@motorgroupeast.com.aetf</SalesEmail>
+            <Fax>781-555-1234</Fax>
+            <ZIP>02002</ZIP>
+            <State>MA</State>
+            <Phone>781-555-0001</Phone>
+        </dealer>
+    </brand>
+</dealers>

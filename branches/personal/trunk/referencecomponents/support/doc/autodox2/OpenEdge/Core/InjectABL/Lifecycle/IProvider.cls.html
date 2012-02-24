@@ -1,0 +1,202 @@
+<html>
+  <head>
+    <title>IProvider</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL\Lifecycle</font>
+      <br />INTERFACE IProvider
+    </h2>
+    <p>INTERFACE OpenEdge.Core.InjectABL.Lifecycle.IProvider </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Type'>Type</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the type (or prototype) of instances the provider creates.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#create(openedge.core.injectabl.lifecycle.ilifecyclecontext)'> Create</a>
+          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an instance within the specified context.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#injectmethods(progress.lang.object,openedge.core.injectabl.lifecycle.ilifecyclecontext)'> InjectMethods</a>
+          </b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance, <a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dependency injection into a method.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#injectproperties(progress.lang.object,openedge.core.injectabl.lifecycle.ilifecyclecontext)'> InjectProperties</a>
+          </b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance, <a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dependency injection into a property.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Type'><!-- --></a>
+    <h3>Type</h3>
+    <code><a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> PUBLIC GET </code>
+    <dl>
+      <dd>Gets the type (or prototype) of instances the provider creates. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='create(openedge.core.injectabl.lifecycle.ilifecyclecontext)'><!-- --></a>
+    <h3>Create</h3>
+    <code>PUBLIC  <a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
+      <b>Create</b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext)
+    </code>
+    <dl>
+      <dd>Creates an instance within the specified context. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ILifecycleContext - The context used to create the object.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>Object The created instance.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='injectmethods(progress.lang.object,openedge.core.injectabl.lifecycle.ilifecyclecontext)'><!-- --></a>
+    <h3>InjectMethods</h3>
+    <code>PUBLIC  VOID
+      <b>InjectMethods</b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance, <a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext)
+    </code>
+    <dl>
+      <dd>Dependency injection into a method. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Object - The instance into which we inject values<br/>ILifecycleContext - The context containing the values to be injected<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='injectproperties(progress.lang.object,openedge.core.injectabl.lifecycle.ilifecyclecontext)'><!-- --></a>
+    <h3>InjectProperties</h3>
+    <code>PUBLIC  VOID
+      <b>InjectProperties</b>(<a href="../../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poInstance, <a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext)
+    </code>
+    <dl>
+      <dd>Dependency injection into a property. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Object - The instance into which we inject values<br/>ILifecycleContext - The context containing the values to be injected<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

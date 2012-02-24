@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <title>IPipeline</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL\Lifecycle</font>
+      <br />INTERFACE IPipeline
+    </h2>
+    <p>INTERFACE OpenEdge.Core.InjectABL.Lifecycle.IPipeline </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleStrategyCollection.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleStrategyCollection" target="classFrame">ILifecycleStrategyCollection</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Strategies'>Strategies</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the strategies that contribute to the activation and deactivation processes. *
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#activate(openedge.core.injectabl.lifecycle.ilifecyclecontext,object)'> Activate</a>
+          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activates the instance in the specified context.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#deactivate(openedge.core.injectabl.lifecycle.ilifecyclecontext,object)'> Deactivate</a>
+          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deactivates the instance in the specified context.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Strategies'><!-- --></a>
+    <h3>Strategies</h3>
+    <code><a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleStrategyCollection.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleStrategyCollection" target="classFrame">ILifecycleStrategyCollection</a> PUBLIC GET </code>
+    <dl>
+      <dd>Gets the strategies that contribute to the activation and deactivation processes. * <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='activate(openedge.core.injectabl.lifecycle.ilifecyclecontext,object)'><!-- --></a>
+    <h3>Activate</h3>
+    <code>PUBLIC  VOID
+      <b>Activate</b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+    </code>
+    <dl>
+      <dd>Activates the instance in the specified context. <p> </dd>
+      <dd><param name="context">The context.</param> <param name="reference">The instance reference.</param> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='deactivate(openedge.core.injectabl.lifecycle.ilifecyclecontext,object)'><!-- --></a>
+    <h3>Deactivate</h3>
+    <code>PUBLIC  VOID
+      <b>Deactivate</b>(<a href="../../../../OpenEdge/Core/InjectABL/Lifecycle/ILifecycleContext.cls.html" title="OpenEdge.Core.InjectABL.Lifecycle.ILifecycleContext" target="classFrame">ILifecycleContext</a> poContext, <a href="../../../../Object.cls.html" title="Object" target="classFrame">Object</a> poInstance)
+    </code>
+    <dl>
+      <dd>Deactivates the instance in the specified context. <p> </dd>
+      <dd><param name="context">The context.</param> <param name="reference">The instance reference.</param> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

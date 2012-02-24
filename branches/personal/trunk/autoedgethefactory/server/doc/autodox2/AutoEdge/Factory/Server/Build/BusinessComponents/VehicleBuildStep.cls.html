@@ -1,0 +1,429 @@
+<html>
+  <head>
+    <title>VehicleBuildStep</title>
+    <link rel='stylesheet' type='text/css' href='../../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>AutoEdge\Factory\Server\Build\BusinessComponents</font>
+      <br />CLASS VehicleBuildStep
+    </h2>
+    <p>CLASS AutoEdge.Factory.Server.Build.BusinessComponents.VehicleBuildStep abstract INHERITS <a href="../../../../../OpenEdge/BusinessComponent/WorkFlow/WorkStep.cls.html" title="OpenEdge.BusinessComponent.WorkFlow.WorkStep" target="classFrame">WorkStep</a> IMPLEMENTS <a href="../../../../../AutoEdge/Factory/Server/Build/BusinessComponents/IBuildVehicle.cls.html" title="AutoEdge.Factory.Server.Build.BusinessComponents.IBuildVehicle" target="classFrame">IBuildVehicle</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.BuildStatus'>BuildStatus</a>
+          </b> PUBLIC GET PROTECTED SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(derived, readonly) The current status
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>CHARACTER</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.OrderId'>OrderId</a>
+          </b> PUBLIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mandatory) OrderId passed in to constructor.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.ServiceMessageManager'>ServiceMessageManager</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ServiceMessageManager is used plentifully; we keep it as a property so that
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#buildfetchrequest()'> BuildFetchRequest</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#buildsaverequest()'> BuildSaveRequest</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#commitchanges()'> CommitChanges</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#disabledatasetforupdate(handle)'> DisableDatasetForUpdate</a>
+          </b>(HANDLE phDataset)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#enabledatasetforupdate(handle)'> EnableDatasetForUpdate</a>
+          </b>(HANDLE phDataset)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#fetchorder(character,OUTPUT_handle)'> FetchOrder</a>
+          </b>(CHARACTER pcOrderId, OUTPUT HANDLE phOrders)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse" target="classFrame">IWorkstepResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getresponse(longchar)'> GetResponse</a>
+          </b>(LONGCHAR pcMessageId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#performstep(openedge.commoninfrastructure.common.servicemessage.iworksteprequest)'> PerformStep</a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest" target="classFrame">IWorkstepRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#processsaveresponse(openedge.commoninfrastructure.common.servicemessage.isaveresponse)'> ProcessSaveResponse</a>
+          </b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a> poSaveResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#updateorderstatus(character,character)'> UpdateOrderStatus</a>
+          </b>(CHARACTER pcOrderId, CHARACTER pcStatus)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.BuildStatus'><!-- --></a>
+    <h3>BuildStatus</h3>
+    <code>CHARACTER PUBLIC GET PROTECTED SET </code>
+    <dl>
+      <dd>(derived, readonly) The current status <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.OrderId'><!-- --></a>
+    <h3>OrderId</h3>
+    <code>CHARACTER PUBLIC GET PRIVATE SET </code>
+    <dl>
+      <dd>(mandatory) OrderId passed in to constructor. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.ServiceMessageManager'><!-- --></a>
+    <h3>ServiceMessageManager</h3>
+    <code><a href="../../../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>The ServiceMessageManager is used plentifully; we keep it as a property so that <p> </dd>
+      <dd>we can get it whenever needed, without fuss. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='buildfetchrequest()'><!-- --></a>
+    <h3>BuildFetchRequest</h3>
+    <code>PROTECTED  <a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IFetchRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest" target="classFrame">IFetchRequest</a>
+      <b>BuildFetchRequest</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='buildsaverequest()'><!-- --></a>
+    <h3>BuildSaveRequest</h3>
+    <code>PROTECTED  <a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest" target="classFrame">ISaveRequest</a>
+      <b>BuildSaveRequest</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='commitchanges()'><!-- --></a>
+    <h3>CommitChanges</h3>
+    <code>PUBLIC  VOID
+      <b>CommitChanges</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='disabledatasetforupdate(handle)'><!-- --></a>
+    <h3>DisableDatasetForUpdate</h3>
+    <code>PROTECTED  VOID
+      <b>DisableDatasetForUpdate</b>(HANDLE phDataset)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='enabledatasetforupdate(handle)'><!-- --></a>
+    <h3>EnableDatasetForUpdate</h3>
+    <code>PROTECTED  VOID
+      <b>EnableDatasetForUpdate</b>(HANDLE phDataset)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='fetchorder(character,OUTPUT_handle)'><!-- --></a>
+    <h3>FetchOrder</h3>
+    <code>PROTECTED  VOID
+      <b>FetchOrder</b>(CHARACTER pcOrderId, OUTPUT HANDLE phOrders)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='getresponse(longchar)'><!-- --></a>
+    <h3>GetResponse</h3>
+    <code>OVERRIDE PUBLIC  <a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepResponse" target="classFrame">IWorkstepResponse</a>
+      <b>GetResponse</b>(LONGCHAR pcMessageId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='performstep(openedge.commoninfrastructure.common.servicemessage.iworksteprequest)'><!-- --></a>
+    <h3>PerformStep</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>PerformStep</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IWorkstepRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest" target="classFrame">IWorkstepRequest</a> poRequest)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='processsaveresponse(openedge.commoninfrastructure.common.servicemessage.isaveresponse)'><!-- --></a>
+    <h3>ProcessSaveResponse</h3>
+    <code>PROTECTED  VOID
+      <b>ProcessSaveResponse</b>(<a href="../../../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ISaveResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse" target="classFrame">ISaveResponse</a> poSaveResponse)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='updateorderstatus(character,character)'><!-- --></a>
+    <h3>UpdateOrderStatus</h3>
+    <code>PUBLIC  VOID
+      <b>UpdateOrderStatus</b>(CHARACTER pcOrderId, CHARACTER pcStatus)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

@@ -1,0 +1,11 @@
+#Fri Jan 20 13:47:32 EST 2012
+adapter-class=com.savvion.sbm.adapters.oe.OEAdapter
+map-configurator=com.savvion.sbm.adapters.framework.CAFGroupMapConfigurator
+adapter-configurator=com.savvion.sbm.adapters.oe.OEAdapterConfigurationDialog
+AdapterName=CaptureOrder
+log-level=10
+runtime-mapper=com.savvion.sbm.adapters.framework.GroupMapper
+AdapterCategory=OEAdapters
+icon=oe.png
+instance=true
+adaplet=false
