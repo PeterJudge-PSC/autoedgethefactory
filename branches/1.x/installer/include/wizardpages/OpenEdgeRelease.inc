@@ -20,7 +20,7 @@ var
 	I : integer;
 	startPos : integer;
   strMajorVer, strMinorVer : string;
-  intPos, intMajorVer : integer; 
+  intPos, intMajorVer, intOE11Ver : integer; 
 begin
 
 	OpenEdgeVersion := '';
@@ -34,6 +34,7 @@ begin
 
 	if RegGetSubkeyNames( HKEY_LOCAL_MACHINE, 'SOFTWARE\PSC\PROGRESS', OpenEdgeReleases ) then
 	begin
+    intOE11Ver := 0;
 		for I := 0 to ( GetArrayLength( OpenEdgeReleases ) - 1 ) do
 		begin
 			S := OpenEdgeReleases[ I ];
@@ -51,13 +52,16 @@ begin
       // anything from 11 onwards works
            ( intMajorVer >= 10 ) then 
 			begin
+        if ( intMajorVer = 11) then
+          intOE11Ver := I;
+
 				cbOpenEdgeRelease.Items.Add( S );
 			end;
 		end;
 
     // select first item 
     if ( cbOpenEdgeRelease.Items.Count > 0 ) then
-      cbOpenEdgeRelease.ItemIndex := 0;
+      cbOpenEdgeRelease.ItemIndex := intOE11Ver;
 	end
 	else
 	begin
@@ -73,17 +77,8 @@ end;
 
 function OpenEdgeRelease_NextButtonClick(Page: TWizardPage): Boolean;
 begin
-
 	OpenEdgeVersion := cbOpenEdgeRelease.Text;
-
-	{	Selection has to be made and has to fit '10.xx' at least	}
-	{	so this is four chars minimum.								}
-
-	if ( length( OpenEdgeVersion ) < 5 ) then
-		Result := false
-	else
-		Result := True;
-
+  Result := True;
 end;
 
 function OpenEdgeRelease_CreatePage(PreviousPageId: Integer): Integer;
