@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>IConnectionParameters</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\Common\Connection</font>
+      <br />INTERFACE IConnectionParameters
+    </h2>
+    <p>INTERFACE OpenEdge.CommonInfrastructure.Common.Connection.IConnectionParameters </p>
+    <dl>
+      <dd>------------------------------------------------------------------------ <p> </dd>
+      <dd>File        : IConnectionParameters Purpose     : A general interface for AppServer/DB/etc connection parameters Syntax      : Description : </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Author:</b>
+          </dt>
+          <dd>pjudgeCreated     : Thu Jan 13 10:41:05 EST 2011 Notes       : ---------------------------------------------------------------------- </dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LONGCHAR</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Options'>Options</a>
+          </b> PUBLIC GET SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This property contains a nicely-formatted string for use by the
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>LONGCHAR</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getconnectionstring()'> GetConnectionString</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Connection Manager will call GetConnectionString() on this
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Options'><!-- --></a>
+    <h3>Options</h3>
+    <code>LONGCHAR PUBLIC GET SET </code>
+    <dl>
+      <dd>This property contains a nicely-formatted string for use by the <p> </dd>
+      <dd>ABL CONNECT statement or method. </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='getconnectionstring()'><!-- --></a>
+    <h3>GetConnectionString</h3>
+    <code>PUBLIC  LONGCHAR
+      <b>GetConnectionString</b>()
+    </code>
+    <dl>
+      <dd>The Connection Manager will call GetConnectionString() on this <p> </dd>
+      <dd>object, which returns a nicely-formatted string for use by the ABL CONNECT statement. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>character A useable string of connection parameters.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

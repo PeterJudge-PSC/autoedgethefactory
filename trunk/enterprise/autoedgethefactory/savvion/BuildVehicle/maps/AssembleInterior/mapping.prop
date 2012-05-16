@@ -1,0 +1,11 @@
+#Tue Mar 15 13:45:53 EDT 2011
+adapter-class=com.savvion.sbm.adapters.webservice.WebServiceAdapter
+map-configurator=com.savvion.sbm.adapters.framework.GroupMapConfigurator
+adapter-configurator=com.savvion.sbm.adapters.webservice.WebServiceAdapterConfiguratorDialog
+AdapterName=PerformBuldVehicleWorkstep
+log-level=10
+runtime-mapper=com.savvion.sbm.adapters.framework.GroupMapper
+AdapterCategory=WebServiceAdapters
+icon=server_client_exchange.png
+instance=true
+adaplet=true

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pidl:description targetNamespace="urn:schemas-progress-com:bpm:appserverbinding:0001" serviceType="wsad:OEAppServerInvoke" xmlns:oedatatype="http://www.progress.com/adapters/oe" xmlns:pidl="http://www.progress.com/caf/idl1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsad="urn:schemas-progress-com:bpm:appserverbinding:0001">
+<pidl:types>
+
+<javaTypes xmlns:javatype="http://www.progress.com/adapters/javatypesystem" xmlns:jts="http://www.progress.com/adapters/idl1.0/javatype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.progress.com/adapters/oe" xmlns="http://www.progress.com/adapters/javatypesystem">
+    <javatype:javaType className="com.progress.lang.Memptr" extend="jts:Object" name="raw"/>
+    <javatype:javaType className="com.progress.lang.Handle" extend="jts:Object" name="handle"/>
+    <javatype:javaType className="com.progress.lang.Integer" extend="jts:Object" name="integer"/>
+    <javatype:javaType className="com.progress.lang.Date" extend="jts:Object" name="date"/>
+    <javatype:javaType className="com.progress.lang.Decimal" extend="jts:Object" name="decimal"/>
+    <javatype:javaType className="com.progress.lang.Character" extend="jts:Object" name="character"/>
+    <javatype:javaType className="com.progress.lang.Logical" extend="jts:Object" name="logical"/>
+    <javatype:javaType className="com.progress.lang.Int64" extend="jts:Object" name="int64"/>
+    <javatype:javaType className="com.progress.lang.Memptr" extend="jts:Object" name="memptr"/>
+    <javatype:javaType className="com.progress.lang.Character" extend="jts:Object" name="longchar"/>
+    <javatype:javaType className="com.progress.lang.Date" extend="jts:Object" name="datetime"/>
+    <javatype:javaType className="com.progress.lang.RowId" extend="jts:Object" name="rowid"/>
+    <javatype:javaType className="com.progress.lang.Date" extend="jts:Object" name="datetime-tz"/>
+</javaTypes>
+
+</pidl:types>
+  <pidl:interface name="com.progress.openedge.pdt.bpminterfaces">
+    <pidl:operation name="service_userlogin">
+      <pidl:input messageLabel="pcUserName" req="false" type="oedatatype:character">
+    </pidl:input>
+      <pidl:input messageLabel="pcUserDomain" req="false" type="oedatatype:character">
+    </pidl:input>
+      <pidl:input messageLabel="pcPassword" req="false" type="oedatatype:character">
+    </pidl:input>
+      <pidl:output messageLabel="pcUserContextId" req="false" type="oedatatype:longchar">
+    </pidl:output>
+    </pidl:operation>
+  </pidl:interface>
+  <pidl:binding name="com.progress.openedge.pdt.bpmbindings" interface="wsad:com.progress.openedge.pdt.bpminterfaces" type="urn:schemas-progress-com:bpm:appserverbinding:0001">
+<wsad:Operation isPersistent="false" useFullName="false">
+  <wsad:Name>service_userlogin</wsad:Name>
+  <wsad:ProcPath>OpenEdge\CommonInfrastructure\Server\</wsad:ProcPath>
+  <wsad:ProPath></wsad:ProPath>
+  <wsad:ProcExt>p</wsad:ProcExt>
+  <wsad:ProcDetail isCustomized="false" usesUnknownDefault="true" useRetVal="false" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true">
+    <wsad:Name>service_userlogin</wsad:Name>
+    <wsad:HelpString></wsad:HelpString>
+    <wsad:Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+      <wsad:Name>pcUserName</wsad:Name>
+      <wsad:OrigName>pcUserName</wsad:OrigName>
+      <wsad:Type>1</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
+      <wsad:Name>pcUserDomain</wsad:Name>
+      <wsad:OrigName>pcUserDomain</wsad:OrigName>
+      <wsad:Type>1</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
+      <wsad:Name>pcPassword</wsad:Name>
+      <wsad:OrigName>pcPassword</wsad:OrigName>
+      <wsad:Type>1</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+      <wsad:Name>pcUserContextId</wsad:Name>
+      <wsad:OrigName>pcUserContextId</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>2</wsad:Mode>
+    </wsad:Parameter>
+  </wsad:ProcDetail>
+</wsad:Operation>
+  </pidl:binding>
+</pidl:description>

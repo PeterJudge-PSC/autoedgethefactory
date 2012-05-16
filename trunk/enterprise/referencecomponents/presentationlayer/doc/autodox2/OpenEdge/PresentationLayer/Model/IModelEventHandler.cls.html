@@ -1,0 +1,441 @@
+<html>
+  <head>
+    <title>IModelEventHandler</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\PresentationLayer\Model</font>
+      <br />INTERFACE IModelEventHandler
+    </h2>
+    <p>INTERFACE OpenEdge.PresentationLayer.Model.IModelEventHandler </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#dataadderrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataAddErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is added to the model.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#dataaddhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataAddHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been added to the model.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datacommiterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataCommitErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is saved to a service.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datacommittedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataCommittedHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a FetchData()
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datadeleteerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataDeleteErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is deleted from the model
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datadeletehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataDeleteHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been removed
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataFetchedHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a SaveData()
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datafetcherrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataFetchErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is fetched from a service.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datasaveerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> DataSaveErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs when data is saved locally
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#datasavehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> DataSaveHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after a record has been saved to the model (local save,
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#servicerequestcompletedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'> ServiceRequestCompletedHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event fired after the Model received its response from a service request.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#servicerequesterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'> ServiceRequestErrorHandler</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This event fires when an error occurs on a service request.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='dataadderrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataAddErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataAddErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is added to the model. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='dataaddhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataAddHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataAddHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Fired after a record has been added to the model. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>ModelActionEventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datacommiterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataCommitErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataCommitErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is saved to a service. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datacommittedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataCommittedHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataCommittedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a FetchData() <p> </dd>
+      <dd>service request. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>ModelActionEventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datadeleteerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataDeleteErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataDeleteErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is deleted from the model <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datadeletehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataDeleteHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataDeleteHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Fired after a record has been removed <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>ModelActionEventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datafetchedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataFetchedHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataFetchedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a SaveData() <p> </dd>
+      <dd>service request. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>ModelActionEventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datafetcherrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataFetchErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataFetchErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is fetched from a service. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datasaveerrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>DataSaveErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataSaveErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>This event fires when an error occurs when data is saved locally <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='datasavehandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>DataSaveHandler</h3>
+    <code>PUBLIC  VOID
+      <b>DataSaveHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Fired after a record has been saved to the model (local save, <p> </dd>
+      <dd>not a commit). </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>ModelActionEventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='servicerequestcompletedhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelactioneventargs)'><!-- --></a>
+    <h3>ServiceRequestCompletedHandler</h3>
+    <code>PUBLIC  VOID
+      <b>ServiceRequestCompletedHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poSender, <a href="../../../OpenEdge/PresentationLayer/Common/ModelActionEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelActionEventArgs" target="classFrame">ModelActionEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>Event fired after the Model received its response from a service request. <p> </dd>
+      <dd>Individual events like DataFetched above will also fire. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The Model sending the event<br/>ModelActionEventArgs - Arguments pertinent to the event<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='servicerequesterrorhandler(openedge.commoninfrastructure.common.icomponent,openedge.presentationlayer.common.modelerroreventargs)'><!-- --></a>
+    <h3>ServiceRequestErrorHandler</h3>
+    <code>PUBLIC  VOID
+      <b>ServiceRequestErrorHandler</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IComponent.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponent" target="classFrame">IComponent</a> poComponent, <a href="../../../OpenEdge/PresentationLayer/Common/ModelErrorEventArgs.cls.html" title="OpenEdge.PresentationLayer.Common.ModelErrorEventArgs" target="classFrame">ModelErrorEventArgs</a> poEventArgs)
+    </code>
+    <dl>
+      <dd>This event fires when an error occurs on a service request. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IComponent - The model sending the events.<br/>ModelErrorEventArgs - Arguments containing the detail of the error.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
