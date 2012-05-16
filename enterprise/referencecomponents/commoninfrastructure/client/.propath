@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<propath version="11.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/propath.xsd">
+<propathentry env="all" kind="src" output="@{ROOT}\bin" path="@{ROOT}\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Common Infrastructure Shared\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Support\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Common Infrastructure Shared\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Support\src" platform="All"/>
+<propathentry env="all" kind="dir" path="@{ROOT}\tests" platform="All"/>
+<propathentry env="all" kind="con" path="com.openedge.pdt.text.DLC_PATHS" platform="All"/>
+<propathentry env="all" kind="folder" path="\ProRefactory" platform="All"/>
+</propath>

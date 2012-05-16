@@ -1,0 +1,363 @@
+<html>
+  <head>
+    <title>ServiceMessageManager</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\CommonInfrastructure\Common</font>
+      <br />CLASS ServiceMessageManager
+    </h2>
+    <p>CLASS OpenEdge.CommonInfrastructure.Common.ServiceMessageManager INHERITS <a href="../../../OpenEdge/CommonInfrastructure/Common/Service.cls.html" title="OpenEdge.CommonInfrastructure.Common.Service" target="classFrame">Service</a> IMPLEMENTS <a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceMessageManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceMessageManager" target="classFrame">IServiceMessageManager</a> , <a href="../../../OpenEdge/CommonInfrastructure/Common/IManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IManager" target="classFrame">IManager</a> </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.IServiceMessageManagerType'>IServiceMessageManagerType</a>
+          </b> STATIC GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this property in lieu of having to say Class:GetClass('....IServiceManager') every time
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.MessageConsumers'>MessageConsumers</a>
+          </b> PROTECTED GET PRIVATE SET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A (lookup) map of message ID's and their requestors.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>STATIC </code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'>CONSTRUCTOR </a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#createcomponent()'> CreateComponent</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#destroycomponent()'> DestroyComponent</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executerequest(openedge.commoninfrastructure.common.servicemessage.imessageconsumer,openedge.commoninfrastructure.common.servicemessage.iservicerequest)'> ExecuteRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageRequestor, <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequests)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes the request(s) asynchroronously.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executerequest(openedge.commoninfrastructure.common.servicemessage.iservicerequest)'> ExecuteRequest</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequests)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A synchronous/linear/connected service request call. Services a
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executeresponse(openedge.commoninfrastructure.common.servicemessage.iserviceresponse)'> ExecuteResponse</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> poResponse)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes responses for the message(s) requested earlier.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#grouprequestsbyservice(openedge.commoninfrastructure.common.servicemessage.iservicerequest,logical)'> GroupRequestsByService</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequests, LOGICAL plSyncRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Groups a set of requests by service. There's no sorting done on the service; the grouped
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.IServiceMessageManagerType'><!-- --></a>
+    <h3>IServiceMessageManagerType</h3>
+    <code><a href="../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> STATIC GET PRIVATE SET </code>
+    <dl>
+      <dd>Use this property in lieu of having to say Class:GetClass('....IServiceManager') every time <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='property.MessageConsumers'><!-- --></a>
+    <h3>MessageConsumers</h3>
+    <code><a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> PROTECTED GET PRIVATE SET </code>
+    <dl>
+      <dd>A (lookup) map of message ID's and their requestors. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>STATIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='(openedge.commoninfrastructure.common.iservicemanager,openedge.commoninfrastructure.common.icomponentinfo)'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/IServiceManager.cls.html" title="OpenEdge.CommonInfrastructure.Common.IServiceManager" target="classFrame">IServiceManager</a> poServiceManager, <a href="../../../OpenEdge/CommonInfrastructure/Common/IComponentInfo.cls.html" title="OpenEdge.CommonInfrastructure.Common.IComponentInfo" target="classFrame">IComponentInfo</a> poComponentInfo)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='createcomponent()'><!-- --></a>
+    <h3>CreateComponent</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>CreateComponent</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='destroycomponent()'><!-- --></a>
+    <h3>DestroyComponent</h3>
+    <code>OVERRIDE PUBLIC  VOID
+      <b>DestroyComponent</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executerequest(openedge.commoninfrastructure.common.servicemessage.imessageconsumer,openedge.commoninfrastructure.common.servicemessage.iservicerequest)'><!-- --></a>
+    <h3>ExecuteRequest</h3>
+    <code>PUBLIC  VOID
+      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IMessageConsumer.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IMessageConsumer" target="classFrame">IMessageConsumer</a> poMessageRequestor, <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequests)
+    </code>
+    <dl>
+      <dd>Executes the request(s) asynchroronously. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IMessageConsumer - The object initiating this request<br/>IServiceRequest - An array of the request(s) to be executed.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executerequest(openedge.commoninfrastructure.common.servicemessage.iservicerequest)'><!-- --></a>
+    <h3>ExecuteRequest</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a>
+      <b>ExecuteRequest</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequests)
+    </code>
+    <dl>
+      <dd>A synchronous/linear/connected service request call. Services a <p> </dd>
+      <dd>request in a synchronous manner. There are no no IMessageConsumers, and that whoever calls this method knows how to deal with the responses. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IServiceRequest - An array of the request(s) to be executed.<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IServiceResponse An array of response for the requests.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='executeresponse(openedge.commoninfrastructure.common.servicemessage.iserviceresponse)'><!-- --></a>
+    <h3>ExecuteResponse</h3>
+    <code>PUBLIC  VOID
+      <b>ExecuteResponse</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse" target="classFrame">IServiceResponse</a> poResponse)
+    </code>
+    <dl>
+      <dd>Executes responses for the message(s) requested earlier. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>poResponse - An array of request responses.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='grouprequestsbyservice(openedge.commoninfrastructure.common.servicemessage.iservicerequest,logical)'><!-- --></a>
+    <h3>GroupRequestsByService</h3>
+    <code>PROTECTED  <a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a>
+      <b>GroupRequestsByService</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/IServiceRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest" target="classFrame">IServiceRequest</a> poRequests, LOGICAL plSyncRequest)
+    </code>
+    <dl>
+      <dd>Groups a set of requests by service. There's no sorting done on the service; the grouped <p> </dd>
+      <dd>requests are created in the order in which they are found in the passed message collection. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IServiceRequest - An array of messages (requests) which are being grouped.<br/>logical -  Whether the request is synchronous or not. If not so,  maintain amap of the request IDs and the consumers. <br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>IMap A collection of service requests, keyed per service.</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

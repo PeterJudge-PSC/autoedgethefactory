@@ -1,0 +1,911 @@
+<html>
+  <head>
+    <title>IObjectOutput</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\Util</font>
+      <br />INTERFACE IObjectOutput
+    </h2>
+    <p>INTERFACE OpenEdge.Core.Util.IObjectOutput </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#reset()'> Reset</a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resets/reinitialises the output
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#write(OUTPUT_longchar)'> Write</a>
+          </b>(OUTPUT LONGCHAR pcStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes the serialized output to a CLOB
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#write(OUTPUT_memptr)'> Write</a>
+          </b>(OUTPUT MEMPTR pmStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes the serialized output to a memptr
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#write(character)'> Write</a>
+          </b>(CHARACTER pcFileName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes the serialized output to the specified file
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writechar(character)'> WriteChar</a>
+          </b>(CHARACTER pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writechararray(character)'> WriteCharArray</a>
+          </b>(CHARACTER pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedataset(handle)'> WriteDataset</a>
+          </b>(HANDLE phValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedate(date)'> WriteDate</a>
+          </b>(DATE ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedatearray(date)'> WriteDateArray</a>
+          </b>(DATE ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedatetime(datetime)'> WriteDateTime</a>
+          </b>(DATETIME ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedatetimearray(datetime)'> WriteDateTimeArray</a>
+          </b>(DATETIME ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedatetimetz(datetime-tz)'> WriteDateTimeTz</a>
+          </b>(DATETIME-TZ ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedatetimetzarray(datetime-tz)'> WriteDateTimeTzArray</a>
+          </b>(DATETIME-TZ ptValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedecimal(decimal)'> WriteDecimal</a>
+          </b>(DECIMAL pdValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writedecimalarray(decimal)'> WriteDecimalArray</a>
+          </b>(DECIMAL pdValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeenum(openedge.lang.enummember)'> WriteEnum</a>
+          </b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poMember)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writehandle(handle)'> WriteHandle</a>
+          </b>(HANDLE phValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writehandlearray(handle)'> WriteHandleArray</a>
+          </b>(HANDLE phValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeint(integer)'> WriteInt</a>
+          </b>(INTEGER piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeint64(int64)'> WriteInt64</a>
+          </b>(INT64 piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeint64array(int64)'> WriteInt64Array</a>
+          </b>(INT64 piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeintarray(integer)'> WriteIntArray</a>
+          </b>(INTEGER piValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writelogical(logical)'> WriteLogical</a>
+          </b>(LOGICAL plValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writelogicalarray(logical)'> WriteLogicalArray</a>
+          </b>(LOGICAL plValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writelongchar(longchar)'> WriteLongchar</a>
+          </b>(LONGCHAR pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writelongchararray(longchar)'> WriteLongcharArray</a>
+          </b>(LONGCHAR pcValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeobject(progress.lang.object)'> WriteObject</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write*() and Write*Array() methods to write individual members into the output.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeobjectarray(progress.lang.object)'> WriteObjectArray</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writerecid(recid)'> WriteRecid</a>
+          </b>(RECID prValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writerecidarray(recid)'> WriteRecidArray</a>
+          </b>(RECID prValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writerowid(rowid)'> WriteRowid</a>
+          </b>(ROWID prValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writerowidarray(rowid)'> WriteRowidArray</a>
+          </b>(ROWID prValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writetable(handle)'> WriteTable</a>
+          </b>(HANDLE phValue)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='reset()'><!-- --></a>
+    <h3>Reset</h3>
+    <code>PUBLIC  VOID
+      <b>Reset</b>()
+    </code>
+    <dl>
+      <dd>Resets/reinitialises the output <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='write(OUTPUT_longchar)'><!-- --></a>
+    <h3>Write</h3>
+    <code>PUBLIC  VOID
+      <b>Write</b>(OUTPUT LONGCHAR pcStream)
+    </code>
+    <dl>
+      <dd>Writes the serialized output to a CLOB <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>longchar - The CLOB into which to write the output.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='write(OUTPUT_memptr)'><!-- --></a>
+    <h3>Write</h3>
+    <code>PUBLIC  VOID
+      <b>Write</b>(OUTPUT MEMPTR pmStream)
+    </code>
+    <dl>
+      <dd>Writes the serialized output to a memptr <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>memptr - The memprt into which to write the output.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='write(character)'><!-- --></a>
+    <h3>Write</h3>
+    <code>PUBLIC  VOID
+      <b>Write</b>(CHARACTER pcFileName)
+    </code>
+    <dl>
+      <dd>Writes the serialized output to the specified file <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The name of a file to write the output into.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writechar(character)'><!-- --></a>
+    <h3>WriteChar</h3>
+    <code>PUBLIC  VOID
+      <b>WriteChar</b>(CHARACTER pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writechararray(character)'><!-- --></a>
+    <h3>WriteCharArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteCharArray</b>(CHARACTER pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedataset(handle)'><!-- --></a>
+    <h3>WriteDataset</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDataset</b>(HANDLE phValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedate(date)'><!-- --></a>
+    <h3>WriteDate</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDate</b>(DATE ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedatearray(date)'><!-- --></a>
+    <h3>WriteDateArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDateArray</b>(DATE ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedatetime(datetime)'><!-- --></a>
+    <h3>WriteDateTime</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDateTime</b>(DATETIME ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedatetimearray(datetime)'><!-- --></a>
+    <h3>WriteDateTimeArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDateTimeArray</b>(DATETIME ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedatetimetz(datetime-tz)'><!-- --></a>
+    <h3>WriteDateTimeTz</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDateTimeTz</b>(DATETIME-TZ ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedatetimetzarray(datetime-tz)'><!-- --></a>
+    <h3>WriteDateTimeTzArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDateTimeTzArray</b>(DATETIME-TZ ptValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedecimal(decimal)'><!-- --></a>
+    <h3>WriteDecimal</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDecimal</b>(DECIMAL pdValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writedecimalarray(decimal)'><!-- --></a>
+    <h3>WriteDecimalArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteDecimalArray</b>(DECIMAL pdValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeenum(openedge.lang.enummember)'><!-- --></a>
+    <h3>WriteEnum</h3>
+    <code>PUBLIC  VOID
+      <b>WriteEnum</b>(<a href="../../../OpenEdge/Lang/EnumMember.cls.html" title="OpenEdge.Lang.EnumMember" target="classFrame">EnumMember</a> poMember)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writehandle(handle)'><!-- --></a>
+    <h3>WriteHandle</h3>
+    <code>PUBLIC  VOID
+      <b>WriteHandle</b>(HANDLE phValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writehandlearray(handle)'><!-- --></a>
+    <h3>WriteHandleArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteHandleArray</b>(HANDLE phValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeint(integer)'><!-- --></a>
+    <h3>WriteInt</h3>
+    <code>PUBLIC  VOID
+      <b>WriteInt</b>(INTEGER piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeint64(int64)'><!-- --></a>
+    <h3>WriteInt64</h3>
+    <code>PUBLIC  VOID
+      <b>WriteInt64</b>(INT64 piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeint64array(int64)'><!-- --></a>
+    <h3>WriteInt64Array</h3>
+    <code>PUBLIC  VOID
+      <b>WriteInt64Array</b>(INT64 piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeintarray(integer)'><!-- --></a>
+    <h3>WriteIntArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteIntArray</b>(INTEGER piValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writelogical(logical)'><!-- --></a>
+    <h3>WriteLogical</h3>
+    <code>PUBLIC  VOID
+      <b>WriteLogical</b>(LOGICAL plValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writelogicalarray(logical)'><!-- --></a>
+    <h3>WriteLogicalArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteLogicalArray</b>(LOGICAL plValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writelongchar(longchar)'><!-- --></a>
+    <h3>WriteLongchar</h3>
+    <code>PUBLIC  VOID
+      <b>WriteLongchar</b>(LONGCHAR pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writelongchararray(longchar)'><!-- --></a>
+    <h3>WriteLongcharArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteLongcharArray</b>(LONGCHAR pcValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeobject(progress.lang.object)'><!-- --></a>
+    <h3>WriteObject</h3>
+    <code>PUBLIC  VOID
+      <b>WriteObject</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+    </code>
+    <dl>
+      <dd>Write*() and Write*Array() methods to write individual members into the output. <p> </dd>
+      <dd>(see note above). </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeobjectarray(progress.lang.object)'><!-- --></a>
+    <h3>WriteObjectArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteObjectArray</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writerecid(recid)'><!-- --></a>
+    <h3>WriteRecid</h3>
+    <code>PUBLIC  VOID
+      <b>WriteRecid</b>(RECID prValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writerecidarray(recid)'><!-- --></a>
+    <h3>WriteRecidArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteRecidArray</b>(RECID prValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writerowid(rowid)'><!-- --></a>
+    <h3>WriteRowid</h3>
+    <code>PUBLIC  VOID
+      <b>WriteRowid</b>(ROWID prValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writerowidarray(rowid)'><!-- --></a>
+    <h3>WriteRowidArray</h3>
+    <code>PUBLIC  VOID
+      <b>WriteRowidArray</b>(ROWID prValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writetable(handle)'><!-- --></a>
+    <h3>WriteTable</h3>
+    <code>PUBLIC  VOID
+      <b>WriteTable</b>(HANDLE phValue)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

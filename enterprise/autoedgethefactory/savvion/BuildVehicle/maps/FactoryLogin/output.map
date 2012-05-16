@@ -1,0 +1,3 @@
+<map version="1.3">
+  <param name="ContextId" type="java.lang.String" value="@OUT.responseContextId"/>
+</map>
