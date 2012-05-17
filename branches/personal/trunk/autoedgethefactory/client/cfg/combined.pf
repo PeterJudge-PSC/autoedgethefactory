@@ -1,6 +1,0 @@
-# PF for Combined client/server session
- -pf cfg\shared.pf
- 
- -db C:\Devarea\projects\OEBP\autoedgethefactory\server\db\aetf.db
- -T C:\Devarea\projects\OEBP\autoedgethefactory\client\temp
- -assemblies C:\Devarea\projects\OEBP\autoedgethefactory\client
