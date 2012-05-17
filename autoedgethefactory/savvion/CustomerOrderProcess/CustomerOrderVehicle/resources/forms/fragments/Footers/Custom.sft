@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Form SYSTEM "form.dtd" >
+<Form version="7.0">
+  <DataSources/>
+  <Validation/>
+  <head>
+    <link rel="stylesheet" type="bizsolo"/>
+  </head>
+  <body class="apbody">
+    <table id="table1" width="100%" align="center" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="64%" class="apbuttondarkbg">
+            <div align="center">
+              <control id="button_complete" type="button" source="" name="" format="complete"/>
+              <control id="button_save" type="button" source="" name="" format="save"/>
+              <control id="button_reset" type="button" source="" name="" format="reset"/>
+              <control id="button_cancel" type="button" source="" name="" format="cancel"/>
+              <control id="bizsite_assigneeName" type="text" source="" name="" width="106" height="33" visible="true" editable="true" required="false" format=""/>
+              <a href="javascript://" title="" target="" onclick="setUserControl(document.form.bizsite_assigneeName);searchUser()">
+                <control id="image1" type="img" source="" name="" width="32" height="32" url="@SBM_ROOT/bpmportal/css/apptheme01/images/icon_edit_user_search_single.gif"/>
+              </a>
+              <control id="button_reassign" type="button" source="" name="" format="reassign"/>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</Form>

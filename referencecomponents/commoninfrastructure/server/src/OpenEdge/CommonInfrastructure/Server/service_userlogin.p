@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /** ----------------------------------------------------------------------
     File        : OpenEdge/CommonInfrastructure/Server/service_userlogin.p
     Purpose     : 
@@ -18,14 +19,9 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IUserContext.
 
-using OpenEdge.Core.System.ApplicationError.
-using OpenEdge.Core.System.UnhandledError.
-
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params, defs -- **/
 define input  parameter pcUserName as character no-undo.
@@ -64,12 +60,5 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplicationError as ApplicationError:
-    return error oApplicationError:ResolvedMessageText().
-end catch.
-catch oError as Error:
-    define variable oUHError as UnhandledError no-undo.
-    oUHError = new UnhandledError(oError).
-    return error oUHError:ResolvedMessageText().
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i}
 /** -- eof -- **/

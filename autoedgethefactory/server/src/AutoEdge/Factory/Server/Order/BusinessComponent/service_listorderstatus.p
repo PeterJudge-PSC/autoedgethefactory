@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /** ------------------------------------------------------------------------
     File        : AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderstatus.p
     Purpose     : 
@@ -32,7 +33,6 @@ using OpenEdge.CommonInfrastructure.Common.IUserContext.
 using OpenEdge.CommonInfrastructure.Common.UserContext.
 using OpenEdge.CommonInfrastructure.Common.Service.
 
-using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.OperatorEnum.
@@ -41,8 +41,6 @@ using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.Assert.
 using OpenEdge.Lang.String.
 using Progress.Lang.Class.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params, defs -- **/
 /* AETF info */
@@ -109,15 +107,5 @@ error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue. 
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i}
 /** -- eof -- **/

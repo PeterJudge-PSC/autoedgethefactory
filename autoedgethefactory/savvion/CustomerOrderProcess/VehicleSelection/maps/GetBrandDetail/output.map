@@ -1,0 +1,14 @@
+<map version="1.3">
+  <param name="ExteriorMoonroof" type="java.lang.String" value="@pcMoonroof"/>
+  <param name="PremiumModels" type="java.lang.String" value="@pcConvertibleModels"/>
+  <param name="InteriorAccessories" type="java.lang.String" value="@pcInteriorAccessories"/>
+  <param name="CompactModels" type="java.lang.String" value="@pcCompactModels"/>
+  <param name="TruckModels" type="java.lang.String" value="@pcTruckModels"/>
+  <param name="ExteriorWheels" type="java.lang.String" value="@pcWheels"/>
+  <param name="DealerList" type="java.lang.String" value="@pcDealerNameList"/>
+  <param name="SUVModels" type="java.lang.String" value="@pcSuvModels"/>
+  <param name="InteriorSeatMaterial" type="java.lang.String" value="@pcInteriorTrimMaterial"/>
+  <param name="ExteriorColour" type="java.lang.String" value="@pcExteriorColour"/>
+  <param name="SedanModels" type="java.lang.String" value="@pcSedanModels"/>
+  <param name="InteriorTrimColour" type="java.lang.String" value="@pcInteriorTrimColour"/>
+</map>

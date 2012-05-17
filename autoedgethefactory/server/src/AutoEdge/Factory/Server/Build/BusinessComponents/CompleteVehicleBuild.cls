@@ -27,6 +27,10 @@ class AutoEdge.Factory.Server.Build.BusinessComponents.CompleteVehicleBuild inhe
         QualityControlCheckEngine().
         QualityControlCheckBody().
         QualityControlAnalyzeRepair().
+/*
+        OrderEntity:UpdateOrderLineStatus(OrderNum, 1, 'ORDER-BUILD-COMPLETE').
+        OrderEntity:UpdateOrderStatus(OrderNum, 'ORDER-BUILD-COMPLETE').
+*/
     end method.
     
     method protected void QualityControlCheckEngine():

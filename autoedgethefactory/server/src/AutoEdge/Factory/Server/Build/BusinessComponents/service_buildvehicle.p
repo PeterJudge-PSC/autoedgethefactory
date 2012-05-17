@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
     File        : service_buildvehicle.p
     Purpose     : 
@@ -66,4 +67,5 @@ if cast(oResponse[1], IServiceResponse):HasError then
 
 error-status:error = no.
 return.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i}
 /* EOF */

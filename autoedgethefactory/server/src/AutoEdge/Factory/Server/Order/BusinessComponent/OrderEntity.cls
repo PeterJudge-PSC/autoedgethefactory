@@ -9,20 +9,31 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.BusinessComponent.Entity.StandardBusinessEntity.
+using AutoEdge.Factory.Server.Order.BusinessComponent.IOrderEntity.
 
+using OpenEdge.BusinessComponent.Entity.StandardBusinessEntity.
 using OpenEdge.DataAccess.IDataAccess.
 
-using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IComponentInfo.
 
+using OpenEdge.Lang.OperatorEnum.
+using OpenEdge.Lang.JoinEnum.
+using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.RowStateEnum.
+using OpenEdge.Lang.Assert.
+using OpenEdge.Lang.String.
 
-class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits StandardBusinessEntity:
+class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits StandardBusinessEntity
+    implements IOrderEntity:
+        
     define temp-table eOrder no-undo before-table beOrder
         field OrderNum      as integer
         field OrderId       as character
@@ -58,7 +69,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         
         index idx1 as primary unique OrderNum.
     
-    @todo(task="refactor", action="merge OrderLine and FinishedItem into single BE table? ").
+    @todo(task="refactor", action="merge OrderLine and FinishedItem and Item into single BE table? ").
     define temp-table eOrderLine no-undo before-table beOrderLine
         field OrderId           as character
         field LineNum           as integer
@@ -78,6 +89,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         field ExternalId as character   /* This is likely to be the VIN */
         index idx1 as primary unique FinishedItemId.
     
+    @todo(task="refactor", action="merge ComponentItem and Item into single BE table? ").
     define temp-table eComponentItem no-undo before-table beComponentItem
         field ItemId as character
         field FinishedItemId as character
@@ -104,6 +116,15 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         data-relation for eFinishedItem, eComponentItem relation-fields (FinishedItemId, FinishedItemId)
         .
     
+    define override protected property DatasetHandle as handle no-undo        
+        get():
+            if not valid-handle(DatasetHandle) then
+               DatasetHandle = dataset dsOrder:handle.
+               
+            return DatasetHandle.
+        end get.
+        set.    
+
     constructor public OrderEntity(input poComponentInfo as IComponentInfo ):
         super (input poComponentInfo).
     end constructor.
@@ -112,96 +133,221 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         super(input poComponentInfo, input poDAO).
     end constructor.
 
-    method override protected handle CopyStaticDataset (output dataset-handle phDataset):
-        phDataset = dataset dsOrder:handle.
-    end method.
-
-	method override public ISaveResponse SaveData(input poRequest as ISaveRequest):
-	    define variable hVehicle as handle no-undo.
-	    define variable hFinishedItem as handle no-undo.
-	    define variable hItem as handle no-undo.
-	    define variable hDataset as handle no-undo.
-	    define variable hQuery as handle no-undo.
-	    define variable hOrder as handle no-undo.
-	    
-	    @todo(task="implement", action="").
-	    cast(poRequest, IServiceMessage):GetMessageData(output hDataset).
-	    hFinishedItem = hDataset:get-buffer-handle('eFinishedItem').
-	    hOrder = hDataset:get-buffer-handle('eOrder').
-	    
-	    create query hQuery.
-	    
-        /* make sure new records have a salesrep */
-	    hQuery:set-buffers(hOrder).
-	    hQuery:query-prepare(substitute('for each &1 where row-state(&1) eq &2',
-	                         hOrder:name,
-	                         RowStateEnum:Created:Value)).
-	    hQuery:query-open().
-	    
-	    hQuery:get-first().
-	    do while hOrder:available:
-            ValidateNewRow(hDataset, hOrder).
-	        hQuery:get-next().
-        end.
-        hQuery:query-close().
-        
-        hQuery:set-buffers(hFinishedItem).
-        hQuery:query-prepare(substitute('for each &1 ', hFinishedItem:name)).
-        hQuery:query-open().
-        
-        hQuery:get-first().
-        do while hFinishedItem:available:
-            ValidateNewRow(hDataset, hFinishedItem).
-            hQuery:get-next().
-        end.
-        
-		return super:SaveData(input poRequest).	
-        finally:
-            hQuery:query-close().
-            delete object hQuery.
-        end finally.
+    method override protected void BeforeSaveData(input poRequest as ISaveRequest):
+		super:BeforeSaveData(input poRequest).
+		
+        for each eComponentItem:
+            message eComponentItem.ItemId eComponentItem.Quantity
+                view-as alert-box.
+	   end.
 	end method.
-
+	
     method override public IFetchResponse GetData(input pcMessageId as longchar ):
         define variable oResponse as IFetchResponse no-undo.
-        define variable hOrder as handle no-undo.
-        define variable hOrderLine as handle no-undo.
-        define variable hItem as handle no-undo.
-        define variable hDataset as handle no-undo.
-        define variable hQuery as handle no-undo.
-
+        
         oResponse = super:GetData(input pcMessageId).
 
         /* Aggregate order total */
-        cast(oResponse, IServiceMessage):GetMessageData(output hDataset).
-
-        hOrderLine = hDataset:get-buffer-handle('eOrderLine').
-        hOrder = hDataset:get-buffer-handle('eOrder').
-
-        create query hQuery.
-
-        /* make sure new records have a salesrep */
-        hQuery:set-buffers(hOrderLine, hOrder).
-        hQuery:query-prepare('for each eOrderLine, first eOrder where eOrder.OrderId eq eOrderLine.OrderId ').
-        hQuery:query-open().
-        hQuery:get-first().
-
-        do while hOrderLine:available:
-            hOrder::OrderAmount = hOrder::OrderAmount
-                                + ( hOrderLine::Price * hOrderLine::Quantity
-                                    * (-1 * hOrderLine::Discount)).
-
-            hQuery:get-next().
+        for each eOrderLine,
+            first eOrder where eOrder.OrderId eq eOrderLine.OrderId:
+            eOrder.OrderAmount = eOrder.OrderAmount
+                                + ( eOrderLine.Price * eOrderLine.Quantity
+                                    * (-1 * eOrderLine.Discount)).
         end.
-        hQuery:query-close().
-        delete object hQuery.
-
+        
         return oResponse.        
 	end method.
 
-    method protected void ValidateNewRow(input phDataset as handle,
-                                         input phBuffer as handle):
-        /*eg */
+    method protected void BindReceivedDataset( input dataset dsOrder bind):
+        /* no body needed. the parameter passing does what we need. */
     end method.
 
+    method override protected void ReceiveDataset(input phDataset as handle):
+        BindReceivedDataset(dataset-handle phDataset).
+    end method.
+    
+    method public integer GetOrderNumFromId( input pcOrderId as character ):
+        define variable oRequest as IFetchRequest no-undo.
+        define variable cTableName as character no-undo.
+        define variable oTableRequest as ITableRequest no-undo.
+        
+        oRequest = new FetchRequest('Order').
+        
+        cTableName = 'eOrder'.
+        oTableRequest = new TableRequest(cTableName).
+        oRequest:TableRequests:Put(cTableName, oTableRequest).
+        oTableRequest:AddFilter(cTableName,
+                                'OrderId',
+                                OperatorEnum:IsEqual,
+                                new String(pcOrderId),
+                                DataTypeEnum:Character,
+                                JoinEnum:And).
+        FetchData(oRequest).
+                     
+        find first eOrder where eOrder.OrderId eq pcOrderId no-error.
+        if available eOrder then
+            return eOrder.OrderNum .
+	end method.
+	
+	method public void UpdateFinishedItemStatus( input piOrderNum as integer, input piLineNum as integer, input pcStatusCode as character ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void UpdateOrderLineStatus( input piOrderNum as integer, input piLineNum as integer, input pcStatusCode as character ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	method public void UpdateOrderStatus( input piOrderNum as integer, input pcStatusCode as character ):
+		
+		undo, throw new Progress.Lang.AppError("METHOD NOT IMPLEMENTED").
+
+	end method.
+	
+/**  Creates a vehicle order
+    
+        @param integer The order number 
+        @param character The dealer servicing this order
+        @param integer The customer placing this order
+        @param logical Is the order approved 
+        @parma longchar Additional instructions
+        @param longchar The opaque id of the model
+        @param longchar The opaque id of the trim material
+        @param longchar The opaque id of the trim colour
+        @param longchar[] The opaque ids of any accessories
+        @param longchar The opaque id of the paint colour
+        @param longchar The opaque id of the moonroof option
+        @param longchar The opaque id of the wheels selected  
+        @return character the opaque id of the newly-created order.*/
+    method public character CreateOrder(input piOrderNum as integer,
+                                      input pcDealerCode as character,
+                                      input pcSalesrepCode as character,
+                                      input piCustomerNumber as integer,
+                                      input plOrderApproved as logical,
+                                      input pcInstructions as longchar,
+                                      input pcModelId as character,
+                                      input pcInteriorTrimMaterial as character,
+                                      input pcInteriorTrimColour as character,
+                                      input pcInteriorAccessories as character extent,
+                                      input pcExteriorColour as character,
+                                      input pcMoonroof as character,
+                                      input pcWheels as character):
+        define variable cOrderId as character no-undo.
+        define variable cFinishedItemId as character no-undo.
+        define variable iMax as integer no-undo.
+        define variable iLoop as integer no-undo.
+        define variable dOrderAmount as decimal no-undo.
+        define variable oSaveResponse as ISaveResponse no-undo.
+                                 
+        Assert:ArgumentNotNullOrEmpty(pcModelId, 'Model').
+        Assert:ArgumentNotNullOrEmpty(pcDealerCode, 'Dealer').
+        Assert:ArgumentNotZero(piOrderNum, 'Order Number').
+                                                                    
+        EnableDatasetForUpdate().
+        
+        create eOrder.
+        assign cOrderId = guid(generate-uuid)
+               eOrder.OrderNum = piOrderNum
+               eOrder.OrderId = cOrderId
+               eOrder.EnteredDate = now
+               eOrder.OrderDate = today
+               eOrder.DealerCode = pcDealerCode
+               eOrder.Salesrepcode = pcSalesrepCode
+               eOrder.OrderStatus = 'ORDER-NEW'
+               eOrder.CustomerNum = piCustomerNumber
+               eOrder.Instructions = pcInstructions.
+            
+        create eFinishedItem.
+        assign
+            cFinishedItemId = guid(generate-uuid)
+            eFinishedItem.FinishedItemId = cFinishedItemId
+            eFinishedItem.ItemId = pcModelId
+            eFinishedItem.StatusDate = now
+            eFinishedItem.FinishedItemStatus = 'ORDER-NEW'.
+
+        /* orderline */
+        create eOrderLine.
+        assign
+            eOrderLine.OrderId = cOrderId
+            eOrderLine.LineNum = 1
+            eOrderLine.Quantity = 1
+            eOrderLine.ItemId = pcModelId
+            eOrderLine.FinishedItemId = cFinishedItemId
+            eOrderLine.OrderLineStatus = 'ORDER-NEW'.
+            
+        /* components */
+        CreateComponentItem(cFinishedItemId, pcInteriorTrimColour, 1).
+        CreateComponentItem(cFinishedItemId, pcInteriorTrimMaterial, 1).
+        CreateComponentItem(cFinishedItemId, pcExteriorColour, 1).
+        CreateComponentItem(cFinishedItemId, pcWheels, 1).
+        CreateComponentItem(cFinishedItemId, pcMoonroof, 1).
+            
+        iMax = extent(pcInteriorAccessories).
+        do iLoop = 1 to iMax:
+            CreateComponentItem(cFinishedItemId, pcInteriorAccessories[iLoop], 1).
+        end.
+        
+        DisableDatasetForUpdate().
+        oSaveResponse = SaveData(BuildSaveRequest()).
+        
+        CheckForSaveError(oSaveResponse).
+        
+        return cOrderId.                
+    end method.
+    
+    method private void CreateComponentItem (input pcFinishedItemId as character,
+                                             input pcItemId as character,
+                                             input pdQuantity as decimal):    
+        if pcItemId eq '' or pcItemId eq ? or pcItemId eq '<NULL>' then
+            return.
+                
+        find first eComponentItem where
+                   eComponentItem.ItemId eq pcItemId and
+                   eComponentItem.FinishedItemId eq pcFinishedItemId
+                   no-error.
+        if not available eComponentItem then
+        do:
+            create eComponentItem.
+            assign eComponentItem.ItemId = pcItemId
+                   eComponentItem.FinishedItemId = pcFinishedItemId.
+        end.
+        eComponentItem.Quantity = eComponentItem.Quantity + pdQuantity.
+    end method.
+    
+    /** Returns the amount of an order.
+    
+        @param integer The order ide
+        @return decimal The order amount  */
+    method public decimal GetOrderAmount(input piOrderNum as integer):
+        define variable oRequest as IFetchRequest no-undo.
+        define variable cTableName as character no-undo.
+        define variable oTableRequest as ITableRequest no-undo.
+        
+        if not IsOrderCached(piOrderNum) then
+        do:
+            oRequest = new FetchRequest('Order').
+            
+            cTableName = 'eOrder'.
+            oTableRequest = new TableRequest(cTableName).
+            oRequest:TableRequests:Put(cTableName, oTableRequest).
+            oTableRequest:AddFilter(cTableName,
+                                    'OrderNum',
+                                    OperatorEnum:IsEqual,
+                                    new String(string(piOrderNum)),
+                                    DataTypeEnum:Integer,
+                                    JoinEnum:And).
+            FetchData(oRequest).
+        end.
+                     
+        find first eOrder where eOrder.OrderNum eq piOrderNum no-error.
+        if available eOrder then
+            return eOrder.OrderAmount.
+    end method.
+    
+    method private logical IsOrderCached (input piOrderNum as integer):
+        find eOrder where eOrder.OrderNum eq piOrderNum no-error.
+        return available eOrder.
+    end method.
+    
 end class.

@@ -18,7 +18,7 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
 class AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsEntity inherits StandardBusinessEntity:
 
     /* Each eVehicle is an Item, actually */
-    define temp-table eVehicle no-undo
+    define temp-table eVehicle no-undo before-table eVehicleBefore
         field Brand as character
         field ItemId as character
         field VehicleName as character
@@ -28,7 +28,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsEntity inher
         index idx1 as primary unique ItemId
         .
     
-    define temp-table eItem no-undo
+    define temp-table eItem no-undo before-table eItemBefore
         field ItemId as character
         field ItemNum as integer
         field ItemName as character
@@ -38,7 +38,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsEntity inher
         index idx1 as primary unique ItemNum
         .
     
-    define temp-table eItemOption no-undo
+    define temp-table eItemOption no-undo before-table eItemOptionBefore
         field ItemId as character
         field ItemNum as integer
         field ChildItemId as character
@@ -55,7 +55,16 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsEntity inher
         /* single-level series of items and options */
         data-relation for eItemOption, eItem relation-fields (ChildItemId, ItemId)
         .
-    
+
+    define override protected property DatasetHandle as handle no-undo        
+        get():
+            if not valid-handle(DatasetHandle) then
+               DatasetHandle = dataset dsVehicleOptions:handle.
+               
+            return DatasetHandle.
+        end get.
+        set.    
+
     constructor public VehicleOptionsEntity(input poComponentInfo as IComponentInfo ):
         super (input poComponentInfo).
     end constructor.
@@ -67,5 +76,12 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.VehicleOptionsEntity inher
     method override protected handle CopyStaticDataset (output dataset-handle phDataset):
         phDataset = dataset dsVehicleOptions:handle.  
     end method.
-    
+
+    method protected void BindReceivedDataset( input dataset dsVehicleOptions bind):
+        /* no body needed. the parameter passing does what we need. */
+    end method.
+
+    method override protected void ReceiveDataset(input phDataset as handle):
+        BindReceivedDataset(dataset-handle phDataset).
+    end method.
 end class.
