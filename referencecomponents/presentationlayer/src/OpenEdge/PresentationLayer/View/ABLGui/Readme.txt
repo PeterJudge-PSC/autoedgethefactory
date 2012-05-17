@@ -1,1 +1,0 @@
-There might be a window.w in here, which provides std funcitonality for all ABL Gui windows.

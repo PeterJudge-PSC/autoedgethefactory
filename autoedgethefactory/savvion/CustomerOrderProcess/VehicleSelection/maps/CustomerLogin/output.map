@@ -1,7 +1,0 @@
-<map version="1.3">
-  <param name="CustomerEmail" type="java.lang.String" value="@pcCustomerEmail"/>
-  <param name="CustomerCreditLimit" type="com.progress.lang.Decimal" value="@pdCreditLimit"/>
-  <param name="ContextId" type="java.lang.String" value="@pcUserContextId"/>
-  <param name="CustomerId" type="java.lang.String" value="@pcCustNum"/>
-  <param name="CustomerName" type="java.lang.String" value="@pcCustomerName"/>
-</map>

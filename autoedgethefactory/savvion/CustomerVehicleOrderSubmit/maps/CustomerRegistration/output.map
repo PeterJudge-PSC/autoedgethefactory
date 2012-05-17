@@ -1,4 +1,0 @@
-<map version="1.3">
-  <param name="CustomerId" type="java.lang.String" value="@OUT.responseCustNum"/>
-  <param name="SalesrepCode" type="java.lang.String" value="@OUT.responseSalesRep"/>
-</map>

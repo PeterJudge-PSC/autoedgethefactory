@@ -1,7 +1,0 @@
-# AutoEdge|TheFactory Database Connection
--param CFGFILE=./autoedgethefactory/server/cfg/config.xml,CFGNAME=default
-
--pf ./autoedgethefactory/shared/cfg/shared.pf
--T  ./autoedgethefactory/server/temp
-# eof
- 

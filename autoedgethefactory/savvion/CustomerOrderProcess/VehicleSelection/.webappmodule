@@ -1,9 +1,0 @@
-#Tue Jan 17 15:13:52 EST 2012
-application.root=VehicleSelection
-module.name=VehicleSelection
-module.version=8
-application.mainappfile=VehicleSelection/WEB-INF/template/VehicleSelection.swt
-application.name=VehicleSelection
-module.type=com.savvion.studio.designer.module.webapp
-module.id=7668b9ff-979d-486a-a838-6a6484d1c793
-application.mainprocessname=VehicleSelection
