@@ -18,7 +18,7 @@ using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Collections.Iterator.
 
 
-class OpenEdge.Lang.Collections.Iterator implements IIterator :
+class OpenEdge.Lang.Collections.Iterator use-widget-pool implements IIterator :
     /*------------------------------------------------------------------------------
             Purpose:                                                                        
             Notes:                                                                        

@@ -114,6 +114,7 @@ Assert:ArgumentNotZero(piOrderNumber, 'Order Number').
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType)
                , IServiceManager).
 
+/* Are we who we say we are? Note that this should really happen on activate. activate doesn't run for state-free AppServers */
 oSecMgr = cast(oServiceMgr:GetService(SecurityManager:ISecurityManagerType), ISecurityManager).
 
 oSecMgr:UserLogin('admin',
@@ -122,6 +123,7 @@ oSecMgr:UserLogin('admin',
 
 oSecMgr:AuthoriseServiceAction('CaptureOrder', ServiceMessageActionEnum:SaveData).
 
+oServiceMessageManager = cast(oServiceMgr:GetService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
 oOrderEntity = cast(oServiceMgr:GetService(Class:GetClass('AutoEdge.Factory.Server.Order.BusinessComponent.IOrderEntity')), IOrderEntity).
 
 pcInteriorAccessories = trim(trim(pcInteriorAccessories, '['), ']').
@@ -147,6 +149,19 @@ pcOrderId = oOrderEntity:CreateOrder(piOrderNumber,
 
 pdOrderAmount = oOrderEntity:GetOrderAmount(piOrderNumber).
 
+FetchSchema(output dataset-handle mhOrderDataset).
+
+CreateEntityData(mhOrderDataset).
+
+SaveData(BuildSaveRequest()).
+
+/* Now get the amount of the newly-created order */
+FetchData(output dataset-handle mhOrderDataset).
+
+mhOrderBuffer = mhOrderDataset:get-buffer-handle('eOrder').
+
+mhOrderBuffer:find-first().
+pdOrderAmount = mhOrderBuffer::OrderAmount.
 oSecMgr:UserLogout(oSecMgr:CurrentUserContext).
 error-status:error = no.
 return.
