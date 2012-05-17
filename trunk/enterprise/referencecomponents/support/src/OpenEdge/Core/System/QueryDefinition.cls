@@ -139,8 +139,8 @@ class OpenEdge.Core.System.QueryDefinition
         
         @param QueryFilter The query filter used to filter the query. */
     method public void RemoveFilter (input poQueryFilter as QueryFilter):        
-        define buffer lbFilter for ttFilter
-        .
+        define buffer lbFilter for ttFilter.
+        
         if valid-object(poQueryFilter) then
         for each lbFilter where
                  lbFilter.BufferName = poQueryFilter:BufferName and

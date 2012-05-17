@@ -14,7 +14,7 @@ routine-level on error undo, throw.
 
 using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
-using OpenEdge.CommonInfrastructure.Server.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.AgentRequest.
