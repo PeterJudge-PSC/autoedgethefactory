@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<propath version="10.2B" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/propath.xsd">
-<propathentry env="all" kind="src" output="@{ROOT}\bin" path="@{ROOT}\src"/>
-<propathentry env="all" kind="dir" path="@{ROOT}\tests"/>
-<propathentry env="all" kind="con" path="com.openedge.pdt.text.DLC_PATHS"/>
-<propathentry env="all" kind="folder" path="\ProRefactory"/>
-</propath>

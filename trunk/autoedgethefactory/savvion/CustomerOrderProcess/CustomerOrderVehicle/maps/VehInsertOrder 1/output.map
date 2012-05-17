@@ -1,4 +1,0 @@
-<map version="1.3">
-  <param name="OrderId" type="java.lang.String" value="@OUT.responseOrderId"/>
-  <param name="OrderAmount" type="java.lang.Long" value="@OUT.responseOrderAmount"/>
-</map>
