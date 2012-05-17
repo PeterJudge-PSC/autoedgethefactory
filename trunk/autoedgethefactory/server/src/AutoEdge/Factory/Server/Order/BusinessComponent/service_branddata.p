@@ -1,4 +1,6 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
+
     File        : AutoEdge/Factory/Server/Order/BusinessComponent/service_branddata.p
     Purpose     :
 
@@ -18,7 +20,7 @@ using OpenEdge.CommonInfrastructure.Common.IServiceManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceManager.
 using OpenEdge.CommonInfrastructure.Common.IServiceMessageManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessageManager.
-using OpenEdge.CommonInfrastructure.Common.ISecurityManager.
+using OpenEdge.CommonInfrastructure.Server.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.SecurityManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest.
@@ -31,7 +33,6 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableContext.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 
-using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.IQueryDefinition.
 
 using OpenEdge.Lang.FillModeEnum.
@@ -41,8 +42,6 @@ using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params -- **/
 define input  parameter pcBrand as character no-undo.
@@ -328,20 +327,11 @@ do iLoop = 1 to iMax:
     end case.
 end.
 
+oSecMgr:UserLogout(oSecMgr:CurrentUserContext).
 error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue.
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i}
 /** -- eof -- **/
 

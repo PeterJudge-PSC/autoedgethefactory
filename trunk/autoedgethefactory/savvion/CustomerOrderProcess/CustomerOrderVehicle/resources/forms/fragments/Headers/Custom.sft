@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Form SYSTEM "form.dtd" >
+<Form version="7.0">
+  <DataSources/>
+  <Validation/>
+  <head>
+    <link rel="stylesheet" type="bizsolo"/>
+  </head>
+  <body class="apbody">
+    <table id="table9" width="100%" align="center" cellpadding="4" cellspacing="1" class="apsegtblinbg">
+      <tbody>
+        <tr>
+          <td width="16%" colspan="6" class="apsegtitle">
+            <div align="center">
+              <b>
+                <field type="portal" name="workitemName">Activity 1:item</field>
+              </b>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td width="16%" class="apseggenlabel">
+            <b>Instructions</b>
+          </td>
+          <td width="16%" colspan="5" class="apseggendata">
+            <field type="portal" name="bizsite_instruction">Instructions</field>
+          </td>
+        </tr>
+        <tr>
+          <td width="16%" class="apseggenlabel">
+            <b>Priority</b>
+          </td>
+          <td width="16%" class="apseggendata">
+            <field type="portal" name="bizsite_priority">Priority</field>
+          </td>
+          <td width="16%" class="apseggenlabel">
+            <b>Start Date</b>
+          </td>
+          <td width="16%" class="apseggendata">
+            <field type="portal" name="bizsite_startDate">Wed Dec 06 14:37:38 PST 2006</field>
+          </td>
+          <td width="16%" class="apseggenlabel">
+            <b>Due Date</b>
+          </td>
+          <td width="16%" class="apseggendata">
+            <field type="portal" name="bizsite_dueDate">Wed Dec 06 14:37:38 PST 2006</field>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</Form>

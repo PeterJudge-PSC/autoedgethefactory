@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Order/BusinessComponent/service_captureorder.p
     Purpose     :
@@ -12,6 +13,7 @@
   ----------------------------------------------------------------------*/
 routine-level on error undo, throw.
 
+using AutoEdge.Factory.Server.Order.BusinessComponent.IOrderEntity.    
 using AutoEdge.Factory.Common.CommonInfrastructure.UserTypeEnum.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceRequestError.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
@@ -24,7 +26,7 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchResponse.
-using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveRequest.
+using OpenEdge.CommonInfrastructure.Server.ISecurityManager.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.SaveRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
@@ -58,6 +60,7 @@ using OpenEdge.Lang.Assert.
 
 using Progress.Lang.AppError.
 using Progress.Lang.Error.
+using Progress.Lang.Class.
 
 /** -- params, variables -- **/
 define input parameter piOrderNumber as integer no-undo.
@@ -83,6 +86,11 @@ define variable oServiceMgr as IServiceManager no-undo.
 define variable oSecMgr as ISecurityManager no-undo.
 define variable mhOrderDataset as handle no-undo.
 define variable mhOrderBuffer as handle no-undo.
+define variable oOrderEntity as IOrderEntity no-undo.
+define variable cInteriorAccessories as character extent no-undo.
+define variable cSalesRepCode as character no-undo.
+define variable iMax as integer no-undo.
+define variable iLoop as integer no-undo.
 
 /* ***************************  Functions  *************************** */
 function GetSelectedOption returns character (input pcOptions as longchar):
@@ -368,7 +376,7 @@ end.
 
 /** -- validate defs -- **/
 Assert:ArgumentNotNullOrEmpty(pcBrand, 'Brand').
-Assert:ArgumentNonZero(piOrderNumber, 'Order Number').
+Assert:ArgumentNotZero(piOrderNumber, 'Order Number').
 
 /** -- main -- **/
 oServiceMgr = cast(ABLSession:Instance:SessionProperties:Get(ServiceManager:IServiceManagerType)
@@ -384,6 +392,30 @@ oSecMgr:UserLogin('admin',
 oSecMgr:AuthoriseServiceAction('CaptureOrder', ServiceMessageActionEnum:SaveData).
 
 oServiceMessageManager = cast(oServiceMgr:GetService(ServiceMessageManager:IServiceMessageManagerType), IServiceMessageManager).
+oOrderEntity = cast(oServiceMgr:GetService(Class:GetClass('AutoEdge.Factory.Server.Order.BusinessComponent.IOrderEntity')), IOrderEntity).
+
+pcInteriorAccessories = trim(trim(pcInteriorAccessories, '['), ']').
+iMax = num-entries(pcInteriorAccessories).
+extent(cInteriorAccessories) = iMax.
+do iLoop = 1 to iMax:
+    cInteriorAccessories[iLoop] = trim(entry(iLoop, pcInteriorAccessories)).
+end.
+
+pcOrderId = oOrderEntity:CreateOrder(piOrderNumber,
+                                     string(pcDealerCode),
+                                     cSalesRepCode,
+                                     int(pcCustomerId),
+                                     plOrderApproved,
+                                     pcInstructions,
+                                     GetSelectedOption(pcModel), /* ModelId */
+                                     string(pcInteriorTrimMaterial),
+                                     string(pcInteriorTrimColour),
+                                     cInteriorAccessories,
+                                     string(pcExteriorColour),
+                                     string(pcWheels),
+                                     string(pcMoonroof)).                                         
+
+pdOrderAmount = oOrderEntity:GetOrderAmount(piOrderNumber).
 
 FetchSchema(output dataset-handle mhOrderDataset).
 
@@ -399,23 +431,11 @@ mhOrderBuffer = mhOrderDataset:get-buffer-handle('eOrder').
 mhOrderBuffer:find-first().
 pdOrderAmount = mhOrderBuffer::OrderAmount.
 
+oSecMgr:UserLogout(oSecMgr:CurrentUserContext).
 error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue.
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
-
-finally:
-    delete object mhOrderDataset no-error.
-end finally.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i
+    &THROW-ERROR=true  }
 /** -- eof -- **/

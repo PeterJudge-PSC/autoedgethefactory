@@ -39,6 +39,14 @@ class AutoEdge.Factory.Server.Common.BusinessComponent.DealerEntity inherits Sta
 	define dataset dsDealer for eDealer, eSalesrep
 	   /*data-relation for eDealer, eSalesrep relation-fields(DealerId, DealerId)*/ .
     
+    define override protected property DatasetHandle as handle no-undo
+        get():
+            if not valid-handle(DatasetHandle) then
+               DatasetHandle = dataset dsDealer:handle.
+            
+            return DatasetHandle.
+        end get.
+        set.
 	constructor public DealerEntity(input poComponentInfo as IComponentInfo,
 	                                input poDAO as IDataAccess ):
 		super(input poComponentInfo, input poDAO).
@@ -48,8 +56,11 @@ class AutoEdge.Factory.Server.Common.BusinessComponent.DealerEntity inherits Sta
 		super(input poComponentInfo).
 	end constructor.
 	
-    method override protected handle CopyStaticDataset (output dataset-handle phDataset):
-        phDataset = dataset dsDealer:handle.  
+    method protected void BindReceivedDataset( input dataset dsDealer bind):
+        /* no body needed. the parameter passing does what we need. */
+    end method.
+    method override protected void ReceiveDataset(input phDataset as handle):
+        BindReceivedDataset(dataset-handle phDataset).
     end method.
     
 end class.

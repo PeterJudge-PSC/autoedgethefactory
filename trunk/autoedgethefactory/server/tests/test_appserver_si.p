@@ -79,12 +79,13 @@ run OpenEdge/CommonInfrastructure/Server/as_startup.p (SessionClientTypeEnum:App
 
 /*run test_userlogin (output moUC).*/
 /*run test_userlogout (input moUC).*/
-
 /*run test_customerlogin.*/
-
 /*run test_getbranddata ('fjord').*/
-/*run test_captureorder.*/
-run test_dealerdetail.
+/*run test_dealerdetail.*/
+/*run test_getorders ('dealer03').*/
+run test_captureorder.
+/*run test_O-OL-I_multifilter (input moUC[1]).*/
+/*run test_userlogout (input moUC).*/
 
 procedure test_captureorder:
     define VARIABLE piOrderNumber as integer no-undo.
@@ -105,7 +106,7 @@ procedure test_captureorder:
     define variable pcOrderId as character no-undo.
     define variable pdOrderAmount as decimal no-undo.    
     
-    piOrderNumber = 7.
+    piOrderNumber = 259.
     pcBrand = 'fjord'.
     pcDealerId = 'dealer03'.
     pcCustomerId = '8e1f00c4-ec87-119b-e011-c50e4ed40b4c'.
@@ -137,10 +138,9 @@ procedure test_captureorder:
                 input pcWheels, 
                 output pcOrderId ,
                 output pdOrderAmount). 
-                
     message
-    pcOrderId skip
-    pdOrderAmount
+    'pcOrderId =' pcOrderId skip
+    'pdOrderAmount=' pdOrderAmount
     view-as alert-box error title '[PJ DEBUG]'.                
     
 end procedure.
@@ -290,6 +290,23 @@ procedure test_dealerdetail:
         
 end procedure.     
 
+procedure test_O-OL-I_multifilter:
+    define input parameter poUC as IUserContext no-undo.
+    
+    define variable iOrderNum as integer extent 1 no-undo.
+    define variable hOrders as handle no-undo.
+    
+    iOrderNum[1] = 23532.
+    
+    run AutoEdge/Factory/Server/Order/BusinessComponent/service_orderbynumber.p (
+        iOrderNum,
+        poUC:ContextId,
+        output dataset-handle hOrders).
+        
+    hOrders:write-json('file', session:temp-dir + 'orders.json', true).
+    
+end procedure.
+
 procedure test_getbranddata:
     define input  parameter pcBrand as character no-undo.
     
@@ -332,6 +349,22 @@ error-status:get-message(1) skip(2)
 'pcExteriorColour' string(pcExteriorColour) skip(2)
 'pcWheels=' string(pcWheels) skip(2)
 view-as alert-box error title '[PJ DEBUG]'.                
+end procedure.
+
+
+procedure test_getorders:
+    define input  parameter cDealerCode as character no-undo.
+    def var mhOrders as handle.
+
+    run AutoEdge/Factory/Server/Order/BusinessComponent/service_listorderdealer.p
+                    (input cDealerCode,
+                     input moUC[1]:ContextId,
+                     output dataset-handle mhOrders).
+    message 
+    mhOrders
+    view-as alert-box.                     
+    mhOrders:write-json ('file', './orders.json', yes).                     
+
 end procedure.
 
 /** ----------------- **/

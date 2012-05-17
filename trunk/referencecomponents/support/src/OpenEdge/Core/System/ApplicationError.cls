@@ -46,6 +46,7 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
         this-object:Severity = ErrorSeverityEnum:Default:Value.
         
         LogFileName = session:temp-directory + '/' + 'error.log'.
+        this-object:ReturnValue = ResolvedMessageText().
     end constructor.
     
     constructor public ApplicationError(poInnerError as Error):               
@@ -59,7 +60,7 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
             put stream sLog unformatted ResolvedMessageText().
         output stream sLog close.
     end method.
-    
+
     method public void ShowError():
         /** This method should probably use a 'proper' message dialog; this
             might be a complete MVP application. For now, we simply use
@@ -180,6 +181,7 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
             oClone:AddMessage(GetMessage(iLoop), iLoop).
         end.
         oClone:Severity = this-object:Severity.
+        oClone:ReturnValue = this-object:ReturnValue.
         
         return oClone.
     end method.

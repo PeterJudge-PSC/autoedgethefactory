@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../conf/resources/common/widgets.xsd">
+    <graphical name="TaskTime">
+        <description>AETFVehicleOrder Task Time</description>
+        <category>AETFVehicleOrder</category>
+        <title>Vehicle Order Task Time</title>
+        <width>450</width>
+        <height>200</height>
+        <charttype>verticalBar3D</charttype>
+        <sqlquery>select b.workstep_name, round(avg(b.duration), 1) "Duration" from processtemplate a, workstep b, processworkstepinfo c where a.process_template_id = b.process_template_id and a.process_template_id = c.process_template_id and a.process_template_name = 'CustomerOrderVehicle' and b.status='W_COMPLETED' and c.workstep_type = 'ATOMIC' and b.workstep_name = c.workstep_name group by b.workstep_name</sqlquery>
+        <drilldownurl target="inline">/sbm/bpmportal/management/report_generator_timeanalysis.jsp?ApplicationName=CustomerOrderVehicle&amp;DateRange=All&amp;OutputFormat=HTML&amp;SummaryType=Workstep&amp;TimeAnalysisType=Completion%20Time</drilldownurl>
+        <jsp>/bpmportal/common/DefaultGraphicalWidget.jsp</jsp>
+        <properties/>
+    </graphical>
+    <graphical name="RevenueRecognition">
+        <description>RevenueRecognition</description>
+        <category>CustomerOrderVehicle</category>
+        <title>Revenue Recognition</title>
+        <width>450</width>
+        <height>200</height>
+        <charttype>pie3D</charttype>
+        <sqlquery>select decode(status, 'PI_ACTIVATED', 'Receivables', 'PI_COMPLETED', 'Realized') "Status", sum(OrderAmount) "Sales Revenue" from CustomerOrderVehicle a, processinstance b where a.process_instance_id=b.process_instance_id group by status</sqlquery>
+        <drilldownurl target="popup">foo.jsp</drilldownurl>
+        <jsp>/bpmportal/common/DefaultGraphicalWidget.jsp</jsp>
+        <properties/>
+    </graphical>
+    <graphical name="InventoryControl">
+        <description>Inventory control widget</description>
+        <category>CustomerOrderVehicle</category>
+        <title>Inventory Control</title>
+        <width>450</width>
+        <height>200</height>
+        <charttype>pie3D</charttype>
+        <sqlquery>select decode(VehicleInStock, '1', 'In Stock', '0', 'Build-to-Order') "Status", count(*) "Number of Orders" from CustomerOrderVehicle group by VehicleInStock</sqlquery>
+        <drilldownurl target="inline">foo.jsp</drilldownurl>
+        <jsp>/bpmportal/common/DefaultGraphicalWidget.jsp</jsp>
+        <properties/>
+    </graphical>
+</widgets>

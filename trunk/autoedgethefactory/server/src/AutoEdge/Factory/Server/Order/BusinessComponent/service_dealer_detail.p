@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Server/Order/BusinessComponent/service_dealer_detail.p
     Purpose     : Returns details about a single dealer.
@@ -30,7 +31,6 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequest.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
 
-using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.IQueryDefinition.
 
 using OpenEdge.Lang.OperatorEnum.
@@ -39,8 +39,6 @@ using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
-using Progress.Lang.AppError.
-using Progress.Lang.Error.
 
 /** -- params -- **/
 define input parameter pcBrand as character no-undo.
@@ -150,7 +148,7 @@ do:
                             UserTypeEnum:Customer:ToString(),
                             pcBrand)
            cUserPassword = 'letmein'.
-    cast(oSecMgr, OpenEdge.CommonInfrastructure.Common.ISecurityManager):UserLogin(cUserName, cUserDomain, cUserPassword).
+    oSecMgr:UserLogin(cUserName, cUserDomain, cUserPassword).
 end.
 else
     oSecMgr:EstablishSession(pcUserContextId).
@@ -173,19 +171,14 @@ do iLoop = 1 to iMax:
     end case.
 end.
 
+if pcUserContextId eq '' or pcUserContextId eq ? or pcUserContextId eq '<NULL>' then
+    oSecMgr:UserLogout(oSecMgr:CurrentUserContext).
+    
 error-status:error = no.
 return.
 
 /** -- error handling -- **/
-catch oApplError as ApplicationError:
-    return error oApplError:ResolvedMessageText().
-end catch.
-
-catch oAppError as AppError:
-    return error oAppError:ReturnValue.
-end catch.
-
-catch oError as Error:
-    return error oError:GetMessage(1).
-end catch.
+{OpenEdge/CommonInfrastructure/Server/service_returnerror.i
+    &LOG-ERROR=true
+}
 /** -- eof -- **/

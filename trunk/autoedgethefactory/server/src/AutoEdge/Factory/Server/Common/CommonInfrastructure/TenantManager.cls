@@ -69,7 +69,10 @@ class AutoEdge.Factory.Server.Common.CommonInfrastructure.TenantManager inherits
             undo, throw new DoesNotExistError(substitute('tenant (name: &1)', pcTenantName)).
         
         oTenantId = new TypedMap(String:Type, String:Type).
-        oTenantId:Put(new String('aetf'), new String(lbTenant.TenantId)).
+        oTenantId:Put(
+            /* typically resolves to 'aetf' */
+            new String(buffer lbTenant:dbname),
+            new String(lbTenant.TenantId)).
         
         return oTenantId.
     end method.
