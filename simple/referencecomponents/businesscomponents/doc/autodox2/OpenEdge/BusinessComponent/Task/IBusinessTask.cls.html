@@ -1,0 +1,203 @@
+<html>
+  <head>
+    <title>IBusinessTask</title>
+    <link rel='stylesheet' type='text/css' href='../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\BusinessComponent\Task</font>
+      <br />INTERFACE IBusinessTask
+    </h2>
+    <p>INTERFACE OpenEdge.BusinessComponent.Task.IBusinessTask </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Services'>Services</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains a collection of the entities that this Task knows about and operates on with.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#executetask(openedge.commoninfrastructure.common.servicemessage.itaskrequest)'> ExecuteTask</a>
+          </b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITaskRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITaskRequest" target="classFrame">ITaskRequest</a> poRequest)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes a requested task
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITaskResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITaskResponse" target="classFrame">ITaskResponse</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#gettaskresponse(longchar)'> GetTaskResponse</a>
+          </b>(LONGCHAR pcMessageId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Response complement method for ExecuteTask.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#setservice(character,openedge.commoninfrastructure.common.iservice)'> SetService</a>
+          </b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a business entity into the Services map. Used to work around
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Services'><!-- --></a>
+    <h3>Services</h3>
+    <code><a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> PUBLIC GET </code>
+    <dl>
+      <dd>Contains a collection of the entities that this Task knows about and operates on with. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='executetask(openedge.commoninfrastructure.common.servicemessage.itaskrequest)'><!-- --></a>
+    <h3>ExecuteTask</h3>
+    <code>PUBLIC  VOID
+      <b>ExecuteTask</b>(<a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITaskRequest.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITaskRequest" target="classFrame">ITaskRequest</a> poRequest)
+    </code>
+    <dl>
+      <dd>Executes a requested task <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>ITaskRequest - The request for this task<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='gettaskresponse(longchar)'><!-- --></a>
+    <h3>GetTaskResponse</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/CommonInfrastructure/Common/ServiceMessage/ITaskResponse.cls.html" title="OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITaskResponse" target="classFrame">ITaskResponse</a>
+      <b>GetTaskResponse</b>(LONGCHAR pcMessageId)
+    </code>
+    <dl>
+      <dd>Response complement method for ExecuteTask. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The message id for the *Task* request/response<br/></dd>
+          <dt>
+            <b>Returns:</b>
+          </dt>
+          <dd>ITaskResponse The response</dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='setservice(character,openedge.commoninfrastructure.common.iservice)'><!-- --></a>
+    <h3>SetService</h3>
+    <code>PUBLIC  VOID
+      <b>SetService</b>(CHARACTER pcService, <a href="../../../OpenEdge/CommonInfrastructure/Common/IService.cls.html" title="OpenEdge.CommonInfrastructure.Common.IService" target="classFrame">IService</a> poService)
+    </code>
+    <dl>
+      <dd>Sets a business entity into the Services map. Used to work around <p> </dd>
+      <dd>the lack of dynamic property invocation in the ABL in 10.2Bx. </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The service name represented by the entity<br/>IService - The service used. Typically an entity<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>

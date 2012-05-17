@@ -1,0 +1,353 @@
+<html>
+  <head>
+    <title>IBindingRoot</title>
+    <link rel='stylesheet' type='text/css' href='../../../../stylesheet.css' title='Style' />
+  </head>
+  <body>
+    <table border='0' width='100%' cellpadding='1' cellspacing='0' summary=''>
+      <tr>
+        <td colspan='2' bgcolor='#EEEEFF' class='NavBarCell1'>
+          <table border='0' cellpadding='0' cellspacing='3' summary=''>
+            <tr align='center' valign='top'>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='../../../../overview-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Overview</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#EEEEFF' class='NavBarCell1'>
+                <a href='package-summary.html'>
+                  <font class='NavBarFont1'>
+                    <b>Package</b>
+                  </font>
+                </a>&nbsp;
+              </td>
+              <td bgcolor='#FFFFFF' class='NavBarCell1Rev'>
+                <font class='NavBarFont1Rev'>
+                  <b>Unit</b>
+                </font>&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <h2>
+      <font size='-1'>OpenEdge\Core\InjectABL\Binding</font>
+      <br />INTERFACE IBindingRoot
+    </h2>
+    <p>INTERFACE OpenEdge.Core.InjectABL.Binding.IBindingRoot </p>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="property_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Property Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#property.Bindings'>Bindings</a>
+          </b> PUBLIC GET 
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A collection of bindings, keyed by the service they bind to.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="method_summary"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+				<B>Method Summary</B></FONT></TH>
+				</TR>
+				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#addbinding(openedge.core.injectabl.binding.ibinding)'> AddBinding</a>
+          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registers the specified binding.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#bind(character)'> Bind</a>
+          </b>(CHARACTER pcService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Declares a binding from the service to itself.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#bind(progress.lang.class)'> Bind</a>
+          </b>(<a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Declares a binding from the service to itself.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#rebind(character)'> Rebind</a>
+          </b>(CHARACTER pcService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes any existing bindings for the specified service, and declares a new one.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#rebind(progress.lang.class)'> Rebind</a>
+          </b>(<a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes any existing bindings for the specified service, and declares a new one.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#removebinding(openedge.core.injectabl.binding.ibinding)'> RemoveBinding</a>
+          </b>(<a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unregisters the specified binding.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#unbind(character)'> Unbind</a>
+          </b>(CHARACTER pcService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unregisters all bindings for the specified service.
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#unbind(progress.lang.class)'> Unbind</a>
+          </b>(<a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unregisters all bindings for the specified service.
+      </td>
+    </tr>
+				</TABLE>&nbsp;<P>
+				
+				<A NAME="property_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Property Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='property.Bindings'><!-- --></a>
+    <h3>Bindings</h3>
+    <code><a href="../../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> PUBLIC GET </code>
+    <dl>
+      <dd>A collection of bindings, keyed by the service they bind to. <p> </dd>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+				<A NAME="method_detail"><!-- --></A>
+				<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+				<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+				<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+				<B>Method Detail</B></FONT></TH>
+				</TR></TABLE>
+				
+    <a name='addbinding(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>AddBinding</h3>
+    <code>PUBLIC  VOID
+      <b>AddBinding</b>(<a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>Registers the specified binding. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IBinding - The binding to add.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='bind(character)'><!-- --></a>
+    <h3>Bind</h3>
+    <code>PUBLIC  <a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a>
+      <b>Bind</b>(CHARACTER pcService)
+    </code>
+    <dl>
+      <dd>Declares a binding from the service to itself. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The service to bind.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='bind(progress.lang.class)'><!-- --></a>
+    <h3>Bind</h3>
+    <code>PUBLIC  <a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a>
+      <b>Bind</b>(<a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>Declares a binding from the service to itself. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - The service to bind.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='rebind(character)'><!-- --></a>
+    <h3>Rebind</h3>
+    <code>PUBLIC  <a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a>
+      <b>Rebind</b>(CHARACTER pcService)
+    </code>
+    <dl>
+      <dd>Removes any existing bindings for the specified service, and declares a new one. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The service to re-bind. *<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='rebind(progress.lang.class)'><!-- --></a>
+    <h3>Rebind</h3>
+    <code>PUBLIC  <a href="../../../../OpenEdge/Core/InjectABL/Binding/IBindingSyntax.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBindingSyntax" target="classFrame">IBindingSyntax</a>
+      <b>Rebind</b>(<a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>Removes any existing bindings for the specified service, and declares a new one. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - The service to re-bind. *<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='removebinding(openedge.core.injectabl.binding.ibinding)'><!-- --></a>
+    <h3>RemoveBinding</h3>
+    <code>PUBLIC  VOID
+      <b>RemoveBinding</b>(<a href="../../../../OpenEdge/Core/InjectABL/Binding/IBinding.cls.html" title="OpenEdge.Core.InjectABL.Binding.IBinding" target="classFrame">IBinding</a> poBinding)
+    </code>
+    <dl>
+      <dd>Unregisters the specified binding. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>IBinding - The binding to remove.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='unbind(character)'><!-- --></a>
+    <h3>Unbind</h3>
+    <code>PUBLIC  VOID
+      <b>Unbind</b>(CHARACTER pcService)
+    </code>
+    <dl>
+      <dd>Unregisters all bindings for the specified service. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>character - The service to unbind.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='unbind(progress.lang.class)'><!-- --></a>
+    <h3>Unbind</h3>
+    <code>PUBLIC  VOID
+      <b>Unbind</b>(<a href="../../../../Progress/Lang/Class.cls.html" title="Progress.Lang.Class" target="classFrame">Class</a> poService)
+    </code>
+    <dl>
+      <dd>Unregisters all bindings for the specified service. <p> </dd>
+      <dd>
+        <dl><!-- -->
+          <dt>
+            <b>Parameters:</b>
+          </dt>
+          <dd>Class - The service to unbind.<br/></dd>
+        </dl>
+      </dd>
+    </dl>
+    <hr />
+  </body>
+</html>
