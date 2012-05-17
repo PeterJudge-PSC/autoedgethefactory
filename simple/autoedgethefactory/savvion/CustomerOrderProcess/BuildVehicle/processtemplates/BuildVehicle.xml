@@ -1,0 +1,1864 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Process SYSTEM "../../common/processtemplates/processTemplate.dtd">
+<Process name="BuildVehicle" type="BIZLOGIC">
+  <Description>AutoEdge|TheFactory vehicle build process. The vehicle bulid steps are taken from http://www.madehow.com/Volume-1/Automobile.html .&#13;
+</Description>
+  <Application name="BuildVehicle"/>
+  <Category level="0">AutoEdge</Category>
+  <Category level="1">Factory</Category>
+  <Group/>
+  <Manager>@CREATOR</Manager>
+  <EstimatedDuration>1d</EstimatedDuration>
+  <TimeCreated>1326487747116</TimeCreated>
+  <Author>pjudge</Author>
+  <Version>BuildVehicle</Version>
+  <Attributes>
+    <Attribute name="ProcessType" required="true">
+      <Label>Process Type</Label>
+      <Description>Type of the Process</Description>
+      <Value>BusinessProcess</Value>
+    </Attribute>
+    <Attribute name="Objective" required="false">
+      <Label>Objective</Label>
+      <Description>Objective for developing this process model. E.g. Objective is to automate order processing</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Goal" required="false">
+      <Label>Goal</Label>
+      <Description>The goal of this process model. E.g. Goal is to reduce order processing cost by 10%</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="OrganizationalUnit" required="false">
+      <Label>Organizational Unit</Label>
+      <Description>The organizational unit that owns this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Influencers" required="false">
+      <Label>Influencers</Label>
+      <Description>People who have influenced development of this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Risks" required="false">
+      <Label>Risks</Label>
+      <Description>Risks associated with this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Rewards" required="false">
+      <Label>Rewards</Label>
+      <Description>Potential rewards on investment for this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Executable" required="false">
+      <Label>Executable</Label>
+      <Description>Can the Process  Ever be made executable?</Description>
+      <Value>Yes</Value>
+    </Attribute>
+  </Attributes>
+  <Alerts>
+    <Alert name="Default">
+      <AlertSeverity>High</AlertSeverity>
+      <AlertMessage>This is the default alert.</AlertMessage>
+      <AlertDescription/>
+      <AlertCondition type="java:expression"/>
+      <AlertDelivery type="sbm">
+        <AlertRecipient type="USER">${@CREATOR}</AlertRecipient>
+      </AlertDelivery>
+    </Alert>
+  </Alerts>
+  <AtomicWS height="36" name="Start" width="36" worktime="false" x="72" y="36">
+    <AtomicType>START</AtomicType>
+    <Priority>MEDIUM</Priority>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>VehicleBrand</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="VehicleBrand" label="SelectedVehicleBrand:" password="false" required="true" size="20" type="text">
+      <Label>SelectedVehicleBrand:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)"/>
+  </AtomicWS>
+  <AtomicWS height="60" name="CompleteAssembleBody" width="168" worktime="false" x="396" y="324">
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>FactoryGroup</Performer>
+    <PerformBy>ANY</PerformBy>
+    <PerformingApp type="JSP">CompleteAssembleBody.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>BuildStatus</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="CompleteAssembleChassis" width="168" worktime="false" x="396" y="228">
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>FactoryGroup</Performer>
+    <PerformBy>ANY</PerformBy>
+    <PerformingApp type="JSP">CompleteAssembleChassis.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>BuildStatus</Datainput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="CompleteAssembleInterior" width="168" worktime="false" x="396" y="516">
+    <Label>CompleteAssembleInterior</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>FactoryGroup</Performer>
+    <PerformBy>ANY</PerformBy>
+    <PerformingApp type="JSP">CompleteAssembleInterior.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>BuildStatus</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="CompleteCompleteVehicleBuild" width="168" worktime="false" x="396" y="720">
+    <Label>CompleteCompleteVehicleBuild</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>FactoryGroup</Performer>
+    <PerformBy>ANY</PerformBy>
+    <PerformingApp type="JSP">CompleteCompleteVehicleBuild.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>VIN</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>BuildStatus</Datainput>
+    <Dataoutput>VIN</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Format editable="true" input="VIN" label="VIN:" password="false" required="false" size="20" type="text">
+      <Label>VIN:</Label>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+    </Format>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="CompleteMateAssembledComponents" width="168" worktime="false" x="396" y="612">
+    <Label>CompleteMateAssembledComponents</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>FactoryGroup</Performer>
+    <PerformBy>ANY</PerformBy>
+    <PerformingApp type="JSP">CompleteMateAssembledComponents.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>BuildStatus</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="CompletePaintVehicle" width="168" worktime="false" x="396" y="420">
+    <Label>CompletePaintVehicle</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>FactoryGroup</Performer>
+    <PerformBy>ANY</PerformBy>
+    <PerformingApp type="JSP">CompletePaintVehicle.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>BuildStatus</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="CompleteProcessComponents" width="168" worktime="false" x="396" y="144">
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>FactoryGroup</Performer>
+    <PerformBy>ANY</PerformBy>
+    <PerformingApp type="JSP">CompleteProcessComponents.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>BuildStatus</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>UseDemoShortcut</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>UseDemoShortcut</Dataoutput>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="UseDemoShortcut" label="Shortcut process for demo:" type="boolean">
+      <Label>Shortcut process for demo:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="ProcessBuildError" width="108" worktime="false" x="792" y="420">
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>@CREATOR</Performer>
+    <PerformingApp type="JSP">ProcessBuildError.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="true" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <Datainput>OrderId</Datainput>
+    <Datainput>BuildStatus</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderNum</Datainput>
+    <Datainput>WorkStepError</Datainput>
+    <Dataoutput>OrderId</Dataoutput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <Dataoutput>ContextId</Dataoutput>
+    <Dataoutput>OrderNum</Dataoutput>
+    <Dataoutput>WorkStepError</Dataoutput>
+    <Format editable="true" input="OrderId" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="BuildStatus" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="ContextId" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="OrderNum" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Format editable="true" input="WorkStepError" label="WorkStepError:" password="false" required="false" size="20" type="text">
+      <Label>WorkStepError:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="36" name="end" width="36" worktime="false" x="300" y="984">
+    <AtomicType>END</AtomicType>
+    <Priority>MEDIUM</Priority>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)"/>
+  </AtomicWS>
+  <ExternalWS height="60" name="AssembleBody" width="108" x="120" y="324">
+    <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="AssembleChassis" width="108" x="120" y="228">
+    <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>FALSE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="AssembleInterior" width="108" x="120" y="516">
+    <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="CompleteVehicleBuild" width="108" x="120" y="720">
+    <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="Factory Logout" width="108" x="264" y="840">
+    <Performer category="OEAdapters" generate="false" managed="true" name="ApplicationUserLogout">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>ContextId</Datainput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="FactoryLogin" width="108" x="264" y="24">
+    <Performer category="OEAdapters" generate="false" managed="true" name="ApplicationUserLogin">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <PreFunction type="java:function">// Construct a domain from the selected brand&#13;
+//java.lang.String userDomain = new java.lang.String('factory.');&#13;
+//userDomain.Append(jst.getDataSlotValue("SelectedVehicleBrand"));&#13;
+&#13;
+java.lang.String userDomain = "system.".concat(jst.getDataSlotValue("VehicleBrand").toLowerCase());&#13;
+jst.putDataSlot("FactoryDomain", userDomain);</PreFunction>
+    <Datainput>FactoryDomain</Datainput>
+    <Datainput>password</Datainput>
+    <Datainput>FactoryUsers</Datainput>
+    <Dataoutput>ContextId</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="MateAssembledComponents" width="108" x="120" y="612">
+    <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="PaintVehicle" width="108" x="120" y="420">
+    <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <ExternalWS height="60" name="ProcessComponents" width="108" x="120" y="144">
+    <Performer category="OEAdapters" generate="false" managed="true" name="PerformBuildVehicleStep">com.savvion.sbm.adapters.oe.OEAdapter</Performer>
+    <PerformBy>execute</PerformBy>
+    <ClosedConnection>TRUE</ClosedConnection>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <Datainput>@WORKSTEPNAME</Datainput>
+    <Datainput>@PROCESS_TEMPLATE_NAME</Datainput>
+    <Datainput>ContextId</Datainput>
+    <Datainput>OrderId</Datainput>
+    <Dataoutput>BuildStatus</Dataoutput>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+    <InlineExecution>FALSE</InlineExecution>
+    <AdapterType>process</AdapterType>
+  </ExternalWS>
+  <Link Name="Connection 1" default="true">
+    <Label>Connection 1</Label>
+    <Source cp="1">Start</Source>
+    <Point x="108.0" y="54.0"/>
+    <Point x="264.0" y="54.0"/>
+    <Target cp="3">FactoryLogin</Target>
+  </Link>
+  <Link Name="Connection 40" default="true">
+    <Label>Connection 40</Label>
+    <Source cp="2">FactoryLogin</Source>
+    <Point x="318.0" y="84.0"/>
+    <Point x="318.0" y="104.0"/>
+    <Point x="100.0" y="104.0"/>
+    <Point x="100.0" y="174.0"/>
+    <Point x="120.0" y="174.0"/>
+    <Target cp="3">ProcessComponents</Target>
+  </Link>
+  <Link Name="Connection 4" default="true">
+    <Label>Connection 4</Label>
+    <Source cp="2">CompleteAssembleBody</Source>
+    <Point x="480.0" y="384.0"/>
+    <Point x="480.0" y="404.0"/>
+    <Point x="100.0" y="404.0"/>
+    <Point x="100.0" y="435.0"/>
+    <Point x="120.0" y="435.0"/>
+    <Target cp="11">PaintVehicle</Target>
+  </Link>
+  <Link Name="Connection 5" default="true">
+    <Label>Connection 5</Label>
+    <Source cp="1">PaintVehicle</Source>
+    <Point x="228.0" y="450.0"/>
+    <Point x="396.0" y="450.0"/>
+    <Target cp="3">CompletePaintVehicle</Target>
+  </Link>
+  <Link Name="Connection 6" default="true">
+    <Label>Connection 6</Label>
+    <Source cp="1">AssembleInterior</Source>
+    <Point x="228.0" y="546.0"/>
+    <Point x="396.0" y="546.0"/>
+    <Target cp="3">CompleteAssembleInterior</Target>
+  </Link>
+  <Link Name="Connection 7" default="true">
+    <Label>Connection 7</Label>
+    <Source cp="2">CompleteMateAssembledComponents</Source>
+    <Point x="480.0" y="672.0"/>
+    <Point x="480.0" y="700.0"/>
+    <Point x="100.0" y="700.0"/>
+    <Point x="100.0" y="735.0"/>
+    <Point x="120.0" y="735.0"/>
+    <Target cp="11">CompleteVehicleBuild</Target>
+  </Link>
+  <Link Name="Connection 19" default="true">
+    <Label>Connection 19</Label>
+    <Source cp="1">CompleteVehicleBuild</Source>
+    <Point x="228.0" y="750.0"/>
+    <Point x="396.0" y="750.0"/>
+    <Target cp="3">CompleteCompleteVehicleBuild</Target>
+  </Link>
+  <Link Name="Connection 21" default="true">
+    <Label>Connection 21</Label>
+    <Source cp="2">CompleteAssembleChassis</Source>
+    <Point x="480.0" y="288.0"/>
+    <Point x="480.0" y="308.0"/>
+    <Point x="100.0" y="308.0"/>
+    <Point x="100.0" y="339.0"/>
+    <Point x="120.0" y="339.0"/>
+    <Target cp="11">AssembleBody</Target>
+  </Link>
+  <Link Name="Connection 22" default="true">
+    <Label>Connection 22</Label>
+    <Source cp="1">AssembleBody</Source>
+    <Point x="228.0" y="354.0"/>
+    <Point x="396.0" y="354.0"/>
+    <Target cp="3">CompleteAssembleBody</Target>
+  </Link>
+  <Link Name="Connection 23" default="true">
+    <Label>Connection 23</Label>
+    <Source cp="1">MateAssembledComponents</Source>
+    <Point x="228.0" y="642.0"/>
+    <Point x="396.0" y="642.0"/>
+    <Target cp="3">CompleteMateAssembledComponents</Target>
+  </Link>
+  <Link Name="Connection 24" default="true">
+    <Label>Connection 24</Label>
+    <Source cp="2">CompletePaintVehicle</Source>
+    <Point x="480.0" y="480.0"/>
+    <Point x="480.0" y="500.0"/>
+    <Point x="100.0" y="500.0"/>
+    <Point x="100.0" y="531.0"/>
+    <Point x="120.0" y="531.0"/>
+    <Target cp="11">AssembleInterior</Target>
+  </Link>
+  <Link Name="Connection 25" default="true">
+    <Label>Connection 25</Label>
+    <Source cp="2">CompleteAssembleInterior</Source>
+    <Point x="480.0" y="576.0"/>
+    <Point x="480.0" y="596.0"/>
+    <Point x="100.0" y="596.0"/>
+    <Point x="100.0" y="627.0"/>
+    <Point x="120.0" y="627.0"/>
+    <Target cp="11">MateAssembledComponents</Target>
+  </Link>
+  <Link Name="Connection 26" default="true">
+    <Label>Connection 26</Label>
+    <Source cp="2">CompleteCompleteVehicleBuild</Source>
+    <Point x="480.0" y="780.0"/>
+    <Point x="480.0" y="820.0"/>
+    <Point x="318.0" y="820.0"/>
+    <Point x="318.0" y="840.0"/>
+    <Target cp="0">Factory Logout</Target>
+  </Link>
+  <Link Name="Connection 31" default="true">
+    <Label>Connection 31</Label>
+    <Source cp="2">ProcessBuildError</Source>
+    <Point x="846.0" y="480.0"/>
+    <Point x="846.0" y="855.0"/>
+    <Point x="372.0" y="855.0"/>
+    <Target cp="6">Factory Logout</Target>
+  </Link>
+  <Link Name="CompleteProcessComponentsError" default="false">
+    <Label>CompleteProcessComponentsError</Label>
+    <Source cp="7">CompleteProcessComponents</Source>
+    <Point x="564.0" y="189.0"/>
+    <Point x="772.0" y="189.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="CompleteAssembleChassisError" default="false">
+    <Label>CompleteAssembleChassisError</Label>
+    <Source cp="7">CompleteAssembleChassis</Source>
+    <Point x="564.0" y="273.0"/>
+    <Point x="772.0" y="273.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="CompleteAssembleBodyError" default="false">
+    <Label>CompleteAssembleBodyError</Label>
+    <Source cp="7">CompleteAssembleBody</Source>
+    <Point x="564.0" y="369.0"/>
+    <Point x="772.0" y="369.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="CompletePaintVehicleError" default="false">
+    <Label>CompletePaintVehicleError</Label>
+    <Source cp="1">CompletePaintVehicle</Source>
+    <Point x="564.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="CompleteAssembleInteriorError" default="false">
+    <Label>CompleteAssembleInterior</Label>
+    <Source cp="6">CompleteAssembleInterior</Source>
+    <Point x="564.0" y="531.0"/>
+    <Point x="772.0" y="531.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="CompleteMateComponentsError" default="false">
+    <Label>CompleteMateComponentsError</Label>
+    <Source cp="6">CompleteMateAssembledComponents</Source>
+    <Point x="564.0" y="627.0"/>
+    <Point x="772.0" y="627.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="CompleteCompleteVehicleBuildErr" default="false">
+    <Label>CompleteCompleteVehicleBuildErr</Label>
+    <Source cp="6">CompleteCompleteVehicleBuild</Source>
+    <Point x="564.0" y="735.0"/>
+    <Point x="772.0" y="735.0"/>
+    <Point x="772.0" y="450.0"/>
+    <Point x="792.0" y="450.0"/>
+    <Target cp="3">ProcessBuildError</Target>
+    <Condition type="java">BuildStatus.indexOf("ERROR")&gt;=0<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke0J1aWxkU3RhdHVzfTwvcGFyYW1ldGVyPgogICAgICAgICAg&#13;
+PHBhcmFtZXRlciBuYW1lPSJvcGVyYXRvck5hbWUiIHR5cGU9IlNUUklORyIgZWRpdGFibGU9ImZh&#13;
+bHNlIiBmaWx0ZXI9IiI+U3RyaW5nQ29udGFpbnM8L3BhcmFtZXRlcj4KICAgICAgICAgIDxwYXJh&#13;
+bWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFsc2Ui&#13;
+IGZpbHRlcj0iIj4mcXVvdDtFUlJPUiZxdW90OzwvcGFyYW1ldGVyPgogICAgICAgIDwvcGFyYW1l&#13;
+dGVycz4KICAgICAgICA8cHJlc2VudGF0aW9uPgoKICAgICAgICA8L3ByZXNlbnRhdGlvbj4KICAg&#13;
+ICAgICA8Y29kZT4KQnVpbGRTdGF0dXMuaW5kZXhPZigmcXVvdDtFUlJPUiZxdW90OykmZ3Q7PTAK&#13;
+ICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFORDwvam9pbk5leHQ+CiAgICAgIDwv&#13;
+ZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8L2V4cHJlc3Npb25zPgo8L2NvbmRp&#13;
+dGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Link Name="Connection 3" default="true">
+    <Label>Connection 3</Label>
+    <Source cp="1">AssembleChassis</Source>
+    <Point x="228.0" y="258.0"/>
+    <Point x="396.0" y="258.0"/>
+    <Target cp="3">CompleteAssembleChassis</Target>
+  </Link>
+  <Link Name="Connection 20" default="true" x="5" y="-10">
+    <Label>Connection 20</Label>
+    <Source cp="2">CompleteProcessComponents</Source>
+    <Point x="480.0" y="204.0"/>
+    <Point x="480.0" y="224.0"/>
+    <Point x="100.0" y="224.0"/>
+    <Point x="100.0" y="243.0"/>
+    <Point x="120.0" y="243.0"/>
+    <Target cp="11">AssembleChassis</Target>
+  </Link>
+  <Link Name="Connection 2" default="true">
+    <Label>Connection 2</Label>
+    <Source cp="1">ProcessComponents</Source>
+    <Point x="228.0" y="174.0"/>
+    <Point x="396.0" y="174.0"/>
+    <Target cp="3">CompleteProcessComponents</Target>
+  </Link>
+  <Link Name="Connection 42" default="true">
+    <Label>Connection 42</Label>
+    <Source cp="2">Factory Logout</Source>
+    <Point x="318.0" y="900.0"/>
+    <Point x="318.0" y="984.0"/>
+    <Target cp="0">end</Target>
+  </Link>
+  <Link Name="DemoShortcut" default="false">
+    <Label>Demo Shortcut</Label>
+    <Source cp="6">CompleteProcessComponents</Source>
+    <Point x="564.0" y="159.0"/>
+    <Point x="1076.0" y="159.0"/>
+    <Point x="1076.0" y="765.0"/>
+    <Point x="564.0" y="765.0"/>
+    <Target cp="7">CompleteCompleteVehicleBuild</Target>
+    <Condition type="java">UseDemoShortcut<ConditionXMLEncoded>PGNvbmRpdGlvbj4KICA8Z2V0ZmllbGQ+CiR7ZmllbGR9CiAgPC9nZXRmaWVsZD4KICA8ZXhwcmVz&#13;
+c2lvbnM+CiAgICA8Y29uZmlndXJhdGlvbj4KICAgICAgPGNhdGVnb3J5PjwvY2F0ZWdvcnk+CiAg&#13;
+ICAgIDxleHByZXNzaW9uIHR5cGU9ImJhc2ljIj4KICAgICAgICA8bmFtZT48L25hbWU+CiAgICAg&#13;
+ICAgPGRlc2NyaXB0aW9uPjwvZGVzY3JpcHRpb24+CiAgICAgICAgPHBhcmFtZXRlcnM+CiAgICAg&#13;
+ICAgICA8cGFyYW1ldGVyIG5hbWU9ImZpcnN0T3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJs&#13;
+ZT0iZmFsc2UiIGZpbHRlcj0iIj4ke1VzZURlbW9TaG9ydGN1dH08L3BhcmFtZXRlcj4KICAgICAg&#13;
+ICAgIDxwYXJhbWV0ZXIgbmFtZT0ib3BlcmF0b3JOYW1lIiB0eXBlPSJTVFJJTkciIGVkaXRhYmxl&#13;
+PSJmYWxzZSIgZmlsdGVyPSIiPkJvb2xlYW5Jc1RydWU8L3BhcmFtZXRlcj4KICAgICAgICAgIDxw&#13;
+YXJhbWV0ZXIgbmFtZT0ic2Vjb25kT3BlcmFuZCIgdHlwZT0iU1RSSU5HIiBlZGl0YWJsZT0iZmFs&#13;
+c2UiIGZpbHRlcj0iIj4ke251bGx9PC9wYXJhbWV0ZXI+CiAgICAgICAgPC9wYXJhbWV0ZXJzPgog&#13;
+ICAgICAgIDxwcmVzZW50YXRpb24+CgogICAgICAgIDwvcHJlc2VudGF0aW9uPgogICAgICAgIDxj&#13;
+b2RlPgpVc2VEZW1vU2hvcnRjdXQKICAgICAgICA8L2NvZGU+CiAgICAgICAgPGpvaW5OZXh0PkFO&#13;
+RDwvam9pbk5leHQ+CiAgICAgIDwvZXhwcmVzc2lvbj4KICAgIDwvY29uZmlndXJhdGlvbj4KICA8&#13;
+L2V4cHJlc3Npb25zPgo8L2NvbmRpdGlvbj4K</ConditionXMLEncoded>
+    </Condition>
+  </Link>
+  <Dataslot Name="VIN" category="AETF" name="VIN" type="STRING">
+    <Label>VIN:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="VIN:" password="false" required="false" size="20" type="text">
+      <Label>VIN:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="FactoryDomain" category="VehicleOrder" name="FactoryDomain" type="STRING">
+    <Label>FactoryDomain:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="FactoryDomain:" password="false" required="false" size="20" type="text">
+      <Label>FactoryDomain:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="password" category="VehicleOrder" name="password" type="STRING">
+    <Label>password:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>letmein</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="password:" password="false" required="false" size="20" type="text">
+      <Label>password:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="VehicleBrand" category="VehicleOrder" name="VehicleBrand" type="STRING">
+    <Label>SelectedVehicleBrand:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="SelectedVehicleBrand:" password="false" required="true" size="20" type="text">
+      <Label>SelectedVehicleBrand:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="BuildStatus" category="VehicleOrder" name="BuildStatus" type="STRING">
+    <Label>BuildStatus:</Label>
+    <Description>The status of the build step</Description>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text">
+      <Label>BuildStatus:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="ContextId" category="VehicleOrder" name="ContextId" type="STRING">
+    <Label>ContextId:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text">
+      <Label>ContextId:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="FactoryUsers" category="VehicleOrder" name="FactoryUsers" type="STRING">
+    <Label>FactoryUsers:</Label>
+    <DataType>STRING</DataType>
+    <DataValue>factory</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text">
+      <Label>FactoryUsers:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Dataslot Name="OrderNum" category="VehicleOrder" name="OrderNum" type="NUMBER">
+    <Label>OrderNum:</Label>
+    <DataType>LONG</DataType>
+    <DataValue>0</DataValue>
+    <DataSize>256</DataSize>
+    <MultiLine>false</MultiLine>
+    <Format editable="true" label="OrderNum:" required="false" type="field">
+      <Label>OrderNum:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage type="LONG"/>
+  </Dataslot>
+  <Dataslot Name="WorkStepError" category="VehicleOrder" name="WorkStepError" type="STRING">
+    <Label>WorkStepError:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text">
+      <Label>WorkStepError:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="OrderId" category="VehicleOrder" name="OrderId" type="STRING">
+    <Label>orderid:</Label>
+    <DataType>STRING</DataType>
+    <DataValue/>
+    <DataSize>2000</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="orderid:" password="false" required="false" size="20" type="text">
+      <Label>orderid:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="2000" type="VARCHAR"/>
+  </Dataslot>
+  <Dataslot Name="UseDemoShortcut" category="AETF" name="UseDemoShortcut" type="BOOLEAN">
+    <Label>UseDemoShortcut:</Label>
+    <DataType>BOOLEAN</DataType>
+    <DataValue>true</DataValue>
+    <DataSize>256</DataSize>
+    <IsPublic>true</IsPublic>
+    <MultiLine>false</MultiLine>
+    <BizManageAccessFlag>true</BizManageAccessFlag>
+    <Access type="PUBLIC" value="true"/>
+    <Access type="BIZ_MANAGE_ACCESS" value="true"/>
+    <Access type="GLOBAL" value="false"/>
+    <Access type="BIZ_SITE_COLUMN" value="false"/>
+    <Format editable="true" label="UseDemoShortcut:" type="boolean">
+      <Label>UseDemoShortcut:</Label>
+      <Validation>
+        <ValidationType/>
+      </Validation>
+    </Format>
+    <Storage size="256" type="CHAR"/>
+  </Dataslot>
+  <Notes>
+    <Note color="255,255,255" height="96" shape="annotation" width="312" x="684" y="36">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1295533759491" version="7.0SP1"&gt;&#13;
+  &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
+    &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING"&gt;&#13;
+    &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+    &lt;Description&gt;Savvion ProcessInstanceId&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="PIID:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING"&gt;&#13;
+    &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING"&gt;&#13;
+    &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING"&gt;&#13;
+    &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The status of the build step&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
+    &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" height="4" label="WebServiceEndpoint:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN"&gt;&#13;
+    &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;BOOLEAN&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;false&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="VehicleBuildComplete:" type="boolean"&gt;&#13;
+      &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The Order number for this order.&lt;/Description&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;&#13;
+    &lt;font color="#000000" face="Arial"&gt;&#13;
+      &lt;b&gt;The Complete* steps are completed externally, by a OpenEdge process, which is analogous to input received by a scanner on the factory floor which scans the being-built vehicle as it moves down the production line.&lt;/b&gt;&#13;
+    &lt;/font&gt;&#13;
+  &lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
+    <Note color="255,255,153" height="84" shape="sticky" width="252" x="432" y="912">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1295533767862" version="7.0SP1"&gt;&#13;
+  &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
+    &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING"&gt;&#13;
+    &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+    &lt;Description&gt;Savvion ProcessInstanceId&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="PIID:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING"&gt;&#13;
+    &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING"&gt;&#13;
+    &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING"&gt;&#13;
+    &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The status of the build step&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
+    &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" height="4" label="WebServiceEndpoint:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN"&gt;&#13;
+    &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;BOOLEAN&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;false&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="VehicleBuildComplete:" type="boolean"&gt;&#13;
+      &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The Order number for this order.&lt;/Description&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;&#13;
+    &lt;font color="#000000" face="Arial"&gt;&#13;
+      &lt;b&gt;No doubt the &amp;lt;step&amp;gt; + Complete&amp;lt;step&amp;gt; + error handling can be further modularised into its own sub-process&lt;/b&gt;&#13;
+    &lt;/font&gt;&#13;
+  &lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
+    <Note color="255,255,153" connectTo="ProcessBuildError" height="204" shape="annotation" width="132" x="924" y="540">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&#13;
+&lt;!DOCTYPE Form SYSTEM "form.dtd"&gt;&#13;
+&lt;Form tstamp="1295534106662" version="7.0SP1"&gt;&#13;
+  &lt;Dataslot Name="FactoryUsers" category="AETF_Build" name="FactoryUsers" type="STRING"&gt;&#13;
+    &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="FactoryUsers:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;FactoryUsers:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="PIID" category="AETF_Build" name="PIID" type="STRING"&gt;&#13;
+    &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+    &lt;Description&gt;Savvion ProcessInstanceId&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="PIID:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;PIID:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="WorkStepError" category="AETF_Build" name="WorkStepError" type="STRING"&gt;&#13;
+    &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="WorkStepError:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;WorkStepError:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="ContextId" category="AETF_Build" name="ContextId" type="STRING"&gt;&#13;
+    &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+    &lt;Description&gt;AETF User Context ID &lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="ContextId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;ContextId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderId" category="AETF_Build" name="OrderId" type="STRING"&gt;&#13;
+    &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderId:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;OrderId:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="BuildStatus" category="AETF_Build" name="BuildStatus" type="STRING"&gt;&#13;
+    &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The status of the build step&lt;/Description&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue/&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="BuildStatus:" password="false" required="false" size="20" type="text"&gt;&#13;
+      &lt;Label&gt;BuildStatus:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="AutoEdgeWebServiceEndpoint" category="AETF_Build" name="AutoEdgeWebServiceEndpoint" type="STRING"&gt;&#13;
+    &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;STRING&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;http://ec2-50-16-84-39.compute-1.amazonaws.com:8080/wsa/wsa1&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;2000&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;true&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" height="4" label="WebServiceEndpoint:" required="false" type="textarea" width="20"&gt;&#13;
+      &lt;Label&gt;WebServiceEndpoint:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="2000" type="VARCHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="VehicleBuildComplete" category="AETF_Build" name="VehicleBuildComplete" type="BOOLEAN"&gt;&#13;
+    &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+    &lt;DataType&gt;BOOLEAN&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;false&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="VehicleBuildComplete:" type="boolean"&gt;&#13;
+      &lt;Label&gt;VehicleBuildComplete:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage size="256" type="CHAR"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;Dataslot Name="OrderNum" category="AETF_Build" name="OrderNum" type="NUMBER"&gt;&#13;
+    &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+    &lt;Description&gt;The Order number for this order.&lt;/Description&gt;&#13;
+    &lt;DataType&gt;LONG&lt;/DataType&gt;&#13;
+    &lt;DataValue&gt;0&lt;/DataValue&gt;&#13;
+    &lt;DataSize&gt;256&lt;/DataSize&gt;&#13;
+    &lt;IsPublic&gt;true&lt;/IsPublic&gt;&#13;
+    &lt;MultiLine&gt;false&lt;/MultiLine&gt;&#13;
+    &lt;BizManageAccessFlag&gt;true&lt;/BizManageAccessFlag&gt;&#13;
+    &lt;Access type="PUBLIC" value="true"/&gt;&#13;
+    &lt;Access type="BIZ_MANAGE_ACCESS" value="true"/&gt;&#13;
+    &lt;Access type="GLOBAL" value="false"/&gt;&#13;
+    &lt;Access type="BIZ_SITE_COLUMN" value="false"/&gt;&#13;
+    &lt;Format editable="true" label="OrderNum:" required="false" type="field"&gt;&#13;
+      &lt;Label&gt;OrderNum:&lt;/Label&gt;&#13;
+      &lt;Validation&gt;&#13;
+        &lt;ValidationType/&gt;&#13;
+      &lt;/Validation&gt;&#13;
+    &lt;/Format&gt;&#13;
+    &lt;Storage type="LONG"/&gt;&#13;
+  &lt;/Dataslot&gt;&#13;
+  &lt;DataSources/&gt;&#13;
+  &lt;Validation/&gt;&#13;
+  &lt;head/&gt;&#13;
+  &lt;body&gt;&#13;
+    &lt;font color="#000000" face="Arial"&gt;&#13;
+      &lt;b&gt;The processing of errors in the build process is its own sub-process. We don't show that here for complexity's sake.&lt;/b&gt;&#13;
+    &lt;/font&gt;&#13;
+    &lt;br clear="all"/&gt;&#13;
+&lt;br clear="all"/&gt;&#13;
+&lt;font color="#000000" face="Arial"&gt;&#13;
+      &lt;b&gt;Errors in the process are in all likelihood the result of QA failures on the line.&lt;/b&gt;&#13;
+    &lt;/font&gt;&#13;
+  &lt;/body&gt;&#13;
+&lt;/Form&gt;&#13;
+</Note>
+  </Notes>
+  <History>
+    <Deployed as="BuildVehicle" by="ebms" on="1327357402729" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:23:22 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327357064886" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:17:44 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327356542731" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:09:02 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327348439251" to="http://localhost:18793/sbm/deployment">Mon Jan 23 14:53:59 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327091659867" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:34:19 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327090963730" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:22:43 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327089373766" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:56:13 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327088763250" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:46:03 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327088311446" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:38:31 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327088223897" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:37:03 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327087389065" to="http://localhost:18793/sbm/deployment">Fri Jan 20 14:23:09 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326813742333" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:22:22 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326813378658" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:16:18 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326747637684" to="http://localhost:18793/sbm/deployment">Mon Jan 16 16:00:37 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326746533736" to="http://localhost:18793/sbm/deployment">Mon Jan 16 15:42:13 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326744179004" to="http://localhost:18793/sbm/deployment">Mon Jan 16 15:02:59 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326742535526" to="http://localhost:18793/sbm/deployment">Mon Jan 16 14:35:35 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326728128244" to="http://localhost:18793/sbm/deployment">Mon Jan 16 10:35:28 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326724067873" to="http://localhost:18793/sbm/deployment">Mon Jan 16 09:27:47 EST 2012</Deployed>
+    <Created as="BuildVehicle" by="pjudge" from="BuildVehicle" on="1326487747117">Fri Jan 13 15:49:07 EST 2012</Created>
+    <Deployed as="BuildVehicle" by="ebms" on="1326728264216" to="http://localhost:18793/sbm/deployment">Mon Jan 16 10:37:44 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326814371323" to="http://localhost:18793/sbm/deployment">Tue Jan 17 10:32:51 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326825193375" to="http://localhost:18793/sbm/deployment">Tue Jan 17 13:33:13 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326829451344" to="http://localhost:18793/sbm/deployment">Tue Jan 17 14:44:11 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1326835610096" to="http://localhost:18793/sbm/deployment">Tue Jan 17 16:26:50 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327075835953" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:10:35 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327076407076" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:20:07 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327077582336" to="http://localhost:18793/sbm/deployment">Fri Jan 20 11:39:42 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327080026000" to="http://localhost:18793/sbm/deployment">Fri Jan 20 12:20:26 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327082908342" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:08:28 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327083773197" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:22:53 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327085475382" to="http://localhost:18793/sbm/deployment">Fri Jan 20 13:51:15 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327092494269" to="http://localhost:18793/sbm/deployment">Fri Jan 20 15:48:14 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327094011714" to="http://localhost:18793/sbm/deployment">Fri Jan 20 16:13:31 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327326786276" to="http://localhost:18793/sbm/deployment">Mon Jan 23 08:53:06 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327329384232" to="http://localhost:18793/sbm/deployment">Mon Jan 23 09:36:24 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327348506531" to="http://localhost:18793/sbm/deployment">Mon Jan 23 14:55:06 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327349212457" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:06:52 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327350247045" to="http://localhost:18793/sbm/deployment">Mon Jan 23 15:24:07 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327356403841" to="http://localhost:18793/sbm/deployment">Mon Jan 23 17:06:43 EST 2012</Deployed>
+    <Deployed as="BuildVehicle" by="ebms" on="1327368975300" to="http://localhost:18793/sbm/deployment">Mon Jan 23 20:36:15 EST 2012</Deployed>
+  </History>
+  <Repository/>
+</Process>
