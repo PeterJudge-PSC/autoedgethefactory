@@ -1,0 +1,12 @@
+#Fri May 18 10:15:44 EDT 2012
+publishing.type=Reintall
+application.name=BuildVehicle
+inherit.acl=true
+module.type=com.savvion.studio.designer.module.bpm
+publish.webservice=false
+application.mainprocessname=BuildVehicle
+module.id=8d1ac3ea-a98a-4b5e-8062-167aadf630ff
+module.version=8
+application.mainappfile=BuildVehicle/processtemplates/BuildVehicle.spt
+module.name=BuildVehicle
+application.root=BuildVehicle

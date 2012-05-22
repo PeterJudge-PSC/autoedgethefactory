@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Process SYSTEM "../../common/processtemplates/processTemplate.dtd">
+<Process name="UserLoad" type="BIZLOGIC">
+  <Description>Loads AutoEdge|TheFactory users into the Savvion Realm</Description>
+  <Application name="UserLoad"/>
+  <Category level="0"/>
+  <Category level="1"/>
+  <Group/>
+  <Manager>@CREATOR</Manager>
+  <EstimatedDuration>1d</EstimatedDuration>
+  <TimeCreated>1337347212911</TimeCreated>
+  <Author>pjudge</Author>
+  <Version>UserLoad</Version>
+  <Attributes>
+    <Attribute name="ProcessType" required="true">
+      <Label>Process Type</Label>
+      <Description>Type of the Process</Description>
+      <Value>BusinessProcess</Value>
+    </Attribute>
+    <Attribute name="Objective" required="false">
+      <Label>Objective</Label>
+      <Description>Objective for developing this process model. E.g. Objective is to automate order processing</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Goal" required="false">
+      <Label>Goal</Label>
+      <Description>The goal of this process model. E.g. Goal is to reduce order processing cost by 10%</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="OrganizationalUnit" required="false">
+      <Label>Organizational Unit</Label>
+      <Description>The organizational unit that owns this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Influencers" required="false">
+      <Label>Influencers</Label>
+      <Description>People who have influenced development of this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Risks" required="false">
+      <Label>Risks</Label>
+      <Description>Risks associated with this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Rewards" required="false">
+      <Label>Rewards</Label>
+      <Description>Potential rewards on investment for this process model</Description>
+      <Value/>
+    </Attribute>
+    <Attribute name="Executable" required="false">
+      <Label>Executable</Label>
+      <Description>Can the Process  Ever be made executable?</Description>
+      <Value>Yes</Value>
+    </Attribute>
+  </Attributes>
+  <Alerts>
+    <Alert name="Default">
+      <AlertSeverity>High</AlertSeverity>
+      <AlertMessage>This is the default alert.</AlertMessage>
+      <AlertDescription/>
+      <AlertCondition type="java:expression"/>
+      <AlertDelivery type="sbm">
+        <AlertRecipient type="USER">${@CREATOR}</AlertRecipient>
+      </AlertDelivery>
+    </Alert>
+  </Alerts>
+  <AtomicWS height="36" name="Start" width="36" worktime="false" x="168" y="108">
+    <AtomicType>START</AtomicType>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="60" name="LoadAutoEdgeTheFactoryUsers" width="180" worktime="false" x="276" y="96">
+    <Label>Load AutoEdge|TheFactory Users</Label>
+    <AtomicType>ACTIVITY</AtomicType>
+    <Performer>@CREATOR</Performer>
+    <PerformingApp type="JSP">LoadAutoEdgeTheFactoryUsers.jsp</PerformingApp>
+    <Collaboration>
+      <CollabFunction enabled="false" type="Reassign"/>
+    </Collaboration>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <EmailSupport>FALSE</EmailSupport>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <AtomicWS height="36" name="End 1" width="36" worktime="false" x="624" y="108">
+    <AtomicType>END</AtomicType>
+    <Duration value="7200">2h</Duration>
+    <Priority>MEDIUM</Priority>
+    <RollbackPoint>FALSE</RollbackPoint>
+    <Simulation distribution="ct" scenario="(default)">
+      <Duration value="7200">2h</Duration>
+    </Simulation>
+  </AtomicWS>
+  <Link Name="Connection 1" default="true">
+    <Label>Connection 1</Label>
+    <Source cp="1">Start</Source>
+    <Point x="204.0" y="126.0"/>
+    <Point x="276.0" y="126.0"/>
+    <Target cp="3">LoadAutoEdgeTheFactoryUsers</Target>
+  </Link>
+  <Link Name="Connection 2" default="true">
+    <Label>Connection 2</Label>
+    <Source cp="1">LoadAutoEdgeTheFactoryUsers</Source>
+    <Point x="456.0" y="126.0"/>
+    <Point x="624.0" y="126.0"/>
+    <Target cp="3">End 1</Target>
+  </Link>
+  <History>
+    <Deployed as="UserLoad" by="ebms" on="1337350556523" to="http://localhost:18793/sbm/deployment">Fri May 18 10:15:56 EDT 2012</Deployed>
+    <Deployed as="UserLoad" by="ebms" on="1337350442640" to="http://localhost:18793/sbm/deployment">Fri May 18 10:14:02 EDT 2012</Deployed>
+    <Created as="UserLoad" by="pjudge" from="UserLoad" on="1337347212914">Fri May 18 09:20:12 EDT 2012</Created>
+    <Deployed as="UserLoad" by="ebms" on="1337361795521" to="http://localhost:18793/sbm/deployment">Fri May 18 13:23:15 EDT 2012</Deployed>
+    <Deployed as="UserLoad" by="ebms" on="1337364658516" to="http://localhost:18793/sbm/deployment">Fri May 18 14:10:58 EDT 2012</Deployed>
+    <Deployed as="UserLoad" by="ebms" on="1337366586505" to="http://localhost:18793/sbm/deployment">Fri May 18 14:43:06 EDT 2012</Deployed>
+    <Deployed as="UserLoad" by="ebms" on="1337367516533" to="http://localhost:18793/sbm/deployment">Fri May 18 14:58:36 EDT 2012</Deployed>
+    <Deployed as="UserLoad" by="ebms" on="1337368332273" to="http://localhost:18793/sbm/deployment">Fri May 18 15:12:12 EDT 2012</Deployed>
+  </History>
+  <Repository/>
+</Process>

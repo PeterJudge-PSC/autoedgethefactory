@@ -1,0 +1,9 @@
+#Fri May 18 14:32:15 EDT 2012
+application.root=CustomerVehicleOrderSubmit
+module.name=CustomerVehicleOrderSubmit
+module.version=8
+application.mainappfile=CustomerVehicleOrderSubmit/WEB-INF/template/CustomerVehicleOrderSubmit.swt
+application.name=CustomerVehicleOrderSubmit
+module.type=com.savvion.studio.designer.module.webapp
+module.id=61351455-e671-4146-87c9-8d8e3766212a
+application.mainprocessname=CustomerVehicleOrderSubmit
