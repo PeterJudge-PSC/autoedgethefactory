@@ -1,0 +1,12 @@
+#Fri May 18 10:15:47 EDT 2012
+publishing.type=Reintall
+application.name=UserLoad
+inherit.acl=true
+module.type=com.savvion.studio.designer.module.bpm
+publish.webservice=false
+application.mainprocessname=UserLoad
+module.id=8d98361a-2164-4752-8072-cef015074d57
+module.version=8
+application.mainappfile=UserLoad/processtemplates/UserLoad.spt
+module.name=UserLoad
+application.root=UserLoad

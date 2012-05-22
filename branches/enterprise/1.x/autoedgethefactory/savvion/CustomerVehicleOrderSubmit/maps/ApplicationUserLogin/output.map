@@ -1,6 +1,0 @@
-<map version="1.3">
-  <param name="CustomerEmail" type="java.lang.String" value="@OUT.responseCustomerEmail"/>
-  <param name="CustomerCreditLimit" type="java.lang.Long" value="@OUT.responseCreditLimit"/>
-  <param name="ContextId" type="java.lang.String" value="@OUT.responseContextId"/>
-  <param name="CustomerId" type="java.lang.String" value="@OUT.responseCustomerId"/>
-</map>
