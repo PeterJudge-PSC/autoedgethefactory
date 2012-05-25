@@ -1,5 +1,6 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
-    File        : AutoEdge/Factory/Order/BusinessComponent/service_captureorder.p
+    File        : AutoEdge/Factory/Server/Order/BusinessComponent/service_captureorder.p
     Purpose     :
 
     Syntax      :
@@ -56,6 +57,13 @@ using OpenEdge.Lang.ABLSession.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
 
+using Progress.Json.ObjectModel.JsonConstruct.
+using Progress.Json.ObjectModel.JsonArray.
+using Progress.Json.ObjectModel.JsonObject.
+using Progress.Json.ObjectModel.ObjectModelParser.
+using Progress.Json.ObjectModel.JsonDataType.
+using Progress.Json.JsonParserError.
+
 using Progress.Lang.AppError.
 using Progress.Lang.Error.
 
@@ -86,44 +94,46 @@ define variable mhOrderBuffer as handle no-undo.
 
 /* ***************************  Functions  *************************** */
 function GetSelectedOption returns character (input pcOptions as longchar):
-    define variable cSelectedOption as character no-undo.
-    define variable hTable as handle no-undo.
-    define variable hQuery as handle no-undo.
-    define variable hBuffer as handle no-undo.
-
-    /* ABL needs to know the/some/any tt name before read-json() works */
-    if substring(left-trim(pcOptions), 1, 1) eq '[' then
-        pcOptions = '~{' + quoter("ttOptions")  + ':' + pcOptions + '~}'.
-    else
-        /* this is not JSON-formatted text */
-        return ''.
-
-    create temp-table hTable.
-    hTable:read-json('longchar', pcOptions).
-    hBuffer = hTable:default-buffer-handle.
-
-    create query hQuery.
-    hQuery:set-buffers(hBuffer).
-    hQuery:query-prepare('for each ' + hBuffer:name + ' where selected = true ').
-    hQuery:query-open().
-
-    hQuery:get-first().
-    do while hbuffer:available:
-        cSelectedOption = cSelectedOption
-                        + ',' + hBuffer:buffer-field('value'):buffer-value.
-        hQuery:get-next().
+    define variable oParsedConstruct as JsonConstruct     no-undo.
+    define variable oArray           as JsonArray         no-undo.
+    define variable oDetail          as JsonObject        no-undo.
+    define variable oParser          as ObjectModelParser no-undo.
+    define variable iMax             as integer           no-undo.
+    define variable iLoop            as integer           no-undo.
+    define variable cSelectedOption  as character         no-undo.
+    define variable cDelimiter       as character         no-undo.
+    
+    oParser = new ObjectModelParser().
+    oParsedConstruct = oParser:Parse(pcOptions).
+    if type-of(oParsedConstruct, JsonArray) then
+    do:
+        oArray = cast(oParsedConstruct,JsonArray).
+        iMax =  oArray:Length.
+        cDelimiter = ''.
+        do iLoop = 1 to iMax:        
+            case oArray:GetType(iLoop).
+                when JsonDataType:OBJECT then
+                    do:
+                        oDetail = oArray:GetJsonObject(iLoop).
+                        if oDetail:GetLogical('selected') then
+                            cSelectedOption = trim(oDetail:GetCharacter('value')). 
+                    end.    /* object */
+                otherwise
+                assign 
+                    cSelectedOption = cSelectedOption + cDelimiter + trim(oArray:GetJsonText(iLoop))
+                    cDelimiter      = ','.
+            end case.
+        end.
     end.
-
-    return left-trim(cSelectedOption, ',').
-
+        
+    catch oParseError as JsonParserError:
+        cSelectedOption = trim(pcOptions).
+    end catch.
     finally:
-        if valid-handle(hQuery) then
-            hQuery:query-close().
-        delete object hQuery no-error.
-        delete object hBuffer no-error.
-        delete object hTable no-error.
+        return cSelectedOption.
     end finally.
 end function.
+
 
 function FetchSchema returns logical (output dataset-handle phDataset):
     define variable oRequest as IServiceRequest extent 1 no-undo.

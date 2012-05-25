@@ -83,8 +83,8 @@ run OpenEdge/CommonInfrastructure/Server/as_startup.p (SessionClientTypeEnum:App
 /*run test_customerlogin.*/
 
 /*run test_getbranddata ('fjord').*/
-/*run test_captureorder.*/
-run test_dealerdetail.
+run test_captureorder.
+/*run test_dealerdetail.*/
 
 procedure test_captureorder:
     define VARIABLE piOrderNumber as integer no-undo.
@@ -105,7 +105,7 @@ procedure test_captureorder:
     define variable pcOrderId as character no-undo.
     define variable pdOrderAmount as decimal no-undo.    
     
-    piOrderNumber = 7.
+    piOrderNumber = 74.
     pcBrand = 'fjord'.
     pcDealerId = 'dealer03'.
     pcCustomerId = '8e1f00c4-ec87-119b-e011-c50e4ed40b4c'.
@@ -115,7 +115,7 @@ procedure test_captureorder:
     pcmodel = '[~{"label":"FJ-200","value":"fd16dc03-8bcb-9bb8-e011-b02411c531fa","selected":false~},~{"label":"FJ-100","value":"fd16dc03-8bcb-9bb8-e011-b024cd2831fa","selected":true~}]'.    
     pcInteriorTrimMaterial = 'fd16dc03-8bcb-9bb8-e011-b024aeda30fa'.
     pcInteriorTrimColour = 'fd16dc03-8bcb-9bb8-e011-b024bc0131fa'.
-    pcInteriorAccessories = '[fd16dc03-8bcb-9bb8-e011-b024be0131fa, fd16dc03-8bcb-9bb8-e011-b024c00131fa]'.
+    pcInteriorAccessories = '["fd16dc03-8bcb-9bb8-e011-b024be0131fa", "fd16dc03-8bcb-9bb8-e011-b024c00131fa"]'.
     pcMoonroof = 'fd16dc03-8bcb-9bb8-e011-b0249eb330fa'.
     pcWheels = 'fd16dc03-8bcb-9bb8-e011-b0249db330fa'.
     
@@ -306,7 +306,7 @@ define variable pcExteriorColour as longchar no-undo.
 define variable pcMoonroof as longchar no-undo.
 define variable pcWheels as longchar no-undo.
     def var cUserContextId as longchar.
-    
+
     run AutoEdge/Factory/Server/Order/BusinessComponent/service_branddata.p (
                 input pcBrand,
                 input cUserContextId,

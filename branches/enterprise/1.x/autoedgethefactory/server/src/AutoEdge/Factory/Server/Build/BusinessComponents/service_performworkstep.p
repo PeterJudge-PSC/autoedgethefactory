@@ -1,5 +1,6 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
-    File        : AutoEdge/Factory/Build/BusinessComponent/service_performworkstep.p
+    File        : AutoEdge/Factory/Server/Build/BusinessComponents/service_performworkstep.p
     Purpose     : 
     Syntax      :
     Description : 

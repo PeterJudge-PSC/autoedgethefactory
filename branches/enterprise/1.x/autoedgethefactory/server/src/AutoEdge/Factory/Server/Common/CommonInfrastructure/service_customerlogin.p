@@ -1,5 +1,6 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /** ----------------------------------------------------------------------
-    File        : AutoEdge/Factory/Common/CommonInfrastructure/service_customerlogin.p
+    File        : AutoEdge/Factory/Server/Common/CommonInfrastructure/service_customerlogin.p
     Purpose     : 
 
     Syntax      :

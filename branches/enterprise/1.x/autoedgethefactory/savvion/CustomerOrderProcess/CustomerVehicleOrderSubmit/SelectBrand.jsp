@@ -358,26 +358,6 @@ sbm.util.show('imgScubarooLogoBw');;
 }
 
 
-function imgScubarooLogo_onMouseDown(eventContext) {
-{
-sbm.util.setValue('txtBrand', 'Scubaroo'); 
-// highlight selected brand, de-emphasise others
-sbm.util.hide('imgCheryLogo');
-sbm.util.show('imgCheryLogoBw');	
-sbm.util.hide('imgHindaLogo');
-sbm.util.show('imgHindaLogoBw');
-sbm.util.hide('imgPotomocLogo');
-sbm.util.show('imgPotomocLogoBw');
-sbm.util.hide('imgToyolaLogo');
-sbm.util.show('imgToyolaLogoBw');
-sbm.util.hide('imgFjordLogo');
-sbm.util.show('imgFjordLogoBw');
-sbm.util.show('imgScubarooLogo');
-sbm.util.hide('imgScubarooLogoBw');;
-}
-}
-
-
 function imgToyolaLogo_onMouseDown(eventContext) {
 {
 sbm.util.setValue('txtBrand', 'Toyola'); 
@@ -394,6 +374,26 @@ sbm.util.hide('imgFjordLogo');
 sbm.util.show('imgFjordLogoBw');
 sbm.util.hide('imgScubarooLogo');
 sbm.util.show('imgScubarooLogoBw');;
+}
+}
+
+
+function imgScubarooLogo_onMouseDown(eventContext) {
+{
+sbm.util.setValue('txtBrand', 'Scubaroo'); 
+// highlight selected brand, de-emphasise others
+sbm.util.hide('imgCheryLogo');
+sbm.util.show('imgCheryLogoBw');	
+sbm.util.hide('imgHindaLogo');
+sbm.util.show('imgHindaLogoBw');
+sbm.util.hide('imgPotomocLogo');
+sbm.util.show('imgPotomocLogoBw');
+sbm.util.hide('imgToyolaLogo');
+sbm.util.show('imgToyolaLogoBw');
+sbm.util.hide('imgFjordLogo');
+sbm.util.show('imgFjordLogoBw');
+sbm.util.show('imgScubarooLogo');
+sbm.util.hide('imgScubarooLogoBw');;
 }
 }
 

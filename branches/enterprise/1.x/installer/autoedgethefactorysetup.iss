@@ -7,15 +7,15 @@ LogFileOverwrite=true
 
 [Setup]
 InternalCompressLevel=Max
-OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.7
+OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.8
 SolidCompression=true
-VersionInfoVersion=1.0.7
+VersionInfoVersion=1.0.8
 VersionInfoCompany=Progress Software Corp.
 VersionInfoDescription=OpenEdge AutoEdge|TheFactory Application Example Setup
 MinVersion=0,5.0.2195sp3
 AppCopyright=Copyright 2011-2012 © Progress Software Corp.
 AppName=OpenEdge AutoEdge|TheFactory Application Example
-AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.7
+AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.8
 InfoAfterFile=installer\include\InfoAfter.txt
 InfoBeforeFile=installer\include\InfoBefore.txt
 LicenseFile=installer\include\License.txt
@@ -28,11 +28,11 @@ AlwaysShowComponentsList=true
 ShowLanguageDialog=auto
 SetupIconFile=installer\include\autoedge.ico
 AppID={{62CE4B50-E7A0-4279-9889-0D6EC3B80C0E}
-VersionInfoTextVersion=1.0.7
+VersionInfoTextVersion=1.0.8
 AppPublisher=Progress Software Corp.
 AppPublisherURL=http://www.progress.com
 AppSupportURL=http://communities.progress.com/pcom/community/psdn/openedge/architecture/autoedgethefactory
-AppVersion=1.0.7
+AppVersion=1.0.8
 UninstallDisplayName=OpenEdge AutoEdge|TheFactory Application Example
 ExtraDiskSpaceRequired=1000000
 AlwaysRestart=false
@@ -46,7 +46,7 @@ OutputDir=installer\output
 PrivilegesRequired=none
 ; Use relative paths?
 ;SourceDir=..
-SourceDir=C:\devarea\staging\aetf\1.x
+SourceDir=C:\devarea\aetf\enterprise\1.x\dev
 WizardImageBackColor=$00400000
 AllowRootDirectory=true
 AllowNoIcons=true
@@ -157,7 +157,7 @@ Name: {app}\referencecomponents\support\resources; Flags: uninsneveruninstall; C
 Name: {app}\referencecomponents\support\tests; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
 Name: {app}\referencecomponents\support\temp; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
 
-; Savvion Processes
+; Savvion CustomerOrderProcess Processes
 Name: {app}\autoedgethefactory\savvion; Flags: uninsneveruninstall; Components: BPM_MODELS; 
 
 ; Installer / Setup
@@ -189,11 +189,6 @@ Source: autoedgethefactory\server\doc\*.*; DestDir: {app}\autoedgethefactory\ser
 Source: autoedgethefactory\server\tests\*.*; DestDir: {app}\autoedgethefactory\server\tests; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_SERVER; Tasks: 
 Source: autoedgethefactory\server\resources\*.*; DestDir: {app}\autoedgethefactory\server\resources; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER; Tasks: 
 Source: autoedgethefactory\server\setup\*.*; DestDir: {app}\autoedgethefactory\server\setup; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: AETF_SERVER; Tasks: 
-
-Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsdl; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
-Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsm; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
-Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.xpxg; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
-Source: autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsdl; DestDir: {app}\autoedgethefactory\server\cfg; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER;
 
 Source: autoedgethefactory\server\.propath; DestDir: {app}\autoedgethefactory\server; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER
 Source: autoedgethefactory\server\.project; DestDir: {app}\autoedgethefactory\server; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER
@@ -248,7 +243,7 @@ Source: referencecomponents\commoninfrastructure\server\.propath; DestDir: {app}
 Source: referencecomponents\commoninfrastructure\server\.project; DestDir: {app}\referencecomponents\commoninfrastructure\server; Excludes: .svn; Flags: ignoreversion uninsremovereadonly skipifsourcedoesntexist touch; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_CI_SERVER
 
 ;shared
-Source: referencecomponents\commoninfrastructure\shared\src\*.*; DestDir: {app}\referencecomponents\commoninfrastructure\shared\src; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER
+Source: referencecomponents\commoninfrastructure\shared\src\*.*; DestDir: {app}\referencecomponents\commoninfrastructure\shared\src; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER 
 Source: referencecomponents\commoninfrastructure\shared\bin\*.*; DestDir: {app}\referencecomponents\commoninfrastructure\shared\bin; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER
 Source: referencecomponents\commoninfrastructure\shared\tests\*.*; DestDir: {app}\referencecomponents\commoninfrastructure\shared\tests; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER
 Source: referencecomponents\commoninfrastructure\shared\doc\*.*; DestDir: {app}\referencecomponents\commoninfrastructure\shared\doc; Excludes: .svn; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER
@@ -327,18 +322,18 @@ Name: {group}\AutoEdge\Factory Module\Server\Stop Database Servers; Filename: {a
 Name: {group}\AutoEdge\Factory Module\Server\Stop AppServers; Filename: {app}\autoedgethefactory\server\cfg\StopAppServers.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; IconFilename: {app}\autoedgethefactory\server\cfg\stopdbs.ico; IconIndex: 0; Components: AETF_SERVER
 
 ;devenv 
-Name: {group}\AutoEdge\Factory Module\Development Environment(OpenEdge Architect); Filename: {code:getDLCDirectory}\oeide\eclipse\eclipse.exe;  Parameters: -showlocation -vm {code:getDLCDirectory}\jre\bin\javaw.exe; WorkingDir: {app}; Comment: AutoEdge|TheFactory OpenEdge Architect; IconFilename: {app}\autoedgethefactory\shared\resources\aetf.ico; IconIndex: 0; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; 
+Name: {group}\AutoEdge\Factory Module\Development Environment(Progress Developer Studio for OpenEdge); Filename: {code:getDLCDirectory}\..\DeveloperStudio3.6\eclipse\eclipse.exe;  Parameters: -showlocation -vm {code:getDLCDirectory}\..\DeveloperStudio3.6\jre\bin\javaw.exe; WorkingDir: {app}; Comment: AutoEdge|TheFactory OpenEdge Architect; IconFilename: {app}\autoedgethefactory\shared\resources\aetf.ico; IconIndex: 0; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; 
 
 ;runtime
 Name: {group}\AutoEdge\Factory Module\Client\Dealer Review GUI; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-pf ""autoedgethefactory\client\cfg\client.pf"" -basekey INI -ininame ""autoedgethefactory\client\cfg\client.ini"" -p start_ui.p "; WorkingDir: {app}; Comment: AutoEdge|TheFactory Dealer Review GUI; IconFilename: {app}\autoedgethefactory\shared\resources\aetf.ico; IconIndex: 0; Components: AETF_CLIENT; Tasks: 
-Name: {group}\AutoEdge\Factory Module\Client\Admin Console; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-p _edit.p -debugalert -ini autoedgethefactory/client/cfg/client.ini -pf autoedgethefactory/client/cfg/base.pf"; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Client Admin Console (Editor)"; Components: AETF_CLIENT; 
-Name: {group}\AutoEdge\Factory Module\Server\Admin Console; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-p _edit.p -debugalert -ini autoedgethefactory/server/cfg/console.ini -pf autoedgethefactory/server/cfg/console.pf"; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Server Admin Console (Editor)"; Components: AETF_SERVER;
+Name: {group}\AutoEdge\Factory Module\Client\Admin Console; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-p _edit.p -debugalert -ini autoedgethefactory/client/cfg/client.ini -pf autoedgethefactory/client/cfg/base.pf -basekey INI"; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Client Admin Console (Editor)"; Components: AETF_CLIENT; 
+Name: {group}\AutoEdge\Factory Module\Server\Admin Console; Filename: {code:getDLCDirectory}\bin\prowin32.exe; Parameters: "-p _edit.p -debugalert -ini autoedgethefactory/server/cfg/console.ini -pf autoedgethefactory/server/cfg/console.pf  -basekey INI"; WorkingDir: {app}; Comment: "AutoEdge|TheFactory Server Admin Console (Editor)"; Components: AETF_SERVER;
 
 Name: {group}\AutoEdge\Factory Module\Application User List; Filename: {app}\autoedgethefactory\shared\doc\applicationusers.txt; WorkingDir: {app}; Comment: "Application User List";
 
 ; Savvion
 ; SBM portal
-Name: "{group}\AutoEdge\Factory Module\Savvion Portal"; Filename: {code:getSBMURL}/sbm/bpmportal/login.jsp; Components: BPM_SERVER_SUPPORT; WorkingDir: {app}; 
+Name: "{group}\AutoEdge\Factory Module\BPM Portal"; Filename: {code:getSBMURL}/sbm/bpmportal/login.jsp; Components: BPM_SERVER_SUPPORT; WorkingDir: {app}; 
 Name: "{group}\AutoEdge\Factory Module\Customer Vehicle Order Process"; Filename: {code:getSBMURL}/sbm/BizSolo/CustomerVehicleOrderSubmit/Start.jsp; Components: BPM_SERVER_SUPPORT; WorkingDir: {app}; 
  
 
@@ -362,7 +357,6 @@ LogFile={src}\installer\output\compile.log
 LogFileAppend=false
 [UninstallRun]
 Filename: {app}\autoedgethefactory\server\cfg\StopAll.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER
-Filename: {app}\autoedgethefactory\server\cfg\UndeployWebservices.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER; Flags: SkipIfDoesntExist NoWait
 Filename: {app}\autoedgethefactory\server\cfg\UninstallAppserver.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER; Flags: SkipIfDoesntExist NoWait
 Filename: {app}\autoedgethefactory\server\cfg\UninstallDatabase.cmd; WorkingDir: {app}\autoedgethefactory\server\cfg; Components: AETF_SERVER; Flags: SkipIfDoesntExist NoWait
 
@@ -537,7 +531,7 @@ begin
 	bShowDebugMsg := false;		// Setting this to TRUE will enable debug messages!
 //	bShowDebugMsg := true;		// Setting this to FALSE will disable debug messages!
 	Result        := true;
-	strMinDLCMajor := '10.2B';
+	strMinDLCMajor := '11.0';
 	intMinDLCMinor := 0;	// not always used: use 0 when not in use
 
 	DebugMsg( 'Running InitializeSetup()' );
@@ -603,7 +597,7 @@ var
 	TotalMB 	: cardinal;
 begin
 	{ Get and display free megabytes on the Program Files drive }
-	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.7';
+	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.8';
 	Path 		:= ExpandConstant('{pf}');
 
 	if GetSpaceOnDisk(Path, True, FreeMB, TotalMB) then
@@ -881,36 +875,6 @@ begin
 						  'CALL "' + ExpandConstant( '{app}\autoedgethefactory\server\cfg\StopAppservers.cmd' ) + '" ' + #13#10#13#10,
 						  false );
 
-		{ === DeployWebservices.cmd === }
-		FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\DeployWebservices.cmd' );
-
-		{ Put the body in }
-		SaveStringToFile( FileName,
-						  '@ECHO OFF' + #13#10 +
-						  'SET DLC=' + strDLCDirectory + #13#10 +
-						  'SET PATH=%DLC%\bin;%PATH%' + #13#10#13#10 +
-						  'REM' + #13#10#13#10 +
-						  'CALL "%DLC%\bin\wsaman.bat" -name wsa1 -appname AutoEdgeTheFactoryWebServices -wsm '
-						        + ExpandConstant( '{app}\autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsm')
-						        + ' -deploy ' +#13#10 +
-               'CALL "%DLC%\bin\wsaman.bat" -name wsa1 -appname AutoEdgeTheFactoryWebServices -enable ' +#13#10,
-               false);
-
-		{ === UndeployWebservices.cmd === }
-		FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\UndeployWebservices.cmd' );
-
-		{ Put the body in }
-		SaveStringToFile( FileName,
-						  '@ECHO OFF' + #13#10 +
-						  'SET DLC=' + strDLCDirectory + #13#10 +
-						  'SET PATH=%DLC%\bin;%PATH%' + #13#10#13#10 +
-						  'REM' + #13#10#13#10 +
-						  'CALL "%DLC%\bin\wsaman.bat" -name wsa1 -appname AutoEdgeTheFactoryWebServices -disable ' +#13#10 +
-						  'CALL "%DLC%\bin\wsaman.bat" -name wsa1 -appname AutoEdgeTheFactoryWebServices -wsm '
-						        + ExpandConstant( '{app}\autoedgethefactory\server\cfg\AutoEdgeTheFactoryWebServices.wsm')
-						        + ' -undeploy ' +#13#10,
-						   false);
-
     { ABL session config file }
     //Get the config node.
     ParentNode := serverConfigXML.selectSingleNode('/configs/config[name="default"]');
@@ -924,7 +888,7 @@ begin
     ChildNode.text := 'database';
     ParentNode.appendChild(ChildNode);
     ChildNode := serverConfigXML.createElement('name');
-    ChildNode.text := txtAETFDBName.Text;    
+    ChildNode.text := 'dbAutoEdgeTheFactory';    // logical name used by the application code
     ParentNode.appendChild(ChildNode);
 
     // parameter for -db / Physical DB name./ Must be < 11 chars@! 
@@ -935,7 +899,7 @@ begin
     ChildNode.text := 'db';    
     ParentNode.appendChild(ChildNode);
     ChildNode := serverConfigXML.createElement('value');
-    ChildNode.text := './autoedgethefactory/server/db/aetf.db';    
+    ChildNode.text := './autoedgethefactory/server/db/aetf.db';
     ParentNode.appendChild(ChildNode);
 
     // back up to serverconnection
@@ -1063,6 +1027,21 @@ begin
 				
     { ABL session config file }
     ParentNode := clientConfigXML.selectSingleNode('/configs/config[name="default"]');
+
+    // properties 
+    ChildNode := clientConfigXML.createElement('property');
+    ParentNode.appendChild(ChildNode);
+    ParentNode := ChildNode;
+
+    ChildNode := clientConfigXML.createElement('name');
+    ChildNode.text := 'AppRoot';
+    ParentNode.appendChild(ChildNode);
+    ChildNode := clientConfigXML.createElement('value');
+    ChildNode.text := ExpandConstant('{app}');
+    ParentNode.appendChild(ChildNode);
+    
+    // back up to root
+    ParentNode := ChildNode.parentNode.parentNode;
     
     // database connection
     ChildNode := clientConfigXML.createElement('serverconnection');
@@ -1073,7 +1052,7 @@ begin
     ChildNode.text := 'appserver';
     ParentNode.appendChild(ChildNode);
     ChildNode := clientConfigXML.createElement('name');
-    ChildNode.text := txtAETFASClientName.Text;    
+    ChildNode.text := 'asAutoEdgeTheFactory';    // logical name used by the application code
     ParentNode.appendChild(ChildNode);
     ChildNode := clientConfigXML.createElement('enabled');
     ChildNode.text := 'true';    
@@ -1329,6 +1308,7 @@ procedure DoUpdateUBrokerPropertiesFile();
 var
 	FileName	: string;
 	Section		: string;
+	AppServerNameList : string;
 begin
 	if isComponentSelected( 'AETF_SERVER' ) then
 	begin
@@ -1351,6 +1331,11 @@ begin
 								ExpandConstant( '{app}' ));
 
 		{ Add the startup procedures }
+		if not (txtAEFAppserverName.Text = 'asAutoEdgeTheFactory') then
+		  AppServerNameList := txtAEFAppserverName.Text + ',';
+		 
+		SetIniString(Section, 'appserviceNameList', AppServerNameList + 'asAutoEdgeTheFactory', FileName);
+		
 		SetIniString(Section, 'srvrActivateProc', 'OpenEdge/CommonInfrastructure/Server/as_activate.p', FileName );
 		SetIniString(Section, 'srvrConnectProc', 'OpenEdge/CommonInfrastructure/Server/as_connect.p', FileName );
 		SetIniString(Section, 'srvrDeactivateProc', 'OpenEdge/CommonInfrastructure/Server/as_deactivate.p', FileName );
@@ -1415,24 +1400,7 @@ begin
   
   	if not bRet then
   		MsgBox( 'Return code: ' + intToStr( ret ) + ' [ ' + SysErrorMessage( ret ) + ' ]', mbInformation, MB_OK );
-  end;
-
-	if IsTaskSelected('DeployWebServices') then
-	begin
-    strDirectory := ExpandConstant('{app}\autoedgethefactory\server\cfg');
-    strCmd := strDirectory + '\DeployWebservices.cmd';
-  
-  	bRet := Exec( strCmd ,
-            '',
-  				  strDirectory,
-  				  SW_HIDE,
-  				  ewWaitUntilTerminated,
-  				  ret );
-  
-  	if not bRet then
-  		MsgBox( 'Return code: ' + intToStr( ret ) + ' [ ' + SysErrorMessage( ret ) + ' ]', mbInformation, MB_OK );	
-	end;
-  		
+  end;  		
 end;
 
 { === PROCEDURE FixSourceFiles ========================================================== }
@@ -1569,7 +1537,7 @@ end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 begin
-	DebugMsg( 'CusrStepChanged()' );
+	DebugMsg( 'CurStepChanged()' );
 
   { Right after installing the files, we will modify them }
 	if ( CurStep = ssPostInstall ) then
@@ -1746,6 +1714,5 @@ DBBrokerPortsDescription=Please provide the database broker ports (TCP) to use
 
 [Tasks]
 Components: AETF_SERVER; Name: StartAllServers; Description: "Start the AutoEdge servers (DB, AppServer)";
-Components: AETF_SERVER; Name: DeployWebServices; Description: "Deploy the AutoEdge|TheFactory WebServices";
  
 

@@ -42,8 +42,11 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     constructor public ApplicationError():               
         super().
         
-        /* can/will be overwritten by individual Error */
+    /* OE00218181  
+    /* can/will be overwritten by individual Error */
         this-object:Severity = ErrorSeverityEnum:Default:Value.
+        this-object:ReturnValue = ResolvedMessageText().
+    */
         
         LogFileName = session:temp-directory + '/' + 'error.log'.
     end constructor.
@@ -56,10 +59,10 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     
     method public void LogError():
         output stream sLog to value(LogFileName) append.
-            put stream sLog unformatted ResolvedMessageText().
+            put stream sLog unformatted iso-date(now) ' : ' ResolvedMessageText().
         output stream sLog close.
     end method.
-    
+
     method public void ShowError():
         /** This method should probably use a 'proper' message dialog; this
             might be a complete MVP application. For now, we simply use
@@ -180,6 +183,7 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
             oClone:AddMessage(GetMessage(iLoop), iLoop).
         end.
         oClone:Severity = this-object:Severity.
+        oClone:ReturnValue = this-object:ReturnValue.
         
         return oClone.
     end method.

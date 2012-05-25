@@ -169,6 +169,7 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         define variable hItem as handle no-undo.
         define variable hDataset as handle no-undo.
         define variable hQuery as handle no-undo.
+        define variable dLineTotal as decimal no-undo.
 
         oResponse = super:GetData(input pcMessageId).
 
@@ -187,9 +188,11 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderEntity inherits Stand
         hQuery:get-first().
 
         do while hOrderLine:available:
-            hOrder::OrderAmount = hOrder::OrderAmount
-                                + ( hOrderLine::Price * hOrderLine::Quantity
-                                    * (-1 * hOrderLine::Discount)).
+            dLineTotal = hOrderLine::Price * hOrderLine::Quantity.            
+            if hOrderLine::Discount gt 0 then
+                dLineTotal = dLineTotal - (hOrderLine::Discount * dLineTotal / 100).
+            
+            hOrder::OrderAmount = hOrder::OrderAmount + dLineTotal. 
 
             hQuery:get-next().
         end.

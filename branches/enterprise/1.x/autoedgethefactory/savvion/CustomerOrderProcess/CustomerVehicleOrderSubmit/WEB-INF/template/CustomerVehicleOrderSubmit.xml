@@ -323,6 +323,23 @@
     <PreFunction type="java:function">// Each tenant/brand has its own admin user&#13;
 bean.setPropString("BIZSITE_USER", "lob_manager@"+bean.getPropString("SelectedVehicleBrand").toLowerCase());&#13;
 &#13;
+// ABL doesn't like List objects, turn into String for passing into BizLogic process&#13;
+java.util.Vector accessoryList = bean.getPropVector("SelectedAccessoryList");&#13;
+java.lang.StringBuilder accessoryString = new  java.lang.StringBuilder("[");&#13;
+&#13;
+java.lang.String prefix = "";&#13;
+for (java.lang.Object element : accessoryList) {&#13;
+    accessoryString.append(prefix);&#13;
+    prefix = ",";&#13;
+    accessoryString.append("\"" + element.toString() + "\" ");&#13;
+}&#13;
+accessoryString.append("]");&#13;
+&#13;
+//System.out.println(accessoryString.toString());&#13;
+&#13;
+bean.setPropString("SelectedInteriorAccessories", accessoryString.toString());&#13;
+&#13;
+&#13;
 </PreFunction>
     <Datainput>CustomerName@CustomerName</Datainput>
     <Datainput>SelectedInteriorSeatMaterial@SelectedInteriorSeatMaterial</Datainput>

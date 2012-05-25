@@ -21,7 +21,7 @@ define stream strJSPMain.
 define stream strJSPChild.
 
 /** -- main -- **/
-output stream strJSPMain  to value(session:parameter + '\autoedgethefactory\savvion\UserLoad\jsp\LoadAutoEdgeTheFactoryUsers.jsp').
+output stream strJSPMain  to value(session:parameter + '\autoedgethefactory\savvion\CustomerOrderProcess\UserLoad\jsp\LoadAutoEdgeTheFactoryUsers.jsp').
 
 put stream strJSPMain unformatted
     '<html>' skip.
@@ -35,7 +35,7 @@ for each Tenant no-lock:
     put stream strJSPMain unformatted
         '<jsp:include page="' +  cChildPage + '" />' skip.
     
-    output stream strJSPChild to value(session:parameter + '\autoedgethefactory\savvion\UserLoad\jsp\' + cChildPage).
+    output stream strJSPChild to value(session:parameter + '\autoedgethefactory\savvion\CustomerOrderProcess\UserLoad\jsp\' + cChildPage).
 
     put stream strJSPChild unformatted
         '<html>' skip
@@ -67,7 +67,7 @@ for each Tenant no-lock:
             when 'admin' or when 'lob_manager' then cParentGroupName = 'FinanceManagementGroup'.
             when 'factory' then cParentGroupName = 'FactoryGroup'.
             when 'sales' then cParentGroupName = 'SalesrepGroup'.
-            when 'support' then cParentGroupName = 'FullfillmentStaffGroup'.
+            when 'support' then cParentGroupName = 'FulfillmentStaffGroup'.
             when 'finance' then cParentGroupName = 'FinanceStaffGroup'.
             otherwise cParentGroupName = ''.
         end case.
@@ -115,7 +115,7 @@ for each Tenant no-lock:
         case Department.Name:
             when 'sales' then cParentGroupName = 'SalesrepGroup'.
             when 'factory' then cParentGroupName = 'FactoryGroup'.
-            when 'support' then cParentGroupName = 'FullfillmentStaffGroup'.
+            when 'support' then cParentGroupName = 'FulfillmentStaffGroup'.
             when 'admin' then cParentGroupName = 'FinanceManagementGroup'.
             when 'finance' then cParentGroupName = 'FinanceStaffGroup'.
             otherwise cParentGroupName = ''.

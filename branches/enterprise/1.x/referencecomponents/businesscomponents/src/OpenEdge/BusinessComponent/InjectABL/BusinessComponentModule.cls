@@ -80,6 +80,9 @@ class OpenEdge.BusinessComponent.InjectABL.BusinessComponentModule abstract inhe
         oBindingSyntax
             :WithConstructorArgument(IDataAccessType, pcDAName)
             :Using(InjectABLServiceProviderType)
+            /* Business Entities are Singletons, per OERA 
+            :InSingletonScope()
+            */ 
             :InAgentRequestScope().
         
         /* bind data access */

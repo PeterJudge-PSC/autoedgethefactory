@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
     File        : AutoEdge/Factory/Server/Order/BusinessComponent/service_branddata.p
     Purpose     :
@@ -306,6 +307,8 @@ assign cUserName = 'guest'
                             UserTypeEnum:Customer:ToString(),
                             pcBrand)
        cUserPassword = 'letmein'.
+
+       
 oSecMgr:UserLogin(cUserName, cUserDomain, cUserPassword).
 
 oSecMgr:AuthoriseServiceAction('VehicleOptions', ServiceMessageActionEnum:FetchData).
