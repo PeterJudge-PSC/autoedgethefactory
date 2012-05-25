@@ -168,12 +168,12 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderDA inherits StandardD
             @todo(task="implement", action="generic using datasource!").
             
             hDBBuffer = hBuffer:data-source:get-source-buffer(1).
-            hDBBuffer:find-first(substitute(' where &1.ItemId eq ', hDBBuffer:name) + quoter(pcItemId), no-lock) no-error.
+            hDBBuffer:find-first(substitute(' where &1.ItemId eq ', hDBBuffer:name) + quoter(pcItemId), no-lock) /*no-error*/.
             hBuffer:buffer-copy(hDBBuffer).
             cItemTypeId = hDBBuffer::ItemTypeId.
             
             hDBBuffer = hBuffer:data-source:get-source-buffer(2).
-            hDBBuffer:find-first(substitute(' where &1.ItemTypeId eq ', hDBBuffer:name) + quoter(cItemTypeId), no-lock) no-error.
+            hDBBuffer:find-first(substitute(' where &1.ItemTypeId eq ', hDBBuffer:name) + quoter(cItemTypeId), no-lock) /*no-error*/.
             hBuffer:buffer-copy(hDBBuffer).
             
             hBuffer:buffer-release().

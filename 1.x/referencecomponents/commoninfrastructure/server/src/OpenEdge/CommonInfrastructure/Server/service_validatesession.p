@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /** ------------------------------------------------------------------------
     File        : OpenEdge/CommonInfrastructure/Server/service_validatesession.p
     Purpose     : 

@@ -90,7 +90,7 @@ class OpenEdge.CommonInfrastructure.Server.SecurityManager abstract inherits Sec
         if oContext:Equals(CurrentUserContext) then
         do:
             CurrentUserContext = ?.
-            security-policy:set-client(?).
+/*            security-policy:set-client(?).*/
         end.
     end method.
     

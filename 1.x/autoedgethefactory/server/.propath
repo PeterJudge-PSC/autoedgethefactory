@@ -1,22 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<propath version="10.2B" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/propath.xsd">
-<propathentry env="all" kind="src" output="@{ROOT}\bin" path="@{ROOT}\src"/>
-<propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\bin"/>
-<propathentry env="all" kind="folder" path="\Business Components\bin"/>
-<propathentry env="all" kind="folder" path="\Data Access\bin"/>
-<propathentry env="all" kind="folder" path="\Enterprise Services\bin"/>
-<propathentry env="all" kind="folder" path="\Common Infrastructure Server\bin"/>
-<propathentry env="all" kind="folder" path="\Common Infrastructure Shared\bin"/>
-<propathentry env="all" kind="folder" path="\Support\bin"/>
-<propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\src"/>
-<propathentry env="all" kind="folder" path="\Business Components\src"/>
-<propathentry env="all" kind="folder" path="\Data Access\src"/>
-<propathentry env="all" kind="folder" path="\Enterprise Services\src"/>
-<propathentry env="all" kind="folder" path="\Common Infrastructure Server\src"/>
-<propathentry env="all" kind="folder" path="\Common Infrastructure Shared\src"/>
-<propathentry env="all" kind="folder" path="\Support\src"/>
-<propathentry env="all" kind="dir" path="@{ROOT}\tests"/>
-<propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\tests"/>
-<propathentry env="all" kind="con" path="com.openedge.pdt.text.DLC_PATHS"/>
-<propathentry env="all" kind="folder" path="\ProRefactory"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<propath version="11.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/propath.xsd">
+<propathentry env="all" kind="src" output="@{ROOT}\bin" path="@{ROOT}\src" platform="All"/>
+<propathentry env="all" kind="dir" path="@{ROOT}\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Business Components\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Data Access\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Enterprise Services\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Common Infrastructure Server\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Common Infrastructure Shared\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\Support\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Business Components\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Data Access\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Enterprise Services\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Common Infrastructure Server\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Common Infrastructure Shared\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\Support\src" platform="All"/>
+<propathentry env="all" kind="dir" path="@{ROOT}\tests" platform="All"/>
+<propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\tests" platform="All"/>
+<propathentry env="all" kind="con" path="com.openedge.pdt.text.DLC_PATHS" platform="All"/>
+<propathentry env="all" kind="folder" path="\ProRefactory" platform="All"/>
 </propath>

@@ -239,7 +239,23 @@ String CompactModels=bean.getPropString("CompactModels");
 
 <bizsolo:ifCrtWS name="CreateOrder" >
 <% // Each tenant/brand has its own admin user
-bean.setPropString("BIZSITE_USER", "lob_manager@"+bean.getPropString("SelectedVehicleBrand").toLowerCase());%>
+bean.setPropString("BIZSITE_USER", "lob_manager@"+bean.getPropString("SelectedVehicleBrand").toLowerCase());
+
+// ABL doesn't like List objects, turn into String for passing into BizLogic process
+java.util.Vector accessoryList = bean.getPropVector("SelectedAccessoryList");
+java.lang.StringBuilder accessoryString = new  java.lang.StringBuilder("[");
+
+java.lang.String prefix = "";
+for (java.lang.Object element : accessoryList) {
+    accessoryString.append(prefix);
+    prefix = ",";
+    accessoryString.append("\"" + element.toString() + "\" ");
+}
+accessoryString.append("]");
+
+//System.out.println(accessoryString.toString());
+
+bean.setPropString("SelectedInteriorAccessories", accessoryString.toString());%>
 <bizsolo:executeAction wsName="CreateOrder" epClassName="com.savvion.BizSolo.beans.PAKCreatePI" perfMethod="commit" dsi="CustomerName@CustomerName,SelectedInteriorSeatMaterial@SelectedInteriorSeatMaterial,CustomerId@CustomerId,DealerCode@DealerCode,SelectedExteriorWheels@SelectedExteriorWheels,SelectedExteriorMoonroof@SelectedExteriorMoonroof,ModelName@ModelName,SelectedInteriorTrimColour@SelectedInteriorTrimColour,CustomerEmail@CustomerEmail,SelectedVehicleModel@VehicleModel,SelectedExteriorColour@SelectedExteriorColour,SelectedVehicleBrand@VehicleBrand,SelectedInteriorAccessories@SelectedInteriorAccessories,CustomerCreditLimit@CustomerCreditLimit,BIZSITE_PASSWORD@bizsite_pass,BIZSITE_USER@bizsite_user,PT_NAME@ptName" dso="error@error" />
 <bizsolo:forwardURL page="Start.jsp?crtApp=CustomerVehicleOrderSubmit&crtPage=ExitPage" />
 </bizsolo:ifCrtWS>

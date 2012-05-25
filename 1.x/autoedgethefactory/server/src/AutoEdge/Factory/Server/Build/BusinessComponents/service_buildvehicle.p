@@ -1,5 +1,6 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /*------------------------------------------------------------------------
-    File        : service_buildvehicle.p
+    File        : AutoEdge/Factory/Server/Build/BusinessComponents/service_buildvehicle.p
     Purpose     : 
     Syntax      :
     Description : 

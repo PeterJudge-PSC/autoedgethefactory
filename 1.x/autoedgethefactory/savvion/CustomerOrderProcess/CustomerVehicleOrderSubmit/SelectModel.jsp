@@ -473,20 +473,20 @@ assignModelName('uxSUVModels');;
 }
 
 
-function uxCompactModels_onChange(eventContext) {
-sbm.widgets.setValue('txtModel',sbm.widgets.getValue('uxCompactModels'));
-{
-clearOtherSelections('uxCompactModels');
-assignModelName('uxCompactModels');;
-}
-}
-
-
 function uxSedanModels_onChange(eventContext) {
 sbm.widgets.setValue('txtModel',sbm.widgets.getValue('uxSedanModels'));
 {
 clearOtherSelections('uxSedanModels');
 assignModelName('uxSedanModels');;
+}
+}
+
+
+function uxCompactModels_onChange(eventContext) {
+sbm.widgets.setValue('txtModel',sbm.widgets.getValue('uxCompactModels'));
+{
+clearOtherSelections('uxCompactModels');
+assignModelName('uxCompactModels');;
 }
 }
 

@@ -1,3 +1,4 @@
+@openapi.openedge.export FILE(type="BPM", operationName="%FILENAME%", useReturnValue="false", writeDataSetBeforeImage="false", executionMode="external").
 /** ------------------------------------------------------------------------
     File        : AutoEdge/Factory/Server/Common/CommonInfrastructure/service_registercustomer.p
     Purpose     : 
