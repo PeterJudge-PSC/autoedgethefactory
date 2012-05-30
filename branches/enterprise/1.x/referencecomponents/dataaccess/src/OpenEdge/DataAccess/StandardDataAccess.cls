@@ -3,7 +3,7 @@
     Purpose     : Standard DataAccess object for filling ProDataSet-based business components.
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    @author pjudge
     Created     : Tue Aug 24 15:04:40 EDT 2010
     Notes       : 
   --------------------------------------------------------------------- */

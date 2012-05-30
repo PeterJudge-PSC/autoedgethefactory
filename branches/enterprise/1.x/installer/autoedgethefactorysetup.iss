@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [InnoIDE_Settings]
-LogFile=C:\devarea\staging\aetf\trunk\installer\output\compile.log
+LogFile=C:\devarea\staging\aetf\enterprise\1.x\dev\installer\output\compile.log
 LogFileOverwrite=true
 
 [Setup]
@@ -531,7 +531,7 @@ begin
 	bShowDebugMsg := false;		// Setting this to TRUE will enable debug messages!
 //	bShowDebugMsg := true;		// Setting this to FALSE will disable debug messages!
 	Result        := true;
-	strMinDLCMajor := '11.0';
+	strMinDLCMajor := '11.0.0';
 	intMinDLCMinor := 0;	// not always used: use 0 when not in use
 
 	DebugMsg( 'Running InitializeSetup()' );
