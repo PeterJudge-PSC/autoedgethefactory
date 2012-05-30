@@ -28,10 +28,7 @@ class OpenEdge.CommonInfrastructure.Common.InjectABL.ComponentKernel inherits St
                                      poModules as IInjectionModuleCollection,
                                      poSettings as OpenEdge.Core.InjectABL.KernelSettings):
         super(poComponents, poModules, poSettings).
-        
-        message this-object this-object:GetClass():TypeName program-name(1) program-name(2) skip(2)
-            'ComponentKernel ctor'
-        view-as alert-box error title '[PJ DEBUG]'.
+
     end constructor.
         
     method protected override void AddComponents():
