@@ -20,7 +20,6 @@ using OpenEdge.CommonInfrastructure.Common.IConnectionManager.
 using OpenEdge.CommonInfrastructure.Common.IManager.
 using OpenEdge.CommonInfrastructure.Common.Service.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEnum.
-using OpenEdge.CommonInfrastructure.Common.ConnectionManagerActionEventArgs.
 using OpenEdge.CommonInfrastructure.Common.IComponent.
 
 using OpenEdge.Core.Util.IObjectInput.

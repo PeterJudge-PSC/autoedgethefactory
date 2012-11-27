@@ -9,8 +9,10 @@
   ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
 
-using OpenEdge.Lang.Assert.
+using OpenEdge.Lang.Collections.ICollection.
+using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.DataTypeEnum.
+using OpenEdge.Lang.Assert.
 using Progress.Lang.Class.
 using Progress.Lang.Object.
 using Progress.Lang.AppError.
@@ -21,7 +23,7 @@ class OpenEdge.Lang.Assert:
         if not valid-object(poArgument) then
             undo, throw new AppError(substitute('&1 cannot be null', pcName)).
     end method.
-    
+
     method public static void ArgumentNotNull(input poArgument as Object extent, pcName as char):
         if extent(poArgument) eq ? then
             undo, throw new AppError(substitute('&1 cannot be null', pcName)).
@@ -31,16 +33,71 @@ class OpenEdge.Lang.Assert:
         if pcArgument eq ? then 
             undo, throw new AppError(substitute('&1 cannot be unknown', pcName)).
     end method.
-    
+
+    method public static void ArgumentNotNull(pcArgument as longchar, pcName as character):
+        if pcArgument eq ? then
+            undo, throw new AppError(substitute('&1 cannot be unknown', pcName)).
+    end method.
+
+    method public static void ArgumentNotNullOrEmpty(input poArgument as ICollection, pcName as char):
+        Assert:ArgumentNotNull(input poArgument, input pcName).
+
+        if poArgument:Size eq 0 then
+            undo, throw new AppError(substitute('&1 cannot be empty: collection must have at least one entry', pcName)).
+    end method.
+
+    method public static void ArgumentIsEmpty(input phArgument as handle, pcName as character):
+        Assert:ArgumentNotNull(phArgument, pcName).
+
+        phArgument:find-first() no-error.
+        Assert:ArgumentNotAvailable(phArgument, pcName).
+    end method.
+
+    method public static void ArgumentNotEmpty(input phArgument as handle, pcName as character):
+        Assert:ArgumentNotNull(phArgument, pcName).
+
+        phArgument:find-first() no-error.
+        Assert:ArgumentIsAvailable(phArgument, pcName).
+    end method.
+
+    method public static void ArgumentNotNullOrEmpty(input poArgument as IMap, pcName as char):
+        Assert:ArgumentNotNull(input poArgument, input pcName).
+
+        if poArgument:Size eq 0 then
+            undo, throw new AppError(substitute('&1 cannot be empty: map must have at least one entry', pcName)).
+    end method.
+
+    method public static void ArgumentNotNullOrEmpty(input poArgument as Object extent, pcName as char):
+        Assert:ArgumentNotNull(input poArgument, pcName).
+
+        if not valid-object(poArgument[1]) then
+            undo, throw new AppError(substitute('&1 cannot be empty: array must have at least one valid extent', pcName)).
+    end method.
+
     method public static void ArgumentNotNullOrEmpty(pcArgument as character, pcName as character):
         define variable cLongCharArg as longchar no-undo.
         cLongCharArg = pcArgument.
         Assert:ArgumentNotNullOrEmpty(cLongCharArg, pcName).
     end method.
-    
+
+    method public static void ArgumentNotNullOrEmpty(input pcArgument as character extent, pcName as character):
+        define variable cLongCharArg as longchar no-undo.
+
+        if extent(pcArgument) eq ? then
+            undo, throw new AppError('argument cannot be an indeterminiate array').
+
+        cLongCharArg = pcArgument[1].
+        Assert:ArgumentNotNullOrEmpty(cLongCharArg, pcName).
+    end method.
+
+    method public static void ArgumentNotEmpty(pcArgument as longchar, pcName as character):
+        if trim(pcArgument) eq '' then
+            undo, throw new AppError(substitute('&1 cannot be empty', pcName)).
+    end method.
+
     method public static void ArgumentNotNullOrEmpty(pcArgument as longchar, pcName as character):
-        if pcArgument eq ? or pcArgument eq '' then 
-            undo, throw new AppError(substitute('&1 cannot be unknown or empty', pcName)).
+        Assert:ArgumentNotNull(pcArgument, pcName).
+        Assert:ArgumentNotEmpty(pcArgument, pcName).
     end method.
 
     method public static void ArgumentNonZero(piArgument as integer, pcName as character):
@@ -218,19 +275,19 @@ class OpenEdge.Lang.Assert:
         
         cCheckType = poCheckType:ToString().
         if phArgument:type eq cCheckType then
-            undo, throw new AppError(substitute('&1 cannot be of type &2', pcName, cCheckType)).        
+            undo, throw new AppError(substitute('&1 cannot be of type &2', pcName, cCheckType)).
     end method.
-        
+    
     method public static void ArgumentHasDeterminateExtent(input pcArgument as character extent,
                                                            input pcName as character):
         if extent(pcArgument) eq ? then
-            undo, throw new AppError(substitute('&1 array cannot be indeterminate', pcName)).                                                               
+            undo, throw new AppError(substitute('&1 array cannot be indeterminate', pcName)).
     end method.
     
     method public static void ArgumentIsIndeterminateArray(input pcArgument as character extent,
                                                            input pcName as character):
         if extent(pcArgument) ne ? then
-            undo, throw new AppError(substitute('&1 array must be indeterminate', pcName)).                                                               
+            undo, throw new AppError(substitute('&1 array must be indeterminate', pcName)).
     end method.
     
     method public static void ArgumentHasDeterminateExtent(input piArgument as integer extent,
@@ -262,7 +319,7 @@ class OpenEdge.Lang.Assert:
         Assert:ArgumentNotNull(phArgument, pcName).
         
         if not phArgument:available then
-            undo, throw new AppError(substitute('record in buffer &1 is not available', pcName)).                                                               
+            undo, throw new AppError(substitute('record in buffer &1 is not available', pcName)).
     end method.
 
     method public static void ArgumentIsInt(input pcArgument as character,
@@ -271,8 +328,98 @@ class OpenEdge.Lang.Assert:
         
         iCheckVal = int(pcArgument) no-error.
         if error-status:error then
-            undo, throw new AppError(substitute('&1 is an integer value', pcName)).                                                               
+            undo, throw new AppError(substitute('&1 is an integer value', pcName)).
     end method.
     
+    method public static void ArgumentNotAvailable(input phArgument as handle,
+                                                   input pcName as character):
+        Assert:ArgumentNotNull(phArgument, pcName).
+
+        if phArgument:available then
+            undo, throw new AppError(substitute('record in buffer &1 is available', pcName)).
+    end method.
+
+    method public static void ArgumentIsInteger(input pcArgument as character,
+                                                input pcName as character):
+        define variable iCheckVal as integer no-undo.
+
+        iCheckVal = int(pcArgument) no-error.
+        if error-status:error then
+            undo, throw new AppError(substitute('&1 is an integer value', pcName)).
+    end method.
+
+    method public static void ArgumentIsTrue(input plArgument as logical,
+                                             input pcName as character):
+        /* deliberate not true */
+        if not (plArgument eq true) then
+            undo, throw new AppError(substitute('&1 is not true', pcName)).
+    end method.
+
+    method public static void ArgumentIsFalse(input plArgument as logical,
+                                              input pcName as character):
+        /* deliberate not false */
+        if not (plArgument eq false) then
+            undo, throw new AppError(substitute('&1 is not false', pcName)).
+    end method.
+
+    method public static void ArgumentIsUnknown(input plArgument as logical,
+                                                input pcName as character):
+        /* deliberate not ? */
+        if not (plArgument eq ?) then
+            undo, throw new AppError(substitute('&1 is unknown', pcName)).
+    end method.
+
+    method public static void ArgumentNotTrue(input plArgument as logical,
+                                              input pcName as character):
+        if plArgument eq true then
+            undo, throw new AppError(substitute('&1 is true', pcName)).
+    end method.
+
+    method public static void ArgumentNotFalse(input plArgument as logical,
+                                               input pcName as character):
+        if plArgument eq false then
+            undo, throw new AppError(substitute('&1 is false', pcName)).
+    end method.
+
+    method public static void ArgumentNotUnknown(input plArgument as logical,
+                                                 input pcName as character):
+        if plArgument eq ? then
+            undo, throw new AppError(substitute('&1 is unknown', pcName)).
+    end method.
+    
+    method public static void ArgumentNotNull(piArgument as integer, pcName as character):
+        if piArgument eq ? then
+            undo, throw new AppError(substitute('&1 cannot be null', pcName)).
+    end method.
+    
+    method public static void ArgumentNotNull(piArgument as int64, pcName as character):
+            if piArgument eq ? then
+                    undo, throw new AppError(substitute('&1 cannot be null', pcName)).
+                        end method.
+
+    method public static void ArgumentNotZero(piArgument as decimal, pcName as character):
+        if piArgument eq 0 then
+            undo, throw new AppError(substitute('&1 cannot be zero', pcName)).
+    end method.
+
+    method public static void ArgumentNotNull(pdArgument as decimal, pcName as character):
+        if pdArgument eq ? then
+            undo, throw new AppError(substitute('&1 cannot be null', pcName)).
+    end method.
+
+    method public static void ArgumentNotNullOrZero(piArgument as integer, pcName as character):
+        Assert:ArgumentNotNull(piArgument, pcName).
+        Assert:ArgumentNotZero(piArgument, pcName).
+    end method.
+
+    method public static void ArgumentNotZero(piArgument as integer, pcName as character):
+        if piArgument eq 0 then
+            undo, throw new AppError(substitute('&1 cannot be zero', pcName)).
+    end method.
+
+    method public static void ArgumentNotZero(piArgument as int64, pcName as character):
+        if piArgument eq 0 then
+            undo, throw new AppError(substitute('&1 cannot be zero', pcName)).
+    end method.
     
 end class.

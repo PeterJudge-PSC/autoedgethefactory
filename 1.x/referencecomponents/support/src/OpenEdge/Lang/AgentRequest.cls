@@ -15,6 +15,8 @@ using OpenEdge.Lang.AgentRequest.
 using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.Collections.IMap.
 
+using Progress.Lang.OERequestInfo.
+
 class OpenEdge.Lang.AgentRequest:
     define public property ActiveSince as datetime-tz no-undo get. private set.
     
@@ -32,7 +34,7 @@ class OpenEdge.Lang.AgentRequest:
     define public property Id as char no-undo get. private set.
     
     constructor private AgentRequest():
-        assign this-object:Id = guid(generate-uuid)
+        assign this-object:Id = cast(session:current-request-info, OERequestInfo):RequestId
                RequestProperties = new Map()
                ActiveSince = now.
     end constructor.

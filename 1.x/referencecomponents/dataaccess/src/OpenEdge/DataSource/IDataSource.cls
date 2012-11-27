@@ -68,18 +68,17 @@ interface OpenEdge.DataSource.IDataSource:
         
         @param handle A buffer or dataset handle that is the data target. */
     method public void SetDataTarget(input phData as handle).
-    
+
     /** Clears the Datatarget and associated properties */
     method public void ClearDataTarget().
-    
+
     /** A helper for retrieving the data target in longchar form again. Performs
         the inverse of the SetDataTarget() method; this is basically just a STRING()
         of the value or reference.
-        
-        @return longchar The value of the datatarget property (not necessarily its contents).
-     */
+
+        @return longchar The value of the datatarget property (not necessarily its contents). */
     method public longchar GetDataTarget().
-    
+
     /** Prepare with query, batchsize and more.
         
         @param ServiceMessageActionEnum The action that we're preparing the datasource for. 
@@ -87,7 +86,7 @@ interface OpenEdge.DataSource.IDataSource:
         @param ITableRequest Parameters for the fetch (query modifications, page size etc).
         @param IDataAccess The DataAccess object making this request. The DAO can be used to
                resolve table- or field name mappings (from the Business Entity names to the 
-               Data Source names.           */
+               Data Source names. */
     method public void Prepare(input poAction as ServiceMessageActionEnum,
                                input poRequest as ITableRequest,
                                input poDAO as IDataAccess).
@@ -100,13 +99,13 @@ interface OpenEdge.DataSource.IDataSource:
         in ITableContext). */
     method public void FetchData().    
     
-    /** Retrieves the results of a fetch */
+    /** Retrieves the results of a fetch 
+        @return ITableResponse The response to the fetch operation. */
     method public ITableResponse GetData().
     
-    /** Saves all data in the buffer passed in.
-            
-        @param handle The buffer containing data to save.
+    /** Saves all data in the DataTarget
+        
         @return ITableResponse The response to the save operation. */
-    method public ITableResponse SaveData().
+    method public ITableResponse SaveData().    
     
 end interface.

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pidl:description targetNamespace="urn:schemas-progress-com:bpm:appserverbinding:0001" serviceType="wsad:OEAppServerInvoke" xmlns:oedatatype="http://www.progress.com/adapters/oe" xmlns:pidl="http://www.progress.com/caf/idl1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsad="urn:schemas-progress-com:bpm:appserverbinding:0001">
+<pidl:types>
+
+<javaTypes xmlns:javatype="http://www.progress.com/adapters/javatypesystem" xmlns:jts="http://www.progress.com/adapters/idl1.0/javatype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.progress.com/adapters/oe" xmlns="http://www.progress.com/adapters/javatypesystem">
+    <javatype:javaType className="com.progress.lang.Memptr" extend="jts:Object" name="raw"/>
+    <javatype:javaType className="com.progress.lang.Handle" extend="jts:Object" name="handle"/>
+    <javatype:javaType className="com.progress.lang.Integer" extend="jts:Object" name="integer"/>
+    <javatype:javaType className="com.progress.lang.Date" extend="jts:Object" name="date"/>
+    <javatype:javaType className="com.progress.lang.Decimal" extend="jts:Object" name="decimal"/>
+    <javatype:javaType className="com.progress.lang.Character" extend="jts:Object" name="character"/>
+    <javatype:javaType className="com.progress.lang.Logical" extend="jts:Object" name="logical"/>
+    <javatype:javaType className="com.progress.lang.Int64" extend="jts:Object" name="int64"/>
+    <javatype:javaType className="com.progress.lang.Memptr" extend="jts:Object" name="memptr"/>
+    <javatype:javaType className="com.progress.lang.Character" extend="jts:Object" name="longchar"/>
+    <javatype:javaType className="com.progress.lang.Date" extend="jts:Object" name="datetime"/>
+    <javatype:javaType className="com.progress.lang.RowId" extend="jts:Object" name="rowid"/>
+    <javatype:javaType className="com.progress.lang.Date" extend="jts:Object" name="datetime-tz"/>
+</javaTypes>
+
+</pidl:types>
+  <pidl:interface name="com.progress.openedge.pdt.bpminterfaces">
+    <pidl:operation name="service_captureorder">
+      <pidl:input messageLabel="piOrderNumber" req="false" type="oedatatype:integer">
+    </pidl:input>
+      <pidl:input messageLabel="pcBrand" req="false" type="oedatatype:character">
+    </pidl:input>
+      <pidl:input messageLabel="pcDealerCode" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcCustomerId" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="plOrderApproved" req="false" type="oedatatype:logical">
+    </pidl:input>
+      <pidl:input messageLabel="pcInstructions" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcModel" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcInteriorTrimMaterial" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcInteriorTrimColour" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcInteriorAccessories" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcExteriorColour" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcMoonroof" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:input messageLabel="pcWheels" req="false" type="oedatatype:longchar">
+    </pidl:input>
+      <pidl:output messageLabel="pcOrderId" req="false" type="oedatatype:character">
+    </pidl:output>
+      <pidl:output messageLabel="pdOrderAmount" req="false" type="oedatatype:decimal">
+    </pidl:output>
+    </pidl:operation>
+  </pidl:interface>
+  <pidl:binding name="com.progress.openedge.pdt.bpmbindings" interface="wsad:com.progress.openedge.pdt.bpminterfaces" type="urn:schemas-progress-com:bpm:appserverbinding:0001">
+<wsad:Operation isPersistent="false" useFullName="false">
+  <wsad:Name>service_captureorder</wsad:Name>
+  <wsad:ProcPath>AutoEdge/Factory/Server/Order/BusinessComponent/</wsad:ProcPath>
+  <wsad:ProPath/>
+  <wsad:ProcExt>p</wsad:ProcExt>
+  <wsad:ProcDetail isCustomized="false" usesUnknownDefault="true" useRetVal="false" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true" IsMappedToSubmit="false">
+    <wsad:Name>service_captureorder</wsad:Name>
+    <wsad:HelpString></wsad:HelpString>
+    <wsad:Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+      <wsad:Name>piOrderNumber</wsad:Name>
+      <wsad:OrigName>piOrderNumber</wsad:OrigName>
+      <wsad:Type>4</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
+      <wsad:Name>pcBrand</wsad:Name>
+      <wsad:OrigName>pcBrand</wsad:OrigName>
+      <wsad:Type>1</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
+      <wsad:Name>pcDealerCode</wsad:Name>
+      <wsad:OrigName>pcDealerCode</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+      <wsad:Name>pcCustomerId</wsad:Name>
+      <wsad:OrigName>pcCustomerId</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="5" writeXmlBeforeImage="false">
+      <wsad:Name>plOrderApproved</wsad:Name>
+      <wsad:OrigName>plOrderApproved</wsad:OrigName>
+      <wsad:Type>3</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="6" writeXmlBeforeImage="false">
+      <wsad:Name>pcInstructions</wsad:Name>
+      <wsad:OrigName>pcInstructions</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="7" writeXmlBeforeImage="false">
+      <wsad:Name>pcModel</wsad:Name>
+      <wsad:OrigName>pcModel</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="8" writeXmlBeforeImage="false">
+      <wsad:Name>pcInteriorTrimMaterial</wsad:Name>
+      <wsad:OrigName>pcInteriorTrimMaterial</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="9" writeXmlBeforeImage="false">
+      <wsad:Name>pcInteriorTrimColour</wsad:Name>
+      <wsad:OrigName>pcInteriorTrimColour</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="10" writeXmlBeforeImage="false">
+      <wsad:Name>pcInteriorAccessories</wsad:Name>
+      <wsad:OrigName>pcInteriorAccessories</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="11" writeXmlBeforeImage="false">
+      <wsad:Name>pcExteriorColour</wsad:Name>
+      <wsad:OrigName>pcExteriorColour</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="12" writeXmlBeforeImage="false">
+      <wsad:Name>pcMoonroof</wsad:Name>
+      <wsad:OrigName>pcMoonroof</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="13" writeXmlBeforeImage="false">
+      <wsad:Name>pcWheels</wsad:Name>
+      <wsad:OrigName>pcWheels</wsad:OrigName>
+      <wsad:Type>39</wsad:Type>
+      <wsad:Mode>1</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="14" writeXmlBeforeImage="false">
+      <wsad:Name>pcOrderId</wsad:Name>
+      <wsad:OrigName>pcOrderId</wsad:OrigName>
+      <wsad:Type>1</wsad:Type>
+      <wsad:Mode>2</wsad:Mode>
+    </wsad:Parameter>
+    <wsad:Parameter allowUnknown="true" ordinal="15" writeXmlBeforeImage="false">
+      <wsad:Name>pdOrderAmount</wsad:Name>
+      <wsad:OrigName>pdOrderAmount</wsad:OrigName>
+      <wsad:Type>5</wsad:Type>
+      <wsad:Mode>2</wsad:Mode>
+    </wsad:Parameter>
+  </wsad:ProcDetail>
+</wsad:Operation>
+  </pidl:binding>
+</pidl:description>

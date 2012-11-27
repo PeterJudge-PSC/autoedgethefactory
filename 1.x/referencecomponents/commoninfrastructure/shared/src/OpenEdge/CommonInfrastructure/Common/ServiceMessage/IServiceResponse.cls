@@ -9,7 +9,7 @@
   --------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 
-interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse /* inherits IServiceMessage */:
+interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse inherits IServiceMessage:
     
     /** Was there an error on the request? */
     define public property HasError as logical no-undo get. set.

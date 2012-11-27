@@ -43,21 +43,46 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderDA inherits StandardD
                 [3] = DB Name               */
     method override public character extent ResolveFieldName (input pcSourceTable as character, input pcSourceField as character):        
         define variable cFieldName as character extent 2 no-undo.
+
+        /* default is a simple mapping from eTable to Table */
+        assign cFieldName[1] = pcSourceField
+               cFieldName[2] = substring(pcSourceTable, 2).
         
-        if pcSourceTable eq 'eOrder' and pcSourceField eq 'OrderStatus' then
-            assign cFieldName[1] = 'Code'
-                   cFieldName[2] = 'StatusDetail'.
-        else
-        if pcSourceTable eq 'eOrder' and pcSourceField eq 'DealerCode' then
-            assign cFieldName[1] = 'Code'
-                   cFieldName[2] = 'Dealer'.
-        else
-        if pcSourceTable eq 'eOrder' and pcSourceField eq 'SalesrepCode' then
-            assign cFieldName[1] = 'Code'
-                   cFieldName[2] = 'Salesrep'.
-        else
-            assign cFieldName[1] = pcSourceField
-                   cFieldName[2] = substring(pcSourceTable, 2).
+        case pcSourceTable:
+            when 'eOrder' then
+            case pcSourceField:
+                when 'OrderStatus' then
+                    assign cFieldName[1] = 'Code'
+                           cFieldName[2] = 'StatusDetail'.
+                when 'DealerCode' then
+                    assign cFieldName[1] = 'Code'
+                           cFieldName[2] = 'Dealer'.
+                when 'SalesrepCode' then
+                    assign cFieldName[1] = 'Code'
+                           cFieldName[2] = 'Salesrep'.
+            end case.   /* eOrder */
+            when 'eOrderLine' then
+            case pcSourceField:
+                when 'OrderLineStatus' then
+                    assign cFieldName[1] = 'Code'
+                           cFieldName[2] = 'StatusDetail'.
+            end case.   /* eOrderLine */
+            when 'eItem' then
+            case pcSourceField:
+                when 'ItemType' then
+                    assign cFieldName[1] = 'Name'
+                           cFieldName[2] = 'ItemType'.
+                when 'Description' then
+                    assign cFieldName[1] = 'Description'
+                           cFieldName[2] = 'Item'.
+            end case.   /* eOrder */
+            when 'eComponentItem' then
+            case pcSourceField:
+                when 'Quantity' then
+                    assign cFieldName[1] = 'Qty'
+                           cFieldName[2] = 'ComponentItem'.
+            end case.   /* eComponentItem */
+        end case.
         
         return cFieldName.
     end method.
@@ -111,6 +136,28 @@ class AutoEdge.Factory.Server.Order.BusinessComponent.OrderDA inherits StandardD
                 end case.
             end.
     end method.
+
+	method override protected void RemoveBufferCallbacks(input phBuffer as handle,
+	                                                     input poServiceMessageAction as ServiceMessageActionEnum,
+	                                                     input poDataSource as IDataSource):
+        super:RemoveBufferCallbacks(phBuffer, poServiceMessageAction, poDataSource).
+            	                                                         
+        if poServiceMessageAction:Equals(ServiceMessageActionEnum:FetchData) then                
+        do:
+            case phBuffer:table:
+                when 'eFinishedItem' or when 'eComponentItem' then
+                    phBuffer:set-callback(CallbackNameEnum:AfterRowFill:ToString(), ?, this-object).
+            end case.
+        end.
+        else
+        if poServiceMessageAction:Equals(ServiceMessageActionEnum:SaveData) then
+        do:
+            case phBuffer:table:
+                when 'eOrder' then 
+                    poDataSource:BeforeSaveTransaction:Unsubscribe(OrderBeforeSaveTransactionHandler).
+            end case.
+        end.
+	end method.
     
     method public void eComponentItemAfterRowFillCallback(input dataset-handle phDataset):
         define variable hBuffer as handle no-undo.

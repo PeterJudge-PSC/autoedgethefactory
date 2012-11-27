@@ -90,7 +90,7 @@ procedure test_captureorder:
     define VARIABLE piOrderNumber as integer no-undo.
     define VARIABLE pcBrand as character no-undo.
     define VARIABLE pcDealerId as longchar no-undo.
-    define VARIABLE pcCustomerId as character no-undo.
+    define VARIABLE pcCustomerId as longchar no-undo.
     define VARIABLE plOrderApproved as logical no-undo.
     define variable pcInstructions as longchar no-undo.
     define VARIABLE pcModel as longchar no-undo.

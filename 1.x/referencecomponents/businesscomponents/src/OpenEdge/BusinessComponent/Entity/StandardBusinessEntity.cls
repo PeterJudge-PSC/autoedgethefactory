@@ -50,7 +50,7 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
     method override public void FetchData(poRequest as IFetchRequest):
         /* We assume new data appending requests would possibly need 
            direction to MERGE or APPEND in fill */
-        cast(poRequest, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
+        poRequest:SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         super:FetchData(poRequest).                        
     end method.
@@ -76,7 +76,7 @@ class OpenEdge.BusinessComponent.Entity.StandardBusinessEntity inherits Business
         define variable oFetchSchemaResponse as IFetchResponse no-undo.
         
         oFetchSchemaResponse = new FetchResponse(poDefineRequest).
-        cast(oFetchSchemaResponse, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
+        oFetchSchemaResponse:SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         return oFetchSchemaResponse.
     end method.

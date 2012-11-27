@@ -187,9 +187,14 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
 
             /*cResolvedFieldName[2]).*/
             if cWhereClause ne '' then
-                cast(oDSQuery, DataSourceQuery):ABLDataSource:fill-where-string = ' where ' + cWhereClause.
+            do:                
+                if cast(oDSQuery, DataSourceQuery):ABLDataSource:fill-where-string eq ? then
+                    cast(oDSQuery, DataSourceQuery):ABLDataSource:fill-where-string = ' where ' + cWhereClause.
+                else
+                    cast(oDSQuery, DataSourceQuery):ABLDataSource:fill-where-string = cast(oDSQuery, DataSourceQuery):ABLDataSource:fill-where-string 
+                                                                                    + ' and ' + cWhereClause. 
+            end.
         end.
-
     end method.
 
     /** Specific handling for SaveData requests.
@@ -230,7 +235,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         if valid-handle(TargetBuffer:dataset) then
             TargetBuffer:fill().
         else
-        do:
+        do on error undo, throw:
             assign oDSQuery = cast(ABLDataSources:Get(CurrentActionType), IQuery)
                    hABLDataSource = cast(oDSQuery, DataSourceQuery):ABLDataSource
                    iMax = hABLDataSource:num-source-buffers.
@@ -256,6 +261,10 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
                 lAvailable = oDSQuery:GetNext().
             end.
             OnAfterFill().
+            
+            finally:
+                oDSQuery:Close().
+            end finally.
         end.
     end method.
 
@@ -279,15 +288,11 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
 
         return CurrentTableResponse.
         finally:
-            ClearDataTarget().
-
             /* go back to the base definition */
             oDSQuery:Close().
             oDSQuery:Reset().
 
-            assign CurrentTableResponse = ?
-                   CurrentActionType = ?
-                   CurrentDAO = ?.
+            DisposeRequest().
         end finally.
     end method.
 
@@ -350,14 +355,10 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
             delete object hBeforeBuffer no-error.
             hBeforeBuffer = ?.
 
-            ClearDataTarget().
-
             /* go back to the base definition */
             cast(ABLDataSources:Get(ServiceMessageActionEnum:SaveData), IQuery):Reset().
-
-            assign CurrentTableResponse = ?
-                   CurrentActionType = ?
-                   CurrentDAO = ?.
+            
+            DisposeRequest().
         end finally.
     end method.
 
@@ -420,9 +421,9 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         hDbBuffer:buffer-create().
 
         /* The BUFFER-COPY is cool in that it respects the DATA-SOURCE attach mappings. Except when there are 'EXCEPT' values */
-        hDbBuffer:buffer-copy(phSourceBuffer:after-buffer).
+        hDbBuffer:buffer-copy(phSourceBuffer:after-buffer, TenantFilterFieldName).
 
-        if poDataSourceQuery:TenantFilters:ContainsKey(new String(hDbBuffer:name)) then
+        if poDataSourceQuery:HasTenantFilter(hDbBuffer:name) then
             AddTenantKeys(hDbBuffer).
 
         AddPrimaryKeys(hDbBuffer, phSourceBuffer).
@@ -795,6 +796,38 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         end.    /* managed session */
     end method.
 
+    /** Removes filtering by tenant for a given action. 
+        
+        @param ServiceMessageActionEnum The current request's action type. */
+    method override protected void RemoveTenantFilter(input poAction as ServiceMessageActionEnum).
+        define variable oDSQuery as DataSourceQuery no-undo.
+        define variable oFilter as QueryFilter no-undo.
+        define variable hField as handle no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable hBuffer as handle no-undo.
+        define variable oTenantId as IMap no-undo.
+            
+        /* always try to filter by tenant */
+        if SecurityManager:IsManagedSession then
+        do:
+            oTenantId = SecurityManager:CurrentUserContext:TenantId.
+            oDSQuery = cast(ABLDataSources:Get(poAction), DataSourceQuery).
+            iMax = oDSQuery:ABLDataSource:num-source-buffers.
+            do iLoop = 1 to iMax:
+                assign hField = ?
+                       oFilter = ?
+                       hBuffer = oDSQuery:ABLDataSource:get-source-buffer(iLoop).
+
+                /* no-error since this field may not exist */
+                hField = hBuffer:buffer-field(TenantFilterFieldName) no-error.
+                error-status:error = no.
+                if valid-handle(hField) then
+                    oDSQuery:RemoveTenantFilter(hBuffer:name).
+            end.
+        end.    /* managed session */
+    end method.
+    
     method override protected void CreateDataStore():
         define variable hABLDataSource as handle no-undo.
         define variable oDSQuery as DataSourceQuery no-undo.
@@ -822,7 +855,7 @@ class OpenEdge.DataSource.StandardDataSource abstract use-widget-pool inherits D
         do:
             create data-source hABLDataSource.
             /* Create a buffer with a unique name, since we don't know where this DataSource will be used,
-               nor how. So to aviod error 12298 we give the buffer a unique name */
+               nor how. So to avoid error 12298 we give the buffer a unique name */
             create buffer hBuffer for table PrimaryTable
                 buffer-name substitute('&1_&2-&3',
                              PrimaryTable:name,

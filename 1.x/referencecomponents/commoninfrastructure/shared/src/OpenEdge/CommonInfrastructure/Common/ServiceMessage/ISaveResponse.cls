@@ -9,8 +9,9 @@
   ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableResponseCollection.
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequestCollection.
-  
-interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse: /* inherits IServiceResponse */
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceResponse.
+
+interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.ISaveResponse inherits IServiceResponse:
     
     /** A collection of individual table responses for this larger request */
     define public property TableResponses as ITableResponseCollection no-undo get.

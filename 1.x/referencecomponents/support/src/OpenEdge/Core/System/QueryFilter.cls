@@ -100,7 +100,7 @@ class OpenEdge.Core.System.QueryFilter
         
         if FieldType:Equals(DataTypeEnum:Rowid) then
             cWhereClause = cWhereClause 
-                         + 'rowid(' + quoter(BufferName) + ')' 
+                         + 'rowid(' + BufferName + ')' 
                          + Operator:ToString() + ' '
                          + 'to-rowid(' + quoter(cValue) + ')'.
         else
@@ -109,6 +109,12 @@ class OpenEdge.Core.System.QueryFilter
                          + BufferName + '.' + FieldName + ' ' 
                          + Operator:ToString() + ' '
                          + 'widget-handle(' + quoter(cValue) + ')'.
+        else
+        if FieldType:Equals(DataTypeEnum:RowState) then
+            cWhereClause = cWhereClause 
+                         + 'row-state(' + BufferName + ')'
+                         + Operator:ToString() + ' '
+                         + quoter(cValue).
         else
             cWhereClause = cWhereClause
                          + BufferName + '.' + FieldName + ' ' 

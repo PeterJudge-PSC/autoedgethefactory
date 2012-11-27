@@ -1,17 +1,13 @@
- 
- /*------------------------------------------------------------------------
+/** ------------------------------------------------------------------------
     File        : Map
-    Purpose     : 
+    Purpose     : Unique Key-Value mapping collection 
     Syntax      :  
     Description : 
     @author hdaniels
     Created     : Sun Apr 11 01:35:13 EDT 2010
     Notes       : 
-  ----------------------------------------------------------------------*/
+  ---------------------------------------------------------------------- */
 routine-level on error undo, throw.
- 
-using Progress.Lang.Object.
-using Progress.Lang.AppError.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IMap.
@@ -22,7 +18,16 @@ using OpenEdge.Lang.Collections.KeySet.
 using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.Collections.ValueCollection.
 
-class OpenEdge.Lang.Collections.Map implements IMap: 
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.ISerializable.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
+
+using Progress.Lang.AppError.
+using Progress.Lang.Object.
+
+class OpenEdge.Lang.Collections.Map
+    implements IMap, IExternalizable, ISerializable: 
     
     define temp-table ttMap 
       field KeyRef as Object 
@@ -233,9 +238,29 @@ class OpenEdge.Lang.Collections.Map implements IMap:
         return oOld.
     end method.
 
+    method public void WriteObject(input poStream as IObjectOutput):
+        poStream:WriteObjectArray(KeySet:ToArray()).
+        poStream:WriteObjectArray(Values:ToArray()).
+	end method.
+	
+	method public void ReadObject(input poStream as IObjectInput):
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+        define variable oKeys as Object extent no-undo.
+        define variable oValues as Object extent no-undo.
+        
+        assign oKeys = poStream:ReadObjectArray()
+               oValues = poStream:ReadObjectArray()
+               iMax = extent(oKeys).
+        do iloop = 1 to iMax:
+            this-object:Put(oKeys[iLoop], oValues[iLoop]).
+        end.
+    end method.
+    
     destructor public Map ( ):
         this-object:Values = ?.
         this-object:KeySet = ?.
     end destructor.
+      
       
 end class.

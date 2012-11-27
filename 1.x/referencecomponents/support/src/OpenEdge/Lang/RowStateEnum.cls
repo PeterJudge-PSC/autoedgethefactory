@@ -42,10 +42,11 @@ class OpenEdge.Lang.RowStateEnum inherits EnumMember final:
         define variable oRowStateEnum as RowStateEnum no-undo.
         
         case piValue:
-            when RowStateEnum:Unmodified:Value then oRowStateEnum = RowStateEnum:Unmodified.
             when RowStateEnum:Deleted:Value then oRowStateEnum = RowStateEnum:Deleted.
             when RowStateEnum:Modified:Value then oRowStateEnum = RowStateEnum:Modified.
             when RowStateEnum:Created:Value then oRowStateEnum = RowStateEnum:Created.              
+            otherwise 
+                oRowStateEnum = RowStateEnum:Unmodified.
         end case.
         
         return oRowStateEnum.

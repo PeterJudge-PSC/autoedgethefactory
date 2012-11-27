@@ -21,6 +21,8 @@ using OpenEdge.Core.System.ITableOwner.
 
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.Collection.
+using OpenEdge.Lang.Collections.TypedCollection.
+using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Collections.IMap.
 using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.LockModeEnum.
@@ -30,6 +32,8 @@ using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.String.
 using OpenEdge.Lang.Assert.
+
+using Progress.Lang.Class.
 
 class OpenEdge.DataSource.DataSourceQuery inherits Query
         implements ITableOwner:
@@ -56,8 +60,10 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
     /** A collection of QueryFilter objects that indicate the tenant filters in the datasource buffers.
         
         These filters are used when saving rows, where the values are used to identify the 
-        DB rows uniquely. */
-    define public property TenantFilters as IMap no-undo
+        DB rows uniquely.
+        
+        This property is protected because Adding and removing filters isn't only done in this collection. */
+    define protected property TenantFilters as IMap no-undo
         get():
             if not valid-object(TenantFilters) then
                 TenantFilters = new Map().
@@ -123,13 +129,39 @@ class OpenEdge.DataSource.DataSourceQuery inherits Query
         end.
     end method.
     
+    method public logical HasTenantFilter(input pcBufferName as character):
+        return TenantFilters:ContainsKey(new String(pcBufferName)). 
+    end method.
+    
     method public void AddTenantFilter(input poFilter as QueryFilter):
+        define variable oFilters as ICollection no-undo.
+        
         Definition:AddFilter(poFilter).
-        TenantFilters:Put(new String(poFilter:BufferName), poFilter).
+        
+        oFilters = cast(TenantFilters:Get(new String(poFilter:BufferName)), ICollection).
+        if not valid-object(oFilters) then
+        do:
+            oFilters = new TypedCollection(Class:GetClass('OpenEdge.Core.System.QueryFilter')).        
+            TenantFilters:Put(new String(poFilter:BufferName), oFilters).
+        end.
+        
+        oFilters:Add(poFilter).
     end.
     
     method public void RemoveTenantFilter(input pcBufferName as character):
-        TenantFilters:Remove(new String(pcBufferName)).
+        define variable oFilters as ICollection no-undo.
+        define variable oQueryFilter as QueryFilter no-undo.
+        define variable oIterator as IIterator no-undo.
+        
+        oFilters = cast(TenantFilters:Remove(new String(pcBufferName)), ICollection).
+        oIterator = oFilters:Iterator().
+        
+        do while oIterator:HasNext():
+            oQueryFilter = cast(oIterator:Next(), QueryFilter).
+            
+            /*remove tenant filters */
+            this-object:Definition:RemoveFilter(oQueryFilter).
+        end.
     end.
     
     /** Creates and stores query filters for the datasource buffers' keys. */

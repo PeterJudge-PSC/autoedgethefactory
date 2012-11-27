@@ -102,16 +102,18 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         define variable oIterator as IIterator no-undo.
         define variable oFetchResponse as IFetchResponse no-undo.
         define variable oTableResponse as ITableResponse no-undo.
+        define variable oDataSource as IDataSource no-undo.
         
-        if cast(moCurrentRequest, IServiceMessage):MessageId ne pcMessageId then
+        if moCurrentRequest:MessageId ne pcMessageId then
             undo, throw new InvalidValueSpecifiedError('message id', ' for GetData() request').
         
-        oFetchResponse = new FetchResponse(cast(moCurrentRequest, IFetchRequest)). 
-        cast(oFetchResponse, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
+        oFetchResponse = new FetchResponse(cast(moCurrentRequest, IFetchRequest)).
+        oFetchResponse:SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         oIterator = moCurrentRequestDataSources:Iterator().
         do while oIterator:HasNext():
-            oTableResponse = cast(oIterator:Next(), IDataSource):GetData().
+            oDataSource = cast(oIterator:Next(), IDataSource).
+            oTableResponse = oDataSource:GetData().
             
             /* Create an entry for the request buffer. We do this here since this is the
                only place that we know that we're making a request for a particular table/buffer. */
@@ -119,8 +121,14 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
             
             /* cascade error flag up. */
             if oTableResponse:HasError then
-                cast(oFetchResponse, IServiceResponse):HasError = true.
+                oFetchResponse:HasError = true.
         end.
+        
+        /* also check for errors in dataset FILL operation  */
+        if this-object:DatasetHandle:error then
+            oFetchResponse:ErrorText = substitute('Dataset &1 Error for &2',
+                        moCurrentRequest:ActionType:ToString(),
+                        moCurrentRequest:Service).
         
         return oFetchResponse.
         finally:
@@ -137,13 +145,13 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         define variable oTableResponse as ITableResponse no-undo.
         define variable oSaveResponse as ISaveResponse no-undo.
         
-        moCurrentRequest = cast(poRequest, IServiceRequest).
+        moCurrentRequest = poRequest.
         oSaveResponse = new SaveResponse(poRequest).
-        cast(poRequest, IServiceMessage):GetMessageData(output DatasetHandle).
+        poRequest:GetMessageData(output DatasetHandle).
         
         AddDatasetCallbacks(DatasetHandle,
                             /* Should be SaveData or something similar. You'd expect. */
-                            cast(poRequest, IServiceMessage):ActionType).
+                            poRequest:ActionType).
         
         /* only loop through the tables that actually have changed data. */
         iMax = extent(poRequest:TableNames).
@@ -153,16 +161,15 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
             if valid-object(oDataSource) then
             do:
                 hBuffer = DatasetHandle:get-buffer-handle(poRequest:TableNames[iLoop]).
-                AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType, oDataSource).
+                AddBufferCallbacks(hBuffer, poRequest:ActionType, oDataSource).
                 
                 /* Saves for all data in the data target (buffer in this case). 
                    hBuffer is the after-table. */
                 oDataSource:SetDataTarget(hBuffer).
                 
-                oDataSource:Prepare(cast(poRequest, IServiceMessage):ActionType,
+                oDataSource:Prepare(poRequest:ActionType,
                                     CreateDefaultTableRequest(hBuffer:name),
                                     this-object).
-
                 oTableResponse = oDataSource:SaveData().
                 
                 /* Add the table response to the total response */
@@ -170,17 +177,17 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                 
                 /* cascade error flag up to message from tableresponse */                
                 if oTableResponse:HasError then
-                    assign cast(oSaveResponse, IServiceResponse):HasError = true
-                           cast(oSaveResponse, IServiceResponse):ErrorText = cast(oSaveResponse, IServiceResponse):ErrorText + '|' + oTableResponse:TableName. 
+                    assign oSaveResponse:HasError = true
+                           oSaveResponse:ErrorText = oSaveResponse:ErrorText + '|' + oTableResponse:TableName. 
             end.
         end.        
-        RemoveAllCallbacks(DatasetHandle, cast(poRequest, IServiceMessage):ActionType).
+        RemoveAllCallbacks(DatasetHandle, poRequest:ActionType).
         
-        if cast(oSaveResponse, IServiceResponse):HasError then
-            cast(oSaveResponse, IServiceResponse):ErrorText = left-trim(cast(oSaveResponse, IServiceResponse):ErrorText, '|').
+        if oSaveResponse:HasError then
+            oSaveResponse:ErrorText = left-trim(oSaveResponse:ErrorText, '|').
         
         /* Add the data to the message */
-        cast(oSaveResponse, IServiceMessage):SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
+        oSaveResponse:SetMessageData(DatasetHandle, DataFormatEnum:ProDataSet).
         
         return oSaveResponse.
         finally:
@@ -197,16 +204,21 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         define variable oDataSource as IDataSource no-undo.
         define variable oServiceMessage as IServiceMessage no-undo. 
         
-        oServiceMessage = cast(poRequest, IServiceMessage).
+        oServiceMessage = poRequest.
         oServiceMessage:GetMessageData(output DatasetHandle).
         
         /* Keep a record of the current request, for use in constructing the response in GetData(). */
-        moCurrentRequest = cast(poRequest, IServiceRequest).
+        moCurrentRequest = poRequest.
         
-        AddDatasetCallbacks(DatasetHandle, cast(poRequest, IServiceMessage):ActionType). 
+        AddDatasetCallbacks(DatasetHandle, poRequest:ActionType). 
         
         /* Clean out just to be sure.*/
         moCurrentRequestDataSources:Clear().
+        
+        /* If there are no individual table requests, and we're not already getting all tables,
+           get 'em all. This somewhat a-typical, since we'll usually filter the fetch request 
+           for at least one table (a/the top-level buffer) in the ProDataSet */
+        FetchAllTables = poRequest:TableRequests:IsEmpty().
         
         /* If a top-level buffer has a TableRequestType of 'All', then
            fetch all of the tables according to the relations. */
@@ -243,7 +255,7 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                     oDataSource:Prepare(oServiceMessage:ActionType,
                                         oTableRequest,
                                         this-object).
-                    AddBufferCallbacks(hBuffer, cast(poRequest, IServiceMessage):ActionType, oDataSource).
+                    AddBufferCallbacks(hBuffer, poRequest:ActionType, oDataSource).
                 end.
             end.    /* valid tablerequest */
         end.    /* buffer loop */
@@ -251,23 +263,26 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
         /* Get data into this dataset */
         if moCurrentRequestDataSources:Size gt 0 then
         do:
-            PerformFetch().
-            RemoveAllCallbacks(DatasetHandle, cast(moCurrentRequest, IServiceMessage):ActionType).
+            AddDatasetCallbacks(DatasetHandle, poRequest:ActionType).
+            PerformFetch(FetchAllTables).
+            RemoveDatasetCallbacks(DatasetHandle, poRequest:ActionType).
         end.
     end method.
     
     /** Fetch/retrieve data from the datasource, and populate the business entity with 
-        it. */ 
-    method protected void PerformFetch():
+        it.
+        
+        @param logical Fetch all tables in the Dataset? */ 
+    method protected void PerformFetch(input plFetchAllTables as logical):
         define variable oIterator as IIterator no-undo.
         
         /* If we want to get all tables, */
-        if FetchAllTables then
+        if plFetchAllTables then
             DatasetHandle:fill().
         else
         do:
             oIterator = moCurrentRequestDataSources:Iterator().
-            do while oIterator:HasNext(): 
+            do while oIterator:HasNext():
                 cast(oIterator:Next(), IDataSource):FetchData().
             end.
         end.
@@ -281,11 +296,17 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                                              input poServiceMessageAction as ServiceMessageActionEnum):
         define variable iLoop as integer no-undo.
         define variable iMax as integer no-undo.
+        define variable hBuffer as handle no-undo.
+        define variable oDataSource as IDataSource no-undo.
         
         iMax = phDatasetHandle:num-buffers.
         do iLoop = 1 to iMax:
-            RemoveBufferCallbacks(phDatasetHandle:get-buffer-handle(iLoop), 
-                                  poServiceMessageAction).
+            hBuffer = phDatasetHandle:get-buffer-handle(iLoop).
+            oDataSource = cast(DataSources:Get(new String(hBuffer:name)), IDataSource).
+            
+            RemoveBufferCallbacks(hBuffer, 
+                                  poServiceMessageAction,
+                                  oDataSource).
         end.
         
         RemoveDatasetCallbacks(phDatasetHandle, poServiceMessageAction).
@@ -306,23 +327,16 @@ class OpenEdge.DataAccess.StandardDataAccess use-widget-pool abstract
                     /* GetDataSource(phBuffer:name):BeforeRowFill:Subscribe(XXX).*/
 /*                     ohBuffer:set-callback(CallbackNameEnum:BeforeRowFill:ToString(), 'XXX', this-object).*/
                 end.
-                when ServiceMessageActionEnum:SaveData then
-                do:
-                    /*  
-                    OpenEdge.DataSource.DataSource:SubscribeDataSourceEvents(
-                        cast(DataSources:Get(phBuffer:name), IDataSource,
-                        this-object).
-                    */
-                end.
             end case.
     end method.
-
+    
     /** Remove ABL callbacks from a buffer handle for an action.
     
         @param handle The dataset from which to remove the callback
         @param ServiceMessageActionEnum The action being performed. */
     method protected void RemoveBufferCallbacks(input phBuffer as handle,
-                                                input poServiceMessageAction as ServiceMessageActionEnum):
+                                                input poServiceMessageAction as ServiceMessageActionEnum,
+                                                input poDataSource as IDataSource):
     end method.
     
     /** Add ABL callbacks to a buffer handle for an action.

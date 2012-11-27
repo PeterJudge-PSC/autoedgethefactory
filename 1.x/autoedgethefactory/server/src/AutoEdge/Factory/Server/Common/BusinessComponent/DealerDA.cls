@@ -68,6 +68,24 @@ class AutoEdge.Factory.Server.Common.BusinessComponent.DealerDA inherits Standar
             end case.
     end method.
     
+    /** Remove ABL callbacks from a buffer handle for an action.
+    
+        @param handle The dataset from which to remove the callback
+        @param ServiceMessageActionEnum The action being performed. */
+    method override protected void RemoveBufferCallbacks(input phBuffer as handle,
+                                                         input poServiceMessageAction as ServiceMessageActionEnum,
+                                                         input poDataSource as IDataSource):
+        super:RemoveBufferCallbacks(phBuffer, poServiceMessageAction, poDataSource).
+        
+        case poServiceMessageAction:
+            when ServiceMessageActionEnum:FetchData then
+            do:
+                if phBuffer:name eq 'eDealer' then
+                    phBuffer:set-callback(CallbackNameEnum:AfterRowFill:ToString(), ?, this-object).
+            end.
+        end case.
+    end method.    
+    
     method public void AfterRowFillCallback(input dataset-handle phEntity):
         define variable hBuffer as handle no-undo.
         define variable hDBBuffer as handle no-undo.

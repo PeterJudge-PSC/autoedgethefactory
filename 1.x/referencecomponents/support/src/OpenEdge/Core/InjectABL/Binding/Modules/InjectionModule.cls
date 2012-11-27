@@ -109,10 +109,19 @@ class OpenEdge.Core.InjectABL.Binding.Modules.InjectionModule abstract inherits 
         @param binding The binding to remove.
        */
     method override public void RemoveBinding(poBinding as IBinding):
+        define variable oBindings as IList no-undo.
+        
         Assert:ArgumentNotNull(poBinding, "binding").
 
-        cast(Kernel, IBindingRoot):RemoveBinding(pobinding).
-        Bindings:Remove(poBinding).
+        cast(Kernel, IBindingRoot):RemoveBinding(poBinding).
+        
+        oBindings = cast(Bindings:Get(poBinding:Service), IList).
+        if valid-object(oBindings) then
+        do:
+            oBindings:Remove(poBinding).
+            if oBindings:IsEmpty() then
+                Bindings:Remove(poBinding:Service).
+        end.
     end.
     
     method override protected IBindingSyntax CreateBindingBuilder(poBinding as IBinding):

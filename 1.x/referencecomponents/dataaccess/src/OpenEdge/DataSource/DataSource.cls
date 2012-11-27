@@ -175,11 +175,24 @@ class OpenEdge.DataSource.DataSource abstract use-widget-pool inherits Component
         AddTenantFilter(poAction).
     end method.
     
-    /** Adds filtering by tenant to for a given action. 
+    method protected void DisposeRequest():
+        RemoveTenantFilter(CurrentActionType).
+        ClearDataTarget().
         
-        @param ServiceMessageActionEnum The current request's action type.
-        @return logical Whether a filter was added to the QD.       */
+        assign CurrentTableResponse = ?
+               CurrentActionType = ?
+               CurrentDAO = ?.
+    end method.
+    
+    /** Adds filtering by tenant for a given action. 
+        
+        @param ServiceMessageActionEnum The current request's action type. */
     method abstract protected void AddTenantFilter(input poAction as ServiceMessageActionEnum).
+
+    /** Removes filtering by tenant for a given action. 
+        
+        @param ServiceMessageActionEnum The current request's action type. */
+    method abstract protected void RemoveTenantFilter(input poAction as ServiceMessageActionEnum).
     
     /** This SetDataTarget override is provided since the bulk of datatargets in ABL
         will be buffers (possibly datasets).

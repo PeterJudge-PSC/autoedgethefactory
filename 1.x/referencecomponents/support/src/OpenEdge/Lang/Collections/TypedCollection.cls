@@ -13,13 +13,12 @@ using OpenEdge.Lang.Collections.TypedCollection.
 using OpenEdge.Lang.Collections.Collection.
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Assert.
-using Progress.Lang.Class.
 using Progress.Lang.Object.
 
 class OpenEdge.Lang.Collections.TypedCollection inherits Collection:
-    define public property CollectionType as class Class no-undo get. private set. 
+    define public property CollectionType as Progress.Lang.Class no-undo get. private set. 
     
-    constructor public TypedCollection (poType as class Class):
+    constructor public TypedCollection (poType as Progress.Lang.Class):
         super().
         CollectionType = poType.
     end constructor.
