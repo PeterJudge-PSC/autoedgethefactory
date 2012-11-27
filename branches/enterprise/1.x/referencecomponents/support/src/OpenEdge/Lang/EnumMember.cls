@@ -46,6 +46,7 @@ class OpenEdge.Lang.EnumMember abstract:
     method public override logical Equals(poEnumMember as Object):
         define variable lEquals as logical no-undo.
 
+        /* checks for instance equality (ie reference values ('handles') are same */
         lEquals = super:Equals(poEnumMember).
         
         /* ABL deals with unknown values just fine */

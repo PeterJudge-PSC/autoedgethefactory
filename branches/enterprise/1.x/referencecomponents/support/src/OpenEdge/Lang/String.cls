@@ -92,6 +92,7 @@ class OpenEdge.Lang.String
         return OpenEdge.Lang.String:Split(pcValue, ',').
     end method.
             
+    @todo(action="refactor", comment="should return String[] not character[]").            
     method static public character extent Split(input pcValue as longchar,
                                                 input pcDelimiter as character):
         define variable cArray as character extent no-undo.
@@ -122,6 +123,23 @@ class OpenEdge.Lang.String
                 cJoinedString = cJoinedString + pcDelimiter + poValue[iLoop]:Value.
         end.
         
+        return cJoinedString.
+    end method.
+    
+    method static public longchar Join(input pcValue as character extent,
+                                       input pcDelimiter as character):
+        define variable cJoinedString as longchar no-undo.
+        define variable iLoop as integer no-undo.
+        define variable iMax as integer no-undo.
+
+        iMax = extent(pcValue).
+        do iLoop = 1 to iMax:
+            if iLoop eq 1 then
+                cJoinedString = pcValue[iLoop].
+            else
+                cJoinedString = cJoinedString + pcDelimiter + pcValue[iLoop].
+        end.
+
         return cJoinedString.
     end method.
     

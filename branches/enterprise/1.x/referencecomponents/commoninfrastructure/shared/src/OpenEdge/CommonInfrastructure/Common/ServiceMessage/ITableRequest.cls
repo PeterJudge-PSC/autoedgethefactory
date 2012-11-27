@@ -9,6 +9,7 @@
   ---------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.TableRequestTypeEnum.
 
+using OpenEdge.Core.System.IQueryDefinition.
 using OpenEdge.Lang.FillModeEnum.
 using OpenEdge.Lang.FindTypeEnum.
 using OpenEdge.Lang.OperatorEnum.
@@ -16,7 +17,7 @@ using OpenEdge.Lang.DataTypeEnum.
 using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.String.
 
-interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest /** inherits IQueryDefinition */:
+interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequest inherits IQueryDefinition:
     
     /** protected set - not changeable - provide with constructor  */  
     define property TableName as char no-undo get.

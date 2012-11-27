@@ -65,6 +65,9 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
     /* Streams */
     define public static property Stream as DataTypeEnum no-undo get. private set.
     
+    /* Query Where clause 'types' */
+    define public static property RowState as DataTypeEnum no-undo get. private set.
+    
     /* XML */
     define public static property XmlDocument as DataTypeEnum no-undo get. private set.
     define public static property XmlNodeRef as DataTypeEnum no-undo get. private set.
@@ -112,6 +115,7 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
         
         DataTypeEnum:Enumeration = new DataTypeEnum(40, 'Enumeration').
         DataTypeEnum:Stream = new DataTypeEnum(41, 'Stream').
+        DataTypeEnum:RowState = new DataTypeEnum(44, 'row-state').
         
         DataTypeEnum:XmlNodeRef = new DataTypeEnum(42, 'x-noderef').
         DataTypeEnum:XmlDocument = new DataTypeEnum(43, 'x-document').
@@ -168,6 +172,7 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
             when DataTypeEnum:TempTable:Value          then oMember = DataTypeEnum:TempTable.
             when DataTypeEnum:Enumeration:Value        then oMember = DataTypeEnum:Enumeration.
             when DataTypeEnum:Stream:Value             then oMember = DataTypeEnum:Stream.
+            when DataTypeEnum:RowState:Value           then oMember = DataTypeEnum:RowState.
             when DataTypeEnum:XmlDocument:Value        then oMember = DataTypeEnum:XmlDocument.
             when DataTypeEnum:XmlNodeRef:Value         then oMember = DataTypeEnum:XmlNodeRef.
         end case.
@@ -220,6 +225,7 @@ class OpenEdge.Lang.DataTypeEnum final inherits EnumMember:
             when DataTypeEnum:TempTable:ToString()          then oMember = DataTypeEnum:TempTable.
             when DataTypeEnum:Enumeration:ToString()        then oMember = DataTypeEnum:Enumeration.
             when DataTypeEnum:Stream:ToString()             then oMember = DataTypeEnum:Stream.
+            when DataTypeEnum:RowState:ToString()           then oMember = DataTypeEnum:RowState.
             when DataTypeEnum:XmlDocument:ToString()        then oMember = DataTypeEnum:XmlDocument.
             when DataTypeEnum:XmlNodeRef:ToString()         then oMember = DataTypeEnum:XmlNodeRef.
         end case.

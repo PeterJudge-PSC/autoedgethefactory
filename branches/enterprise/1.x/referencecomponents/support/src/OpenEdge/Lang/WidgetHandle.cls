@@ -56,5 +56,11 @@ class OpenEdge.Lang.WidgetHandle implements IExternalizable:
 	method public void WriteObject(input poStream as IObjectOutput):
 	    poStream:WriteHandle(this-object:Value).
 	end method.
-
+	
+    method override public character ToString():
+        define variable cValue as character no-undo.
+        cValue = string(this-object:Value).
+        
+        return cValue.
+    end method.
 end class.

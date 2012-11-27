@@ -54,7 +54,8 @@ class OpenEdge.CommonInfrastructure.Common.ServiceMessage.FetchRequest inherits 
     
     method override public void WriteObject( input poStream as IObjectOutput ):
         super:WriteObject(poStream).
-        
+
+        poStream:writeObject(TableRequests).        
         poStream:WriteObjectArray(TableRequests:KeySet:ToArray()).
         poStream:WriteObjectArray(TableRequests:Values:ToArray()).
     end method.

@@ -11,6 +11,6 @@
   --------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceMessage.
 
-interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest /* inherits IServiceMessage */:  
+interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest inherits IServiceMessage:  
     
 end interface.

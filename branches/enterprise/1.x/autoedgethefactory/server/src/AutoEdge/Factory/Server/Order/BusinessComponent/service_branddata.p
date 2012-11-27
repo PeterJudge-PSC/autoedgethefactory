@@ -35,7 +35,6 @@ using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ServiceMessageActionEn
 using OpenEdge.Core.System.ApplicationError.
 using OpenEdge.Core.System.IQueryDefinition.
 
-using OpenEdge.Lang.FillModeEnum.
 using OpenEdge.Lang.OperatorEnum.
 using OpenEdge.Lang.JoinEnum.
 using OpenEdge.Lang.DataTypeEnum.

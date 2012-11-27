@@ -12,16 +12,22 @@
                 - The most important behavioral encapsulation/reuse provided by 
                   this is the management of the size().               
 ------------------------------------------------------------------------------*/
-
 routine-level on error undo, throw.
 
-using Progress.Lang.*.
 using OpenEdge.Lang.Collections.AbstractTTCollection.
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.IIterator.
 using OpenEdge.Lang.Collections.Iterator.
  
-class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollection: 
+using OpenEdge.Core.Util.IExternalizable.
+using OpenEdge.Core.Util.ISerializable.
+using OpenEdge.Core.Util.IObjectOutput.
+using OpenEdge.Core.Util.IObjectInput.
+
+using Progress.Lang.Object.
+ 
+class OpenEdge.Lang.Collections.AbstractTTCollection abstract
+    implements ICollection, IExternalizable, ISerializable: 
 
    /*---------------------------------------------------------------------------
     Purpose: Abstract collection class                                                                
@@ -37,6 +43,10 @@ class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollec
 
     define public property Size as integer no-undo get. private set.
     
+    constructor public AbstractTTCollection():
+        /* default public ctor for Serialization only */
+    end constructor.
+        
     /* pass Collection  */ 
     constructor protected AbstractTTCollection (poCol as ICollection,phtt as handle,pcField as char):
         this-object(phtt,pcField).
@@ -203,5 +213,12 @@ class OpenEdge.Lang.Collections.AbstractTTCollection abstract implements ICollec
         end.
     end method.
     
+    method public void WriteObject(input poStream as IObjectOutput):
+        poStream:WriteTable(mhTempTable).
+	end method.
+	
+	method public void ReadObject(input poStream as IObjectInput):
+	    poStream:ReadTable(input-output table-handle mhTempTable by-reference).
+	end method.
     
 end class.

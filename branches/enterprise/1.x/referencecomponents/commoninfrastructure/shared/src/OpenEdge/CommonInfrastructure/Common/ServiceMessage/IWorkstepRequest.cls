@@ -7,7 +7,9 @@
     Created     : Wed Dec 01 19:04:58 EST 2010
     Notes       : 
   ---------------------------------------------------------------------- */
-interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest:
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
+ 
+interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IWorkstepRequest inherits IServiceRequest:
     
     /** (optional) The workstep name. */
     define public property Name as longchar no-undo get. set.

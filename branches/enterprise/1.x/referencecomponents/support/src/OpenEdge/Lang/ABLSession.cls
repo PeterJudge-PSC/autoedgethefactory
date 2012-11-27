@@ -19,6 +19,7 @@ using OpenEdge.Lang.Collections.Map.
 using OpenEdge.Lang.Collections.ICollection.
 using OpenEdge.Lang.Collections.Collection.
 using OpenEdge.Lang.String.
+using OpenEdge.Lang.Assert.  
 using Progress.Lang.Class. 
 using Progress.Lang.Object.
 
@@ -155,6 +156,8 @@ class OpenEdge.Lang.ABLSession:
     method public Object GetFirstClassInstance(input pcName as character):
         define variable oInstance as Object no-undo.
         
+        Assert:ArgumentIsValidType(pcName).
+        
         oInstance = session:first-object.
         do while valid-object(oInstance) and oInstance:GetClass():IsA(pcName):
             oInstance = oInstance:next-sibling. 
@@ -172,6 +175,8 @@ class OpenEdge.Lang.ABLSession:
         define variable oInstance as Object extent no-undo.
         define variable oTemp as Object no-undo.
         define variable oCollection as ICollection no-undo.
+        
+        Assert:ArgumentIsValidType(pcName).
         
         oCollection = new Collection().
         

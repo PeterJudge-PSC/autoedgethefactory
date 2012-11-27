@@ -8,8 +8,9 @@
     Notes       : 
   --------------------------------------------------------------------- */
 using OpenEdge.CommonInfrastructure.Common.ServiceMessage.ITableRequestCollection.
+using OpenEdge.CommonInfrastructure.Common.ServiceMessage.IServiceRequest.
 
-interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest /* inherits IServiceRequest */:
+interface OpenEdge.CommonInfrastructure.Common.ServiceMessage.IFetchRequest inherits IServiceRequest:
     
     /** (mandatory) A collection of one of more tables for this request. */
     define public property TableRequests as ITableRequestCollection no-undo get.

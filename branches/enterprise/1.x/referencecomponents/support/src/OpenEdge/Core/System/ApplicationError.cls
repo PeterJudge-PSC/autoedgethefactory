@@ -49,12 +49,14 @@ class OpenEdge.Core.System.ApplicationError abstract inherits AppError
     */
         
         LogFileName = session:temp-directory + '/' + 'error.log'.
+        this-object:ReturnValue = ResolvedMessageText().
     end constructor.
     
     constructor public ApplicationError(poInnerError as Error):               
         this-object().
         
         this-object:InnerError = poInnerError.
+        this-object:ReturnValue = ResolvedMessageText().
     end constructor.
     
     method public void LogError():

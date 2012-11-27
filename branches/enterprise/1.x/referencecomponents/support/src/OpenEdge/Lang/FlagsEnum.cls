@@ -25,23 +25,9 @@ class OpenEdge.Lang.FlagsEnum abstract inherits EnumMember:
         @param poCheckEnum The flag being checked for inclusion.
         @return Whether the value includes the specified member     */
     method static public logical IsA (piValueSum as int, poCheckEnum as EnumMember):
-        define variable iPos as integer no-undo.
-        define variable iVal as integer no-undo.
-        define variable iCheckVal as integer no-undo.
-        
+        /* thx to Bronco Oostermeyer */
         /** This value should always be a power of 2. */
-        iCheckVal = poCheckEnum:Value.
-        
-        /** This loop looks for the position of the bit (the '1') in our value
-            so for an iVal of 2, it'll be the right-most position, ie 32. */
-        do iPos = 1 to 32 while iVal eq 0:
-            iVal = get-bits(iCheckVal, iPos, 1).
-        end.
-        
-        /** Now we look to whether the total enum contains a bit set (ie a '1') set
-            at the position we established above.  Because we're dealing with powers 
-            of 2, we know that if a bit is set that the check flag appears in the value. */
-        return (get-bits(piValueSum, iPos - 1, 1) eq iVal).
+        return ((integer(truncate(piValueSum / poCheckEnum:Value, 0)) mod 2) eq 1).        
     end method.
     
     /* Private ctor so that a derived class can't bypass the necessary checks for
