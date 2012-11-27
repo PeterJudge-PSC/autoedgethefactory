@@ -7,15 +7,15 @@ LogFileOverwrite=true
 
 [Setup]
 InternalCompressLevel=Max
-OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.8
+OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.9
 SolidCompression=true
-VersionInfoVersion=1.0.8
+VersionInfoVersion=1.0.9
 VersionInfoCompany=Progress Software Corp.
 VersionInfoDescription=OpenEdge AutoEdge|TheFactory Application Example Setup
 MinVersion=0,5.0.2195sp3
 AppCopyright=Copyright 2011-2012 © Progress Software Corp.
 AppName=OpenEdge AutoEdge|TheFactory Application Example
-AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.8
+AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.9
 InfoAfterFile=installer\include\InfoAfter.txt
 InfoBeforeFile=installer\include\InfoBefore.txt
 LicenseFile=installer\include\License.txt
@@ -28,11 +28,11 @@ AlwaysShowComponentsList=true
 ShowLanguageDialog=auto
 SetupIconFile=installer\include\autoedge.ico
 AppID={{62CE4B50-E7A0-4279-9889-0D6EC3B80C0E}
-VersionInfoTextVersion=1.0.8
+VersionInfoTextVersion=1.0.9
 AppPublisher=Progress Software Corp.
 AppPublisherURL=http://www.progress.com
 AppSupportURL=http://communities.progress.com/pcom/community/psdn/openedge/architecture/autoedgethefactory
-AppVersion=1.0.8
+AppVersion=1.0.9
 UninstallDisplayName=OpenEdge AutoEdge|TheFactory Application Example
 ExtraDiskSpaceRequired=1000000
 AlwaysRestart=false
@@ -531,7 +531,7 @@ begin
 	bShowDebugMsg := false;		// Setting this to TRUE will enable debug messages!
 //	bShowDebugMsg := true;		// Setting this to FALSE will disable debug messages!
 	Result        := true;
-	strMinDLCMajor := '11.0.0';
+	strMinDLCMajor := '11.1.0';
 	intMinDLCMinor := 0;	// not always used: use 0 when not in use
 
 	DebugMsg( 'Running InitializeSetup()' );
@@ -597,7 +597,7 @@ var
 	TotalMB 	: cardinal;
 begin
 	{ Get and display free megabytes on the Program Files drive }
-	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.8';
+	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.9';
 	Path 		:= ExpandConstant('{pf}');
 
 	if GetSpaceOnDisk(Path, True, FreeMB, TotalMB) then
