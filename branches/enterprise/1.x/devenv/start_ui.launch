@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="abl.launchType">
+<booleanAttribute key="abl.abl.REREAD_NO_LOCK" value="true"/>
+<intAttribute key="abl.abl.STATEMENT_INPUT_CHARS" value="16000"/>
+<intAttribute key="abl.abl.STATEMENT_TOKENS" value="4000"/>
+<booleanAttribute key="abl.abl.USE_APPLICATION_ALERT" value="true"/>
+<booleanAttribute key="abl.abl.USE_DEBUG_ALERT" value="true"/>
+<booleanAttribute key="abl.abl.USE_SYSTEM_ALERT" value="true"/>
+<stringAttribute key="abl.client.PROVERSION" value="11.1"/>
+<booleanAttribute key="abl.databases.USE_PROJECT" value="false"/>
+<stringAttribute key="abl.debug.ABL_PROGRAM" value="${workspace_loc:/AutoEdge TheFactory Client/src/start_ui.p}"/>
+<stringAttribute key="abl.debug.ATTR_ABL_PROJECT_NAME" value="AutoEdge TheFactory Client"/>
+<booleanAttribute key="abl.debug.GENERATE_LAUNCHER_PROGRAM" value="true"/>
+<stringAttribute key="abl.debug.PROPATH" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;propath version=&quot;11.1&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;schema/propath.xsd&quot;&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\client\bin&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\shared\bin&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\presentationlayer\bin&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\enterpriseservices\bin&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\client\bin&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\shared\bin&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\support\bin&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\client\src&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\shared\src&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\presentationlayer\src&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\enterpriseservices\src&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\client\src&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\shared\src&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\support\src&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\client\tests&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\shared\tests&quot; platform=&quot;Windows&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;gui&quot; kind=&quot;con&quot; name=&quot;Standard GUI Libraries&quot; path=&quot;com.openedge.pdt.text.GUI_LIBRARIES&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;con&quot; name=&quot;Installation Paths&quot; path=&quot;com.openedge.pdt.text.DLC_PATHS&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;/propath&gt;&#13;&#10;"/>
+<booleanAttribute key="abl.debug.PROPATH_USE_DEFAULT" value="false"/>
+<stringAttribute key="abl.i18n.CASE_TABLE" value="Basic"/>
+<stringAttribute key="abl.i18n.COLLATION_TABLE" value="Basic"/>
+<stringAttribute key="abl.i18n.DATE_FORMAT" value="mdy"/>
+<intAttribute key="abl.i18n.FRACTIONAL_SEP" value="46"/>
+<stringAttribute key="abl.i18n.INTERNAL_CODE_PAGE" value="UTF-8"/>
+<stringAttribute key="abl.i18n.STREAM_CODE_PAGE" value="UTF-8"/>
+<intAttribute key="abl.i18n.THOUSANDS_SEP" value="44"/>
+<intAttribute key="abl.performance.DIRECTORY_SIZE" value="256"/>
+<intAttribute key="abl.performance.MAXIMUM_MEMORY" value="65534"/>
+<intAttribute key="abl.performance.STACK_SIZE" value="200"/>
+<stringAttribute key="abl.performance.TEMP_DIRECTORY" value="${workspace_loc:/AutoEdge TheFactory Client/temp}"/>
+<booleanAttribute key="abl.performance.USE_DEFALTS" value="false"/>
+<booleanAttribute key="abl.startup.ERROR_STACK_TRACE" value="true"/>
+<stringAttribute key="abl.startup.STARTUP_PARAMETERS" value="-pf autoedgethefactory/client/cfg/client.pf"/>
+<stringAttribute key="abl.startup.WORKING_DIRECTORY" value="c:\devarea\aetf\enterprise\1.x\dev"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/AutoEdge TheFactory Client"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.core.capture_output" value="false"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_CONSOLE_OUTPUT_ON" value="false"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.ui.private" value="false"/>
+</launchConfiguration>
