@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="abl.launchType">
+<booleanAttribute key="abl.abl.REREAD_NO_LOCK" value="true"/>
+<intAttribute key="abl.abl.STATEMENT_INPUT_CHARS" value="16000"/>
+<intAttribute key="abl.abl.STATEMENT_TOKENS" value="4000"/>
+<booleanAttribute key="abl.abl.USE_APPLICATION_ALERT" value="true"/>
+<booleanAttribute key="abl.abl.USE_DEBUG_ALERT" value="true"/>
+<booleanAttribute key="abl.abl.USE_SYSTEM_ALERT" value="true"/>
+<stringAttribute key="abl.client.PROVERSION" value="11.1"/>
+<booleanAttribute key="abl.databases.USE_PROJECT" value="false"/>
+<stringAttribute key="abl.debug.ABL_PROGRAM" value="${workspace_loc:/AutoEdge TheFactory Server/tests/test_appserver_si.p}"/>
+<stringAttribute key="abl.debug.ATTR_ABL_PROJECT_NAME" value="AutoEdge TheFactory Server"/>
+<booleanAttribute key="abl.debug.GENERATE_LAUNCHER_PROGRAM" value="true"/>
+<stringAttribute key="abl.debug.PROPATH" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;propath version=&quot;11.1&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;schema/propath.xsd&quot;&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\server\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\shared\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\businesscomponents\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\dataaccess\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\enterpriseservices\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\server\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\shared\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\support\bin&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\server\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\shared\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\businesscomponents\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\dataaccess\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\enterpriseservices\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\server\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\commoninfrastructure\shared\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;referencecomponents\support\src&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\server\tests&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;autoedgethefactory\shared\tests&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;propathentry env=&quot;all&quot; kind=&quot;dir&quot; path=&quot;C:\devarea\dlc\oe1100&quot; platform=&quot;All&quot;/&gt;&#13;&#10;&lt;/propath&gt;&#13;&#10;"/>
+<booleanAttribute key="abl.debug.PROPATH_USE_DEFAULT" value="false"/>
+<stringAttribute key="abl.i18n.CASE_TABLE" value="Basic"/>
+<stringAttribute key="abl.i18n.COLLATION_TABLE" value="Basic"/>
+<stringAttribute key="abl.i18n.DATE_FORMAT" value="mdy"/>
+<intAttribute key="abl.i18n.FRACTIONAL_SEP" value="46"/>
+<stringAttribute key="abl.i18n.INTERNAL_CODE_PAGE" value="UTF-8"/>
+<stringAttribute key="abl.i18n.STREAM_CODE_PAGE" value="UTF-8"/>
+<intAttribute key="abl.i18n.THOUSANDS_SEP" value="44"/>
+<booleanAttribute key="abl.logging.CLEAR_LOG" value="true"/>
+<stringAttribute key="abl.logging.CLIENT_LOG" value="${workspace_loc:/AutoEdge TheFactory Server/temp}\logging.log"/>
+<booleanAttribute key="abl.logging.LOGGING_ENABLED" value="true"/>
+<intAttribute key="abl.logging.LOGGING_LEVEL" value="3"/>
+<intAttribute key="abl.logging.LOGGING_THRESHOLD" value="500000"/>
+<intAttribute key="abl.performance.DIRECTORY_SIZE" value="256"/>
+<intAttribute key="abl.performance.MAXIMUM_MEMORY" value="65534"/>
+<intAttribute key="abl.performance.STACK_SIZE" value="200"/>
+<stringAttribute key="abl.performance.TEMP_DIRECTORY" value="${workspace_loc:/AutoEdge TheFactory Server/temp}"/>
+<booleanAttribute key="abl.performance.USE_DEFALTS" value="false"/>
+<booleanAttribute key="abl.startup.ERROR_STACK_TRACE" value="true"/>
+<stringAttribute key="abl.startup.STARTUP_PARAMETERS" value="-pf autoedgethefactory/server/cfg/server.pf"/>
+<stringAttribute key="abl.startup.WORKING_DIRECTORY" value="c:\devarea\aetf\enterprise\1.x\dev"/>
+<listAttribute key="logging.LOGGING_ENABLED_TYPES">
+<listEntry value="4GLTrace:-1:true"/>
+<listEntry value="DynObjects.Class:-1:true"/>
+<listEntry value="DynObjects.Other:-1:true"/>
+<listEntry value="QryInfo:-1:true"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/AutoEdge TheFactory Server"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.core.capture_output" value="false"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_CONSOLE_OUTPUT_ON" value="false"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.ui.private" value="false"/>
+</launchConfiguration>
