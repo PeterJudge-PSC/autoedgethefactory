@@ -98,7 +98,7 @@
       <td>
         <code>
           <b>
-            <a href='#assignworkitemfromwiid(int64,character)'> AssignWorkItemFromWiid</a>
+            <a href='#assignworkitem(int64,character)'> AssignWorkItem</a>
           </b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -140,7 +140,7 @@
       <td>
         <code>
           <b>
-            <a href='#completeworkitemfromwiid(int64,openedge.lang.bpm.dataslotinstance)'> CompleteWorkItemFromWiid</a>
+            <a href='#completeworkitem(int64,openedge.lang.bpm.dataslotinstance)'> CompleteWorkItem</a>
           </b>(INT64 piWorkItemInstanceId, <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -274,6 +274,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/BPM/ProcessInstance.cls.html" title="OpenEdge.Lang.BPM.ProcessInstance" target="classFrame">ProcessInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocessinstance(int64)'> GetProcessInstance</a>
+          </b>(INT64 piProcessInstanceId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
         </font>
       </td>
@@ -294,7 +308,7 @@
       <td>
         <code>
           <b>
-            <a href='#getprocessinstancedataslotfrompiid(int64,character)'> GetProcessInstanceDataSlotFromPiid</a>
+            <a href='#getprocessinstancedataslot(int64,character)'> GetProcessInstanceDataSlot</a>
           </b>(INT64 piProcessInstanceId, CHARACTER pcDataslotName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -310,20 +324,6 @@
           <b>
             <a href='#getprocessinstancedataslots(character)'> GetProcessInstanceDataSlots</a>
           </b>(CHARACTER pcProcessInstanceName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/BPM/ProcessInstance.cls.html" title="OpenEdge.Lang.BPM.ProcessInstance" target="classFrame">ProcessInstance</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getprocessinstancefromid(int64)'> GetProcessInstanceFromID</a>
-          </b>(INT64 piProcessInstanceId)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -372,6 +372,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/BPM/ProcessTemplate.cls.html" title="OpenEdge.Lang.BPM.ProcessTemplate" target="classFrame">ProcessTemplate</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getprocesstemplate(int64)'> GetProcessTemplate</a>
+          </b>(INT64 piProcessTemplateId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>CHARACTER</code>
         </font>
       </td>
@@ -414,20 +428,6 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/BPM/ProcessTemplate.cls.html" title="OpenEdge.Lang.BPM.ProcessTemplate" target="classFrame">ProcessTemplate</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getprocesstemplatefromid(int64)'> GetProcessTemplateFromID</a>
-          </b>(INT64 piProcessTemplateId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
           <code>INT64</code>
         </font>
       </td>
@@ -448,8 +448,8 @@
       <td>
         <code>
           <b>
-            <a href='#getprocesstemplatenamefromprocessid(int64)'> GetProcessTemplateNameFromProcessID</a>
-          </b>(INT64 piProcessTemplateId)
+            <a href='#getprocesstemplatename(character)'> GetProcessTemplateName</a>
+          </b>(CHARACTER pcProcessInstanceName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -462,8 +462,8 @@
       <td>
         <code>
           <b>
-            <a href='#getprocesstemplatenamefromprocessinstance(character)'> GetProcessTemplateNameFromProcessInstance</a>
-          </b>(CHARACTER pcProcessInstanceName)
+            <a href='#getprocesstemplatename(int64)'> GetProcessTemplateName</a>
+          </b>(INT64 piProcessTemplateId)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -624,6 +624,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/BPM/WorkItem.cls.html" title="OpenEdge.Lang.BPM.WorkItem" target="classFrame">WorkItem</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkitem(int64)'> GetWorkItem</a>
+          </b>(INT64 piWorkItemInstanceId)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a></code>
         </font>
       </td>
@@ -644,22 +658,8 @@
       <td>
         <code>
           <b>
-            <a href='#getworkitemdataslotsfromwiid(int64)'> GetWorkItemDataSlotsFromWiid</a>
+            <a href='#getworkitemdataslots(int64)'> GetWorkItemDataSlots</a>
           </b>(INT64 piWorkstepInstanceId)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/BPM/WorkItem.cls.html" title="OpenEdge.Lang.BPM.WorkItem" target="classFrame">WorkItem</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getworkitemfromid(int64)'> GetWorkItemFromID</a>
-          </b>(INT64 piWorkItemInstanceId)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -674,6 +674,20 @@
           <b>
             <a href='#getworkstepinstance(character,character)'> GetWorkStepInstance</a>
           </b>(CHARACTER pcProcessInstanceName, CHARACTER pcWorkStepName)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code><a href="../../../OpenEdge/Lang/BPM/WorkStepInstance.cls.html" title="OpenEdge.Lang.BPM.WorkStepInstance" target="classFrame">WorkStepInstance</a></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#getworkstepinstance(int64,character)'> GetWorkStepInstance</a>
+          </b>(INT64 piProcessInstanceId, CHARACTER pcWorkStepName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -700,22 +714,8 @@
       <td>
         <code>
           <b>
-            <a href='#getworkstepinstancedataslotsfrompiid(int64,character)'> GetWorkStepInstanceDataSlotsFromPiid</a>
+            <a href='#getworkstepinstancedataslots(int64,character)'> GetWorkStepInstanceDataSlots</a>
           </b>(INT64 piProcessInstanceId, CHARACTER pcWorkstepInstanceName)
-        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-    </tr>
-    <tr bgcolor='white' class='TableRowColor'>
-      <td align='right' valign='top' width='1%'>
-        <font size='-1'>
-          <code><a href="../../../OpenEdge/Lang/BPM/WorkStepInstance.cls.html" title="OpenEdge.Lang.BPM.WorkStepInstance" target="classFrame">WorkStepInstance</a></code>
-        </font>
-      </td>
-      <td>
-        <code>
-          <b>
-            <a href='#getworkstepinstancefrompiid(int64,character)'> GetWorkStepInstanceFromPiid</a>
-          </b>(INT64 piProcessInstanceId, CHARACTER pcWorkStepName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -756,7 +756,7 @@
       <td>
         <code>
           <b>
-            <a href='#getworksteptemplatedataslotsfromptid(int64,character)'> GetWorkStepTemplateDataSlotsFromPtid</a>
+            <a href='#getworksteptemplatedataslots(int64,character)'> GetWorkStepTemplateDataSlots</a>
           </b>(INT64 piProcessTemplateId, CHARACTER pcWorkStepName)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -840,7 +840,7 @@
       <td>
         <code>
           <b>
-            <a href='#makeavailableworkitemfromwiid(int64,character)'> MakeAvailableWorkItemFromWiid</a>
+            <a href='#makeavailableworkitem(int64,character)'> MakeAvailableWorkItem</a>
           </b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformers)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -868,7 +868,7 @@
       <td>
         <code>
           <b>
-            <a href='#reassignworkitemfromwiid(int64,character)'> ReassignWorkItemFromWiid</a>
+            <a href='#reassignworkitem(int64,character)'> ReassignWorkItem</a>
           </b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
@@ -1119,10 +1119,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='assignworkitemfromwiid(int64,character)'><!-- --></a>
-    <h3>AssignWorkItemFromWiid</h3>
+    <a name='assignworkitem(int64,character)'><!-- --></a>
+    <h3>AssignWorkItem</h3>
     <code>PUBLIC  VOID
-      <b>AssignWorkItemFromWiid</b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
+      <b>AssignWorkItem</b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
     </code>
     <dl>
       <dd>
@@ -1152,10 +1152,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='completeworkitemfromwiid(int64,openedge.lang.bpm.dataslotinstance)'><!-- --></a>
-    <h3>CompleteWorkItemFromWiid</h3>
+    <a name='completeworkitem(int64,openedge.lang.bpm.dataslotinstance)'><!-- --></a>
+    <h3>CompleteWorkItem</h3>
     <code>PUBLIC  VOID
-      <b>CompleteWorkItemFromWiid</b>(INT64 piWorkItemInstanceId, <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
+      <b>CompleteWorkItem</b>(INT64 piWorkItemInstanceId, <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a> poDataSlotInstance)
     </code>
     <dl>
       <dd>
@@ -1271,6 +1271,17 @@
       </dd>
     </dl>
     <hr />
+    <a name='getprocessinstance(int64)'><!-- --></a>
+    <h3>GetProcessInstance</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/ProcessInstance.cls.html" title="OpenEdge.Lang.BPM.ProcessInstance" target="classFrame">ProcessInstance</a>
+      <b>GetProcessInstance</b>(INT64 piProcessInstanceId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='getprocessinstancedataslot(character,character)'><!-- --></a>
     <h3>GetProcessInstanceDataSlot</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a>
@@ -1282,10 +1293,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='getprocessinstancedataslotfrompiid(int64,character)'><!-- --></a>
-    <h3>GetProcessInstanceDataSlotFromPiid</h3>
+    <a name='getprocessinstancedataslot(int64,character)'><!-- --></a>
+    <h3>GetProcessInstanceDataSlot</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a>
-      <b>GetProcessInstanceDataSlotFromPiid</b>(INT64 piProcessInstanceId, CHARACTER pcDataslotName)
+      <b>GetProcessInstanceDataSlot</b>(INT64 piProcessInstanceId, CHARACTER pcDataslotName)
     </code>
     <dl>
       <dd>
@@ -1297,17 +1308,6 @@
     <h3>GetProcessInstanceDataSlots</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a>
       <b>GetProcessInstanceDataSlots</b>(CHARACTER pcProcessInstanceName)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getprocessinstancefromid(int64)'><!-- --></a>
-    <h3>GetProcessInstanceFromID</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/ProcessInstance.cls.html" title="OpenEdge.Lang.BPM.ProcessInstance" target="classFrame">ProcessInstance</a>
-      <b>GetProcessInstanceFromID</b>(INT64 piProcessInstanceId)
     </code>
     <dl>
       <dd>
@@ -1348,6 +1348,17 @@
       </dd>
     </dl>
     <hr />
+    <a name='getprocesstemplate(int64)'><!-- --></a>
+    <h3>GetProcessTemplate</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/ProcessTemplate.cls.html" title="OpenEdge.Lang.BPM.ProcessTemplate" target="classFrame">ProcessTemplate</a>
+      <b>GetProcessTemplate</b>(INT64 piProcessTemplateId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='getprocesstemplateappname(character)'><!-- --></a>
     <h3>GetProcessTemplateAppName</h3>
     <code>PUBLIC  CHARACTER
@@ -1381,17 +1392,6 @@
       </dd>
     </dl>
     <hr />
-    <a name='getprocesstemplatefromid(int64)'><!-- --></a>
-    <h3>GetProcessTemplateFromID</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/ProcessTemplate.cls.html" title="OpenEdge.Lang.BPM.ProcessTemplate" target="classFrame">ProcessTemplate</a>
-      <b>GetProcessTemplateFromID</b>(INT64 piProcessTemplateId)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
     <a name='getprocesstemplateid(character)'><!-- --></a>
     <h3>GetProcessTemplateID</h3>
     <code>PUBLIC  INT64
@@ -1403,10 +1403,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='getprocesstemplatenamefromprocessid(int64)'><!-- --></a>
-    <h3>GetProcessTemplateNameFromProcessID</h3>
+    <a name='getprocesstemplatename(character)'><!-- --></a>
+    <h3>GetProcessTemplateName</h3>
     <code>PUBLIC  CHARACTER
-      <b>GetProcessTemplateNameFromProcessID</b>(INT64 piProcessTemplateId)
+      <b>GetProcessTemplateName</b>(CHARACTER pcProcessInstanceName)
     </code>
     <dl>
       <dd>
@@ -1414,10 +1414,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='getprocesstemplatenamefromprocessinstance(character)'><!-- --></a>
-    <h3>GetProcessTemplateNameFromProcessInstance</h3>
+    <a name='getprocesstemplatename(int64)'><!-- --></a>
+    <h3>GetProcessTemplateName</h3>
     <code>PUBLIC  CHARACTER
-      <b>GetProcessTemplateNameFromProcessInstance</b>(CHARACTER pcProcessInstanceName)
+      <b>GetProcessTemplateName</b>(INT64 piProcessTemplateId)
     </code>
     <dl>
       <dd>
@@ -1546,6 +1546,17 @@
       </dd>
     </dl>
     <hr />
+    <a name='getworkitem(int64)'><!-- --></a>
+    <h3>GetWorkItem</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/WorkItem.cls.html" title="OpenEdge.Lang.BPM.WorkItem" target="classFrame">WorkItem</a>
+      <b>GetWorkItem</b>(INT64 piWorkItemInstanceId)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='getworkitemdataslots(character)'><!-- --></a>
     <h3>GetWorkItemDataSlots</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a>
@@ -1557,21 +1568,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='getworkitemdataslotsfromwiid(int64)'><!-- --></a>
-    <h3>GetWorkItemDataSlotsFromWiid</h3>
+    <a name='getworkitemdataslots(int64)'><!-- --></a>
+    <h3>GetWorkItemDataSlots</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a>
-      <b>GetWorkItemDataSlotsFromWiid</b>(INT64 piWorkstepInstanceId)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getworkitemfromid(int64)'><!-- --></a>
-    <h3>GetWorkItemFromID</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/WorkItem.cls.html" title="OpenEdge.Lang.BPM.WorkItem" target="classFrame">WorkItem</a>
-      <b>GetWorkItemFromID</b>(INT64 piWorkItemInstanceId)
+      <b>GetWorkItemDataSlots</b>(INT64 piWorkstepInstanceId)
     </code>
     <dl>
       <dd>
@@ -1590,6 +1590,17 @@
       </dd>
     </dl>
     <hr />
+    <a name='getworkstepinstance(int64,character)'><!-- --></a>
+    <h3>GetWorkStepInstance</h3>
+    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/WorkStepInstance.cls.html" title="OpenEdge.Lang.BPM.WorkStepInstance" target="classFrame">WorkStepInstance</a>
+      <b>GetWorkStepInstance</b>(INT64 piProcessInstanceId, CHARACTER pcWorkStepName)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='getworkstepinstancedataslots(character,character)'><!-- --></a>
     <h3>GetWorkStepInstanceDataSlots</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a>
@@ -1601,21 +1612,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='getworkstepinstancedataslotsfrompiid(int64,character)'><!-- --></a>
-    <h3>GetWorkStepInstanceDataSlotsFromPiid</h3>
+    <a name='getworkstepinstancedataslots(int64,character)'><!-- --></a>
+    <h3>GetWorkStepInstanceDataSlots</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotInstance.cls.html" title="OpenEdge.Lang.BPM.DataSlotInstance" target="classFrame">DataSlotInstance</a>
-      <b>GetWorkStepInstanceDataSlotsFromPiid</b>(INT64 piProcessInstanceId, CHARACTER pcWorkstepInstanceName)
-    </code>
-    <dl>
-      <dd>
-        <dl><!-- --></dl>
-      </dd>
-    </dl>
-    <hr />
-    <a name='getworkstepinstancefrompiid(int64,character)'><!-- --></a>
-    <h3>GetWorkStepInstanceFromPiid</h3>
-    <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/WorkStepInstance.cls.html" title="OpenEdge.Lang.BPM.WorkStepInstance" target="classFrame">WorkStepInstance</a>
-      <b>GetWorkStepInstanceFromPiid</b>(INT64 piProcessInstanceId, CHARACTER pcWorkStepName)
+      <b>GetWorkStepInstanceDataSlots</b>(INT64 piProcessInstanceId, CHARACTER pcWorkstepInstanceName)
     </code>
     <dl>
       <dd>
@@ -1645,10 +1645,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='getworksteptemplatedataslotsfromptid(int64,character)'><!-- --></a>
-    <h3>GetWorkStepTemplateDataSlotsFromPtid</h3>
+    <a name='getworksteptemplatedataslots(int64,character)'><!-- --></a>
+    <h3>GetWorkStepTemplateDataSlots</h3>
     <code>PUBLIC  <a href="../../../OpenEdge/Lang/BPM/DataSlotTemplate.cls.html" title="OpenEdge.Lang.BPM.DataSlotTemplate" target="classFrame">DataSlotTemplate</a>
-      <b>GetWorkStepTemplateDataSlotsFromPtid</b>(INT64 piProcessTemplateId, CHARACTER pcWorkStepName)
+      <b>GetWorkStepTemplateDataSlots</b>(INT64 piProcessTemplateId, CHARACTER pcWorkStepName)
     </code>
     <dl>
       <dd>
@@ -1723,10 +1723,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='makeavailableworkitemfromwiid(int64,character)'><!-- --></a>
-    <h3>MakeAvailableWorkItemFromWiid</h3>
+    <a name='makeavailableworkitem(int64,character)'><!-- --></a>
+    <h3>MakeAvailableWorkItem</h3>
     <code>PUBLIC  VOID
-      <b>MakeAvailableWorkItemFromWiid</b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformers)
+      <b>MakeAvailableWorkItem</b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformers)
     </code>
     <dl>
       <dd>
@@ -1745,10 +1745,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='reassignworkitemfromwiid(int64,character)'><!-- --></a>
-    <h3>ReassignWorkItemFromWiid</h3>
+    <a name='reassignworkitem(int64,character)'><!-- --></a>
+    <h3>ReassignWorkItem</h3>
     <code>PUBLIC  VOID
-      <b>ReassignWorkItemFromWiid</b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
+      <b>ReassignWorkItem</b>(INT64 piWorkItemInstanceId, CHARACTER pcPerformer)
     </code>
     <dl>
       <dd>
