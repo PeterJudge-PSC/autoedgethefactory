@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\Lang\Collections</font>
       <br />CLASS AbstractTTCollection
     </h2>
-    <p>CLASS OpenEdge.Lang.Collections.AbstractTTCollection abstract IMPLEMENTS <a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> </p>
+    <p>CLASS OpenEdge.Lang.Collections.AbstractTTCollection abstract IMPLEMENTS <a href="../../../OpenEdge/Lang/Collections/ICollection.cls.html" title="OpenEdge.Lang.Collections.ICollection" target="classFrame">ICollection</a> , <a href="../../../OpenEdge/Core/Util/IExternalizable.cls.html" title="OpenEdge.Core.Util.IExternalizable" target="classFrame">IExternalizable</a> , <a href="../../../OpenEdge/Core/Util/ISerializable.cls.html" title="OpenEdge.Core.Util.ISerializable" target="classFrame">ISerializable</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -75,6 +75,20 @@
 				<B>Method Summary</B></FONT></TH>
 				</TR>
 				
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code></code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#()'>CONSTRUCTOR </a>
+          </b>()
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
@@ -126,8 +140,8 @@
       <td>
         <code>
           <b>
-            <a href='#add(object)'> Add</a>
-          </b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> newObject)
+            <a href='#add(progress.lang.object)'> Add</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> newObject)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -154,8 +168,8 @@
       <td>
         <code>
           <b>
-            <a href='#addarray(object)'> AddArray</a>
-          </b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> objectArray)
+            <a href='#addarray(progress.lang.object)'> AddArray</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> objectArray)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -176,7 +190,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>Object</code>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
         </font>
       </td>
       <td>
@@ -210,8 +224,8 @@
       <td>
         <code>
           <b>
-            <a href='#contains(object)'> Contains</a>
-          </b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> checkObject)
+            <a href='#contains(progress.lang.object)'> Contains</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> checkObject)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -224,8 +238,8 @@
       <td>
         <code>
           <b>
-            <a href='#findbufferuseobject(object)'> FindBufferUseObject</a>
-          </b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> obj)
+            <a href='#findbufferuseobject(progress.lang.object)'> FindBufferUseObject</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -260,14 +274,28 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#readobject(openedge.core.util.iobjectinput)'> ReadObject</a>
+          </b>(<a href="../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code>LOGICAL</code>
         </font>
       </td>
       <td>
         <code>
           <b>
-            <a href='#remove(object)'> Remove</a>
-          </b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> oldObject)
+            <a href='#remove(progress.lang.object)'> Remove</a>
+          </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> oldObject)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -302,7 +330,7 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
-          <code>Object</code>
+          <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
         </font>
       </td>
       <td>
@@ -324,6 +352,20 @@
           <b>
             <a href='#totable(OUTPUT_handle)'> ToTable</a>
           </b>(OUTPUT HANDLE tt)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeobject(openedge.core.util.iobjectoutput)'> WriteObject</a>
+          </b>(<a href="../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -352,6 +394,17 @@
 				<B>Method Detail</B></FONT></TH>
 				</TR></TABLE>
 				
+    <a name='()'><!-- --></a>
+    <h3>CONSTRUCTOR</h3>
+    <code>PUBLIC  
+      <b>CONSTRUCTOR</b>()
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='(handle,character)'><!-- --></a>
     <h3>CONSTRUCTOR</h3>
     <code>PROTECTED  
@@ -385,10 +438,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='add(object)'><!-- --></a>
+    <a name='add(progress.lang.object)'><!-- --></a>
     <h3>Add</h3>
     <code>PUBLIC  LOGICAL
-      <b>Add</b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> newObject)
+      <b>Add</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> newObject)
     </code>
     <dl>
       <dd>
@@ -407,10 +460,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='addarray(object)'><!-- --></a>
+    <a name='addarray(progress.lang.object)'><!-- --></a>
     <h3>AddArray</h3>
     <code>PUBLIC  LOGICAL
-      <b>AddArray</b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> objectArray)
+      <b>AddArray</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> objectArray)
     </code>
     <dl>
       <dd>
@@ -431,7 +484,7 @@
     <hr />
     <a name='clone()'><!-- --></a>
     <h3>Clone</h3>
-    <code>OVERRIDE PUBLIC  Object
+    <code>OVERRIDE PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
       <b>Clone</b>()
     </code>
     <dl>
@@ -451,10 +504,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='contains(object)'><!-- --></a>
+    <a name='contains(progress.lang.object)'><!-- --></a>
     <h3>Contains</h3>
     <code>PUBLIC  LOGICAL
-      <b>Contains</b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> checkObject)
+      <b>Contains</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> checkObject)
     </code>
     <dl>
       <dd>
@@ -462,10 +515,10 @@
       </dd>
     </dl>
     <hr />
-    <a name='findbufferuseobject(object)'><!-- --></a>
+    <a name='findbufferuseobject(progress.lang.object)'><!-- --></a>
     <h3>FindBufferUseObject</h3>
     <code>PROTECTED  VOID
-      <b>FindBufferUseObject</b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> obj)
+      <b>FindBufferUseObject</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> obj)
     </code>
     <dl>
       <dd>
@@ -495,10 +548,21 @@
       </dd>
     </dl>
     <hr />
-    <a name='remove(object)'><!-- --></a>
+    <a name='readobject(openedge.core.util.iobjectinput)'><!-- --></a>
+    <h3>ReadObject</h3>
+    <code>PUBLIC  VOID
+      <b>ReadObject</b>(<a href="../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='remove(progress.lang.object)'><!-- --></a>
     <h3>Remove</h3>
     <code>PUBLIC  LOGICAL
-      <b>Remove</b>(<a href="../../../Object.cls.html" title="Object" target="classFrame">Object</a> oldObject)
+      <b>Remove</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> oldObject)
     </code>
     <dl>
       <dd>
@@ -530,7 +594,7 @@
     <hr />
     <a name='toarray()'><!-- --></a>
     <h3>ToArray</h3>
-    <code>PUBLIC  Object
+    <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
       <b>ToArray</b>()
     </code>
     <dl>
@@ -543,6 +607,17 @@
     <h3>ToTable</h3>
     <code>PUBLIC  VOID
       <b>ToTable</b>(OUTPUT HANDLE tt)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeobject(openedge.core.util.iobjectoutput)'><!-- --></a>
+    <h3>WriteObject</h3>
+    <code>PUBLIC  VOID
+      <b>WriteObject</b>(<a href="../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
     </code>
     <dl>
       <dd>

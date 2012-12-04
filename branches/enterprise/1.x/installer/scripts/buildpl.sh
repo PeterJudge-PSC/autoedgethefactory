@@ -23,8 +23,8 @@
 #+            Name: OERA_CI_SERVER; Description: OERA Common Infrastructure Server Layer Components
 #+            Name: OERA_BUSINESS_COMPONENTS; Description: OERA Business Components Layer Components
 #+            Name: OERA_DATA_ACCESS; Description: OERA Data Access Layer Components (incl. Data Source Layer)
+#+            Name: INJECTABL; Description: InjectABL Inversion of Control container
 #+            Name: SUPPORT; Description: General Support Libraries
-
 #+    The apps=<application list> option identifies a specific list of
 #+    application directories to compile.  If this parameter is missing,
 #+    all appropriate source directories are processed for the user

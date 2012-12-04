@@ -40,7 +40,7 @@ class OpenEdge.CommonInfrastructure.Common.InjectABL.ManagerScopeEnum inherits S
         ManagerScopeEnum:ConnectionManager = new ManagerScopeEnum(OpenEdge.CommonInfrastructure.Common.ConnectionManager:IConnectionManagerType:TypeName).
     end constructor.
     
-    constructor public ManagerScopeEnum(input pcName as character):
+    constructor private ManagerScopeEnum(input pcName as character):
         super(pcName).
     end constructor.
     

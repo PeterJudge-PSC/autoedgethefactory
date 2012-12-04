@@ -38,7 +38,7 @@
       <font size='-1'>OpenEdge\Lang\Collections</font>
       <br />CLASS Map
     </h2>
-    <p>CLASS OpenEdge.Lang.Collections.Map IMPLEMENTS <a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> </p>
+    <p>CLASS OpenEdge.Lang.Collections.Map IMPLEMENTS <a href="../../../OpenEdge/Lang/Collections/IMap.cls.html" title="OpenEdge.Lang.Collections.IMap" target="classFrame">IMap</a> , <a href="../../../OpenEdge/Core/Util/IExternalizable.cls.html" title="OpenEdge.Core.Util.IExternalizable" target="classFrame">IExternalizable</a> , <a href="../../../OpenEdge/Core/Util/ISerializable.cls.html" title="OpenEdge.Core.Util.ISerializable" target="classFrame">ISerializable</a> </p>
     <dl>
       <dd>
         <dl><!-- --></dl>
@@ -260,6 +260,20 @@
     <tr bgcolor='white' class='TableRowColor'>
       <td align='right' valign='top' width='1%'>
         <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#readobject(openedge.core.util.iobjectinput)'> ReadObject</a>
+          </b>(<a href="../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
           <code><a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a></code>
         </font>
       </td>
@@ -268,6 +282,20 @@
           <b>
             <a href='#remove(progress.lang.object)'> Remove</a>
           </b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poKey)
+        </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr bgcolor='white' class='TableRowColor'>
+      <td align='right' valign='top' width='1%'>
+        <font size='-1'>
+          <code>VOID</code>
+        </font>
+      </td>
+      <td>
+        <code>
+          <b>
+            <a href='#writeobject(openedge.core.util.iobjectoutput)'> WriteObject</a>
+          </b>(<a href="../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
         </code><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
     </tr>
@@ -433,10 +461,32 @@
       </dd>
     </dl>
     <hr />
+    <a name='readobject(openedge.core.util.iobjectinput)'><!-- --></a>
+    <h3>ReadObject</h3>
+    <code>PUBLIC  VOID
+      <b>ReadObject</b>(<a href="../../../OpenEdge/Core/Util/IObjectInput.cls.html" title="OpenEdge.Core.Util.IObjectInput" target="classFrame">IObjectInput</a> poStream)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
     <a name='remove(progress.lang.object)'><!-- --></a>
     <h3>Remove</h3>
     <code>PUBLIC  <a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a>
       <b>Remove</b>(<a href="../../../Progress/Lang/Object.cls.html" title="Progress.Lang.Object" target="classFrame">Object</a> poKey)
+    </code>
+    <dl>
+      <dd>
+        <dl><!-- --></dl>
+      </dd>
+    </dl>
+    <hr />
+    <a name='writeobject(openedge.core.util.iobjectoutput)'><!-- --></a>
+    <h3>WriteObject</h3>
+    <code>PUBLIC  VOID
+      <b>WriteObject</b>(<a href="../../../OpenEdge/Core/Util/IObjectOutput.cls.html" title="OpenEdge.Core.Util.IObjectOutput" target="classFrame">IObjectOutput</a> poStream)
     </code>
     <dl>
       <dd>

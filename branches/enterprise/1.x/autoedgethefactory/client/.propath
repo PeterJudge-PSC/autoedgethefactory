@@ -7,12 +7,14 @@
 <propathentry env="all" kind="folder" path="\Enterprise Services\bin" platform="All"/>
 <propathentry env="all" kind="folder" path="\Common Infrastructure Client\bin" platform="All"/>
 <propathentry env="all" kind="folder" path="\Common Infrastructure Shared\bin" platform="All"/>
+<propathentry env="all" kind="folder" path="\InjectABL\bin" platform="All"/>
 <propathentry env="all" kind="folder" path="\Support\bin" platform="All"/>
 <propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\src" platform="All"/>
 <propathentry env="all" kind="folder" path="\Presentation Layer\src" platform="All"/>
 <propathentry env="all" kind="folder" path="\Enterprise Services\src" platform="All"/>
 <propathentry env="all" kind="folder" path="\Common Infrastructure Client\src" platform="All"/>
 <propathentry env="all" kind="folder" path="\Common Infrastructure Shared\src" platform="All"/>
+<propathentry env="all" kind="folder" path="\InjectABL\src" platform="All"/>
 <propathentry env="all" kind="folder" path="\Support\src" platform="All"/>
 <propathentry env="all" kind="dir" path="@{ROOT}\doc" platform="All"/>
 <propathentry env="all" kind="folder" path="\AutoEdge TheFactory Shared\doc" platform="All"/>
