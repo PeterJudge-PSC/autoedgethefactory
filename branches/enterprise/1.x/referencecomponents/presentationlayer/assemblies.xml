@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <references>
   <assembly name="Accessibility, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <assembly name="Infragistics2.Shared.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.Misc.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinEditors.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinGrid.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinListView.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinStatusBar.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinTabControl.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinTabbedMdi.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinToolbars.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.UltraWinTree.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
-  <assembly name="Infragistics2.Win.v11.2, Version=11.2.20112.2050, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Shared.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.Misc.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinEditors.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinGrid.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinListView.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinStatusBar.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinTabControl.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinTabbedMdi.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinToolbars.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.UltraWinTree.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+  <assembly name="Infragistics4.Win.v11.2, Version=11.2.20112.2124, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
   <assembly name="Microsoft.VisualBasic, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <assembly name="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <assembly name="System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
