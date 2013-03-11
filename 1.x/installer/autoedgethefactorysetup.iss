@@ -2,20 +2,20 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [InnoIDE_Settings]
-LogFile=C:\devarea\staging\aetf\enterprise\1.x\dev\installer\output\compile.log
+LogFile=C:\devarea\aetf\enterprise\1.x\staging\installer\output\compile.log
 LogFileOverwrite=true
 
 [Setup]
 InternalCompressLevel=Max
-OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.9
+OutputBaseFilename=AutoEdgeTheFactorySetup-1.0.10
 SolidCompression=true
-VersionInfoVersion=1.0.9
+VersionInfoVersion=1.0.10
 VersionInfoCompany=Progress Software Corp.
 VersionInfoDescription=OpenEdge AutoEdge|TheFactory Application Example Setup
 MinVersion=0,5.0.2195sp3
-AppCopyright=Copyright 2011-2012 © Progress Software Corp.
+AppCopyright=Copyright 2011-2013 © Progress Software Corp.
 AppName=OpenEdge AutoEdge|TheFactory Application Example
-AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.9
+AppVerName=OpenEdge AutoEdge|TheFactory Application Example 1.0.10
 InfoAfterFile=installer\include\InfoAfter.txt
 InfoBeforeFile=installer\include\InfoBefore.txt
 LicenseFile=installer\include\License.txt
@@ -28,11 +28,11 @@ AlwaysShowComponentsList=true
 ShowLanguageDialog=auto
 SetupIconFile=installer\include\autoedge.ico
 AppID={{62CE4B50-E7A0-4279-9889-0D6EC3B80C0E}
-VersionInfoTextVersion=1.0.9
+VersionInfoTextVersion=1.0.10
 AppPublisher=Progress Software Corp.
 AppPublisherURL=http://www.progress.com
 AppSupportURL=http://communities.progress.com/pcom/community/psdn/openedge/architecture/autoedgethefactory
-AppVersion=1.0.9
+AppVersion=1.0.10
 UninstallDisplayName=OpenEdge AutoEdge|TheFactory Application Example
 ExtraDiskSpaceRequired=1000000
 AlwaysRestart=false
@@ -46,10 +46,11 @@ OutputDir=installer\output
 PrivilegesRequired=none
 ; Use relative paths?
 ;SourceDir=..
-SourceDir=C:\devarea\aetf\enterprise\1.x\dev
+SourceDir=C:\devarea\aetf\enterprise\1.x\staging
 WizardImageBackColor=$00400000
 AllowRootDirectory=true
 AllowNoIcons=true
+VersionInfoCopyright=Copyright 2013 Progress Software Corp.
 
 [Dirs]
 ; AETF Application
@@ -148,14 +149,23 @@ Name: {app}\referencecomponents\commoninfrastructure\server\tests; Flags: uninsn
 Name: {app}\referencecomponents\commoninfrastructure\server\doc; Flags: uninsneveruninstall; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_CI_SERVER; Tasks: 
 Name: {app}\referencecomponents\commoninfrastructure\server\resources; Flags: uninsneveruninstall; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_CI_SERVER; Tasks: 
 
+;InjectABL
+Name: {app}\referencecomponents\injectabl; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Name: {app}\referencecomponents\injectabl\src; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Name: {app}\referencecomponents\injectabl\bin; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Name: {app}\referencecomponents\injectabl\doc; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Name: {app}\referencecomponents\injectabl\resources; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Name: {app}\referencecomponents\injectabl\tests; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Name: {app}\referencecomponents\injectabl\temp; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+
 ;SDK
-Name: {app}\referencecomponents\support; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
-Name: {app}\referencecomponents\support\src; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
-Name: {app}\referencecomponents\support\bin; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
-Name: {app}\referencecomponents\support\doc; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
-Name: {app}\referencecomponents\support\resources; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
-Name: {app}\referencecomponents\support\tests; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
-Name: {app}\referencecomponents\support\temp; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
+Name: {app}\referencecomponents\support; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL SUPPORT; Tasks: 
+Name: {app}\referencecomponents\support\src; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL SUPPORT; Tasks: 
+Name: {app}\referencecomponents\support\bin; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL SUPPORT; Tasks: 
+Name: {app}\referencecomponents\support\doc; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL SUPPORT; Tasks: 
+Name: {app}\referencecomponents\support\resources; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL SUPPORT; Tasks: 
+Name: {app}\referencecomponents\support\tests; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL SUPPORT; Tasks: 
+Name: {app}\referencecomponents\support\temp; Flags: uninsneveruninstall; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL SUPPORT; Tasks: 
 
 ; Savvion CustomerOrderProcess Processes
 Name: {app}\autoedgethefactory\savvion; Flags: uninsneveruninstall; Components: BPM_MODELS; 
@@ -208,8 +218,10 @@ Source: autoedgethefactory\shared\resources\*.*; DestDir: {app}\autoedgethefacto
 Source: autoedgethefactory\shared\.propath; DestDir: {app}\autoedgethefactory\shared; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER AETF_CLIENT
 Source: autoedgethefactory\shared\.project; DestDir: {app}\autoedgethefactory\shared; Excludes: .svn; Flags: ignoreversion uninsremovereadonly touch; Components: AETF_SERVER AETF_CLIENT
 
-;Savvion
+;Savvion - process models and associated artifacts
 Source: autoedgethefactory\savvion\*.*; DestDir: {app}\autoedgethefactory\savvion; Excludes: ".svn, .metadata,*.com.savvion.studio"; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs touch; Components: BPM_MODELS; 
+Source: autoedgethefactory\server\resources\*.bizoe; DestDir: {app}\autoedgethefactory\server\resources; Excludes: .svn,.*; Flags: ignoreversion uninsremovereadonly recursesubdirs createallsubdirs skipifsourcedoesntexist touch; Components: BPM_MODELS;
+Source: referencecomponents\commoninfrastructure\server\resources\*.bizoe; DestDir: {app}\referencecomponents\commoninfrastructure\server\resources; Excludes: .svn,.*; Flags: skipifsourcedoesntexist touch uninsneveruninstall recursesubdirs createallsubdirs; Components: BPM_MODELS;
 
 ;OERA - BusinessComponents
 Source: referencecomponents\businesscomponents\src\*.*; DestDir: {app}\referencecomponents\businesscomponents\src; Excludes: .svn,.*; Flags: uninsneveruninstall recursesubdirs createallsubdirs touch; Components: AETF_SERVER OERA_BUSINESS_COMPONENTS; Tasks: 
@@ -283,6 +295,16 @@ Source: referencecomponents\presentationlayer\.propath; DestDir: {app}\reference
 Source: referencecomponents\presentationlayer\.project; DestDir: {app}\referencecomponents\presentationlayer; Excludes: .svn; Flags: ignoreversion uninsremovereadonly; Components: AETF_CLIENT OERA_PRESENTATION_LAYER
 Source: referencecomponents\presentationlayer\assemblies.xml; DestDir: {app}\referencecomponents\presentationlayer; Excludes: .svn; Flags: ignoreversion uninsremovereadonly; Components: AETF_CLIENT OERA_PRESENTATION_LAYER
 
+;InjectABL
+Source: referencecomponents\injectabl\src\*.*; DestDir: {app}\referencecomponents\injectabl\src; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Source: referencecomponents\injectabl\bin\*.*; DestDir: {app}\referencecomponents\injectabl\bin; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks:
+Source: referencecomponents\injectabl\tests\*.*; DestDir: {app}\referencecomponents\injectabl\tests; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL; Tasks: 
+Source: referencecomponents\injectabl\doc\*.*; DestDir: {app}\referencecomponents\injectabl\doc; Excludes: .svn; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER; Tasks: 
+Source: referencecomponents\injectabl\resources\*.*; DestDir: {app}\referencecomponents\injectabl\resources; Excludes: .svn; Flags: uninsneveruninstall skipifsourcedoesntexist touch; Components:AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL ; Tasks: 
+ 
+Source: referencecomponents\injectabl\.propath; DestDir: {app}\referencecomponents\injectabl; Excludes: .svn; Flags: ignoreversion uninsremovereadonly; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL
+Source: referencecomponents\injectabl\.project; DestDir: {app}\referencecomponents\injectabl; Excludes: .svn; Flags: ignoreversion uninsremovereadonly; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER INJECTABL
+
 ;Support
 Source: referencecomponents\support\src\*.*; DestDir: {app}\referencecomponents\support\src; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks: 
 Source: referencecomponents\support\bin\*.*; DestDir: {app}\referencecomponents\support\bin; Excludes: .svn,.*; Flags: uninsneveruninstall skipifsourcedoesntexist touch recursesubdirs createallsubdirs; Components: AETF_CLIENT AETF_SERVER OERA_BUSINESS_COMPONENTS OERA_DATA_ACCESS OERA_PRESENTATION_LAYER OERA_ENTERPRISE_SERVICES OERA_CI_CLIENT OERA_CI_SERVER SUPPORT; Tasks:
@@ -349,6 +371,7 @@ Name: OERA_CI_SERVER; Description: OERA Common Infrastructure Server Layer Compo
 Name: OERA_BUSINESS_COMPONENTS; Description: OERA Business Components Layer Components; Flags: checkablealone; Types: custom compact full
 Name: OERA_DATA_ACCESS; Description: OERA Data Access Layer Components (incl. Data Source Layer); Flags: checkablealone; Types: custom compact full
 Name: SUPPORT; Description: General Support Libraries; Flags: checkablealone; Types: custom compact full
+Name: INJECTABL; Description: InjectABL Dependency Injection Library; Flags: checkablealone; Types: custom compact full
 Name: INSTALLER; Description: Installer support files; Flags: checkablealone; Types: custom compact full
 
 [_ISTool]
@@ -597,7 +620,7 @@ var
 	TotalMB 	: cardinal;
 begin
 	{ Get and display free megabytes on the Program Files drive }
-	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.9';
+	MsgAbout	:= 'AutoEdge|TheFactory Setup Version 1.0.10';
 	Path 		:= ExpandConstant('{pf}');
 
 	if GetSpaceOnDisk(Path, True, FreeMB, TotalMB) then
@@ -795,7 +818,7 @@ begin
 		FileName := ExpandConstant( '{app}\autoedgethefactory\server\cfg\console.ini' );		
 		FileCopy(ExpandConstant('{code:getDLCDirectory}\bin\progress.ini'), FileName, false);
 		
-    Propath := ExpandConstant('.\autoedgethefactory\server\bin,.\autoedgethefactory\shared\bin,.\referencecomponents\businesscomponents\bin,.\referencecomponents\dataaccess\bin,.\referencecomponents\enterpriseservices\bin,.\referencecomponents\commoninfrastructure\server\bin,.\referencecomponents\commoninfrastructure\shared\bin,.\referencecomponents\support\bin,.\autoedgethefactory\server\src,.\autoedgethefactory\shared\src,.\referencecomponents\businesscomponents\src,.\referencecomponents\dataaccess\src,.\referencecomponents\enterpriseservices\src,.\referencecomponents\commoninfrastructure\server\src,.\referencecomponents\commoninfrastructure\shared\src,.\referencecomponents\support\src,.\autoedgethefactory\server\tests,.\autoedgethefactory\shared\tests,{code:getDLCDirectory},{code:getDLCDirectory}\bin');    
+    Propath := ExpandConstant('.\autoedgethefactory\server\bin,.\autoedgethefactory\shared\bin,.\referencecomponents\businesscomponents\bin,.\referencecomponents\dataaccess\bin,.\referencecomponents\enterpriseservices\bin,.\referencecomponents\commoninfrastructure\server\bin,.\referencecomponents\commoninfrastructure\shared\bin,.\referencecomponents\injectabl\bin,.\referencecomponents\support\bin,.\autoedgethefactory\server\src,.\autoedgethefactory\shared\src,.\referencecomponents\businesscomponents\src,.\referencecomponents\dataaccess\src,.\referencecomponents\enterpriseservices\src,.\referencecomponents\commoninfrastructure\server\src,.\referencecomponents\commoninfrastructure\shared\src,.\referencecomponents\injectabl\src,.\referencecomponents\support\src,.\autoedgethefactory\server\tests,.\autoedgethefactory\shared\tests,{code:getDLCDirectory}');    
 		SetIniString( 'Startup', 'PROPATH', Propath, FileName );
 		
 		Propath := ExpandConstant('.,{code:getDLCDirectory}\tty,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
@@ -1018,8 +1041,8 @@ begin
     
 		FileName := ExpandConstant( '{app}\autoedgethefactory\client\cfg\client.ini');
 		FileCopy(ExpandConstant('{code:getDLCDirectory}\bin\progress.ini'), FileName, false);
-		
-    Propath := ExpandConstant('.\autoedgethefactory\client\bin,.\autoedgethefactory\shared\bin,.\referencecomponents\presentationlayer\bin,.\referencecomponents\enterpriseservices\bin,.\referencecomponents\commoninfrastructure\client\bin,.\referencecomponents\commoninfrastructure\shared\bin,.\referencecomponents\support\bin,.\autoedgethefactory\client\src,.\autoedgethefactory\shared\src,.\referencecomponents\presentationlayer\src,.\referencecomponents\enterpriseservices\src,.\referencecomponents\commoninfrastructure\client\src,.\referencecomponents\commoninfrastructure\shared\src,.\referencecomponents\support\src,.\autoedgethefactory\client\doc,.\autoedgethefactory\shared\doc,.\referencecomponents\presentationlayer\doc,.\referencecomponents\enterpriseservices\doc,.\referencecomponents\commoninfrastructure\client\doc,.\referencecomponents\commoninfrastructure\shared\doc,.\referencecomponents\support\doc,.\autoedgethefactory\client\tests,.\autoedgethefactory\shared\tests,{code:getDLCDirectory}\gui,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
+		    
+    Propath := ExpandConstant('.\autoedgethefactory\client\bin,.\autoedgethefactory\shared\bin,.\referencecomponents\presentationlayer\bin,.\referencecomponents\enterpriseservices\bin,.\referencecomponents\commoninfrastructure\client\bin,.\referencecomponents\commoninfrastructure\shared\bin,.\referencecomponents\injectabl\bin,.\referencecomponents\support\bin,.\autoedgethefactory\client\src,.\autoedgethefactory\shared\src,.\referencecomponents\presentationlayer\src,.\referencecomponents\enterpriseservices\src,.\referencecomponents\commoninfrastructure\client\src,.\referencecomponents\commoninfrastructure\shared\src,.\referencecomponents\injectabl\src,.\referencecomponents\support\src,.\autoedgethefactory\client\doc,.\autoedgethefactory\shared\doc,.\referencecomponents\presentationlayer\doc,.\referencecomponents\enterpriseservices\doc,.\referencecomponents\commoninfrastructure\client\doc,.\referencecomponents\commoninfrastructure\shared\doc\,.\referencecomponents\support\doc,.\autoedgethefactory\client\tests,.\autoedgethefactory\shared\tests,{code:getDLCDirectory}\gui,{code:getDLCDirectory}');
 		SetIniString( 'Startup', 'PROPATH', Propath, FileName );
 
 		Propath := ExpandConstant('.,{code:getDLCDirectory}\tty,{code:getDLCDirectory},{code:getDLCDirectory}\bin');
@@ -1324,8 +1347,8 @@ begin
 								Section,
 								txtAEFAppserverName.Text,
 								'State-free',
-								txtAETFASBrokerPort.Text,
-                ExpandConstant('./autoedgethefactory/server/bin;./autoedgethefactory/shared/bin;./referencecomponents/businesscomponents/bin;./referencecomponents/dataaccess/bin;./referencecomponents/enterpriseservices/bin;./referencecomponents/commoninfrastructure/server/bin;./referencecomponents/commoninfrastructure/shared/bin;./referencecomponents/support/bin;./autoedgethefactory/server/src;./autoedgethefactory/shared/src;./referencecomponents/businesscomponents/src;./referencecomponents/dataaccess/src;./referencecomponents/enterpriseservices/src;./referencecomponents/commoninfrastructure/server/src;./referencecomponents/commoninfrastructure/shared/src;./referencecomponents/support/src;./autoedgethefactory/server/tests;./autoedgethefactory/shared/tests;{code:getDLCDirectory};{code:getDLCDirectory}/bin'),
+								txtAETFASBrokerPort.Text,                
+                ExpandConstant('./autoedgethefactory/server/bin;./autoedgethefactory/shared/bin;./referencecomponents/businesscomponents/bin;./referencecomponents/dataaccess/bin;./referencecomponents/enterpriseservices/bin;./referencecomponents/commoninfrastructure/server/bin;./referencecomponents/commoninfrastructure/shared/bin;./referencecomponents/support/bin;./referencecomponents/injectabl/bin;./autoedgethefactory/server/src;./autoedgethefactory/shared/src;./referencecomponents/businesscomponents/src;./referencecomponents/dataaccess/src;./referencecomponents/enterpriseservices/src;./referencecomponents/commoninfrastructure/server/src;./referencecomponents/commoninfrastructure/shared/src;./referencecomponents/injectabl/src;./referencecomponents/support/src;./autoedgethefactory/server/tests;./autoedgethefactory/shared/tests;{code:getDLCDirectory}'),
 								'-pf ./autoedgethefactory/server/cfg/server.pf',
                 '0da8f650f94beecc:13f73c94:131ce84799f:-8000',
 								ExpandConstant( '{app}' ));
